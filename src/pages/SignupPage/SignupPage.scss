@@ -1,0 +1,69 @@
+@use "../../styles/abstracts/variables" as *;
+
+
+.test {
+    .signup-page {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: $primary-bg;
+        font-family: "Barlow", sans-serif;
+
+        .signup-main-div {
+            width: 500px;
+            height: 200px;
+
+            h1 {
+                color: $font-color-white;
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+
+            .login-form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                .password-section-signup {
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+
+                    .toggle-password-visibility {
+                        position: absolute;
+                        right: -40px;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 20px;
+                        border: none;
+                        cursor: pointer;
+
+                        .eye-logo {
+                            width: 24px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .signup-btn {
+                    width: 90px;
+                    padding: 10px;
+                    cursor: pointer;
+                }
+            }
+
+            input {
+                height: 40px;
+                border: none;
+                padding-left: 10px;
+                border-radius: 12px
+            }
+        }
+    }
+}

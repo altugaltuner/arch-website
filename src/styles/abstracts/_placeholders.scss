@@ -1,0 +1,39 @@
+@import "./variables";
+
+%custom-scroll-bar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #d7d4d6 #fff;
+  resize: none;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #d7d4d6;
+  }
+}
+
+%main-container {
+  min-height: 100vh;
+  width: calc(100% - 0px);
+  padding: 1em;
+  padding-left: 0em;
+  margin: 0 0 0 auto;
+  overflow-y: auto;
+  @extend %custom-scroll-bar;
+  font-family: $primary-font, sans-serif;
+  background: $primary-bg;
+  color: $primary-font-color;
+}
+
+@media (max-width: 768px) {
+  %main-container {
+    width: calc(100% - 70px);
+  }
+}

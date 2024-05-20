@@ -1,0 +1,8 @@
+@use "../../styles/abstracts/variables" as *;
+
+.homepage-main {
+  background-color: $sec;
+  font-family: "Barlow", sans-serif;
+  color: white;
+  height: 100vh;
+}

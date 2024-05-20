@@ -1,0 +1,64 @@
+@use "../../styles/abstracts/variables" as *;
+
+.project-inside-main {
+    display: flex;
+    flex-direction: row;
+    background-color: $my;
+    font-family: "Barlow", sans-serif;
+    color: white;
+
+    .projects-sidebar {
+        padding: 20px;
+        background-color: $sec;
+        width: 270px;
+
+        .sidebar-title {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+            font-size: 36px;
+        }
+
+        .projects-list {
+            list-style-type: none;
+            padding: 0;
+
+            .project-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                font-size: 1.2em;
+                font-weight: bold;
+                gap: 20px;
+                padding: 5px;
+                cursor: pointer;
+                background-color: $grey;
+                border-radius: 20px;
+                color: $my;
+
+                .project-navbar-photos {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    padding: 2px;
+                    border: 1px solid white;
+                }
+
+                .project-navbar-name {
+                    font-size: 24px;
+                    font-weight: 300;
+                }
+            }
+
+            :hover {
+                background-color: darken($grey, 10%);
+            }
+
+            :active {
+                background-color: darken($grey, 20%);
+            }
+
+        }
+    }
+}

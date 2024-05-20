@@ -1,0 +1,89 @@
+@use "../../styles/abstracts/variables" as *;
+
+.activities-container {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-family: "Barlow", sans-serif;
+
+    .activities-container-half {
+        padding: 20px;
+        background-color: $my;
+        width: 50%;
+        border-radius: 15px;
+
+        .activities-title {
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 10px;
+            background-color: $grey;
+            border-radius: 10px;
+            padding: 10px;
+            color: $my;
+        }
+
+        .activities-table {
+            width: 100%;
+            color: $my;
+            border-collapse: collapse;
+
+            .table-main-head {
+                .table-header-row {
+                    background-color: $grey;
+
+                    .table-header {
+                        text-align: left;
+                        padding: 10px;
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .table-body {
+                .table-body-row {
+
+
+                    .table-data {
+                        padding: 10px;
+                        background-color: $grey;
+                        border: 1px solid $my;
+
+                        .project-name {
+                            font-weight: bold;
+                            cursor: pointer;
+                        }
+
+                        .table-data-description {
+                            margin-top: 5px;
+                            font-size: 16px;
+                        }
+
+                        .table-data-group,
+                        .table-data-date {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 5px;
+                            width: 100%;
+
+                            .table-data-bullet {
+                                display: inline-block;
+                                width: 6px;
+                                height: 6px;
+                                background-color: $my;
+                                border-radius: 50%;
+                                margin-right: 5px;
+                            }
+                        }
+
+                        &.table-data-fordate {
+                            width: 20%;
+                            /* Burada istediğiniz rengi belirleyin */
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

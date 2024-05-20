@@ -1,0 +1,16 @@
+@import "./styles/abstracts/index";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+li {
+  list-style-type: none;
+}

@@ -1,0 +1,42 @@
+@use "../../styles/abstracts/variables" as *;
+
+.navigation-main {
+    display: flex;
+    flex-direction: row;
+    background-color: $my;
+    color: white;
+    font-family: "Barlow", sans-serif;
+
+    .nav-ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 90px;
+
+        .nav-li-third,
+        .nav-li-one {
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+
+            .nav-button {
+                background-color: $grey;
+                border: none;
+                border-radius: 15px;
+                padding: 10px 100px;
+                color: $my;
+            }
+
+            :hover {
+                background-color: darken($grey, 10%);
+            }
+
+            :active {
+                background-color: darken($grey, 20%);
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@use "../../styles/abstracts/variables" as *;
+
+.mylast-act-main {
+    font-family: "Barlow", sans-serif;
+    color: $grey;
+
+    .mylast-act-header {
+        margin: 30px 0px 10px 0px;
+        font-weight: 500;
+    }
+
+    .my-last-activity {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+        border-bottom: 1px solid;
+        margin-bottom: 5px;
+        justify-content: space-between;
+
+        .last-activity-header {
+            width: 30%;
+            font-weight: 300;
+
+            .last-act-p {
+                font-weight: 200;
+            }
+        }
+    }
+}

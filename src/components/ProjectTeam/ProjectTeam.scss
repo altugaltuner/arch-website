@@ -1,0 +1,57 @@
+@use "../../styles/abstracts/variables" as *;
+
+.project-teams-container {
+    padding: 20px;
+    background-color: $sec;
+    font-family: "Barlow", sans-serif;
+
+    .section-header {
+        display: flex;
+        justify-content: center;
+        font-weight: 400;
+        border-radius: 15px;
+        padding: 10px;
+        font-size: 30px;
+        background-color: $grey;
+        color: $my;
+        margin-bottom: 20px;
+    }
+
+    .teams-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .team-card {
+        width: 30%;
+        cursor: pointer;
+        /* 4 kare için */
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+
+        .team-title {
+            font-size: 1.2em;
+            color: $my;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .team-images {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+            }
+        }
+    }
+}

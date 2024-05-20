@@ -1,0 +1,21 @@
+@use "../../styles/abstracts/variables" as *;
+
+.company-name-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: $sec;
+    font-family: "Barlow", sans-serif;
+
+    .company-name {
+        color: $my;
+        font-size: 40px;
+        font-weight: 400;
+        background-color: $grey;
+        padding: 20px 50px;
+        border: none;
+        border-radius: 15px;
+    }
+}

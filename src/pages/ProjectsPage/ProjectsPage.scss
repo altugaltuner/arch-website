@@ -1,0 +1,109 @@
+@use "../../styles/abstracts/variables" as *;
+
+.projects-page {
+    display: flex;
+    flex-direction: column;
+    background-color: $sec;
+    font-family: "Barlow", sans-serif;
+
+    .inner-project-page {
+        display: flex;
+        flex-direction: row;
+
+        .inner-project-column {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 40px;
+
+            .new-section {
+                display: flex;
+                flex-direction: column;
+
+                .new-section-header {
+                    display: flex;
+                    justify-content: center;
+                    font-weight: 400;
+                    border-radius: 15px;
+                    padding: 10px;
+                    font-size: 30px;
+                    background-color: $grey;
+                    color: $my;
+                }
+
+                .company-project-files-main {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                    margin-top: 20px;
+
+                    .company-project-files {
+                        flex: 1 1 calc(12.5% - 10px);
+                        /* 8 columns, 12.5% width per column */
+                        box-sizing: border-box;
+                        padding: 10px;
+                        background: $grey;
+                        border-radius: 20px;
+                        text-align: center;
+                        cursor: pointer;
+
+                        .extension-logo {
+                            width: 100px;
+                            height: 100px;
+                        }
+                    }
+
+                    :hover {
+                        background-color: darken($grey, 10%);
+                    }
+
+                    :active {
+                        background-color: darken($grey, 20%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .company-project-files {
+        flex: 1 1 calc(14.28% - 10px);
+        /* 7 columns */
+    }
+}
+
+@media (max-width: 992px) {
+    .company-project-files {
+        flex: 1 1 calc(16.66% - 10px);
+        /* 6 columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .company-project-files {
+        flex: 1 1 calc(20% - 10px);
+        /* 5 columns */
+    }
+}
+
+@media (max-width: 576px) {
+    .company-project-files {
+        flex: 1 1 calc(25% - 10px);
+        /* 4 columns */
+    }
+}
+
+@media (max-width: 480px) {
+    .company-project-files {
+        flex: 1 1 calc(33.33% - 10px);
+        /* 3 columns */
+    }
+}
+
+@media (max-width: 360px) {
+    .company-project-files {
+        flex: 1 1 calc(50% - 10px);
+        /* 2 columns */
+    }
+}

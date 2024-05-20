@@ -1,0 +1,121 @@
+@use "../../styles/abstracts/variables" as *;
+
+
+
+.login-main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: $primary-bg;
+    font-family: "Barlow", sans-serif;
+
+    .login-main-div {
+        width: 500px;
+        height: 200px;
+
+        .login-h1 {
+            color: $font-color-white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            .password-input-container {
+                margin-left: 40px;
+                gap: 10px;
+                display: flex;
+                align-items: center;
+
+                .toggle-password-visibility {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 30px;
+                    width: 30px;
+                    border: none;
+                    border-radius: 10px;
+
+                    .eye-logo {
+                        width: 20px;
+                        height: 20px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .error-message {
+                color: $font-color-white;
+                padding: 5px;
+            }
+
+            .login-password {
+                height: 40px;
+                border: none;
+                padding-left: 10px;
+                border-radius: 12px
+            }
+
+            .login-email {
+                height: 40px;
+                border: none;
+                padding-left: 10px;
+                border-radius: 12px
+            }
+
+            .submits-of-login {
+                display: flex;
+                gap: 20px;
+
+                .login-submit {
+                    height: 40px;
+                    width: 85px;
+                    border: none;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    color: $primary-bg;
+                    background-color: $font-color-white;
+
+                    &:hover {
+                        background-color: darken($font-color-white, 20%);
+                        color: $primary-bg;
+                    }
+
+                    &:active {
+                        background-color: darken($font-color-white, 35%);
+                        color: $primary-bg;
+                    }
+                }
+
+                .login-logout {
+                    height: 40px;
+                    width: 85px;
+                    border: none;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    color: $primary-bg;
+                    background-color: $font-color-white;
+
+                    &:hover {
+                        background-color: darken($font-color-white, 20%);
+                        color: $primary-bg;
+                    }
+
+                    &:active {
+                        background-color: darken($font-color-white, 35%);
+                        color: $primary-bg;
+                    }
+                }
+            }
+        }
+    }
+}

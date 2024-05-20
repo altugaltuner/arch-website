@@ -1,0 +1,20 @@
+@use "../../styles/abstracts/variables" as *;
+
+.aboutme-page-main {
+    display: flex;
+    flex-direction: column;
+    background-color: $my;
+    font-family: "Barlow", sans-serif;
+
+    .aboutme-page-row {
+        display: flex;
+        flex-direction: row;
+
+        .aboutme-page-column {
+            background-color: $sec;
+            color: white;
+            padding: 20px;
+            margin: 20px;
+        }
+    }
+}

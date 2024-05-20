@@ -1,0 +1,63 @@
+@use "../../styles/abstracts/variables" as *;
+
+.project-sections {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+    background-color: $sec;
+    font-family: "Barlow", sans-serif;
+
+    .section-header {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        font-weight: 400;
+        border-radius: 15px;
+        padding: 10px;
+        font-size: 30px;
+        background-color: $grey;
+        color: $my;
+    }
+
+    .project-section-one {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        color: $my;
+        background-color: $grey;
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+
+        .project-section-title {
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .project-images-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+
+            .project-image {
+                width: 262px;
+                height: auto;
+                border-radius: 4px;
+                height: 150px;
+            }
+        }
+    }
+
+    :hover {
+        background-color: darken($grey, 10%);
+    }
+
+    :active {
+        background-color: darken($grey, 20%);
+    }
+}

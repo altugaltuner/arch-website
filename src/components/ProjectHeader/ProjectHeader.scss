@@ -1,0 +1,49 @@
+@use "../../styles/abstracts/variables" as *;
+
+.project-section-main {
+    width: 100%;
+    font-family: "Barlow", sans-serif;
+
+    .projects-page-content-header {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: $sec;
+        border-radius: 20px;
+
+        .active-project-title {
+            width: fit-content;
+            padding: 10px;
+            margin: 10px;
+            background-color: $grey;
+            color: $my;
+            font-weight: 400;
+            border-radius: 15px;
+        }
+
+        .active-project-tabs {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            background-color: $sec;
+
+            .active-project-btn {
+                border-radius: 15px;
+                padding: 10px;
+                margin: 10px;
+                width: 100%;
+                font-size: 30px;
+                background-color: $grey;
+                color: $my;
+            }
+
+            :hover {
+                background-color: darken($grey, 10%);
+            }
+
+            :active {
+                background-color: darken($grey, 20%);
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+@import "../../styles/abstracts/variables";
+
+.button {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: $button-shadow;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  border: 1px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:hover {
+    color: $accent-color;
+    border: 1px solid $accent-color;
+  }
+
+  &.primary {
+    background-color: $accent-color;
+    color: $primary-font-color;
+
+    &:hover {
+      background-color: darken($color: $accent-color, $amount: 1%);
+    }
+  }
+
+  &.secondary {
+    background-color: transparent;
+    color: $accent-color;
+    border: 1px solid $accent-color;
+  }
+
+  &.large {
+    padding: 10px 30px;
+  }
+
+  &.medium {
+    padding: 6px 20px;
+  }
+}
