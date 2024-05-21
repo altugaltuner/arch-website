@@ -24,7 +24,8 @@
     .project-section-one {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 275px;
+        height: 300px;
         color: $my;
         background-color: $grey;
         border-radius: 15px;
@@ -45,10 +46,9 @@
             gap: 10px;
 
             .project-image {
-                width: 262px;
-                height: auto;
+                width: 250px;
+                height: 200px;
                 border-radius: 4px;
-                height: 150px;
             }
         }
     }
