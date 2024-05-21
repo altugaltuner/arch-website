@@ -9,7 +9,7 @@ function ProjectInside() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/projects');
+                const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto');
                 console.log(response.data); // Yanıtı kontrol etmek için konsola yazdırın
                 setProjects(response.data.data); // API'nin döndürdüğü veriyi kontrol edin ve uygun şekilde kaydedin
             } catch (error) {
@@ -27,7 +27,7 @@ function ProjectInside() {
                 <ul className="projects-list">
                     {projects.length > 0 ? projects.map(project => (
                         <li key={project.id} className="project-item">
-                            <img className="project-navbar-photos" src={project.projectCoverPhoto} alt={project.projectName} />
+                            <img className="project-navbar-photos" src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`} alt="project-photo" />
                             {project.attributes.projectName}
                         </li>
                     )) : <li>Yükleniyor</li>}

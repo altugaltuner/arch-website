@@ -29,7 +29,7 @@ function ProjectSection({ onItemClick }) {
                     <div className="project-images-container">
                         <img className="project-image"
                             src={`http://localhost:1337${folder.attributes.projectfolderimage.data.attributes.url}`}
-                            alt={folder.attributes.projectFolderName}
+                            alt="project-image"
                         />
                     </div>
                 </div>

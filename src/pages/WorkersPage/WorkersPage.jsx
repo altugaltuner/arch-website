@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./WorkersPage.scss";
-import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";
-
-import employees from "../../database/employees";
 import jobTitles from "../../database/jobTitles";
+import axios from 'axios';
 
 function WorkersPage() {
-    const auth = useAuth(); // auth'u const {fireStoreUser} = useAuth() şeklinde alırsanız user bilgilerine ulaşabilirsiniz
-
+    const [employees, setEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [selectedJobTitle, setSelectedJobTitle] = useState('Tümü');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:1337/api/employees?populate=profession,projects,profilePic');
+                console.log(response.data); // Yanıtı kontrol etmek için konsola yazdırın
+                setEmployees(response.data.data); // API'nin döndürdüğü veriyi kontrol edin ve uygun şekilde kaydedin
+            } catch (error) {
+                console.error('Error fetching the data', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     function openEmployeeCardModal(employee) {
         setSelectedEmployee(employee);
@@ -26,7 +37,7 @@ function WorkersPage() {
 
     const filteredEmployees = selectedJobTitle === 'Tümü'
         ? employees
-        : employees.filter(employee => employee.title === selectedJobTitle);
+        : employees.filter(employee => employee.attributes.profession.data.attributes.professionName === selectedJobTitle);
 
     return (
         <div className="workers-page-main">
@@ -40,11 +51,11 @@ function WorkersPage() {
                         >
                             Tümü
                         </li>
-                        {jobTitles.map((item, index) => (
+                        {jobTitles.map((item) => (
                             <li
                                 className="job-titles-for-workersPage"
                                 key={item.id}
-                                onClick={() => handleJobTitleClick(item.title)}
+                                onClick={() => handleJobTitleClick(item.name)}
                             >
                                 {item.name}
                             </li>
@@ -54,11 +65,14 @@ function WorkersPage() {
                 <div className="employee-grid">
                     {filteredEmployees.map((employee, index) => (
                         <div className="employee-card" key={index} onClick={() => openEmployeeCardModal(employee)}>
-                            <div className="profile-pic"></div>
+                            <div className="profile-pic">
+                                <img className="profile-pic-inner" src={`http://localhost:1337${employee.attributes.profilePic.data.attributes.url}`} alt="" srcSet="" />
+                            </div>
                             <div className="employee-info">
-                                <h3>{employee.name}</h3>
-                                <p>{employee.title}</p>
-                                <p>{employee.email}</p>
+                                <h3>{employee.attributes.fullname}</h3>
+                                <p>{employee.attributes.jobTitle}</p>
+                                <p>{employee.attributes.email}</p>
+                                <p>{employee.attributes.profession.data.attributes.professionName}</p>
                             </div>
                         </div>
                     ))}
@@ -66,9 +80,12 @@ function WorkersPage() {
                 {selectedEmployee && (
                     <div className="employee-card-modal">
                         <div className="employee-card-modal-inner">
-                            <p>{selectedEmployee.name}</p>
-                            <p>{selectedEmployee.title}</p>
-                            <p>{selectedEmployee.email}</p>
+                            <div className="profile-pic">
+                                <img className="profile-pic-inner" src={`http://localhost:1337${selectedEmployee.attributes.profilePic.data.attributes.url}`} alt="" srcSet="" />
+                            </div>
+                            <p>{selectedEmployee.attributes.fullname}</p>
+                            <p>{selectedEmployee.attributes.jobTitle}</p>
+                            <p>{selectedEmployee.attributes.email}</p>
                             <button className="modal-close-btn" onClick={closeEmployeeCardModal}>Close</button>
                         </div>
                     </div>

@@ -25,57 +25,57 @@ const jobTitles = [
     },
     {
         id: 3,
+        name: 'Baş Mimar / Baş Mühendis',
+        photo: headArch,
+        title: 'Baş Mimar'
+    },
+    {
+        id: 4,
         name: 'İnşaat Mühendisleri',
         photo: civilEngineer,
         title: 'İnşaat mühendisi'
     },
     {
-        id: 4,
+        id: 5,
         name: 'Mekanik Mühendisler',
         photo: mechanicalEngineer,
         title: 'Mekanik mühendisi'
     },
     {
-        id: 5,
+        id: 6,
         name: 'Muhasabe Uzmanları',
         photo: calcPic,
         title: 'Muhasebe uzmanı'
     },
     {
-        id: 6,
+        id: 7,
         name: 'Şantiye Sorumluları',
         photo: constructionGuard,
         title: 'Şantiye sorumlusu'
     },
     {
-        id: 7,
+        id: 8,
         name: 'İnşaat İşçileri',
         photo: constructionWorker,
         title: 'İnşaat işçisi'
     },
     {
-        id: 8,
+        id: 9,
         name: 'Güvenlik Görevlileri',
         photo: guardCons,
         title: 'Güvenlik görevlisi'
     },
     {
-        id: 9,
+        id: 10,
         name: 'İnsan Kaynakları',
         photo: humanResources,
         title: 'İnsan Kaynakları'
     },
     {
-        id: 10,
+        id: 11,
         name: 'CEO ve Yönetim Kurulu',
         photo: ceoPic,
         title: 'CEO'
-    },
-    {
-        id: 11,
-        name: 'Baş Mimar / Baş Mühendis',
-        photo: headArch,
-        title: 'Baş Mimar'
     },
     {
         id: 12,

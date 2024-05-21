@@ -95,6 +95,13 @@
                 background-color: #ccc;
                 border-radius: 50%;
                 margin: 0 auto 10px;
+
+                .profile-pic-inner {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
             }
 
             .employee-info {
