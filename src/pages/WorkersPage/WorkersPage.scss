@@ -29,8 +29,22 @@
                 height: 400px;
                 justify-content: center;
                 text-align: center;
+                align-items: center;
                 position: relative;
                 gap: 10px;
+                border-radius: 20px;
+
+                .profile-pic {
+                    width: 150px;
+                    height: 150px;
+
+                    .profile-pic-inner {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                }
 
                 .modal-close-btn {
                     position: absolute;
@@ -42,12 +56,14 @@
         }
 
         .sidebar {
+            display: flex;
             width: 20%;
             background-color: $my;
             padding: 10px;
             background-color: $sec;
 
             ul {
+                width: 100%;
                 list-style-type: none;
                 padding: 0;
 
@@ -74,7 +90,7 @@
         .employee-grid {
             width: 80%;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 20px;
             padding: 20px;
             background-color: $sec;
@@ -84,6 +100,7 @@
         .employee-card {
             background-color: $grey;
             padding: 20px;
+            max-height: 240px;
             text-align: center;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

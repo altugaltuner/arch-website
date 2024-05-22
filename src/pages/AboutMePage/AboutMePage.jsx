@@ -4,7 +4,6 @@ import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";
 import MyProfile from "../../components/MyProfile/MyProfile";
 import MyActiveProjects from "../../components/MyActiveProjects/MyActiveProjects";
-import MyLastAct from "../../components/MyLastAct/MyLastAct";
 
 function AboutMePage() {
 
@@ -17,7 +16,7 @@ function AboutMePage() {
                 <MyProfile />
                 <div className="aboutme-page-column">
                     <MyActiveProjects />
-                    <MyLastAct />
+
                 </div>
             </div>
         </div>

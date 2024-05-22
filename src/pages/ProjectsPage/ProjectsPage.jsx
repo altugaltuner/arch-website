@@ -39,21 +39,17 @@ function ProjectsPage() {
                     <ProjectHeader onTabChange={handleTabChange} />
                     {selectedItem ? (
                         <div className="new-section">
-                            <h3 className="new-section-header">{selectedItem}</h3>
-                            {selectedItem === "Mimari Proje Deposu" ? (
-                                <div className="company-project-files-main">
-                                    {companyProjects.map((item) => (
-                                        <div className="company-project-files" key={item.id}>
-                                            <h4>{item.fileTitle}</h4>
-                                            <p>{item.modificationDate}</p>
-                                            <img className="extension-logo" src={item.imageSrc} alt={item.fileTitle} />
-                                            <p>{item.extension}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p className="here">No data to display</p>
-                            )}
+                            <h3 className="new-section-header">{selectedItem.attributes.projectFolderName}</h3>
+                            <div className="company-project-files-main">
+                                {companyProjects.map((item) => (
+                                    <div className="company-project-files" key={item.id}>
+                                        <h4>{item.fileTitle}</h4>
+                                        <p>{item.modificationDate}</p>
+                                        <img className="extension-logo" src={item.imageSrc} alt={item.fileTitle} />
+                                        <p>{item.extension}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     ) : (
                         activeComponents[tabName] || <ProjectSection onItemClick={handleItemClick} />
