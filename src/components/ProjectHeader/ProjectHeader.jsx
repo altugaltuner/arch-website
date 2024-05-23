@@ -5,7 +5,7 @@ function ProjectHeader({ onTabChange }) {
     const navigate = useNavigate();
 
     const handleTabChange = (tab) => {
-        onTabChange(null);  // selectedItem state'ini sıfırla
+        onTabChange(null);
         navigate(`/projects/${tab}`);
     };
 

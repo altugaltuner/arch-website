@@ -11,8 +11,8 @@ const ProjectTeam = ({ onItemClick }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/professions?populate=professionImg');
-                console.log(response.data); // Yanıtı kontrol etmek için konsola yazdırın
-                setJobTitles(response.data.data); // API'nin döndürdüğü veriyi kontrol edin ve uygun şekilde kaydedin
+                console.log(response.data);
+                setJobTitles(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }

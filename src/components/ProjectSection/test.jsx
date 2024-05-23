@@ -2,23 +2,25 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import "./ProjectSection.scss";
 
-function ProjectSection({ onItemClick }) {
+function ProjectSection({ projectId, onItemClick }) {
 
     const [projectFolders, setProjectFolders] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/project-folders?populate=projectfolderimage');
-                console.log(response.data);
-                setProjectFolders(response.data.data);
+                const response = await axios.get(`http://localhost:1337/api/project-folders?filters[projectId][$eq]=${projectId}&populate=projectfolderimage`);
+                console.log(response.data); // Yanıtı kontrol etmek için konsola yazdırın
+                setProjectFolders(response.data.data); // API'nin döndürdüğü veriyi kontrol edin ve uygun şekilde kaydedin
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
         };
 
-        fetchData();
-    }, []);
+        if (projectId) {
+            fetchData();
+        }
+    }, [projectId]);
 
     return (
         <div className="project-sections">

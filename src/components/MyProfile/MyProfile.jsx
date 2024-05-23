@@ -6,7 +6,7 @@ import profilePic from "../../assets/pp.jpg";
 
 function MyProfile() {
 
-    const auth = useAuth(); // auth'u const {fireStoreUser} = useAuth() şeklinde alırsanız user bilgilerine ulaşabilirsiniz
+    const auth = useAuth();
 
     return (
         <div className="profile">
