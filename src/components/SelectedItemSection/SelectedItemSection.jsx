@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import './SelectedItemSection.scss';
 import axios from "axios";
 
-function SelectedItemSection({ selectedProject, companyProjects }) {
-
-    console.log("companyProjects[0]", companyProjects[0]);
-    console.log("selectedProject", selectedProject);
+function SelectedItemSection({ activeProjectTitle, companyProjects }) {
 
     const [projectFiles, setProjectFiles] = useState([]);
 
@@ -13,7 +10,6 @@ function SelectedItemSection({ selectedProject, companyProjects }) {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/projects?populate[projectAllFiles][populate]=*');
-                console.log(response.data);
                 setProjectFiles(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
@@ -23,27 +19,43 @@ function SelectedItemSection({ selectedProject, companyProjects }) {
         fetchData();
     }, []);
 
+    const renderFile = (file) => {
+        const { name, url, ext } = file.attributes;
+        return (
+            <div key={file.id} className="project-file">
+                <p className="file-name">{name}</p>
+                <p className="file-type">{ext}</p>
+                <a href={`http://localhost:1337${url}`} download className="download-link">Download</a>
+            </div>
+        );
+    };
+
+    const activeProjectFiles = projectFiles.filter(project =>
+        project.attributes.projectName === activeProjectTitle
+    );
+
     return (
         <div className='selected-item-section'>
-            {selectedProject && companyProjects.map(project => (
-                selectedProject.attributes.projectName === project.attributes.projectName && (
-                    <div key={project.id}>
-                        <p>{project.attributes.projectName} Dosyaları</p>
-                        {
-                            projectFiles.map((file) => (
-                                <div key={file.id} className="project-files">
-                                    <h3 className="project-file-title">{file.attributes.projectAllFiles.projectPhotoshoots.data.attributes.name}</h3>
-                                    <div className="project-images-container">
-                                        <img className="project-image"
-                                            src={`http://localhost:1337${file.attributes.projectAllFiles.projectPhotoshoots.data.attributes.url}`}
-                                        />
-                                    </div>
-                                </div>
-                            ))
-                        }
+            <h2>{activeProjectTitle} Dosyaları</h2>
+            {activeProjectFiles.map(projectFile => {
+                const { projectAllFiles } = projectFile.attributes;
+                return (
+                    <div key={projectFile.id} className="project-file-container">
+                        {projectAllFiles.architecturalPlans.data && projectAllFiles.architecturalPlans.data.map(renderFile)}
+                        {projectAllFiles.staticPlans.data && projectAllFiles.staticPlans.data.map(renderFile)}
+                        {projectAllFiles.electricalPlans.data && projectAllFiles.electricalPlans.data.map(renderFile)}
+                        {projectAllFiles.plumbingPlans.data && projectAllFiles.plumbingPlans.data.map(renderFile)}
+                        {projectAllFiles.financialPapers.data && projectAllFiles.financialPapers.data.map(renderFile)}
+                        {projectAllFiles.contractPapers.data && projectAllFiles.contractPapers.data.map(renderFile)}
+                        {projectAllFiles.meetingNotes.data && projectAllFiles.meetingNotes.data.map(renderFile)}
+                        {projectAllFiles.dailyReports.data && projectAllFiles.dailyReports.data.map(renderFile)}
+                        {projectAllFiles.projectPhotoshoots.data && projectAllFiles.projectPhotoshoots.data.map(renderFile)}
+                        {projectAllFiles.projectRenders.data && projectAllFiles.projectRenders.data.map(renderFile)}
+
+                        {/* soldaki truthy ise sağdakini çalıştır: && */}
                     </div>
-                )
-            ))}
+                );
+            })}
         </div>
     );
 }
