@@ -67,7 +67,9 @@ function ProjectsPage() {
                         <div className="new-section">
                             <div className="selected-folder-items">
                                 <h2 className="new-section-header">{selectedItem.attributes.projectFolderName}</h2>
-                            </div><ProjectBasedRevisions />
+                                <SelectedItemSection selectedProject={selectedProject} companyProjects={companyProjects} />
+                            </div>
+                            <ProjectBasedRevisions />
                         </div>
                     ) : (
                         activeComponents[currentTab] || <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />

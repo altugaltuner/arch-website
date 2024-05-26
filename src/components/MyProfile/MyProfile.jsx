@@ -17,7 +17,7 @@ function MyProfile() {
         social4: ""
     };
 
-    const [isEditing, setIsEditing] = useState(true); // Initially in edit mode
+    const [isEditing, setIsEditing] = useState(false); // Initially in edit mode
     const [formData, setFormData] = useState(initialData);
     const [savedData, setSavedData] = useState(initialData); // To keep track of saved data
 

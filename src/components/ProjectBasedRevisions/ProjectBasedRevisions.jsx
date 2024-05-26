@@ -21,9 +21,9 @@ function ProjectBasedRevisions() {
 
     const getCommentText = (comment) => {
         return comment.map((paragraph, index) => (
-            <p key={index}>
+            <p className="revision-paragraph" key={index}>
                 {paragraph.children.map((child, childIndex) => (
-                    <span key={childIndex}>{child.text}</span>
+                    <span className="revision-comment" key={childIndex}>{child.text}</span>
                 ))}
             </p>
         ));
@@ -31,11 +31,11 @@ function ProjectBasedRevisions() {
 
     return (
         <div className="projects-based-revisions">
-            <h1>Proje Revizeleri</h1>
+            <h1 className="projects-revisions-header">Proje Revizeleri</h1>
             <div className="project-revisions">
                 {ProjectBasedRevisions.map((projectRevision) => (
                     <div key={projectRevision.id} className="project-revision">
-                        <h2>{projectRevision.attributes.revisionName}</h2>
+                        <h2 className="revision-project-name">{projectRevision.attributes.project.data.attributes.projectName}</h2>
                         {getCommentText(projectRevision.attributes.comment)}
                         <p>{projectRevision.attributes.revisionDate}</p>
                     </div>

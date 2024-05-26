@@ -1,10 +1,11 @@
-import React from 'react';
+import { useEffect, useState } from "react";
 import './SelectedItemSection.scss';
+import axios from "axios";
 
 function SelectedItemSection({ selectedProject, companyProjects }) {
 
-    console.log("dswd", companyProjects[0]);
-    console.log("aa", selectedProject);
+    console.log("companyProjects[0]", companyProjects[0]);
+    console.log("selectedProject", selectedProject);
 
     const [projectFolders, setProjectFolders] = useState([]);
 
