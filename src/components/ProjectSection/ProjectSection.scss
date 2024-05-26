@@ -2,6 +2,7 @@
 
 .project-sections {
     display: flex;
+    width: 60%;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
@@ -24,8 +25,8 @@
     .project-section-one {
         display: flex;
         flex-direction: column;
-        width: 350px;
-        height: 300px;
+        width: 300px;
+        height: 270px;
         color: $my;
         background-color: $grey;
         border-radius: 15px;

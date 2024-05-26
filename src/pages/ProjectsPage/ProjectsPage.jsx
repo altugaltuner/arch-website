@@ -8,16 +8,21 @@ import ProjectTeam from "../../components/ProjectTeam/ProjectTeam";
 import ProjectInside from "../../components/ProjectInside/ProjectInside";
 import Navigation from "../../components/Navigation/Navigation";
 import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
+import SelectedItemSection from "../../components/SelectedItemSection/SelectedItemSection";
+import ProjectBasedRevisions from "../../components/ProjectBasedRevisions/ProjectBasedRevisions";
 
 function ProjectsPage() {
     const [companyProjects, setCompanyProjects] = useState([]);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [currentTab, setCurrentTab] = useState('allprojects'); // Add this state to track the current tab
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [activeProjectName, setActiveProjectName] = useState(""); // Yeni state
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/projects?populate[projectAllFiles][populate]=*');
                 setCompanyProjects(response.data.data);
-                console.log("Fetched companyProjects:", response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
@@ -26,16 +31,20 @@ function ProjectsPage() {
         fetchData();
     }, []);
 
-    const { tabName } = useParams();
-    const [selectedItem, setSelectedItem] = useState(null);
+    useParams();
 
     const handleItemClick = (item) => {
-        console.log("Item clicked:", item);
         setSelectedItem(item);
+        setActiveProjectName(item.attributes.projectFolderName); // Tıklanan öğenin adını aktif proje adı olarak ayarla
     };
 
-    const handleTabChange = () => {
-        setSelectedItem(null);
+    const handleProjectClick = (project) => {
+        setSelectedProject(project);
+    };
+
+    const handleTabChange = (tab) => {
+        setCurrentTab(tab);
+        setSelectedItem(null); // Reset selected item when the tab changes
     };
 
     const activeComponents = {
@@ -43,45 +52,27 @@ function ProjectsPage() {
         team: <ProjectTeam onItemClick={handleItemClick} />,
     };
 
-    console.log("Selected item:", selectedItem);
-    console.log("Tab name:", tabName);
+    console.log("dsdad", companyProjects);
+    console.log("selectedProject", selectedProject);
 
     return (
         <div className="projects-page">
             <Navigation />
             <div className="inner-project-page">
-                <ProjectInside />
+                <ProjectInside onProjectClick={handleProjectClick} />
                 <div className="inner-project-column">
-                    <ProjectHeader onTabChange={handleTabChange} />
+                    <ProjectHeader clickedProject={selectedProject} onTabChange={handleTabChange} />
+
                     {selectedItem ? (
                         <div className="new-section">
-                            <h3 className="new-section-header">{selectedItem.attributes.projectName}</h3>
-                            <div className="company-project-files-main">
-                                {selectedItem.attributes.projectAllFiles && selectedItem.attributes.projectAllFiles.data ? (
-                                    Object.entries(selectedItem.attributes.projectAllFiles).map(([key, value]) => (
-                                        value.data ? (
-                                            <div key={key}>
-                                                <h4>{key}</h4>
-                                                {value.data.map(file => (
-                                                    <div className="company-project-files" key={file.id}>
-                                                        <h4>{file.attributes.name}</h4>
-                                                        <img className="extension-logo" src={file.attributes.url} alt={file.attributes.name} />
-                                                        <p>Format: {file.attributes.ext}</p>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ) : (
-                                            <p key={key}>{key} - No files available</p>
-                                        )
-                                    ))
-                                ) : (
-                                    <p>No files available</p>
-                                )}
-                            </div>
+                            <div className="selected-folder-items">
+                                <h2 className="new-section-header">{selectedItem.attributes.projectFolderName}</h2>
+                            </div><ProjectBasedRevisions />
                         </div>
                     ) : (
-                        activeComponents[tabName] || <ProjectSection onItemClick={handleItemClick} />
+                        activeComponents[currentTab] || <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />
                     )}
+
                 </div>
             </div>
         </div>

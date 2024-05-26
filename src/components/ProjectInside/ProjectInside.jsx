@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./ProjectInside.scss";
 
-function ProjectInside() {
+function ProjectInside({ onProjectClick }) {
 
     const [projects, setProjects] = useState([]);
 
@@ -26,7 +26,7 @@ function ProjectInside() {
                 <h2 className="sidebar-title">Projeler</h2>
                 <ul className="projects-list">
                     {projects.length > 0 ? projects.map(project => (
-                        <li key={project.id} className="project-item">
+                        <li key={project.id} className="project-item" onClick={() => onProjectClick(project)}>
                             <img className="project-navbar-photos" src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`} alt="project-photo" />
                             {project.attributes.projectName}
                         </li>

@@ -47,7 +47,7 @@ const Activities = () => {
                                 </td>
                                 <td className="table-data">
                                     <div className="revise-owner">
-                                        {activity.attributes.user?.data?.attributes?.username || 'Kullanıcı adı yok'}
+                                        {activity.attributes.users_permissions_user?.data?.attributes?.username || 'Kullanıcı adı yok'}
                                     </div>
                                 </td>
                                 <td className="table-data">
