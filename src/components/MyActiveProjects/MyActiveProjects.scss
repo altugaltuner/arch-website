@@ -17,6 +17,10 @@
             margin: 20px;
             flex-wrap: wrap;
 
+            .project-inside-main {
+                width: 100%;
+            }
+
             .active-project {
                 width: 240px;
                 height: 240px;
