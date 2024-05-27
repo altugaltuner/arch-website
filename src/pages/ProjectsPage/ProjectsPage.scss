@@ -16,6 +16,11 @@
             width: 80%;
             padding: 20px;
 
+            .file-inside-row {
+                display: flex;
+                flex-direction: row;
+            }
+
             .new-section {
                 display: flex;
                 flex-direction: row;

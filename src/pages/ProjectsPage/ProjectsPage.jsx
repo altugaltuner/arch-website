@@ -14,9 +14,9 @@ import ProjectBasedRevisions from "../../components/ProjectBasedRevisions/Projec
 function ProjectsPage() {
     const [companyProjects, setCompanyProjects] = useState([]);
     const [selectedProject, setSelectedProject] = useState(null);
-    const [currentTab, setCurrentTab] = useState('allprojects'); // Add this state to track the current tab
+    const [currentTab, setCurrentTab] = useState('allprojects');
     const [selectedItem, setSelectedItem] = useState(null);
-    const [activeProjectName, setActiveProjectName] = useState(""); // Yeni state
+    const [activeProjectName, setActiveProjectName] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,25 +35,25 @@ function ProjectsPage() {
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-        setActiveProjectName(item.attributes.projectFolderName); // Tıklanan öğenin adını aktif proje adı olarak ayarla
+        setActiveProjectName(item.attributes.projectFolderName);
     };
 
     const handleProjectClick = (project) => {
         setSelectedProject(project);
+        console.log("Selected Project:", project); // Debug için eklendi
+        console.log("Selected Project Name ben yazdım:", project.attributes.projectName); // Debug için eklendi
     };
+
 
     const handleTabChange = (tab) => {
         setCurrentTab(tab);
-        setSelectedItem(null); // Reset selected item when the tab changes
+        setSelectedItem(null);
     };
 
     const activeComponents = {
         allprojects: <ProjectSection onItemClick={handleItemClick} />,
         team: <ProjectTeam onItemClick={handleItemClick} />,
     };
-
-    console.log("dsdad", companyProjects);
-    console.log("selectedProject", selectedProject);
 
     return (
         <div className="projects-page">
@@ -62,19 +62,20 @@ function ProjectsPage() {
                 <ProjectInside onProjectClick={handleProjectClick} />
                 <div className="inner-project-column">
                     <ProjectHeader clickedProject={selectedProject} onTabChange={handleTabChange} />
-
                     {selectedItem ? (
                         <div className="new-section">
                             <div className="selected-folder-items">
                                 <h2 className="new-section-header">{selectedItem.attributes.projectFolderName}</h2>
                                 <SelectedItemSection selectedProject={selectedProject} companyProjects={companyProjects} />
                             </div>
-                            <ProjectBasedRevisions />
+                            <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
                         </div>
                     ) : (
-                        activeComponents[currentTab] || <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />
+                        activeComponents[currentTab] ||
+                        <div className="file-inside-row"> <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />
+                            <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
+                        </div>
                     )}
-
                 </div>
             </div>
         </div>

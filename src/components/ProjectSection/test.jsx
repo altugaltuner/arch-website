@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-import './SelectedItemSection.scss';
-import axios from "axios";
+import "../ProjectBasedRevisions/ProjectBasedRevisions.scss";
+import axios from 'axios';
 
-function SelectedItemSection({ selectedProject, companyProjects }) {
+function ProjectBasedRevisions({ clickedProject }) {
+    const [projectBasedRevisions, setProjectBasedRevisions] = useState([]);
+    const [activeProjectTitle, setActiveProjectTitle] = useState(null);
 
-    const [projectFiles, setProjectFiles] = useState([]);
+    useEffect(() => {
+        setActiveProjectTitle(clickedProject);
+    }, [clickedProject]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate[projectAllFiles][populate]=*');
-                setProjectFiles(response.data.data);
+                const response = await axios.get('http://localhost:1337/api/project-revises?populate=*');
+                console.log(response.data);
+                setProjectBasedRevisions(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
@@ -19,45 +24,32 @@ function SelectedItemSection({ selectedProject, companyProjects }) {
         fetchData();
     }, []);
 
-    const renderFile = (file) => {
-        const { name, url, ext } = file.attributes;
-        return (
-            <div key={file.id} className="project-file">
-                <p className="file-name">{name}</p>
-                <p className="file-type">{ext}</p>
-                <a href={`http://localhost:1337${url}`} download className="download-link">Download</a>
-            </div>
-        );
+    const getCommentText = (comment) => {
+        return comment.map((paragraph, index) => (
+            <p className="revision-paragraph" key={index}>
+                {paragraph.children.map((child, childIndex) => (
+                    <span className="revision-comment" key={childIndex}>{child.text}</span>
+                ))}
+            </p>
+        ));
     };
 
     return (
-        <div className='selected-item-section'>
-            {selectedProject && companyProjects.map(project => (
-                selectedProject.attributes.projectName === project.attributes.projectName && (
-                    <div key={project.id}>
-                        <h2>{project.attributes.projectName} Dosyaları</h2>
-                        {projectFiles.map(projectFile => {
-                            const { projectAllFiles } = projectFile.attributes;
-                            return (
-                                <div key={projectFile.id} className="project-file-container">
-                                    {projectAllFiles.architecturalPlans?.data?.map(renderFile)}
-                                    {projectAllFiles.staticPlans?.data?.map(renderFile)}
-                                    {projectAllFiles.electricalPlans?.data?.map(renderFile)}
-                                    {projectAllFiles.plumbingPlans?.data?.map(renderFile)}
-                                    {projectAllFiles.financialPapers?.data?.map(renderFile)}
-                                    {projectAllFiles.contractPapers?.data?.map(renderFile)}
-                                    {projectAllFiles.meetingNotes?.data?.map(renderFile)}
-                                    {projectAllFiles.dailyReports?.data?.map(renderFile)}
-                                    {projectAllFiles.projectPhotoshoots?.data?.map(renderFile)}
-                                    {projectAllFiles.projectRenders?.data?.map(renderFile)}
-                                </div>
-                            );
-                        })}
+        <div className="projects-based-revisions">
+            <h1 className="projects-revisions-header">Proje Revizeleri</h1>
+            <div className="project-revisions">
+                {projectBasedRevisions.filter(projectRevision =>
+                    projectRevision.attributes.project.data.attributes.projectName === activeProjectTitle
+                ).map((projectRevision) => (
+                    <div key={projectRevision.id} className="project-revision">
+                        <h2 className="revision-project-name">{projectRevision.attributes.project.data.attributes.projectName}</h2>
+                        {getCommentText(projectRevision.attributes.comment)}
+                        <p>{projectRevision.attributes.revisionDate}</p>
                     </div>
-                )
-            ))}
+                ))}
+            </div>
         </div>
     );
 }
 
-export default SelectedItemSection;
+export default ProjectBasedRevisions;
