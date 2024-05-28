@@ -35,15 +35,15 @@ function ProjectsPage() {
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-        setActiveProjectName(item.attributes.projectFolderName);
+        console.log("Selected Itemmmmmm:", item); // Debug için eklendi
+        if (item && item.attributes) {
+            setActiveProjectName(item.attributes.projectFolderName);
+        }
     };
 
     const handleProjectClick = (project) => {
         setSelectedProject(project);
-        console.log("Selected Project:", project); // Debug için eklendi
-        console.log("Selected Project Name ben yazdım:", project.attributes.projectName); // Debug için eklendi
     };
-
 
     const handleTabChange = (tab) => {
         setCurrentTab(tab);
@@ -69,10 +69,12 @@ function ProjectsPage() {
                                 <SelectedItemSection selectedProject={selectedProject} companyProjects={companyProjects} />
                             </div>
                             <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
+                            <button onClick={() => setSelectedItem(null)}>Back</button>
                         </div>
                     ) : (
                         activeComponents[currentTab] ||
-                        <div className="file-inside-row"> <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />
+                        <div className="file-inside-row">
+                            <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />
                             <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
                         </div>
                     )}
