@@ -140,27 +140,27 @@ function MyProfile() {
             ) : (
                 <div className="profile-info">
                     <div className="profile-field">
-                        <label>İsim Soyisim:</label>
-                        <p>{savedData.name}</p>
+                        <label className="profile-field-labels">İsim Soyisim:</label>
+                        <p className="profile-field-paragraph">{savedData.name}</p>
                     </div>
                     <div className="profile-field">
-                        <label>Biyografi:</label>
-                        <p>{savedData.bio}</p>
+                        <label className="profile-field-labels">Biyografi:</label>
+                        <p className="profile-field-paragraph">{savedData.bio}</p>
                     </div>
                     <div className="profile-field">
-                        <label>Konum:</label>
-                        <p>{savedData.location}</p>
+                        <label className="profile-field-labels">Konum:</label>
+                        <p className="profile-field-paragraph">{savedData.location}</p>
                     </div>
                     <div className="profile-field">
-                        <label>Website:</label>
-                        <p>{savedData.website}</p>
+                        <label className="profile-field-labels">Website:</label>
+                        <p className="profile-field-paragraph">{savedData.website}</p>
                     </div>
                     <div className="profile-field-social">
-                        <label>Sosyal Medya Hesaplarım:</label>
-                        <p>{savedData.social1}</p>
-                        <p>{savedData.social2}</p>
-                        <p>{savedData.social3}</p>
-                        <p>{savedData.social4}</p>
+                        <label className="profile-field-labels">Sosyal Medya Hesaplarım:</label>
+                        <p className="profile-field-paragraph">{savedData.social1}</p>
+                        <p className="profile-field-paragraph">{savedData.social2}</p>
+                        <p className="profile-field-paragraph">{savedData.social3}</p>
+                        <p className="profile-field-paragraph">{savedData.social4}</p>
                     </div>
                     <button className="my-profile-edit" type="button" onClick={handleEdit}>
                         Değiştir
