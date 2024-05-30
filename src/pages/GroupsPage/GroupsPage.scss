@@ -1,4 +1,8 @@
+@use "../../styles/abstracts/variables" as *;
+
 .groups-main {
     display: flex;
     flex-direction: column;
+    background-color: $background-color;
+    height: 100vh;
 }
