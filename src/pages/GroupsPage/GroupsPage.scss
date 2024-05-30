@@ -5,4 +5,91 @@
     flex-direction: column;
     background-color: $background-color;
     height: 100vh;
+    color: $div-color;
+    font-family: "Barlow", sans-serif;
+
+    .groups-main-header {
+        background-color: $grey;
+        width: 150px;
+        border: none;
+        border-radius: 15px;
+        padding: 10px;
+        text-align: center;
+        color: #2A2C41;
+        font-size: 25px;
+        font-weight: 400;
+        margin: 20px;
+    }
+
+    .project-groups {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        padding: 20px;
+        flex-wrap: wrap;
+
+        .project-group {
+            display: flex;
+            flex-direction: column;
+            border: none;
+            width: 250px;
+            height: 220px;
+            text-align: center;
+            background-color: $grey;
+            padding: 10px;
+            border-radius: 10%;
+            cursor: pointer;
+
+            .project-group-header {
+                font-size: 20px;
+                font-weight: 600;
+                color: $div-color;
+                padding: 5px
+            }
+
+            .relevant-project-header {
+                font-size: 20px;
+                color: $div-color;
+                padding: 5px;
+                font-weight: 500;
+            }
+
+            .project-group-members {
+                .project-group-member-header {
+                    color: $div-color;
+                    padding: 5px
+                }
+
+                .project-group-list {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    justify-content: center;
+                    margin-top: 20px;
+
+                    .group-list-element {
+                        background: $grey;
+                        border: 1px solid $grey;
+                        padding: 1px;
+                        margin: 5px;
+                        text-align: center;
+                        width: 25px;
+                    }
+
+                    .slick-slide {
+                        padding: 10px;
+                        width: 25px;
+
+                        &.slick-active {
+                            width: 25px;
+                        }
+
+                        &.slick-current {
+                            width: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
