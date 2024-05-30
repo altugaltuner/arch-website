@@ -17,7 +17,7 @@ function MyProfile() {
         social4: ""
     };
 
-    const [isEditing, setIsEditing] = useState(false); // Initially in edit mode
+    const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState(initialData);
     const [savedData, setSavedData] = useState(initialData); // To keep track of saved data
 
@@ -29,16 +29,20 @@ function MyProfile() {
     const handleSave = (e) => {
         e.preventDefault();
         setSavedData(formData); // Save the current form data
-        setIsEditing(false); // Switch to view mode
+        setIsEditing(false);
     };
 
     const handleEdit = () => {
-        setIsEditing(true); // Switch back to edit mode
+        setIsEditing(true);
     };
 
     const handleCancel = () => {
         setFormData(savedData); // Revert to saved data
-        setIsEditing(false); // Switch to view mode
+        setIsEditing(false);
+    };
+
+    const handleLogout = () => {
+        window.location.href = "/login";
     };
 
     return (
@@ -162,11 +166,17 @@ function MyProfile() {
                         <p className="profile-field-paragraph">{savedData.social3}</p>
                         <p className="profile-field-paragraph">{savedData.social4}</p>
                     </div>
-                    <button className="my-profile-edit" type="button" onClick={handleEdit}>
-                        Değiştir
-                    </button>
+                    <div className="buttons-for-profile-section">
+                        <button className="my-profile-edit" type="button" onClick={handleEdit}>
+                            Değiştir
+                        </button>
+                        <button className="my-profile-logout" type="button" onClick={handleLogout}>
+                            Çıkış Yap
+                        </button>
+                    </div>
                 </div>
             )}
+
         </div>
     );
 }

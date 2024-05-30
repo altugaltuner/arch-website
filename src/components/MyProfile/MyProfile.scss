@@ -27,6 +27,7 @@
     .profile-form {
         .profile-field {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
             gap: 60px;
             margin: 5px 0px 5px 0px;
@@ -116,6 +117,60 @@
         flex-direction: column;
         width: 90%;
 
-        .profile-field {}
+        .profile-field {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .profile-field-social {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .buttons-for-profile-section {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: space-around;
+            margin-top: 20px;
+
+            .my-profile-edit {
+                width: 50%;
+                height: 48px;
+                padding: 0px;
+                gap: 8px;
+                border-radius: 8px;
+                background: #2A2C41;
+                border: 1px solid #2A2C41;
+                color: #ffffff;
+                cursor: pointer;
+                box-shadow: 0px 8px 24px 0px rgba(114, 72, 231, 0.4);
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 19.6px;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .my-profile-logout {
+                width: 50%;
+                height: 48px;
+                padding: 0px;
+                gap: 8px;
+                border-radius: 8px;
+                background: none;
+                border: 1px solid #2A2C41;
+                color: #2A2C41;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 19.6px;
+                text-align: center;
+                transition: transform 0.3s ease, border-color 0.01s ease, background-color 0.3s ease;
+            }
+        }
     }
 }
