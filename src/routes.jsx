@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import ProjectsPage from "./pages/ProjectsPage/ProjectsPage.jsx";
 import WorkersPage from "./pages/WorkersPage/WorkersPage.jsx";
 import AboutMePage from "./pages/AboutMePage/AboutMePage.jsx";
+import GroupsPage from "./pages/GroupsPage/GroupsPage.jsx";
 
 const routes = [
   {
@@ -21,6 +22,14 @@ const routes = [
     element: (
       <ProtectedRoute>
         <ProjectsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/groups",
+    element: (
+      <ProtectedRoute>
+        <GroupsPage />
       </ProtectedRoute>
     ),
   },

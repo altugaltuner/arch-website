@@ -10,7 +10,7 @@
 
     .activities-container-half {
         padding: 20px;
-        background-color: $my;
+        background-color: $div-color;
         width: 100%;
         border-radius: 15px;
 
@@ -21,12 +21,12 @@
             background-color: $grey;
             border-radius: 10px;
             padding: 10px;
-            color: $my;
+            color: $div-color;
         }
 
         .activities-table {
             width: 100%;
-            color: $my;
+            color: $div-color;
             border-collapse: collapse;
 
             .table-main-head {
@@ -48,7 +48,7 @@
                     .table-data {
                         padding: 10px;
                         background-color: $grey;
-                        border: 1px solid $my;
+                        border: 1px solid $div-color;
 
                         .project-name {
                             font-weight: bold;
@@ -71,7 +71,7 @@
                                 display: inline-block;
                                 width: 6px;
                                 height: 6px;
-                                background-color: $my;
+                                background-color: $div-color;
                                 border-radius: 50%;
                                 margin-right: 5px;
                             }
