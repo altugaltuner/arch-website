@@ -6,11 +6,11 @@
     align-items: center;
     justify-content: center;
     padding: 40px;
-    background-color: $sec;
+    background-color: $background-color;
     font-family: "Barlow", sans-serif;
 
     .company-name {
-        color: $my;
+        color: $div-color;
         font-size: 40px;
         font-weight: 400;
         background-color: $grey;

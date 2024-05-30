@@ -8,14 +8,14 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        background-color: $sec;
+        background-color: $background-color;
         border-radius: 20px;
 
         .active-project-title {
             width: fit-content;
             padding: 10px;
             margin: 10px;
-            background-color: $my;
+            background-color: $div-color;
             color: $grey;
             font-weight: 400;
             border-radius: 15px;
@@ -25,7 +25,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            background-color: $sec;
+            background-color: $background-color;
 
             .active-project-btn {
                 border-radius: 15px;
@@ -34,7 +34,7 @@
                 width: 100%;
                 font-size: 30px;
                 background-color: $grey;
-                color: $my;
+                color: $div-color;
             }
 
             :hover {

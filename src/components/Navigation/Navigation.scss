@@ -3,7 +3,7 @@
 .navigation-main {
     display: flex;
     flex-direction: row;
-    background-color: $my;
+    background-color: $div-color;
     color: white;
     font-family: "Barlow", sans-serif;
 
@@ -27,7 +27,7 @@
                 border: none;
                 border-radius: 15px;
                 padding: 10px 100px;
-                color: $my;
+                color: $div-color;
             }
 
             :hover {

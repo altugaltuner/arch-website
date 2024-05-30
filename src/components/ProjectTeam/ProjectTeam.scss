@@ -2,7 +2,7 @@
 
 .project-teams-container {
     padding: 20px;
-    background-color: $sec;
+    background-color: $background-color;
     font-family: "Barlow", sans-serif;
 
     .section-header {
@@ -13,7 +13,7 @@
         padding: 10px;
         font-size: 30px;
         background-color: $grey;
-        color: $my;
+        color: $div-color;
         margin-bottom: 20px;
     }
 
@@ -37,7 +37,7 @@
 
         .team-title {
             font-size: 1.2em;
-            color: $my;
+            color: $div-color;
             margin-bottom: 10px;
             font-weight: 400;
         }

@@ -3,7 +3,7 @@
 .aboutme-page-main {
     display: flex;
     flex-direction: column;
-    background-color: $my;
+    background-color: $div-color;
     font-family: "Barlow", sans-serif;
 
     .aboutme-page-row {
@@ -11,7 +11,7 @@
         flex-direction: row;
 
         .aboutme-page-column {
-            background-color: $sec;
+            background-color: $background-color;
             color: white;
             padding: 20px;
             margin: 20px;

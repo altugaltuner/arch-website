@@ -7,7 +7,7 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 10px;
-    background-color: $sec;
+    background-color: $background-color;
     font-family: "Barlow", sans-serif;
 
     .section-header {
@@ -19,7 +19,7 @@
         padding: 10px;
         font-size: 30px;
         background-color: $grey;
-        color: $my;
+        color: $div-color;
     }
 
     .project-section-one {
@@ -27,7 +27,7 @@
         flex-direction: column;
         width: 300px;
         height: 270px;
-        color: $my;
+        color: $div-color;
         background-color: $grey;
         border-radius: 15px;
         padding: 15px;

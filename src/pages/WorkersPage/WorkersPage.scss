@@ -1,7 +1,7 @@
 @use "../../styles/abstracts/variables" as *;
 
 .workers-page-main {
-    background-color: $my;
+    background-color: $div-color;
     height: 100vh;
     font-family: "Barlow", sans-serif;
 
@@ -58,9 +58,9 @@
         .sidebar {
             display: flex;
             width: 20%;
-            background-color: $my;
+            background-color: $div-color;
             padding: 10px;
-            background-color: $sec;
+            background-color: $background-color;
 
             ul {
                 width: 100%;
@@ -93,8 +93,8 @@
             grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 20px;
             padding: 20px;
-            background-color: $sec;
-            color: $my;
+            background-color: $background-color;
+            color: $div-color;
         }
 
         .employee-card {

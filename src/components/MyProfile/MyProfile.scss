@@ -9,7 +9,7 @@
     padding: 20px;
     background-color: $grey;
     border-radius: 20px;
-    color: $sec;
+    color: $background-color;
     font-family: "Barlow", sans-serif;
 
     .profile-image {
@@ -33,7 +33,7 @@
 
             .biography-area {
                 height: 80px;
-                background-color: $sec;
+                background-color: $background-color;
                 color: white;
                 border-radius: 8px;
                 padding: 10px;
@@ -41,7 +41,7 @@
             }
 
             .input-for-labels {
-                background-color: $sec;
+                background-color: $background-color;
                 color: white;
                 padding: 10px;
                 border-radius: 8px;
@@ -61,7 +61,7 @@
             margin-top: 20px;
 
             .input-for-labels {
-                background-color: $sec;
+                background-color: $background-color;
                 color: white;
                 padding: 10px;
                 border-radius: 8px;
@@ -80,8 +80,8 @@
                 padding: 0px;
                 gap: 8px;
                 border-radius: 8px;
-                background: $my;
-                border: 1px solid $my;
+                background: $div-color;
+                border: 1px solid $div-color;
                 color: #ffffff;
                 cursor: pointer;
                 box-shadow: 0px 8px 24px 0px rgba(234, 124, 105, 0.4);
@@ -99,8 +99,8 @@
                 gap: 8px;
                 border-radius: 8px;
                 background: none;
-                border: 1px solid $my;
-                color: $my;
+                border: 1px solid $div-color;
+                color: $div-color;
                 cursor: pointer;
                 font-size: 14px;
                 font-weight: 600;
@@ -115,8 +115,7 @@
         display: flex;
         flex-direction: column;
         width: 90%;
-        .profile-field{
-            
-        }
+
+        .profile-field {}
     }
 }
