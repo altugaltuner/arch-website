@@ -21,75 +21,81 @@
         margin: 20px;
     }
 
-    .project-groups {
+    .group-div-row {
         display: flex;
         flex-direction: row;
-        gap: 50px;
-        padding: 20px;
-        flex-wrap: wrap;
+        width: 100%;
 
-        .project-group {
+        .project-groups {
             display: flex;
             flex-direction: column;
-            border: none;
-            width: 250px;
-            height: 220px;
-            text-align: center;
-            background-color: $grey;
-            padding: 10px;
-            border-radius: 10%;
-            cursor: pointer;
+            gap: 2px;
+            padding: 20px;
+            flex-wrap: wrap;
 
-            .project-group-header {
-                font-size: 20px;
-                font-weight: 600;
-                color: $div-color;
-                padding: 5px
-            }
+            .project-group {
+                display: flex;
+                flex-direction: row;
+                border: none;
+                width: 350px;
+                height: 80px;
+                text-align: center;
+                background-color: $grey;
+                padding: 10px;
+                cursor: pointer;
 
-            .relevant-project-header {
-                font-size: 20px;
-                color: $div-color;
-                padding: 5px;
-                font-weight: 500;
-            }
-
-            .project-group-members {
-                .project-group-member-header {
+                .project-group-header {
+                    font-size: 20px;
+                    font-weight: 600;
                     color: $div-color;
                     padding: 5px
                 }
 
-                .project-group-list {
-                    display: flex;
-                    flex-direction: row;
-                    gap: 10px;
-                    justify-content: center;
-                    margin-top: 20px;
+                .relevant-project-header {
+                    font-size: 20px;
+                    color: $div-color;
+                    padding: 5px;
+                    font-weight: 500;
+                }
 
-                    .group-list-element {
-                        background: $grey;
-                        border: 1px solid $grey;
-                        padding: 1px;
-                        margin: 5px;
-                        text-align: center;
-                        width: 25px;
+                .project-group-members {
+                    .project-group-member-header {
+                        color: $div-color;
+                        padding: 5px
                     }
 
-                    .slick-slide {
-                        padding: 10px;
-                        width: 25px;
+                    .project-group-list {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 10px;
+                        justify-content: center;
+                        margin-top: 20px;
 
-                        &.slick-active {
+                        .group-list-element {
+                            background: $grey;
+                            border: 1px solid $grey;
+                            padding: 1px;
+                            margin: 5px;
+                            text-align: center;
                             width: 25px;
                         }
 
-                        &.slick-current {
+                        .slick-slide {
+                            padding: 10px;
                             width: 25px;
+
+                            &.slick-active {
+                                width: 25px;
+                            }
+
+                            &.slick-current {
+                                width: 25px;
+                            }
                         }
                     }
                 }
             }
         }
     }
+
 }

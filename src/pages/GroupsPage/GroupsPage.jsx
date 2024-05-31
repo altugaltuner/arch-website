@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./GroupsPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
+import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
 
 function GroupsPage() {
 
@@ -60,21 +60,17 @@ function GroupsPage() {
         <div className="groups-main">
             <Navigation />
             <h1 className="groups-main-header">Groups</h1>
-            <div className="project-groups">
-                {groups.map((group) => (
-                    <div key={group.id} className="project-group">
-                        <h2 className="project-group-header">{group.id}</h2>
-                        <h3 className="relevant-project-header">Project: {group.attributes.groupName}</h3>
-                        <div className="project-group-members">
-                            <p className="project-group-member-header">Katılımcılar</p>
-                            <Slider {...settings} className="project-group-list">
-                                {group.attributes.users_permissions_users.data.map((user) => (
-                                    <div key={user.id} className="group-list-element">{user.attributes.username}</div>
-                                ))}
-                            </Slider>
+            <div className="group-div-row">
+                <div className="project-groups">
+                    {groups.map((group) => (
+                        <div key={group.id} className="project-group">
+                            <img className="group-image" src={group.attributes.groupMedia[0]} alt="group" />
+                            <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
+
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+                <GroupMessagePanel />
             </div>
         </div>
     );
