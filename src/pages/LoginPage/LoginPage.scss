@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: $primary-bg;
+    background-color: $background-color;
     font-family: "Barlow", sans-serif;
 
     .login-main-div {
@@ -16,7 +16,7 @@
         height: 200px;
 
         .login-h1 {
-            color: $font-color-white;
+            color: $grey;
             font-size: 3rem;
             margin-bottom: 1rem;
         }
@@ -52,7 +52,7 @@
             }
 
             .error-message {
-                color: $font-color-white;
+                color: $grey;
                 padding: 5px;
             }
 
@@ -80,17 +80,17 @@
                     border: none;
                     border-radius: 12px;
                     cursor: pointer;
-                    color: $primary-bg;
-                    background-color: $font-color-white;
+                    color: $background-color;
+                    background-color: $grey;
 
                     &:hover {
-                        background-color: darken($font-color-white, 20%);
-                        color: $primary-bg;
+                        background-color: darken($grey, 20%);
+                        color: $background-color;
                     }
 
                     &:active {
-                        background-color: darken($font-color-white, 35%);
-                        color: $primary-bg;
+                        background-color: darken($grey, 35%);
+                        color: $background-color;
                     }
                 }
 
@@ -100,17 +100,17 @@
                     border: none;
                     border-radius: 12px;
                     cursor: pointer;
-                    color: $primary-bg;
-                    background-color: $font-color-white;
+                    color: $background-color;
+                    background-color: $grey;
 
                     &:hover {
-                        background-color: darken($font-color-white, 20%);
-                        color: $primary-bg;
+                        background-color: darken($grey, 20%);
+                        color: $background-color;
                     }
 
                     &:active {
-                        background-color: darken($font-color-white, 35%);
-                        color: $primary-bg;
+                        background-color: darken($grey, 35%);
+                        color: $background-color;
                     }
                 }
             }

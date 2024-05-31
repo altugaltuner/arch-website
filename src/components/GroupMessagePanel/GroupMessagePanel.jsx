@@ -14,11 +14,11 @@ function GroupMessagePanel() {
         <div className="message-panel-main">
             <div className="message-panel-head">
                 <div className="message-panel-left-side">
-                    <img src="" alt="group-pic" />
-                    <h2>Group Name</h2>
+                    <img className="message-panel-group-img" src="" alt="group-pic" />
+                    <h2 className="message-panel-group-name">Group Name</h2>
                 </div>
                 <div className="message-panel-right-side">
-                    <img src="" alt="search-logo" />
+                    <img className="message-panel-search-logo" src="" alt="search-logo" />
                     <img src="" alt="media-logo" />
                 </div>
             </div>

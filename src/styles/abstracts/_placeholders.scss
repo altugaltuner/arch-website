@@ -28,8 +28,8 @@
   overflow-y: auto;
   @extend %custom-scroll-bar;
   font-family: $primary-font, sans-serif;
-  background: $primary-bg;
-  color: $primary-font-color;
+  background: $background-color;
+  color: $grey;
 }
 
 @media (max-width: 768px) {

@@ -49,6 +49,7 @@
                         padding: 10px;
                         background-color: $grey;
                         border: 1px solid $div-color;
+                        font-size: 18px;
 
                         .project-name {
                             font-weight: bold;
@@ -66,6 +67,7 @@
                             align-items: center;
                             margin-bottom: 5px;
                             width: 100%;
+                            font-size: 15px;
 
                             .table-data-bullet {
                                 display: inline-block;
@@ -78,7 +80,7 @@
                         }
 
                         &.table-data-fordate {
-                            width: 20%;
+                            width: 10%;
                             /* Burada istediğiniz rengi belirleyin */
                         }
                     }
