@@ -7,18 +7,19 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     width: 33%;
+    font-family: "Barlow", sans-serif;
 
-    h2 {
+    .my-files-panel-header {
         font-size: 20px;
         margin-bottom: 20px;
     }
 
-    .folders {
+    .my-folders {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
 
-        .folder {
+        .my-folder {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,14 +31,15 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             text-align: center;
+            cursor: pointer;
 
-            img {
+            .my-folder-preview {
                 width: 40px;
                 height: 40px;
                 margin-bottom: 10px;
             }
 
-            p {
+            .my-folder-name {
                 font-size: 14px;
                 color: #555;
             }

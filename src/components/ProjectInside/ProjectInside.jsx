@@ -23,7 +23,7 @@ function ProjectInside({ onProjectClick }) {
     return (
         <div className="project-inside-main">
             <div className="projects-sidebar">
-                <h2 className="sidebar-title">Projeler</h2>
+                <h2 className="sidebar-title">Aktif Projeler</h2>
                 <ul className="projects-list">
                     {projects.length > 0 ? projects.map(project => (
                         <li key={project.id} className="project-item" onClick={() => onProjectClick(project)}>
