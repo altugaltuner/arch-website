@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./GroupMessagePanel.scss";
 
 function GroupMessagePanel() {
+    const [message, setMessage] = useState("");
+
+    const handleSendMessage = () => {
+        // Mesaj gönderme işlemi burada yapılacak
+        console.log("Mesaj gönderildi:", message);
+        setMessage("");
+    };
 
     return (
         <div className="message-panel-main">
@@ -14,18 +21,25 @@ function GroupMessagePanel() {
                     <img src="" alt="search-logo" />
                     <img src="" alt="media-logo" />
                 </div>
-                <div className="message-panel-message-area">
-                    <p className="others-message-in-panel">Lorem ipsum</p>
-                    <p className="others-message-in-panel">dolor sit amet</p>
-                    <p className="others-message-in-panel">consectetur adipisicing</p>
-                    <p className="others-message-in-panel">Adipisci nihil itaque</p>
-                    <p className="my-message-in-panel">laboriosam, dolor</p>
-                    <p className="others-message-in-panel">eligendi unde eaque vel</p>
-                    <p className="my-message-in-panel">necessitatibus quo optio</p>
-                </div>
-
             </div>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci nihil itaque magnam laboriosam, dolor, perferendis veniam eligendi unde eaque vel necessitatibus quo optio commodi nobis sint totam, nisi atque ratione?</p>
+            <div className="message-panel-message-area">
+                <p className="others-message-in-panel">Lorem ipsum</p>
+                <p className="others-message-in-panel">dolor sit amet</p>
+                <p className="others-message-in-panel">consectetur adipisicing</p>
+                <p className="others-message-in-panel">Adipisci nihil itaque</p>
+                <p className="my-message-in-panel">laboriosam, dolor</p>
+                <p className="others-message-in-panel">eligendi unde eaque vel</p>
+                <p className="my-message-in-panel">necessitatibus quo optio</p>
+            </div>
+            <div className="message-input-area">
+                <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Type a message"
+                />
+                <button onClick={handleSendMessage}>Send</button>
+            </div>
         </div>
     );
 };

@@ -4,9 +4,9 @@ import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";
 import MyProfile from "../../components/MyProfile/MyProfile";
 import MyActiveProjects from "../../components/MyActiveProjects/MyActiveProjects";
+import MyPersonalFiles from "../../components/MyPersonalFiles/MyPersonalFiles";
 
 function AboutMePage() {
-
     const auth = useAuth(); // auth'u const {fireStoreUser} = useAuth() şeklinde alırsanız user bilgilerine ulaşabilirsiniz
 
     return (
@@ -14,10 +14,8 @@ function AboutMePage() {
             <Navigation />
             <div className="aboutme-page-row">
                 <MyProfile />
-                <div className="aboutme-page-column">
-                    <MyActiveProjects />
-
-                </div>
+                <MyActiveProjects />
+                <MyPersonalFiles />
             </div>
         </div>
     );

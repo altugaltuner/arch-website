@@ -1,3 +1,111 @@
 .message-panel-main {
-    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    margin-right: 20px;
+    background-color: #f0f0f0;
+    transform: translate(0px, -60px);
+    border-radius: 20px;
+
+    .message-panel-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        .message-panel-left-side,
+        .message-panel-right-side {
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            h2 {
+                font-size: 18px;
+                font-weight: bold;
+                color: #333;
+            }
+        }
+
+        .message-panel-right-side {
+            img {
+                width: 20px;
+                height: 20px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .message-panel-message-area {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        background-color: #e9e9e9;
+        margin-top: 10px;
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+        flex-grow: 1;
+
+        .others-message-in-panel {
+            align-self: flex-start;
+            background-color: #d1e7dd;
+            color: #0f5132;
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .my-message-in-panel {
+            align-self: flex-end;
+            background-color: #cff4fc;
+            color: #055160;
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+    }
+
+    .message-input-area {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+
+        input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+
+            &:hover {
+                background-color: #22c35e;
+            }
+        }
+    }
 }

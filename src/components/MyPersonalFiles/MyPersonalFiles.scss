@@ -1,0 +1,46 @@
+@use "../../styles/abstracts/variables" as *;
+
+.my-files-panel {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: $grey;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width: 33%;
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .folders {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .folder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 130px;
+            height: 130px;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+
+            img {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 14px;
+                color: #555;
+            }
+        }
+    }
+}
