@@ -89,3 +89,84 @@
         }
     }
 }
+
+@media screen and (max-width: 950px) {
+    .activities-container {
+        flex-direction: column;
+        gap: 10px;
+
+        .activities-container-half {
+            padding: 10px;
+            font-size: 15px;
+
+            .activities-title {
+                font-size: 18px;
+            }
+
+            .activities-table {
+                .table-main-head {
+                    .table-header-row {
+                        .table-header {
+                            font-size: 15px;
+                        }
+                    }
+                }
+
+                .table-body {
+                    .table-body-row {
+                        .table-data {
+                            font-size: 15px;
+
+                            .table-data-description {
+                                font-size: 14px;
+                            }
+
+                            .table-data-group,
+                            .table-data-date {
+                                font-size: 13px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .activities-container {
+        .activities-container-half {
+            .activities-title {
+                font-size: 16px;
+            }
+
+            .activities-table {
+                .table-main-head {
+                    .table-header-row {
+                        .table-header {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                .table-body {
+                    .table-body-row {
+                        .table-data {
+                            font-size: 14px;
+                            padding: 0px;
+
+                            .table-data-description {
+                                font-size: 13px;
+                            }
+
+                            .table-data-group,
+                            .table-data-date {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

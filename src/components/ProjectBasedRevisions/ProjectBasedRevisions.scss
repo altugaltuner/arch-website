@@ -35,3 +35,38 @@
         }
     }
 }
+
+@media screen and (max-width: 950px) {
+
+    .projects-based-revisions {
+        width: 80%;
+
+        .projects-revisions-header {}
+    }
+
+
+
+    .project-revision {
+        .revision-project-name {
+            font-size: 18px;
+        }
+
+        .revision-paragraph {
+            .revision-comment {
+                font-size: 15px;
+                padding: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .projects-based-revisions {
+        width: 80%;
+
+        .projects-revisions-header {
+            height: 90px;
+        }
+    }
+
+}

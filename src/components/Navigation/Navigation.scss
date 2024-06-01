@@ -42,3 +42,37 @@
         }
     }
 }
+
+@media screen and (max-width: 950px) {
+
+    .navigation-main {
+        .nav-ul {
+
+            .nav-li-third,
+            .nav-li-one {
+                font-size: 20px;
+
+                .nav-button {
+                    width: 90%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 560px) {
+
+    .navigation-main {
+        .nav-ul {
+
+            .nav-li-third,
+            .nav-li-one {
+                font-size: 14px;
+
+                .nav-button {
+                    width: 90%;
+                }
+            }
+        }
+    }
+}

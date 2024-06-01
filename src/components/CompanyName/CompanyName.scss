@@ -19,3 +19,13 @@
         border-radius: 15px;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .company-name-main {
+        padding: 20px 0px 0px 0px;
+
+        .company-name {
+            font-size: 30px;
+        }
+    }
+}

@@ -59,7 +59,38 @@
             :active {
                 background-color: darken($grey, 20%);
             }
+        }
+    }
+}
 
+@media screen and (max-width: 1250px) {
+    .project-inside-main {
+        width: 100%;
+
+        .projects-sidebar {
+
+            .projects-list {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                padding: 10px;
+
+                .project-item {
+                    font-size: 1em;
+                    padding: 5px;
+                    border-radius: 10px;
+                    background-color: $grey;
+                    color: $div-color;
+
+                    .project-navbar-photos {
+                        display: none;
+                    }
+
+                    .project-navbar-name {
+                        font-size: 18px;
+                    }
+                }
+            }
         }
     }
 }
