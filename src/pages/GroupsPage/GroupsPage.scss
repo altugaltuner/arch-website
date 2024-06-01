@@ -99,5 +99,35 @@
             }
         }
     }
+}
 
+@media screen and (max-width: 768px) {
+    .groups-main {
+        .group-div-row {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+
+            .project-groups {
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                justify-content: center;
+
+                .project-group {
+                    display: flex;
+                    flex-direction: row;
+                    border: none;
+                    width: 285px;
+                    height: 58px;
+                    text-align: center;
+                    background-color: #f4f4f4;
+                    padding: 7px;
+                    cursor: pointer;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
 }

@@ -114,3 +114,17 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+
+    .message-panel-main {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        height: 60%;
+        padding: 20px;
+        transform: translate(0px, 0px);
+        margin: 20px;
+
+    }
+}
