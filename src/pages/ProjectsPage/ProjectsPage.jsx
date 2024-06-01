@@ -16,7 +16,7 @@ function ProjectsPage() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [currentTab, setCurrentTab] = useState('allprojects');
     const [selectedItem, setSelectedItem] = useState(null);
-    const [activeProjectName, setActiveProjectName] = useState("");
+    const [activeFolder, setActiveFolder] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,9 +35,10 @@ function ProjectsPage() {
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-        console.log("Selected Itemmmmmm:", item); // Debug için eklendi
+        console.log("Selected Item:", item); // Debug için eklendi
         if (item && item.attributes) {
-            setActiveProjectName(item);
+            setActiveFolder(item.attributes.projectFolderName);
+            console.log("Active Project Name:", item.attributes.projectFolderName); // Debug için eklendi
         }
     };
 
@@ -65,17 +66,17 @@ function ProjectsPage() {
                     {selectedItem ? (
                         <div className="new-section">
                             <div className="selected-folder-items">
-                                <h2 className="new-section-header">{selectedItem}</h2>
-                                <SelectedItemSection selectedProject={selectedProject} companyProjects={companyProjects} />
+                                <h2 className="new-section-header">{selectedItem.attributes.projectName}</h2>
+                                <SelectedItemSection activeProjectTitle={activeFolder} companyProjects={companyProjects} />
                             </div>
-                            <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
+                            <ProjectBasedRevisions clickedProject={selectedProject} />
                             <button onClick={() => setSelectedItem(null)}>Back</button>
                         </div>
                     ) : (
                         activeComponents[currentTab] ||
                         <div className="file-inside-row">
-                            <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />
-                            <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
+                            <ProjectSection onItemClick={handleItemClick} />
+                            <ProjectBasedRevisions clickedProject={selectedProject} />
                         </div>
                     )}
                 </div>

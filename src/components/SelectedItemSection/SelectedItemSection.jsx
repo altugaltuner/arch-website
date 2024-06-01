@@ -19,8 +19,6 @@ function SelectedItemSection({ activeProjectTitle, companyProjects }) {
         fetchData();
     }, []);
 
-    //console.log("fileExtensions", fileExtensions);
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -53,18 +51,12 @@ function SelectedItemSection({ activeProjectTitle, companyProjects }) {
 
     const [activeProjectFiles, setActiveProjectFiles] = useState([]);
 
-    //console.log("project.attributes.projectName", projectFiles.map(project => project.attributes.projectName));
-    //console.log("projectFiles 22", projectFiles);
-
     const activePs = projectFiles.map(project => project.attributes.projectName);
-    // console.log("activePs", activePs);
 
     useEffect(() => {
         const activeProjectFiles = projectFiles.filter(project => project.attributes.projectName === activeProjectTitle);
         setActiveProjectFiles(activeProjectFiles);
     }, [activeProjectTitle, projectFiles]);
-
-    //console.log("activeProjectFiles", activeProjectFiles);
 
     return (
         <div className='selected-item-section'>
