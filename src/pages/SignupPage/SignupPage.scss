@@ -10,7 +10,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        background-color: $primary-bg;
+        background-color: $background-color;
         font-family: "Barlow", sans-serif;
 
         .signup-main-div {
@@ -18,7 +18,7 @@
             height: 200px;
 
             h1 {
-                color: $font-color-white;
+                color: $grey;
                 font-size: 3rem;
                 margin-bottom: 1rem;
             }
