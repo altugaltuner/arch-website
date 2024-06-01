@@ -2,7 +2,6 @@
 
 .workers-page-main {
     background-color: $background-color;
-    height: 100vh;
     font-family: "Barlow", sans-serif;
 
     .company-grid {
@@ -94,44 +93,75 @@
             gap: 20px;
             padding: 20px;
             color: $div-color;
+
+            .employee-card {
+                background-color: $grey;
+                padding: 20px;
+                max-height: 240px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+
+                .profile-pic {
+                    width: 100px;
+                    height: 100px;
+                    background-color: #ccc;
+                    border-radius: 50%;
+                    margin: 0 auto 10px;
+
+                    .profile-pic-inner {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                }
+
+                .employee-info {
+                    h3 {
+                        margin: 10px 0 5px;
+                        font-size: 18px;
+                    }
+
+                    p {
+                        margin: 5px 0;
+                        font-size: 14px;
+                        color: #666;
+                    }
+                }
+            }
         }
 
-        .employee-card {
-            background-color: $grey;
-            padding: 20px;
-            max-height: 240px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
 
-            .profile-pic {
-                width: 100px;
-                height: 100px;
-                background-color: #ccc;
-                border-radius: 50%;
-                margin: 0 auto 10px;
+    }
+}
 
-                .profile-pic-inner {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    border-radius: 50%;
+@media screen and (max-width: 620px) {
+    .workers-page-main {
+        .company-grid {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .employee-grid {
+                width: 100%;
+
+                .employee-card {
+                    background-color: #f4f4f4;
+                    padding: 20px;
+                    max-height: 240px;
+                    text-align: center;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    cursor: pointer;
                 }
             }
 
-            .employee-info {
-                h3 {
-                    margin: 10px 0 5px;
-                    font-size: 18px;
-                }
-
-                p {
-                    margin: 5px 0;
-                    font-size: 14px;
-                    color: #666;
-                }
-            }
         }
     }
 }
