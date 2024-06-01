@@ -47,3 +47,19 @@
         }
     }
 }
+
+@media screen and (max-width: 950px) {
+    .project-section-main {
+        .projects-page-content-header {
+            .active-project-title {
+                font-size: 20px;
+            }
+
+            .active-project-tabs {
+                .active-project-btn {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}

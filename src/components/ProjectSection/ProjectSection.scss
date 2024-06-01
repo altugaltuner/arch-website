@@ -67,6 +67,10 @@
     .project-sections {
         width: 80%;
 
+        .section-header {
+            font-size: 25px;
+        }
+
         .project-section-one {
             width: 250px;
             height: 250px;
@@ -88,6 +92,10 @@
 @media screen and (max-width: 950px) {
     .project-sections {
         width: 90%;
+
+        .section-header {
+            font-size: 20px;
+        }
 
         .project-section-one {
             width: 170px;

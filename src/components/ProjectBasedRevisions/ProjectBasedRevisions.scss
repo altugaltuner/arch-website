@@ -41,7 +41,9 @@
     .projects-based-revisions {
         width: 80%;
 
-        .projects-revisions-header {}
+        .projects-revisions-header {
+            font-size: 25px;
+        }
     }
 
 
@@ -65,8 +67,8 @@
         width: 80%;
 
         .projects-revisions-header {
-            height: 90px;
+            font-size: 20px;
+            height: 63px;
         }
     }
-
 }
