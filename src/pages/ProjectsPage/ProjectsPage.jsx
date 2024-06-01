@@ -37,7 +37,7 @@ function ProjectsPage() {
         setSelectedItem(item);
         console.log("Selected Itemmmmmm:", item); // Debug için eklendi
         if (item && item.attributes) {
-            setActiveProjectName(item.attributes.projectFolderName);
+            setActiveProjectName(item);
         }
     };
 
@@ -65,7 +65,7 @@ function ProjectsPage() {
                     {selectedItem ? (
                         <div className="new-section">
                             <div className="selected-folder-items">
-                                <h2 className="new-section-header">{selectedItem.attributes.projectFolderName}</h2>
+                                <h2 className="new-section-header">{selectedItem}</h2>
                                 <SelectedItemSection selectedProject={selectedProject} companyProjects={companyProjects} />
                             </div>
                             <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
