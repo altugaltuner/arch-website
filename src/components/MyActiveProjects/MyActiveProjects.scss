@@ -47,3 +47,22 @@
         }
     }
 }
+
+@media screen and (max-width: 655px) {
+    .myactive-projects-main {
+        width: 100%;
+    }
+
+    .active-projects {
+        .active-projects-container {
+            .project-inside-main {
+                .projects-sidebar {
+                    .projects-list {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+}

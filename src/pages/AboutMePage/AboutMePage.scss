@@ -15,3 +15,27 @@
         padding: 20px;
     }
 }
+
+@media screen and (max-width: 1250px) {
+    .aboutme-page-main {
+        .aboutme-page-row {
+            .project-inside-main {
+                .projects-sidebar {
+                    .projects-list {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 655px) {
+    .aboutme-page-main {
+        .aboutme-page-row {
+            flex-direction: column;
+        }
+    }
+
+}

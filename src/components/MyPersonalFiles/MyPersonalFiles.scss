@@ -12,6 +12,7 @@
     .my-files-panel-header {
         font-size: 20px;
         margin-bottom: 20px;
+        color: $background-color;
     }
 
     .my-folders {
@@ -45,4 +46,11 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 655px) {
+    .my-files-panel {
+        width: 100%;
+    }
+
 }

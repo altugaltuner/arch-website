@@ -174,3 +174,77 @@
         }
     }
 }
+
+@media screen and (max-width: 1250px) {
+    .profile {
+
+        .profile-image {
+            .profile-pic {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        .profile-form {
+            .profile-field {
+                flex-direction: column;
+                gap: 10px;
+
+                .biography-area {}
+
+                .input-for-labels {}
+            }
+
+            .profile-field-social {
+                .input-for-labels {}
+            }
+
+            .profile-buttons {
+                .my-profile-submit {}
+
+                .my-profile-cancel {}
+            }
+        }
+    }
+
+    .profile-info {
+        .profile-field {}
+
+        .profile-field-social {}
+
+        .buttons-for-profile-section {
+            .my-profile-edit {}
+
+            .my-profile-logout {}
+        }
+    }
+
+    .profile-info {
+        .profile-field {}
+
+        .profile-field-social {}
+
+        .buttons-for-profile-section {
+            .my-profile-edit {}
+
+            .my-profile-logout {}
+        }
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .profile {
+        .profile-image {
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 655px) {
+    .profile {
+        width: 95%;
+    }
+}
