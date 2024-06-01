@@ -66,7 +66,7 @@ function ProjectsPage() {
                     {selectedItem ? (
                         <div className="new-section">
                             <div className="selected-folder-items">
-                                <h2 className="new-section-header">{selectedItem.attributes.projectName}</h2>
+                                <h2 className="new-section-header">{selectedItem.attributes && selectedItem.attributes.projectName ? selectedItem.attributes.projectName : "No Project Name"}</h2>
                                 <SelectedItemSection activeProjectTitle={activeFolder} companyProjects={companyProjects} />
                             </div>
                             <ProjectBasedRevisions clickedProject={selectedProject} />

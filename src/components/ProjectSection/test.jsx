@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import './SelectedItemSection.scss';
 import axios from "axios";
-import "./ProjectsPage.scss";
 
-import ProjectSection from "../../components/ProjectSection/ProjectSection";
-import ProjectTeam from "../../components/ProjectTeam/ProjectTeam";
-import ProjectInside from "../../components/ProjectInside/ProjectInside";
-import Navigation from "../../components/Navigation/Navigation";
-import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
-import SelectedItemSection from "../../components/SelectedItemSection/SelectedItemSection";
-import ProjectBasedRevisions from "../../components/ProjectBasedRevisions/ProjectBasedRevisions";
+function SelectedItemSection({ activeProjectTitle }) {
 
-function ProjectsPage() {
-    const [companyProjects, setCompanyProjects] = useState([]);
-    const [selectedProject, setSelectedProject] = useState(null);
-    const [currentTab, setCurrentTab] = useState('allprojects');
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [activeProjectName, setActiveProjectName] = useState("");
+    const [projectFiles, setProjectFiles] = useState([]);
+    const [fileExtensions, setFileExtensions] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate[projectAllFiles][populate]=*');
-                setCompanyProjects(response.data.data);
+                const response = await axios.get('http://localhost:1337/api/file-extension-logos?populate=*');
+                setFileExtensions(response.data.data);
+            } catch (error) {
+                console.error('Error fetching the data', error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:1337/api/projects?populate[users][projectAllFiles][populate]=*');
+                setProjectFiles(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
@@ -31,56 +32,74 @@ function ProjectsPage() {
         fetchData();
     }, []);
 
-    useParams();
-
-    const handleItemClick = (item) => {
-        setSelectedItem(item);
-        console.log("Selected Itemmmmmm:", item); // Debug için eklendi
-        if (item && item.attributes) {
-            setActiveProjectName(item.attributes.projectFolderName);
-        }
+    const getLogoUrl = (ext) => {
+        const extension = fileExtensions.find(item => item.attributes.extensionName === ext);
+        return extension ? `http://localhost:1337${extension.attributes.extensionLogo.data.attributes.url}` : '';
     };
 
-    const handleProjectClick = (project) => {
-        setSelectedProject(project);
-    };
-
-    const handleTabChange = (tab) => {
-        setCurrentTab(tab);
-        setSelectedItem(null);
-    };
-
-    const activeComponents = {
-        allprojects: <ProjectSection onItemClick={handleItemClick} />,
-        team: <ProjectTeam onItemClick={handleItemClick} />,
-    };
-
-    return (
-        <div className="projects-page">
-            <Navigation />
-            <div className="inner-project-page">
-                <ProjectInside onProjectClick={handleProjectClick} />
-                <div className="inner-project-column">
-                    <ProjectHeader clickedProject={selectedProject} onTabChange={handleTabChange} />
-                    {selectedItem ? (
-                        <div className="new-section">
-                            <div className="selected-folder-items">
-                                <h2 className="new-section-header">{selectedItem.attributes ? selectedItem.attributes.projectFolderName : ''}</h2>
-                                <SelectedItemSection selectedProject={selectedProject} companyProjects={companyProjects} />
-                            </div>
-                            <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
-                        </div>
-                    ) : (
-                        activeComponents[currentTab] ||
-                        <div className="file-inside-row">
-                            <ProjectSection onItemClick={(folder) => handleItemClick(folder)} />
-                            <ProjectBasedRevisions clickedProject={selectedProject ? selectedProject.attributes.projectFolderName : ""} />
-                        </div>
-                    )}
-                </div>
+    const renderFile = (file) => {
+        const { name, url, ext } = file.attributes;
+        const logoUrl = getLogoUrl(ext.replace('.', ''));
+        return (
+            <div key={file.id} className="project-file">
+                <p className="file-name">{name}</p>
+                <img className="file-logo-image" src={logoUrl} alt={`${ext} logo`} />
+                <a href={`http://localhost:1337${url}`} download className="file-download-link">Download</a>
             </div>
-        </div>
-    );
+        );
+    };
+
+    const [activeProjectFiles, setActiveProjectFiles] = useState([]);
+
+    useEffect(() => {
+        const activeProjectFiles = projectFiles.filter(project => project.attributes.projectName === activeProjectTitle);
+        setActiveProjectFiles(activeProjectFiles);
+    }, [activeProjectTitle, projectFiles]);
+
+    let x = 2;
+    if (x === 1) {
+        return (
+            <div className='selected-item-section'>
+                <h2 className="selected-header">{activeProjectTitle} Dosyalar</h2>
+                {projectFiles.map(projectFile => {
+                    const { projectAllFiles } = projectFile.attributes;
+                    return (
+                        <div key={projectFile.id} className="project-file-container">
+                            {projectAllFiles.architecturalPlans?.data?.map(renderFile)}
+                            {projectAllFiles.staticPlans?.data?.map(renderFile)}
+                            {projectAllFiles.electricalPlans?.data?.map(renderFile)}
+                            {projectAllFiles.plumbingPlans?.data?.map(renderFile)}
+                            {projectAllFiles.financialPapers?.data?.map(renderFile)}
+                            {projectAllFiles.contractPapers?.data?.map(renderFile)}
+                            {projectAllFiles.meetingNotes?.data?.map(renderFile)}
+                            {projectAllFiles.dailyReports?.data?.map(renderFile)}
+                            {projectAllFiles.projectPhotoshoots?.data?.map(renderFile)}
+                            {projectAllFiles.projectRenders?.data?.map(renderFile)}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+
+    if (x === 2) {
+        return (
+            <div className='selected-item-section'>
+                <h2 className="selected-header">{activeProjectTitle} Dosyalar</h2>
+                {projectFiles.map(projectEmployee => {
+                    const { projectAllEmployees } = projectEmployee.attributes;
+                    return (
+                        <div key={projectEmployee.id} className="project-file-container">
+                            {projectAllEmployees?.users?.data?.map(user => (
+                                <p key={user.id}>{user.attributes.username}</p>
+                            ))}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+
 }
 
-export default ProjectsPage;
+export default SelectedItemSection;

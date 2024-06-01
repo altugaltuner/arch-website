@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import './SelectedItemSection.scss';
 import axios from "axios";
 
-function SelectedItemSection({ activeProjectTitle, companyProjects }) {
+function SelectedItemSection({ activeProjectTitle }) {
 
     const [projectFiles, setProjectFiles] = useState([]);
     const [fileExtensions, setFileExtensions] = useState([]);
@@ -22,7 +22,7 @@ function SelectedItemSection({ activeProjectTitle, companyProjects }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate[projectAllFiles][populate]=*');
+                const response = await axios.get('http://localhost:1337/api/projects?populate[users][projectAllFiles][populate]=*');
                 setProjectFiles(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
@@ -51,37 +51,57 @@ function SelectedItemSection({ activeProjectTitle, companyProjects }) {
 
     const [activeProjectFiles, setActiveProjectFiles] = useState([]);
 
-    const activePs = projectFiles.map(project => project.attributes.projectName);
-
     useEffect(() => {
         const activeProjectFiles = projectFiles.filter(project => project.attributes.projectName === activeProjectTitle);
         setActiveProjectFiles(activeProjectFiles);
     }, [activeProjectTitle, projectFiles]);
 
-    return (
-        <div className='selected-item-section'>
-            <h2 className="selected-header">{activeProjectTitle} Dosyalar</h2>
-            {projectFiles.map(projectFile => {
-                const { projectAllFiles } = projectFile.attributes;
-                return (
-                    <div key={projectFile.id} className="project-file-container">
-                        {projectAllFiles.architecturalPlans?.data?.map(renderFile)}
-                        {projectAllFiles.staticPlans?.data?.map(renderFile)}
-                        {projectAllFiles.electricalPlans?.data?.map(renderFile)}
-                        {projectAllFiles.plumbingPlans?.data?.map(renderFile)}
-                        {projectAllFiles.financialPapers?.data?.map(renderFile)}
-                        {projectAllFiles.contractPapers?.data?.map(renderFile)}
-                        {projectAllFiles.meetingNotes?.data?.map(renderFile)}
-                        {projectAllFiles.dailyReports?.data?.map(renderFile)}
-                        {projectAllFiles.projectPhotoshoots?.data?.map(renderFile)}
-                        {projectAllFiles.projectRenders?.data?.map(renderFile)}
+    let x = 2;
+    if (x === 1) {
+        return (
+            <div className='selected-item-section'>
+                <h2 className="selected-header">{activeProjectTitle} Dosyalar</h2>
+                {projectFiles.map(projectFile => {
+                    const { projectAllFiles } = projectFile.attributes;
+                    return (
+                        <div key={projectFile.id} className="project-file-container">
+                            {projectAllFiles.architecturalPlans?.data?.map(renderFile)}
+                            {projectAllFiles.staticPlans?.data?.map(renderFile)}
+                            {projectAllFiles.electricalPlans?.data?.map(renderFile)}
+                            {projectAllFiles.plumbingPlans?.data?.map(renderFile)}
+                            {projectAllFiles.financialPapers?.data?.map(renderFile)}
+                            {projectAllFiles.contractPapers?.data?.map(renderFile)}
+                            {projectAllFiles.meetingNotes?.data?.map(renderFile)}
+                            {projectAllFiles.dailyReports?.data?.map(renderFile)}
+                            {projectAllFiles.projectPhotoshoots?.data?.map(renderFile)}
+                            {projectAllFiles.projectRenders?.data?.map(renderFile)}
 
-                        {/* soldaki truthy ise yani varsa sağdakini çalıştır: && */}
-                    </div>
-                );
-            })}
-        </div>
-    );
+                            {/* soldaki truthy ise yani varsa sağdakini çalıştır: && */}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+
+    if (x === 2) {
+        return (
+            <div className='selected-item-section'>
+                <h2 className="selected-header">{activeProjectTitle} Dosyalar</h2>
+                {projectFiles.map(projectEmployee => {
+                    const { projectAllEmployees } = projectEmployee.attributes;
+                    return (
+                        <div key={projectEmployee.id} className="project-file-container">
+                            {projectAllEmployees?.users?.data?.map(user => (
+                                <p key={user.id}>{user.attributes.username}</p>
+                            ))}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+
 }
 
 export default SelectedItemSection;
