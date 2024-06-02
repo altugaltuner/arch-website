@@ -70,7 +70,7 @@ function ProjectsPage() {
                                 <SelectedItemSection activeProjectTitle={activeFolder} companyProjects={companyProjects} />
                             </div>
                             <ProjectBasedRevisions clickedProject={selectedProject} />
-                            <button onClick={() => setSelectedItem(null)}>Back</button>
+                            <button className="go-back-btn" onClick={() => setSelectedItem(null)}>Back</button>
                         </div>
                     ) : (
                         activeComponents[currentTab] ||

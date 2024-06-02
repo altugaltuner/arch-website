@@ -22,7 +22,6 @@ function ProjectSection({ onItemClick }) {
 
     return (
         <div className="project-sections">
-            <h2 className="section-header">Proje Dosyaları</h2>
             {projectFolders.map((folder) => (
                 <div key={folder.id} className="project-section-one" onClick={() => onItemClick(folder)}>
                     <h3 className="project-section-title">{folder.attributes.projectFolderName}</h3>

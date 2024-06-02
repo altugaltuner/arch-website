@@ -33,6 +33,10 @@ function WorkersPage() {
         setSelectedEmployee(employee);
     }
 
+    function sendEmail(email) {
+        window.location.href = `mailto:${email}`;
+    }
+
     function closeEmployeeCardModal() {
         setSelectedEmployee(null);
     }
@@ -90,6 +94,8 @@ function WorkersPage() {
                             </div>
                             <p>{selectedEmployee.username}</p>
                             <p>{selectedEmployee.email}</p>
+                            <p>{selectedEmployee.profession.professionName}</p>
+                            <button className="send-email-btn" onClick={() => sendEmail(selectedEmployee.email)}>Send Email</button>
                             <button className="modal-close-btn" onClick={closeEmployeeCardModal}>Close</button>
                         </div>
                     </div>
