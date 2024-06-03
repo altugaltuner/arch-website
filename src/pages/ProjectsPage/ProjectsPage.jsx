@@ -13,7 +13,7 @@ import ProjectBasedRevisions from "../../components/ProjectBasedRevisions/Projec
 
 function ProjectsPage() {
     const [companyProjects, setCompanyProjects] = useState([]);
-    const [selectedProject, setSelectedProject] = useState(null);
+    const [selectedProject, setSelectedProject] = useState(companyProjects[0]);
     const [currentTab, setCurrentTab] = useState('allprojects');
     const [selectedItem, setSelectedItem] = useState(null);
     const [activeFolder, setActiveFolder] = useState("");
@@ -23,6 +23,7 @@ function ProjectsPage() {
             try {
                 const response = await axios.get('http://localhost:1337/api/projects?populate[projectAllFiles][populate]=*');
                 setCompanyProjects(response.data.data);
+                setSelectedProject(response.data.data[0]);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
