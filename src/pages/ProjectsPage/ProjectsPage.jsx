@@ -3,13 +3,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ProjectsPage.scss";
 
-import ProjectSection from "../../components/ProjectSection/ProjectSection";
-import ProjectTeam from "../../components/ProjectTeam/ProjectTeam";
 import ProjectInside from "../../components/ProjectInside/ProjectInside";
 import Navigation from "../../components/Navigation/Navigation";
 import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
-import SelectedItemSection from "../../components/SelectedItemSection/SelectedItemSection";
-import ProjectBasedRevisions from "../../components/ProjectBasedRevisions/ProjectBasedRevisions";
+import ProjectContent from "../../components/ProjectContent/ProjectContent";
+import ProjectDetails from "../../components/ProjectDetails/ProjectDetails";
 
 function ProjectsPage() {
     const [companyProjects, setCompanyProjects] = useState([]);
@@ -36,10 +34,8 @@ function ProjectsPage() {
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-        console.log("Selected Item:", item); // Debug için eklendi
         if (item && item.attributes) {
             setActiveFolder(item.attributes.projectFolderName);
-            console.log("Active Project Name:", item.attributes.projectFolderName); // Debug için eklendi
         }
     };
 
@@ -52,11 +48,6 @@ function ProjectsPage() {
         setSelectedItem(null);
     };
 
-    const activeComponents = {
-        allprojects: <ProjectSection onItemClick={handleItemClick} />,
-        team: <ProjectTeam onItemClick={handleItemClick} />,
-    };
-
     return (
         <div className="projects-page">
             <Navigation />
@@ -65,20 +56,15 @@ function ProjectsPage() {
                 <div className="inner-project-column">
                     <ProjectHeader clickedProject={selectedProject} onTabChange={handleTabChange} />
                     {selectedItem ? (
-                        <div className="new-section">
-                            <div className="selected-folder-items">
-                                <h2 className="new-section-header">{selectedItem.attributes && selectedItem.attributes.projectName ? selectedItem.attributes.projectName : "No Project Name"}</h2>
-                                <SelectedItemSection activeProjectTitle={activeFolder} companyProjects={companyProjects} />
-                            </div>
-                            <ProjectBasedRevisions clickedProject={selectedProject} />
-                            <button className="go-back-btn" onClick={() => setSelectedItem(null)}>Back</button>
-                        </div>
+                        <ProjectDetails
+                            selectedItem={selectedItem}
+                            activeFolder={activeFolder}
+                            companyProjects={companyProjects}
+                            selectedProject={selectedProject}
+                            onBack={() => setSelectedItem(null)}
+                        />
                     ) : (
-                        activeComponents[currentTab] ||
-                        <div className="file-inside-row">
-                            <ProjectSection onItemClick={handleItemClick} />
-                            <ProjectBasedRevisions clickedProject={selectedProject} />
-                        </div>
+                        <ProjectContent currentTab={currentTab} handleItemClick={handleItemClick} />
                     )}
                 </div>
             </div>
