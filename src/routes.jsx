@@ -7,6 +7,7 @@ import ProjectsPage from "./pages/ProjectsPage/ProjectsPage.jsx";
 import WorkersPage from "./pages/WorkersPage/WorkersPage.jsx";
 import AboutMePage from "./pages/AboutMePage/AboutMePage.jsx";
 import GroupsPage from "./pages/GroupsPage/GroupsPage.jsx";
+import ProjectsMainPage from "./pages/ProjectsMainPage/ProjectsMainPage.jsx";
 
 const routes = [
   {
