@@ -26,6 +26,22 @@ const routes = [
     ),
   },
   {
+    path: "/projects",
+    element: (
+      <ProtectedRoute>
+        <ProjectsMainPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/projects/:projectId/",
+    element: (
+      <ProtectedRoute>
+        <ProjectsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: "/groups",
     element: (
       <ProtectedRoute>
