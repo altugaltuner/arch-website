@@ -1,11 +1,22 @@
 import './ProjectHeader.scss';
+import { useNavigate } from 'react-router-dom';
 
 function ProjectHeader({ clickedProject, onTabChange }) {
+    const navigate = useNavigate();
+
+    const handleBackClick = () => {
+        navigate('/projects'); // Projeler sayfasına geri yönlendir
+    };
+
     console.log("Clicked Project in Header:", clickedProject); // Debug için eklendi
+
     return (
         <div className="project-section-main">
             <div className="projects-page-content-header">
-                <h2 className="active-project-title">{clickedProject ? clickedProject.attributes.projectName : "Yeşil Vadi Konutları"}</h2>
+                <div className="header-with-back-button">
+                    <button className="back-button" onClick={handleBackClick}>Geri Dön</button>
+                    <h2 className="active-project-title">{clickedProject ? clickedProject.attributes.projectName : "Yeşil Vadi Konutları"}</h2>
+                </div>
                 <div className="active-project-tabs">
                     <button className="active-project-btn" type="button" onClick={() => onTabChange("files")}>Proje Dosyaları</button>
                     <button className="active-project-btn" type="button" onClick={() => onTabChange("team")}>Proje Ekipleri</button>
