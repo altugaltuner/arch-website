@@ -19,7 +19,8 @@ function ProjectsPage() {
 
     // Use the projectId and projectName from the location state if available
     const idToFetch = location.state?.projectId || projectId;
-    const projectName = location.state?.projectName;
+    const projectName = location.state?.projectName || "projecttyName"; // Capture projectName from location state
+    console.log("projectName", location.state?.projectName);
 
     async function getRoles() {
         try {
@@ -68,7 +69,7 @@ function ProjectsPage() {
             <Navigation />
             <div className="inner-project-page">
                 <div className="inner-project-column">
-                    <ProjectHeader clickedProject={{ attributes: { projectName } }} />
+                    {currentProject && <ProjectHeader clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
                     {currentProject && <ProjectContent project={currentProject} />}
                 </div>
             </div>
