@@ -58,6 +58,7 @@ function ProjectsMainPage() {
 
                     </div>
                 ))}
+
                 {roles.map(role => {
                     if (role.attributes.role === "Admin") {
                         return (
