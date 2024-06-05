@@ -51,18 +51,18 @@ function ProjectsMainPage() {
                         </Link>
                     </div>
                 ))}
-            </div>
-            {roles.map(role => {
-                if (role.attributes.role === "Admin") {
-                    return (
+                {roles.map(role => {
+                    if (role.attributes.role === "Admin") {
+                        return (
 
-                        <button>
-                            proje ekle
-                        </button>
-                    )
+                            <button className="add-project-btn">
+                                proje ekle
+                            </button>
+                        )
+                    }
                 }
-            }
-            )}
+                )}
+            </div>
         </div>
     );
 }
