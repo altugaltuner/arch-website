@@ -2,10 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./ProjectsMainPage.scss";
-import ProjectInside from "../../components/ProjectInside/ProjectInside";
 import Navigation from "../../components/Navigation/Navigation";
-import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
-import ProjectContent from "../../components/ProjectContent/ProjectContent";
+
 
 function ProjectsMainPage() {
 
@@ -16,8 +14,7 @@ function ProjectsMainPage() {
         try {
             const response = await axios.get('http://localhost:1337/api/accesses');
             setRoles(response.data.data);
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
         }
     }
@@ -45,23 +42,31 @@ function ProjectsMainPage() {
             <div className="projects-cards-main-row">
                 {companyProjects.map((project) => (
                     <div className="project-cards" key={project.id}>
-                        <Link className="project-card" to={`/projects/${project.id}`}>
+                        <Link
+                            className="project-card"
+                            to={{
+                                pathname: `/projects/${project.id}`,
+                                state: {
+                                    projectId: project.id,
+                                    projectName: project.attributes.projectName, // Pass projectName correctly here
+                                }
+                            }}
+                        >
                             <p className="project-card-name">{project.attributes.projectName}</p>
                             <img className="project-navbar-photos" src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`} alt="project-photo" />
                         </Link>
+
                     </div>
                 ))}
                 {roles.map(role => {
                     if (role.attributes.role === "Admin") {
                         return (
-
                             <button className="add-project-btn">
                                 proje ekle
                             </button>
                         )
                     }
-                }
-                )}
+                })}
             </div>
         </div>
     );

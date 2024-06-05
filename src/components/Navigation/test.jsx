@@ -1,53 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom'; // Link ve location komponentini import ettim.
-import './Navbar.scss';
-const logoNav = "/src/assets/Logo.png";
+import { useEffect, useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import axios from "axios";
+import "./ProjectsPage.scss";
+import Navigation from "../../components/Navigation/Navigation";
+import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
+import ProjectContent from "../../components/ProjectContent/ProjectContent";
 
-function Navbar() {
+function ProjectsPage() {
+    const [roles, setRoles] = useState([]);
 
-    const [activeNavId, setActiveNavId] = useState(null);
-    const location = useLocation();  // Mevcut konumu almak için hook
+    // Additional states for project details
+    const [currentProject, setCurrentProject] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const navItems = [
-        { id: 'home-nav-id', to: '/', logo: "/src/assets/Home.png" },
-        { id: 'about-nav-id', to: '/dashboard', logo: "/src/assets/Discount.png" },
-        { id: 'services-nav-id', to: '/settings/products', logo: "/src/assets/Graph.png" },
-        { id: 'contact-nav-id-message', to: '', logo: "/src/assets/Message.png" },
-        { id: 'contact-nav-id-notification', to: '', logo: "/src/assets/Notification.png" },
-        { id: 'contact-nav-id-settings', to: '/signup', logo: "/src/assets/Setting.png" },
-        { id: 'contact-nav-id-logout', to: '/login', logo: "/src/assets/Logout.png" },
-    ];
+    const { projectId } = useParams();
+    const location = useLocation();
 
-    // Konum değiştiğinde aktif sınıfı güncelle
-    useEffect(() => {
-        const activeItem = navItems.find(item => item.to === location.pathname);
-        if (activeItem) {
-            setActiveNavId(activeItem.id);
+    // Use the projectId and projectName from the location state if available
+    const idToFetch = location.state?.projectId || projectId;
+    const projectName = location.state?.projectName;
+
+    async function getRoles() {
+        try {
+            const response = await axios.get('http://localhost:1337/api/accesses');
+            setRoles(response.data.data);
+        } catch (error) {
+            console.error(error);
         }
-    }, [location, navItems]);
+    }
 
-    const handleNavClick = (id) => {
-        setActiveNavId(id);
-    };
+    useEffect(() => {
+        getRoles();
+    }, []);
+
+    console.log(roles);
+
+    async function getProjectDetails() {
+        const endpoint = `http://localhost:1337/api/projects/${idToFetch}`;
+        try {
+            setLoading(true);
+            const { data } = await axios.get(endpoint);
+            setCurrentProject(data);
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        } finally {
+            setLoading(false);
+            console.log("currentProject isss", currentProject);
+        }
+    }
+
+    useEffect(() => {
+        getProjectDetails();
+    }, [idToFetch]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
-        <nav className='mainnet-logo-second'>
-            <li className='logo-nav'>
-                <Link to="/"><img src={logoNav} alt="Site Logo" /></Link>
-            </li>
-            {navItems.map(item => (
-                <li key={item.id} className="single-nav" id={item.id} onClick={() => handleNavClick(item.id)}>
-                    <Link to={item.to} className={`parent-inner-container-for-nav ${activeNavId === item.id ? 'active' : ''}`}>
-                        <div className={`inner-container-for-nav ${activeNavId === item.id ? 'active' : ''}`}>
-                            <a className='a-logo-nav-photo' role="button" tabIndex="0">
-                                <img src={item.logo} alt="" className='other-nav-logo' />
-                            </a>
-                        </div>
-                    </Link>
-                </li>
-            ))}
-        </nav>
+        <div className="projects-page">
+            <Navigation />
+            <div className="inner-project-page">
+                <div className="inner-project-column">
+                    <ProjectHeader clickedProject={{ attributes: { projectName } }} />
+                    {currentProject && <ProjectContent project={currentProject} />}
+                </div>
+            </div>
+        </div>
     );
 }
 
-export default Navbar;
+export default ProjectsPage;
