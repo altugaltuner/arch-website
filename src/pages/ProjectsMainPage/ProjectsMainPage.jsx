@@ -40,18 +40,15 @@ function ProjectsMainPage() {
     }, []);
 
     return (
-        <div>
-            <div className="projects-main-page">
-                <Navigation />
+        <div className="projects-main-page">
+            <Navigation />
+            <div className="projects-cards-main-row">
                 {companyProjects.map((project) => (
                     <div className="project-cards" key={project.id}>
-                        <div className="project-card">
-                            <Link to={`/projects/${project.id}`}>
-                                <img className="project-navbar-photos" src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`} alt="project-photo" />
-                                {project.attributes.projectName}
-                            </Link>
-                        </div>
-
+                        <Link className="project-card" to={`/projects/${project.id}`}>
+                            <p className="project-card-name">{project.attributes.projectName}</p>
+                            <img className="project-navbar-photos" src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`} alt="project-photo" />
+                        </Link>
                     </div>
                 ))}
             </div>
