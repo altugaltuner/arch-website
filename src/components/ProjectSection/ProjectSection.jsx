@@ -5,13 +5,15 @@ import "./ProjectSection.scss";
 function ProjectSection({ onItemClick, clickedProject }) {
 
     const [projectFolders, setProjectFolders] = useState([]);
+
     console.log("Clicked Project in ProjectSectipn isssss:", clickedProject); // Debug için eklendi
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/project-folders?populate=projectfolderimage');
-                console.log(response.data);
+                const response = await axios.get('http://localhost:1337/api/projects?populate=*');
                 setProjectFolders(response.data.data);
+                console.log("asasew323", response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
@@ -21,18 +23,14 @@ function ProjectSection({ onItemClick, clickedProject }) {
     }, []);
 
     return (
-        <div className="project-sections">
-            {projectFolders.map((folder) => (
-                <div key={folder.id} className="project-section-one" onClick={() => onItemClick(folder)}>
-                    <h3 className="project-section-title">{folder.attributes.projectFolderName}</h3>
-                    <div className="project-images-container">
-                        <img className="project-image"
-                            src={`http://localhost:1337${folder.attributes.projectfolderimage.data.attributes.url}`}
-                            alt="project-image"
-                        />
-                    </div>
+        <div className="project-folders">
+            {projectFolders.map((projectFolder) => (
+                <div className="project-folder" key={projectFolder.id}>
+                    <h2 className="project-folder-name">{projectFolder.attributes.project_folders.data[0].attributes.projectFolderName}</h2>
+                    <img className="project-folder-image" src={"https://w7.pngwing.com/pngs/603/506/png-transparent-directory-icon-computer-file-folder-miscellaneous-angle-image-file-formats.png"} alt="project-photo" />
                 </div>
             ))}
+
         </div>
     );
 }

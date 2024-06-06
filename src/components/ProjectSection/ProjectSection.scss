@@ -1,6 +1,6 @@
 @use "../../styles/abstracts/variables" as *;
 
-.project-sections {
+.project-folders {
     display: flex;
     width: 60%;
     justify-content: center;
@@ -10,7 +10,7 @@
     background-color: $background-color;
     font-family: "Barlow", sans-serif;
 
-    .project-section-one {
+    .project-folder {
         display: flex;
         flex-direction: column;
         width: 300px;
@@ -22,23 +22,14 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
 
-        .project-section-title {
+        .project-folder-name {
             font-weight: 300;
             margin-bottom: 10px;
             text-align: center;
         }
 
-        .project-images-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-
-            .project-image {
-                width: 250px;
-                height: 200px;
-                border-radius: 4px;
-            }
+        .project-folder-image {
+            width: 250px;
         }
     }
 

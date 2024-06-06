@@ -19,8 +19,6 @@ function ProjectsPage() {
 
     // Use the projectId and projectName from the location state if available
     const idToFetch = location.state?.projectId || projectId;
-    const projectName = location.state?.projectName || "projecttyName"; // Capture projectName from location state
-    console.log("projectName", location.state?.projectName);
 
     async function getRoles() {
         try {
@@ -43,7 +41,6 @@ function ProjectsPage() {
             setLoading(true);
             const { data } = await axios.get(endpoint);
             setCurrentProject(data);
-            console.log("data is", data);
         } catch (error) {
             console.error(error);
             setError(error);
