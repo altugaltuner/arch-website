@@ -11,6 +11,15 @@
         background-color: $background-color;
         border-radius: 20px;
 
+        .header-with-back-button {
+            display: flex;
+
+            .back-button {
+                padding: 20px;
+                color: $grey;
+            }
+        }
+
         .active-project-title {
             width: fit-content;
             padding: 10px;

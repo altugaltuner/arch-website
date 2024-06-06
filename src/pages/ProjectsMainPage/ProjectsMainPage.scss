@@ -43,9 +43,14 @@
 
                 .project-navbar-photos {
                     width: 200px;
+                    border-radius: 10px;
                 }
 
-                .project-card-name {}
+                .project-card-name {
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: $div-color;
+                }
             }
         }
     }
