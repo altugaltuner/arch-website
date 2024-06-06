@@ -4,7 +4,6 @@ import axios from "axios";
 import "./ProjectsPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
-import ProjectContent from "../../components/ProjectContent/ProjectContent";
 
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
@@ -70,7 +69,7 @@ function ProjectsPage() {
             <div className="inner-project-page">
                 <div className="inner-project-column">
                     {currentProject && <ProjectHeader clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
-                    {currentProject && <ProjectContent project={currentProject} />}
+
                 </div>
             </div>
         </div>
