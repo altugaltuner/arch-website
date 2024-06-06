@@ -1,79 +1,46 @@
-// import App from "./App.jsx";
-import HomePage from "./pages/HomePage/HomePage.jsx";
-import SignupPage from "./pages/SignupPage/SignupPage.jsx";
-import LoginPage from "./pages/LoginPage/LoginPage.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import ProjectsPage from "./pages/ProjectsPage/ProjectsPage.jsx";
-import WorkersPage from "./pages/WorkersPage/WorkersPage.jsx";
-import AboutMePage from "./pages/AboutMePage/AboutMePage.jsx";
-import GroupsPage from "./pages/GroupsPage/GroupsPage.jsx";
-import ProjectsMainPage from "./pages/ProjectsMainPage/ProjectsMainPage.jsx";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import "./ProjectSection.scss";
 
-const routes = [
-    {
-        path: "/",
-        element: (
-            <ProtectedRoute>
-                <HomePage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/projects/:tabName",
-        element: (
-            <ProtectedRoute>
-                <ProjectsPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/projects",
-        element: (
-            <ProtectedRoute>
-                <ProjectsMainPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/projects/:projectId/",
-        element: (
-            <ProtectedRoute>
-                <ProjectsPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/groups",
-        element: (
-            <ProtectedRoute>
-                <GroupsPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/workers",
-        element: (
-            <ProtectedRoute>
-                <WorkersPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/me",
-        element: (
-            <ProtectedRoute>
-                <AboutMePage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/signup",
-        element: <SignupPage />,
-    },
-    {
-        path: "/login",
-        element: <LoginPage />,
-    },
-];
+function ProjectSection({ clickedProject }) {
+    const [projectFolders, setProjectFolders] = useState([]);
 
-export default routes;
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:1337/api/projects?populate=*');
+                setProjectFolders(response.data.data);
+            } catch (error) {
+                console.error('Error fetching the data', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Filter project folders based on the clicked project ID
+    const filteredFolders = clickedProject
+        ? projectFolders.find((project) => project.id === clickedProject.id)?.attributes.project_folders.data
+        : [];
+
+    return (
+        <div className="project-folders">
+            {filteredFolders && filteredFolders.length > 0 ? (
+                filteredFolders.map((folder) => (
+                    <div className="project-folder" key={folder.id}>
+                        <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
+                        <img
+                            className="project-folder-image"
+                            src="https://w7.pngwing.com/pngs/603/506/png-transparent-directory-icon-computer-file-folder-miscellaneous-angle-image-file-formats.png"
+                            alt="folder-icon"
+                        />
+                    </div>
+                ))
+            ) : (
+                <p>No folders available for the selected project.</p>
+            )}
+        </div>
+    );
+}
+
+export default ProjectSection;
