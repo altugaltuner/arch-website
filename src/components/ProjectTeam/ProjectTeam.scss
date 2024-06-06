@@ -6,12 +6,66 @@
     font-family: "Barlow", sans-serif;
     width: 50%;
 
-    .teams-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
+    .new-div {
+        position: relative;
+
+        .new-div-backbtn {
+            position: absolute;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .new-div-selected-profession {
+            color: $grey;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-size: 30px;
+        }
+
+        .employees-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+
+            .employee-card {
+                width: 30%;
+                cursor: pointer;
+                /* 4 kare için */
+                background-color: #ffffff;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                text-align: center;
+
+                .profile-pic {
+
+                    .profile-pic-inner {
+                        width: 100%;
+                    }
+                }
+
+                .employee-info {
+                    .employee-info-username {}
+
+                    .employee-info-email {}
+
+                    .employee-info-professionName {}
+                }
+            }
+        }
     }
+}
+
+.teams-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 
     .team-card {
         width: 30%;

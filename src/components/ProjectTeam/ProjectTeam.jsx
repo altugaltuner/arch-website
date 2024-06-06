@@ -46,8 +46,8 @@ const ProjectTeam = () => {
         <div className="project-teams-container">
             {selectedTeam ? (
                 <div className="new-div">
-                    <button onClick={() => setSelectedTeam(null)}>Back</button>
-                    <h3>{selectedTeam.attributes.professionName}</h3>
+                    <button className='new-div-backbtn' onClick={() => setSelectedTeam(null)}>Back</button>
+                    <h3 className='new-div-selected-profession'>{selectedTeam.attributes.professionName}</h3>
                     <div className="employees-grid">
                         {employees.map((employee, index) => (
                             <div className="employee-card" key={index} onClick={() => openEmployeeCardModal(employee)}>
@@ -55,9 +55,9 @@ const ProjectTeam = () => {
                                     <img className="profile-pic-inner" src={`http://localhost:1337${employee.profilePic.url}`} alt="" srcSet="" />
                                 </div>
                                 <div className="employee-info">
-                                    <h3>{employee.username}</h3>
-                                    <p>{employee.email}</p>
-                                    <p>{employee.profession.professionName}</p>
+                                    <h3 className='employee-info-username'>{employee.username}</h3>
+                                    <p className='employee-info-email'>{employee.email}</p>
+                                    <p className='employee-info-professionName'>{employee.profession.professionName}</p>
                                 </div>
                             </div>
                         ))}
