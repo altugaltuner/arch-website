@@ -4,6 +4,7 @@ import axios from "axios";
 import "./ProjectsPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
+import ProjectSection from "../../components/ProjectSection/ProjectSection";
 
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
@@ -42,12 +43,12 @@ function ProjectsPage() {
             setLoading(true);
             const { data } = await axios.get(endpoint);
             setCurrentProject(data);
+            console.log("data is", data);
         } catch (error) {
             console.error(error);
             setError(error);
         } finally {
             setLoading(false);
-            console.log("currentProject isss", currentProject);
         }
     }
 
@@ -69,6 +70,7 @@ function ProjectsPage() {
             <div className="inner-project-page">
                 <div className="inner-project-column">
                     {currentProject && <ProjectHeader clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
+                    {currentProject && <ProjectSection clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
 
                 </div>
             </div>

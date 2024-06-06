@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import "./ProjectSection.scss";
 
-function ProjectSection({ onItemClick }) {
+function ProjectSection({ onItemClick, clickedProject }) {
 
     const [projectFolders, setProjectFolders] = useState([]);
-
+    console.log("Clicked Project in ProjectSectipn isssss:", clickedProject); // Debug için eklendi
     useEffect(() => {
         const fetchData = async () => {
             try {
