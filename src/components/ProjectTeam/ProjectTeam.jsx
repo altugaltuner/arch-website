@@ -41,12 +41,14 @@ const ProjectTeam = () => {
     };
 
     console.log('employees:', employees);
+    console.log('employees:', employees[0]);
+
 
     return (
         <div className="project-teams-container">
             {selectedTeam ? (
                 <div className="new-div">
-                    <button className='new-div-backbtn' onClick={() => setSelectedTeam(null)}>Back</button>
+                    <button className='new-div-backbtn' onClick={() => setSelectedTeam(null)}>Geri Dön</button>
                     <h3 className='new-div-selected-profession'>{selectedTeam.attributes.professionName}</h3>
                     <div className="employees-grid">
                         {employees.map((employee, index) => (
@@ -56,7 +58,6 @@ const ProjectTeam = () => {
                                 </div>
                                 <div className="employee-info">
                                     <h3 className='employee-info-username'>{employee.username}</h3>
-                                    <p className='employee-info-email'>{employee.email}</p>
                                     <p className='employee-info-professionName'>{employee.profession.professionName}</p>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@
         position: relative;
 
         .new-div-backbtn {
+            color: $grey;
             position: absolute;
             display: flex;
             justify-content: flex-end;
@@ -33,11 +34,12 @@
 
             .employee-card {
                 width: 30%;
+                height: 260px;
                 cursor: pointer;
                 /* 4 kare için */
                 background-color: #ffffff;
                 border: 1px solid #ccc;
-                border-radius: 8px;
+                border-radius: 20px;
                 padding: 15px;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 text-align: center;
@@ -46,15 +48,24 @@
 
                     .profile-pic-inner {
                         width: 100%;
+                        border-radius: 20px;
                     }
                 }
 
                 .employee-info {
-                    .employee-info-username {}
+                    .employee-info-username {
+                        font-size: 20px;
+                        color: $div-color;
+                        margin: 5px 0px 5px 0px;
+                        font-weight: 500;
+                    }
 
-                    .employee-info-email {}
-
-                    .employee-info-professionName {}
+                    .employee-info-professionName {
+                        font-size: 18px;
+                        color: $div-color;
+                        margin-bottom: 10px;
+                        font-weight: 400;
+                    }
                 }
             }
         }

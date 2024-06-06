@@ -3,6 +3,7 @@
 .project-folders {
     display: flex;
     width: 50%;
+    height: fit-content;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
@@ -13,7 +14,7 @@
     .project-folder {
         display: flex;
         flex-direction: column;
-        width: 300px;
+        width: 240px;
         height: 270px;
         color: $div-color;
         background-color: $grey;
@@ -29,7 +30,8 @@
         }
 
         .project-folder-image {
-            width: 250px;
+            width: 100%;
+            padding: 20px;
         }
     }
 
