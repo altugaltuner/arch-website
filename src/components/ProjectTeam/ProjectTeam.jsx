@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import './ProjectTeam.scss';
 import axios from 'axios';
 
-const ProjectTeam = ({ onItemClick }) => {
+const ProjectTeam = () => {
     const [jobTitles, setJobTitles] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [employees, setEmployees] = useState([]);
@@ -24,8 +24,9 @@ const ProjectTeam = ({ onItemClick }) => {
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=profession,profilePic');
-                setEmployees(response.data.data);
+                const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
+                setEmployees(response.data);
+                console.log('employees33:', response.data);
             } catch (error) {
                 console.error('Error fetching employees', error);
             }
@@ -35,26 +36,29 @@ const ProjectTeam = ({ onItemClick }) => {
     }, []);
 
     const handleCardClick = (team) => {
+        console.log('Selected team:', team);
         setSelectedTeam(team);
-        onItemClick(team.attributes.professionName);
     };
 
-    const filteredEmployees = employees ? employees.filter(employee =>
-        employee.profession && employee.profession.id === selectedTeam?.id
-    ) : [];
+    console.log('employees:', employees);
 
     return (
         <div className="project-teams-container">
-            <h2 className="section-header">Proje Ekipleri</h2>
             {selectedTeam ? (
                 <div className="new-div">
                     <button onClick={() => setSelectedTeam(null)}>Back</button>
                     <h3>{selectedTeam.attributes.professionName}</h3>
                     <div className="employees-grid">
-                        {filteredEmployees.map((employee, index) => (
-                            <div key={index} className="employee-card">
-                                <h4>{employee.username}</h4>
-                                <img src={`http://localhost:1337${employee.profilePic.url}`} alt={employee.username} />
+                        {employees.map((employee, index) => (
+                            <div className="employee-card" key={index} onClick={() => openEmployeeCardModal(employee)}>
+                                <div className="profile-pic">
+                                    <img className="profile-pic-inner" src={`http://localhost:1337${employee.profilePic.url}`} alt="" srcSet="" />
+                                </div>
+                                <div className="employee-info">
+                                    <h3>{employee.username}</h3>
+                                    <p>{employee.email}</p>
+                                    <p>{employee.profession.professionName}</p>
+                                </div>
                             </div>
                         ))}
                     </div>

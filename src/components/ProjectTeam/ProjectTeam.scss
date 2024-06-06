@@ -4,18 +4,7 @@
     padding: 20px;
     background-color: $background-color;
     font-family: "Barlow", sans-serif;
-
-    .section-header {
-        display: flex;
-        justify-content: center;
-        font-weight: 400;
-        border-radius: 15px;
-        padding: 10px;
-        font-size: 30px;
-        background-color: $div-color;
-        color: $grey;
-        margin-bottom: 20px;
-    }
+    width: 50%;
 
     .teams-grid {
         display: flex;

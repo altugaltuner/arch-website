@@ -5,6 +5,7 @@ import "./ProjectsPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
 import ProjectSection from "../../components/ProjectSection/ProjectSection";
+import ProjectTeam from "../../components/ProjectTeam/ProjectTeam";
 
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
@@ -67,8 +68,10 @@ function ProjectsPage() {
             <div className="inner-project-page">
                 <div className="inner-project-column">
                     {currentProject && <ProjectHeader clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
-                    {currentProject && <ProjectSection clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
-
+                    <div className="inner-project-row">
+                        {currentProject && <ProjectSection clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
+                        {currentProject && <ProjectTeam clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
+                    </div>
                 </div>
             </div>
         </div>

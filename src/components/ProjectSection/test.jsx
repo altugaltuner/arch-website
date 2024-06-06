@@ -1,46 +1,14 @@
-import { useState, useEffect } from "react";
-import axios from 'axios';
-import "./ProjectSection.scss";
-
-function ProjectSection({ clickedProject }) {
-    const [projectFolders, setProjectFolders] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate=*');
-                setProjectFolders(response.data.data);
-            } catch (error) {
-                console.error('Error fetching the data', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    // Filter project folders based on the clicked project ID
-    const filteredFolders = clickedProject
-        ? projectFolders.find((project) => project.id === clickedProject.id)?.attributes.project_folders.data
-        : [];
-
-    return (
-        <div className="project-folders">
-            {filteredFolders && filteredFolders.length > 0 ? (
-                filteredFolders.map((folder) => (
-                    <div className="project-folder" key={folder.id}>
-                        <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
-                        <img
-                            className="project-folder-image"
-                            src="https://w7.pngwing.com/pngs/603/506/png-transparent-directory-icon-computer-file-folder-miscellaneous-angle-image-file-formats.png"
-                            alt="folder-icon"
-                        />
-                    </div>
-                ))
-            ) : (
-                <p>No folders available for the selected project.</p>
-            )}
+<div className="employees-grid">
+    {filteredEmployees.map((employee, index) => (
+        <div className="employee-card" key={index} onClick={() => openEmployeeCardModal(employee)}>
+            <div className="profile-pic">
+                <img className="profile-pic-inner" src={`http://localhost:1337${employee.profilePic.url}`} alt="" srcSet="" />
+            </div>
+            <div className="employee-info">
+                <h3>{employee.username}</h3>
+                <p>{employee.email}</p>
+                <p>{employee.profession.professionName}</p>
+            </div>
         </div>
-    );
-}
-
-export default ProjectSection;
+    ))}
+</div>
