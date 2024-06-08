@@ -3,6 +3,7 @@
 .workers-page-main {
     background-color: $background-color;
     font-family: "Barlow", sans-serif;
+    position: relative;
 
     .company-grid {
         display: flex;
@@ -73,16 +74,15 @@
                     text-align: center;
                     cursor: pointer;
                     border-radius: 10px;
-                }
 
-                :hover {
-                    background-color: darken($grey, 10%);
-                }
+                    &:hover {
+                        background-color: darken($grey, 10%);
+                    }
 
-                :active {
-                    background-color: darken($grey, 20%);
+                    &:active {
+                        background-color: darken($grey, 20%);
+                    }
                 }
-
             }
         }
 
@@ -93,6 +93,25 @@
             gap: 20px;
             padding: 20px;
             color: $div-color;
+
+            .add-employee-btn {
+                background-color: $grey;
+                padding: 20px;
+                max-height: 240px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                font-weight: 500;
+
+                &:hover {
+                    background-color: darken($grey, 10%);
+                }
+
+                &:active {
+                    background-color: darken($grey, 20%);
+                }
+            }
 
             .employee-card {
                 background-color: $grey;
@@ -132,15 +151,81 @@
                 }
             }
         }
+    }
 
+    .add-new-employee-modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
 
+        .new-employee-modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative;
+            text-align: center;
+            width: 50%;
+
+            .new-employee-modal-close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            .employee-name-input,
+            .employee-email-input,
+            .new-employee-profile-pic {
+                margin: 10px 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .adding-modal-buttons-row {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+
+                .adding-modal-button-create,
+                .adding-modal-button-abort {
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: darken($grey, 10%);
+                    }
+
+                    &:active {
+                        background-color: darken($grey, 20%);
+                    }
+                }
+
+                .adding-modal-button-create {
+                    background-color: $grey;
+                    color: $div-color;
+                }
+
+                .adding-modal-button-abort {
+                    background-color: $grey;
+                    color: $div-color;
+                }
+            }
+        }
     }
 }
 
 @media screen and (max-width: 620px) {
     .workers-page-main {
         .company-grid {
-            display: flex;
             flex-direction: column;
             width: 100%;
 
@@ -161,7 +246,6 @@
                     cursor: pointer;
                 }
             }
-
         }
     }
 }
