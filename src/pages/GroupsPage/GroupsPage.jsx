@@ -7,9 +7,12 @@ import Navigation from "../../components/Navigation/Navigation";
 import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
 
 function GroupsPage() {
-
     const [groups, setGroups] = useState([]);
     const [roles, setRoles] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [newGroup, setNewGroup] = useState({
+        groupName: ""
+    });
 
     async function getRoles() {
         try {
@@ -29,7 +32,6 @@ function GroupsPage() {
             try {
                 const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic');
                 setGroups(response.data.data);
-                console.log(response.data.data);
             } catch (error) {
                 console.error('Error fetching groups', error);
             }
@@ -37,26 +39,45 @@ function GroupsPage() {
         fetchGroups();
     }, []);
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewGroup({ ...newGroup, [name]: value });
+    };
+
+    const handleSubmit = async () => {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify({ groupName: newGroup.groupName }));
+
+        try {
+            await axios.post('http://localhost:1337/api/groups', formData);
+            setShowModal(false);
+            setNewGroup({ groupName: "" });
+            // Refetch groups after adding a new one
+            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic');
+            setGroups(response.data.data);
+        } catch (error) {
+            console.error('Error creating a new group', error);
+        }
+    };
+
     return (
         <div className="groups-main">
             <Navigation />
             <h1 className="groups-main-header">Groups</h1>
             <div className="group-div-row">
                 <div className="project-groups">
-
-                    {roles.map(role => {
-                        if (role.attributes.role === "Admin") {
-                            return (
-                                <button className="project-group-add-group">
-                                    Grup Oluştur
-                                </button>
-                            )
-                        }
-                    })}
+                    {roles.map(role => role.attributes.role === "Admin" && (
+                        <button
+                            className="project-group-add-group"
+                            onClick={() => setShowModal(true)}
+                        >
+                            Grup Oluştur
+                        </button>
+                    ))}
 
                     {groups.map((group) => (
                         <div key={group.id} className="project-group">
-                            {group.attributes.groupChatPic.data ? (
+                            {group.attributes.groupChatPic?.data ? (
                                 <img
                                     className="group-image"
                                     src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
@@ -75,7 +96,26 @@ function GroupsPage() {
                 </div>
                 <GroupMessagePanel />
             </div>
+
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+                        <h2>Yeni Grup Oluştur</h2>
+                        <input
+                            type="text"
+                            name="groupName"
+                            placeholder="Grup Adı"
+                            value={newGroup.groupName}
+                            onChange={handleInputChange}
+                        />
+                        <button onClick={handleSubmit}>Oluştur</button>
+                        <button onClick={() => setShowModal(false)}>İptal</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
+
 export default GroupsPage;
