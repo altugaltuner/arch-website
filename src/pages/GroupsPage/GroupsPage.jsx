@@ -13,14 +13,17 @@ function GroupsPage() {
     useEffect(() => {
         const fetchGroups = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users');
+                const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic');
                 setGroups(response.data.data);
+                console.log(response.data.data);
             } catch (error) {
                 console.error('Error fetching groups', error);
             }
         };
         fetchGroups();
     }, []);
+
+
 
     return (
         <div className="groups-main">
@@ -30,9 +33,14 @@ function GroupsPage() {
                 <div className="project-groups">
                     {groups.map((group) => (
                         <div key={group.id} className="project-group">
-                            <img className="group-image" src={group.attributes.groupMedia[0]} alt="group" />
+                            {group.attributes.groupChatPic.data && (
+                                <img
+                                    className="group-image"
+                                    src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
+                                    alt={group.attributes.groupChatPic.data.attributes.name}
+                                />
+                            )}
                             <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
-
                         </div>
                     ))}
                 </div>
