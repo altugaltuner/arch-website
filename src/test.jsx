@@ -81,7 +81,7 @@ function ProjectsMainPage() {
                             <img
                                 className="project-navbar-photos"
                                 src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
-                                alt=""
+                                alt="project-photo"
                             />
                         </Link>
                     </div>
@@ -98,18 +98,18 @@ function ProjectsMainPage() {
             </div>
 
             {showModal && (
-                <div className="add-new-project-modal">
-                    <div className="add-new-project-modal-content">
-                        <span className="add-new-project-modal-close" onClick={() => setShowModal(false)}>&times;</span>
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={() => setShowModal(false)}>&times;</span>
                         <h2>Yeni Proje Ekle</h2>
-                        <input className="project-name-input"
+                        <input
                             type="text"
                             name="projectName"
                             placeholder="Proje Adı"
                             value={newProject.projectName}
                             onChange={handleInputChange}
                         />
-                        <input className="project-cover-photo-input"
+                        <input
                             type="file"
                             name="projectCoverPhoto"
                             onChange={handleFileChange}
