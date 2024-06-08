@@ -100,8 +100,8 @@ function ProjectsMainPage() {
             {showModal && (
                 <div className="add-new-project-modal">
                     <div className="add-new-project-modal-content">
-                        <span className="add-new-project-modal-close" onClick={() => setShowModal(false)}>&times;</span>
-                        <h2>Yeni Proje Ekle</h2>
+                        <span className="new-project-modal-close" onClick={() => setShowModal(false)}>X</span>
+                        <h2 className="new-project-adding-header">Yeni Proje Ekle</h2>
                         <input className="project-name-input"
                             type="text"
                             name="projectName"
@@ -114,8 +114,11 @@ function ProjectsMainPage() {
                             name="projectCoverPhoto"
                             onChange={handleFileChange}
                         />
-                        <button onClick={handleSubmit}>Oluştur</button>
-                        <button onClick={() => setShowModal(false)}>İptal</button>
+                        <div className="adding-modal-buttons-row">
+                            <button className="adding-modal-button-create" onClick={handleSubmit}>Oluştur</button>
+                            <button className="adding-modal-button-abort" onClick={() => setShowModal(false)}>İptal</button>
+                        </div>
+
                     </div>
                 </div>
             )}

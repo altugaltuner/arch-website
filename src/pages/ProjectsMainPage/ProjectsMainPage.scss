@@ -69,35 +69,64 @@
         z-index: 1000;
 
         .add-new-project-modal-content {
-
+            position: relative;
             background-color: $grey;
             display: flex;
             flex-direction: column;
             padding: 50px;
-        }
+            gap: 20px;
+            border-radius: 20px;
 
-        .add-new-project-modal-title {
-            font-size: 20px;
-            font-weight: 500;
-            color: $div-color;
-        }
+            .new-project-modal-close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                font-weight: 900;
+            }
 
-        .add-new-project-modal-input {
-            width: 300px;
-            height: 40px;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid $div-color;
-        }
+            .new-project-adding-header {
+                font-size: 30px;
+                font-weight: 500;
+                color: $div-color;
+            }
 
-        .add-new-project-modal-btn {
-            width: 100px;
-            height: 40px;
-            background-color: $div-color;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+            .add-new-project-modal-title {
+                font-size: 20px;
+                font-weight: 500;
+                color: $div-color;
+            }
+
+            .add-new-project-modal-input {
+                width: 300px;
+                height: 40px;
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid $div-color;
+            }
+
+            .adding-modal-buttons-row {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+
+                .adding-modal-button-create {
+                    background-color: $div-color;
+                    color: $grey;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+
+                .adding-modal-button-abort {
+                    background-color: $background-color;
+                    color: $grey;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
