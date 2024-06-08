@@ -9,13 +9,13 @@
     font-family: "Barlow", sans-serif;
 
     .groups-main-header {
-        background-color: $grey;
+        background-color: $div-color;
         width: 150px;
+        color: $grey;
         border: none;
         border-radius: 15px;
         padding: 10px;
         text-align: center;
-        color: #2A2C41;
         font-size: 25px;
         font-weight: 400;
         margin: 20px;
@@ -45,6 +45,7 @@
                 padding: 10px;
                 cursor: pointer;
                 border-radius: 20px;
+                gap: 10px;
 
                 .group-image {
                     width: 60px;
@@ -102,6 +103,15 @@
                     }
                 }
             }
+
+            :hover {
+                background-color: darken($grey, 10%);
+            }
+
+            :active {
+                background-color: darken($grey, 20%);
+            }
+
         }
     }
 }

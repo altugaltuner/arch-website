@@ -33,11 +33,17 @@ function GroupsPage() {
                 <div className="project-groups">
                     {groups.map((group) => (
                         <div key={group.id} className="project-group">
-                            {group.attributes.groupChatPic.data && (
+                            {group.attributes.groupChatPic.data ? (
                                 <img
                                     className="group-image"
                                     src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
                                     alt={group.attributes.groupChatPic.data.attributes.name}
+                                />
+                            ) : (
+                                <img
+                                    className="group-image"
+                                    src="https://play-lh.googleusercontent.com/iBKHlB7QEv8Ez57mJhGLUJDXwxzFHioEzacOBJABT0BA6fm71SxOCvsxH0Lk4fo3AJJ1=w600-h300-pc0xffffff-pd"
+                                    alt="group-chat-pic"
                                 />
                             )}
                             <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
