@@ -1,110 +1,169 @@
-@use "../../styles/abstracts/variables" as *;
-
 .project-teams-container {
-    padding: 20px;
-    background-color: $background-color;
-    font-family: "Barlow", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
 
+    .add-team-btn {
+        background-color: #f4f4f4;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        font-weight: 500;
+
+        &:hover {
+            background-color: darken(#f4f4f4, 10%);
+        }
+
+        &:active {
+            background-color: darken(#f4f4f4, 20%);
+        }
+    }
+
+    .teams-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .team-card {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+
+        .team-title {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .team-images {
+            img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
     .new-div {
-        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
 
         .new-div-backbtn {
-            color: $grey;
-            position: absolute;
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
         }
 
         .new-div-selected-profession {
-            color: $grey;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-weight: 400;
-            font-size: 30px;
+            font-size: 24px;
+            margin: 20px 0;
         }
 
         .employees-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 20px;
-            justify-content: center;
+            padding: 20px;
+            width: 100%;
+        }
 
-            .employee-card {
-                width: 30%;
-                height: 260px;
-                cursor: pointer;
-                /* 4 kare için */
-                background-color: #ffffff;
-                border: 1px solid #ccc;
-                border-radius: 20px;
-                padding: 15px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                text-align: center;
+        .employee-card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
 
-                .profile-pic {
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+                background-color: #ccc;
+                border-radius: 50%;
+                margin: 0 auto 10px;
 
-                    .profile-pic-inner {
-                        width: 100%;
-                        border-radius: 20px;
-                    }
+                .profile-pic-inner {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            .employee-info {
+                .employee-info-username {
+                    font-size: 18px;
+                    margin: 10px 0;
                 }
 
-                .employee-info {
-                    .employee-info-username {
-                        font-size: 20px;
-                        color: $div-color;
-                        margin: 5px 0px 5px 0px;
-                        font-weight: 500;
-                    }
-
-                    .employee-info-professionName {
-                        font-size: 18px;
-                        color: $div-color;
-                        margin-bottom: 10px;
-                        font-weight: 400;
-                    }
+                .employee-info-professionName {
+                    font-size: 14px;
+                    color: #666;
                 }
             }
         }
     }
-}
 
-.teams-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
 
-    .team-card {
-        width: 30%;
-        cursor: pointer;
-        /* 4 kare için */
-        background-color: #ffffff;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 15px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative;
+            text-align: center;
 
-        .team-title {
-            font-size: 1.2em;
-            color: $div-color;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
+            .close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                cursor: pointer;
+            }
 
-        .team-images {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-
-            img {
+            input {
+                margin: 10px 0;
+                padding: 10px;
                 width: 100%;
-                height: 100%;
-                border-radius: 4px;
+            }
+
+            button {
+                padding: 10px 20px;
+                margin: 10px 5px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: darken(#ccc, 10%);
+                }
+
+                &:active {
+                    background-color: darken(#ccc, 20%);
+                }
             }
         }
     }
