@@ -9,6 +9,20 @@ import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePa
 function GroupsPage() {
 
     const [groups, setGroups] = useState([]);
+    const [roles, setRoles] = useState([]);
+
+    async function getRoles() {
+        try {
+            const response = await axios.get('http://localhost:1337/api/accesses');
+            setRoles(response.data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getRoles();
+    }, []);
 
     useEffect(() => {
         const fetchGroups = async () => {
@@ -23,14 +37,23 @@ function GroupsPage() {
         fetchGroups();
     }, []);
 
-
-
     return (
         <div className="groups-main">
             <Navigation />
             <h1 className="groups-main-header">Groups</h1>
             <div className="group-div-row">
                 <div className="project-groups">
+
+                    {roles.map(role => {
+                        if (role.attributes.role === "Admin") {
+                            return (
+                                <button className="project-group-add-group">
+                                    Grup Oluştur
+                                </button>
+                            )
+                        }
+                    })}
+
                     {groups.map((group) => (
                         <div key={group.id} className="project-group">
                             {group.attributes.groupChatPic.data ? (
