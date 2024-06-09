@@ -1,6 +1,6 @@
 import "./SignupPage.scss";
 import { useState } from "react";
-import { api } from "../../api/index"; // Doğru yolu kullanın
+import { api } from "../../api"; // Doğru yolu kullanın
 
 import eyeShow from "../../assets/eye-show.svg";
 import eyeHide from "../../assets/eye-hide.png";
