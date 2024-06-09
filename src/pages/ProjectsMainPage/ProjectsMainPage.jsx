@@ -3,8 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./ProjectsMainPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
+import { useAuth } from "../../components/AuthProvider";
 
 function ProjectsMainPage() {
+    const auth = useAuth(); // auth'u const {fireStoreUser} = useAuth() şeklinde alırsanız user bilgilerine ulaşabilirsiniz
+    const { fireStoreUser } = useAuth();
+    console.log(fireStoreUser);
+
     const [companyProjects, setCompanyProjects] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);

@@ -1,5 +1,6 @@
 import axios from "axios";
+import { authorization } from "./authorization";
 
 export const getAccessRoles = async () => {
-    axios.get('/http://localhost:1337/api/accesses');
-} // burada api oluşturduk. ve getAccessRoles fonksiyonu ile access endpointine get request yaptık. ve authorization fonksiyonunu kullandık.
+    return axios.get('/api/accesses', authorization());
+};
