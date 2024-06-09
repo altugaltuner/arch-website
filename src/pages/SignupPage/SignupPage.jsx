@@ -1,6 +1,6 @@
 import "./SignupPage.scss";
 import { useState } from "react";
-import axios from 'axios';
+import { api } from "../../api/index"; // Doğru yolu kullanın
 
 import eyeShow from "../../assets/eye-show.svg";
 import eyeHide from "../../assets/eye-hide.png";
@@ -38,7 +38,7 @@ function SignupPage() {
     }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local/register`, {
+      const response = await api.post(`/auth/local/register`, {
         username: fullName,
         email,
         password
@@ -46,9 +46,11 @@ function SignupPage() {
 
       if (response.data.jwt) {
         localStorage.setItem('token', response.data.jwt);
+        alert("Registration successful. You can now log in.");
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error during registration:', error);
+      alert("Error during registration. Please try again.");
     }
   };
 
@@ -69,26 +71,30 @@ function SignupPage() {
               type="text"
               placeholder="Full Name"
               name="fullName"
-              onKeyUp={handleChange}
+              onChange={handleChange}
+              autoComplete="name"
             />
             <input
               type="tel"
               placeholder="Phone number"
               name="phoneNumber"
-              onKeyUp={handleChange}
+              onChange={handleChange}
+              autoComplete="tel"
             />
             <input
               type="email"
               placeholder="Email"
               name="email"
-              onKeyUp={handleChange}
+              onChange={handleChange}
+              autoComplete="email"
             />
             <div className="password-section-signup">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 name="password"
-                onKeyUp={handleChange}
+                onChange={handleChange}
+                autoComplete="new-password"
               />
               <button type="button" onClick={togglePasswordVisibility} className="toggle-password-visibility">
                 {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />}
@@ -99,7 +105,8 @@ function SignupPage() {
                 type={showPassword ? "text" : "password"}
                 placeholder="Confirm Password"
                 name="confirmPassword"
-                onKeyUp={handleChange}
+                onChange={handleChange}
+                autoComplete="new-password"
               />
             </div>
             <input className="signup-btn" type="submit" value="Sign Up" />

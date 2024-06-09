@@ -1,187 +1,120 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import "./ProjectsMainPage.scss";
-import Navigation from "../../components/Navigation/Navigation";
-import { useAuth } from "../../components/AuthProvider";
+import "./SignupPage.scss";
+import { useState } from "react";
+import axios from 'axios';
 
-function ProjectsMainPage() {
-    const { user } = useAuth();
-    console.log(user);
+import eyeShow from "../../assets/eye-show.svg";
+import eyeHide from "../../assets/eye-hide.png";
 
-    const [companyProjects, setCompanyProjects] = useState([]);
-    const [roles, setRoles] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [newProject, setNewProject] = useState({
-        projectName: "",
-        projectCoverPhoto: null
+function SignupPage() {
+    const [formData, setFormData] = useState({
+        fullName: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     });
 
-    async function getRoles() {
-        try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                console.error('No token found in localStorage');
-                return;
-            }
+    const [showPassword, setShowPassword] = useState(false);
 
-            const response = await axios.get('http://localhost:1337/api/accesses', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            console.log('Roles response:', response.data);  // API yanıtını kontrol et
-            setRoles(response.data.data);
-        } catch (error) {
-            console.error('Error fetching roles:', error);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const signupUser = async (e) => {
+        e.preventDefault();
+
+        const { fullName, phoneNumber, email, password, confirmPassword } = formData;
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
         }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{6,}$/;
+        if (!passwordRegex.test(password)) {
+            alert(
+                "Password must be minimum 6 characters, at least one uppercase letter, one lowercase letter and one number"
+            );
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local/register`, {
+                username: fullName,
+                email,
+                password
+            });
+
+            if (response.data.jwt) {
+                localStorage.setItem('token', response.data.jwt);
+                alert("Registration successful. You can now log in.");
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert("Error during registration. Please try again.");
+        }
+    };
+
+    function handleChange(event) {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value,
+        });
     }
 
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            getRoles();
-        }
-    }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    console.error('No token found in localStorage');
-                    return;
-                }
-
-                const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                console.log('Projects response:', response.data);  // API yanıtını kontrol et
-                setCompanyProjects(response.data.data);
-            } catch (error) {
-                console.error('Error fetching the data:', error);
-            }
-        };
-
-        if (localStorage.getItem('token')) {
-            fetchData();
-        }
-    }, []);
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewProject({ ...newProject, [name]: value });
-    };
-
-    const handleFileChange = (e) => {
-        setNewProject({ ...newProject, projectCoverPhoto: e.target.files[0] });
-    };
-
-    const handleSubmit = async () => {
-        const formData = new FormData();
-        formData.append('data', JSON.stringify({ projectName: newProject.projectName }));
-        if (newProject.projectCoverPhoto) {
-            formData.append('files.projectCoverPhoto', newProject.projectCoverPhoto);
-        }
-
-        try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                console.error('No token found in localStorage');
-                return;
-            }
-
-            await axios.post(
-                'http://localhost:1337/api/projects',
-                formData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-            setShowModal(false);
-            setNewProject({ projectName: "", projectCoverPhoto: null });
-            // Refetch projects after adding a new one
-            const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setCompanyProjects(response.data.data);
-        } catch (error) {
-            console.error('Error creating a new project:', error);
-        }
-    };
-
     return (
-        <div className="projects-main-page">
-            <Navigation />
-            <div className="projects-cards-main-row">
-                {companyProjects.length > 0 ? (
-                    companyProjects.map((project) => (
-                        <div className="project-cards" key={project.id}>
-                            <Link
-                                className="project-card"
-                                to={`/projects/${project.id}`}
-                            >
-                                <p className="project-card-name">{project.attributes.projectName}</p>
-                                {project.attributes.projectCoverPhoto && project.attributes.projectCoverPhoto.data && (
-                                    <img
-                                        className="project-navbar-photos"
-                                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
-                                        alt=""
-                                    />
-                                )}
-                            </Link>
-                        </div>
-                    ))
-                ) : (
-                    <p>No projects found</p>
-                )}
-
-                {roles.length > 0 ? (
-                    roles.map(role => role.attributes.role === "Admin" && (
-                        <button
-                            className="add-project-btn"
-                            onClick={() => setShowModal(true)}
-                        >
-                            Proje Ekle
-                        </button>
-                    ))
-                ) : (
-                    <p>No roles found</p>
-                )}
-            </div>
-
-            {showModal && (
-                <div className="add-new-project-modal">
-                    <div className="add-new-project-modal-content">
-                        <span className="new-project-modal-close" onClick={() => setShowModal(false)}>X</span>
-                        <h2 className="new-project-adding-header">Yeni Proje Ekle</h2>
-                        <input className="project-name-input"
+        <div className="test">
+            <main className="signup-page">
+                <div className="signup-main-div">
+                    <h1>Signup Page</h1>
+                    <form className="login-form" onSubmit={(e) => signupUser(e)}>
+                        <input
                             type="text"
-                            name="projectName"
-                            placeholder="Proje Adı"
-                            value={newProject.projectName}
-                            onChange={handleInputChange}
+                            placeholder="Full Name"
+                            name="fullName"
+                            onChange={handleChange}
+                            autoComplete="name"
                         />
-                        <input className="project-cover-photo-input"
-                            type="file"
-                            name="projectCoverPhoto"
-                            onChange={handleFileChange}
+                        <input
+                            type="tel"
+                            placeholder="Phone number"
+                            name="phoneNumber"
+                            onChange={handleChange}
+                            autoComplete="tel"
                         />
-                        <div className="adding-modal-buttons-row">
-                            <button className="adding-modal-button-create" onClick={handleSubmit}>Oluştur</button>
-                            <button className="adding-modal-button-abort" onClick={() => setShowModal(false)}>İptal</button>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            name="email"
+                            onChange={handleChange}
+                            autoComplete="email"
+                        />
+                        <div className="password-section-signup">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                name="password"
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                            />
+                            <button type="button" onClick={togglePasswordVisibility} className="toggle-password-visibility">
+                                {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />}
+                            </button>
                         </div>
-
-                    </div>
+                        <div className="password-section-signup">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Confirm Password"
+                                name="confirmPassword"
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                            />
+                        </div>
+                        <input className="signup-btn" type="submit" value="Sign Up" />
+                    </form>
                 </div>
-            )}
+            </main>
         </div>
     );
 }
 
-export default ProjectsMainPage;
+export default SignupPage;

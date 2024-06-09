@@ -9,8 +9,7 @@ import eyeHide from "../../assets/eye-hide.png";
 
 function LoginPage() {
   const [error, setError] = useState("");
-
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   console.log(user, "USER");
 
   const navigate = useNavigate();
@@ -37,15 +36,8 @@ function LoginPage() {
     e.preventDefault();
     const { email, password } = formData;
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local`, {
-        identifier: email,
-        password,
-      });
-
-      if (response.data.jwt) {
-        localStorage.setItem('token', response.data.jwt);
-        navigate("/");
-      }
+      await login(email, password);
+      navigate("/");
     } catch (error) {
       console.error(error);
       setError("Invalid email or password, please try again!");
