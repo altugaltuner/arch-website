@@ -12,7 +12,7 @@ function ProtectedRoute({ children }) {
       navigate("/login", { replace: true });
       return;
     }
-  }, []);
+  }, [user, navigate]);
 
   return children;
 }

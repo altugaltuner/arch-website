@@ -1,8 +1,6 @@
 import "./SignupPage.scss";
 import { useState } from "react";
-import { auth, db } from "@/config/firebase";
-import { setDoc, doc } from "firebase/firestore";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import axios from 'axios';
 
 import eyeShow from "../../assets/eye-show.svg";
 import eyeHide from "../../assets/eye-hide.png";
@@ -16,7 +14,7 @@ function SignupPage() {
     confirmPassword: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false); // Şifre gösterim durumu için yeni state
+  const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -25,8 +23,7 @@ function SignupPage() {
   const signupUser = async (e) => {
     e.preventDefault();
 
-    const { fullName, phoneNumber, email, password, confirmPassword } =
-      formData;
+    const { fullName, phoneNumber, email, password, confirmPassword } = formData;
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -41,19 +38,15 @@ function SignupPage() {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(auth.currentUser, {
-        displayName: fullName,
-        phoneNumber: phoneNumber,
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local/register`, {
+        username: fullName,
+        email,
+        password
       });
-      const userDocRef = doc(db, "users", auth.currentUser.uid);
-      await setDoc(userDocRef, {
-        fullName: auth.currentUser.displayName,
-        phoneNumber: auth.currentUser.phoneNumber,
-        email: auth.currentUser.email,
-        cart: null,
-        role: "user",
-      });
+
+      if (response.data.jwt) {
+        localStorage.setItem('token', response.data.jwt);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -92,7 +85,7 @@ function SignupPage() {
             />
             <div className="password-section-signup">
               <input
-                type={showPassword ? "text" : "password"} // Input tipini dinamik olarak güncelle
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 name="password"
                 onKeyUp={handleChange}

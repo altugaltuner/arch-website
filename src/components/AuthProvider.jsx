@@ -1,49 +1,33 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth, db } from "@/config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import axios from 'axios';
 
 const AuthContext = createContext(null);
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [fireStoreUser, setFireStoreUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let unsubscribe;
-
-    unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
-      if (currentUser) {
-        setUser(currentUser);
-      } else {
+    const checkAuthStatus = async () => {
+      try {
+        const response = await axios.get('/users/me', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        setUser(response.data);
+      } catch (error) {
         setUser(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      if (user) {
-        const userDoc = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userDoc);
-        if (userSnap.exists()) {
-          setFireStoreUser({ ...user, ...userSnap.data() });
-        }
+      } finally {
+        setLoading(false);
       }
     };
-    fetchUserDetails();
-    if (user) {
-      console.log(user.uid);
-    }
-  }, [user]);
+
+    checkAuthStatus();
+  }, []);
 
   const userValues = {
     user,
-    fireStoreUser,
     setUser,
   };
 

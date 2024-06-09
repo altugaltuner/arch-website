@@ -1,11 +1,6 @@
 import { useState } from "react";
 import "./LoginPage.scss";
-import { auth } from "@/config/firebase";
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
 
@@ -13,25 +8,19 @@ import eyeShow from "../../assets/eye-show.svg";
 import eyeHide from "../../assets/eye-hide.png";
 
 function LoginPage() {
-
   const [error, setError] = useState("");
 
-  const { fireStoreUser } = useAuth();
-  console.log(fireStoreUser, "FIRESTORE USER");
+  const { user } = useAuth();
+  console.log(user, "USER");
 
   const navigate = useNavigate();
-
-  onAuthStateChanged(auth, (currentUser) => {
-
-    console.log(currentUser);
-  });
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false); // Şifre gösterim durumu için yeni state
+  const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -48,78 +37,62 @@ function LoginPage() {
     e.preventDefault();
     const { email, password } = formData;
     try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
-      if (res) {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local`, {
+        identifier: email,
+        password,
+      });
+
+      if (response.data.jwt) {
+        localStorage.setItem('token', response.data.jwt);
         navigate("/");
       }
     } catch (error) {
       console.error(error);
-      setError("Hatalı şifre veya email, lütfen tekrar deneyin!");
+      setError("Invalid email or password, please try again!");
     }
   }
 
-  if (fireStoreUser) {
+  if (user) {
     return (
       <main className="login-main">
         <div className="login-main-div">
-          <h1 className="login-h1">Zaten Giriş Yaptınız</h1>
-          <form className="login-form" onSubmit={(e) => handleUserLogin(e)}>
-            <div className="submits-of-login">
-              <button
-                className="login-logout"
-                onClick={() => {
-                  signOut(auth).then(() => {
-                    navigate("/login", { replace: true });
-                    window.location.reload();  // Sayfayı yenile
-                  }).catch((error) => {
-                    console.error('Sign out error:', error);
-                  });
-                }}
-              >Logout
-              </button>
-            </div>
-          </form>
+          <h1 className="login-h1">You are already logged in</h1>
+          <button
+            className="login-logout"
+            onClick={() => {
+              localStorage.removeItem('token');
+              window.location.reload();
+            }}
+          >
+            Logout
+          </button>
         </div>
       </main>
     );
   }
 
   return (
-
     <div className="login-main">
       <div className="login-main-div">
         <h1 className="login-h1">Login page</h1>
         <form className="login-form" onSubmit={(e) => handleUserLogin(e)}>
-          {/* Hata mesajını göster Bu kontrol, JavaScript'in mantıksal AND operatörü (&&) ile yapılır. Bu operatör, sol tarafı (error) doğru (truthy) ise sağ tarafı (<p className="error-message">{error}</p>) değerlendirir ve döndürür. Eğer sol taraf yanlışsa (falsy, bu durumda boş bir string), ifade yanlış olarak değerlendirilir ve hiçbir şey render edilmez.*/}
           {error && <p className="error-message">{error}</p>}
 
           <input className="login-email" placeholder="Please Enter Your E-Mail" onKeyUp={handleChange} name="email" type="email" />
 
           <div className="password-input-container">
-
             <input className="login-password"
               onKeyUp={handleChange}
               name="password"
-              type={showPassword ? "text" : "password"} // Input tipini dinamik olarak güncelle
+              type={showPassword ? "text" : "password"}
             />
-
             <button type="button" onClick={togglePasswordVisibility} className="toggle-password-visibility">
-              {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />} {/* Göz simgesi olarak kullanılabilir bir metin */}
+              {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />}
             </button>
-
           </div>
 
           <div className="submits-of-login">
             <input className="login-submit" type="submit" value="Login" />
-
-            <button className="login-logout"
-              onClick={() => {
-                signOut(auth);
-                console.log("clicked");
-              }}
-            >
-              Logout
-            </button>
           </div>
         </form>
       </div>

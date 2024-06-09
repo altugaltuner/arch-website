@@ -1,126 +1,103 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import "./ProjectsMainPage.scss";
-import Navigation from "../../components/Navigation/Navigation";
+import { useState } from "react";
+import "./LoginPage.scss";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../components/AuthProvider";
 
-function ProjectsMainPage() {
-    const [companyProjects, setCompanyProjects] = useState([]);
-    const [roles, setRoles] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [newProject, setNewProject] = useState({
-        projectName: "",
-        projectCoverPhoto: null
+import eyeShow from "../../assets/eye-show.svg";
+import eyeHide from "../../assets/eye-hide.png";
+
+function LoginPage() {
+    const [error, setError] = useState("");
+
+    const { user } = useAuth();
+    console.log(user, "USER");
+
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
     });
 
-    async function getRoles() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    function handleChange(event) {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value,
+        });
+    }
+
+    async function handleUserLogin(e) {
+        e.preventDefault();
+        const { email, password } = formData;
         try {
-            const response = await axios.get('http://localhost:1337/api/accesses');
-            setRoles(response.data.data);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local`, {
+                identifier: email,
+                password,
+            });
+
+            if (response.data.jwt) {
+                localStorage.setItem('token', response.data.jwt);
+                navigate("/");
+            }
         } catch (error) {
             console.error(error);
+            setError("Invalid email or password, please try again!");
         }
     }
 
-    useEffect(() => {
-        getRoles();
-    }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto');
-                setCompanyProjects(response.data.data);
-            } catch (error) {
-                console.error('Error fetching the data', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewProject({ ...newProject, [name]: value });
-    };
-
-    const handleFileChange = (e) => {
-        setNewProject({ ...newProject, projectCoverPhoto: e.target.files[0] });
-    };
-
-    const handleSubmit = async () => {
-        const formData = new FormData();
-        formData.append('data', JSON.stringify({ projectName: newProject.projectName }));
-        if (newProject.projectCoverPhoto) {
-            formData.append('files.projectCoverPhoto', newProject.projectCoverPhoto);
-        }
-
-        try {
-            await axios.post('http://localhost:1337/api/projects', formData);
-            setShowModal(false);
-            setNewProject({ projectName: "", projectCoverPhoto: null });
-            // Refetch projects after adding a new one
-            const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto');
-            setCompanyProjects(response.data.data);
-        } catch (error) {
-            console.error('Error creating a new project', error);
-        }
-    };
+    if (user) {
+        return (
+            <main className="login-main">
+                <div className="login-main-div">
+                    <h1 className="login-h1">You are already logged in</h1>
+                    <button
+                        className="login-logout"
+                        onClick={() => {
+                            localStorage.removeItem('token');
+                            window.location.reload();
+                        }}
+                    >
+                        Logout
+                    </button>
+                </div>
+            </main>
+        );
+    }
 
     return (
-        <div className="projects-main-page">
-            <Navigation />
-            <div className="projects-cards-main-row">
-                {companyProjects.map((project) => (
-                    <div className="project-cards" key={project.id}>
-                        <Link
-                            className="project-card"
-                            to={`/projects/${project.id}`}
-                        >
-                            <p className="project-card-name">{project.attributes.projectName}</p>
-                            <img
-                                className="project-navbar-photos"
-                                src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
-                                alt="project-photo"
-                            />
-                        </Link>
-                    </div>
-                ))}
+        <div className="login-main">
+            <div className="login-main-div">
+                <h1 className="login-h1">Login page</h1>
+                <form className="login-form" onSubmit={(e) => handleUserLogin(e)}>
+                    {error && <p className="error-message">{error}</p>}
 
-                {roles.map(role => role.attributes.role === "Admin" && (
-                    <button
-                        className="add-project-btn"
-                        onClick={() => setShowModal(true)}
-                    >
-                        Proje Ekle
-                    </button>
-                ))}
+                    <input className="login-email" placeholder="Please Enter Your E-Mail" onKeyUp={handleChange} name="email" type="email" />
+
+                    <div className="password-input-container">
+                        <input className="login-password"
+                            onKeyUp={handleChange}
+                            name="password"
+                            type={showPassword ? "text" : "password"}
+                        />
+                        <button type="button" onClick={togglePasswordVisibility} className="toggle-password-visibility">
+                            {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />}
+                        </button>
+                    </div>
+
+                    <div className="submits-of-login">
+                        <input className="login-submit" type="submit" value="Login" />
+                    </div>
+                </form>
             </div>
-
-            {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={() => setShowModal(false)}>&times;</span>
-                        <h2>Yeni Proje Ekle</h2>
-                        <input
-                            type="text"
-                            name="projectName"
-                            placeholder="Proje Adı"
-                            value={newProject.projectName}
-                            onChange={handleInputChange}
-                        />
-                        <input
-                            type="file"
-                            name="projectCoverPhoto"
-                            onChange={handleFileChange}
-                        />
-                        <button onClick={handleSubmit}>Oluştur</button>
-                        <button onClick={() => setShowModal(false)}>İptal</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
 
-export default ProjectsMainPage;
+export default LoginPage;
