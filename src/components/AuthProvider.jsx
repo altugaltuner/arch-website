@@ -10,12 +10,17 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await axios.get('/users/me', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        setUser(response.data);
+        const token = localStorage.getItem('token');
+        if (token) {
+          const response = await axios.get('/users/me', {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          setUser(response.data);
+        } else {
+          setUser(null);
+        }
       } catch (error) {
         setUser(null);
       } finally {
@@ -26,9 +31,32 @@ function AuthProvider({ children }) {
     checkAuthStatus();
   }, []);
 
+  const login = async (email, password) => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local`, {
+        identifier: email,
+        password,
+      });
+
+      if (response.data.jwt) {
+        localStorage.setItem('token', response.data.jwt);
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
   const userValues = {
     user,
-    setUser,
+    login,
+    logout,
   };
 
   return (

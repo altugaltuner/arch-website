@@ -1,103 +1,187 @@
-import { useState } from "react";
-import "./LoginPage.scss";
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "./ProjectsMainPage.scss";
+import Navigation from "../../components/Navigation/Navigation";
 import { useAuth } from "../../components/AuthProvider";
 
-import eyeShow from "../../assets/eye-show.svg";
-import eyeHide from "../../assets/eye-hide.png";
-
-function LoginPage() {
-    const [error, setError] = useState("");
-
+function ProjectsMainPage() {
     const { user } = useAuth();
-    console.log(user, "USER");
+    console.log(user);
 
-    const navigate = useNavigate();
-
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
+    const [companyProjects, setCompanyProjects] = useState([]);
+    const [roles, setRoles] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [newProject, setNewProject] = useState({
+        projectName: "",
+        projectCoverPhoto: null
     });
 
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    function handleChange(event) {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-        });
-    }
-
-    async function handleUserLogin(e) {
-        e.preventDefault();
-        const { email, password } = formData;
+    async function getRoles() {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local`, {
-                identifier: email,
-                password,
-            });
-
-            if (response.data.jwt) {
-                localStorage.setItem('token', response.data.jwt);
-                navigate("/");
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found in localStorage');
+                return;
             }
+
+            const response = await axios.get('http://localhost:1337/api/accesses', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log('Roles response:', response.data);  // API yanıtını kontrol et
+            setRoles(response.data.data);
         } catch (error) {
-            console.error(error);
-            setError("Invalid email or password, please try again!");
+            console.error('Error fetching roles:', error);
         }
     }
 
-    if (user) {
-        return (
-            <main className="login-main">
-                <div className="login-main-div">
-                    <h1 className="login-h1">You are already logged in</h1>
-                    <button
-                        className="login-logout"
-                        onClick={() => {
-                            localStorage.removeItem('token');
-                            window.location.reload();
-                        }}
-                    >
-                        Logout
-                    </button>
-                </div>
-            </main>
-        );
-    }
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            getRoles();
+        }
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    console.error('No token found in localStorage');
+                    return;
+                }
+
+                const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log('Projects response:', response.data);  // API yanıtını kontrol et
+                setCompanyProjects(response.data.data);
+            } catch (error) {
+                console.error('Error fetching the data:', error);
+            }
+        };
+
+        if (localStorage.getItem('token')) {
+            fetchData();
+        }
+    }, []);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewProject({ ...newProject, [name]: value });
+    };
+
+    const handleFileChange = (e) => {
+        setNewProject({ ...newProject, projectCoverPhoto: e.target.files[0] });
+    };
+
+    const handleSubmit = async () => {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify({ projectName: newProject.projectName }));
+        if (newProject.projectCoverPhoto) {
+            formData.append('files.projectCoverPhoto', newProject.projectCoverPhoto);
+        }
+
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found in localStorage');
+                return;
+            }
+
+            await axios.post(
+                'http://localhost:1337/api/projects',
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setShowModal(false);
+            setNewProject({ projectName: "", projectCoverPhoto: null });
+            // Refetch projects after adding a new one
+            const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setCompanyProjects(response.data.data);
+        } catch (error) {
+            console.error('Error creating a new project:', error);
+        }
+    };
 
     return (
-        <div className="login-main">
-            <div className="login-main-div">
-                <h1 className="login-h1">Login page</h1>
-                <form className="login-form" onSubmit={(e) => handleUserLogin(e)}>
-                    {error && <p className="error-message">{error}</p>}
+        <div className="projects-main-page">
+            <Navigation />
+            <div className="projects-cards-main-row">
+                {companyProjects.length > 0 ? (
+                    companyProjects.map((project) => (
+                        <div className="project-cards" key={project.id}>
+                            <Link
+                                className="project-card"
+                                to={`/projects/${project.id}`}
+                            >
+                                <p className="project-card-name">{project.attributes.projectName}</p>
+                                {project.attributes.projectCoverPhoto && project.attributes.projectCoverPhoto.data && (
+                                    <img
+                                        className="project-navbar-photos"
+                                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
+                                        alt=""
+                                    />
+                                )}
+                            </Link>
+                        </div>
+                    ))
+                ) : (
+                    <p>No projects found</p>
+                )}
 
-                    <input className="login-email" placeholder="Please Enter Your E-Mail" onKeyUp={handleChange} name="email" type="email" />
-
-                    <div className="password-input-container">
-                        <input className="login-password"
-                            onKeyUp={handleChange}
-                            name="password"
-                            type={showPassword ? "text" : "password"}
-                        />
-                        <button type="button" onClick={togglePasswordVisibility} className="toggle-password-visibility">
-                            {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />}
+                {roles.length > 0 ? (
+                    roles.map(role => role.attributes.role === "Admin" && (
+                        <button
+                            className="add-project-btn"
+                            onClick={() => setShowModal(true)}
+                        >
+                            Proje Ekle
                         </button>
-                    </div>
-
-                    <div className="submits-of-login">
-                        <input className="login-submit" type="submit" value="Login" />
-                    </div>
-                </form>
+                    ))
+                ) : (
+                    <p>No roles found</p>
+                )}
             </div>
+
+            {showModal && (
+                <div className="add-new-project-modal">
+                    <div className="add-new-project-modal-content">
+                        <span className="new-project-modal-close" onClick={() => setShowModal(false)}>X</span>
+                        <h2 className="new-project-adding-header">Yeni Proje Ekle</h2>
+                        <input className="project-name-input"
+                            type="text"
+                            name="projectName"
+                            placeholder="Proje Adı"
+                            value={newProject.projectName}
+                            onChange={handleInputChange}
+                        />
+                        <input className="project-cover-photo-input"
+                            type="file"
+                            name="projectCoverPhoto"
+                            onChange={handleFileChange}
+                        />
+                        <div className="adding-modal-buttons-row">
+                            <button className="adding-modal-button-create" onClick={handleSubmit}>Oluştur</button>
+                            <button className="adding-modal-button-abort" onClick={() => setShowModal(false)}>İptal</button>
+                        </div>
+
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
 
-export default LoginPage;
+export default ProjectsMainPage;

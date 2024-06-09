@@ -6,9 +6,8 @@ import Navigation from "../../components/Navigation/Navigation";
 import { useAuth } from "../../components/AuthProvider";
 
 function ProjectsMainPage() {
-    const auth = useAuth(); // auth'u const {fireStoreUser} = useAuth() şeklinde alırsanız user bilgilerine ulaşabilirsiniz
-    const { fireStoreUser } = useAuth();
-    console.log(fireStoreUser);
+    const { user } = useAuth();
+    console.log(user);
 
     const [companyProjects, setCompanyProjects] = useState([]);
     const [roles, setRoles] = useState([]);
@@ -20,28 +19,54 @@ function ProjectsMainPage() {
 
     async function getRoles() {
         try {
-            const response = await axios.get('http://localhost:1337/api/accesses');
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found in localStorage');
+                return;
+            }
+
+            const response = await axios.get('http://localhost:1337/api/accesses', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log('Roles response:', response.data);  // API yanıtını kontrol et
             setRoles(response.data.data);
         } catch (error) {
-            console.error(error);
+            console.error('Error fetching roles:', error);
         }
     }
 
     useEffect(() => {
-        getRoles();
+        if (localStorage.getItem('token')) {
+            getRoles();
+        }
     }, []);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto');
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    console.error('No token found in localStorage');
+                    return;
+                }
+
+                const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log('Projects response:', response.data);  // API yanıtını kontrol et
                 setCompanyProjects(response.data.data);
             } catch (error) {
-                console.error('Error fetching the data', error);
+                console.error('Error fetching the data:', error);
             }
         };
 
-        fetchData();
+        if (localStorage.getItem('token')) {
+            fetchData();
+        }
     }, []);
 
     const handleInputChange = (e) => {
@@ -61,14 +86,32 @@ function ProjectsMainPage() {
         }
 
         try {
-            await axios.post('http://localhost:1337/api/projects', formData);
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found in localStorage');
+                return;
+            }
+
+            await axios.post(
+                'http://localhost:1337/api/projects',
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
             setShowModal(false);
             setNewProject({ projectName: "", projectCoverPhoto: null });
             // Refetch projects after adding a new one
-            const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto');
+            const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             setCompanyProjects(response.data.data);
         } catch (error) {
-            console.error('Error creating a new project', error);
+            console.error('Error creating a new project:', error);
         }
     };
 
@@ -76,30 +119,40 @@ function ProjectsMainPage() {
         <div className="projects-main-page">
             <Navigation />
             <div className="projects-cards-main-row">
-                {companyProjects.map((project) => (
-                    <div className="project-cards" key={project.id}>
-                        <Link
-                            className="project-card"
-                            to={`/projects/${project.id}`}
-                        >
-                            <p className="project-card-name">{project.attributes.projectName}</p>
-                            <img
-                                className="project-navbar-photos"
-                                src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
-                                alt=""
-                            />
-                        </Link>
-                    </div>
-                ))}
+                {companyProjects.length > 0 ? (
+                    companyProjects.map((project) => (
+                        <div className="project-cards" key={project.id}>
+                            <Link
+                                className="project-card"
+                                to={`/projects/${project.id}`}
+                            >
+                                <p className="project-card-name">{project.attributes.projectName}</p>
+                                {project.attributes.projectCoverPhoto && project.attributes.projectCoverPhoto.data && (
+                                    <img
+                                        className="project-navbar-photos"
+                                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
+                                        alt=""
+                                    />
+                                )}
+                            </Link>
+                        </div>
+                    ))
+                ) : (
+                    <p>No projects found</p>
+                )}
 
-                {roles.map(role => role.attributes.role === "Admin" && (
-                    <button
-                        className="add-project-btn"
-                        onClick={() => setShowModal(true)}
-                    >
-                        Proje Ekle
-                    </button>
-                ))}
+                {roles.length > 0 ? (
+                    roles.map(role => role.attributes.role === "Admin" && (
+                        <button
+                            className="add-project-btn"
+                            onClick={() => setShowModal(true)}
+                        >
+                            Proje Ekle
+                        </button>
+                    ))
+                ) : (
+                    <p>No roles found</p>
+                )}
             </div>
 
             {showModal && (
