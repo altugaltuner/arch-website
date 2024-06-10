@@ -17,7 +17,7 @@
 
         .login-h1 {
             color: $grey;
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
         }
 
@@ -41,7 +41,8 @@
                     height: 30px;
                     width: 30px;
                     border: none;
-                    border-radius: 10px;
+                    border-radius: 50%;
+                    background-color: white;
 
                     .eye-logo {
                         width: 20px;
@@ -57,6 +58,7 @@
             }
 
             .login-password {
+                width: 300px;
                 height: 40px;
                 border: none;
                 padding-left: 10px;
@@ -64,6 +66,7 @@
             }
 
             .login-email {
+                width: 300px;
                 height: 40px;
                 border: none;
                 padding-left: 10px;

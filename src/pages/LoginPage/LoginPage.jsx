@@ -40,7 +40,7 @@ function LoginPage() {
       navigate("/");
     } catch (error) {
       console.error(error);
-      setError("Invalid email or password, please try again!");
+      setError("Hatalı kullanıcı adı veya şifre, lütfen tekrar deneyin!");
     }
   }
 
@@ -48,7 +48,7 @@ function LoginPage() {
     return (
       <main className="login-main">
         <div className="login-main-div">
-          <h1 className="login-h1">You are already logged in</h1>
+          <h1 className="login-h1">Zaten Giriş Yaptınız</h1>
           <button
             className="login-logout"
             onClick={() => {
@@ -56,7 +56,7 @@ function LoginPage() {
               window.location.reload();
             }}
           >
-            Logout
+            Çıkış Yap
           </button>
         </div>
       </main>
@@ -66,11 +66,11 @@ function LoginPage() {
   return (
     <div className="login-main">
       <div className="login-main-div">
-        <h1 className="login-h1">Login page</h1>
+        <h1 className="login-h1">Giriş Yapın</h1>
         <form className="login-form" onSubmit={(e) => handleUserLogin(e)}>
           {error && <p className="error-message">{error}</p>}
 
-          <input className="login-email" placeholder="Please Enter Your E-Mail" onKeyUp={handleChange} name="email" type="email" />
+          <input className="login-email" placeholder="E-Mail'iniz" onKeyUp={handleChange} name="email" type="email" />
 
           <div className="password-input-container">
             <input className="login-password"
@@ -84,7 +84,7 @@ function LoginPage() {
           </div>
 
           <div className="submits-of-login">
-            <input className="login-submit" type="submit" value="Login" />
+            <input className="login-submit" type="submit" value="Giriş Yap" />
           </div>
         </form>
       </div>

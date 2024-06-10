@@ -1,7 +1,6 @@
 import "./SignupPage.scss";
 import { useState } from "react";
-import { api } from "../../api"; // Doğru yolu kullanın
-
+import { api } from "../../api";
 import eyeShow from "../../assets/eye-show.svg";
 import eyeHide from "../../assets/eye-hide.png";
 
@@ -25,14 +24,14 @@ function SignupPage() {
 
     const { fullName, phoneNumber, email, password, confirmPassword } = formData;
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      alert("Şifreler eşleşmiyor. Lütfen tekrar deneyin.");
       return;
     }
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{6,}$/;
     if (!passwordRegex.test(password)) {
       alert(
-        "Password must be minimum 6 characters, at least one uppercase letter, one lowercase letter and one number"
+        "Şifreniz en az 6 karakter uzunluğunda olmalı ve en az bir büyük harf, bir küçük harf ve bir rakam içermelidir."
       );
       return;
     }
@@ -46,11 +45,11 @@ function SignupPage() {
 
       if (response.data.jwt) {
         localStorage.setItem('token', response.data.jwt);
-        alert("Registration successful. You can now log in.");
+        alert("Kayıt başarılı. Giriş yapabilirsiniz.");
       }
     } catch (error) {
       console.error('Error during registration:', error);
-      alert("Error during registration. Please try again.");
+      alert("Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
     }
   };
 
@@ -65,7 +64,7 @@ function SignupPage() {
     <div className="test">
       <main className="signup-page">
         <div className="signup-main-div">
-          <h1>Signup Page</h1>
+          <h1>Hesap oluştur</h1>
           <form className="login-form" onSubmit={(e) => signupUser(e)}>
             <input
               type="text"
