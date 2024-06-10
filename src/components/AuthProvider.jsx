@@ -12,7 +12,7 @@ function AuthProvider({ children }) {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await api.get(`/users/me`, {
+          const response = await api.get(`http://localhost:1337/api/users/me`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -33,12 +33,14 @@ function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const response = await api.post(`/auth/local`, {
+      const response = await api.post(`http://localhost:1337/api/auth/local`, {
         identifier: email,
-        password,
+        password: password,
       });
 
+      console.log(response);
       if (response.data.jwt) {
+
         localStorage.setItem('token', response.data.jwt);
         setUser(response.data.user);
       }

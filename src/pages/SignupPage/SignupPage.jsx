@@ -22,7 +22,8 @@ function SignupPage() {
   const signupUser = async (e) => {
     e.preventDefault();
 
-    const { fullName, phoneNumber, email, password, confirmPassword } = formData;
+    const { fullName, phoneNumber, email, password, confirmPassword } =
+      formData;
     if (password !== confirmPassword) {
       alert("Şifreler eşleşmiyor. Lütfen tekrar deneyin.");
       return;
@@ -37,18 +38,21 @@ function SignupPage() {
     }
 
     try {
-      const response = await api.post(`/auth/local/register`, {
-        username: fullName,
-        email,
-        password
-      });
+      const response = await api.post(
+        `http://localhost:1337/api/auth/local/register`,
+        {
+          username: fullName,
+          email: email,
+          password: password,
+        }
+      );
 
       if (response.data.jwt) {
-        localStorage.setItem('token', response.data.jwt);
+        localStorage.setItem("token", response.data.jwt);
         alert("Kayıt başarılı. Giriş yapabilirsiniz.");
       }
     } catch (error) {
-      console.error('Error during registration:', error);
+      console.error("Error during registration:", error);
       alert("Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
     }
   };
@@ -95,8 +99,16 @@ function SignupPage() {
                 onChange={handleChange}
                 autoComplete="new-password"
               />
-              <button type="button" onClick={togglePasswordVisibility} className="toggle-password-visibility">
-                {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />}
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="toggle-password-visibility"
+              >
+                {showPassword ? (
+                  <img className="eye-logo" src={eyeHide} alt="Hide" />
+                ) : (
+                  <img src={eyeShow} alt="Show" className="eye-logo" />
+                )}
               </button>
             </div>
             <div className="password-section-signup">
