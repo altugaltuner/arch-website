@@ -22,15 +22,20 @@
             .my-active-project-div {
                 color: $div-color;
 
-                .my-active-project-list-header {}
+                .my-active-project-list-header {
+                    padding: 20px;
+                }
 
                 .my-active-project-list {
                     display: flex;
                     flex-direction: column;
-
+                    align-items: center;
                     gap: 10px;
 
-                    .my-active-project-list-element {}
+                    .my-active-project-list-element {
+                        padding: 10px;
+                        cursor: pointer;
+                    }
                 }
             }
         }
