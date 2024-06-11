@@ -34,7 +34,6 @@ function MyActiveProjects({ user }) {
 
     const userElements = filteredUser.map(u => (
         <div className="my-active-project-div" key={u.id}>
-            <p>{u.username}</p>
             <h2 className="my-active-project-list-header">Dahil Olduğum Projeler</h2>
             <div className="my-active-project-list">
                 {u.projects.map(p => (
