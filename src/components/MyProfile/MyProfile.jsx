@@ -14,7 +14,7 @@ function MyProfile({ user }) {
         social3: "",
         social4: ""
     });
-    const [savedData, setSavedData] = useState(formData); // Track saved data
+    const [savedData, setSavedData] = useState(formData);
 
     useEffect(() => {
         if (user) {
@@ -38,7 +38,7 @@ function MyProfile({ user }) {
 
     const handleSave = (e) => {
         e.preventDefault();
-        setSavedData(formData); // Save current form data
+        setSavedData(formData);
         setIsEditing(false);
     };
 
@@ -47,7 +47,7 @@ function MyProfile({ user }) {
     };
 
     const handleCancel = () => {
-        setFormData(savedData); // Revert to saved data
+        setFormData(savedData);
         setIsEditing(false);
     };
 

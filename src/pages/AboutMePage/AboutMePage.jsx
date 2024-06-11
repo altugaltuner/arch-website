@@ -12,7 +12,6 @@ function AboutMePage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-
     useEffect(() => {
         const checkCurrentPerson = async () => {
             try {
@@ -43,7 +42,7 @@ function AboutMePage() {
             <Navigation />
             <div className="aboutme-page-row">
                 <MyProfile user={user} />
-                <MyActiveProjects />
+                <MyActiveProjects user={user} />
                 <MyPersonalFiles />
             </div>
         </div>
