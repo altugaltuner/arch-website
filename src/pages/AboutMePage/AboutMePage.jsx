@@ -35,7 +35,6 @@ function AboutMePage() {
 
         checkCurrentPerson();
     }, []);
-    console.log(user);
 
     return (
         <div className="aboutme-page-main">
@@ -43,7 +42,7 @@ function AboutMePage() {
             <div className="aboutme-page-row">
                 <MyProfile user={user} />
                 <MyActiveProjects user={user} />
-                <MyPersonalFiles />
+                <MyPersonalFiles user={user} />
             </div>
         </div>
     );

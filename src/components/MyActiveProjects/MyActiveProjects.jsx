@@ -9,7 +9,7 @@ function MyActiveProjects({ user }) {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/users?populate=projects');
-                console.log("Fetched users:", response.data);
+                //console.log("Fetched users:", response.data);
                 setAllUsers(response.data || []);
             } catch (error) {
                 console.error('Error fetching the data', error);
@@ -20,9 +20,9 @@ function MyActiveProjects({ user }) {
     }, []);
 
     useEffect(() => {
-        console.log("All Users:", allUsers);
+        //console.log("All Users:", allUsers);
     }, [allUsers]);
-    console.log("User:", user);
+    //console.log("User:", user);
 
     // Add a check for user being null or undefined
     if (!user || !user.username) {
@@ -30,7 +30,7 @@ function MyActiveProjects({ user }) {
     }
 
     const filteredUser = allUsers.filter(u => u.username === user.username);
-    console.log("Filtered User:", filteredUser);
+    //console.log("Filtered User:", filteredUser);
 
     const userElements = filteredUser.map(u => (
         <div className="my-active-project-div" key={u.id}>

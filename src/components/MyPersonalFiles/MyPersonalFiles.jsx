@@ -1,7 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import "./MyPersonalFiles.scss";
 
-function AboutMePage() {
+function AboutMePage({ user }) {
+
+    const [allUsers, setAllUsers] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:1337/api/users?populate=MyPersonalFiles');
+                console.log("Fetched users:", response.data);
+                setAllUsers(response.data || []);
+            } catch (error) {
+                console.error('Error fetching the data', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        console.log("All Users:", allUsers);
+    }, [allUsers]);
+
+    if (!user || !user.MyPersonalFiles) {
+        return <div>No user data available.</div>;
+    }
 
     return (
         <div className="my-files-panel">
@@ -29,5 +54,3 @@ function AboutMePage() {
 };
 
 export default AboutMePage;
-
-
