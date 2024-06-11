@@ -1,25 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MyProfile.scss";
 import { useAuth } from "../../components/AuthProvider";
 import profilePic from "../../assets/pp.jpg";
 
-function MyProfile() {
+function MyProfile({ user }) {
     const auth = useAuth();
-
-    const initialData = {
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState({
         name: "",
-        bio: "",
         location: "",
-        website: "",
         social1: "",
         social2: "",
         social3: "",
         social4: ""
-    };
+    });
+    const [savedData, setSavedData] = useState(formData); // Track saved data
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState(initialData);
-    const [savedData, setSavedData] = useState(initialData); // To keep track of saved data
+    useEffect(() => {
+        if (user) {
+            const initialData = {
+                name: user.username || "",
+                location: user.location || "",
+                social1: user.social1 || "",
+                social2: user.social2 || "",
+                social3: user.social3 || "",
+                social4: user.social4 || ""
+            };
+            setFormData(initialData);
+            setSavedData(initialData);
+        }
+    }, [user]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,7 +38,7 @@ function MyProfile() {
 
     const handleSave = (e) => {
         e.preventDefault();
-        setSavedData(formData); // Save the current form data
+        setSavedData(formData); // Save current form data
         setIsEditing(false);
     };
 
@@ -44,6 +54,10 @@ function MyProfile() {
     const handleLogout = () => {
         window.location.href = "/login";
     };
+
+    if (!user) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="profile">
@@ -65,17 +79,6 @@ function MyProfile() {
                         />
                     </div>
                     <div className="profile-field">
-                        <label htmlFor="bio">Biyografi</label>
-                        <textarea
-                            className="biography-area"
-                            id="bio"
-                            name="bio"
-                            placeholder="biyografiniz"
-                            value={formData.bio}
-                            onChange={handleChange}
-                        ></textarea>
-                    </div>
-                    <div className="profile-field">
                         <label htmlFor="location">Konum</label>
                         <input
                             className="input-for-labels"
@@ -83,17 +86,6 @@ function MyProfile() {
                             id="location"
                             name="location"
                             value={formData.location}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="profile-field">
-                        <label htmlFor="website">Website</label>
-                        <input
-                            className="input-for-labels"
-                            type="text"
-                            id="website"
-                            name="website"
-                            value={formData.website}
                             onChange={handleChange}
                         />
                     </div>
@@ -148,16 +140,8 @@ function MyProfile() {
                         <p className="profile-field-paragraph">{savedData.name}</p>
                     </div>
                     <div className="profile-field">
-                        <label className="profile-field-labels">Biyografi:</label>
-                        <p className="profile-field-paragraph">{savedData.bio}</p>
-                    </div>
-                    <div className="profile-field">
                         <label className="profile-field-labels">Konum:</label>
                         <p className="profile-field-paragraph">{savedData.location}</p>
-                    </div>
-                    <div className="profile-field">
-                        <label className="profile-field-labels">Website:</label>
-                        <p className="profile-field-paragraph">{savedData.website}</p>
                     </div>
                     <div className="profile-field-social">
                         <label className="profile-field-labels">Sosyal Medya Hesaplarım:</label>
@@ -176,7 +160,6 @@ function MyProfile() {
                     </div>
                 </div>
             )}
-
         </div>
     );
 }
