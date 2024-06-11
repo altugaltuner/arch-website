@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./MyProfile.scss";
+import axios from "axios";
 
 function MyProfile({ user }) {
     const [isEditing, setIsEditing] = useState(false);
@@ -12,6 +13,22 @@ function MyProfile({ user }) {
         social1: "",
     });
     const [savedData, setSavedData] = useState(formData);
+
+    const [undefinedProfilePic, setUndefinedProfilePic] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:1337/api/website-uis/5?populate=*');
+                console.log("Fetched undefined profile pic:", response.data);
+                setUndefinedProfilePic(response.data.data.attributes.LogoImg.data[0].attributes.url || "");
+            } catch (error) {
+                console.error('Error fetching the data', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     useEffect(() => {
         if (user) {
@@ -60,7 +77,6 @@ function MyProfile({ user }) {
         };
         reader.readAsDataURL(file);
     };
-
 
     if (!user) {
         return <div>Loading...</div>;
@@ -150,7 +166,11 @@ function MyProfile({ user }) {
             ) : (
                 <div className="profile-info">
                     <div className="profile-image">
-                        <img className="profile-pic" src={`http://localhost:1337${savedData.profilePic.url}`} alt="Profile" />
+                        <img
+                            className="profile-pic"
+                            src={savedData.profilePic ? `http://localhost:1337${savedData.profilePic}` : `http://localhost:1337${undefinedProfilePic}`}
+                            alt="Profile"
+                        />
                     </div>
                     <div className="profile-field">
                         <label className="profile-field-labels">İsim Soyisim:</label>

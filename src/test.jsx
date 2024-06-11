@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import "./MyPersonalFiles.scss";
+import "./MyProfile.scss";
+import axios from "axios";
 
-function AboutMePage({ user }) {
+function MyProfile({ user }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState({
+        profilePic: "",
+        name: "",
+        location: "",
+        mobilePhone: "",
+        email: "",
+        social1: "",
+    });
+    const [savedData, setSavedData] = useState(formData);
 
-    const [allUsers, setAllUsers] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); // Add a loading state
+    const [undefinedProfilePic, setUndefinedProfilePic] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=MyPersonalFiles');
-                console.log("Fetched users:", response.data);
-                setAllUsers(response.data.data || []); // Adjust based on the actual structure of the response
+                const response = await axios.get('http://localhost:1337/api/website-uis/5?populate=*');
+                console.log("Fetched undefined profile pic:", response.data);
+                setUndefinedProfilePic(response.data.data.attributes.LogoImg.data[0].attributes.url || "");
             } catch (error) {
                 console.error('Error fetching the data', error);
-            } finally {
-                setIsLoading(false); // Set loading to false after fetching data
             }
         };
 
@@ -24,67 +31,179 @@ function AboutMePage({ user }) {
     }, []);
 
     useEffect(() => {
-        console.log("All Users state updated:", allUsers);
-    }, [allUsers]);
+        if (user) {
+            const initialData = {
+                profilePic: user.profilePic || "",
+                name: user.username || "",
+                location: user.UserLocation || "",
+                mobilePhone: user.MobilePhone || "",
+                email: user.email || "",
+                social1: user.socialMedia || ""
+            };
+            setFormData(initialData);
+            setSavedData(initialData);
+        }
+    }, [user]);
 
-    if (isLoading) {
-        return <div>Loading...</div>; // Show a loading message while data is being fetched
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
+    };
+
+    const handleSave = (e) => {
+        e.preventDefault();
+        setSavedData(formData);
+        setIsEditing(false);
+    };
+
+    const handleEdit = () => {
+        setIsEditing(true);
+    };
+
+    const handleCancel = () => {
+        setFormData(savedData);
+        setIsEditing(false);
+    };
+
+    const handleLogout = () => {
+        window.location.href = "/login";
+    };
+
+    const handleProfilePicChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setFormData((prevData) => ({ ...prevData, profilePic: reader.result }));
+        };
+        reader.readAsDataURL(file);
+    };
 
     if (!user) {
-        return <div>No user data available.</div>;
+        return <div>Loading...</div>;
     }
-
-    const filteredUser = allUsers.find(u => u.username === user.username);
-
-    if (!filteredUser || !filteredUser.MyPersonalFiles) {
-        return <div>No personal files available for this user.</div>;
-    }
-
-    const uploadMyFile = async () => {
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*'; // Allow only image files
-        fileInput.addEventListener('change', handleFileUpload);
-        fileInput.click();
-    };
-
-    const handleFileUpload = async (event) => {
-        const file = event.target.files[0];
-        const formData = new FormData();
-        formData.append('files', file); // Ensure the key is 'files'
-
-        try {
-            const response = await axios.post('http://localhost:1337/api/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
-            });
-            console.log('File uploaded:', response.data);
-
-            // Update the filteredUser's MyPersonalFiles array with the uploaded file
-            const updatedFiles = [...filteredUser.MyPersonalFiles, response.data];
-            const updatedUser = { ...filteredUser, MyPersonalFiles: updatedFiles };
-            setAllUsers(prevUsers => prevUsers.map(u => u.username === user.username ? updatedUser : u));
-        } catch (error) {
-            console.error('Error uploading the file', error);
-        }
-    };
 
     return (
-        <div className="my-files-panel">
-            <h2 className="my-files-panel-header">Dosyalarım</h2>
-            <div className="my-folders">
-                <div className="my-folder" onClick={uploadMyFile}>Yükle</div>
-                {filteredUser.MyPersonalFiles.map((file, index) => (
-                    <div key={index} className="my-folder">
-                        <img className="my-folder-preview" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt="folder" />
-                        <p className="my-folder-name">{file.name}</p>
+        <div className="profile">
+            {isEditing ? (
+                <form className="profile-form" onSubmit={handleSave}>
+                    <div className="profile-image">
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleProfilePicChange}
+                        />
+                        <img className="profile-pic" src={formData.profilePic} alt="Profile" />
                     </div>
-                ))}
-            </div>
+
+                    <div className="profile-field">
+                        <label htmlFor="name">İsim Soyisim</label>
+                        <input
+                            className="input-for-labels"
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="İsminiz"
+                            value={formData.name}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label htmlFor="email">E-posta</label>
+                        <input
+                            className="input-for-labels"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="E-posta adresiniz"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label htmlFor="mobilePhone">Telefon</label>
+                        <input
+                            className="input-for-labels"
+                            type="tel"
+                            id="mobilePhone"
+                            name="mobilePhone"
+                            placeholder="Telefon numaranız"
+                            value={formData.mobilePhone}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label htmlFor="location">Konum</label>
+                        <input
+                            className="input-for-labels"
+                            type="text"
+                            id="location"
+                            name="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field-social">
+                        <label htmlFor="social1">Sosyal Medya</label>
+                        <input
+                            className="input-for-labels"
+                            type="text"
+                            id="social1"
+                            name="social1"
+                            placeholder="Link to social profile"
+                            value={formData.social1}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-buttons">
+                        <button className="my-profile-submit" type="submit">
+                            Kaydet
+                        </button>
+                        <button className="my-profile-cancel" type="button" onClick={handleCancel}>
+                            İptal Et
+                        </button>
+                    </div>
+                </form>
+            ) : (
+                <div className="profile-info">
+                    <div className="profile-image">
+                        <img
+                            className="profile-pic"
+                            src={savedData.profilePic ? `http://localhost:1337${savedData.profilePic}` : `http://localhost:1337${undefinedProfilePic}`}
+                            alt="Profile"
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">İsim Soyisim:</label>
+                        <p className="profile-field-paragraph">{savedData.name}</p>
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">E-posta:</label>
+                        <p className="profile-field-paragraph">{savedData.email}</p>
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">Telefon:</label>
+                        <p className="profile-field-paragraph">{savedData.mobilePhone}</p>
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">Konum:</label>
+                        <p className="profile-field-paragraph">{savedData.location}</p>
+                    </div>
+                    <div className="profile-field-social">
+                        <label className="profile-field-labels">Sosyal Medya:</label>
+                        <p className="profile-field-paragraph">{savedData.social1}</p>
+                    </div>
+                    <div className="buttons-for-profile-section">
+                        <button className="my-profile-edit" type="button" onClick={handleEdit}>
+                            Değiştir
+                        </button>
+                        <button className="my-profile-logout" type="button" onClick={handleLogout}>
+                            Çıkış Yap
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
-};
+}
 
-export default AboutMePage;
+export default MyProfile;

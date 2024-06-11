@@ -12,6 +12,26 @@
     color: $background-color;
     font-family: "Barlow", sans-serif;
 
+    .profile-info {
+        .profile-field {
+            flex-wrap: wrap;
+
+            .profile-field-paragraph {
+                word-break: break-all;
+
+            }
+        }
+
+        .profile-field-social {
+            flex-wrap: wrap;
+
+            .profile-field-paragraph {
+                word-break: break-all;
+
+            }
+        }
+    }
+
     .profile-image {
         margin: 10px;
 

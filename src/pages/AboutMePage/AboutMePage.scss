@@ -6,13 +6,14 @@
     width: 100%;
     height: 100vh;
     background-color: $background-color;
-    font-size: "Barlow", sans-serif;
+    font-family: "Barlow", sans-serif;
 
     .aboutme-page-row {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         padding: 20px;
+        background-color: $background-color;
     }
 }
 
