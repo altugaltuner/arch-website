@@ -9,10 +9,9 @@ function MyProfile({ user }) {
     const [formData, setFormData] = useState({
         name: "",
         location: "",
+        mobilePhone: "",
+        email: "",
         social1: "",
-        social2: "",
-        social3: "",
-        social4: ""
     });
     const [savedData, setSavedData] = useState(formData);
 
@@ -20,11 +19,10 @@ function MyProfile({ user }) {
         if (user) {
             const initialData = {
                 name: user.username || "",
-                location: user.location || "",
-                social1: user.social1 || "",
-                social2: user.social2 || "",
-                social3: user.social3 || "",
-                social4: user.social4 || ""
+                location: user.UserLocation || "",
+                mobilePhone: user.MobilePhone || "",
+                email: user.email || "",
+                social1: user.socialMedia || ""
             };
             setFormData(initialData);
             setSavedData(initialData);
@@ -79,6 +77,30 @@ function MyProfile({ user }) {
                         />
                     </div>
                     <div className="profile-field">
+                        <label htmlFor="email">E-posta</label>
+                        <input
+                            className="input-for-labels"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="E-posta adresiniz"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label htmlFor="mobilePhone">Telefon</label>
+                        <input
+                            className="input-for-labels"
+                            type="tel"
+                            id="mobilePhone"
+                            name="mobilePhone"
+                            placeholder="Telefon numaranız"
+                            value={formData.mobilePhone}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
                         <label htmlFor="location">Konum</label>
                         <input
                             className="input-for-labels"
@@ -90,37 +112,14 @@ function MyProfile({ user }) {
                         />
                     </div>
                     <div className="profile-field-social">
-                        <label>Sosyal Medya Hesaplarım</label>
+                        <label htmlFor="social1">Sosyal Medya</label>
                         <input
                             className="input-for-labels"
                             type="text"
+                            id="social1"
                             name="social1"
                             placeholder="Link to social profile"
                             value={formData.social1}
-                            onChange={handleChange}
-                        />
-                        <input
-                            className="input-for-labels"
-                            type="text"
-                            name="social2"
-                            placeholder="Link to social profile"
-                            value={formData.social2}
-                            onChange={handleChange}
-                        />
-                        <input
-                            className="input-for-labels"
-                            type="text"
-                            name="social3"
-                            placeholder="Link to social profile"
-                            value={formData.social3}
-                            onChange={handleChange}
-                        />
-                        <input
-                            className="input-for-labels"
-                            type="text"
-                            name="social4"
-                            placeholder="Link to social profile"
-                            value={formData.social4}
                             onChange={handleChange}
                         />
                     </div>
@@ -140,15 +139,20 @@ function MyProfile({ user }) {
                         <p className="profile-field-paragraph">{savedData.name}</p>
                     </div>
                     <div className="profile-field">
+                        <label className="profile-field-labels">E-posta:</label>
+                        <p className="profile-field-paragraph">{savedData.email}</p>
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">Telefon:</label>
+                        <p className="profile-field-paragraph">{savedData.mobilePhone}</p>
+                    </div>
+                    <div className="profile-field">
                         <label className="profile-field-labels">Konum:</label>
                         <p className="profile-field-paragraph">{savedData.location}</p>
                     </div>
                     <div className="profile-field-social">
-                        <label className="profile-field-labels">Sosyal Medya Hesaplarım:</label>
+                        <label className="profile-field-labels">Sosyal Medya:</label>
                         <p className="profile-field-paragraph">{savedData.social1}</p>
-                        <p className="profile-field-paragraph">{savedData.social2}</p>
-                        <p className="profile-field-paragraph">{savedData.social3}</p>
-                        <p className="profile-field-paragraph">{savedData.social4}</p>
                     </div>
                     <div className="buttons-for-profile-section">
                         <button className="my-profile-edit" type="button" onClick={handleEdit}>

@@ -57,11 +57,7 @@ function AboutMePage({ user }) {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('http://localhost:1337/api/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            const response = await axios.post('http://localhost:1337/api/upload', formData,);
             console.log('File uploaded:', response.data);
 
             // Update the filteredUser's MyPersonalFiles array with the uploaded file

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
-import "../MyActiveProjects/MyActiveProjects.scss";
-import axios from "axios";
+import axios from 'axios';
+import "./MyPersonalFiles.scss";
 
-function MyActiveProjects({ user }) {
+function AboutMePage({ user }) {
+
     const [allUsers, setAllUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Add a loading state
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=projects');
+                const response = await axios.get('http://localhost:1337/api/users?populate=MyPersonalFiles');
                 console.log("Fetched users:", response.data);
-                setAllUsers(response.data || []);
+                setAllUsers(response.data.data || []); // Adjust based on the actual structure of the response
             } catch (error) {
                 console.error('Error fetching the data', error);
+            } finally {
+                setIsLoading(false); // Set loading to false after fetching data
             }
         };
 
@@ -20,40 +24,67 @@ function MyActiveProjects({ user }) {
     }, []);
 
     useEffect(() => {
-        console.log("All Users:", allUsers);
+        console.log("All Users state updated:", allUsers);
     }, [allUsers]);
 
-    console.log("User:", user);
+    if (isLoading) {
+        return <div>Loading...</div>; // Show a loading message while data is being fetched
+    }
 
-    // Add a check for user being null or undefined
-    if (!user || !user.username) {
+    if (!user) {
         return <div>No user data available.</div>;
     }
 
-    const filteredUser = allUsers.filter(u => u.username === user.username);
-    console.log("Filtered User:", filteredUser);
+    const filteredUser = allUsers.find(u => u.username === user.username);
 
-    const userElements = filteredUser.map(u => (
-        <div className="my-active-project-div" key={u.id}>
-            <p>{u.username}</p>
-            <h2 className="my-active-project-list-header">Dahil Olduğum Projeler</h2>
-            <div className="my-active-project-list">
-                {u.projects.map(p => (
-                    <p className="my-active-project-list-element" key={p.id}>{p.projectName}</p>
+    if (!filteredUser || !filteredUser.MyPersonalFiles) {
+        return <div>No personal files available for this user.</div>;
+    }
+
+    const uploadMyFile = async () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*'; // Allow only image files
+        fileInput.addEventListener('change', handleFileUpload);
+        fileInput.click();
+    };
+
+    const handleFileUpload = async (event) => {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append('files', file); // Ensure the key is 'files'
+
+        try {
+            const response = await axios.post('http://localhost:1337/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            console.log('File uploaded:', response.data);
+
+            // Update the filteredUser's MyPersonalFiles array with the uploaded file
+            const updatedFiles = [...filteredUser.MyPersonalFiles, response.data];
+            const updatedUser = { ...filteredUser, MyPersonalFiles: updatedFiles };
+            setAllUsers(prevUsers => prevUsers.map(u => u.username === user.username ? updatedUser : u));
+        } catch (error) {
+            console.error('Error uploading the file', error);
+        }
+    };
+
+    return (
+        <div className="my-files-panel">
+            <h2 className="my-files-panel-header">Dosyalarım</h2>
+            <div className="my-folders">
+                <div className="my-folder" onClick={uploadMyFile}>Yükle</div>
+                {filteredUser.MyPersonalFiles.map((file, index) => (
+                    <div key={index} className="my-folder">
+                        <img className="my-folder-preview" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt="folder" />
+                        <p className="my-folder-name">{file.name}</p>
+                    </div>
                 ))}
             </div>
         </div>
-    ));
-
-    return (
-        <div className="myactive-projects-main">
-            <div className="active-projects">
-                <div className="active-projects-container">
-                    {userElements}
-                </div>
-            </div>
-        </div>
     );
-}
+};
 
-export default MyActiveProjects;
+export default AboutMePage;
