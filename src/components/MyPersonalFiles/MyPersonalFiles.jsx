@@ -5,15 +5,20 @@ import "./MyPersonalFiles.scss";
 function AboutMePage({ user }) {
 
     const [allUsers, setAllUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Add a loading state
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/users?populate=MyPersonalFiles');
                 console.log("Fetched users:", response.data);
-                setAllUsers(response.data || []);
+                setAllUsers(response.data);
+                console.log("All Users:", allUsers);
+
             } catch (error) {
                 console.error('Error fetching the data', error);
+            } finally {
+                setIsLoading(false); // Set loading to false after fetching data
             }
         };
 
@@ -21,33 +26,33 @@ function AboutMePage({ user }) {
     }, []);
 
     useEffect(() => {
-        console.log("All Users:", allUsers);
+        console.log("All Users state updated:", allUsers);
     }, [allUsers]);
 
-    if (!user || !user.MyPersonalFiles) {
+    if (isLoading) {
+        return <div>Loading...</div>; // Show a loading message while data is being fetched
+    }
+
+    if (!user) {
         return <div>No user data available.</div>;
+    }
+
+    const filteredUser = allUsers.find(u => u.username === user.username);
+
+    if (!filteredUser || !filteredUser.MyPersonalFiles) {
+        return <div>No personal files available for this user.</div>;
     }
 
     return (
         <div className="my-files-panel">
             <h2 className="my-files-panel-header">Dosyalarım</h2>
             <div className="my-folders">
-                <div className="my-folder">
-                    <img className="my-folder-preview" src="path/to/windows-folder-logo.png" alt="folder" />
-                    <p className="my-folder-name">Klasör 1</p>
-                </div>
-                <div className="my-folder">
-                    <img className="my-folder-preview" src="path/to/windows-folder-logo.png" alt="folder" />
-                    <p className="my-folder-name">Klasör 2</p>
-                </div>
-                <div className="my-folder">
-                    <img className="my-folder-preview" src="path/to/windows-folder-logo.png" alt="folder" />
-                    <p className="my-folder-name">Klasör 3</p>
-                </div>
-                <div className="my-folder">
-                    <img className="my-folder-preview" src="path/to/windows-folder-logo.png" alt="folder" />
-                    <p className="my-folder-name">Klasör 4</p>
-                </div>
+                {filteredUser.MyPersonalFiles.map((file, index) => (
+                    <div key={index} className="my-folder">
+                        <img className="my-folder-preview" src={file.formats.thumbnail.url} alt="folder" />
+                        <p className="my-folder-name">{file.name}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );
