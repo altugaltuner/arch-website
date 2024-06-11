@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./MyProfile.scss";
-import { useAuth } from "../../components/AuthProvider";
-import profilePic from "../../assets/pp.jpg";
 
 function MyProfile({ user }) {
-    const auth = useAuth();
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
+        profilePic: "",
         name: "",
         location: "",
         mobilePhone: "",
@@ -18,6 +16,7 @@ function MyProfile({ user }) {
     useEffect(() => {
         if (user) {
             const initialData = {
+                profilePic: user.profilePic || "",
                 name: user.username || "",
                 location: user.UserLocation || "",
                 mobilePhone: user.MobilePhone || "",
@@ -53,17 +52,33 @@ function MyProfile({ user }) {
         window.location.href = "/login";
     };
 
+    const handleProfilePicChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setFormData((prevData) => ({ ...prevData, profilePic: reader.result }));
+        };
+        reader.readAsDataURL(file);
+    };
+
+
     if (!user) {
         return <div>Loading...</div>;
     }
 
     return (
         <div className="profile">
-            <div className="profile-image">
-                <img className="profile-pic" src={profilePic} alt="Profile" />
-            </div>
             {isEditing ? (
                 <form className="profile-form" onSubmit={handleSave}>
+                    <div className="profile-image">
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleProfilePicChange}
+                        />
+                        <img className="profile-pic" src={formData.profilePic} alt="Profile" />
+                    </div>
+
                     <div className="profile-field">
                         <label htmlFor="name">İsim Soyisim</label>
                         <input
@@ -134,6 +149,9 @@ function MyProfile({ user }) {
                 </form>
             ) : (
                 <div className="profile-info">
+                    <div className="profile-image">
+                        <img className="profile-pic" src={`http://localhost:1337${savedData.profilePic.url}`} alt="Profile" />
+                    </div>
                     <div className="profile-field">
                         <label className="profile-field-labels">İsim Soyisim:</label>
                         <p className="profile-field-paragraph">{savedData.name}</p>
