@@ -3,6 +3,12 @@
 .myactive-projects-main {
     width: 33%;
     font-family: "Barlow", sans-serif;
+    background-color: $grey;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    font-family: "Barlow", sans-serif;
 
     .active-projects {
 
@@ -13,6 +19,20 @@
             margin: 20px;
             flex-wrap: wrap;
 
+            .my-active-project-div {
+                color: $div-color;
+
+                .my-active-project-list-header {}
+
+                .my-active-project-list {
+                    display: flex;
+                    flex-direction: column;
+
+                    gap: 10px;
+
+                    .my-active-project-list-element {}
+                }
+            }
         }
     }
 }

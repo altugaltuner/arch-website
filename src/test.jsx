@@ -1,120 +1,59 @@
-import "./SignupPage.scss";
-import { useState } from "react";
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "../MyActiveProjects/MyActiveProjects.scss";
+import axios from "axios";
 
-import eyeShow from "../../assets/eye-show.svg";
-import eyeHide from "../../assets/eye-hide.png";
+function MyActiveProjects({ user }) {
+    const [allUsers, setAllUsers] = useState([]);
 
-function SignupPage() {
-    const [formData, setFormData] = useState({
-        fullName: "",
-        phoneNumber: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
-
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const signupUser = async (e) => {
-        e.preventDefault();
-
-        const { fullName, phoneNumber, email, password, confirmPassword } = formData;
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
-
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{6,}$/;
-        if (!passwordRegex.test(password)) {
-            alert(
-                "Password must be minimum 6 characters, at least one uppercase letter, one lowercase letter and one number"
-            );
-            return;
-        }
-
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/local/register`, {
-                username: fullName,
-                email,
-                password
-            });
-
-            if (response.data.jwt) {
-                localStorage.setItem('token', response.data.jwt);
-                alert("Registration successful. You can now log in.");
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:1337/api/users?populate=projects');
+                console.log("Fetched users:", response.data);
+                setAllUsers(response.data || []);
+            } catch (error) {
+                console.error('Error fetching the data', error);
             }
-        } catch (error) {
-            console.error('Error during registration:', error);
-            alert("Error during registration. Please try again.");
-        }
-    };
+        };
 
-    function handleChange(event) {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-        });
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        console.log("All Users:", allUsers);
+    }, [allUsers]);
+
+    console.log("User:", user);
+
+    // Add a check for user being null or undefined
+    if (!user || !user.username) {
+        return <div>No user data available.</div>;
     }
 
+    const filteredUser = allUsers.filter(u => u.username === user.username);
+    console.log("Filtered User:", filteredUser);
+
+    const userElements = filteredUser.map(u => (
+        <div className="my-active-project-div" key={u.id}>
+            <p>{u.username}</p>
+            <h2 className="my-active-project-list-header">Dahil Olduğum Projeler</h2>
+            <div className="my-active-project-list">
+                {u.projects.map(p => (
+                    <p className="my-active-project-list-element" key={p.id}>{p.projectName}</p>
+                ))}
+            </div>
+        </div>
+    ));
+
     return (
-        <div className="test">
-            <main className="signup-page">
-                <div className="signup-main-div">
-                    <h1>Signup Page</h1>
-                    <form className="login-form" onSubmit={(e) => signupUser(e)}>
-                        <input
-                            type="text"
-                            placeholder="Full Name"
-                            name="fullName"
-                            onChange={handleChange}
-                            autoComplete="name"
-                        />
-                        <input
-                            type="tel"
-                            placeholder="Phone number"
-                            name="phoneNumber"
-                            onChange={handleChange}
-                            autoComplete="tel"
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            name="email"
-                            onChange={handleChange}
-                            autoComplete="email"
-                        />
-                        <div className="password-section-signup">
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                placeholder="Password"
-                                name="password"
-                                onChange={handleChange}
-                                autoComplete="new-password"
-                            />
-                            <button type="button" onClick={togglePasswordVisibility} className="toggle-password-visibility">
-                                {showPassword ? <img className="eye-logo" src={eyeHide} alt="Hide" /> : <img src={eyeShow} alt="Show" className="eye-logo" />}
-                            </button>
-                        </div>
-                        <div className="password-section-signup">
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                placeholder="Confirm Password"
-                                name="confirmPassword"
-                                onChange={handleChange}
-                                autoComplete="new-password"
-                            />
-                        </div>
-                        <input className="signup-btn" type="submit" value="Sign Up" />
-                    </form>
+        <div className="myactive-projects-main">
+            <div className="active-projects">
+                <div className="active-projects-container">
+                    {userElements}
                 </div>
-            </main>
+            </div>
         </div>
     );
 }
 
-export default SignupPage;
+export default MyActiveProjects;
