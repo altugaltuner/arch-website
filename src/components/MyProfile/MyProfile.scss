@@ -16,6 +16,11 @@
         .profile-field {
             flex-wrap: wrap;
 
+            .profile-field-labels {
+                font-weight: 600;
+                width: 30%;
+            }
+
             .profile-field-paragraph {
                 word-break: break-all;
 
@@ -24,6 +29,11 @@
 
         .profile-field-social {
             flex-wrap: wrap;
+
+            .profile-field-labels {
+                font-weight: 600;
+                width: 30%;
+            }
 
             .profile-field-paragraph {
                 word-break: break-all;
