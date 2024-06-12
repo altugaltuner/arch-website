@@ -10,6 +10,8 @@ function ProjectsMainPage() {
     console.log(user);
 
     const [companyProjects, setCompanyProjects] = useState([]);
+    const [deleteIcon, setDeleteIcon] = useState([]);
+    const [editIcon, setEditIcon] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newProject, setNewProject] = useState({
@@ -38,6 +40,35 @@ function ProjectsMainPage() {
             getRoles();
         }
     }, []);
+
+    async function getDeleteIcon() {
+        try {
+            const response = await axios.get('http://localhost:1337/api/website-uis/7?populate=*');
+            console.log("Delete icon response:", response.data.data);
+            setDeleteIcon(response.data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getDeleteIcon();
+    }, []);
+
+    async function getEditIcon() {
+        try {
+            const response = await axios.get('http://localhost:1337/api/website-uis/8?populate=*');
+            console.log("Edit icon response:", response.data.data);
+            setEditIcon(response.data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getEditIcon();
+    }, []);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -102,6 +133,18 @@ function ProjectsMainPage() {
         }
     };
 
+    function deleteProjectFromDatabase(id) {
+        axios.delete(`http://localhost:1337/api/projects/${id}`)
+            .then((response) => {
+                console.log(response);
+                console.log("Project deleted successfully");
+                setCompanyProjects(companyProjects.filter(project => project.id !== id));
+            })
+            .catch((error) => {
+                console.error("Error deleting project:", error);
+            });
+    }
+
     return (
         <div className="projects-main-page">
             <Navigation />
@@ -110,6 +153,13 @@ function ProjectsMainPage() {
                     companyProjects.map((project) => (
                         <div className="project-cards" key={project.id}>
                             <Link className="project-card" to={`/projects/${project.id}`}>
+                                <img
+                                    className="project-card-delete-btn"
+                                    src={`http://localhost:1337${deleteIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`}
+                                    alt=""
+                                    onClick={() => deleteProjectFromDatabase(project.id)}
+                                />
+                                <img className="project-card-edit-btn" src={`http://localhost:1337${editIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`} alt="" />
                                 <p className="project-card-name">
                                     {project.attributes.projectName}
                                 </p>

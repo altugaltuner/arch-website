@@ -25,6 +25,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
 
+        :hover {
+            // transition: 0.1s;
+            transform: scale(1.02);
+        }
+
         .project-cards {
             display: flex;
             flex-direction: row;
@@ -32,6 +37,7 @@
 
             .project-card {
                 display: flex;
+                position: relative;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -43,6 +49,22 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
                 cursor: pointer;
 
+                .project-card-delete-btn {
+                    display: none;
+                    position: absolute;
+                    width: 20px;
+                    right: 0;
+                    top: 0;
+                }
+
+                .project-card-edit-btn {
+                    display: none;
+                    position: absolute;
+                    width: 20px;
+                    right: 20px;
+                    top: 0;
+                }
+
                 .project-navbar-photos {
                     width: 200px;
                     border-radius: 10px;
@@ -52,6 +74,21 @@
                     font-size: 20px;
                     font-weight: 500;
                     color: $div-color;
+                }
+            }
+
+            :hover {
+                //transition: 0.2s;
+                transform: scale(1.02);
+
+                .project-card-delete-btn {
+                    display: block;
+                    position: absolute;
+                }
+
+                .project-card-edit-btn {
+                    display: block;
+                    position: absolute;
                 }
             }
         }

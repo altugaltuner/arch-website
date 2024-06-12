@@ -3,7 +3,6 @@ import "./LoginPage.scss";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
-
 import eyeShow from "../../assets/eye-show.svg";
 import eyeHide from "../../assets/eye-hide.png";
 
