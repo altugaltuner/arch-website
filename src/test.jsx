@@ -1,238 +1,204 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import "./MyProfile.scss";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import "./ProjectsMainPage.scss";
-import Navigation from "../../components/Navigation/Navigation";
-import { useAuth } from "../../components/AuthProvider";
 
-function ProjectsMainPage() {
-    const { user } = useAuth();
-    console.log(user);
-
-    const [companyProjects, setCompanyProjects] = useState([]);
-    const [deleteIcon, setDeleteIcon] = useState([]);
-    const [editIcon, setEditIcon] = useState([]);
-    const [roles, setRoles] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [newProject, setNewProject] = useState({
-        projectName: "",
-        projectCoverPhoto: null,
+function MyProfile({ user }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState({
+        profilePic: "",
+        name: "",
+        location: "",
+        mobilePhone: "",
+        email: "",
+        social1: "",
     });
+    const [savedData, setSavedData] = useState(formData);
 
-    async function getRoles() {
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                console.error("No token found in localStorage");
-                return;
-            }
-
-            const response = await axios.get("http://localhost:1337/api/accesses");
-            console.log("Roles response:", response.data); // API yanıtını kontrol et
-            setRoles(response.data.data);
-        } catch (error) {
-            console.error("Error fetching roles:", error);
-        }
-    }
-
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            getRoles();
-        }
-    }, []);
-
-    async function getDeleteIcon() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/website-uis/7?populate=*');
-            console.log("Delete icon response:", response.data.data);
-            setDeleteIcon(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getDeleteIcon();
-    }, []);
-
-    async function getEditIcon() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/website-uis/8?populate=*');
-            console.log("Edit icon response:", response.data.data);
-            setEditIcon(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getEditIcon();
-    }, []);
-
+    const [undefinedProfilePic, setUndefinedProfilePic] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const token = localStorage.getItem("token");
-                if (!token) {
-                    console.error("No token found in localStorage");
-                    return;
-                }
-
-                const response = await axios.get(
-                    "http://localhost:1337/api/projects?populate=projectCoverPhoto"
-                );
-                console.log("Projects response:", response.data); // API yanıtını kontrol et
-                setCompanyProjects(response.data.data);
+                const response = await axios.get('http://localhost:1337/api/website-uis/5?populate=*');
+                console.log("Fetched undefined profile pic:", response.data);
+                setUndefinedProfilePic(response.data.data.attributes.LogoImg.data[0].attributes.url || "");
             } catch (error) {
-                console.error("Error fetching the data:", error);
+                console.error('Error fetching the data', error);
             }
         };
 
-        if (localStorage.getItem("token")) {
-            fetchData();
-        }
+        fetchData();
     }, []);
 
-    const handleInputChange = (e) => {
+    useEffect(() => {
+        if (user) {
+            const initialData = {
+                profilePic: user.profilePic || "",
+                name: user.username || "",
+                location: user.UserLocation || "",
+                mobilePhone: user.MobilePhone || "",
+                email: user.email || "",
+                social1: user.socialMedia || ""
+            };
+            setFormData(initialData);
+            setSavedData(initialData);
+        }
+    }, [user]);
+
+    const handleChange = (e) => {
         const { name, value } = e.target;
-        setNewProject({ ...newProject, [name]: value });
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const handleFileChange = (e) => {
-        setNewProject({ ...newProject, projectCoverPhoto: e.target.files[0] });
+    const handleSave = (e) => {
+        e.preventDefault();
+        setSavedData(formData);
+        setIsEditing(false);
     };
 
-    const handleSubmit = async () => {
-        const formData = new FormData();
-        formData.append(
-            "data",
-            JSON.stringify({ projectName: newProject.projectName })
-        );
-        if (newProject.projectCoverPhoto) {
-            formData.append("files.projectCoverPhoto", newProject.projectCoverPhoto);
-        }
-
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                console.error("No token found in localStorage");
-                return;
-            }
-
-            await axios.post("http://localhost:1337/api/projects", formData);
-            setShowModal(false);
-            setNewProject({ projectName: "", projectCoverPhoto: null });
-            // Refetch projects after adding a new one
-            const response = await axios.get(
-                "http://localhost:1337/api/projects?populate=projectCoverPhoto",
-            );
-            setCompanyProjects(response.data.data);
-        } catch (error) {
-            console.error("Error creating a new project:", error);
-        }
+    const handleEdit = () => {
+        setIsEditing(true);
     };
 
-    function deleteProjectFromDatabase(id) {
-        axios.delete(`http://localhost:1337/api/projects/${id}`)
-            .then((response) => {
-                console.log(response);
-                console.log("Project deleted successfully");
-                setCompanyProjects(companyProjects.filter(project => project.id !== id));
-            })
-            .catch((error) => {
-                console.error("Error deleting project:", error);
-            });
+    const handleCancel = () => {
+        setFormData(savedData);
+        setIsEditing(false);
+    };
+
+    const handleLogout = () => {
+        window.location.href = "/login";
+    };
+
+    const handleProfilePicChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setFormData((prevData) => ({ ...prevData, profilePic: reader.result }));
+        };
+        reader.readAsDataURL(file);
+    };
+
+    if (!user) {
+        return <div>Loading...</div>;
     }
 
     return (
-        <div className="projects-main-page">
-            <Navigation />
-            <div className="projects-cards-main-row">
-                {companyProjects.length > 0 ? (
-                    companyProjects.map((project) => (
-                        <div className="project-cards" key={project.id}>
-                            <Link className="project-card" to={`/projects/${project.id}`}>
-                                <img
-                                    className="project-card-delete-btn"
-                                    src={`http://localhost:1337${deleteIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`}
-                                    alt=""
-                                    onClick={() => deleteProjectFromDatabase(project.id)}
-                                />
-                                <img className="project-card-edit-btn" src={`http://localhost:1337${editIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`} alt="" />
-                                <p className="project-card-name">
-                                    {project.attributes.projectName}
-                                </p>
-                                {project.attributes.projectCoverPhoto &&
-                                    project.attributes.projectCoverPhoto.data && (
-                                        <img
-                                            className="project-navbar-photos"
-                                            src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
-                                            alt=""
-                                        />
-                                    )}
-                            </Link>
-                        </div>
-                    ))
-                ) : (
-                    <p>No projects found</p>
-                )}
-
-                {roles.length > 0 ? (
-                    roles.map(
-                        (role) =>
-                            role.attributes.role === "Admin" && (
-                                <button
-                                    className="add-project-btn"
-                                    onClick={() => setShowModal(true)}
-                                >
-                                    Proje Ekle
-                                </button>
-                            )
-                    )
-                ) : (
-                    <p>No roles found</p>
-                )}
-            </div>
-
-            {showModal && (
-                <div className="add-new-project-modal">
-                    <div className="add-new-project-modal-content">
-                        <span
-                            className="new-project-modal-close"
-                            onClick={() => setShowModal(false)}
-                        >
-                            X
-                        </span>
-                        <h2 className="new-project-adding-header">Yeni Proje Ekle</h2>
+        <div className="profile">
+            {isEditing ? (
+                <form className="profile-form" onSubmit={handleSave}>
+                    <div className="profile-image">
                         <input
-                            className="project-name-input"
-                            type="text"
-                            name="projectName"
-                            placeholder="Proje Adı"
-                            value={newProject.projectName}
-                            onChange={handleInputChange}
-                        />
-                        <input
-                            className="project-cover-photo-input"
                             type="file"
-                            name="projectCoverPhoto"
-                            onChange={handleFileChange}
+                            accept="image/*"
+                            onChange={handleProfilePicChange}
                         />
-                        <div className="adding-modal-buttons-row">
-                            <button
-                                className="adding-modal-button-create"
-                                onClick={handleSubmit}
-                            >
-                                Oluştur
-                            </button>
-                            <button
-                                className="adding-modal-button-abort"
-                                onClick={() => setShowModal(false)}
-                            >
-                                İptal
-                            </button>
-                        </div>
+                        <img className="profile-pic" src={formData.profilePic} alt="Profile" />
+                    </div>
+
+                    <div className="profile-field">
+                        <label htmlFor="name">İsim Soyisim</label>
+                        <input
+                            className="input-for-labels"
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="İsminiz"
+                            value={formData.name}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label htmlFor="email">E-posta</label>
+                        <input
+                            className="input-for-labels"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="E-posta adresiniz"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label htmlFor="mobilePhone">Telefon</label>
+                        <input
+                            className="input-for-labels"
+                            type="tel"
+                            id="mobilePhone"
+                            name="mobilePhone"
+                            placeholder="Telefon numaranız"
+                            value={formData.mobilePhone}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label htmlFor="location">Konum</label>
+                        <input
+                            className="input-for-labels"
+                            type="text"
+                            id="location"
+                            name="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-field-social">
+                        <label htmlFor="social1">Sosyal Medya</label>
+                        <input
+                            className="input-for-labels"
+                            type="text"
+                            id="social1"
+                            name="social1"
+                            placeholder="Link to social profile"
+                            value={formData.social1}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="profile-buttons">
+                        <button className="my-profile-submit" type="submit">
+                            Kaydet
+                        </button>
+                        <button className="my-profile-cancel" type="button" onClick={handleCancel}>
+                            İptal Et
+                        </button>
+                    </div>
+                </form>
+            ) : (
+                <div className="profile-info">
+                    <div className="profile-image">
+                        <img
+                            className="profile-pic"
+                            src={savedData.profilePic ? savedData.profilePic : `http://localhost:1337${undefinedProfilePic}`}
+                            alt="Profile"
+                        />
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">İsim Soyisim:</label>
+                        <p className="profile-field-paragraph">{savedData.name}</p>
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">E-posta:</label>
+                        <p className="profile-field-paragraph">{savedData.email}</p>
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">Telefon:</label>
+                        <p className="profile-field-paragraph">{savedData.mobilePhone}</p>
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-field-labels">Konum:</label>
+                        <p className="profile-field-paragraph">{savedData.location}</p>
+                    </div>
+                    <div className="profile-field-social">
+                        <label className="profile-field-labels">Sosyal Medya:</label>
+                        <p className="profile-field-paragraph">{savedData.social1}</p>
+                    </div>
+                    <div className="buttons-for-profile-section">
+                        <button className="my-profile-edit" type="button" onClick={handleEdit}>
+                            Değiştir
+                        </button>
+                        <button className="my-profile-logout" type="button" onClick={handleLogout}>
+                            Çıkış Yap
+                        </button>
                     </div>
                 </div>
             )}
@@ -240,4 +206,4 @@ function ProjectsMainPage() {
     );
 }
 
-export default ProjectsMainPage;
+export default MyProfile;

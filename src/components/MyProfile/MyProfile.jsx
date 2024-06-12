@@ -13,6 +13,7 @@ function MyProfile({ user }) {
         social1: "",
     });
     const [savedData, setSavedData] = useState(formData);
+    console.log("User:", user);
 
     const [undefinedProfilePic, setUndefinedProfilePic] = useState("");
 
@@ -168,7 +169,7 @@ function MyProfile({ user }) {
                     <div className="profile-image">
                         <img
                             className="profile-pic"
-                            src={savedData.profilePic ? `http://localhost:1337${savedData.profilePic}` : `http://localhost:1337${undefinedProfilePic}`}
+                            src={savedData.profilePic ? `http://localhost:1337${savedData.profilePic.url}` : `http://localhost:1337${undefinedProfilePic}`}
                             alt="Profile"
                         />
                     </div>
