@@ -18,8 +18,9 @@
             text-align: center;
             font-weight: 500;
             margin-bottom: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             background-color: $grey;
-            border-radius: 10px;
             padding: 10px;
             color: $div-color;
         }
@@ -36,7 +37,7 @@
                     .table-header {
                         text-align: left;
                         padding: 10px;
-                        font-weight: 500;
+                        font-weight: 600;
                     }
                 }
             }
@@ -52,7 +53,7 @@
                         font-size: 18px;
 
                         .project-name {
-                            font-weight: bold;
+                            font-weight: 600;
                             cursor: pointer;
                         }
 

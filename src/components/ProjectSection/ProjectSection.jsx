@@ -7,6 +7,7 @@ function ProjectSection({ clickedProject }) {
     const [roles, setRoles] = useState([]);
     const [deleteIcon, setDeleteIcon] = useState([]);
     const [editIcon, setEditIcon] = useState([]);
+    const [addIcon, setAddIcon] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newFolder, setNewFolder] = useState({
         projectFolderName: ""
@@ -38,6 +39,20 @@ function ProjectSection({ clickedProject }) {
 
     useEffect(() => {
         getEditIcon();
+    }, []);
+
+    async function getAddIcon() {
+        try {
+            const response = await axios.get('http://localhost:1337/api/website-uis/9?populate=*');
+            console.log("Edit icon response:", response.data.data);
+            setAddIcon(response.data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getAddIcon();
     }, []);
 
 
@@ -122,6 +137,7 @@ function ProjectSection({ clickedProject }) {
                     onClick={() => setShowModal(true)} // Show the modal directly on button click
                 >
                     Grup Oluştur
+                    <img className="project-folder-add-logo" src={`http://localhost:1337${addIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`} alt="" />
                 </button>
             ))}
             {filteredFolders && filteredFolders.length > 0 ? (

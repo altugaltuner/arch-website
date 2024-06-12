@@ -15,6 +15,8 @@ const Activities = () => {
             }
         };
 
+
+
         fetchData();
     }, []);
 
@@ -27,7 +29,7 @@ const Activities = () => {
                         <tr className="table-header-row">
                             <th className="table-header">Proje Adı</th>
                             <th className="table-header">Revize Sahibi</th>
-                            <th className="table-header">Paylaşılan Gruplar</th>
+                            <th className="table-header">Grup</th>
                             <th className="table-header">Tarih</th>
                         </tr>
                     </thead>
@@ -51,12 +53,9 @@ const Activities = () => {
                                     </div>
                                 </td>
                                 <td className="table-data">
-                                    {activity.attributes.professions?.data?.map((profession, index) => (
-                                        <div key={index} className="table-data-group">
-                                            <span className="table-data-bullet"></span>
-                                            {profession.attributes.professionName}
-                                        </div>
-                                    )) || 'Paylaşılan grup yok'}
+                                    <div className="revise-owner">
+                                        {activity.attributes.group?.data?.attributes?.groupName || 'Grup yok'}
+                                    </div>
                                 </td>
                                 <td className="table-data table-data-fordate">
                                     <div className="table-data-date">

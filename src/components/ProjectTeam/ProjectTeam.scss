@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .project-teams-container {
     display: flex;
     flex-direction: column;
@@ -32,7 +34,7 @@
 
     .team-card {
         background-color: #f4f4f4;
-        padding: 20px;
+        padding: 10px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
@@ -41,6 +43,8 @@
         .team-title {
             font-size: 18px;
             margin: 10px 0;
+            font-weight: 500;
+            color: $div-color;
         }
 
         .team-images {
