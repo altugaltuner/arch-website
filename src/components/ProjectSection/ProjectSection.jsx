@@ -5,10 +5,41 @@ import "./ProjectSection.scss";
 function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
+    const [deleteIcon, setDeleteIcon] = useState([]);
+    const [editIcon, setEditIcon] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newFolder, setNewFolder] = useState({
         projectFolderName: ""
     });
+
+    async function getDeleteIcon() {
+        try {
+            const response = await axios.get('http://localhost:1337/api/website-uis/7?populate=*');
+            console.log("Delete icon response:", response.data.data);
+            setDeleteIcon(response.data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getDeleteIcon();
+    }, []);
+
+    async function getEditIcon() {
+        try {
+            const response = await axios.get('http://localhost:1337/api/website-uis/8?populate=*');
+            console.log("Edit icon response:", response.data.data);
+            setEditIcon(response.data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getEditIcon();
+    }, []);
+
 
     async function getRoles() {
         try {
@@ -78,6 +109,11 @@ function ProjectSection({ clickedProject }) {
         // Implement the edit functionality here
     }
 
+    function openInsideFolder(id) {
+        // Implement the functionality to open the folder here
+        console.log(`Opening folder with ID: ${id}`);
+    }
+
     return (
         <div className="project-folders">
             {roles.map(role => role.attributes.role === "Admin" && (
@@ -90,7 +126,15 @@ function ProjectSection({ clickedProject }) {
             ))}
             {filteredFolders && filteredFolders.length > 0 ? (
                 filteredFolders.map((folder) => (
-                    <div className="project-folder" key={folder.id}>
+                    <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder.id)}>
+                        <img
+                            className="file-card-delete-btn"
+                            src={`http://localhost:1337${deleteIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`}
+                            alt=""
+                            onClick={() => handleDeleteFolder(folder.id)}
+                        />
+                        <img className="file-card-edit-btn" src={`http://localhost:1337${editIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`} alt="" />
+
                         <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
                         <img
                             className="project-folder-image"
