@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from "react";
-import "./MyProfile.scss";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from "react";
+import axios from 'axios';
+import "./MyPersonalFiles.scss";
 
-function MyProfile({ user }) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({
-        profilePic: "",
-        name: "",
-        location: "",
-        mobilePhone: "",
-        email: "",
-        social1: "",
-    });
-    const [savedData, setSavedData] = useState(formData);
-
-    const [undefinedProfilePic, setUndefinedProfilePic] = useState("");
+function AboutMePage({ user }) {
+    const [allUsers, setAllUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/website-uis/5?populate=*');
-                console.log("Fetched undefined profile pic:", response.data);
-                setUndefinedProfilePic(response.data.data.attributes.LogoImg.data[0].attributes.url || "");
+                const response = await axios.get('http://localhost:1337/api/users?populate=MyPersonalFiles');
+                console.log("Fetched users:", response.data);
+                setAllUsers(response.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
+            } finally {
+                setIsLoading(false); // Set loading to false after fetching data
             }
         };
 
@@ -31,179 +24,98 @@ function MyProfile({ user }) {
     }, []);
 
     useEffect(() => {
-        if (user) {
-            const initialData = {
-                profilePic: user.profilePic || "",
-                name: user.username || "",
-                location: user.UserLocation || "",
-                mobilePhone: user.MobilePhone || "",
-                email: user.email || "",
-                social1: user.socialMedia || ""
-            };
-            setFormData(initialData);
-            setSavedData(initialData);
-        }
-    }, [user]);
+        console.log("All Users state updated:", allUsers);
+    }, [allUsers]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
-    const handleSave = (e) => {
-        e.preventDefault();
-        setSavedData(formData);
-        setIsEditing(false);
-    };
-
-    const handleEdit = () => {
-        setIsEditing(true);
-    };
-
-    const handleCancel = () => {
-        setFormData(savedData);
-        setIsEditing(false);
-    };
-
-    const handleLogout = () => {
-        window.location.href = "/login";
-    };
-
-    const handleProfilePicChange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setFormData((prevData) => ({ ...prevData, profilePic: reader.result }));
-        };
-        reader.readAsDataURL(file);
-    };
-
-    if (!user) {
-        return <div>Loading...</div>;
+    if (isLoading) {
+        return <div>Loading...</div>; // Show a loading message while data is being fetched
     }
 
-    return (
-        <div className="profile">
-            {isEditing ? (
-                <form className="profile-form" onSubmit={handleSave}>
-                    <div className="profile-image">
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleProfilePicChange}
-                        />
-                        <img className="profile-pic" src={formData.profilePic} alt="Profile" />
-                    </div>
+    if (!user) {
+        return <div>No user data available.</div>;
+    }
 
-                    <div className="profile-field">
-                        <label htmlFor="name">İsim Soyisim</label>
-                        <input
-                            className="input-for-labels"
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="İsminiz"
-                            value={formData.name}
-                            onChange={handleChange}
-                        />
+    const filteredUser = allUsers.find(u => u.username === user.username);
+
+    if (!filteredUser || !filteredUser.MyPersonalFiles) {
+        return <div>No personal files available for this user.</div>;
+    }
+
+    const handleFileUpload = async (event) => {
+        const file = event.target.files[0];
+        if (!file) {
+            console.error('No file selected');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('files', file); // Ensure the field name matches what the API expects
+
+        try {
+            const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('File uploaded:', uploadResponse.data);
+
+            // Assuming the uploadResponse.data returns an array of files, and we are interested in the first one
+            const uploadedFile = uploadResponse.data[0];
+
+            // Update the user's MyPersonalFiles field with the new file
+            const updatedFiles = [...filteredUser.MyPersonalFiles, uploadedFile];
+            const updateUserResponse = await axios.put(`http://localhost:1337/api/users/${filteredUser.id}`, {
+                MyPersonalFiles: updatedFiles
+            });
+
+            console.log('User updated with new file:', updateUserResponse.data);
+
+            // Update the state with the updated user
+            const updatedUser = { ...filteredUser, MyPersonalFiles: updatedFiles };
+            setAllUsers(prevUsers => prevUsers.map(u => u.username === user.username ? updatedUser : u));
+        } catch (error) {
+            if (error.response) {
+                // Server responded with a status other than 200 range
+                console.error('Error uploading the file', error.response.data);
+            } else if (error.request) {
+                // Request was made but no response received
+                console.error('Error uploading the file', error.request);
+            } else {
+                // Something happened in setting up the request
+                console.error('Error uploading the file', error.message);
+            }
+        }
+    };
+
+    const uploadMyFile = () => {
+        fileInputRef.current.click(); // Trigger a click event on the file input element
+    };
+
+    return (
+        <div className="my-files-panel">
+            <h2 className="my-files-panel-header">Dosyalarım</h2>
+            <div className="my-folders">
+                <div className="my-folder" onClick={uploadMyFile}>Yükle</div>
+                {filteredUser.MyPersonalFiles.map((file, index) => (
+                    <div key={index} className="my-folder">
+                        {file.formats && file.formats.thumbnail ? (
+                            <img className="my-folder-preview" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt="folder" />
+                        ) : (
+                            <div className="my-folder-preview-placeholder">No Thumbnail</div>
+                        )}
+                        <p className="my-folder-name">{file.name}</p>
                     </div>
-                    <div className="profile-field">
-                        <label htmlFor="email">E-posta</label>
-                        <input
-                            className="input-for-labels"
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="E-posta adresiniz"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="profile-field">
-                        <label htmlFor="mobilePhone">Telefon</label>
-                        <input
-                            className="input-for-labels"
-                            type="tel"
-                            id="mobilePhone"
-                            name="mobilePhone"
-                            placeholder="Telefon numaranız"
-                            value={formData.mobilePhone}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="profile-field">
-                        <label htmlFor="location">Konum</label>
-                        <input
-                            className="input-for-labels"
-                            type="text"
-                            id="location"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="profile-field-social">
-                        <label htmlFor="social1">Sosyal Medya</label>
-                        <input
-                            className="input-for-labels"
-                            type="text"
-                            id="social1"
-                            name="social1"
-                            placeholder="Link to social profile"
-                            value={formData.social1}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="profile-buttons">
-                        <button className="my-profile-submit" type="submit">
-                            Kaydet
-                        </button>
-                        <button className="my-profile-cancel" type="button" onClick={handleCancel}>
-                            İptal Et
-                        </button>
-                    </div>
-                </form>
-            ) : (
-                <div className="profile-info">
-                    <div className="profile-image">
-                        <img
-                            className="profile-pic"
-                            src={savedData.profilePic ? savedData.profilePic : `http://localhost:1337${undefinedProfilePic}`}
-                            alt="Profile"
-                        />
-                    </div>
-                    <div className="profile-field">
-                        <label className="profile-field-labels">İsim Soyisim:</label>
-                        <p className="profile-field-paragraph">{savedData.name}</p>
-                    </div>
-                    <div className="profile-field">
-                        <label className="profile-field-labels">E-posta:</label>
-                        <p className="profile-field-paragraph">{savedData.email}</p>
-                    </div>
-                    <div className="profile-field">
-                        <label className="profile-field-labels">Telefon:</label>
-                        <p className="profile-field-paragraph">{savedData.mobilePhone}</p>
-                    </div>
-                    <div className="profile-field">
-                        <label className="profile-field-labels">Konum:</label>
-                        <p className="profile-field-paragraph">{savedData.location}</p>
-                    </div>
-                    <div className="profile-field-social">
-                        <label className="profile-field-labels">Sosyal Medya:</label>
-                        <p className="profile-field-paragraph">{savedData.social1}</p>
-                    </div>
-                    <div className="buttons-for-profile-section">
-                        <button className="my-profile-edit" type="button" onClick={handleEdit}>
-                            Değiştir
-                        </button>
-                        <button className="my-profile-logout" type="button" onClick={handleLogout}>
-                            Çıkış Yap
-                        </button>
-                    </div>
-                </div>
-            )}
+                ))}
+            </div>
+            <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleFileUpload}
+            />
         </div>
     );
-}
+};
 
-export default MyProfile;
+export default AboutMePage;

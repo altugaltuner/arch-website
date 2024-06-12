@@ -35,6 +35,7 @@
                 width: 30%;
             }
 
+
             .profile-field-paragraph {
                 word-break: break-all;
 
@@ -43,9 +44,17 @@
     }
 
     .profile-image {
+        position: relative;
         margin: 10px;
         display: flex;
         justify-content: center;
+
+        .profile-pic-input {
+            position: absolute;
+            display: flex;
+            width: 20px;
+            height: 20px;
+        }
 
         .profile-pic {
             width: 300px;
@@ -57,6 +66,23 @@
     }
 
     .profile-form {
+
+        .profile-image {
+
+            .profile-pic-label {
+                width: 300px;
+                height: 300px;
+                position: relative;
+                cursor: pointer;
+
+                .profile-pic {}
+
+                .profile-pic-input {
+                    display: none;
+                }
+            }
+        }
+
         .profile-field {
             display: flex;
             flex-direction: row;

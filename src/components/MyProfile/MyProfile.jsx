@@ -88,12 +88,17 @@ function MyProfile({ user }) {
             {isEditing ? (
                 <form className="profile-form" onSubmit={handleSave}>
                     <div className="profile-image">
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleProfilePicChange}
-                        />
-                        <img className="profile-pic" src={formData.profilePic} alt="Profile" />
+                        <label htmlFor="profilePic" className="profile-pic-label">
+                            <img className="profile-pic" src={formData.profilePic} alt="Profile" />
+                            <input
+                                className="profile-pic-input"
+                                type="file"
+                                accept="image/*"
+                                id="profilePic"
+                                name="profilePic"
+                                onChange={handleProfilePicChange}
+                            />
+                        </label>
                     </div>
 
                     <div className="profile-field">

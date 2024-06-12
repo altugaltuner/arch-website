@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import "./MyPersonalFiles.scss";
 
 function AboutMePage({ user }) {
-
     const [allUsers, setAllUsers] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); // Add a loading state
+    const [isLoading, setIsLoading] = useState(true);
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -13,8 +13,6 @@ function AboutMePage({ user }) {
                 const response = await axios.get('http://localhost:1337/api/users?populate=MyPersonalFiles');
                 console.log("Fetched users:", response.data);
                 setAllUsers(response.data);
-                console.log("All Users:", allUsers);
-
             } catch (error) {
                 console.error('Error fetching the data', error);
             } finally {
@@ -43,32 +41,55 @@ function AboutMePage({ user }) {
         return <div>No personal files available for this user.</div>;
     }
 
-    const uploadMyFile = async () => {
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*'; // Allow only image files
-        fileInput.addEventListener('change', handleFileUpload);
-        fileInput.click();
-    };
-
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
+        if (!file) {
+            console.error('No file selected');
+            return;
+        }
+
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('files', file); // Ensure the field name matches what the API expects
 
         try {
-            const response = await axios.post('http://localhost:1337/api/upload', formData,);
-            console.log('File uploaded:', response.data);
+            const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('File uploaded:', uploadResponse.data);
 
-            // Update the filteredUser's MyPersonalFiles array with the uploaded file
-            const updatedFiles = [...filteredUser.MyPersonalFiles, response.data];
+            // Assuming the uploadResponse.data returns an array of files, and we are interested in the first one
+            const uploadedFile = uploadResponse.data[0];
+
+            // Update the user's MyPersonalFiles field with the new file
+            const updatedFiles = [...filteredUser.MyPersonalFiles, uploadedFile];
+            const updateUserResponse = await axios.put(`http://localhost:1337/api/users/${filteredUser.id}`, {
+                MyPersonalFiles: updatedFiles
+            });
+
+            console.log('User updated with new file:', updateUserResponse.data);
+
+            // Update the state with the updated user
             const updatedUser = { ...filteredUser, MyPersonalFiles: updatedFiles };
             setAllUsers(prevUsers => prevUsers.map(u => u.username === user.username ? updatedUser : u));
         } catch (error) {
-            console.error('Error uploading the file', error);
+            if (error.response) {
+                // Server responded with a status other than 200 range
+                console.error('Error uploading the file', error.response.data);
+            } else if (error.request) {
+                // Request was made but no response received
+                console.error('Error uploading the file', error.request);
+            } else {
+                // Something happened in setting up the request
+                console.error('Error uploading the file', error.message);
+            }
         }
     };
 
+    const uploadMyFile = () => {
+        fileInputRef.current.click(); // Trigger a click event on the file input element
+    };
 
     return (
         <div className="my-files-panel">
@@ -77,11 +98,22 @@ function AboutMePage({ user }) {
                 <div className="my-folder" onClick={uploadMyFile}>Yükle</div>
                 {filteredUser.MyPersonalFiles.map((file, index) => (
                     <div key={index} className="my-folder">
-                        <img className="my-folder-preview" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt="folder" />
+                        {file.formats && file.formats.thumbnail ? (
+                            <img className="my-folder-preview" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt="folder" />
+                        ) : (
+                            <div className="my-folder-preview-placeholder">No Thumbnail</div>
+                        )}
                         <p className="my-folder-name">{file.name}</p>
                     </div>
                 ))}
             </div>
+            <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleFileUpload}
+            />
         </div>
     );
 };

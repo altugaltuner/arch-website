@@ -10,9 +10,11 @@
     font-family: "Barlow", sans-serif;
 
     .my-files-panel-header {
-        font-size: 20px;
         margin-bottom: 20px;
         color: $background-color;
+        display: flex;
+        justify-content: center;
+
     }
 
     .my-folders {
