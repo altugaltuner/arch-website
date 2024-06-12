@@ -23,17 +23,17 @@ function ProjectSection({ clickedProject }) {
         getRoles();
     }, []);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate=*');
-                setProjectFolders(response.data.data);
-            } catch (error) {
-                console.error('Error fetching the data', error);
-            }
-        };
+    const fetchProjectFolders = async () => {
+        try {
+            const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders');
+            setProjectFolders(response.data.data);
+        } catch (error) {
+            console.error('Error fetching the data', error);
+        }
+    };
 
-        fetchData();
+    useEffect(() => {
+        fetchProjectFolders();
     }, []);
 
     // Filter project folders based on the clicked project ID
@@ -48,26 +48,42 @@ function ProjectSection({ clickedProject }) {
 
     const handleSubmit = async () => {
         const formData = new FormData();
-        formData.append('data', JSON.stringify({ projectFolderName: newFolder.projectFolderName }));
+        formData.append('data', JSON.stringify({
+            projectFolderName: newFolder.projectFolderName,
+            project: clickedProject.id
+        }));
 
         try {
             await axios.post('http://localhost:1337/api/project-folders', formData);
             setShowModal(false);
             setNewFolder({ projectFolderName: "" });
             // Refetch project folders after adding a new one
-            const response = await axios.get('http://localhost:1337/api/projects?populate=*');
-            setProjectFolders(response.data.data);
+            await fetchProjectFolders();
         } catch (error) {
             console.error('Error creating a new project folder', error);
         }
     };
+
+    function handleDeleteFolder(id) {
+        try {
+            axios.delete(`http://localhost:1337/api/project-folders/${id}`);
+            // Refetch project folders after deleting one
+            fetchProjectFolders();
+        } catch (error) {
+            console.error('Error deleting the project folder', error);
+        }
+    }
+
+    function handleEditFolder(id) {
+        // Implement the edit functionality here
+    }
 
     return (
         <div className="project-folders">
             {roles.map(role => role.attributes.role === "Admin" && (
                 <button
                     className="project-folder"
-                    onClick={() => setShowModal(true)}
+                    onClick={() => setShowModal(true)} // Show the modal directly on button click
                 >
                     Grup Oluştur
                 </button>
@@ -80,6 +96,7 @@ function ProjectSection({ clickedProject }) {
                             className="project-folder-image"
                             src="https://w7.pngwing.com/pngs/603/506/png-transparent-directory-icon-computer-file-folder-miscellaneous-angle-image-file-formats.png"
                             alt="folder-icon"
+                            key={folder.id} // Add the key prop here
                         />
                     </div>
                 ))
