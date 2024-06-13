@@ -1,10 +1,9 @@
 import { useState } from "react";
 import "./LoginPage.scss";
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
-import eyeShow from "../../assets/eye-show.svg";
-import eyeHide from "../../assets/eye-hide.png";
+import eyeShow from "../../assets/EyeShowLogo.png";
+import eyeHide from "../../assets/EyeHideLogo.png";
 
 function LoginPage() {
   const [error, setError] = useState("");
