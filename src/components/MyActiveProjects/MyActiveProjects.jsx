@@ -20,17 +20,13 @@ function MyActiveProjects({ user }) {
     }, []);
 
     useEffect(() => {
-        //console.log("All Users:", allUsers);
     }, [allUsers]);
-    //console.log("User:", user);
 
-    // Add a check for user being null or undefined
     if (!user || !user.username) {
         return <div>No user data available.</div>;
     }
 
     const filteredUser = allUsers.filter(u => u.username === user.username);
-    //console.log("Filtered User:", filteredUser);
 
     const userElements = filteredUser.map(u => (
         <div className="my-active-project-div" key={u.id}>

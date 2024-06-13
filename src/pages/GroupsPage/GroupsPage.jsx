@@ -6,8 +6,10 @@ import "./GroupsPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
 
+import deleteIcon from "../../assets/icons/delete-icon.png";
+import groupLogo from "../../assets/icons/GroupProfileLogo.png";
+
 function GroupsPage() {
-    const [deleteIcon, setDeleteIcon] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -16,20 +18,6 @@ function GroupsPage() {
     const [newGroup, setNewGroup] = useState({
         groupName: ""
     });
-
-    async function getDeleteIcon() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/website-uis/7?populate=*');
-            console.log("Delete icon response:", response.data.data);
-            setDeleteIcon(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getDeleteIcon();
-    }, []);
 
     function handleDeleteGroup() {
         try {
@@ -100,6 +88,7 @@ function GroupsPage() {
                         <button
                             className="project-group-add-group"
                             onClick={() => setShowModal(true)}
+                            role="button"
                         >
                             Grup Oluştur
                         </button>
@@ -116,14 +105,14 @@ function GroupsPage() {
                             ) : (
                                 <img
                                     className="group-image"
-                                    src="https://play-lh.googleusercontent.com/iBKHlB7QEv8Ez57mJhGLUJDXwxzFHioEzacOBJABT0BA6fm71SxOCvsxH0Lk4fo3AJJ1=w600-h300-pc0xffffff-pd"
+                                    src={groupLogo}
                                     alt="group-chat-pic"
                                 />
                             )}
                             <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
                             <img
                                 className="file-card-delete-btn"
-                                src={`http://localhost:1337${deleteIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`}
+                                src={deleteIcon}
                                 alt=""
                                 onClick={() => {
                                     setSelectedGroupId(group.id);
@@ -139,7 +128,7 @@ function GroupsPage() {
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+                        <span className="close" onClick={() => setShowModal(false)}>X</span>
                         <h2>Yeni Grup Oluştur</h2>
                         <input
                             type="text"
@@ -157,7 +146,7 @@ function GroupsPage() {
             {showDeleteModal && (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={() => setShowDeleteModal(false)}>&times;</span>
+                        <span className="close" onClick={() => setShowDeleteModal(false)}>X</span>
                         <h2>Grubu Sil</h2>
                         <p>Grubu gerçekten silmek istiyor musunuz?</p>
                         <button onClick={handleDeleteGroup}>Evet</button>

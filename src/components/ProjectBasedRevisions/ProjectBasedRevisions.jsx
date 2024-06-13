@@ -43,7 +43,7 @@ function ProjectBasedRevisions({ clickedProject }) {
             <h1 className="projects-revisions-header">Proje Revizeleri</h1>
             <div className="project-revisions">
                 {projectBasedRevisions.filter(projectRevision => {
-                    return projectRevision.attributes.project.data.attributes.projectName === "Yeşil Vadi Konutları"
+                    return projectRevision.attributes.project.data.attributes.projectName === "Seçili Proje Yok"
                 }).map((projectRevision) => (
                     <div key={projectRevision.id} className="project-revision">
                         <h2 className="revision-project-name">{projectRevision.attributes.project.data.attributes.projectName}</h2>

@@ -6,6 +6,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import MyProfile from "../../components/MyProfile/MyProfile";
 import MyActiveProjects from "../../components/MyActiveProjects/MyActiveProjects";
 import MyPersonalFiles from "../../components/MyPersonalFiles/MyPersonalFiles";
+import MyLastAct from "../../components/MyLastAct/MyLastAct";
 
 function AboutMePage() {
     const auth = useAuth(); // auth'u const {fireStoreUser} = useAuth() şeklinde alırsanız user bilgilerine ulaşabilirsiniz
@@ -41,6 +42,7 @@ function AboutMePage() {
             <Navigation />
             <div className="aboutme-page-row">
                 <MyProfile user={user} />
+                <MyLastAct />
                 <MyActiveProjects user={user} />
                 <MyPersonalFiles user={user} />
             </div>

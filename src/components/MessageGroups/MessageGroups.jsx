@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./MessageGroups.scss";
 
-
 function MessageGroups() {
 
     const [groups, setGroups] = useState([]);

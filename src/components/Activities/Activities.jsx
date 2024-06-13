@@ -14,9 +14,6 @@ const Activities = () => {
                 console.error('Error fetching the data', error);
             }
         };
-
-
-
         fetchData();
     }, []);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./HomePage.scss";
 import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";

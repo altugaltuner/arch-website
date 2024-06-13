@@ -8,7 +8,7 @@
     width: 50%;
 
     .add-team-btn {
-        background-color: #f4f4f4;
+        background-color: $grey;
         padding: 10px;
         margin: 10px;
         border-radius: 10px;
@@ -17,11 +17,11 @@
         font-weight: 500;
 
         &:hover {
-            background-color: darken(#f4f4f4, 10%);
+            background-color: darken($grey, 10%);
         }
 
         &:active {
-            background-color: darken(#f4f4f4, 20%);
+            background-color: darken($grey, 20%);
         }
     }
 
@@ -34,7 +34,7 @@
     }
 
     .team-card {
-        background-color: #f4f4f4;
+        background-color: $grey;
         padding: 10px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,7 +92,7 @@
         }
 
         .employee-card {
-            background-color: #f4f4f4;
+            background-color: $grey;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -141,7 +141,7 @@
         z-index: 1000;
 
         .modal-content {
-            background: #fff;
+            background: white;
             padding: 20px;
             border-radius: 5px;
             position: relative;

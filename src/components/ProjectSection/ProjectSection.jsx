@@ -125,7 +125,7 @@ function ProjectSection({ clickedProject }) {
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={() => setShowModal(false)}>X;</span>
+                        <span className="close" onClick={() => setShowModal(false)}>X</span>
                         <h2>Yeni Proje Klasörü Oluştur</h2>
                         <input
                             type="text"
