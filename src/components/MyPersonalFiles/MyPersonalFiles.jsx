@@ -35,7 +35,7 @@ function AboutMePage({ user }) {
         return <div>No user data available.</div>;
     }
 
-    const filteredUser = allUsers.find(u => u.username === user.username);
+    const filteredUser = allUsers.find(u => u.username === user?.username);
 
     if (!filteredUser || !filteredUser.MyPersonalFiles) {
         return <div>No personal files available for this user.</div>;

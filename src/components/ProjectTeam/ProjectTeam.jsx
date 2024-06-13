@@ -95,7 +95,6 @@ const ProjectTeam = () => {
                         {employees.map((employee, index) => (
                             <div className="employee-card" key={index}>
                                 <div className="profile-pic">
-                                    <img className="profile-pic-inner" src={`http://localhost:1337${employee.profilePic.url}`} alt="" />
                                 </div>
                                 <div className="employee-info">
                                     <h3 className='employee-info-username'>{employee.username}</h3>
@@ -107,6 +106,7 @@ const ProjectTeam = () => {
                 </div>
             ) : (
                 <div className="teams-grid">
+                    <div className='team-card'>Tüm Çalışanlar</div>
                     {jobTitles.map((team, index) => (
                         <div key={index} className="team-card" onClick={() => handleCardClick(team)}>
                             <h3 className="team-title">{team.attributes.professionName}</h3>

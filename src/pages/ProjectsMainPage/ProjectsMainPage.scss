@@ -3,6 +3,7 @@
 
 .projects-main-page {
     display: flex;
+    height: 100vh;
     flex-direction: column;
     background-color: $background-color;
     font-family: "Barlow", sans-serif;
@@ -15,6 +16,7 @@
         gap: 20px;
         justify-content: center;
         padding: 20px;
+        background-color: $background-color;
 
         .add-project-btn {
             background-color: #f4f4f4;

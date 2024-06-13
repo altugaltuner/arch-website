@@ -1,6 +1,7 @@
 @use "../../styles/abstracts/variables" as *;
 
 .project-teams-container {
+    font-family: "Barlow", sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +9,7 @@
 
     .add-team-btn {
         background-color: #f4f4f4;
-        padding: 20px;
+        padding: 10px;
         margin: 10px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,17 +64,23 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+        position: relative;
 
         .new-div-backbtn {
-            margin: 10px;
+            margin: 5px;
+            color: $grey;
             padding: 10px;
             border-radius: 10px;
             cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: 0;
         }
 
         .new-div-selected-profession {
-            font-size: 24px;
-            margin: 20px 0;
+            color: $grey;
+            font-size: 28px;
+            padding: 10px;
         }
 
         .employees-grid {
