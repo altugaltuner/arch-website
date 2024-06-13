@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./WorkersPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import axios from 'axios';
+import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
 
 function WorkersPage() {
     const [employees, setEmployees] = useState([]);
@@ -69,6 +70,9 @@ function WorkersPage() {
                             </li>
                         ))}
                     </ul>
+                </div>
+                <div className="employee-private-chat">
+                    <GroupMessagePanel />
                 </div>
                 <div className="employee-grid">
                     {filteredEmployees.map((employee, index) => (

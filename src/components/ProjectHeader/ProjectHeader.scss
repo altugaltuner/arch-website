@@ -44,14 +44,7 @@
                 font-size: 30px;
                 background-color: $grey;
                 color: $div-color;
-            }
-
-            :hover {
-                background-color: darken($grey, 10%);
-            }
-
-            :active {
-                background-color: darken($grey, 20%);
+                text-align: center;
             }
         }
     }

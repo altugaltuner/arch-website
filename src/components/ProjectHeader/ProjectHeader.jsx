@@ -16,8 +16,8 @@ function ProjectHeader({ clickedProject }) {
                     <h2 className="active-project-title">{clickedProject ? clickedProject.attributes.projectName : "Yeşil Vadi Konutları"}</h2>
                 </div>
                 <div className="active-project-tabs">
-                    <button className="active-project-btn" type="button" >Proje Dosyaları</button>
-                    <button className="active-project-btn" type="button">Proje Ekipleri</button>
+                    <p className="active-project-btn" type="button" >Proje Dosyaları</p>
+                    <p className="active-project-btn" type="button">Proje Ekipleri</p>
                 </div>
             </div>
         </div>

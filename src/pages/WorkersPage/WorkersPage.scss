@@ -9,6 +9,10 @@
         display: flex;
         flex-direction: row;
 
+        .employee-private-chat {
+            width: 60%;
+        }
+
         .employee-card-modal {
             position: fixed;
             top: 0;
@@ -61,6 +65,7 @@
             background-color: $div-color;
             padding: 10px;
             background-color: $background-color;
+            margin-top: 10px;
 
             ul {
                 width: 100%;
@@ -87,9 +92,9 @@
         }
 
         .employee-grid {
-            width: 80%;
+            width: 30%;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
             gap: 20px;
             padding: 20px;
             color: $div-color;
@@ -115,8 +120,9 @@
 
             .employee-card {
                 background-color: $grey;
-                padding: 20px;
-                max-height: 240px;
+                padding: 12px;
+                width: 175px;
+                max-height: 200px;
                 text-align: center;
                 border-radius: 10px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

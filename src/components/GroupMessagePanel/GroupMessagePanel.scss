@@ -1,20 +1,22 @@
+@use "../../styles/abstracts/variables" as *;
+
 .message-panel-main {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 800px;
     padding: 20px;
     margin-right: 20px;
-    background-color: #f0f0f0;
-    transform: translate(0px, -60px);
+    background-color: $grey;
     border-radius: 20px;
+    margin-top: 20px;
 
     .message-panel-head {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px;
-        background-color: #fff;
+        background-color: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
         .message-panel-left-side,
@@ -37,7 +39,7 @@
             .message-panel-group-name {
                 font-size: 18px;
                 font-weight: bold;
-                color: #333;
+                color: $background-color;
             }
         }
 
@@ -87,7 +89,7 @@
         display: flex;
         align-items: center;
         padding: 10px;
-        background-color: #fff;
+        background-color: white;
         box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 
         input {
@@ -120,7 +122,7 @@
     .message-panel-main {
         display: flex;
         flex-direction: column;
-        width: 95%;
+        width: 155%;
         height: 60%;
         padding: 20px;
         transform: translate(0px, 0px);
