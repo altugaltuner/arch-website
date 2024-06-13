@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./LoginPage.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
-import eyeShow from "../../assets/EyeShowLogo.png";
-import eyeHide from "../../assets/EyeHideLogo.png";
+import eyeShow from "../../assets/icons/EyeShowLogo.png";
+import eyeHide from "../../assets/icons/EyeHideLogo.png";
 
 function LoginPage() {
   const [error, setError] = useState("");

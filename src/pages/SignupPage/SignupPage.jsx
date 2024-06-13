@@ -1,8 +1,8 @@
 import "./SignupPage.scss";
 import { useState } from "react";
 import { api } from "../../api";
-import eyeShow from "../../assets/EyeShowLogo.png";
-import eyeHide from "../../assets/EyeHideLogo.png";
+import eyeShow from "../../assets/icons/EyeShowLogo.png";
+import eyeHide from "../../assets/icons/EyeHideLogo.png";
 
 function SignupPage() {
   const [formData, setFormData] = useState({

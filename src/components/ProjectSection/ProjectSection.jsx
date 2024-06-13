@@ -1,60 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import "./ProjectSection.scss";
+import addIcon from "../../assets/icons/add-icon.png";
+import deleteIcon from "../../assets/icons/delete-icon.png";
+import editPencil from "../../assets/icons/edit-pencil.png";
+import folderIcon from "../../assets/icons/folder-icon.png";
 
 function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
-    const [deleteIcon, setDeleteIcon] = useState([]);
-    const [editIcon, setEditIcon] = useState([]);
-    const [addIcon, setAddIcon] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newFolder, setNewFolder] = useState({
         projectFolderName: ""
     });
-
-    async function getDeleteIcon() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/website-uis/7?populate=*');
-            console.log("Delete icon response:", response.data.data);
-            setDeleteIcon(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getDeleteIcon();
-    }, []);
-
-    async function getEditIcon() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/website-uis/8?populate=*');
-            console.log("Edit icon response:", response.data.data);
-            setEditIcon(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getEditIcon();
-    }, []);
-
-    async function getAddIcon() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/website-uis/9?populate=*');
-            console.log("Edit icon response:", response.data.data);
-            setAddIcon(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getAddIcon();
-    }, []);
-
 
     async function getRoles() {
         try {
@@ -137,7 +95,7 @@ function ProjectSection({ clickedProject }) {
                     onClick={() => setShowModal(true)} // Show the modal directly on button click
                 >
                     Grup Oluştur
-                    <img className="project-folder-add-logo" src={`http://localhost:1337${addIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`} alt="" />
+                    <img className="project-folder-add-logo" src={addIcon} alt="" />
                 </button>
             ))}
             {filteredFolders && filteredFolders.length > 0 ? (
@@ -145,16 +103,16 @@ function ProjectSection({ clickedProject }) {
                     <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder.id)}>
                         <img
                             className="file-card-delete-btn"
-                            src={`http://localhost:1337${deleteIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`}
+                            src={deleteIcon}
                             alt=""
                             onClick={() => handleDeleteFolder(folder.id)}
                         />
-                        <img className="file-card-edit-btn" src={`http://localhost:1337${editIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`} alt="" />
+                        <img className="file-card-edit-btn" src={editPencil} alt="" />
 
                         <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
                         <img
                             className="project-folder-image"
-                            src="https://w7.pngwing.com/pngs/603/506/png-transparent-directory-icon-computer-file-folder-miscellaneous-angle-image-file-formats.png"
+                            src={folderIcon}
                             alt="folder-icon"
                             key={folder.id} // Add the key prop here
                         />

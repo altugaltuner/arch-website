@@ -5,13 +5,14 @@ import "./ProjectsMainPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import { useAuth } from "../../components/AuthProvider";
 
+import editPencil from "../../assets/icons/edit-pencil.png"
+import deleteIcon from "../../assets/icons/delete-icon.png"
+
 function ProjectsMainPage() {
   const { user } = useAuth();
-  console.log(user);
+  //console.log(user);
 
   const [companyProjects, setCompanyProjects] = useState([]);
-  const [deleteIcon, setDeleteIcon] = useState([]);
-  const [editIcon, setEditIcon] = useState([]);
   const [roles, setRoles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newProject, setNewProject] = useState({
@@ -39,38 +40,6 @@ function ProjectsMainPage() {
     if (localStorage.getItem("token")) {
       getRoles();
     }
-  }, []);
-
-  async function getDeleteIcon() {
-    try {
-      const response = await axios.get(
-        "http://localhost:1337/api/website-uis/7?populate=*"
-      );
-      console.log("Delete icon response:", response.data.data);
-      setDeleteIcon(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    getDeleteIcon();
-  }, []);
-
-  async function getEditIcon() {
-    try {
-      const response = await axios.get(
-        "http://localhost:1337/api/website-uis/8?populate=*"
-      );
-      console.log("Edit icon response:", response.data.data);
-      setEditIcon(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    getEditIcon();
   }, []);
 
   useEffect(() => {
@@ -161,13 +130,13 @@ function ProjectsMainPage() {
               <Link className="project-card" to={`/projects/${project.id}`}>
                 <img
                   className="project-card-delete-btn"
-                  src={`http://localhost:1337${deleteIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`}
+                  src={deleteIcon}
                   alt=""
                   onClick={() => deleteProjectFromDatabase(project.id)}
                 />
                 <img
                   className="project-card-edit-btn"
-                  src={`http://localhost:1337${editIcon.attributes.LogoImg.data[0].attributes.formats.thumbnail.url}`}
+                  src={editPencil}
                   alt=""
                 />
                 <p className="project-card-name">
