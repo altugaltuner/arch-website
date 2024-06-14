@@ -23,7 +23,7 @@
 
         .project-file {
             display: flex;
-            background-color: $grey;
+            background-color: $background-color;
             border-radius: 15px;
             flex-direction: column;
             justify-content: center;
@@ -36,11 +36,11 @@
             .file-name {
                 font-size: 20px;
                 font-weight: 400;
-                color: $div-color;
+                color: $font-color;
             }
 
             .file-download-link {
-                color: $div-color;
+                color: $font-color;
                 font-size: 16px;
                 font-weight: 500;
                 text-decoration: none;

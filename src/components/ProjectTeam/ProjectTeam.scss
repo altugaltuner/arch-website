@@ -8,7 +8,7 @@
     width: 50%;
 
     .add-team-btn {
-        background-color: $grey;
+        background-color: $background-color;
         padding: 10px;
         margin: 10px;
         border-radius: 10px;
@@ -17,11 +17,11 @@
         font-weight: 500;
 
         &:hover {
-            background-color: darken($grey, 10%);
+            background-color: darken($background-color, 10%);
         }
 
         &:active {
-            background-color: darken($grey, 20%);
+            background-color: darken($background-color, 20%);
         }
     }
 
@@ -34,7 +34,7 @@
     }
 
     .team-card {
-        background-color: $grey;
+        background-color: $background-color;
         padding: 10px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -45,7 +45,7 @@
             font-size: 18px;
             margin: 10px 0;
             font-weight: 500;
-            color: $div-color;
+            color: $font-color;
         }
 
         .team-images {
@@ -78,7 +78,7 @@
         }
 
         .new-div-selected-profession {
-            color: $grey;
+            color: $font-color;
             font-size: 28px;
             padding: 10px;
         }
@@ -92,7 +92,7 @@
         }
 
         .employee-card {
-            background-color: $grey;
+            background-color: $background-color;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -102,7 +102,7 @@
             .profile-pic {
                 width: 100px;
                 height: 100px;
-                background-color: #ccc;
+                background-color: $grey;
                 border-radius: 50%;
                 margin: 0 auto 10px;
 
@@ -141,7 +141,7 @@
         z-index: 1000;
 
         .modal-content {
-            background: white;
+            background-color: $background-color;
             padding: 20px;
             border-radius: 5px;
             position: relative;

@@ -21,10 +21,10 @@
             flex-direction: column;
             gap: 20px;
             padding: 20px;
-            color: $div-color;
+            color: $font-color;
 
             .project-group-add-group {
-                background-color: $grey;
+                background-color: $background-color;
                 padding: 20px;
                 max-height: 240px;
                 text-align: center;
@@ -34,11 +34,11 @@
                 font-weight: 500;
 
                 &:hover {
-                    background-color: darken($grey, 10%);
+                    background-color: darken($background-color, 10%);
                 }
 
                 &:active {
-                    background-color: darken($grey, 20%);
+                    background-color: darken($background-color, 20%);
                 }
             }
 
@@ -47,7 +47,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-                background-color: $grey;
+                background-color: $background-color;
                 padding: 20px;
                 max-height: 70px;
                 text-align: center;
@@ -90,7 +90,7 @@
         z-index: 1000;
 
         .modal-content {
-            background: #fff;
+            background-color: $background-color;
             padding: 20px;
             border-radius: 5px;
             position: relative;
@@ -118,11 +118,11 @@
                 cursor: pointer;
 
                 &:hover {
-                    background-color: darken($grey, 10%);
+                    background-color: darken($background-color, 10%);
                 }
 
                 &:active {
-                    background-color: darken($grey, 20%);
+                    background-color: darken($background-color, 20%);
                 }
             }
         }

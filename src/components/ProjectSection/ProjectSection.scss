@@ -38,7 +38,7 @@
             font-size: 18px;
             font-weight: 500;
             margin: 10px 0;
-            color: $div-color;
+            color: $font-color;
         }
 
         .project-folder-image {
@@ -85,7 +85,7 @@
         z-index: 1000;
 
         .modal-content {
-            background: #fff;
+            background-color: $background-color;
             padding: 20px;
             border-radius: 5px;
             position: relative;

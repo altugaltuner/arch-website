@@ -3,32 +3,32 @@
 .navigation-main {
     display: flex;
     flex-direction: row;
-    background-color: $div-color;
-    color: white;
+    background-color: $background-color;
+    color: $font-color;
     font-family: "Barlow", sans-serif;
 
     .nav-ul {
         display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 90px;
+        flex-direction: column;
+        width: 10%;
+        height: 100vh;
 
         .nav-li-third,
         .nav-li-one {
-            width: 20%;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 30px;
 
             .nav-button {
-                background-color: $grey;
-                width: 80%;
+                background-color: $background-color;
+                width: 100%;
                 border: none;
-                border-radius: 15px;
+                border-radius: 0px;
                 padding: 10px;
                 text-align: center;
-                color: $div-color;
+                color: $font-color;
                 cursor: pointer;
             }
 

@@ -3,7 +3,7 @@
 .myactive-projects-main {
     width: 100%;
     font-family: "Barlow", sans-serif;
-    background-color: $grey;
+    background-color: $background-color;
     margin-top: 20px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -20,7 +20,7 @@
             flex-wrap: wrap;
 
             .my-active-project-div {
-                color: $div-color;
+                color: $font-color;
 
                 .my-active-project-list-header {
                     padding: 20px;

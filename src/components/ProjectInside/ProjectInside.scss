@@ -3,7 +3,7 @@
 .project-inside-main {
     display: flex;
     flex-direction: row;
-    background-color: $div-color;
+    background-color: $background-color;
     font-family: "Barlow", sans-serif;
     color: $grey;
     width: 20%;
@@ -34,16 +34,16 @@
                 gap: 20px;
                 padding: 5px;
                 cursor: pointer;
-                background-color: $grey;
+                background-color: $background-color;
                 border-radius: 20px;
-                color: $div-color;
+                color: $font-color;
 
                 .project-navbar-photos {
                     width: 60px;
                     height: 60px;
                     border-radius: 50%;
                     padding: 2px;
-                    border: 1px solid white;
+                    border: 1px solid $border-color;
                 }
 
                 .project-navbar-name {
@@ -79,8 +79,8 @@
                     font-size: 1em;
                     padding: 5px;
                     border-radius: 10px;
-                    background-color: $grey;
-                    color: $div-color;
+                    background-color: $background-color;
+                    color: $font-color;
 
                     .project-navbar-photos {
                         display: none;

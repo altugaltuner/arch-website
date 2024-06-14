@@ -26,7 +26,7 @@
             z-index: 1000;
 
             .employee-card-modal-inner {
-                background-color: $grey;
+                background-color: $background-color;
                 display: flex;
                 flex-direction: column;
                 width: 400px;
@@ -62,7 +62,6 @@
         .sidebar {
             display: flex;
             width: 20%;
-            background-color: $div-color;
             padding: 10px;
             background-color: $background-color;
             margin-top: 10px;
@@ -75,17 +74,17 @@
                 .job-titles-for-workersPage {
                     margin: 10px 0;
                     padding: 10px;
-                    background-color: $grey;
+                    background-color: $background-color;
                     text-align: center;
                     cursor: pointer;
                     border-radius: 10px;
 
                     &:hover {
-                        background-color: darken($grey, 10%);
+                        background-color: darken($background-color, 10%);
                     }
 
                     &:active {
-                        background-color: darken($grey, 20%);
+                        background-color: darken($background-color, 20%);
                     }
                 }
             }
@@ -97,10 +96,10 @@
             grid-template-columns: repeat(auto-fill, minmax(175px, 0fr));
             gap: 20px;
             padding: 20px;
-            color: $div-color;
+            color: $font-color;
 
             .add-employee-btn {
-                background-color: $grey;
+                background-color: $background-color;
                 padding: 20px;
                 max-height: 240px;
                 text-align: center;
@@ -110,16 +109,16 @@
                 font-weight: 500;
 
                 &:hover {
-                    background-color: darken($grey, 10%);
+                    background-color: darken($background-color, 10%);
                 }
 
                 &:active {
-                    background-color: darken($grey, 20%);
+                    background-color: darken($background-color, 20%);
                 }
             }
 
             .employee-card {
-                background-color: $grey;
+                background-color: $background-color;
                 padding: 12px;
                 width: 175px;
                 max-height: 200px;
@@ -131,7 +130,7 @@
                 .profile-pic {
                     width: 100px;
                     height: 100px;
-                    background-color: #ccc;
+                    background-color: $grey;
                     border-radius: 50%;
                     margin: 0 auto 10px;
 
@@ -171,7 +170,7 @@
         background: rgba(0, 0, 0, 0.5);
 
         .new-employee-modal-content {
-            background: #fff;
+            background: $background-color;
             padding: 20px;
             border-radius: 5px;
             position: relative;
@@ -207,22 +206,22 @@
                     cursor: pointer;
 
                     &:hover {
-                        background-color: darken($grey, 10%);
+                        background-color: darken($background-color, 10%);
                     }
 
                     &:active {
-                        background-color: darken($grey, 20%);
+                        background-color: darken($background-color, 20%);
                     }
                 }
 
                 .adding-modal-button-create {
-                    background-color: $grey;
-                    color: $div-color;
+                    background-color: $background-color;
+                    color: $font-color;
                 }
 
                 .adding-modal-button-abort {
                     background-color: $grey;
-                    color: $div-color;
+                    color: $font-color;
                 }
             }
         }
@@ -243,7 +242,7 @@
                 width: 100%;
 
                 .employee-card {
-                    background-color: $grey;
+                    background-color: $background-color;
                     padding: 20px;
                     max-height: 240px;
                     text-align: center;

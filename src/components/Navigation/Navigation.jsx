@@ -1,11 +1,13 @@
 import "./Navigation.scss";
 import { Link } from 'react-router-dom';
+import archLogo from "../../assets/icons/arch-web-logo.png";
 
 function Navigation() {
 
     return (
         <main className="navigation-main">
             <ul className="nav-ul">
+                <img src={archLogo} alt="arch-logo" />
                 <li className="nav-li-third"><Link className="nav-button" to="/">Anasayfa</Link></li>
                 <li className="nav-li-third"><Link className="nav-button" to="/projects">Projeler</Link></li>
                 <li className="nav-li-third"><Link className="nav-button" to="/groups">Gruplar</Link></li>

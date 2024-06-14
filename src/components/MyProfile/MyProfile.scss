@@ -7,9 +7,9 @@
     width: 30%;
     margin-top: 20px;
     padding: 20px;
-    background-color: $grey;
+    background-color: $background-color;
     border-radius: 20px;
-    color: $background-color;
+    color: $font-color;
     font-family: "Barlow", sans-serif;
 
     .profile-info {
@@ -139,9 +139,9 @@
                 padding: 0px;
                 gap: 8px;
                 border-radius: 8px;
-                background: $div-color;
-                border: 1px solid $div-color;
-                color: #ffffff;
+                background: $font-color;
+                border: 1px solid $font-color;
+                color: white;
                 cursor: pointer;
                 box-shadow: 0px 8px 24px 0px rgba(234, 124, 105, 0.4);
                 font-size: 14px;
@@ -158,7 +158,7 @@
                 gap: 8px;
                 border-radius: 8px;
                 background: none;
-                border: 1px solid $div-color;
+                border: 1px solid $font-color;
                 color: $font-color;
                 cursor: pointer;
                 font-size: 14px;
@@ -201,11 +201,9 @@
                 padding: 0px;
                 gap: 8px;
                 border-radius: 8px;
-                background: #2A2C41;
-                border: 1px solid #2A2C41;
-                color: #ffffff;
+                border: 1px solid $border-color;
+                color: $font-color;
                 cursor: pointer;
-                box-shadow: 0px 8px 24px 0px rgba(114, 72, 231, 0.4);
                 font-size: 14px;
                 font-weight: 600;
                 line-height: 19.6px;
