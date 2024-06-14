@@ -2,12 +2,14 @@
 
 .projects-page {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
     background-color: $background-color;
     font-family: "Barlow", sans-serif;
 
     .inner-project-page {
         display: flex;
+        width: 90%;
         flex-direction: row;
 
         .inner-project-column {

@@ -134,8 +134,11 @@ function ProjectSection({ clickedProject }) {
                             value={newFolder.projectFolderName}
                             onChange={handleInputChange}
                         />
-                        <button onClick={handleSubmit}>Oluştur</button>
-                        <button onClick={() => setShowModal(false)}>İptal</button>
+                        <div className="buttons-for-modal">
+                            <button onClick={handleSubmit}>Oluştur</button>
+                            <button onClick={() => setShowModal(false)}>İptal</button>
+                        </div>
+
                     </div>
                 </div>
             )}

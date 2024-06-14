@@ -123,57 +123,59 @@ function ProjectsMainPage() {
   return (
     <div className="projects-main-page">
       <Navigation />
-      <div className="projects-cards-main-row">
-        {companyProjects.length > 0 ? (
-          companyProjects.map((project) => (
-            <div className="project-cards" key={project.id}>
-              <Link className="project-card" to={`/projects/${project.id}`}>
-                <img
-                  className="project-card-delete-btn"
-                  src={deleteIcon}
-                  alt=""
-                  onClick={() => deleteProjectFromDatabase(project.id)}
-                />
-                <img
-                  className="project-card-edit-btn"
-                  src={editPencil}
-                  alt=""
-                />
-                <p className="project-card-name">
-                  {project.attributes.projectName}
-                </p>
-                {project.attributes.projectCoverPhoto &&
-                  project.attributes.projectCoverPhoto.data && (
-                    <img
-                      className="project-navbar-photos"
-                      src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
-                      alt=""
-                    />
-                  )}
-              </Link>
-            </div>
-          ))
-        ) : (
-          <p>No projects found</p>
-        )}
+      <div className="project-cards-column">
+        <h1 className="title-for-projects">Projeler</h1>
+        <div className="projects-cards-main-row">
+          {companyProjects.length > 0 ? (
+            companyProjects.map((project) => (
+              <div className="project-cards" key={project.id}>
+                <Link className="project-card" to={`/projects/${project.id}`}>
+                  <img
+                    className="project-card-delete-btn"
+                    src={deleteIcon}
+                    alt=""
+                    onClick={() => deleteProjectFromDatabase(project.id)}
+                  />
+                  <img
+                    className="project-card-edit-btn"
+                    src={editPencil}
+                    alt=""
+                  />
+                  <p className="project-card-name">
+                    {project.attributes.projectName}
+                  </p>
+                  {project.attributes.projectCoverPhoto &&
+                    project.attributes.projectCoverPhoto.data && (
+                      <img
+                        className="project-navbar-photos"
+                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
+                        alt=""
+                      />
+                    )}
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p>No projects found</p>
+          )}
 
-        {roles.length > 0 ? (
-          roles.map(
-            (role) =>
-              role.attributes.role === "Admin" && (
-                <button
-                  className="add-project-btn"
-                  onClick={() => setShowModal(true)}
-                >
-                  Proje Ekle
-                </button>
-              )
-          )
-        ) : (
-          <p>No roles found</p>
-        )}
+          {roles.length > 0 ? (
+            roles.map(
+              (role) =>
+                role.attributes.role === "Admin" && (
+                  <button
+                    className="add-project-btn"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Proje Ekle
+                  </button>
+                )
+            )
+          ) : (
+            <p>No roles found</p>
+          )}
+        </div>
       </div>
-
       {showModal && (
         <div className="add-new-project-modal">
           <div className="add-new-project-modal-content">

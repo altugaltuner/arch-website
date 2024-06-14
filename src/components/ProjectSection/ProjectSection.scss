@@ -91,6 +91,11 @@
             position: relative;
             text-align: center;
 
+            .buttons-for-modal {
+                display: flex;
+                justify-content: space-evenly;
+            }
+
             .close {
                 position: absolute;
                 top: 10px;

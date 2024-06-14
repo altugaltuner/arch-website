@@ -3,20 +3,25 @@
 .project-section-main {
     width: 100%;
     font-family: "Barlow", sans-serif;
+    background-color: $background-color;
 
     .projects-page-content-header {
         display: flex;
         flex-direction: column;
         width: 100%;
-        background-color: $background-color;
         border-radius: 20px;
 
         .header-with-back-button {
             display: flex;
 
             .back-button {
-                padding: 20px;
-                color: $grey;
+                padding: 10px;
+                color: $font-color;
+
+                .back-btn {
+                    width: 40px;
+                    height: 45px;
+                }
             }
         }
 
@@ -24,8 +29,7 @@
             width: fit-content;
             padding: 10px;
             margin: 10px;
-            background-color: $background-color;
-            color: $grey;
+            color: $font-color;
             font-weight: 400;
             border-radius: 15px;
         }

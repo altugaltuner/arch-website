@@ -122,7 +122,7 @@ const ProjectTeam = () => {
                 <div className="modal">
                     <div className="modal-content">
                         <span className="close" onClick={() => setShowModal(false)}>&times;</span>
-                        <h2>Yeni Takım Oluştur</h2>
+                        <h2 className='modal-content-header'>Yeni Takım Oluştur</h2>
                         <input
                             type="text"
                             name="teamName"
@@ -130,8 +130,10 @@ const ProjectTeam = () => {
                             value={newTeam.teamName}
                             onChange={handleInputChange}
                         />
-                        <button onClick={handleSubmit}>Oluştur</button>
-                        <button onClick={() => setShowModal(false)}>İptal</button>
+                        <div className='btn-div-for-modal'>
+                            <button onClick={handleSubmit}>Oluştur</button>
+                            <button onClick={() => setShowModal(false)}>İptal</button>
+                        </div>
                     </div>
                 </div>
             )}

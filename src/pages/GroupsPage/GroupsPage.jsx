@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "./GroupsPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
+import CreateGroupModal from "../../components/GroupModals/CreateGroupModal ";
+import DeleteGroupModal from "../../components/GroupModals/DeleteGroupModal ";
 
 import deleteIcon from "../../assets/icons/delete-icon.png";
 import groupLogo from "../../assets/icons/GroupProfileLogo.png";
@@ -81,79 +83,64 @@ function GroupsPage() {
     return (
         <div className="groups-main">
             <Navigation />
-            <h1 className="groups-main-header">Groups</h1>
-            <div className="group-div-row">
-                <div className="project-groups">
-                    {roles.map(role => role.attributes.role === "Admin" && (
-                        <button
-                            className="project-group-add-group"
-                            onClick={() => setShowModal(true)}
-                            role="button"
-                        >
-                            Grup Oluştur
-                        </button>
-                    ))}
+            <div className="groups-main-column">
+                <h1 className="groups-main-header">Groups</h1>
+                <div className="group-div-row">
+                    <div className="project-groups">
+                        {roles.map(role => role.attributes.role === "Admin" && (
+                            <button
+                                className="project-group-add-group"
+                                onClick={() => setShowModal(true)}
+                                role="button"
+                            >
+                                Grup Oluştur
+                            </button>
+                        ))}
 
-                    {groups.map((group) => (
-                        <div key={group.id} className="project-group">
-                            {group.attributes.groupChatPic?.data ? (
+                        {groups.map((group) => (
+                            <div key={group.id} className="project-group">
+                                {group.attributes.groupChatPic?.data ? (
+                                    <img
+                                        className="group-image"
+                                        src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
+                                        alt={group.attributes.groupChatPic.data.attributes.name}
+                                    />
+                                ) : (
+                                    <img
+                                        className="group-image"
+                                        src={groupLogo}
+                                        alt="group-chat-pic"
+                                    />
+                                )}
+                                <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
                                 <img
-                                    className="group-image"
-                                    src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
-                                    alt={group.attributes.groupChatPic.data.attributes.name}
+                                    className="file-card-delete-btn"
+                                    src={deleteIcon}
+                                    alt=""
+                                    onClick={() => {
+                                        setSelectedGroupId(group.id);
+                                        setShowDeleteModal(true);
+                                    }}
                                 />
-                            ) : (
-                                <img
-                                    className="group-image"
-                                    src={groupLogo}
-                                    alt="group-chat-pic"
-                                />
-                            )}
-                            <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
-                            <img
-                                className="file-card-delete-btn"
-                                src={deleteIcon}
-                                alt=""
-                                onClick={() => {
-                                    setSelectedGroupId(group.id);
-                                    setShowDeleteModal(true);
-                                }}
-                            />
-                        </div>
-                    ))}
+                            </div>
+                        ))}
+                    </div>
+                    <GroupMessagePanel />
                 </div>
-                <GroupMessagePanel />
             </div>
+            <CreateGroupModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                newGroup={newGroup}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleSubmit}
+            />
 
-            {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={() => setShowModal(false)}>X</span>
-                        <h2>Yeni Grup Oluştur</h2>
-                        <input
-                            type="text"
-                            name="groupName"
-                            placeholder="Grup Adı"
-                            value={newGroup.groupName}
-                            onChange={handleInputChange}
-                        />
-                        <button onClick={handleSubmit}>Oluştur</button>
-                        <button onClick={() => setShowModal(false)}>İptal</button>
-                    </div>
-                </div>
-            )}
-
-            {showDeleteModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={() => setShowDeleteModal(false)}>X</span>
-                        <h2>Grubu Sil</h2>
-                        <p>Grubu gerçekten silmek istiyor musunuz?</p>
-                        <button onClick={handleDeleteGroup}>Evet</button>
-                        <button onClick={() => setShowDeleteModal(false)}>Hayır</button>
-                    </div>
-                </div>
-            )}
+            <DeleteGroupModal
+                showDeleteModal={showDeleteModal}
+                setShowDeleteModal={setShowDeleteModal}
+                handleDeleteGroup={handleDeleteGroup}
+            />
         </div>
     );
 }

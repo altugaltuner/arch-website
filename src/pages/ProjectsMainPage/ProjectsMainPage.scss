@@ -10,90 +10,106 @@
     font-family: "Barlow", sans-serif;
     position: relative;
 
-    .projects-cards-main-row {
-        width: 90%;
+    .project-cards-column {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-        padding: 20px;
-        background-color: $background-color;
+        flex-direction: column;
 
-        .add-project-btn {
-            background-color: $grey;
-            width: 240px;
-            height: 240px;
-            text-align: center;
-            border-radius: 10px;
-            border: 1px solid grey;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .title-for-projects {
+            font-size: 35px;
+            font-weight: 400;
+            color: $font-color;
+            margin: 20px 20px 20px 65px;
         }
 
-        :hover {
-            // transition: 0.1s;
-            transform: scale(1.02);
-        }
-
-        .project-cards {
+        .projects-cards-main-row {
+            width: 90%;
+            height: fit-content;
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-left: 20px;
+            border: 1px solid $border-color;
+            background-color: $background-color;
 
-
-            .project-card {
-                display: flex;
-                position: relative;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-                gap: 20px;
-                background-color: $grey;
+            .add-project-btn {
+                width: 240px;
+                height: 280px;
                 text-align: center;
                 border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-                cursor: pointer;
-
-                .project-card-delete-btn {
-                    display: none;
-                    position: absolute;
-                    width: 20px;
-                    right: 0;
-                    top: 0;
-                }
-
-                .project-card-edit-btn {
-                    display: none;
-                    position: absolute;
-                    width: 20px;
-                    right: 20px;
-                    top: 0;
-                }
-
-                .project-navbar-photos {
-                    width: 200px;
-                    border-radius: 10px;
-                }
-
-                .project-card-name {
-                    font-size: 20px;
-                    font-weight: 500;
-                    color: $font-color;
-                }
+                border: 1px solid $border-color;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             :hover {
-                //transition: 0.2s;
+                // transition: 0.1s;
                 transform: scale(1.02);
+            }
 
-                .project-card-delete-btn {
-                    display: block;
-                    position: absolute;
+            .project-cards {
+                display: flex;
+                flex-direction: row;
+                height: fit-content;
+
+                .project-card {
+                    display: flex;
+                    position: relative;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                    border: 1px solid $border-color;
+                    gap: 20px;
+                    height: 280px;
+                    text-align: center;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+                    .project-card-delete-btn {
+                        display: none;
+                        position: absolute;
+                        width: 20px;
+                        right: 0;
+                        top: 0;
+                    }
+
+                    .project-card-edit-btn {
+                        display: none;
+                        position: absolute;
+                        width: 20px;
+                        right: 20px;
+                        top: 0;
+                    }
+
+                    .project-navbar-photos {
+                        width: 200px;
+                        border-radius: 10px;
+                        border: 1px solid $border-color;
+                    }
+
+                    .project-card-name {
+                        font-size: 20px;
+                        font-weight: 400;
+                        color: $font-color;
+                    }
                 }
 
-                .project-card-edit-btn {
-                    display: block;
-                    position: absolute;
+                :hover {
+                    // transition: 0.1s;
+
+                    .project-card-delete-btn {
+                        display: block;
+                        position: absolute;
+                    }
+
+                    .project-card-edit-btn {
+                        display: block;
+                        position: absolute;
+                    }
                 }
             }
         }
