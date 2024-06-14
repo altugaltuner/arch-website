@@ -3,13 +3,15 @@
 
 .projects-main-page {
     display: flex;
+    width: 100%;
     height: 100vh;
-    flex-direction: column;
+    flex-direction: row;
     background-color: $background-color;
     font-family: "Barlow", sans-serif;
     position: relative;
 
     .projects-cards-main-row {
+        width: 90%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;

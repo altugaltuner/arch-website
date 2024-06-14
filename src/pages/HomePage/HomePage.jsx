@@ -12,8 +12,11 @@ function HomePage() {
   return (
     <main className="homepage-main">
       <Navigation />
-      <CompanyName />
-      <Activities />
+      <div className="homepage-column">
+        <CompanyName />
+        <Activities />
+      </div>
+
     </main>
   );
 }

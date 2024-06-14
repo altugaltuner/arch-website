@@ -1,7 +1,14 @@
 @use "../../styles/abstracts/variables" as *;
 
 .homepage-main {
+  display: flex;
+  flex-direction: row;
   background-color: $background-color;
   font-family: "Barlow", sans-serif;
   color: $grey;
+
+  .homepage-column {
+    display: flex;
+    flex-direction: column;
+  }
 }
