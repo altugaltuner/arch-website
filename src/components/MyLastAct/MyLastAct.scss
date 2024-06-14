@@ -1,8 +1,14 @@
 @use "../../styles/abstracts/variables" as *;
 
 .mylast-act-main {
+    width: 100%;
     font-family: "Barlow", sans-serif;
-    color: $grey;
+    background-color: $grey;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    font-family: "Barlow", sans-serif;
 
     .mylast-act-header {
         margin: 30px 0px 10px 0px;

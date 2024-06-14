@@ -159,7 +159,7 @@
                 border-radius: 8px;
                 background: none;
                 border: 1px solid $div-color;
-                color: $div-color;
+                color: $font-color;
                 cursor: pointer;
                 font-size: 14px;
                 font-weight: 600;
@@ -220,8 +220,8 @@
                 gap: 8px;
                 border-radius: 8px;
                 background: none;
-                border: 1px solid #2A2C41;
-                color: #2A2C41;
+                border: 1px solid $border-color;
+                color: $font-color;
                 cursor: pointer;
                 font-size: 14px;
                 font-weight: 600;

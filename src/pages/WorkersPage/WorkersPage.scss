@@ -94,7 +94,7 @@
         .employee-grid {
             width: 30%;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(175px, 0fr));
             gap: 20px;
             padding: 20px;
             color: $div-color;

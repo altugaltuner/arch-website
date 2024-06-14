@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./MyLastAct.scss";
 
-function MyLastAct() {
+function MyLastAct({ user }) {
+    console.log("Usewwwr:", user);
+    const [myLastActivities, setMyLastActivities] = useState([]);
 
+    useEffect(() => {
+        if (user) {
+            const lastActivities = user.project_revises;
+            setMyLastActivities(lastActivities);
+        }
+    }, [user]);
+
+    console.log("MyLastActivities:", myLastActivities);
     return (
         <div className="mylast-act-main">
             <h2 className="mylast-act-header">Son Aktivitelerim</h2>
-            {/* {myLastActivities.map((activity, index) => (
-                <div className="my-last-activity" key={index}>
-                    <h3 className="last-activity-header">{activity.projectName}</h3>
-                    <p className="last-act-p">{activity.description}</p>
-                    <p className="last-act-p">{activity.date}</p>
+            {myLastActivities.map((activity, index) => (
+                <div key={index} className="mylast-act-item">
+                    <ul>
+                        <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}</li>
+                    </ul>
                 </div>
-            ))} */}
+            ))}
         </div>
     );
 };

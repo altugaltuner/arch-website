@@ -5,7 +5,7 @@
     flex-direction: column;
     background-color: $background-color;
     height: 100vh;
-    color: $div-color;
+    color: $font-color;
     font-family: "Barlow", sans-serif;
 
     .message-groups-main-header {
@@ -42,7 +42,7 @@
 
             .message-relevant-project-header {
                 font-size: 20px;
-                color: $div-color;
+                color: $font-color;
                 padding: 5px;
                 font-weight: 500;
             }

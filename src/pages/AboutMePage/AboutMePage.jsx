@@ -18,7 +18,7 @@ function AboutMePage() {
             try {
                 const token = localStorage.getItem('token');
                 if (token) {
-                    const response = await api.get(`http://localhost:1337/api/users/me?populate=profilePic`, {
+                    const response = await api.get(`http://localhost:1337/api/users/me?populate=profilePic,project_revises`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -42,8 +42,10 @@ function AboutMePage() {
             <Navigation />
             <div className="aboutme-page-row">
                 <MyProfile user={user} />
-                <MyLastAct />
-                <MyActiveProjects user={user} />
+                <div className="aboutme-page-column">
+                    <MyLastAct user={user} />
+                    <MyActiveProjects user={user} />
+                </div>
                 <MyPersonalFiles user={user} />
             </div>
         </div>
