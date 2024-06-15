@@ -53,25 +53,28 @@ function WorkersPage() {
     return (
         <div className="workers-page-main">
             <Navigation />
-            <div className="company-grid">
-                <CompanyGridSidebar
-                    jobTitles={jobTitles}
-                    selectedJobTitle={selectedJobTitle}
-                    handleJobTitleClick={handleJobTitleClick}
-                />
-                <div className="employee-private-chat">
-                    <GroupMessagePanel />
-                </div>
-                <EmployeeGrid
-                    employees={filteredEmployees}
-                    openEmployeeCardModal={openEmployeeCardModal}
-                />
-                <SelectedEmployeeModal
-                    employee={selectedEmployee}
-                    onClose={closeEmployeeCardModal}
-                    sendEmail={sendEmail}
-                />
-            </div>
+            <div className="workers-column">
+                <h1 className="workers-page-header">Şirket Çalışanları</h1>
+                <div className="company-grid">
+                    <CompanyGridSidebar
+                        jobTitles={jobTitles}
+                        selectedJobTitle={selectedJobTitle}
+                        handleJobTitleClick={handleJobTitleClick}
+                    />
+                    <div className="employee-private-chat">
+                        <GroupMessagePanel />
+                    </div>
+                    <EmployeeGrid
+                        employees={filteredEmployees}
+                        openEmployeeCardModal={openEmployeeCardModal}
+                    />
+                    <SelectedEmployeeModal
+                        employee={selectedEmployee}
+                        onClose={closeEmployeeCardModal}
+                        sendEmail={sendEmail}
+                    />
+                </div></div>
+
         </div>
     );
 }

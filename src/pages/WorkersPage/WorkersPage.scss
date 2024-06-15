@@ -8,176 +8,88 @@
     font-family: "Barlow", sans-serif;
     position: relative;
 
-    .company-grid {
-        display: flex;
-        flex-direction: row;
-        width: 90%;
-
-        .employee-private-chat {
-            width: 60%;
-        }
-
-        .employee-card-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-
-            .employee-card-modal-inner {
-                background-color: $background-color;
-                display: flex;
-                flex-direction: column;
-                width: 400px;
-                height: 400px;
-                justify-content: center;
-                text-align: center;
-                align-items: center;
-                position: relative;
-                gap: 10px;
-                border-radius: 20px;
-
-                .profile-pic {
-                    width: 150px;
-                    height: 150px;
-
-                    .profile-pic-inner {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 50%;
-                    }
-                }
-
-                .modal-close-btn {
-                    position: absolute;
-                    top: 10px;
-                    right: 10px;
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .employee-grid {
-            width: 33%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(175px, 0fr));
-            gap: 20px;
-            padding: 20px;
-            color: $font-color;
-
-            .add-employee-btn {
-                background-color: $background-color;
-                padding: 20px;
-                max-height: 240px;
-                text-align: center;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                cursor: pointer;
-                font-weight: 500;
-
-                &:hover {
-                    background-color: darken($background-color, 10%);
-                }
-
-                &:active {
-                    background-color: darken($background-color, 20%);
-                }
-            }
-
-            .employee-card {
-                background-color: $background-color;
-                padding: 12px;
-                width: 175px;
-                max-height: 200px;
-                text-align: center;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                cursor: pointer;
-
-                .profile-pic {
-                    width: 100px;
-                    height: 100px;
-                    background-color: $grey;
-                    border-radius: 50%;
-                    margin: 0 auto 10px;
-
-                    .profile-pic-inner {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 50%;
-                    }
-                }
-
-                .employee-info {
-                    h3 {
-                        margin: 10px 0 5px;
-                        font-size: 18px;
-                        font-weight: 400;
-                    }
-
-                    p {
-                        margin: 5px 0;
-                        font-size: 14px;
-                        color: #666;
-                    }
-                }
-            }
-        }
-    }
-
-    .add-new-employee-modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
+    .workers-column {
         width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
 
-        .new-employee-modal-content {
-            background: $background-color;
-            padding: 20px;
-            border-radius: 5px;
-            position: relative;
-            text-align: center;
-            width: 50%;
+        .workers-page-header {
+            display: flex;
+            width: 100%;
+            height: 60px;
+        }
 
-            .new-employee-modal-close {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 20px;
-                cursor: pointer;
+        .company-grid {
+            gap: 20px;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+
+            .employee-private-chat {
+                width: 60%;
             }
 
-            .employee-name-input,
-            .employee-email-input,
-            .new-employee-profile-pic {
-                margin: 10px 0;
-                padding: 10px;
+            .employee-card-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
                 width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+
+                .employee-card-modal-inner {
+                    background-color: $background-color;
+                    display: flex;
+                    flex-direction: column;
+                    width: 400px;
+                    height: 400px;
+                    justify-content: center;
+                    text-align: center;
+                    align-items: center;
+                    position: relative;
+                    gap: 10px;
+                    border-radius: 20px;
+
+                    .profile-pic {
+                        width: 150px;
+                        height: 150px;
+
+                        .profile-pic-inner {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .modal-close-btn {
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        cursor: pointer;
+                    }
+                }
             }
 
-            .adding-modal-buttons-row {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 20px;
+            .employee-grid {
+                width: 33%;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(175px, 0fr));
+                gap: 20px;
+                padding: 20px;
+                color: $font-color;
 
-                .adding-modal-button-create,
-                .adding-modal-button-abort {
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
+                .add-employee-btn {
+                    background-color: $background-color;
+                    padding: 20px;
+                    max-height: 240px;
+                    text-align: center;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     cursor: pointer;
+                    font-weight: 500;
 
                     &:hover {
                         background-color: darken($background-color, 10%);
@@ -188,18 +100,119 @@
                     }
                 }
 
-                .adding-modal-button-create {
+                .employee-card {
                     background-color: $background-color;
-                    color: $font-color;
+                    padding: 12px;
+                    width: 175px;
+                    max-height: 200px;
+                    text-align: center;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    cursor: pointer;
+
+                    .profile-pic {
+                        width: 100px;
+                        height: 100px;
+                        background-color: $grey;
+                        border-radius: 50%;
+                        margin: 0 auto 10px;
+
+                        .profile-pic-inner {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .employee-info {
+                        h3 {
+                            margin: 10px 0 5px;
+                            font-size: 18px;
+                            font-weight: 400;
+                        }
+
+                        p {
+                            margin: 5px 0;
+                            font-size: 14px;
+                            color: #666;
+                        }
+                    }
+                }
+            }
+        }
+
+        .add-new-employee-modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+
+            .new-employee-modal-content {
+                background: $background-color;
+                padding: 20px;
+                border-radius: 5px;
+                position: relative;
+                text-align: center;
+                width: 50%;
+
+                .new-employee-modal-close {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-size: 20px;
+                    cursor: pointer;
                 }
 
-                .adding-modal-button-abort {
-                    background-color: $grey;
-                    color: $font-color;
+                .employee-name-input,
+                .employee-email-input,
+                .new-employee-profile-pic {
+                    margin: 10px 0;
+                    padding: 10px;
+                    width: 100%;
+                }
+
+                .adding-modal-buttons-row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 20px;
+
+                    .adding-modal-button-create,
+                    .adding-modal-button-abort {
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: darken($background-color, 10%);
+                        }
+
+                        &:active {
+                            background-color: darken($background-color, 20%);
+                        }
+                    }
+
+                    .adding-modal-button-create {
+                        background-color: $background-color;
+                        color: $font-color;
+                    }
+
+                    .adding-modal-button-abort {
+                        background-color: $grey;
+                        color: $font-color;
+                    }
                 }
             }
         }
     }
+
+
 }
 
 @media screen and (max-width: 620px) {

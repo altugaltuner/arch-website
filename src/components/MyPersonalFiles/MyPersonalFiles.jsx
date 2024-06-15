@@ -101,6 +101,16 @@ function AboutMePage({ user }) {
         setSelectedFile(null);
     };
 
+    const downloadMyFileModal = () => {
+        if (!selectedFile) {
+            console.error('No file selected for download');
+            return;
+        }
+
+        // Assuming the file has a URL property
+        window.open(`http://localhost:1337${selectedFile.url}`, '_blank');
+    };
+
     return (
         <div className="my-files-panel">
             <h2 className="my-files-panel-header">Dosyalarım</h2>
@@ -124,7 +134,7 @@ function AboutMePage({ user }) {
                 style={{ display: "none" }}
                 onChange={handleFileUpload}
             />
-            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeMyFileModal} />}
+            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeMyFileModal} onDownload={downloadMyFileModal} />}
         </div>
     );
 };

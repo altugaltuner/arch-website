@@ -3,9 +3,11 @@
 .company-grid-sidebar {
     display: flex;
     width: 20%;
-    padding: 10px;
+    padding: 15px;
     background-color: $background-color;
-    margin-top: 10px;
+    margin: 20px;
+    border: 1px solid $border-color;
+    border-radius: 15px;
 
     ul {
         width: 100%;

@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .file-preview-modal {
     position: fixed;
     top: 0;
@@ -9,50 +11,63 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
 
-.file-preview-modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 80%;
-    max-height: 80%;
-    overflow: auto;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    text-align: center;
-}
+    .file-preview-modal-content {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        max-width: 80%;
+        max-height: 80%;
+        overflow: auto;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        text-align: center;
 
-.file-preview-image {
-    max-width: 100%;
-    max-height: 60vh;
-    margin-bottom: 20px;
-}
+        .file-preview-file-name {
+            font-size: 20px;
+            padding: 5px;
+        }
 
-.modal-close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
+        .file-preview-image {
+            max-width: 100%;
+            max-height: 60vh;
+            margin-bottom: 20px;
+        }
 
-.modal-close-btn:hover {
-    color: red;
-}
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
-.modal-cancel-btn {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    background: #f0f0f0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        .file-preview-btns {
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            gap: 10px;
 
-.modal-cancel-btn:hover {
-    background: #e0e0e0;
+            .modal-download-btn {
+                display: block;
+                padding: 10px;
+                border: 1px solid $border-color;
+                border-radius: 10px;
+                cursor: pointer;
+                color: $font-color;
+                text-decoration: none;
+                margin-right: 10px;
+            }
+
+            .modal-cancel-btn {
+                display: block;
+                padding: 10px;
+                border: 1px solid $border-color;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+    }
 }
