@@ -55,16 +55,17 @@ function WorkersPage() {
                 <div className="sidebar">
                     <ul>
                         <li
-                            className="job-titles-for-workersPage"
+                            className={`job-titles-for-workersPage ${selectedJobTitle === "Tümü" ? 'active' : ''}`}
                             onClick={() => handleJobTitleClick('Tümü')}
                         >
                             Tümü
                         </li>
                         {jobTitles.map((title, index) => (
                             <li
-                                className="job-titles-for-workersPage"
+                                className={`job-titles-for-workersPage ${selectedJobTitle === title ? 'active' : ''}`}
                                 key={index}
                                 onClick={() => handleJobTitleClick(title)}
+                                role="button"
                             >
                                 {title}
                             </li>
