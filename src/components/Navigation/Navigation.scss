@@ -21,8 +21,7 @@
             width: 130px;
         }
 
-        .nav-li-third,
-        .nav-li-one {
+        .nav-li {
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -51,12 +50,17 @@
                 }
             }
 
+
             :hover {
                 background-color: darken($grey, 10%);
             }
 
             :active {
                 background-color: darken($grey, 20%);
+            }
+
+            .nav-button.active {
+                background-color: darken($grey, 10%);
             }
         }
     }
@@ -67,8 +71,7 @@
     .navigation-main {
         .nav-ul {
 
-            .nav-li-third,
-            .nav-li-one {
+            .nav-li {
                 font-size: 20px;
 
                 .nav-button {
@@ -84,8 +87,7 @@
     .navigation-main {
         .nav-ul {
 
-            .nav-li-third,
-            .nav-li-one {
+            .nav-li {
                 font-size: 14px;
 
                 .nav-button {

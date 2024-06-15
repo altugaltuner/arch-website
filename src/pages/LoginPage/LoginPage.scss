@@ -12,12 +12,15 @@
     font-family: "Barlow", sans-serif;
 
     .login-main-div {
+        border-radius: 20px;
+        border: 1px solid $border-color;
         width: 500px;
-        height: 200px;
+        height: auto;
 
         .login-h1 {
-            color: $grey;
+            color: $font-color;
             font-size: 4rem;
+            font-weight: 400;
             margin-bottom: 1rem;
         }
 
@@ -53,7 +56,7 @@
             }
 
             .error-message {
-                color: $grey;
+                color: $font-color;
                 padding: 5px;
             }
 
@@ -62,13 +65,14 @@
                 height: 40px;
                 border: none;
                 padding-left: 10px;
-                border-radius: 12px
+                border-radius: 12px;
+                border: 1px solid $border-color;
             }
 
             .login-email {
                 width: 300px;
                 height: 40px;
-                border: none;
+                border: 1px solid $border-color;
                 padding-left: 10px;
                 border-radius: 12px
             }
@@ -83,37 +87,32 @@
                     border: none;
                     border-radius: 12px;
                     cursor: pointer;
-                    color: $background-color;
-                    background-color: $grey;
+                    color: $font-color;
+                    border: 1px solid $border-color;
 
                     &:hover {
-                        background-color: darken($grey, 20%);
-                        color: $background-color;
+                        background-color: darken($background-color, 10%);
                     }
 
                     &:active {
-                        background-color: darken($grey, 35%);
-                        color: $background-color;
+                        background-color: darken($background-color, 20%);
                     }
                 }
 
                 .login-logout {
                     height: 40px;
                     width: 85px;
-                    border: none;
+                    border: 1px solid $border-color;
                     border-radius: 12px;
                     cursor: pointer;
-                    color: $background-color;
-                    background-color: $grey;
+                    color: $font-color;
 
                     &:hover {
-                        background-color: darken($grey, 20%);
-                        color: $background-color;
+                        background-color: darken($background-color, 10%);
                     }
 
                     &:active {
-                        background-color: darken($grey, 35%);
-                        color: $background-color;
+                        background-color: darken($background-color, 20%);
                     }
                 }
             }

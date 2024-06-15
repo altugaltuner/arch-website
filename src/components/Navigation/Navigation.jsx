@@ -1,5 +1,6 @@
 import "./Navigation.scss";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import archLogo from "../../assets/icons/arch-web-logo.png";
 import employeesLogo from "../../assets/icons/employees-logo.png";
 import groupsLogo from "../../assets/icons/groups-logo.png";
@@ -10,27 +11,43 @@ import homepageLogo from "../../assets/icons/homepage-logo.png";
 
 function Navigation() {
 
+    const [activeNavId, setActiveNavId] = useState(null);
+    const location = useLocation();  // Mevcut konumu almak için 
+
+    const navItems = [
+        { id: 'home-nav-id', to: '/', logo: homepageLogo, name: 'Anasayfa' },
+        { id: 'projects-nav-id', to: '/projects', logo: projectsLogo, name: 'Projeler' },
+        { id: 'groups-nav-id', to: '/groups', logo: groupsLogo, name: 'Gruplar' },
+        { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: 'Şirket Çalışanları' },
+        { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
+    ];
+
+    // Konum değiştiğinde aktif sınıfı güncelle
+    useEffect(() => {
+        const activeItem = navItems.find(item => item.to === location.pathname);
+        if (activeItem) {
+            setActiveNavId(activeItem.id);
+        }
+    }, [location, navItems]);
+
+    const handleNavClick = (id) => {
+        setActiveNavId(id);
+    };
+
     return (
-        <main className="navigation-main">
+        <nav className="navigation-main">
             <ul className="nav-ul">
                 <img src={archLogo} className="arch-logo" alt="arch-logo" />
-                <li className="nav-li-third"><Link className="nav-button" to="/">
-                    <img className="nav-logo" src={homepageLogo} alt="" srcSet="" />
-                    Anasayfa</Link></li>
-                <li className="nav-li-third"><Link className="nav-button" to="/projects">
-                    <img className="nav-logo" src={projectsLogo} alt="" srcSet="" />
-                    Projeler</Link></li>
-                <li className="nav-li-third"><Link className="nav-button" to="/groups">
-                    <img className="nav-logo" src={groupsLogo} alt="" srcSet="" />
-                    Gruplar</Link></li>
-                <li className="nav-li-third"><Link className="nav-button" to="/workers">
-                    <img className="nav-logo" src={employeesLogo} alt="" srcSet="" />
-                    Şirket Çalışanları</Link></li>
-                <li className="nav-li-one"><Link className="nav-button" to="/me">
-                    <img className="nav-logo" src={myLogo} alt="" srcSet="" />
-                    Profilim</Link></li>
+                {navItems.map(item => (
+                    <li key={item.id} className="nav-li" id={item.id} onClick={() => handleNavClick(item.id)}>
+                        <Link to={item.to} className={`nav-button ${activeNavId === item.id ? 'active' : ''}`}>
+                            <img src={item.logo} alt="" className="nav-logo" />
+                            <p src="li-name">{item.name}</p>
+                        </Link>
+                    </li>
+                ))}
             </ul>
-        </main>
+        </nav>
     );
 }
 export default Navigation;
