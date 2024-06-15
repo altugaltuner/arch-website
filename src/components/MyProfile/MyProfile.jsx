@@ -86,7 +86,7 @@ function MyProfile({ user }) {
                     </div>
 
                     <div className="profile-field">
-                        <label htmlFor="name">İsim Soyisim</label>
+                        <label className="profile-field-label" htmlFor="name">İsim Soyisim</label>
                         <input
                             className="input-for-labels"
                             type="text"
@@ -98,7 +98,7 @@ function MyProfile({ user }) {
                         />
                     </div>
                     <div className="profile-field">
-                        <label htmlFor="email">E-posta</label>
+                        <label className="profile-field-label" htmlFor="email">E-posta</label>
                         <input
                             className="input-for-labels"
                             type="email"
@@ -110,7 +110,7 @@ function MyProfile({ user }) {
                         />
                     </div>
                     <div className="profile-field">
-                        <label htmlFor="mobilePhone">Telefon</label>
+                        <label className="profile-field-label" htmlFor="mobilePhone">Telefon</label>
                         <input
                             className="input-for-labels"
                             type="tel"
@@ -122,7 +122,7 @@ function MyProfile({ user }) {
                         />
                     </div>
                     <div className="profile-field">
-                        <label htmlFor="location">Konum</label>
+                        <label className="profile-field-label" htmlFor="location">Konum</label>
                         <input
                             className="input-for-labels"
                             type="text"
@@ -133,7 +133,7 @@ function MyProfile({ user }) {
                         />
                     </div>
                     <div className="profile-field-social">
-                        <label htmlFor="social1">Sosyal Medya</label>
+                        <label className="profile-field-label" htmlFor="social1">Sosyal Medya</label>
                         <input
                             className="input-for-labels"
                             type="text"

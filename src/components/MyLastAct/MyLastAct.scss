@@ -9,16 +9,17 @@
     border-radius: 20px;
     border: 1px solid $border-color;
     font-family: "Barlow", sans-serif;
+    color: $font-color;
 
     .mylast-act-header {
         padding: 10px;
-        font-weight: 500;
+        font-weight: 400;
     }
 
     .mylast-act-item {
         .mylast-act-item-desc {
             font-size: 18px;
-            font-weight: 400;
+            font-weight: 300;
             padding: 10px;
 
         }
