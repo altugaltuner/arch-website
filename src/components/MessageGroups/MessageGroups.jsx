@@ -20,7 +20,7 @@ function MessageGroups() {
 
     return (
         <div className="message-groups-main">
-            <h1 className="message-groups-main-header">Groups</h1>
+            <h1 className="message-groups-main-header">Proje Grupları</h1>
             {groups.map((group) => (
                 <div key={group.id} className="message-project-group">
                     <img className="message-group-image" src={group.attributes.groupMedia[0]} alt="group" />

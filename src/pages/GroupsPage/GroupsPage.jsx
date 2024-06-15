@@ -84,7 +84,7 @@ function GroupsPage() {
         <div className="groups-main">
             <Navigation />
             <div className="groups-main-column">
-                <h1 className="groups-main-header">Groups</h1>
+                <h1 className="groups-main-header">Proje Grupları</h1>
                 <div className="group-div-row">
                     <div className="project-groups">
                         {roles.map(role => role.attributes.role === "Admin" && (
