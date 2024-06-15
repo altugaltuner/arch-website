@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import "./MyPersonalFiles.scss";
+import FilePreviewModal from "../../components/FilePreviewModal/FilePreviewModal";
 
 function AboutMePage({ user }) {
     const [allUsers, setAllUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedFile, setSelectedFile] = useState(null);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -91,13 +93,21 @@ function AboutMePage({ user }) {
         fileInputRef.current.click(); // Trigger a click event on the file input element
     };
 
+    const showMyFileModal = (file) => {
+        setSelectedFile(file);
+    };
+
+    const closeMyFileModal = () => {
+        setSelectedFile(null);
+    };
+
     return (
         <div className="my-files-panel">
             <h2 className="my-files-panel-header">Dosyalarım</h2>
             <div className="my-folders">
                 <div className="my-folder" onClick={uploadMyFile}>Yükle</div>
                 {filteredUser.MyPersonalFiles.map((file, index) => (
-                    <div key={index} className="my-folder">
+                    <div onClick={() => showMyFileModal(file)} key={index} className="my-folder">
                         {file.formats && file.formats.thumbnail ? (
                             <img className="my-folder-preview" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt="folder" />
                         ) : (
@@ -114,6 +124,7 @@ function AboutMePage({ user }) {
                 style={{ display: "none" }}
                 onChange={handleFileUpload}
             />
+            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeMyFileModal} />}
         </div>
     );
 };

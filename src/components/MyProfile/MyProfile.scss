@@ -18,13 +18,14 @@
             flex-wrap: wrap;
 
             .profile-field-labels {
-                font-weight: 600;
-                width: 30%;
+                font-weight: 400;
+                width: 100%;
             }
 
             .profile-field-paragraph {
                 word-break: break-all;
-
+                font-weight: 300;
+                width: 100%;
             }
         }
 
@@ -32,14 +33,15 @@
             flex-wrap: wrap;
 
             .profile-field-labels {
-                font-weight: 600;
-                width: 30%;
+                font-weight: 400;
+                width: 100%;
             }
 
 
             .profile-field-paragraph {
                 word-break: break-all;
-
+                width: 100%;
+                font-weight: 300;
             }
         }
     }
