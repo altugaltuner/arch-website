@@ -1,81 +1,78 @@
 @use "../../styles/abstracts/variables" as *;
 
+.signup-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: $background-color;
+    font-family: "Barlow", sans-serif;
 
-.test {
-    .signup-page {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        background-color: $background-color;
-        font-family: "Barlow", sans-serif;
+    .signup-main-div {
+        width: 500px;
+        height: 200px;
 
-        .signup-main-div {
-            width: 500px;
-            height: 200px;
+        h1 {
+            color: $grey;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
 
-            h1 {
-                color: $grey;
-                font-size: 4rem;
-                margin-bottom: 1rem;
-            }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
 
-            .login-form {
+            .password-section-signup {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
                 align-items: center;
-                gap: 10px;
+                position: relative;
 
-                .password-section-signup {
+                .toggle-password-visibility {
+                    position: absolute;
                     display: flex;
+                    text-align: center;
+                    justify-content: center;
                     align-items: center;
-                    position: relative;
+                    right: -40px;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    border: none;
+                    cursor: pointer;
+                    background-color: white;
 
-                    .toggle-password-visibility {
-                        position: absolute;
-                        display: flex;
-                        text-align: center;
-                        justify-content: center;
-                        align-items: center;
-                        right: -40px;
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        border: none;
+                    .eye-logo {
+                        width: 20px;
+                        height: 20px;
                         cursor: pointer;
-                        background-color: white;
-
-                        .eye-logo {
-                            width: 20px;
-                            height: 20px;
-                            cursor: pointer;
-                        }
                     }
                 }
-
-                .signup-btn {
-                    display: flex;
-                    height: 40px;
-                    width: 90px;
-                    border: none;
-                    border-radius: 12px;
-                    cursor: pointer;
-                    color: $background-color;
-                    background-color: $grey;
-                }
             }
 
-            input {
+            .signup-btn {
+                display: flex;
                 height: 40px;
-                width: 300px;
+                width: 90px;
                 border: none;
-                padding-left: 10px;
-                border-radius: 12px
+                border-radius: 12px;
+                cursor: pointer;
+                color: $background-color;
+                background-color: $grey;
             }
+        }
+
+        input {
+            height: 40px;
+            width: 300px;
+            border: none;
+            padding-left: 10px;
+            border-radius: 12px
         }
     }
 }

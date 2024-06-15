@@ -65,66 +65,64 @@ function SignupPage() {
   }
 
   return (
-    <div className="test">
-      <main className="signup-page">
-        <div className="signup-main-div">
-          <h1>Hesap oluştur</h1>
-          <form className="login-form" onSubmit={(e) => signupUser(e)}>
+    <main className="signup-page">
+      <div className="signup-main-div">
+        <h1>Hesap oluştur</h1>
+        <form className="login-form" onSubmit={(e) => signupUser(e)}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            name="fullName"
+            onChange={handleChange}
+            autoComplete="name"
+          />
+          <input
+            type="tel"
+            placeholder="Phone number"
+            name="phoneNumber"
+            onChange={handleChange}
+            autoComplete="tel"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            autoComplete="email"
+          />
+          <div className="password-section-signup">
             <input
-              type="text"
-              placeholder="Full Name"
-              name="fullName"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              name="password"
               onChange={handleChange}
-              autoComplete="name"
+              autoComplete="new-password"
             />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="toggle-password-visibility"
+            >
+              {showPassword ? (
+                <img className="eye-logo" src={eyeHide} alt="Hide" />
+              ) : (
+                <img src={eyeShow} alt="Show" className="eye-logo" />
+              )}
+            </button>
+          </div>
+          <div className="password-section-signup">
             <input
-              type="tel"
-              placeholder="Phone number"
-              name="phoneNumber"
+              type={showPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              name="confirmPassword"
               onChange={handleChange}
-              autoComplete="tel"
+              autoComplete="new-password"
             />
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              onChange={handleChange}
-              autoComplete="email"
-            />
-            <div className="password-section-signup">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                name="password"
-                onChange={handleChange}
-                autoComplete="new-password"
-              />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="toggle-password-visibility"
-              >
-                {showPassword ? (
-                  <img className="eye-logo" src={eyeHide} alt="Hide" />
-                ) : (
-                  <img src={eyeShow} alt="Show" className="eye-logo" />
-                )}
-              </button>
-            </div>
-            <div className="password-section-signup">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                onChange={handleChange}
-                autoComplete="new-password"
-              />
-            </div>
-            <input className="signup-btn" type="submit" value="Sign Up" />
-          </form>
-        </div>
-      </main>
-    </div>
+          </div>
+          <input className="signup-btn" type="submit" value="Sign Up" />
+        </form>
+      </div>
+    </main>
   );
 }
 

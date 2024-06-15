@@ -63,41 +63,6 @@
             }
         }
 
-        .sidebar {
-            display: flex;
-            width: 20%;
-            padding: 10px;
-            background-color: $background-color;
-            margin-top: 10px;
-
-            ul {
-                width: 100%;
-                list-style-type: none;
-                padding: 0;
-
-                .job-titles-for-workersPage {
-                    margin: 10px 0;
-                    padding: 10px;
-                    background-color: $background-color;
-                    text-align: center;
-                    cursor: pointer;
-                    border-radius: 0px;
-
-                    &:hover {
-                        background-color: darken($background-color, 10%);
-                    }
-
-                    &:active {
-                        background-color: darken($background-color, 20%);
-                    }
-                }
-
-                .job-titles-for-workersPage.active {
-                    background-color: darken($background-color, 10%);
-                }
-            }
-        }
-
         .employee-grid {
             width: 33%;
             display: grid;
