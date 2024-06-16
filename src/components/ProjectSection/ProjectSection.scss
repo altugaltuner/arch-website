@@ -2,14 +2,15 @@
 
 .project-folders {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
     padding: 10px;
     flex-wrap: wrap;
-    justify-content: center;
     font-family: "Barlow", sans-serif;
     border: 1px solid $border-color;
     border-radius: 15px;
+    margin-top: 20px;
 
     .current-folders-div {
         display: flex;

@@ -9,6 +9,7 @@
     padding: 10px;
     border: 1px solid $border-color;
     border-radius: 15px;
+    margin-top: 20px;
 
     .add-team-btn {
         padding: 10px;
@@ -78,13 +79,6 @@
             position: absolute;
             left: 0;
             top: 0;
-        }
-
-        .new-div-selected-profession {
-            color: $font-color;
-            font-size: 28px;
-            padding: 10px;
-            font-weight: 400;
         }
 
         .employees-grid {

@@ -84,37 +84,19 @@
                 padding: 20px;
                 color: $font-color;
 
-                .add-employee-btn {
-                    background-color: $background-color;
-                    padding: 20px;
-                    max-height: 240px;
-                    text-align: center;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    font-weight: 500;
-
-                    &:hover {
-                        background-color: darken($background-color, 10%);
-                    }
-
-                    &:active {
-                        background-color: darken($background-color, 20%);
-                    }
-                }
-
                 .employee-card {
-                    background-color: $background-color;
                     padding: 12px;
                     width: 175px;
                     max-height: 200px;
                     text-align: center;
                     border-radius: 10px;
                     cursor: pointer;
+                    border: 1px solid $border-color;
+                    border-radius: 20px;
 
                     .profile-pic {
                         width: 100px;
                         height: 100px;
-                        background-color: $grey;
                         border-radius: 50%;
                         margin: 0 auto 10px;
 

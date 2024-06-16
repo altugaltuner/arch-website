@@ -7,13 +7,15 @@
     width: 33%;
     height: fit-content;
     font-family: "Barlow", sans-serif;
+    border: 1px solid $border-color;
 
     .my-files-panel-header {
-        margin-bottom: 20px;
+        padding: 10px;
         font-weight: 400;
         color: $font-color;
         display: flex;
         justify-content: center;
+        border-bottom: 1px solid $border-color;
 
     }
 
@@ -22,14 +24,15 @@
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
+        padding: 10px;
 
         .my-folder {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             padding: 10px;
             border: 1px solid $border-color;
             border-radius: 8px;
@@ -45,6 +48,7 @@
             .my-folder-name {
                 font-size: 14px;
                 color: #555;
+                padding: 5px;
             }
         }
     }

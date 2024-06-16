@@ -7,7 +7,7 @@
     margin-top: 20px;
     padding: 20px;
     border-radius: 20px;
-    font-family: "Barlow", sans-serif;
+    border: 1px solid $border-color;
 
     .active-projects {
 
@@ -24,6 +24,7 @@
                 .my-active-project-list-header {
                     padding: 20px;
                     font-weight: 300;
+                    border-bottom: 1px solid $border-color;
                 }
 
                 .my-active-project-list {
