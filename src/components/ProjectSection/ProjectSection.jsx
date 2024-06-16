@@ -83,7 +83,8 @@ function ProjectSection({ clickedProject }) {
     }
 
     function openInsideFolder(id) {
-        // Implement the functionality to open the folder here
+
+
         console.log(`Opening folder with ID: ${id}`);
     }
 
