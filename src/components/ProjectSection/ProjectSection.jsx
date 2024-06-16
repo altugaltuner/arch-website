@@ -5,14 +5,29 @@ import addIcon from "../../assets/icons/add-icon.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import folderIcon from "../../assets/icons/folder-icon.png";
+import docxIcon from "../../assets/icons/docx-icon.png";
+import pdfIcon from "../../assets/icons/pdf-logo.png";
+import jpgIcon from "../../assets/icons/jpg-icon.png";
+import pngIcon from "../../assets/icons/png-logo.png";
+import fileIcon from "../../assets/icons/file-icon.png";
 
 function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
+
+    const fileIcons = {
+        "docx": docxIcon,
+        "pdf": pdfIcon,
+        "jpg": jpgIcon,
+        "png": pngIcon,
+    };
+
     const [newFolder, setNewFolder] = useState({
         projectFolderName: ""
     });
+    const [currentFolder, setCurrentFolder] = useState(null);
+    const [parentFolder, setParentFolder] = useState(null);
 
     async function getRoles() {
         try {
@@ -29,7 +44,7 @@ function ProjectSection({ clickedProject }) {
 
     const fetchProjectFolders = async () => {
         try {
-            const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders');
+            const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
             setProjectFolders(response.data.data);
         } catch (error) {
             console.error('Error fetching the data', error);
@@ -82,10 +97,29 @@ function ProjectSection({ clickedProject }) {
         // Implement the edit functionality here
     }
 
-    function openInsideFolder(id) {
+    function openInsideFolder(folder) {
+        setParentFolder(currentFolder);
+        setCurrentFolder(folder);
+    }
 
+    function goBack() {
+        setCurrentFolder(parentFolder);
+        setParentFolder(null);
+    }
 
-        console.log(`Opening folder with ID: ${id}`);
+    const renderFoldersAndFiles = (folder) => {
+        if (!folder) return null;
+
+        return (
+            <div className="folder-content">
+                {folder.folderContent?.data.map(file => (
+                    <div key={file.id} className="file">
+                        <img src={fileIcons[file.attributes.ext.slice(1)] || fileIcon} alt="file-icon" />
+                        <span>{file.attributes.name}</span>
+                    </div>
+                ))}
+            </div>
+        );
     }
 
     return (
@@ -99,28 +133,34 @@ function ProjectSection({ clickedProject }) {
                     <img className="project-folder-add-logo" src={addIcon} alt="" />
                 </button>
             ))}
-            {filteredFolders && filteredFolders.length > 0 ? (
-                filteredFolders.map((folder) => (
-                    <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder.id)}>
-                        <img
-                            className="file-card-delete-btn"
-                            src={deleteIcon}
-                            alt=""
-                            onClick={() => handleDeleteFolder(folder.id)}
-                        />
-                        <img className="file-card-edit-btn" src={editPencil} alt="" />
-
-                        <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
-                        <img
-                            className="project-folder-image"
-                            src={folderIcon}
-                            alt="folder-icon"
-                            key={folder.id} // Add the key prop here
-                        />
-                    </div>
-                ))
+            {currentFolder ? (
+                <div>
+                    <button onClick={goBack}>Geri Dön</button>
+                    <h2>{currentFolder.attributes.projectFolderName}</h2>
+                    {renderFoldersAndFiles(currentFolder.attributes)}
+                </div>
             ) : (
-                <p>No folders available for the selected project.</p>
+                filteredFolders && filteredFolders.length > 0 ? (
+                    filteredFolders.map((folder) => (
+                        <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
+                            <img
+                                className="file-card-delete-btn"
+                                src={deleteIcon}
+                                alt=""
+                                onClick={(e) => { e.stopPropagation(); handleDeleteFolder(folder.id); }}
+                            />
+                            <img className="file-card-edit-btn" src={editPencil} alt="" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
+                            <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
+                            <img
+                                className="project-folder-image"
+                                src={folderIcon}
+                                alt="folder-icon"
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <p>No folders available for the selected project.</p>
+                )
             )}
 
             {showModal && (
@@ -139,7 +179,6 @@ function ProjectSection({ clickedProject }) {
                             <button onClick={handleSubmit}>Oluştur</button>
                             <button onClick={() => setShowModal(false)}>İptal</button>
                         </div>
-
                     </div>
                 </div>
             )}
