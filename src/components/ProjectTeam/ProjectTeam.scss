@@ -7,14 +7,18 @@
     align-items: center;
     width: 50%;
     padding: 10px;
+    border: 1px solid $border-color;
+    border-radius: 15px;
 
     .add-team-btn {
         padding: 10px;
+        width: 140px;
+        height: 50px;
         margin: 10px;
         border: 1px solid $border-color;
         border-radius: 10px;
         cursor: pointer;
-        font-weight: 500;
+        font-weight: 400;
 
         &:hover {
             background-color: darken($background-color, 10%);
@@ -92,7 +96,7 @@
         }
 
         .employee-card {
-            background-color: $background-color;
+            border: 1px solid $border-color;
             padding: 20px;
             border-radius: 10px;
             text-align: center;

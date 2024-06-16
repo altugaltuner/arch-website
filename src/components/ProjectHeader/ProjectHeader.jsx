@@ -18,7 +18,7 @@ function ProjectHeader({ clickedProject }) {
                 </div>
                 <div className="active-project-tabs">
                     <p className="active-project-btn" type="button" >Proje Dosyaları</p>
-                    <p className="active-project-btn" type="button">Proje Ekipleri</p>
+                    <p className="active-project-btn" type="button">Proje Ekibi</p>
                 </div>
             </div>
         </div>

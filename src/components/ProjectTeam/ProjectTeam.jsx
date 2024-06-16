@@ -77,7 +77,6 @@ const ProjectTeam = ({ clickedProject }) => {
             ))}
 
             <div className="new-div">
-                <h3 className='new-div-selected-profession'>{clickedProject.attributes.projectName}</h3>
                 <div className="employees-grid">
                     {filteredEmployees.map((employee, index) => (
                         <div className="employee-card" key={index}>

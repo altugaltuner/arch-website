@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .modal {
     position: fixed;
     top: 0;
@@ -24,6 +26,8 @@
 
 .modal-content-header {
     margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 500;
 }
 
 .close {

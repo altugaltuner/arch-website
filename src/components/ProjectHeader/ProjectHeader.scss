@@ -41,12 +41,11 @@
             background-color: $background-color;
 
             .active-project-btn {
-                border-radius: 15px;
+                border-bottom: 1px solid $border-color;
                 padding: 10px;
                 margin: 10px;
                 width: 100%;
                 font-size: 30px;
-                background-color: $grey;
                 color: $font-color;
                 text-align: center;
             }
