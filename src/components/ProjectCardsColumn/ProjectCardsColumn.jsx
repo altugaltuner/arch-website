@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
 
-function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowModal }) {
+function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowModal, editModalOpen }) {
     return (
         <div className="project-cards-column">
             <h1 className="title-for-projects">Projeler</h1>
@@ -21,6 +21,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                 className="project-card-edit-btn"
                                 src={editPencil}
                                 alt=""
+                                onClick={() => editModalOpen(project.id)}
                             />
                             <Link className="project-card" to={`/projects/${project.id}`}>
                                 <p className="project-card-name">

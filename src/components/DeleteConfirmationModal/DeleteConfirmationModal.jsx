@@ -1,7 +1,7 @@
 import React from 'react';
 
-function DeleteConfirmationModal({ show, onClose, onConfirm }) {
-    if (!show) {
+function DeleteConfirmationModal({ showDeleteModal, onClose, onConfirm }) {
+    if (!showDeleteModal) {
         return null;
     }
 
