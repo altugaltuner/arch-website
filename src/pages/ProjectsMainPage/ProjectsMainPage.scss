@@ -41,7 +41,6 @@
                 text-align: center;
                 border-radius: 10px;
                 border: 1px solid $border-color;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             .project-cards {
@@ -51,7 +50,6 @@
                 position: relative;
                 border: 1px solid $border-color;
                 border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
                 .project-card-delete-btn {
                     display: flex;

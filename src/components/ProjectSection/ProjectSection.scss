@@ -7,6 +7,8 @@
     padding: 10px;
     flex-wrap: wrap;
     height: fit-content;
+    justify-content: center;
+    font-family: "Barlow", sans-serif;
 
     .current-folders-div {
         display: flex;
@@ -61,25 +63,36 @@
         }
     }
 
+    .project-folder-button {
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        border: 1px solid $border-color;
+        cursor: pointer;
+        font-weight: 500;
+        color: $font-color;
 
+        &:hover {
+            background-color: darken($background-color, 10%);
+        }
+
+        &:active {
+            background-color: darken($background-color, 20%);
+        }
+    }
 
     .project-folder {
         display: flex;
         position: relative;
         flex-direction: column;
         align-items: center;
-        background-color: $grey;
         padding: 10px;
         margin: 10px;
         height: 170px;
         width: 200px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid $border-color;
         cursor: pointer;
-
-        .project-folder-add-logo {
-            width: 110px;
-        }
 
         .file-card-delete-btn {
             display: none;

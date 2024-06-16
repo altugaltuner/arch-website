@@ -6,13 +6,13 @@
     flex-direction: column;
     align-items: center;
     width: 50%;
+    padding: 10px;
 
     .add-team-btn {
-        background-color: $background-color;
         padding: 10px;
         margin: 10px;
+        border: 1px solid $border-color;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         font-weight: 500;
 
@@ -37,7 +37,6 @@
         background-color: $background-color;
         padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
         cursor: pointer;
 
@@ -96,14 +95,11 @@
             background-color: $background-color;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            cursor: pointer;
 
             .profile-pic {
                 width: 100px;
                 height: 100px;
-                background-color: $grey;
                 border-radius: 50%;
                 margin: 0 auto 10px;
 
@@ -125,69 +121,6 @@
                 .employee-info-professionName {
                     font-size: 14px;
                     color: #666;
-                }
-            }
-        }
-    }
-
-    .modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-
-        .modal-content {
-            background-color: $background-color;
-            padding: 20px;
-            border-radius: 5px;
-            position: relative;
-            text-align: center;
-
-            .modal-content-header {
-                font-size: 24px;
-                font-weight: 500;
-            }
-
-            .btn-div-for-modal {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                gap: 20px;
-            }
-
-            .close {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 20px;
-                cursor: pointer;
-            }
-
-            input {
-                margin: 10px 0;
-                padding: 10px;
-                width: 100%;
-            }
-
-            button {
-                padding: 10px 20px;
-                margin: 10px 5px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: darken(#ccc, 10%);
-                }
-
-                &:active {
-                    background-color: darken(#ccc, 20%);
                 }
             }
         }

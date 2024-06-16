@@ -130,11 +130,10 @@ function ProjectSection({ clickedProject }) {
         <div className="project-folders">
             {!currentFolder && roles.map(role => role.attributes.role === "Admin" && (
                 <button
-                    className="project-folder"
+                    className="project-folder-button"
                     onClick={() => setShowModal(true)} // Show the modal directly on button click
                 >
                     Grup Oluştur
-                    <img className="project-folder-add-logo" src={addIcon} alt="" />
                 </button>
             ))}
             {currentFolder ? (
