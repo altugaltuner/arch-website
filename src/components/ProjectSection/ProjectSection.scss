@@ -8,6 +8,61 @@
     flex-wrap: wrap;
     height: fit-content;
 
+    .current-folders-div {
+        display: flex;
+        flex-direction: column;
+
+        .current-folders-div-2 {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+
+            .go-back-btn {
+                .go-back-btn-img {
+                    width: 40px;
+                }
+            }
+
+            .current-folder-header {
+                font-weight: 400;
+            }
+        }
+
+
+        .folder-content {
+            gap: 20px;
+            padding: 25px;
+            flex-wrap: wrap;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: baseline;
+
+            .file {
+                display: flex;
+                flex-direction: column;
+
+                width: 160px;
+                max-height: 160px;
+                text-align: center;
+                align-items: center;
+
+                .file-icon-img {
+                    width: 100px;
+                }
+
+                .file-name {
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: $font-color;
+                    word-break: break-all;
+                }
+            }
+        }
+    }
+
+
+
     .project-folder {
         display: flex;
         position: relative;

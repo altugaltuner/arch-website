@@ -9,7 +9,10 @@ import docxIcon from "../../assets/icons/docx-icon.png";
 import pdfIcon from "../../assets/icons/pdf-logo.png";
 import jpgIcon from "../../assets/icons/jpg-icon.png";
 import pngIcon from "../../assets/icons/png-logo.png";
+import dwgIcon from "../../assets/icons/dwg-icon.png";
 import fileIcon from "../../assets/icons/file-icon.png";
+import goBackButton from "../../assets/icons/back-button.png";
+
 
 function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
@@ -21,6 +24,7 @@ function ProjectSection({ clickedProject }) {
         "pdf": pdfIcon,
         "jpg": jpgIcon,
         "png": pngIcon,
+        "dwg": dwgIcon
     };
 
     const [newFolder, setNewFolder] = useState({
@@ -114,8 +118,8 @@ function ProjectSection({ clickedProject }) {
             <div className="folder-content">
                 {folder.folderContent?.data.map(file => (
                     <div key={file.id} className="file">
-                        <img src={fileIcons[file.attributes.ext.slice(1)] || fileIcon} alt="file-icon" />
-                        <span>{file.attributes.name}</span>
+                        <img className="file-icon-img" src={fileIcons[file.attributes.ext.slice(1)] || fileIcon} alt="file-icon" />
+                        <span className="file-name">{file.attributes.name}</span>
                     </div>
                 ))}
             </div>
@@ -124,7 +128,7 @@ function ProjectSection({ clickedProject }) {
 
     return (
         <div className="project-folders">
-            {roles.map(role => role.attributes.role === "Admin" && (
+            {!currentFolder && roles.map(role => role.attributes.role === "Admin" && (
                 <button
                     className="project-folder"
                     onClick={() => setShowModal(true)} // Show the modal directly on button click
@@ -134,9 +138,14 @@ function ProjectSection({ clickedProject }) {
                 </button>
             ))}
             {currentFolder ? (
-                <div>
-                    <button onClick={goBack}>Geri Dön</button>
-                    <h2>{currentFolder.attributes.projectFolderName}</h2>
+                <div className="current-folders-div">
+                    <div className="current-folders-div-2">
+                        <button className="go-back-btn" onClick={goBack}>
+                            <img src={goBackButton} alt="" srcSet="" className="go-back-btn-img" />
+                        </button>
+                        <h2 className="current-folder-header">{currentFolder.attributes.projectFolderName}</h2>
+                    </div>
+
                     {renderFoldersAndFiles(currentFolder.attributes)}
                 </div>
             ) : (
