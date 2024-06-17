@@ -20,6 +20,8 @@ function Navigation() {
         { id: 'groups-nav-id', to: '/groups', logo: groupsLogo, name: 'Gruplar' },
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: 'Şirket Çalışanları' },
         { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
+        { id: 'signup-nav-id', to: '/signup', logo: myLogo, name: 'Kayıt Ol' },
+        { id: 'login-nav-id', to: '/login', logo: myLogo, name: 'Giriş Yap' }
     ];
 
     // Konum değiştiğinde aktif sınıfı güncelle

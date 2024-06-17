@@ -7,7 +7,9 @@ import Navigation from "../../components/Navigation/Navigation";
 import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
 import CreateGroupModal from "../../components/GroupModals/CreateGroupModal ";
 import DeleteGroupModal from "../../components/GroupModals/DeleteGroupModal ";
+import EditGroupModal from "../../components/EditGroupModal/EditGroupModal";
 
+import editIcon from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
 import groupLogo from "../../assets/icons/GroupProfileLogo.png";
 
@@ -15,13 +17,13 @@ function GroupsPage() {
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [groups, setGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
-    const [newGroup, setNewGroup] = useState({
-        groupName: ""
-    });
+    const [newGroup, setNewGroup] = useState({ groupName: "" });
+    const [changedGroup, setChangedGroup] = useState({ groupName: "" });
 
-    function handleDeleteGroup() {
+    const handleDeleteGroup = () => {
         try {
             axios.delete(`http://localhost:1337/api/groups/${selectedGroupId}`).then(() => {
                 setGroups((prevGroups) => prevGroups.filter((group) => group.id !== selectedGroupId));
@@ -31,7 +33,25 @@ function GroupsPage() {
         } catch (error) {
             console.error('Error deleting the group', error);
         }
-    }
+    };
+
+    const handleEditGroup = (newGroupName) => {
+        const payload = {
+            data: {
+                groupName: newGroupName
+            }
+        };
+
+        try {
+            axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, payload).then(() => {
+                setShowEditModal(false);
+                setSelectedGroupId(null);
+                fetchProjectGroups();
+            });
+        } catch (error) {
+            console.error('Error editing the group', error);
+        }
+    };
 
     const fetchProjectGroups = async () => {
         try {
@@ -113,6 +133,15 @@ function GroupsPage() {
                                     />
                                 )}
                                 <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
+                                <img className="file-card-edit-btn"
+                                    src={editIcon}
+                                    alt=""
+                                    onClick={() => {
+                                        setSelectedGroupId(group.id);
+                                        setChangedGroup({ groupName: group.attributes.groupName });
+                                        setShowEditModal(true);
+                                    }}
+                                />
                                 <img
                                     className="file-card-delete-btn"
                                     src={deleteIcon}
@@ -140,6 +169,11 @@ function GroupsPage() {
                 showDeleteModal={showDeleteModal}
                 setShowDeleteModal={setShowDeleteModal}
                 handleDeleteGroup={handleDeleteGroup}
+            />
+            <EditGroupModal
+                showEditModal={showEditModal}
+                setShowEditModal={setShowEditModal}
+                handleEditGroup={handleEditGroup}
             />
         </div>
     );

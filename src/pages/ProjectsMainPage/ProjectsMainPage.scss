@@ -135,6 +135,15 @@
                 color: $font-color;
             }
 
+            .project-name-input {
+                width: 300px;
+                height: 40px;
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid $border-color;
+                color: $font-color;
+            }
+
             .add-new-project-modal-title {
                 font-size: 20px;
                 font-weight: 400;
@@ -164,8 +173,8 @@
                 }
 
                 .adding-modal-button-abort {
-                    background-color: $background-color;
-                    color: $grey;
+                    border: 1px solid $border-color;
+                    color: $font-color;
                     padding: 10px 20px;
                     border-radius: 10px;
                     cursor: pointer;

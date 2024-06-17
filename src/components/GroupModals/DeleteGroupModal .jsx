@@ -1,12 +1,13 @@
 import React from 'react';
+import "../GroupModals/DeleteGroupModal.scss"
 
 const DeleteGroupModal = ({ showDeleteModal, setShowDeleteModal, handleDeleteGroup }) => {
     if (!showDeleteModal) return null;
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <span className="close" onClick={() => setShowDeleteModal(false)}>X</span>
+        <div className="delete-group-modal">
+            <div className="delete-group-modal-content">
+                <span className="delete-group-close" onClick={() => setShowDeleteModal(false)}>X</span>
                 <h2>Grubu Sil</h2>
                 <p>Grubu gerçekten silmek istiyor musunuz?</p>
                 <button onClick={handleDeleteGroup}>Evet</button>

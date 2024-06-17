@@ -67,9 +67,10 @@ function SignupPage() {
   return (
     <main className="signup-page">
       <div className="signup-main-div">
-        <h1>Hesap oluştur</h1>
+        <h1 className="signup-header">Hesap oluştur</h1>
         <form className="login-form" onSubmit={(e) => signupUser(e)}>
           <input
+            className="signup-full-name-input"
             type="text"
             placeholder="Full Name"
             name="fullName"
@@ -77,6 +78,7 @@ function SignupPage() {
             autoComplete="name"
           />
           <input
+            className="signup-tel-input"
             type="tel"
             placeholder="Phone number"
             name="phoneNumber"
@@ -84,6 +86,7 @@ function SignupPage() {
             autoComplete="tel"
           />
           <input
+            className="signup-email-input"
             type="email"
             placeholder="Email"
             name="email"
@@ -92,6 +95,7 @@ function SignupPage() {
           />
           <div className="password-section-signup">
             <input
+              className="signup-password-input"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               name="password"
@@ -106,12 +110,13 @@ function SignupPage() {
               {showPassword ? (
                 <img className="eye-logo" src={eyeHide} alt="Hide" />
               ) : (
-                <img src={eyeShow} alt="Show" className="eye-logo" />
+                <img className="eye-logo" src={eyeShow} alt="Show" />
               )}
             </button>
           </div>
           <div className="password-section-signup">
             <input
+              className="signup-password-input"
               type={showPassword ? "text" : "password"}
               placeholder="Confirm Password"
               name="confirmPassword"

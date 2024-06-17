@@ -15,10 +15,11 @@
         width: 500px;
         height: 200px;
 
-        h1 {
-            color: $grey;
+        .signup-header {
+            color: $font-color;
             font-size: 4rem;
-            margin-bottom: 1rem;
+            font-weight: 500;
+            margin-bottom: 20px;
         }
 
         .login-form {
@@ -65,14 +66,58 @@
                 color: $background-color;
                 background-color: $grey;
             }
-        }
 
-        input {
-            height: 40px;
-            width: 300px;
-            border: none;
-            padding-left: 10px;
-            border-radius: 12px
+            .signup-full-name-input {
+                height: 40px;
+                width: 300px;
+                border: none;
+                padding-left: 10px;
+                border-radius: 12px;
+                border: 1px solid $border-color;
+            }
+
+            .signup-tel-input {
+                height: 40px;
+                width: 300px;
+                border: none;
+                padding-left: 10px;
+                border-radius: 12px;
+                border: 1px solid $border-color;
+            }
+
+            .signup-email-input {
+                height: 40px;
+                width: 300px;
+                border: none;
+                padding-left: 10px;
+                border-radius: 12px;
+                border: 1px solid $border-color;
+            }
+
+            .password-section-signup {
+
+                .signup-password-input {
+                    height: 40px;
+                    width: 300px;
+                    border: none;
+                    padding-left: 10px;
+                    border-radius: 12px;
+                    border: 1px solid $border-color;
+                }
+
+                .toggle-password-visibility {
+
+                    .eye-logo {}
+                }
+            }
+
+            .signup-btn {
+                color: $font-color;
+                border: 1px solid $border-color;
+                padding: 5px;
+                border-radius: 12px;
+                background-color: $background-color;
+            }
         }
     }
 }

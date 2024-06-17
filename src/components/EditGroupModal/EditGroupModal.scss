@@ -1,0 +1,56 @@
+@use "../../styles/abstracts/variables" as *;
+
+.group-edit-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    .group-edit-modal-content {
+        background-color: $background-color;
+        padding: 20px;
+        border-radius: 5px;
+        position: relative;
+        text-align: center;
+        width: 400px;
+        height: 300px;
+
+        .close-edit-modal {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .group-edit-modal-header {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .group-edit-modal-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+
+            .modal-button-cancel {
+                border: 1px solid $border-color;
+                border-radius: 15px;
+                color: $font-color;
+            }
+
+            .modal-button-confirm {
+                border: 1px solid $border-color;
+                border-radius: 15px;
+                color: $font-color;
+            }
+        }
+    }
+}
