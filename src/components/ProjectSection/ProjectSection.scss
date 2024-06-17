@@ -42,14 +42,87 @@
             justify-content: center;
             align-items: baseline;
 
+            .file-input-wrapper {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+
+                .file-preview {
+                    .preview-image {
+                        width: 100px;
+                        max-height: 300px;
+                    }
+
+                    .file-preview-upload {}
+                }
+
+                input[type="file"] {
+                    display: none;
+                }
+
+                label {
+                    display: inline-block;
+                    padding: 0.5rem 1rem;
+                    background-color: #007bff;
+                    color: #fff;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: #0056b3;
+                    }
+                }
+
+                button {
+                    margin-left: 1rem;
+                    padding: 0.5rem 1rem;
+                    background-color: #28a745;
+                    color: #fff;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: #218838;
+                    }
+                }
+            }
+
+            .add-file {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 160px;
+                height: 160px;
+                border: 1px solid $border-color;
+                border-radius: 10px;
+                cursor: pointer;
+                transform: translate(0px, -12px);
+            }
+
+            .add-file-to-folder {
+                padding: 10px;
+                width: 140px;
+                height: 50px;
+                margin: 10px;
+                border: 1px solid #e4e4e4;
+                border-radius: 10px;
+                cursor: pointer;
+                font-weight: 400;
+            }
+
             .file {
                 display: flex;
                 flex-direction: column;
-
+                gap: 20px;
                 width: 160px;
-                max-height: 160px;
+                height: 170px;
                 text-align: center;
                 align-items: center;
+                cursor: pointer;
 
                 .file-icon-img {
                     width: 100px;
@@ -164,9 +237,37 @@
             position: relative;
             text-align: center;
 
+            .close-modal {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            .modal-header {
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            .input-field {
+                border-radius: 15px;
+                border: 1px solid $border-color;
+            }
+
             .buttons-for-modal {
                 display: flex;
                 justify-content: space-evenly;
+
+                .submit-button {
+                    border-radius: 15px;
+                    border: 1px solid $border-color;
+                }
+
+                .cancel-button {
+                    border-radius: 15px;
+                    border: 1px solid $border-color;
+                }
             }
 
             .close {

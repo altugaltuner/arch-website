@@ -11,29 +11,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid $border-color;
 
   &:active {
     transform: translateY(1px);
   }
 
   &:hover {
-    color: $accent-color;
-    border: 1px solid $accent-color;
+    color: $background-color;
+    border: 1px solid $background-color;
   }
 
   &.primary {
-    background-color: $accent-color;
-    color: $primary-font-color;
+    background-color: $background-color;
+    color: $font-color;
 
     &:hover {
-      background-color: darken($color: $accent-color, $amount: 1%);
+      background-color: darken($color: $background-color, $amount: 1%);
     }
   }
 
   &.secondary {
     background-color: transparent;
-    color: $accent-color;
-    border: 1px solid $accent-color;
+    color: $background-color;
+    border: 1px solid $border-color;
   }
 
   &.large {

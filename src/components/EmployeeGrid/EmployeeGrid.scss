@@ -1,0 +1,55 @@
+@use "../../styles/abstracts/variables" as *;
+
+.employee-grid-container {
+    max-height: 800px;
+    /* Adjust height as needed */
+    overflow-y: auto;
+
+    .employee-grid {
+        width: 33%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(175px, 0fr));
+        gap: 20px;
+        padding: 20px;
+        color: $font-color;
+
+        .employee-card {
+            padding: 12px;
+            width: 175px;
+            max-height: 200px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid $border-color;
+            border-radius: 20px;
+
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin: 0 auto 10px;
+
+                .profile-pic-inner {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            .employee-info {
+                h3 {
+                    margin: 10px 0 5px;
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+
+                p {
+                    margin: 5px 0;
+                    font-size: 14px;
+                    color: #666;
+                }
+            }
+        }
+    }
+}

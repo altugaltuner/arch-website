@@ -12,12 +12,14 @@ import pngIcon from "../../assets/icons/png-logo.png";
 import dwgIcon from "../../assets/icons/dwg-icon.png";
 import fileIcon from "../../assets/icons/file-icon.png";
 import goBackButton from "../../assets/icons/back-button.png";
-
+import Button from "../Button/Button";
 
 function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [filePreview, setFilePreview] = useState(null);
 
     const fileIcons = {
         "docx": docxIcon,
@@ -59,7 +61,6 @@ function ProjectSection({ clickedProject }) {
         fetchProjectFolders();
     }, []);
 
-    // Filter project folders based on the clicked project ID
     const filteredFolders = clickedProject
         ? projectFolders.find((project) => project.id === clickedProject.id)?.attributes.project_folders.data
         : [];
@@ -80,7 +81,6 @@ function ProjectSection({ clickedProject }) {
             await axios.post('http://localhost:1337/api/project-folders', formData);
             setShowModal(false);
             setNewFolder({ projectFolderName: "" });
-            // Refetch project folders after adding a new one
             await fetchProjectFolders();
         } catch (error) {
             console.error('Error creating a new project folder', error);
@@ -90,7 +90,6 @@ function ProjectSection({ clickedProject }) {
     function handleDeleteFolder(id) {
         try {
             axios.delete(`http://localhost:1337/api/project-folders/${id}`);
-            // Refetch project folders after deleting one
             fetchProjectFolders();
         } catch (error) {
             console.error('Error deleting the project folder', error);
@@ -111,12 +110,63 @@ function ProjectSection({ clickedProject }) {
         setParentFolder(null);
     }
 
+    const addFileToFolder = async () => {
+        if (!selectedFile || !currentFolder) return;
+
+        const formData = new FormData();
+        formData.append('files', selectedFile);
+        formData.append('ref', 'project-folders');
+        formData.append('refId', currentFolder.id);
+        formData.append('field', 'folderContent');
+
+        try {
+            const response = await axios.post('http://localhost:1337/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            await fetchProjectFolders();
+            setSelectedFile(null);
+            setFilePreview(null);
+        } catch (error) {
+            console.error('Error uploading the file', error);
+        }
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedFile(file);
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFilePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const renderFoldersAndFiles = (folder) => {
-        if (!folder) return null;
+        if (!folder || !folder.folderContent || !folder.folderContent.data) return null;
 
         return (
             <div className="folder-content">
-                {folder.folderContent?.data.map(file => (
+                <div className="file-input-wrapper">
+                    <label htmlFor="file-upload" className="custom-file-upload">
+                        Dosya Seç
+                    </label>
+                    <input
+                        id="file-upload"
+                        type="file"
+                        onChange={handleFileChange}
+                    />
+                    {filePreview && (
+                        <div className="file-preview">
+                            <img src={filePreview} alt="Preview" className="preview-image" />
+                            <button className="file-preview-upload" onClick={addFileToFolder}>Dosya Yükle</button>
+                        </div>
+                    )}
+                </div>
+                {folder.folderContent.data.map(file => (
                     <div key={file.id} className="file">
                         <img className="file-icon-img" src={fileIcons[file.attributes.ext.slice(1)] || fileIcon} alt="file-icon" />
                         <span className="file-name">{file.attributes.name}</span>
@@ -124,14 +174,14 @@ function ProjectSection({ clickedProject }) {
                 ))}
             </div>
         );
-    }
+    };
 
     return (
         <div className="project-folders">
             {!currentFolder && roles.map(role => role.attributes.role === "Admin" && (
                 <button
                     className="project-folder-button"
-                    onClick={() => setShowModal(true)} // Show the modal directly on button click
+                    onClick={() => setShowModal(true)}
                 >
                     Grup Oluştur
                 </button>
@@ -140,7 +190,7 @@ function ProjectSection({ clickedProject }) {
                 <div className="current-folders-div">
                     <div className="current-folders-div-2">
                         <button className="go-back-btn" onClick={goBack}>
-                            <img src={goBackButton} alt="" srcSet="" className="go-back-btn-img" />
+                            <img src={goBackButton} alt="" className="go-back-btn-img" />
                         </button>
                         <h2 className="current-folder-header">{currentFolder.attributes.projectFolderName}</h2>
                     </div>
@@ -174,9 +224,10 @@ function ProjectSection({ clickedProject }) {
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={() => setShowModal(false)}>X</span>
-                        <h2>Yeni Proje Klasörü Oluştur</h2>
+                        <span className="close-modal" onClick={() => setShowModal(false)}>X</span>
+                        <h2 className="modal-header">Yeni Proje Klasörü Oluştur</h2>
                         <input
+                            className="input-field"
                             type="text"
                             name="projectFolderName"
                             placeholder="Klasör Adı"
@@ -184,8 +235,8 @@ function ProjectSection({ clickedProject }) {
                             onChange={handleInputChange}
                         />
                         <div className="buttons-for-modal">
-                            <button onClick={handleSubmit}>Oluştur</button>
-                            <button onClick={() => setShowModal(false)}>İptal</button>
+                            <button className="submit-button" onClick={handleSubmit}>Oluştur</button>
+                            <button className="cancel-button" onClick={() => setShowModal(false)}>İptal</button>
                         </div>
                     </div>
                 </div>

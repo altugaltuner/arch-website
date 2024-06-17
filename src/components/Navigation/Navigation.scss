@@ -15,10 +15,9 @@
         flex-direction: column;
         width: 100%;
         height: 100vh;
-        gap: 25px;
 
         .arch-logo {
-            width: 130px;
+            width: 100px;
         }
 
         .nav-li {
@@ -37,7 +36,7 @@
                 width: 100%;
                 border: none;
                 border-radius: 0px;
-                padding: 10px;
+                padding: 30px 10px 30px 10px;
                 gap: 10px;
                 text-align: center;
                 color: $font-color;

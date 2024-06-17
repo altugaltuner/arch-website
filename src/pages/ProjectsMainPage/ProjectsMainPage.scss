@@ -131,13 +131,13 @@
 
             .new-project-adding-header {
                 font-size: 30px;
-                font-weight: 500;
+                font-weight: 400;
                 color: $font-color;
             }
 
             .add-new-project-modal-title {
                 font-size: 20px;
-                font-weight: 500;
+                font-weight: 400;
                 color: $font-color;
             }
 
@@ -156,8 +156,8 @@
                 gap: 20px;
 
                 .adding-modal-button-create {
-                    background-color: $font-color;
-                    color: $grey;
+                    border: 1px solid $border-color;
+                    color: $font-color;
                     padding: 10px 20px;
                     border-radius: 10px;
                     cursor: pointer;
