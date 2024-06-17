@@ -8,7 +8,7 @@ function MyActiveProjects({ user }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=projects');
+                const response = await axios.get('http://localhost:1337/api/users?populate[profession]=*&populate[projects][populate]=projectCoverPhoto&populate=profilePic');
                 //console.log("Fetched users:", response.data);
                 setAllUsers(response.data || []);
             } catch (error) {
@@ -33,7 +33,10 @@ function MyActiveProjects({ user }) {
             <h2 className="my-active-project-list-header">Dahil Olduğum Projeler</h2>
             <div className="my-active-project-list">
                 {u.projects.map(p => (
-                    <p className="my-active-project-list-element" key={p.id}>{p.projectName}</p>
+                    <div className="my-active-project-list-element">
+                        <img className="my-active-project-list-pic" src={`http://localhost:1337${p.projectCoverPhoto.formats.thumbnail.url}`} alt="" />
+                        <p className="my-active-project-list-paragraph" key={p.id}>{p.projectName}</p>
+                    </div>
                 ))}
             </div>
         </div>
@@ -41,10 +44,8 @@ function MyActiveProjects({ user }) {
 
     return (
         <div className="myactive-projects-main">
-            <div className="active-projects">
-                <div className="active-projects-container">
-                    {userElements}
-                </div>
+            <div className="active-projects-container">
+                {userElements}
             </div>
         </div>
     );
