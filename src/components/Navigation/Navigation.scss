@@ -18,6 +18,8 @@
 
         .arch-logo {
             width: 100px;
+            border-bottom: 1px solid $border-color;
+            padding-bottom: 10px;
         }
 
         .nav-li {
@@ -41,6 +43,7 @@
                 color: $font-color;
                 font-size: 20px;
                 cursor: pointer;
+                border-bottom: 1px solid $border-color;
 
                 .nav-logo {
                     width: 45px;

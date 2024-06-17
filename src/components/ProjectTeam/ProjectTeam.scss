@@ -94,6 +94,15 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: darken($background-color, 10%);
+            }
+
+            &:active {
+                background-color: darken($background-color, 20%);
+            }
 
             .profile-pic {
                 width: 100px;

@@ -23,6 +23,14 @@
             border: 1px solid $border-color;
             border-radius: 20px;
 
+            &:hover {
+                background-color: darken($background-color, 10%);
+            }
+
+            &:active {
+                background-color: darken($background-color, 20%);
+            }
+
             .profile-pic {
                 width: 100px;
                 height: 100px;

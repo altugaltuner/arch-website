@@ -7,7 +7,7 @@ import groupsLogo from "../../assets/icons/groups-logo.png";
 import projectsLogo from "../../assets/icons/projects-logo.png";
 import myLogo from "../../assets/icons/my-profile-logo.png";
 import homepageLogo from "../../assets/icons/homepage-logo.png";
-
+import settingsLogo from "../../assets/icons/settings-icon.png";
 
 function Navigation() {
 
@@ -20,8 +20,7 @@ function Navigation() {
         { id: 'groups-nav-id', to: '/groups', logo: groupsLogo, name: 'Gruplar' },
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: 'Şirket Çalışanları' },
         { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
-        { id: 'signup-nav-id', to: '/signup', logo: myLogo, name: 'Kayıt Ol' },
-        { id: 'login-nav-id', to: '/login', logo: myLogo, name: 'Giriş Yap' }
+        { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' },
     ];
 
     // Konum değiştiğinde aktif sınıfı güncelle

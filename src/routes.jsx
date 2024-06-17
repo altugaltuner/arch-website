@@ -8,6 +8,7 @@ import WorkersPage from "./pages/WorkersPage/WorkersPage.jsx";
 import AboutMePage from "./pages/AboutMePage/AboutMePage.jsx";
 import GroupsPage from "./pages/GroupsPage/GroupsPage.jsx";
 import ProjectsMainPage from "./pages/ProjectsMainPage/ProjectsMainPage.jsx";
+import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
 
 const routes = [
   {
@@ -74,6 +75,14 @@ const routes = [
     path: "/login",
     element: <LoginPage />,
   },
+  {
+    path: "settings",
+    element: (
+      <ProtectedRoute>
+        <SettingsPage />
+      </ProtectedRoute>
+    ),
+  }
 ];
 
 export default routes;
