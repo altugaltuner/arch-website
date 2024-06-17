@@ -6,7 +6,7 @@
     overflow-y: auto;
 
     .employee-grid {
-        width: 33%;
+        width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(175px, 0fr));
         gap: 20px;

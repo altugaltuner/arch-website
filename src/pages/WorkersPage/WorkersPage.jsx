@@ -5,13 +5,15 @@ import axios from 'axios';
 import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
 import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import EmployeeGrid from "../../components/EmployeeGrid/EmployeeGrid";
-import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridSidebar"
+import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridSidebar";
 
 function WorkersPage() {
     const [employees, setEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [selectedJobTitle, setSelectedJobTitle] = useState('Tümü');
     const [jobTitles, setJobTitles] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredSearchEmployees, setFilteredSearchEmployees] = useState([]);
 
     const sendEmail = (email) => {
         window.location.href = `mailto:${email}`;
@@ -27,6 +29,7 @@ function WorkersPage() {
                 const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
                 console.log(response.data);
                 setEmployees(response.data);
+                setFilteredSearchEmployees(response.data);
                 const titles = response.data.map(employee => employee.profession.professionName);
                 const uniqueTitles = Array.from(new Set(titles));
                 setJobTitles(uniqueTitles);
@@ -38,6 +41,17 @@ function WorkersPage() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const results = employees.filter(employee =>
+            employee.username.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredSearchEmployees(results);
+    }, [searchTerm, employees]);
+
+    const searchEmployees = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     const openEmployeeCardModal = (employee) => {
         setSelectedEmployee(employee);
     };
@@ -47,14 +61,23 @@ function WorkersPage() {
     };
 
     const filteredEmployees = selectedJobTitle === 'Tümü'
-        ? employees
-        : employees.filter(employee => employee.profession.professionName === selectedJobTitle);
+        ? filteredSearchEmployees
+        : filteredSearchEmployees.filter(employee => employee.profession.professionName === selectedJobTitle);
 
     return (
         <div className="workers-page-main">
             <Navigation />
             <div className="workers-column">
-                <h1 className="workers-page-header">Şirket Çalışanları</h1>
+                <div className="workers-row">
+                    <h1 className="workers-page-header">Şirket Çalışanları</h1>
+                    <input
+                        onChange={searchEmployees}
+                        value={searchTerm}
+                        className="search-bar-of-projects"
+                        type="text"
+                        placeholder="Çalışan Ara"
+                    />
+                </div>
                 <div className="company-grid">
                     <CompanyGridSidebar
                         jobTitles={jobTitles}
@@ -73,8 +96,8 @@ function WorkersPage() {
                         onClose={closeEmployeeCardModal}
                         sendEmail={sendEmail}
                     />
-                </div></div>
-
+                </div>
+            </div>
         </div>
     );
 }
