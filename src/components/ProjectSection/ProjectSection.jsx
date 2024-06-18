@@ -177,7 +177,7 @@ function ProjectSection({ clickedProject }) {
             <div className="folder-content">
                 <div className="file-input-wrapper">
                     <label htmlFor="file-upload" className="custom-file-upload">
-                        Dosya Seç
+                        Dosya Yükle
                     </label>
                     <input
                         id="file-upload"
@@ -274,7 +274,7 @@ function ProjectSection({ clickedProject }) {
                         <span className="close-modal" onClick={() => setFileModal(false)}>X</span>
                         <h2 className="modal-header">{currentFile.attributes.name}</h2>
                         <img src={fileIcons[currentFile.attributes.ext.slice(1)] || fileIcon} alt="file-icon" className="file-icon-modal" />
-                        <div className="modal-buttons">
+                        <div className="buttons-for-modal">
                             <a href={`http://localhost:1337${currentFile.attributes.url}`} download className="download-button">İndir</a>
                             <button className="delete-button" onClick={() => handleDeleteFile(currentFile.id)}>Sil</button>
                         </div>

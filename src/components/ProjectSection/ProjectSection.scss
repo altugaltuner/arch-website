@@ -39,8 +39,7 @@
             flex-wrap: wrap;
             display: flex;
             flex-direction: row;
-            justify-content: center;
-            align-items: baseline;
+
 
             .file-preview-upload {
                 width: 140px;
@@ -65,32 +64,42 @@
                     display: none;
                 }
 
-                label {
-                    display: inline-block;
-                    padding: 0.5rem 1rem;
-                    background-color: #007bff;
-                    color: #fff;
-                    border-radius: 4px;
+                .custom-file-upload {
+                    display: flex;
+                    width: 150px;
+                    height: 205px;
+                    align-items: center;
+                    padding: 10px;
+                    color: $font-color;
+                    border-radius: 15px;
+                    border: 1px solid $border-color;
                     cursor: pointer;
-                    transition: background-color 0.3s ease;
+                    justify-content: center;
+
 
                     &:hover {
-                        background-color: #0056b3;
+                        background-color: darken($background-color, 10%);
+                    }
+
+                    &:active {
+                        background-color: darken($background-color, 20%);
                     }
                 }
 
                 button {
                     margin-left: 1rem;
                     padding: 0.5rem 1rem;
-                    background-color: #28a745;
-                    color: #fff;
+                    color: $font-color;
                     border: none;
                     border-radius: 4px;
                     cursor: pointer;
-                    transition: background-color 0.3s ease;
 
                     &:hover {
-                        background-color: #218838;
+                        background-color: darken($background-color, 10%);
+                    }
+
+                    &:active {
+                        background-color: darken($background-color, 20%);
                     }
                 }
             }
@@ -124,13 +133,17 @@
                 flex-direction: column;
                 gap: 20px;
                 width: 160px;
-                height: 170px;
+                height: 205px;
                 text-align: center;
                 align-items: center;
                 cursor: pointer;
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid $border-color;
 
                 .file-icon-img {
                     width: 100px;
+                    height: 120px;
                 }
 
                 .file-name {
@@ -237,10 +250,16 @@
 
         .modal-content {
             background-color: $background-color;
-            padding: 20px;
-            border-radius: 5px;
+            padding: 30px;
+            border-radius: 15px;
             position: relative;
             text-align: center;
+            align-items: center;
+
+            .file-icon-modal {
+                width: 200px;
+
+            }
 
             .close-modal {
                 position: absolute;
@@ -263,14 +282,40 @@
             .buttons-for-modal {
                 display: flex;
                 justify-content: space-evenly;
+                width: 100%;
+                align-items: center;
+                text-align: center;
 
                 .submit-button {
+                    display: flex;
+                    align-items: center;
                     border-radius: 15px;
                     border: 1px solid $border-color;
                 }
 
                 .cancel-button {
+                    display: flex;
+                    align-items: center;
                     border-radius: 15px;
+                    border: 1px solid $border-color;
+                }
+
+                .download-button {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 15px;
+                    border: 1px solid $border-color;
+                    width: 70px;
+                    height: 35px;
+                }
+
+                .delete-button {
+                    display: flex;
+                    align-items: center;
+                    border-radius: 15px;
+                    width: 70px;
+                    height: 35px;
                     border: 1px solid $border-color;
                 }
             }
@@ -280,7 +325,7 @@
                 top: 10px;
                 right: 10px;
                 font-size: 20px;
-                cursor: pointer;
+                rsor: pointer;
             }
 
             input {
