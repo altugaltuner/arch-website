@@ -125,13 +125,15 @@ function ProjectSection({ clickedProject }) {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+            console.log('File uploaded successfully:', response.data);
             await fetchProjectFolders();
             setSelectedFile(null);
             setFilePreview(null);
         } catch (error) {
-            console.error('Error uploading the file', error);
+            console.error('Error uploading the file:', error.response ? error.response.data : error.message);
         }
     };
+
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -146,7 +148,14 @@ function ProjectSection({ clickedProject }) {
     };
 
     const renderFoldersAndFiles = (folder) => {
-        if (!folder || !folder.folderContent || !folder.folderContent.data) return null;
+        if (!folder || !folder.folderContent || !folder.folderContent.data) {
+            return (
+                <div className="folder-content">
+                    <p>Henüz dosya yüklenmedi.</p>
+                    <button className="file-preview-upload" onClick={addFileToFolder}>Dosya Yükle</button>
+                </div>
+            );
+        };
 
         return (
             <div className="folder-content">
@@ -183,7 +192,7 @@ function ProjectSection({ clickedProject }) {
                     className="project-folder-button"
                     onClick={() => setShowModal(true)}
                 >
-                    Grup Oluştur
+                    Klasör Oluştur
                 </button>
             ))}
             {currentFolder ? (
@@ -193,6 +202,7 @@ function ProjectSection({ clickedProject }) {
                             <img src={goBackButton} alt="" className="go-back-btn-img" />
                         </button>
                         <h2 className="current-folder-header">{currentFolder.attributes.projectFolderName}</h2>
+
                     </div>
 
                     {renderFoldersAndFiles(currentFolder.attributes)}

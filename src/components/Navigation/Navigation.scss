@@ -8,6 +8,10 @@
     font-family: "Barlow", sans-serif;
     width: 110px;
     border-right: 1px solid $border-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 
     .nav-ul {
         display: flex;

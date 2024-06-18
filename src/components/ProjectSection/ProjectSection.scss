@@ -42,6 +42,13 @@
             justify-content: center;
             align-items: baseline;
 
+            .file-preview-upload {
+                width: 140px;
+                height: 140px;
+                border-radius: 15px;
+                border: 1px solid $border-color;
+            }
+
             .file-input-wrapper {
                 display: flex;
                 align-items: center;
@@ -52,8 +59,6 @@
                         width: 100px;
                         max-height: 300px;
                     }
-
-                    .file-preview-upload {}
                 }
 
                 input[type="file"] {
@@ -141,7 +146,7 @@
     .project-folder-button {
         padding: 10px;
         width: 140px;
-        height: 50px;
+        height: 70px;
         margin: 10px;
         border-radius: 10px;
         border: 1px solid $border-color;

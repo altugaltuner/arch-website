@@ -4,6 +4,9 @@
     display: flex;
     flex-direction: column;
     color: $font-color;
+    transform: translate(110px, 0px);
+    width: 90%;
+
 
     .project-cards-header-and-searchbar {
         display: flex;

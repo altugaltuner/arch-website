@@ -9,7 +9,8 @@
     position: relative;
 
     .workers-column {
-        width: 100%;
+        width: calc(100% - 110px);
+        transform: translate(110px, 0px);
 
         .workers-row {
             display: flex;

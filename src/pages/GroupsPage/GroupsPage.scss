@@ -8,10 +8,11 @@
     font-family: "Barlow", sans-serif;
 
     .groups-main-column {
-        width: 90%;
         display: flex;
         flex-direction: column;
         gap: 20px;
+        transform: translate(110px, 0px);
+        width: calc(100% - 110px);
 
         .groups-main-header {
             font-size: 40px;
