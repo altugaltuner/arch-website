@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     color: $font-color;
+    width: calc(100% - 110px);
     transform: translate(110px, 0px);
-    width: 90%;
 
 
     .project-cards-header-and-searchbar {
@@ -32,11 +32,11 @@
     }
 
     .projects-cards-main-row {
-        width: 90%;
         height: fit-content;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        margin: 20px;
         gap: 20px;
         justify-content: center;
         padding: 30px;

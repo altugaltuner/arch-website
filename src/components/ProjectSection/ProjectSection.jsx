@@ -20,6 +20,8 @@ function ProjectSection({ clickedProject }) {
     const [showModal, setShowModal] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [filePreview, setFilePreview] = useState(null);
+    const [fileModal, setFileModal] = useState(false);
+    const [currentFile, setCurrentFile] = useState(null);
 
     const fileIcons = {
         "docx": docxIcon,
@@ -87,14 +89,24 @@ function ProjectSection({ clickedProject }) {
         }
     };
 
-    function handleDeleteFolder(id) {
+    const handleDeleteFolder = async (id) => {
         try {
-            axios.delete(`http://localhost:1337/api/project-folders/${id}`);
-            fetchProjectFolders();
+            await axios.delete(`http://localhost:1337/api/project-folders/${id}`);
+            await fetchProjectFolders();
         } catch (error) {
             console.error('Error deleting the project folder', error);
         }
-    }
+    };
+
+    const handleDeleteFile = async (fileId) => {
+        try {
+            await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
+            setFileModal(false);
+            await fetchProjectFolders();
+        } catch (error) {
+            console.error('Error deleting the file', error);
+        }
+    };
 
     function handleEditFolder(id) {
         // Implement the edit functionality here
@@ -134,7 +146,6 @@ function ProjectSection({ clickedProject }) {
         }
     };
 
-
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setSelectedFile(file);
@@ -157,6 +168,11 @@ function ProjectSection({ clickedProject }) {
             );
         };
 
+        const openFileModal = (file) => {
+            setCurrentFile(file);
+            setFileModal(true);
+        };
+
         return (
             <div className="folder-content">
                 <div className="file-input-wrapper">
@@ -176,7 +192,7 @@ function ProjectSection({ clickedProject }) {
                     )}
                 </div>
                 {folder.folderContent.data.map(file => (
-                    <div key={file.id} className="file">
+                    <div key={file.id} className="file" onClick={() => openFileModal(file)}>
                         <img className="file-icon-img" src={fileIcons[file.attributes.ext.slice(1)] || fileIcon} alt="file-icon" />
                         <span className="file-name">{file.attributes.name}</span>
                     </div>
@@ -247,6 +263,20 @@ function ProjectSection({ clickedProject }) {
                         <div className="buttons-for-modal">
                             <button className="submit-button" onClick={handleSubmit}>Oluştur</button>
                             <button className="cancel-button" onClick={() => setShowModal(false)}>İptal</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {fileModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close-modal" onClick={() => setFileModal(false)}>X</span>
+                        <h2 className="modal-header">{currentFile.attributes.name}</h2>
+                        <img src={fileIcons[currentFile.attributes.ext.slice(1)] || fileIcon} alt="file-icon" className="file-icon-modal" />
+                        <div className="modal-buttons">
+                            <a href={`http://localhost:1337${currentFile.attributes.url}`} download className="download-button">İndir</a>
+                            <button className="delete-button" onClick={() => handleDeleteFile(currentFile.id)}>Sil</button>
                         </div>
                     </div>
                 </div>
