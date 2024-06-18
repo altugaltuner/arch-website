@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../MyActiveProjects/MyActiveProjects.scss";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 function MyActiveProjects({ user }) {
     const [allUsers, setAllUsers] = useState([]);
+    const navigate = useNavigate(); // navigate fonksiyonu oluşturuldu
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/users?populate[profession]=*&populate[projects][populate]=projectCoverPhoto&populate=profilePic');
-                //console.log("Fetched users:", response.data);
                 setAllUsers(response.data || []);
             } catch (error) {
                 console.error('Error fetching the data', error);
@@ -33,7 +35,7 @@ function MyActiveProjects({ user }) {
             <h2 className="my-active-project-list-header">Dahil Olduğum Projeler</h2>
             <div className="my-active-project-list">
                 {u.projects.map(p => (
-                    <div className="my-active-project-list-element">
+                    <div className="my-active-project-list-element" key={p.id} onClick={() => handleProjectClick(p.id)}>
                         <img className="my-active-project-list-pic" src={`http://localhost:1337${p.projectCoverPhoto.formats.thumbnail.url}`} alt="" />
                         <p className="my-active-project-list-paragraph" key={p.id}>{p.projectName}</p>
                     </div>
@@ -41,6 +43,11 @@ function MyActiveProjects({ user }) {
             </div>
         </div>
     ));
+
+    const handleProjectClick = (projectId) => {
+
+        navigate(`/projects/${projectId}`); // Projeye yönlendirme yapıldı
+    };
 
     return (
         <div className="myactive-projects-main">
@@ -52,3 +59,5 @@ function MyActiveProjects({ user }) {
 };
 
 export default MyActiveProjects;
+
+
