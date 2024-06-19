@@ -72,7 +72,7 @@ function SignupPage() {
           <input
             className="signup-full-name-input"
             type="text"
-            placeholder="Full Name"
+            placeholder="Adınız Soyadınız"
             name="fullName"
             onChange={handleChange}
             autoComplete="name"
@@ -80,7 +80,7 @@ function SignupPage() {
           <input
             className="signup-tel-input"
             type="tel"
-            placeholder="Phone number"
+            placeholder="Telefon Numaranız"
             name="phoneNumber"
             onChange={handleChange}
             autoComplete="tel"
@@ -88,7 +88,7 @@ function SignupPage() {
           <input
             className="signup-email-input"
             type="email"
-            placeholder="Email"
+            placeholder="Email'iniz"
             name="email"
             onChange={handleChange}
             autoComplete="email"
@@ -97,7 +97,7 @@ function SignupPage() {
             <input
               className="signup-password-input"
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
+              placeholder="Şifreniz"
               name="password"
               onChange={handleChange}
               autoComplete="new-password"
@@ -118,12 +118,13 @@ function SignupPage() {
             <input
               className="signup-password-input"
               type={showPassword ? "text" : "password"}
-              placeholder="Confirm Password"
+              placeholder="Şifrenizi Tekrar Girin"
               name="confirmPassword"
               onChange={handleChange}
               autoComplete="new-password"
             />
           </div>
+          <input type="text" className="company-code-input" placeholder="Şirket Kodunuz" />
           <input className="signup-btn" type="submit" value="Sign Up" />
         </form>
       </div>

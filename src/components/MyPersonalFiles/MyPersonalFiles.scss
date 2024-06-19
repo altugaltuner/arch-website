@@ -1,22 +1,15 @@
 @use "../../styles/abstracts/variables" as *;
 
 .my-files-panel {
-    margin-top: 20px;
+    max-height: 900px;
+    overflow-y: auto; // This adds the vertical scroll bar if content exceeds 500px in height
     padding: 20px;
-    border-radius: 20px;
-    width: 33%;
-    height: fit-content;
-    font-family: "Barlow", sans-serif;
     border: 1px solid $border-color;
+    border-radius: 20px;
 
     .my-files-panel-header {
-        padding: 10px;
-        font-weight: 400;
-        color: $font-color;
-        display: flex;
-        justify-content: center;
-        border-bottom: 1px solid $border-color;
-
+        font-size: 1.5em;
+        margin-bottom: 20px;
     }
 
     .my-folders {
@@ -24,46 +17,49 @@
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
-        padding: 10px;
 
         .my-folder {
+            width: 150px;
+            height: 150px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 140px;
-            height: 145px;
-            padding: 10px;
-            border: 1px solid $border-color;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            text-align: center;
             cursor: pointer;
+            transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: darken($background-color, 10%);
-            }
-
-            &:active {
-                background-color: darken($background-color, 20%);
+                background-color: #f0f0f0;
             }
 
             .my-folder-preview {
-                width: 80px;
-                height: 80px;
-                border-radius: 10px;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 4px;
+                margin-bottom: 5px;
+            }
+
+            .my-folder-preview-placeholder {
+                width: 100px;
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px;
+                margin-bottom: 5px;
+                color: #999;
             }
 
             .my-folder-name {
-                font-size: 14px;
-                color: #555;
-                padding: 5px;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 300;
+                word-break: break-all;
             }
         }
-    }
-}
-
-@media screen and (max-width: 655px) {
-    .my-files-panel {
-        width: 100%;
     }
 }
