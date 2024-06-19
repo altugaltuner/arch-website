@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AboutMePage.scss";
-import { api } from "../../api"; // Doğru yolu kullanın
+import { api } from "../../api";
 import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";
 import MyProfile from "../../components/MyProfile/MyProfile";

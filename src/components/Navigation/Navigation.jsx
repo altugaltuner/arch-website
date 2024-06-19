@@ -1,7 +1,7 @@
 import "./Navigation.scss";
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import archLogo from "../../assets/icons/arch-web-logo.png";
+import flowLogo from "../../assets/icons/flow-logo.png";
 import employeesLogo from "../../assets/icons/employees-logo.png";
 import groupsLogo from "../../assets/icons/groups-logo.png";
 import projectsLogo from "../../assets/icons/projects-logo.png";
@@ -38,7 +38,7 @@ function Navigation() {
     return (
         <nav className="navigation-main">
             <ul className="nav-ul">
-                <img src={archLogo} className="arch-logo" alt="arch-logo" />
+                <img src={flowLogo} className="flow-logo" alt="flow-logo" />
                 {navItems.map(item => (
                     <li key={item.id} className="nav-li" id={item.id} onClick={() => handleNavClick(item.id)}>
                         <Link to={item.to} className={`nav-button ${activeNavId === item.id ? 'active' : ''}`}>

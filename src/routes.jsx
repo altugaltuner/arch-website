@@ -9,6 +9,7 @@ import AboutMePage from "./pages/AboutMePage/AboutMePage.jsx";
 import GroupsPage from "./pages/GroupsPage/GroupsPage.jsx";
 import ProjectsMainPage from "./pages/ProjectsMainPage/ProjectsMainPage.jsx";
 import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
+import CompanyCreatePage from "./pages/CompanyCreatePage/CompanyCreatePage.jsx";
 
 const routes = [
   {
@@ -76,10 +77,18 @@ const routes = [
     element: <LoginPage />,
   },
   {
-    path: "settings",
+    path: "/settings",
     element: (
       <ProtectedRoute>
         <SettingsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/company-create",
+    element: (
+      <ProtectedRoute>
+        <CompanyCreatePage />
       </ProtectedRoute>
     ),
   }

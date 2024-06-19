@@ -1,0 +1,103 @@
+@use "../../styles/abstracts/variables" as *;
+
+.company-create-page-main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $font-color;
+    font-family: $primary-font;
+
+    .company-create-page-title {
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    .company-and-admin-create-div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid $border-color;
+        // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        .company-create-header {
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .company-admin-create-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            align-items: center;
+
+            .company-admin-row-for-btn {
+                display: flex;
+                flex-direction: row;
+                gap: 50px;
+                width: 100%;
+
+                .company-create-div,
+                .admin-create-div {
+                    margin-bottom: 20px;
+                    width: 50%;
+
+                    .company-create-subheader,
+                    .admin-create-subheader {
+                        font-weight: 400;
+                        font-size: 25px;
+                        margin-bottom: 25px;
+                    }
+
+                    .company-create-label,
+                    .admin-create-label {
+                        display: block;
+                        margin-bottom: 5px;
+                    }
+
+                    .company-create-input,
+                    .admin-create-input {
+                        width: 100%;
+                        padding: 8px;
+                        margin-bottom: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                    }
+
+                    .employee-code-create-btn {
+                        background-color: #007bff;
+                        color: #fff;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        margin-top: 10px;
+
+                        &:hover {
+                            background-color: #0056b3;
+                        }
+                    }
+                }
+
+            }
+
+            .company-admin-create-button {
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 10px;
+
+                &:hover {
+                    background-color: #0056b3;
+                }
+            }
+        }
+    }
+}
