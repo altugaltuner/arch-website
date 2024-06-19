@@ -1,0 +1,71 @@
+@use "../../styles/abstracts/variables" as *;
+
+.firstpage-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $primary-font;
+    color: $font-color;
+    height: 100vh;
+
+    .firstpage-div {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+
+        .firstpage-logo {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+        }
+
+        .firstpage-header {
+            font-weight: 500;
+            font-size: 60px;
+        }
+
+        .firstpage-title {
+            font-weight: 300;
+            font-size: 26px;
+        }
+
+        .firstpage-buttons-div {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            gap: 50px;
+            align-items: center;
+            margin-top: 20px;
+
+            .employee-create-btn {
+                border: 1px solid $border-color;
+                color: $font-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+            }
+
+            .owner-create-btn {
+                background-color: $grey;
+                color: $div-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                border: 1px solid $border-color;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+            }
+        }
+    }
+}
