@@ -19,8 +19,8 @@ function TeamModal({ show, onClose, teamName, handleInputChange, handleSubmit })
                     onChange={handleInputChange}
                 />
                 <div className='btn-div-for-modal'>
-                    <button onClick={handleSubmit}>Oluştur</button>
-                    <button onClick={onClose}>İptal</button>
+                    <button className='btn-div-for-modal-add' onClick={handleSubmit}>Oluştur</button>
+                    <button className='btn-div-for-modal-cancel' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>

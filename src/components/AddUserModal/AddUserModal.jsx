@@ -31,7 +31,7 @@ function AddUserModal({ show, onClose, users, handleAddUsers }) {
     return (
         <div className="modal">
             <div className="modal-content">
-                <span className="close" onClick={onClose}>&times;</span>
+                <span className="modal-close" onClick={onClose}>&times;</span>
                 <h2 className='modal-content-header'>Çalışan Ekle</h2>
                 <ul>
                     {users.map((user) => (
@@ -48,8 +48,8 @@ function AddUserModal({ show, onClose, users, handleAddUsers }) {
                     ))}
                 </ul>
                 <div className="btn-div-for-modal">
-                    <button onClick={handleSubmit}>Onayla</button>
-                    <button onClick={onClose}>İptal</button>
+                    <button className='btn-div-for-modal-submit' onClick={handleSubmit}>Onayla</button>
+                    <button className='btn-div-for-modal-cancel' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>

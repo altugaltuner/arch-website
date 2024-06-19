@@ -11,17 +11,17 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
 
-.modal-content {
-    background-color: $background-color;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 80%;
-    max-height: 80%;
-    overflow: auto;
-    position: relative;
-    text-align: center;
+    .modal-content {
+        background-color: $background-color;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 80%;
+        max-height: 80%;
+        overflow: auto;
+        position: relative;
+        text-align: center;
+    }
 }
 
 .modal-content-header {
@@ -30,7 +30,7 @@
     font-weight: 500;
 }
 
-.close {
+.modal-close {
     position: absolute;
     top: 10px;
     right: 10px;
