@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
 import "./ProjectSection.scss";
-import addIcon from "../../assets/icons/add-icon.png";
+import axios from 'axios';
 import deleteIcon from "../../assets/icons/delete-icon.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import folderIcon from "../../assets/icons/folder-icon.png";
@@ -12,7 +11,7 @@ import pngIcon from "../../assets/icons/png-logo.png";
 import dwgIcon from "../../assets/icons/dwg-icon.png";
 import fileIcon from "../../assets/icons/file-icon.png";
 import goBackButton from "../../assets/icons/back-button.png";
-import Button from "../Button/Button";
+import DeleteFolderModal from "../GroupModals/DeleteFolderModal";
 
 function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
@@ -22,6 +21,8 @@ function ProjectSection({ clickedProject }) {
     const [filePreview, setFilePreview] = useState(null);
     const [fileModal, setFileModal] = useState(false);
     const [currentFile, setCurrentFile] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [folderToDelete, setFolderToDelete] = useState(null);
 
     const fileIcons = {
         "docx": docxIcon,
@@ -89,12 +90,16 @@ function ProjectSection({ clickedProject }) {
         }
     };
 
-    const handleDeleteFolder = async (id) => {
-        try {
-            await axios.delete(`http://localhost:1337/api/project-folders/${id}`);
-            await fetchProjectFolders();
-        } catch (error) {
-            console.error('Error deleting the project folder', error);
+    const handleDeleteFolder = async () => {
+        if (folderToDelete) {
+            try {
+                await axios.delete(`http://localhost:1337/api/project-folders/${folderToDelete}`);
+                setShowDeleteModal(false);
+                setFolderToDelete(null);
+                await fetchProjectFolders();
+            } catch (error) {
+                console.error('Error deleting the project folder', error);
+            }
         }
     };
 
@@ -230,10 +235,10 @@ function ProjectSection({ clickedProject }) {
                             <img
                                 className="file-card-delete-btn"
                                 src={deleteIcon}
-                                alt=""
-                                onClick={(e) => { e.stopPropagation(); handleDeleteFolder(folder.id); }}
+                                alt="delete-icon"
+                                onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}
                             />
-                            <img className="file-card-edit-btn" src={editPencil} alt="" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
+                            <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
                             <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
                             <img
                                 className="project-folder-image"
@@ -280,6 +285,14 @@ function ProjectSection({ clickedProject }) {
                         </div>
                     </div>
                 </div>
+            )}
+
+            {showDeleteModal && (
+                <DeleteFolderModal
+                    showDeleteModal={showDeleteModal}
+                    setShowDeleteModal={setShowDeleteModal}
+                    handleDeleteFolder={handleDeleteFolder}
+                />
             )}
         </div>
     );

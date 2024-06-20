@@ -1,0 +1,63 @@
+@use "../../styles/abstracts/variables" as *;
+
+.delete-folder-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    font-family: $primary-font;
+    color: $font-color;
+
+    .delete-folder-modal-content {
+        background-color: $background-color;
+        padding: 20px;
+        border-radius: 5px;
+        position: relative;
+        text-align: center;
+
+        .delete-folder-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .delete-folder-header {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .delete-folder-p {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .delete-folder-buttons-div {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            .delete-folder-btn-yes,
+            .delete-folder-btn-no {
+                border: 1px solid $border-color;
+                color: $font-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+            }
+        }
+    }
+}
