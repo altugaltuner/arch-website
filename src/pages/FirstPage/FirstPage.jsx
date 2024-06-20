@@ -5,7 +5,6 @@ import flowLogo from "../../assets/icons/flow-logo.png"
 
 function FirstPage() {
 
-
     return (
         <main className="firstpage-main">
             <div className="firstpage-div">

@@ -21,40 +21,27 @@
         gap: 20px;
 
         .add-team-btn {
-            padding: 10px;
-            width: 140px;
-            height: 50px;
-            margin: 10px;
-            border: 1px solid $border-color;
-            border-radius: 10px;
-            cursor: pointer;
             font-weight: 400;
+            border: 1px solid $border-color;
+            color: $font-color;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
 
             &:hover {
-                background-color: darken($background-color, 10%);
-            }
-
-            &:active {
-                background-color: darken($background-color, 20%);
+                background-color: darken($yellow, 10%);
             }
         }
 
         .delete-team-btn {
-            padding: 10px;
-            width: 140px;
-            height: 50px;
-            margin: 10px;
             border: 1px solid $border-color;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 400;
+            color: $font-color;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
 
             &:hover {
-                background-color: darken($background-color, 10%);
-            }
-
-            &:active {
-                background-color: darken($background-color, 20%);
+                background-color: darken($yellow, 10%);
             }
         }
     }
@@ -103,16 +90,12 @@
         .employee-card {
             border: 1px solid $border-color;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
             cursor: pointer;
 
             &:hover {
                 background-color: darken($background-color, 10%);
-            }
-
-            &:active {
-                background-color: darken($background-color, 20%);
             }
 
             .profile-pic {
