@@ -11,6 +11,8 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    font-family: "Barlow", sans-serif;
+    color: $font-color;
 
     .add-new-project-modal-content {
         position: relative;

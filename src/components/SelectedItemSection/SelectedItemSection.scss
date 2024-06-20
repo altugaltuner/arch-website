@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    font-family: "Barlow", sans-serif;
+    color: $font-color;
 
     .selected-header {
         display: flex;

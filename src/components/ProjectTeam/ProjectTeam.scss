@@ -10,9 +10,9 @@
     border: 1px solid $border-color;
     border-radius: 15px;
     margin-top: 20px;
+    color: $font-color;
 
     .admin-buttons {
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -126,7 +126,4 @@
             }
         }
     }
-
-
-
 }

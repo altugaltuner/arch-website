@@ -11,6 +11,8 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
+    font-family: "Barlow", sans-serif;
+    color: $font-color;
 
     .edit-project-content {
         background-color: white;

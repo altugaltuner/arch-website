@@ -7,6 +7,7 @@
     background-color: $background-color;
     font-family: "Barlow", sans-serif;
     position: relative;
+    color: $font-color;
 
     .workers-column {
         width: calc(100% - 110px);

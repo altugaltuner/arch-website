@@ -2,8 +2,9 @@
 
 .employee-grid-container {
     max-height: 800px;
-    /* Adjust height as needed */
     overflow-y: auto;
+    font-family: "Barlow", sans-serif;
+    color: $font-color;
 
     .employee-grid {
         width: 100%;

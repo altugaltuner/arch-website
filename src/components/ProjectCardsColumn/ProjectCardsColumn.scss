@@ -6,6 +6,7 @@
     color: $font-color;
     width: calc(100% - 110px);
     transform: translate(110px, 0px);
+    font-family: "Barlow", sans-serif;
 
 
     .project-cards-header-and-searchbar {
@@ -17,7 +18,6 @@
         .title-for-projects {
             font-size: 40px;
             font-weight: 400;
-            color: $font-color;
             margin: 20px 20px 20px 40px;
         }
 

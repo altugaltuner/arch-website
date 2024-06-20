@@ -11,6 +11,8 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    font-family: "Barlow", sans-serif;
+    color: $font-color;
 
     .delete-group-modal-content {
         background-color: $background-color;
