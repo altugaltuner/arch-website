@@ -12,7 +12,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    font-family: "Barlow", sans-serif;
+    font-family: $primary-font;
     color: $font-color;
 
     .modal-content {

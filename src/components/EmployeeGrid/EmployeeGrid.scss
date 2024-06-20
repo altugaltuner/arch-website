@@ -3,7 +3,7 @@
 .employee-grid-container {
     max-height: 800px;
     overflow-y: auto;
-    font-family: "Barlow", sans-serif;
+    font-family: $primary-font;
     color: $font-color;
 
     .employee-grid {

@@ -11,7 +11,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    font-family: "Barlow", sans-serif;
+    font-family: $primary-font;
     color: $font-color;
 
     .group-edit-modal-content {

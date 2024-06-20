@@ -6,7 +6,7 @@
     color: $font-color;
     width: calc(100% - 110px);
     transform: translate(110px, 0px);
-    font-family: "Barlow", sans-serif;
+    font-family: $primary-font;
 
 
     .project-cards-header-and-searchbar {
