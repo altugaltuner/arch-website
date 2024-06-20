@@ -67,7 +67,7 @@ function SignupPage() {
   return (
     <main className="signup-page">
       <div className="signup-main-div">
-        <h1 className="signup-header">Hesap oluştur</h1>
+        <h1 className="signup-header">Çalışan Hesabı Oluştur</h1>
         <form className="login-form" onSubmit={(e) => signupUser(e)}>
           <input
             className="signup-full-name-input"

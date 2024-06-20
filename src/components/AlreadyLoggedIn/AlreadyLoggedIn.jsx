@@ -10,13 +10,15 @@ function AlreadyLoggedIn() {
     return (
         <main className="already-login-main">
             <div className="already-login-main-div">
-                <h1 className="already-login-header">Çıkmak İçin Tıklayın</h1>
-                <button className="already-login-logout" onClick={handleLogout}>
-                    Çıkış Yap
-                </button>
-                <button className="already-login-back" onClick={() => window.history.back()}>
-                    Geri Dön
-                </button>
+                <h1 className="already-login-header">Çıkmak İstediğinize Emin Misiniz ?</h1>
+                <div className='already-login-btn-div'>
+                    <button className="already-login-logout" onClick={handleLogout}>
+                        Çıkış Yap
+                    </button>
+                    <button className="already-login-back" onClick={() => window.history.back()}>
+                        Geri Dön
+                    </button>
+                </div>
             </div>
         </main>
     );

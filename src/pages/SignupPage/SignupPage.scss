@@ -14,13 +14,13 @@
 
     .signup-main-div {
         width: 500px;
-        height: 200px;
+        height: auto;
 
         .signup-header {
             color: $font-color;
-            font-size: 4rem;
+            font-size: 50px;
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .login-form {

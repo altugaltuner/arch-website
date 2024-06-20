@@ -1,6 +1,7 @@
 import React from 'react';
 import eyeShow from "../../assets/icons/EyeShowLogo.png";
 import eyeHide from "../../assets/icons/EyeHideLogo.png";
+import { Link } from 'react-router-dom';
 
 function LoginForm({ error, handleChange, handleUserLogin, showPassword, togglePasswordVisibility }) {
     return (
@@ -23,6 +24,7 @@ function LoginForm({ error, handleChange, handleUserLogin, showPassword, toggleP
                     </div>
                     <div className="submits-of-login">
                         <input className="login-submit" type="submit" value="Giriş Yap" />
+                        <Link to="/signup" className="login-signup">Hesabınız yok mu? Kaydolun</Link>
                     </div>
                 </form>
             </div>

@@ -52,20 +52,19 @@ function CompanyCreatePage() {
 
     return (
         <main className="company-create-page-main">
-            <h1 className="company-create-page-title">Şirket Hesabı Açma Sayfası</h1>
+            <h1 className="company-create-page-title">Şirket Hesabı Açın</h1>
             <div className="company-and-admin-create-div">
-                <h2 className="company-create-header">Şirket ve Admin Bilgileri</h2>
                 <form className="company-admin-create-form" onSubmit={validateInputs}>
                     <div className="company-admin-row-for-btn">
                         <div className="company-create-div">
                             <h3 className="company-create-subheader">Şirket Bilgileri</h3>
                             <label className="company-create-label" htmlFor="companyName">Şirket İsmi</label>
                             <input className="company-create-input" type="text" id="companyName" />
-                            {errors.companyName && <span className="error">{errors.companyName}</span>}
+                            {errors.companyName && <span className="error-for-company-signup">{errors.companyName}</span>}
 
                             <label className="company-create-label" htmlFor="workingArea">Şirketin Çalışma Alanı</label>
                             <input className="company-create-input" type="text" id="workingArea" />
-                            {errors.workingArea && <span className="error">{errors.workingArea}</span>}
+                            {errors.workingArea && <span className="error-for-company-signup">{errors.workingArea}</span>}
 
                             <label className="company-create-label" htmlFor="employeeCode">Şirket Çalışan Kodu</label>
                             <input className="company-create-input" placeholder="Kodunuzu Kopyalayın" type="text" id="employeeCode" readOnly />
@@ -76,22 +75,22 @@ function CompanyCreatePage() {
                             <h3 className="admin-create-subheader">Admin Bilgileri</h3>
                             <label className="admin-create-label" htmlFor="adminName">Admin İsmi</label>
                             <input className="admin-create-input" type="text" id="adminName" />
-                            {errors.adminName && <span className="error">{errors.adminName}</span>}
+                            {errors.adminName && <span className="error-for-company-signup">{errors.adminName}</span>}
 
                             <label className="admin-create-label" htmlFor="adminSurname">Admin Soyismi</label>
                             <input className="admin-create-input" type="text" id="adminSurname" />
-                            {errors.adminSurname && <span className="error">{errors.adminSurname}</span>}
+                            {errors.adminSurname && <span className="error-for-company-signup">{errors.adminSurname}</span>}
 
                             <label className="admin-create-label" htmlFor="adminEmail">Admin Email</label>
                             <input className="admin-create-input" type="email" id="adminEmail" />
 
                             <label className="admin-create-label" htmlFor="adminPassword">Admin Şifresi</label>
                             <input className="admin-create-input" type="password" id="adminPassword" />
-                            {errors.adminPassword && <span className="error">{errors.adminPassword}</span>}
+                            {errors.adminPassword && <span className="error-for-company-signup">{errors.adminPassword}</span>}
 
                             <label className="admin-create-label" htmlFor="adminPasswordAgain">Admin Şifresi Tekrar</label>
                             <input className="admin-create-input" type="password" id="adminPasswordAgain" />
-                            {errors.adminPasswordAgain && <span className="error">{errors.adminPasswordAgain}</span>}
+                            {errors.adminPasswordAgain && <span className="error-for-company-signup">{errors.adminPasswordAgain}</span>}
                         </div>
                     </div>
                     <button type="submit" className="company-admin-create-button">Oluştur</button>

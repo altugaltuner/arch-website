@@ -53,6 +53,19 @@
                 }
             }
 
+            .employee-login-btn {
+                background-color: $grey;
+                color: $font-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                border: 1px solid $border-color;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+            }
+
             .owner-create-btn {
                 background-color: $grey;
                 color: $font-color;

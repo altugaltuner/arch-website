@@ -248,7 +248,7 @@ function ProjectSection({ clickedProject }) {
                         </div>
                     ))
                 ) : (
-                    <p>No folders available for the selected project.</p>
+                    <p>Bu projede henüz dosya yok.</p>
                 )
             )}
 

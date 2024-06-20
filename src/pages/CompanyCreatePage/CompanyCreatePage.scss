@@ -16,22 +16,19 @@
 
     .company-and-admin-create-div {
         display: flex;
+        width: 100%;
         align-items: center;
         flex-direction: column;
-        gap: 20px;
+        gap: 5px;
         padding: 25px;
         border-radius: 15px;
         border: 1px solid $border-color;
-
-        .company-create-header {
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
 
         .company-admin-create-form {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            width: 60%;
             padding: 20px;
             align-items: center;
 
@@ -43,8 +40,10 @@
 
                 .company-create-div,
                 .admin-create-div {
-                    margin-bottom: 20px;
+                    border: 1px solid $border-color;
+                    border-radius: 15px;
                     width: 50%;
+                    padding: 20px;
 
                     .company-create-subheader,
                     .admin-create-subheader {
@@ -68,17 +67,20 @@
                         border-radius: 8px;
                     }
 
+                    .error-for-company-signup {
+                        font-weight: 300;
+                        font-size: 16px;
+                    }
+
                     .employee-code-create-btn {
-                        background-color: #007bff;
-                        color: #fff;
+                        border: 1px solid $border-color;
+                        color: $font-color;
                         padding: 10px 20px;
-                        border: none;
-                        border-radius: 4px;
-                        cursor: pointer;
-                        margin-top: 10px;
+                        border-radius: 5px;
+                        transition: all 0.3s;
 
                         &:hover {
-                            background-color: #0056b3;
+                            background-color: darken($yellow, 10%);
                         }
                     }
                 }
@@ -86,16 +88,14 @@
             }
 
             .company-admin-create-button {
-                background-color: #007bff;
-                color: #fff;
+                border: 1px solid $border-color;
+                color: $font-color;
                 padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                margin-top: 10px;
+                border-radius: 5px;
+                transition: all 0.3s;
 
                 &:hover {
-                    background-color: #0056b3;
+                    background-color: darken($yellow, 10%);
                 }
             }
         }

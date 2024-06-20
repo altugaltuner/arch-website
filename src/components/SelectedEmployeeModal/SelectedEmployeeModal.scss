@@ -16,10 +16,11 @@
 
     .employee-card-modal-inner {
         background-color: $background-color;
+        padding: 20px;
         display: flex;
         flex-direction: column;
-        width: 320px;
-        height: 400px;
+        width: 420px;
+        height: 420px;
         justify-content: center;
         text-align: center;
         align-items: center;

@@ -58,6 +58,10 @@
                             font-weight: 300;
                         }
                     }
+
+                    &:hover {
+                        background-color: darken($background-color, 10%);
+                    }
                 }
             }
         }

@@ -14,7 +14,7 @@
 
     .login-main-div {
         border-radius: 20px;
-        border: 3px solid $border-color;
+        border: 1px solid $border-color;
         width: 500px;
         height: auto;
         padding: 30px;
@@ -100,21 +100,17 @@
                 display: flex;
                 gap: 20px;
 
-                .login-submit {
-                    height: 40px;
-                    width: 85px;
-                    border: none;
-                    border-radius: 12px;
-                    cursor: pointer;
+                .login-submit,
+                .login-signup {
+                    background-color: $background-color;
                     color: $font-color;
+                    padding: 10px 20px;
+                    border-radius: 5px;
                     border: 1px solid $border-color;
+                    transition: all 0.3s;
 
                     &:hover {
-                        background-color: darken($background-color, 10%);
-                    }
-
-                    &:active {
-                        background-color: darken($background-color, 20%);
+                        background-color: darken($yellow, 10%);
                     }
                 }
             }
