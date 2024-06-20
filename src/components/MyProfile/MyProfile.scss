@@ -12,6 +12,7 @@
     border: 1px solid $border-color;
     color: $font-color;
     font-family: "Barlow", sans-serif;
+    height: fit-content;
 
     .profile-info {
         .profile-field {
@@ -141,37 +142,19 @@
             display: flex;
             margin-top: 20px;
             gap: 10px;
+            justify-content: center;
 
-            .my-profile-submit {
-                width: 50%;
-                height: 48px;
-                padding: 0px;
-                gap: 8px;
-                border-radius: 8px;
-                border: 1px solid $border-color;
-                color: $font-color;
-                cursor: pointer;
-                font-size: 14px;
-                font-weight: 600;
-                line-height: 19.6px;
-                text-align: center;
-                transition: all 0.3s ease;
-            }
-
+            .my-profile-submit,
             .my-profile-cancel {
-                width: 50%;
-                height: 48px;
-                padding: 0px;
-                gap: 8px;
-                border-radius: 8px;
                 border: 1px solid $border-color;
                 color: $font-color;
-                cursor: pointer;
-                font-size: 14px;
-                font-weight: 600;
-                line-height: 19.6px;
-                text-align: center;
-                transition: transform 0.3s ease, border-color 0.01s ease, background-color 0.3s ease;
+                padding: 10px;
+                border-radius: 5px;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
             }
         }
     }
@@ -201,36 +184,18 @@
             justify-content: space-around;
             margin-top: 20px;
 
-            .my-profile-edit {
-                width: 50%;
-                height: 48px;
-                padding: 0px;
-                gap: 8px;
-                border-radius: 8px;
-                border: 1px solid $border-color;
-                color: $font-color;
-                cursor: pointer;
-                font-size: 14px;
-                font-weight: 600;
-                line-height: 19.6px;
-                text-align: center;
-                transition: all 0.3s ease;
-            }
-
+            .my-profile-edit,
             .my-profile-logout {
-                width: 50%;
-                height: 48px;
-                padding: 0px;
-                gap: 8px;
-                border-radius: 8px;
                 border: 1px solid $border-color;
                 color: $font-color;
-                cursor: pointer;
-                font-size: 14px;
-                font-weight: 600;
-                line-height: 19.6px;
-                text-align: center;
-                transition: transform 0.3s ease, border-color 0.01s ease, background-color 0.3s ease;
+                padding: 10px;
+                border-radius: 5px;
+                transition: all 0.3s;
+                font-size: 16px;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
             }
         }
     }

@@ -27,25 +27,35 @@
             cursor: pointer;
         }
 
-        input {
-            margin: 10px 0;
-            padding: 10px;
-            width: 100%;
+        .delete-group-header {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 20px;
         }
 
-        button {
-            padding: 10px 20px;
-            margin: 10px 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .delete-group-p {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
 
-            &:hover {
-                background-color: darken($background-color, 10%);
-            }
 
-            &:active {
-                background-color: darken($background-color, 20%);
+        .delete-group-buttons-div {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            .delete-group-btn-yes,
+            .delete-group-btn-no {
+                border: 1px solid $border-color;
+                color: $font-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
             }
         }
     }

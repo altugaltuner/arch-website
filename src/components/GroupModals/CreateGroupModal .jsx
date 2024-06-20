@@ -10,6 +10,7 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
                 <span className="close-group-modal" onClick={() => setShowModal(false)}>X</span>
                 <h2 className='modal-group-header'>Yeni Grup Oluştur</h2>
                 <input
+                    className='modal-group-name-input'
                     type="text"
                     name="groupName"
                     placeholder="Grup Adı"
@@ -17,8 +18,8 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
                     onChange={handleInputChange}
                 />
                 <div className='button-div-group'>
-                    <button onClick={handleSubmit}>Oluştur</button>
-                    <button onClick={() => setShowModal(false)}>İptal</button>
+                    <button className='modal-div-create-btn' onClick={handleSubmit}>Oluştur</button>
+                    <button className='modal-div-cancel-btn' onClick={() => setShowModal(false)}>İptal</button>
                 </div>
             </div>
         </div>

@@ -22,9 +22,10 @@ function EditGroupModal({ showEditModal, setShowEditModal, handleEditGroup }) {
                 <span className="close-edit-modal" onClick={() => setShowEditModal(false)}>X</span>
                 <h2 className='group-edit-modal-header'>Grubu Düzenle</h2>
                 <div className="group-edit-modal-inputs">
-                    <label htmlFor="group-name">Grup Adı</label>
+                    <label className='group-edit-label' htmlFor="group-name">Grup Adı</label>
                     <input
                         type="text"
+                        className='group-edit-input'
                         id="group-name"
                         name="group-name"
                         placeholder="Grup Adı"
