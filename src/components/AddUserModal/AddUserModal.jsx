@@ -42,7 +42,7 @@ function AddUserModal({ show, onClose, users, handleAddUsers }) {
                                     checked={selectedUsers.includes(user.id)}
                                     onChange={() => handleCheckboxChange(user.id)}
                                 />
-                                {user.username} ({user.email})
+                                {user.username}
                             </label>
                         </li>
                     ))}

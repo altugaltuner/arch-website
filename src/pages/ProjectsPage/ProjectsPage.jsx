@@ -37,7 +37,7 @@ function ProjectsPage() {
     console.log(roles);
 
     async function getProjectDetails() {
-        const endpoint = `http://localhost:1337/api/projects/${idToFetch}`;
+        const endpoint = `http://localhost:1337/api/projects/${idToFetch}?populate=*`;
         try {
             setLoading(true);
             const { data } = await axios.get(endpoint);
@@ -49,6 +49,7 @@ function ProjectsPage() {
             setLoading(false);
         }
     }
+
 
     useEffect(() => {
         getProjectDetails();

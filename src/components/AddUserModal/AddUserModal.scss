@@ -21,43 +21,44 @@
         overflow: auto;
         position: relative;
         text-align: center;
+
+        .modal-content-header {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .btn-div-for-modal {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            gap: 20px;
+
+            .btn-div-for-modal-submit,
+            .btn-div-for-modal-cancel {
+                padding: 10px 20px;
+                border: 1px solid $border-color;
+                border-radius: 15px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: darken($background-color, 10%);
+                }
+
+                &:active {
+                    background-color: darken($background-color, 20%);
+                }
+            }
+        }
     }
-}
-
-.modal-content-header {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 500;
-}
-
-.modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.close:hover {
-    color: red;
-}
-
-.btn-div-for-modal {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.btn-div-for-modal button {
-    padding: 10px 20px;
-    background-color: $background-color;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-div-for-modal button:hover {
-    background: #e0e0e0;
 }
