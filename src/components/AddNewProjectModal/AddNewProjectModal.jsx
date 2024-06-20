@@ -1,4 +1,5 @@
 import React from 'react';
+import "./AddNewProjectModal.scss";
 
 function AddNewProjectModal({ show, onClose, newProject, handleInputChange, handleFileChange, handleSubmit }) {
     if (!show) {

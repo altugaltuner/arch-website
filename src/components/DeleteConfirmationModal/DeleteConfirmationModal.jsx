@@ -1,4 +1,5 @@
 import React from 'react';
+import "./DeleteConfirmationModal.scss";
 
 function DeleteConfirmationModal({ showDeleteModal, onClose, onConfirm }) {
     if (!showDeleteModal) {
@@ -6,12 +7,16 @@ function DeleteConfirmationModal({ showDeleteModal, onClose, onConfirm }) {
     }
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <h2>Are you sure you want to delete this project?</h2>
-                <div className="modal-buttons">
-                    <button onClick={onConfirm}>Yes</button>
-                    <button onClick={onClose}>No</button>
+        <div className="delete-confirmation-modal">
+            <div className="delete-confirmation-modal-content">
+                <span
+                    className="delete-confirmation-close"
+                    onClick={onClose}
+                >X </span>
+                <h2 className='delete-confirmation-header'>Bu projeyi silmek istediğinize emin misiniz?</h2>
+                <div className="delete-confirmation-modal-buttons">
+                    <button className='delete-confirmation-yes' onClick={onConfirm}>Onayla</button>
+                    <button className='delete-confirmation-no' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>
