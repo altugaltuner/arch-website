@@ -11,43 +11,54 @@
     border-radius: 15px;
     margin-top: 20px;
 
-    .add-team-btn {
-        padding: 10px;
-        width: 140px;
-        height: 50px;
-        margin: 10px;
-        border: 1px solid $border-color;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: 400;
+    .admin-buttons {
 
-        &:hover {
-            background-color: darken($background-color, 10%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        gap: 20px;
+
+        .add-team-btn {
+            padding: 10px;
+            width: 140px;
+            height: 50px;
+            margin: 10px;
+            border: 1px solid $border-color;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 400;
+
+            &:hover {
+                background-color: darken($background-color, 10%);
+            }
+
+            &:active {
+                background-color: darken($background-color, 20%);
+            }
         }
 
-        &:active {
-            background-color: darken($background-color, 20%);
+        .delete-team-btn {
+            padding: 10px;
+            width: 140px;
+            height: 50px;
+            margin: 10px;
+            border: 1px solid $border-color;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 400;
+
+            &:hover {
+                background-color: darken($background-color, 10%);
+            }
+
+            &:active {
+                background-color: darken($background-color, 20%);
+            }
         }
     }
 
-    .delete-team-btn {
-        padding: 10px;
-        width: 140px;
-        height: 50px;
-        margin: 10px;
-        border: 1px solid $border-color;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: 400;
-
-        &:hover {
-            background-color: darken($background-color, 10%);
-        }
-
-        &:active {
-            background-color: darken($background-color, 20%);
-        }
-    }
 
     .teams-grid {
         display: grid;

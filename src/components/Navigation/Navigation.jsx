@@ -15,7 +15,7 @@ function Navigation() {
     const location = useLocation();  // Mevcut konumu almak için 
 
     const navItems = [
-        { id: 'home-nav-id', to: '/', logo: homepageLogo, name: 'Anasayfa' },
+        { id: 'home-nav-id', to: '/homepage', logo: homepageLogo, name: 'Anasayfa' },
         { id: 'projects-nav-id', to: '/projects', logo: projectsLogo, name: 'Projeler' },
         { id: 'groups-nav-id', to: '/groups', logo: groupsLogo, name: 'Gruplar' },
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: 'Şirket Çalışanları' },

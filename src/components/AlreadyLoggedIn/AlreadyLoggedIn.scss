@@ -1,0 +1,25 @@
+@use "../../styles/abstracts/variables" as *;
+
+.already-login-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Barlow", sans-serif;
+
+    .already-login-main-div {
+        width: 500px;
+        border: 1px solid $border-color;
+        border-radius: 20px;
+        padding: 20px;
+        height: 300px;
+
+        .already-login-header {
+            font-weight: 400;
+        }
+
+        .already-login-logout {}
+
+        .already-login-back {}
+    }
+}

@@ -16,9 +16,7 @@ const routes = [
   {
     path: "/",
     element: (
-      <ProtectedRoute>
-        <HomePage />
-      </ProtectedRoute>
+      <FirstPage />
     ),
   },
   {
@@ -88,15 +86,15 @@ const routes = [
   {
     path: "/company-create",
     element: (
-      <ProtectedRoute>
-        <CompanyCreatePage />
-      </ProtectedRoute>
+      <CompanyCreatePage />
     ),
   },
   {
-    path: "/firstpage",
+    path: "/homepage",
     element: (
-      <FirstPage />
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
     ),
   }
 ];

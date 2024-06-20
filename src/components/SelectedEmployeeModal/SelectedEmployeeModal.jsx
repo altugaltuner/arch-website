@@ -1,4 +1,5 @@
 import React from 'react';
+import './SelectedEmployeeModal.scss';
 
 function SelectedEmployeeModal({ employee, onClose, sendEmail }) {
     if (!employee) {
@@ -18,9 +19,13 @@ function SelectedEmployeeModal({ employee, onClose, sendEmail }) {
                 <p>{employee.username}</p>
                 <p>{employee.email}</p>
                 <p>{employee.profession.professionName}</p>
-                <button className="send-email-btn" onClick={() => sendEmail(employee.email)}>
-                    Send Email
-                </button>
+                <div className='selected-employee-buttons'>
+                    <button className="send-email-btn" onClick={() => sendEmail(employee.email)}>
+                        E-posta Gönder
+                    </button>
+                    <button className='send-private-message'>İleti Gönder</button>
+                </div>
+
                 <button className="modal-close-btn" onClick={onClose}>
                     X
                 </button>

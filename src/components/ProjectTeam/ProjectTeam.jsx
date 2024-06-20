@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './ProjectTeam.scss';
 import axios from 'axios';
 import AddUserModal from '../../components/AddUserModal/AddUserModal';
+import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal'; // Yeni eklenen modal bileşeni
 
 const ProjectTeam = ({ clickedProject }) => {
     const [employees, setEmployees] = useState([]);
     const [roles, setRoles] = useState([]);
-    const [showModal, setShowModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false);
+    const [showRemoveModal, setShowRemoveModal] = useState(false); // Yeni modal durumu
     const [allUsers, setAllUsers] = useState([]);
     const [availableUsers, setAvailableUsers] = useState([]);
 
@@ -64,12 +66,24 @@ const ProjectTeam = ({ clickedProject }) => {
                     users: [...clickedProject.attributes.users.data.map(user => user.id), ...userIds]
                 }
             });
-            // Yeni kullanıcıları clickedProject'e hemen ekleyin
             const newUsers = userIds.map(id => allUsers.find(user => user.id === id));
             setEmployees(prev => [...prev, ...newUsers]);
-            setShowModal(false);
+            setShowAddModal(false);
         } catch (error) {
             console.error('Error adding users to project team', error);
+        }
+    };
+
+    const handleRemoveUsers = async (userIds) => {
+        try {
+            await axios.put(`http://localhost:1337/api/projects/${clickedProject.id}?populate=*`, {
+                data: {
+                    users: clickedProject.attributes.users.data.filter(user => !userIds.includes(user.id))
+                }
+            });
+            setEmployees(prev => prev.filter(employee => !userIds.includes(employee.id)));
+        } catch (error) {
+            console.error('Error removing users from project team', error);
         }
     };
 
@@ -79,19 +93,19 @@ const ProjectTeam = ({ clickedProject }) => {
 
     return (
         <div className="project-teams-container">
-            {roles.map(role => role.attributes.role === "Admin" && (
-                <>
-                    <button
-                        className="add-team-btn"
-                        onClick={() => setShowModal(true)}
-                    >
-                        Çalışan Ekle
-                    </button>
-                    <button className='delete-team-btn'>Çalışan Çıkar</button>
-                </>
-
-            ))}
-
+            <div className='admin-buttons'>
+                {roles.map(role => role.attributes.role === "Admin" && (
+                    <>
+                        <button
+                            className="add-team-btn"
+                            onClick={() => setShowAddModal(true)}
+                        >
+                            Çalışan Ekle
+                        </button>
+                        <button className='delete-team-btn' onClick={() => setShowRemoveModal(true)}>Çalışan Çıkar</button>
+                    </>
+                ))}
+            </div>
             <div className="employees-grid">
                 {filteredEmployees.map((employee, index) => (
                     <div className="employee-card" key={index}>
@@ -111,12 +125,18 @@ const ProjectTeam = ({ clickedProject }) => {
             </div>
 
             <AddUserModal
-                show={showModal}
-                onClose={() => setShowModal(false)}
-                users={availableUsers}  // This should be `availableUsers` to ensure only available users are shown
+                show={showAddModal}
+                onClose={() => setShowAddModal(false)}
+                users={availableUsers}
                 handleAddUsers={handleAddUsers}
             />
 
+            <RemoveUserModal
+                show={showRemoveModal}
+                onClose={() => setShowRemoveModal(false)}
+                employees={filteredEmployees}
+                handleRemoveUsers={handleRemoveUsers}
+            />
         </div>
     );
 };

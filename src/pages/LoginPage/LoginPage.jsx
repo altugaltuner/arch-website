@@ -33,7 +33,7 @@ function LoginPage() {
     const { email, password } = formData;
     try {
       await login(email, password);
-      navigate("/");
+      navigate("/homepage");
     } catch (error) {
       console.error(error);
       setError("Hatalı kullanıcı adı veya şifre, lütfen tekrar deneyin!");

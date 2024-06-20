@@ -1,0 +1,67 @@
+@use "../../styles/abstracts/variables" as *;
+
+.employee-card-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-family: "Barlow", sans-serif;
+
+    .employee-card-modal-inner {
+        background-color: $background-color;
+        display: flex;
+        flex-direction: column;
+        width: 320px;
+        height: 400px;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        position: relative;
+        gap: 20px;
+        border-radius: 20px;
+
+        .selected-employee-buttons {
+            display: flex;
+            gap: 10px;
+
+            .send-email-btn {
+                border: 1px solid $border-color;
+                padding: 10px 10px;
+                border-radius: 15px;
+            }
+
+            .send-private-message {
+                border: 1px solid $border-color;
+                padding: 10px 10px;
+                border-radius: 15px;
+            }
+        }
+
+
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+
+            .profile-pic-inner {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    }
+}
