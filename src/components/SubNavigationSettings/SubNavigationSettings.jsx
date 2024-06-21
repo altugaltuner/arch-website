@@ -1,43 +1,42 @@
-import { useState, useEffect } from "react";
 import "./SubNavigationSettings.scss";
 
-function SubNavigationSettings() {
+function SubNavigationSettings({ getRelevantSettings }) {
+    const sections = [
+        {
+            header: "Kullanıcı Bilgileri ve Profili",
+            items: ["Kullanıcı adı", "E-posta adresi", "Şifre değiştirme", "Telefon Değiştirme", "Profil fotoğrafı yükleme"]
+        },
+        {
+            header: "Bildirim Ayarları",
+            items: ["E-posta bildirimleri açma/kapatma", "Uygulama içi bildirimler", "SMS bildirimleri"]
+        },
+        {
+            header: "Gizlilik ve Güvenlik",
+            items: ["Hesap güvenliği ayarları (2FA gibi)", "Veri paylaşım tercihleri", "Hesap dondurma veya silme seçenekleri"]
+        },
+        {
+            header: "Uygulama Ayarları",
+            items: ["Tema seçimi (açık/koyu mod)", "Dil ve bölge ayarları", "Uygulama güncellemeleri"]
+        },
+        {
+            header: "Veri ve Depolama",
+            items: ["Veri yedekleme ve geri yükleme seçenekleri", "Depolama kullanımı ve yönetimi", "Arşivleme seçenekleri"]
+        }
+    ];
+
     return (
         <div className="sub-navi-settings-page">
             <h1 className="sub-nav-header">Ayarlar</h1>
             <div className="sub-nav-container">
                 <div className="sub-nav-content">
-                    <div className="sub-nav-section">
-                        <h2 className="sub-nav-subheader">Kullanıcı Bilgileri ve Profili</h2>
-                        <p>Kullanıcı adı</p>
-                        <p>E-posta adresi</p>
-                        <p>Şifre değiştirme</p>
-                        <p>Profil fotoğrafı yükleme</p>
-                    </div>
-                    <div className="sub-nav-section">
-                        <h2 className="sub-nav-subheader">Bildirim Ayarları</h2>
-                        <p>E-posta bildirimleri açma/kapatma</p>
-                        <p>Uygulama içi bildirimler</p>
-                        <p>SMS bildirimleri</p>
-                    </div>
-                    <div className="sub-nav-section">
-                        <h2 className="sub-nav-subheader">Gizlilik ve Güvenlik</h2>
-                        <p>Hesap güvenliği ayarları (2FA gibi)</p>
-                        <p>Veri paylaşım tercihleri</p>
-                        <p>Hesap dondurma veya silme seçenekleri</p>
-                    </div>
-                    <div className="sub-nav-section">
-                        <h2 className="sub-nav-subheader">Uygulama Ayarları</h2>
-                        <p>Tema seçimi (açık/koyu mod)</p>
-                        <p>Dil ve bölge ayarları</p>
-                        <p>Uygulama güncellemeleri</p>
-                    </div>
-                    <div className="sub-nav-section">
-                        <h2 className="sub-nav-subheader">Veri ve Depolama</h2>
-                        <p>Veri yedekleme ve geri yükleme seçenekleri</p>
-                        <p>Depolama kullanımı ve yönetimi</p>
-                        <p>Arşivleme seçenekleri</p>
-                    </div>
+                    {sections.map((section, index) => (
+                        <div key={index} className="sub-nav-section">
+                            <h2 onClick={getRelevantSettings} className="sub-nav-subheader">{section.header}</h2>
+                            {section.items.map((item, idx) => (
+                                <p key={idx}>{item}</p>
+                            ))}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

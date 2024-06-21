@@ -1,125 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import './ProjectTeam.scss';
-import axios from 'axios';
-import AddUserModal from '../../components/AddUserModal/AddUserModal';
+{/* <h2 className="sub-setting-panel-header">{selectedSetting}</h2>
+            <h3 className="sub-setting-panel-content">Kullanıcı Adı: Altuğ Altuner</h3>
+            <h3 className="sub-setting-panel-content">E-posta Adresi: altugaltuner@gmail.com</h3>
+            <h3 className="sub-setting-panel-content">Şifre: *********</h3>
+            <h3 className="sub-setting-panel-content">Telefon: 0535 486 55 55</h3>
+            <h3 className="sub-setting-panel-content">Konum: 0535 486 55 55</h3>
+            <h3 className="sub-setting-panel-content">Profil Fotoğrafı: <img src="https://via.placeholder.com/150" alt="profile" /></h3>
+ */}
 
-const ProjectTeam = ({ clickedProject, setClickedProject }) => {
-    const [employees, setEmployees] = useState([]);
-    const [roles, setRoles] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [allUsers, setAllUsers] = useState([]);
-    const [availableUsers, setAvailableUsers] = useState([]);
+{/* <div className="sub-setting-panel-page">
+            <h2 className="sub-setting-panel-header">{selectedSetting}</h2>
+            <h3 className="sub-setting-panel-content">E-posta bildirimleri açma/kapatma: Yes/No</h3>
+            <h3 className="sub-setting-panel-content">Uygulama içi bildirimler: Yes/No</h3>
+            <h3 className="sub-setting-panel-content">SMS bildirimleri: Yes/No</h3>
+        </div> */}
 
-    async function getRoles() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/accesses');
-            setRoles(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+{/* <div className="sub-setting-panel-page">
+     <h2 className="sub-setting-panel-header">{selectedSetting}</h2>
+     <h3 className="sub-setting-panel-content">Hesap güvenliği ayarları (2FA gibi)</h3>
+     <h3 className="sub-setting-panel-content">Uygulama içi bildirimler: Yes/No</h3>
+     <h3 className="sub-setting-panel-content">SMS bildirimleri: Yes/No</h3>
+ </div>*/}
 
-    useEffect(() => {
-        getRoles();
-    }, []);
+{/* <div className="sub-setting-panel-page">
+    <h2 className="sub-setting-panel-header">{selectedSetting}</h2>
+    <h3 className="sub-setting-panel-content">Tema seçimi (açık/koyu mod)</h3>
+    <h3 className="sub-setting-panel-content">Dil ve bölge ayarları</h3>
+    <h3 className="sub-setting-panel-content">Uygulama güncellemeleri</h3>
+</div> */}
 
-    useEffect(() => {
-        const fetchEmployees = async () => {
-            try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
-                setEmployees(response.data);
-                setAllUsers(response.data);
-            } catch (error) {
-                console.error('Error fetching employees', error);
-            }
-        };
-
-        fetchEmployees();
-    }, []);
-
-    useEffect(() => {
-        console.log('clickedProject:', clickedProject);
-        console.log('allUsers:', allUsers);
-
-        if (clickedProject?.attributes?.users?.data) {
-            const projectUserIds = clickedProject.attributes.users.data.map(user => user.id);
-            const available = allUsers.filter(user => !projectUserIds.includes(user.id));
-            setAvailableUsers(available);
-            console.log('Available users:', available);
-        } else {
-            console.log('clickedProject.attributes.users.data is undefined');
-            if (clickedProject) {
-                console.log('clickedProject.attributes:', clickedProject.attributes);
-                if (clickedProject.attributes) {
-                    console.log('clickedProject.attributes.users:', clickedProject.attributes.users);
-                }
-            }
-        }
-    }, [allUsers, clickedProject]);
-
-    const handleAddUsers = async (userIds) => {
-        try {
-            await axios.put(`http://localhost:1337/api/projects/${clickedProject.id}?populate=*`, {
-                data: {
-                    users: [...clickedProject.attributes.users.data.map(user => user.id), ...userIds]
-                }
-            });
-            setShowModal(false);
-            // Proje bilgisini güncelle
-            const updatedProjectResponse = await axios.get(`http://localhost:1337/api/projects/${clickedProject.id}?populate=*`);
-            setClickedProject(updatedProjectResponse.data.data); // clickedProject state'ini güncelle
-        } catch (error) {
-            console.error('Error adding users to project team', error);
-        }
-    };
-
-    useEffect(() => {
-        if (clickedProject?.attributes?.users?.data) {
-            setEmployees(clickedProject.attributes.users.data);
-        }
-    }, [clickedProject]);
-
-    const filteredEmployees = employees.filter(employee =>
-        employee.projects && employee.projects.some(project => project.id === clickedProject.id)
-    );
-
-    return (
-        <div className="project-teams-container">
-            {roles.map(role => role.attributes.role === "Admin" && (
-                <button
-                    className="add-team-btn"
-                    onClick={() => setShowModal(true)}
-                >
-                    Çalışan Ekle
-                </button>
-            ))}
-
-            <div className="employees-grid">
-                {filteredEmployees.map((employee, index) => (
-                    <div className="employee-card" key={index}>
-                        <div className="profile-pic">
-                            <img
-                                className="profile-pic-inner"
-                                src={employee.profilePic?.url ? `http://localhost:1337${employee.profilePic.url}` : ""}
-                                alt=""
-                            />
-                        </div>
-                        <div className="employee-info">
-                            <h3 className='employee-info-username'>{employee.username}</h3>
-                            <p className='employee-info-professionName'>{employee.profession.professionName}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <AddUserModal
-                show={showModal}
-                onClose={() => setShowModal(false)}
-                users={availableUsers}  // This should be `availableUsers` to ensure only available users are shown
-                handleAddUsers={handleAddUsers}
-            />
-        </div>
-    );
-};
-
-export default ProjectTeam;
+{/* <div className="sub-setting-panel-page">
+    <h2 className="sub-setting-panel-header">{selectedSetting}</h2>
+    <h3 className="sub-setting-panel-content">Veri yedekleme ve geri yükleme seçenekleri</h3>
+    <h3 className="sub-setting-panel-content">Depolama kullanımı ve yönetimi</h3>
+    <h3 className="sub-setting-panel-content">Arşivleme seçenekleri</h3>
+</div> */}

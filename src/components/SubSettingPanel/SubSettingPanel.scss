@@ -1,5 +1,24 @@
+@use "../../styles/abstracts/variables" as *;
+
 .sub-setting-panel-page {
     display: flex;
-    width: 320px;
-    transform: translate(110px, 0px);
+    width: 70%;
+    flex-direction: column;
+    padding: 25px;
+    color: $font-color;
+    font-family: $primary-font;
+
+    .sub-setting-panel-header {
+        font-size: 28px;
+        padding: 10px;
+        font-weight: 400;
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 20px;
+    }
+
+    .sub-setting-panel-content {
+        display: flex;
+        font-size: 18px;
+        padding: 10px;
+    }
 }
