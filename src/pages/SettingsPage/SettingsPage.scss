@@ -1,0 +1,11 @@
+.settings-page {
+    display: flex;
+    width: 100%;
+
+    .settings-page-row {
+        display: flex;
+        flex-direction: row;
+        width: calc(100% - 110px);
+        transform: translate(110px, 0px);
+    }
+}
