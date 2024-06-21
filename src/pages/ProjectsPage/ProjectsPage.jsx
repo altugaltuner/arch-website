@@ -6,11 +6,12 @@ import Navigation from "../../components/Navigation/Navigation";
 import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
 import ProjectSection from "../../components/ProjectSection/ProjectSection";
 import ProjectTeam from "../../components/ProjectTeam/ProjectTeam";
+import ProjectComments from "../../components/ProjectComments/ProjectComments";
+import ProjectMetrics from "../../components/ProjectMetrics/ProjectMetrics";
 
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
 
-    // Additional states for project details
     const [currentProject, setCurrentProject] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -18,7 +19,6 @@ function ProjectsPage() {
     const { projectId } = useParams();
     const location = useLocation();
 
-    // Use the projectId and projectName from the location state if available
     const idToFetch = location.state?.projectId || projectId;
 
     async function getRoles() {
@@ -68,10 +68,14 @@ function ProjectsPage() {
             <Navigation />
             <div className="inner-project-page">
                 <div className="inner-project-column">
-                    {currentProject && <ProjectHeader clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
+                    {currentProject && <ProjectHeader clickedProject={currentProject.data} />}
                     <div className="inner-project-row">
-                        {currentProject && <ProjectSection clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
-                        {currentProject && <ProjectTeam clickedProject={currentProject.data} />} {/* Pass project data correctly here */}
+                        {currentProject && <ProjectSection clickedProject={currentProject.data} />}
+                        {currentProject && <ProjectTeam clickedProject={currentProject.data} />}
+                    </div>
+                    <div className="inner-project-row">
+                        <ProjectComments />
+                        <ProjectMetrics />
                     </div>
                 </div>
             </div>

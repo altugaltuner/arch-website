@@ -1,0 +1,25 @@
+@use "../../styles/abstracts/variables" as *;
+
+.project-metrics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 10px;
+    font-family: $primary-font;
+    border: 1px solid $border-color;
+    border-radius: 15px;
+    margin-top: 20px;
+    color: $font-color;
+
+    .project-metrics-header {
+        border-bottom: 1px solid $border-color;
+        padding: 10px;
+        margin: 10px;
+        width: 100%;
+        font-size: 30px;
+        color: $font-color;
+        text-align: center;
+        font-weight: 400;
+    }
+}
