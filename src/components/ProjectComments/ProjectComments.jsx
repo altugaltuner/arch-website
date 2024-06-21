@@ -6,6 +6,7 @@ function ProjectProcess() {
 
     return (
         <div className="project-comments-main">
+            <h2 className='project-comments-h2'>Proje Revizeleri</h2>
             <ul className='project-comments-ul'>
                 <li className='project-comments-li'>comment Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores unde doloribus perspiciatis libero molestias nisi atque inventore labore, sunt nam temporibus, qui voluptatem. Ea non nobis reprehenderit vel. Consequatur!
                 </li>
