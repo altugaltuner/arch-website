@@ -2,6 +2,7 @@
 
 .firstpage-main {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     font-family: $primary-font;
@@ -79,5 +80,43 @@
                 }
             }
         }
+    }
+
+    .firstpage-social-media {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 30px;
+        left: 0;
+        top: 0;
+
+        .firstpage-social-media-header {
+            font-weight: 500;
+            font-size: 24px;
+        }
+
+        .social-media-logo-div {
+            width: 170px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .social-media-a {
+                display: flex;
+                align-items: center;
+                width: 40px;
+                gap: 10px;
+                height: 40px;
+
+                .social-media-logo {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+
     }
 }

@@ -15,7 +15,7 @@ function MyLastAct({ user }) {
     console.log("MyLastActivities:", myLastActivities);
     return (
         <div className="mylast-act-main">
-            <h2 className="mylast-act-header">Son Aktivitelerim</h2>
+            <h2 className="mylast-act-header">Son Revizelerim</h2>
             {myLastActivities.map((activity, index) => (
                 <div key={index} className="mylast-act-item">
                     <ul>
