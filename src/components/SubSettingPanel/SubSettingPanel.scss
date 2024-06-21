@@ -16,9 +16,35 @@
         margin-bottom: 20px;
     }
 
-    .sub-setting-panel-content {
+    .personal-info-subsetting-column {
         display: flex;
-        font-size: 18px;
-        padding: 10px;
+        flex-direction: column;
+
+        .subsetting-header {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+
+            .subsetting-pp {
+                width: 200px;
+            }
+        }
+
+        .personal-info-subsetting-oneline {
+
+            .subsetting-header {
+                font-size: 20px;
+                font-weight: 500;
+                margin-bottom: 10px;
+            }
+
+            .subsetting-paragraph {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+        }
     }
 }
