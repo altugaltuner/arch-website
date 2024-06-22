@@ -9,6 +9,8 @@
     padding: 20px;
     border-radius: 20px;
     border: 1px solid $border-color;
+    max-height: 560px;
+    overflow-y: auto;
 
     .active-projects-container {
         display: flex;
@@ -38,6 +40,7 @@
                 .my-active-project-list-element {
                     padding: 10px;
                     cursor: pointer;
+                    transition: all 0.3s;
                     width: 150px;
                     display: flex;
                     flex-direction: column;

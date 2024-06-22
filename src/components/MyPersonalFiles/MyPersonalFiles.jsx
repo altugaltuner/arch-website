@@ -1,47 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import "./MyPersonalFiles.scss";
-import FilePreviewModal from "../../components/FilePreviewModal/FilePreviewModal";
+import folderIcon from "../../assets/icons/folder-icon.png";
+import FilePreviewModal from "../FilePreviewModal/FilePreviewModal";
+import backButton from "../../assets/icons/back-button.png";
 
-function AboutMePage({ user }) {
-    const [allUsers, setAllUsers] = useState([]);
+function MyPersonalFiles({ user }) {
+    const [personalFolders, setPersonalFolders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedFolder, setSelectedFolder] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
+        if (!user || !user.id) {
+            setIsLoading(false);
+            return;
+        }
+
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=MyPersonalFiles');
-                console.log("Fetched users:", response.data);
-                setAllUsers(response.data);
+                const response = await axios.get(`http://localhost:1337/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
+                setPersonalFolders(response.data.personal_folders);
             } catch (error) {
                 console.error('Error fetching the data', error);
             } finally {
-                setIsLoading(false); // Set loading to false after fetching data
+                setIsLoading(false);
             }
         };
 
         fetchData();
-    }, []);
-
-    useEffect(() => {
-        console.log("All Users state updated:", allUsers);
-    }, [allUsers]);
-
-    if (isLoading) {
-        return <div>Loading...</div>; // Show a loading message while data is being fetched
-    }
-
-    if (!user) {
-        return <div>No user data available.</div>;
-    }
-
-    const filteredUser = allUsers.find(u => u.username === user?.username);
-
-    if (!filteredUser || !filteredUser.MyPersonalFiles) {
-        return <div>No personal files available for this user.</div>;
-    }
+    }, [user]);
 
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
@@ -51,7 +40,7 @@ function AboutMePage({ user }) {
         }
 
         const formData = new FormData();
-        formData.append('files', file); // Ensure the field name matches what the API expects
+        formData.append('files', file);
 
         try {
             const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
@@ -59,84 +48,94 @@ function AboutMePage({ user }) {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log('File uploaded:', uploadResponse.data);
-
-            // Assuming the uploadResponse.data returns an array of files, and we are interested in the first one
             const uploadedFile = uploadResponse.data[0];
-
-            // Update the user's MyPersonalFiles field with the new file
-            const updatedFiles = [...filteredUser.MyPersonalFiles, uploadedFile];
-            const updateUserResponse = await axios.put(`http://localhost:1337/api/users/${filteredUser.id}`, {
-                MyPersonalFiles: updatedFiles
+            const updatedFolders = personalFolders.map(folder => {
+                if (folder.id === selectedFolder.id) {
+                    return {
+                        ...folder,
+                        personalFolderContent: [...folder.personalFolderContent, uploadedFile],
+                    };
+                }
+                return folder;
             });
-
-            console.log('User updated with new file:', updateUserResponse.data);
-
-            // Update the state with the updated user
-            const updatedUser = { ...filteredUser, MyPersonalFiles: updatedFiles };
-            setAllUsers(prevUsers => prevUsers.map(u => u.username === user.username ? updatedUser : u));
+            setPersonalFolders(updatedFolders);
         } catch (error) {
-            if (error.response) {
-                // Server responded with a status other than 200 range
-                console.error('Error uploading the file', error.response.data);
-            } else if (error.request) {
-                // Request was made but no response received
-                console.error('Error uploading the file', error.request);
-            } else {
-                // Something happened in setting up the request
-                console.error('Error uploading the file', error.message);
-            }
+            console.error('Error uploading the file', error);
         }
     };
 
-    const uploadMyFile = () => {
-        fileInputRef.current.click(); // Trigger a click event on the file input element
+    const uploadFile = (folderId) => {
+        setSelectedFolder(personalFolders.find(folder => folder.id === folderId));
+        fileInputRef.current.click();
     };
 
-    const showMyFileModal = (file) => {
+    const showFilePreview = (file) => {
         setSelectedFile(file);
     };
 
-    const closeMyFileModal = () => {
+    const closeFilePreview = () => {
         setSelectedFile(null);
     };
 
-    const downloadMyFileModal = () => {
-        if (!selectedFile) {
-            console.error('No file selected for download');
-            return;
+    const downloadFile = () => {
+        if (selectedFile) {
+            window.open(`http://localhost:1337${selectedFile.url}`, '_blank');
         }
-
-        // Assuming the file has a URL property
-        window.open(`http://localhost:1337${selectedFile.url}`, '_blank');
     };
+
+    const renderFolders = () => {
+        return personalFolders.map(folder => (
+            <div key={folder.id} className="folder" onClick={() => setSelectedFolder(folder)}>
+                <img src={folderIcon} alt="folder" className="folder-icon" />
+                <p className="folder-p">{folder.folderName}</p>
+            </div>
+        ));
+    };
+
+    const renderFolderContent = (folder) => {
+        return (
+            <div className="folder-content">
+                <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
+                <h3 className="folder-header">{folder.folderName}</h3>
+                <div className="files">
+                    {folder.personalFolderContent.map(file => (
+                        <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
+                            {file.formats && file.formats.thumbnail ? (
+                                <img className="files-img" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt={file.name} />
+                            ) : (
+                                <span>{file.name}</span>
+                            )}
+                        </div>
+                    ))}
+                </div>
+                <button onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
+            </div>
+        );
+    };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!user || !user.id) {
+        return <div>No user data available.</div>;
+    }
 
     return (
         <div className="my-files-panel">
             <h2 className="my-files-panel-header">Dosyalarım</h2>
-            <div className="my-folders">
-                <div className="my-folder" onClick={uploadMyFile}>Yükle</div>
-                {filteredUser.MyPersonalFiles.map((file, index) => (
-                    <div onClick={() => showMyFileModal(file)} key={index} className="my-folder">
-                        {file.formats && file.formats.thumbnail ? (
-                            <img className="my-folder-preview" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt="folder" />
-                        ) : (
-                            <div className="my-folder-preview-placeholder">No Thumbnail</div>
-                        )}
-                        <p className="my-folder-name">{file.name}</p>
-                    </div>
-                ))}
+            <div className="folders">
+                {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
             </div>
             <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/*"
                 style={{ display: "none" }}
                 onChange={handleFileUpload}
             />
-            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeMyFileModal} onDownload={downloadMyFileModal} />}
+            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeFilePreview} onDownload={downloadFile} />}
         </div>
     );
-};
+}
 
-export default AboutMePage;
+export default MyPersonalFiles;

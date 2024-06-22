@@ -12,11 +12,11 @@ function SubNavigationSettings({ getRelevantSettings }) {
         },
         {
             header: "Gizlilik ve Güvenlik",
-            items: ["Hesap güvenliği ayarları (2FA gibi)", "Veri paylaşım tercihleri", "Hesap dondurma veya silme seçenekleri"]
+            items: ["Hesap güvenliği ayarları (2FA gibi)", "Hesap dondurma veya silme seçenekleri"]
         },
         {
             header: "Uygulama Ayarları",
-            items: ["Tema seçimi (açık/koyu mod)", "Dil ve bölge ayarları", "Uygulama güncellemeleri"]
+            items: ["Tema seçimi (açık/koyu mod)", "Uygulama güncellemeleri"]
         },
         {
             header: "Veri ve Depolama",

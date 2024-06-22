@@ -1,69 +1,91 @@
 @use "../../styles/abstracts/variables" as *;
 
 .my-files-panel {
-    max-height: 900px;
-    overflow-y: auto; // This adds the vertical scroll bar if content exceeds 500px in height
-    padding: 20px;
-    border: 1px solid $border-color;
-    border-radius: 20px;
-    font-family: $primary-font;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: $font-color;
+    width: 30%;
+    padding: 20px;
+    border: 1px solid $border-color;
+    border-radius: 15px;
+    gap: 20px;
 
     .my-files-panel-header {
-        margin-bottom: 35px;
-        font-weight: 400;
+        display: flex;
+        justify-content: center;
+        font-weight: 300;
+        width: 100%;
+        padding: 20px;
+        border-bottom: 1px solid $border-color;
     }
 
-    .my-folders {
+    .folders {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
         justify-content: center;
+        gap: 10px;
+        position: relative;
 
-        .my-folder {
-            width: 150px;
-            height: 150px;
-            padding: 10px;
+        .folder-content {
             display: flex;
             flex-direction: column;
-            align-items: center;
+
+            .back-button {
+                width: 30px;
+                cursor: pointer;
+                position: absolute;
+            }
+
+            .folder-header {
+                font-weight: 300;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .files {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+
+                .file {
+                    width: 150px;
+                    padding: 10px;
+                    border: 1px solid $border-color;
+                    border-radius: 15px;
+                    cursor: pointer;
+
+                    .files-img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .folder {
+            border: 1px solid $border-color;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            align-items: center;
+            text-align: center;
+            padding: 15px;
+            margin: 10px;
+            width: 180px;
+            border-radius: 15px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: #f0f0f0;
+                background-color: darken($background-color, 10%);
             }
 
-            .my-folder-preview {
+            .folder-p {
+                margin-top: 10px;
+            }
+
+            .folder-icon {
                 width: 100px;
                 height: 100px;
-                object-fit: cover;
-                border-radius: 4px;
-                margin-bottom: 5px;
-            }
-
-            .my-folder-preview-placeholder {
-                width: 100px;
-                height: 100px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 4px;
-                margin-bottom: 5px;
-                color: #999;
-            }
-
-            .my-folder-name {
-                text-align: center;
-                font-size: 16px;
-                font-weight: 300;
-                word-break: break-all;
             }
         }
     }
