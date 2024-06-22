@@ -40,22 +40,13 @@ const ProjectTeam = ({ clickedProject }) => {
     }, []);
 
     useEffect(() => {
-        console.log('clickedProject:', clickedProject);
-        console.log('allUsers:', allUsers);
 
         if (clickedProject?.attributes?.users?.data) {
             const projectUserIds = clickedProject.attributes.users.data.map(user => user.id);
             const available = allUsers.filter(user => !projectUserIds.includes(user.id));
             setAvailableUsers(available);
-            console.log('Available users:', available);
         } else {
             console.log('clickedProject.attributes.users.data is undefined');
-            if (clickedProject) {
-                console.log('clickedProject.attributes:', clickedProject.attributes);
-                if (clickedProject.attributes) {
-                    console.log('clickedProject.attributes.users:', clickedProject.attributes.users);
-                }
-            }
         }
     }, [allUsers, clickedProject]);
 

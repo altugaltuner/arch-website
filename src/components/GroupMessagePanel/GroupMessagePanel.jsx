@@ -6,7 +6,6 @@ function GroupMessagePanel() {
 
     const handleSendMessage = () => {
         // Mesaj gönderme işlemi burada yapılacak
-        console.log("Mesaj gönderildi:", message);
         setMessage("");
     };
 

@@ -13,7 +13,6 @@ function MyProfile({ user }) {
         social1: "",
     });
     const [savedData, setSavedData] = useState(formData);
-    console.log("User:", user);
 
     useEffect(() => {
         if (user) {

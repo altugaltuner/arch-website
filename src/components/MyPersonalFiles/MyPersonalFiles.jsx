@@ -43,26 +43,36 @@ function MyPersonalFiles({ user }) {
         formData.append('files', file);
 
         try {
+            // Step 1: Upload the file
             const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             const uploadedFile = uploadResponse.data[0];
+
+            // Step 2: Update the folder content in the database
+            const folderResponse = await axios.patch(`http://localhost:1337/api/folders/${selectedFolder.id}`, {
+                personalFolderContent: [...selectedFolder.personalFolderContent, uploadedFile],
+            });
+
+            const updatedFolder = folderResponse.data;
+
+            // Step 3: Update the local state
             const updatedFolders = personalFolders.map(folder => {
                 if (folder.id === selectedFolder.id) {
-                    return {
-                        ...folder,
-                        personalFolderContent: [...folder.personalFolderContent, uploadedFile],
-                    };
+                    return updatedFolder;
                 }
                 return folder;
             });
             setPersonalFolders(updatedFolders);
+
         } catch (error) {
             console.error('Error uploading the file', error);
         }
     };
+
+
 
     const uploadFile = (folderId) => {
         setSelectedFolder(personalFolders.find(folder => folder.id === folderId));

@@ -27,7 +27,7 @@ function WorkersPage() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
-                console.log(response.data);
+
                 setEmployees(response.data);
                 setFilteredSearchEmployees(response.data);
                 const titles = response.data.map(employee => employee.profession.professionName);

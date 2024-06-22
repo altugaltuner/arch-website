@@ -170,7 +170,7 @@ function ProjectsMainPage() {
       projectName: project.attributes.projectName || "",
       projectCoverPhoto: project.attributes.projectCoverPhoto || null,
     });
-    console.log("Edit project with id:", projectId);
+
   };
 
   const handleDeleteConfirm = () => {

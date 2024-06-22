@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./MyLastAct.scss";
 
 function MyLastAct({ user }) {
-    console.log("Usewwwr:", user);
     const [myLastActivities, setMyLastActivities] = useState([]);
 
     useEffect(() => {
@@ -12,7 +11,6 @@ function MyLastAct({ user }) {
         }
     }, [user]);
 
-    console.log("MyLastActivities:", myLastActivities);
     return (
         <div className="mylast-act-main">
             <h2 className="mylast-act-header">Son Revizelerim</h2>
