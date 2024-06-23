@@ -1,48 +1,101 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import "./CompanyFormElements.scss";
 
 const CompanyFormElements = ({ errors, setErrors }) => {
+    const [employeeCodeGenerated, setEmployeeCodeGenerated] = useState(false);
+
     const employeeCodeCreator = () => {
-        const employeeCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-        document.getElementById("employeeCode").value = employeeCode;
-        console.log(employeeCode);
+        if (!employeeCodeGenerated) {
+            const employeeCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+            document.getElementById("employeeCode").value = employeeCode;
+            console.log(employeeCode);
+            setEmployeeCodeGenerated(true);
+        }
     };
 
-    const validateInputs = (e) => {
+    const createCompany = async (companyName, workingArea, companyCode) => {
+        try {
+            const response = await axios.post('http://localhost:1337/api/companies', {
+                data: {
+                    companyName: companyName,
+                    workingArea: workingArea,
+                    companyID: companyCode,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error creating company:", error);
+            throw error;
+        }
+    };
+
+    const createUser = async (adminName, adminSurname, adminPassword, adminEmail, companyID) => {
+        try {
+            const response = await axios.post('http://localhost:1337/api/users', {
+                username: `${adminName} ${adminSurname}`,
+                email: adminEmail,
+                password: adminPassword,
+                isCompanyAdmin: true,
+                company: companyID,
+                role: 3, // Admin rol ID'si
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error creating user:", error);
+            throw error;
+        }
+    };
+
+    const validateInputs = async (e) => {
         e.preventDefault();
-        const companyName = document.getElementById("companyName").value;
-        const workingArea = document.getElementById("workingArea").value;
-        const adminName = document.getElementById("adminName").value;
-        const adminSurname = document.getElementById("adminSurname").value;
-        const adminPassword = document.getElementById("adminPassword").value;
-        const adminPasswordAgain = document.getElementById("adminPasswordAgain").value;
+
+        const formElements = {
+            companyName: document.getElementById("companyName").value,
+            workingArea: document.getElementById("workingArea").value,
+            companyCode: document.getElementById("employeeCode").value,
+            adminName: document.getElementById("adminName").value,
+            adminSurname: document.getElementById("adminSurname").value,
+            adminEmail: document.getElementById("adminEmail").value,
+            adminPassword: document.getElementById("adminPassword").value,
+            adminPasswordAgain: document.getElementById("adminPasswordAgain").value,
+        };
 
         let errors = {};
 
-        if (companyName.length > 50) {
-            errors.companyName = "Şirket ismi 50 karakterden fazla olamaz.";
+        if (formElements.companyName.length > 50 || formElements.companyName.length < 2) {
+            errors.companyName = "Şirket ismi 50 karakterden fazla ve 2 karakterden az olamaz.";
         }
-        if (workingArea.length > 30) {
-            errors.workingArea = "Şirketin çalışma alanı 30 karakterden fazla olamaz.";
+        if (formElements.workingArea.length > 30 || formElements.workingArea.length < 2) {
+            errors.workingArea = "Şirketin çalışma alanı 30 karakterden fazla ve 2 karakterden az olamaz.";
         }
-        if (adminName.length > 15 || !/^[a-zA-Z]+$/.test(adminName)) {
+        if (formElements.adminName.length > 15 || !/^[a-zA-Z]+$/.test(formElements.adminName)) {
             errors.adminName = "Admin ismi 15 karakterden fazla olamaz ve sadece harf içermelidir.";
         }
-        if (adminSurname.length > 20 || !/^[a-zA-Z]+$/.test(adminSurname)) {
+        if (formElements.adminSurname.length > 20 || !/^[a-zA-Z]+$/.test(formElements.adminSurname)) {
             errors.adminSurname = "Admin soyismi 20 karakterden fazla olamaz ve sadece harf içermelidir.";
         }
-        if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}/.test(adminPassword)) {
+        if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}/.test(formElements.adminPassword)) {
             errors.adminPassword = "Şifre en az bir büyük harf, bir küçük harf ve bir rakam içermeli ve en az 8 karakter uzunluğunda olmalıdır.";
         }
-        if (adminPassword !== adminPasswordAgain) {
+        if (formElements.adminPassword !== formElements.adminPasswordAgain) {
             errors.adminPasswordAgain = "Şifreler birbiriyle uyuşmuyor.";
         }
 
         setErrors(errors);
 
         if (Object.keys(errors).length === 0) {
-            // No errors, submit form
-            alert("Form başarıyla gönderildi!");
+            try {
+                // Şirket oluştur
+                const company = await createCompany(formElements.companyName, formElements.workingArea, formElements.companyCode);
+
+                // Kullanıcı oluştur ve şirket ile ilişkilendir
+                await createUser(formElements.adminName, formElements.adminSurname, formElements.adminPassword, formElements.adminEmail, company.data.id);
+
+                alert("Form başarıyla gönderildi!");
+            } catch (error) {
+                alert("Form gönderimi sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+            }
         }
     };
 
@@ -61,7 +114,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
                     <label className="company-create-label" htmlFor="employeeCode">Şirket Çalışan Kodu</label>
                     <input className="company-create-input" placeholder="Kodunuzu Kopyalayın" type="text" id="employeeCode" readOnly />
-                    <button type="button" className="employee-code-create-btn" onClick={employeeCodeCreator}>Kod Oluştur</button>
+                    <button type="button" className="employee-code-create-btn" onClick={employeeCodeCreator} disabled={employeeCodeGenerated}>Kod Oluştur</button>
                 </div>
 
                 <div className="admin-create-div">

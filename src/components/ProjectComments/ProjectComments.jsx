@@ -2,20 +2,31 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./ProjectComments.scss";
 
-function ProjectProcess() {
+function ProjectProcess({ clickedProject }) {
+
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        if (clickedProject) {
+            const projectRevises = clickedProject.attributes.project_revises.data;
+            const projectComments = projectRevises.flatMap(revise =>
+                revise.attributes.comment.flatMap(comment =>
+                    comment.children.map(child => child.text)
+                )
+            );
+            setComments(projectComments);
+        }
+    }, [clickedProject]);
 
     return (
         <div className="project-comments-main">
             <h2 className='project-comments-h2'>Proje Revizeleri</h2>
             <ul className='project-comments-ul'>
-                <li className='project-comments-li'>comment Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores unde doloribus perspiciatis libero molestias nisi atque inventore labore, sunt nam temporibus, qui voluptatem. Ea non nobis reprehenderit vel. Consequatur!
-                </li>
-                <li className='project-comments-li'>comment Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores unde doloribus perspiciatis libero molestias nisi atque inventore labore, sunt nam temporibus, qui voluptatem. Ea non nobis reprehenderit vel. Consequatur!
-                </li>
-                <li className='project-comments-li'>comment Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores unde doloribus perspiciatis libero molestias nisi atque inventore labore, sunt nam temporibus, qui voluptatem. Ea non nobis reprehenderit vel. Consequatur!
-                </li>
-                <li className='project-comments-li'>comment Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores unde doloribus perspiciatis libero molestias nisi atque inventore labore, sunt nam temporibus, qui voluptatem. Ea non nobis reprehenderit vel. Consequatur!
-                </li>
+                {comments.map((comment, index) => (
+                    <li key={index} className='project-comments-li'>
+                        {comment}
+                    </li>
+                ))}
             </ul>
         </div>
     );

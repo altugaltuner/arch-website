@@ -74,8 +74,8 @@ function ProjectsPage() {
                         {currentProject && <ProjectTeam clickedProject={currentProject.data} />}
                     </div>
                     <div className="inner-project-row">
-                        <ProjectComments />
-                        <ProjectMetrics />
+                        {currentProject && <ProjectComments clickedProject={currentProject.data} />}
+                        {currentProject && <ProjectMetrics clickedProject={currentProject.data} />}
                     </div>
                 </div>
             </div>

@@ -58,6 +58,11 @@
                 &:hover {
                     background-color: darken($yellow, 10%);
                 }
+
+                &:disabled {
+                    background-color: rgb(187, 187, 187);
+                    cursor: not-allowed;
+                }
             }
         }
 

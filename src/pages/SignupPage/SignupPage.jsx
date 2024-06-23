@@ -22,8 +22,8 @@ function SignupPage() {
   const signupUser = async (e) => {
     e.preventDefault();
 
-    const { fullName, phoneNumber, email, password, confirmPassword } =
-      formData;
+    const { fullName, phoneNumber, email, password, confirmPassword } = formData;
+
     if (password !== confirmPassword) {
       alert("Şifreler eşleşmiyor. Lütfen tekrar deneyin.");
       return;
