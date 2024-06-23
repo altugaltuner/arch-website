@@ -146,6 +146,7 @@ function ProjectSection({ clickedProject }) {
     };
 
     function openInsideFolder(folder) {
+        console.log("Opening folder:", folder);
         setParentFolder(currentFolder);
         setCurrentFolder(folder);
     }
@@ -156,7 +157,14 @@ function ProjectSection({ clickedProject }) {
     }
 
     const addFileToFolder = async () => {
-        if (!selectedFile || !currentFolder) return;
+        console.log("Attempting to add file to folder...");
+        if (!selectedFile || !currentFolder) {
+            console.log("No file selected or no current folder.");
+            return;
+        }
+
+        console.log("Current folder ID:", currentFolder.id);
+        console.log("Selected file:", selectedFile.name);
 
         const formData = new FormData();
         formData.append('files', selectedFile);
@@ -183,6 +191,7 @@ function ProjectSection({ clickedProject }) {
         const file = e.target.files[0];
         setSelectedFile(file);
         if (file) {
+            console.log("File selected:", file.name);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setFilePreview(reader.result);
@@ -195,7 +204,7 @@ function ProjectSection({ clickedProject }) {
         if (!folder || !folder.folderContent || !folder.folderContent.data) {
             return (
                 <div className="folder-content">
-                    <p>Henüz dosya yüklenmedi.</p>
+                    <p className="folder-content-nocontent-p">Henüz dosya yüklenmedi.</p>
                     <button className="file-preview-upload" onClick={addFileToFolder}>Dosya Yükle</button>
                 </div>
             );

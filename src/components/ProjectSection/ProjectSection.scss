@@ -16,6 +16,7 @@
     .current-folders-div {
         display: flex;
         flex-direction: column;
+        position: relative;
 
         .current-folders-div-2 {
             display: flex;
@@ -40,13 +41,24 @@
             flex-wrap: wrap;
             display: flex;
             flex-direction: row;
+            margin-top: 50px;
 
+            .folder-content-nocontent-p {
+                font-size: 20px;
+                font-weight: 400;
+                position: absolute;
+                top: 60px;
+            }
 
             .file-preview-upload {
                 width: 140px;
                 height: 140px;
                 border-radius: 15px;
                 border: 1px solid $border-color;
+
+                &:hover {
+                    background-color: darken($background-color, 10%);
+                }
             }
 
             .file-input-wrapper {
@@ -80,10 +92,6 @@
 
                     &:hover {
                         background-color: darken($background-color, 10%);
-                    }
-
-                    &:active {
-                        background-color: darken($background-color, 20%);
                     }
                 }
 
@@ -183,6 +191,10 @@
         border: 1px solid $border-color;
         cursor: pointer;
 
+        &:hover {
+            background-color: darken($background-color, 10%);
+        }
+
         .file-card-delete-btn {
             display: none;
         }
@@ -215,7 +227,11 @@
             cursor: pointer;
             width: 20px;
             margin: 5px;
-            opacity: 0.7;
+            opacity: 0.6;
+
+            &:hover {
+                opacity: 1;
+            }
         }
 
         .file-card-edit-btn {
@@ -227,6 +243,11 @@
             cursor: pointer;
             width: 20px;
             margin: 5px;
+            opacity: 0.6;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 
