@@ -9,6 +9,8 @@
     border: 1px solid $border-color;
     border-radius: 15px;
     gap: 20px;
+    max-height: 875px;
+    overflow-y: auto;
 
     .my-files-panel-header {
         display: flex;
@@ -29,6 +31,15 @@
         .folder-content {
             display: flex;
             flex-direction: column;
+            gap: 20px;
+
+            .upload-file-button {
+
+                border: 1px solid $border-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: all 0.3s;
+            }
 
             .back-button {
                 width: 30px;

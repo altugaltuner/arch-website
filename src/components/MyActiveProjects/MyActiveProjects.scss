@@ -33,6 +33,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                justify-content: center;
                 gap: 10px;
                 flex-wrap: wrap;
                 padding: 15px;
@@ -40,6 +41,7 @@
                 .my-active-project-list-element {
                     padding: 10px;
                     cursor: pointer;
+                    text-align: center;
                     transition: all 0.3s;
                     width: 150px;
                     display: flex;

@@ -52,27 +52,27 @@ function MyPersonalFiles({ user }) {
             const uploadedFile = uploadResponse.data[0];
 
             // Step 2: Update the folder content in the database
-            const folderResponse = await axios.patch(`http://localhost:1337/api/folders/${selectedFolder.id}`, {
-                personalFolderContent: [...selectedFolder.personalFolderContent, uploadedFile],
-            });
+            const updatedContent = [...selectedFolder.personalFolderContent, uploadedFile];
 
-            const updatedFolder = folderResponse.data;
+            const folderResponse = await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
+                data: {
+                    personalFolderContent: updatedContent.map(file => file.id),
+                },
+            });
 
             // Step 3: Update the local state
-            const updatedFolders = personalFolders.map(folder => {
+            setPersonalFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === selectedFolder.id) {
-                    return updatedFolder;
+                    return { ...folder, personalFolderContent: updatedContent };
                 }
                 return folder;
-            });
-            setPersonalFolders(updatedFolders);
+            }));
+            setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedContent }));
 
         } catch (error) {
             console.error('Error uploading the file', error);
         }
     };
-
-
 
     const uploadFile = (folderId) => {
         setSelectedFolder(personalFolders.find(folder => folder.id === folderId));
@@ -108,7 +108,7 @@ function MyPersonalFiles({ user }) {
                 <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
                 <h3 className="folder-header">{folder.folderName}</h3>
                 <div className="files">
-                    {folder.personalFolderContent.map(file => (
+                    {folder.personalFolderContent && folder.personalFolderContent.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
                             {file.formats && file.formats.thumbnail ? (
                                 <img className="files-img" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt={file.name} />
@@ -118,7 +118,7 @@ function MyPersonalFiles({ user }) {
                         </div>
                     ))}
                 </div>
-                <button onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
+                <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
             </div>
         );
     };

@@ -17,12 +17,15 @@ function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [filePreview, setFilePreview] = useState(null);
     const [fileModal, setFileModal] = useState(false);
     const [currentFile, setCurrentFile] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [folderToDelete, setFolderToDelete] = useState(null);
+    const [folderToEdit, setFolderToEdit] = useState(null);
+    const [newFolderName, setNewFolderName] = useState("");
 
     const fileIcons = {
         "docx": docxIcon,
@@ -113,9 +116,34 @@ function ProjectSection({ clickedProject }) {
         }
     };
 
-    function handleEditFolder(id) {
-        // Implement the edit functionality here
-    }
+    const handleEditFolder = (id) => {
+        const folder = projectFolders.find((project) =>
+            project.attributes.project_folders.data.some((folder) => folder.id === id)
+        )?.attributes.project_folders.data.find((folder) => folder.id === id);
+
+        setFolderToEdit(folder);
+        setNewFolderName(folder.attributes.projectFolderName);
+        setEditModal(true);
+    };
+
+    const handleEditSubmit = async () => {
+        if (folderToEdit) {
+            const formData = new FormData();
+            formData.append('data', JSON.stringify({
+                projectFolderName: newFolderName
+            }));
+
+            try {
+                await axios.put(`http://localhost:1337/api/project-folders/${folderToEdit.id}`, formData);
+                setEditModal(false);
+                setFolderToEdit(null);
+                setNewFolderName("");
+                await fetchProjectFolders();
+            } catch (error) {
+                console.error('Error editing the project folder', error);
+            }
+        }
+    };
 
     function openInsideFolder(folder) {
         setParentFolder(currentFolder);
@@ -282,6 +310,26 @@ function ProjectSection({ clickedProject }) {
                         <div className="buttons-for-modal">
                             <a href={`http://localhost:1337${currentFile.attributes.url}`} download className="download-button">İndir</a>
                             <button className="delete-button" onClick={() => handleDeleteFile(currentFile.id)}>Sil</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {editModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close-modal" onClick={() => setEditModal(false)}>X</span>
+                        <h2 className="modal-header">Klasörü Düzenle</h2>
+                        <input
+                            className="input-field"
+                            type="text"
+                            placeholder="Klasör Adı"
+                            value={newFolderName}
+                            onChange={(e) => setNewFolderName(e.target.value)}
+                        />
+                        <div className="buttons-for-modal">
+                            <button className="submit-button" onClick={handleEditSubmit}>Kaydet</button>
+                            <button className="cancel-button" onClick={() => setEditModal(false)}>İptal</button>
                         </div>
                     </div>
                 </div>
