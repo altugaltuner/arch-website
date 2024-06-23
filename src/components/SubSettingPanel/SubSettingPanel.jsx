@@ -7,6 +7,7 @@ import DataStorage from './DataStorage/DataStorage';
 import PrivacySecurity from './PrivacySecurity/PrivacySecurity';
 import NotificationSettings from './NotificationSettings/NotificationSettings';
 import UserProfile from './UserProfile/UserProfile';
+import AboutUs from './AboutUs/AboutUs';
 
 function SubSettingPanel({ selectedSetting }) {
     const renderContent = () => {
@@ -21,6 +22,8 @@ function SubSettingPanel({ selectedSetting }) {
                 return <AppSettings />;
             case "Veri ve Depolama":
                 return <DataStorage />;
+            case "Hakkımızda":
+                return <AboutUs />;
             default:
                 return null;
         }

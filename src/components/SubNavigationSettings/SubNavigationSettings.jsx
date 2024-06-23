@@ -21,6 +21,10 @@ function SubNavigationSettings({ getRelevantSettings }) {
         {
             header: "Veri ve Depolama",
             items: ["Veri yedekleme ve geri yükleme seçenekleri", "Depolama kullanımı ve yönetimi", "Arşivleme seçenekleri"]
+        },
+        {
+            header: "Hakkımızda",
+            items: ["Flow Proje Yönetim Sistemi", "Biz Kimiz ?", "Bize Ulaşın"]
         }
     ];
 

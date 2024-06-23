@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "./CompanyName.scss";
-import { useAuth } from "../../components/AuthProvider";
+import { useAuth } from "../AuthProvider";
 
 function CompanyName() {
+    const { user } = useAuth();
 
-    const auth = useAuth(); // auth'u const {fireStoreUser} = useAuth() şeklinde alırsanız user bilgilerine ulaşabilirsiniz
-    const { fireStoreUser } = useAuth();
-    console.log("fireStoreUser", fireStoreUser);
+    console.log(user, "user ama companyName verisi gelmiyor.");
+    const [companyName, setCompanyName] = useState("ArchiNova Mimarlık ve İnşaat");
+
     return (
         <div className="company-name-main">
-            <h1 className="company-name">ArchiNova Mimarlık ve İnşaat</h1>
+            <h1 className="company-name">{companyName}</h1>
         </div>
     );
 }
