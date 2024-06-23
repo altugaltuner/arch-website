@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./MyPersonalFiles.scss";
 import folderIcon from "../../assets/icons/folder-icon.png";
 import FilePreviewModal from "../FilePreviewModal/FilePreviewModal";
+import AddFolderModal from "../AddFolderModal/AddFolderModal";
 import backButton from "../../assets/icons/back-button.png";
 
 function MyPersonalFiles({ user }) {
@@ -10,6 +11,7 @@ function MyPersonalFiles({ user }) {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedFolder, setSelectedFolder] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [showAddFolderModal, setShowAddFolderModal] = useState(false);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -43,24 +45,20 @@ function MyPersonalFiles({ user }) {
         formData.append('files', file);
 
         try {
-            // Step 1: Upload the file
             const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             const uploadedFile = uploadResponse.data[0];
-
-            // Step 2: Update the folder content in the database
             const updatedContent = [...selectedFolder.personalFolderContent, uploadedFile];
 
-            const folderResponse = await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
+            await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
                 data: {
                     personalFolderContent: updatedContent.map(file => file.id),
                 },
             });
 
-            // Step 3: Update the local state
             setPersonalFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === selectedFolder.id) {
                     return { ...folder, personalFolderContent: updatedContent };
@@ -93,11 +91,19 @@ function MyPersonalFiles({ user }) {
         }
     };
 
+    const handleAddFolderClick = () => {
+        setShowAddFolderModal(true);
+    };
+
+    const handleFolderCreated = (newFolder) => {
+        setPersonalFolders([...personalFolders, newFolder]);
+    };
+
     const renderFolders = () => {
         return personalFolders.map(folder => (
             <div key={folder.id} className="folder" onClick={() => setSelectedFolder(folder)}>
                 <img src={folderIcon} alt="folder" className="folder-icon" />
-                <p className="folder-p">{folder.folderName}</p>
+                <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
             </div>
         ));
     };
@@ -106,7 +112,7 @@ function MyPersonalFiles({ user }) {
         return (
             <div className="folder-content">
                 <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
-                <h3 className="folder-header">{folder.folderName}</h3>
+                <h3 className="folder-header">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</h3>
                 <div className="files">
                     {folder.personalFolderContent && folder.personalFolderContent.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
@@ -134,6 +140,7 @@ function MyPersonalFiles({ user }) {
     return (
         <div className="my-files-panel">
             <h2 className="my-files-panel-header">Dosyalarım</h2>
+            <button className="add-folder-button" onClick={handleAddFolderClick}>Yeni Klasör</button>
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
             </div>
@@ -144,6 +151,12 @@ function MyPersonalFiles({ user }) {
                 onChange={handleFileUpload}
             />
             {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeFilePreview} onDownload={downloadFile} />}
+            <AddFolderModal
+                isOpen={showAddFolderModal}
+                onClose={() => setShowAddFolderModal(false)}
+                onFolderCreated={handleFolderCreated}
+                userId={user.id}
+            />
         </div>
     );
 }
