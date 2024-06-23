@@ -4,6 +4,8 @@ import "./MyPersonalFiles.scss";
 import folderIcon from "../../assets/icons/folder-icon.png";
 import FilePreviewModal from "../FilePreviewModal/FilePreviewModal";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
+import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
+import EditFolderModal from "../EditFolderModal/EditFolderModal";
 import backButton from "../../assets/icons/back-button.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
@@ -14,6 +16,10 @@ function MyPersonalFiles({ user }) {
     const [selectedFolder, setSelectedFolder] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [showAddFolderModal, setShowAddFolderModal] = useState(false);
+    const [showDeleteFolderModal, setShowDeleteFolderModal] = useState(false);
+    const [showEditFolderModal, setShowEditFolderModal] = useState(false);
+    const [folderToDelete, setFolderToDelete] = useState(null);
+    const [folderToEdit, setFolderToEdit] = useState(null);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -102,12 +108,61 @@ function MyPersonalFiles({ user }) {
         setPersonalFolders([...personalFolders, newFolder]);
     };
 
+    const handleDeleteFolder = async () => {
+        if (!folderToDelete) return;
+
+        try {
+            await axios.delete(`http://localhost:1337/api/personal-folders/${folderToDelete.id}`);
+            setPersonalFolders(personalFolders.filter(folder => folder.id !== folderToDelete.id));
+            setFolderToDelete(null);
+            setShowDeleteFolderModal(false);
+        } catch (error) {
+            console.error('Error deleting the folder:', error);
+        }
+    };
+
+    const handleEditFolder = async (newName) => {
+        if (!folderToEdit) return;
+
+        try {
+            await axios.put(`http://localhost:1337/api/personal-folders/${folderToEdit.id}`, {
+                data: { folderName: newName }
+            });
+            setPersonalFolders(personalFolders.map(folder => {
+                if (folder.id === folderToEdit.id) {
+                    return { ...folder, folderName: newName };
+                }
+                return folder;
+            }));
+            setFolderToEdit(null);
+            setShowEditFolderModal(false);
+        } catch (error) {
+            console.error('Error editing the folder:', error);
+        }
+    };
+
     const renderFolders = () => {
         return personalFolders.map(folder => (
-            <div key={folder.id} className="folder" onClick={() => setSelectedFolder(folder)}>
-                <img className="folder-editpencil" src={editPencil} alt="editPencil" srcSet="" />
-                <img className="folder-deleteicon" src={deleteIcon} alt="deleteIcon" srcSet="" />
-                <img src={folderIcon} alt="folder" className="folder-icon" />
+            <div key={folder.id} className="folder">
+                <img
+                    className="folder-editpencil"
+                    src={editPencil}
+                    alt="editPencil"
+                    onClick={() => {
+                        setFolderToEdit(folder);
+                        setShowEditFolderModal(true);
+                    }}
+                />
+                <img
+                    className="folder-deleteicon"
+                    src={deleteIcon}
+                    alt="deleteIcon"
+                    onClick={() => {
+                        setFolderToDelete(folder);
+                        setShowDeleteFolderModal(true);
+                    }}
+                />
+                <img src={folderIcon} alt="folder" className="folder-icon" onClick={() => setSelectedFolder(folder)} />
                 <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
             </div>
         ));
@@ -161,6 +216,17 @@ function MyPersonalFiles({ user }) {
                 onClose={() => setShowAddFolderModal(false)}
                 onFolderCreated={handleFolderCreated}
                 userId={user.id}
+            />
+            <DeleteFolderModal
+                isOpen={showDeleteFolderModal}
+                onClose={() => setShowDeleteFolderModal(false)}
+                onDelete={handleDeleteFolder}
+            />
+            <EditFolderModal
+                isOpen={showEditFolderModal}
+                onClose={() => setShowEditFolderModal(false)}
+                onEdit={handleEditFolder}
+                initialName={folderToEdit ? folderToEdit.folderName : ''}
             />
         </div>
     );
