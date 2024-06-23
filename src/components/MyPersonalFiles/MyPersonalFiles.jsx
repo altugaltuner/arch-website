@@ -5,6 +5,8 @@ import folderIcon from "../../assets/icons/folder-icon.png";
 import FilePreviewModal from "../FilePreviewModal/FilePreviewModal";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
 import backButton from "../../assets/icons/back-button.png";
+import editPencil from "../../assets/icons/edit-pencil.png";
+import deleteIcon from "../../assets/icons/delete-icon.png";
 
 function MyPersonalFiles({ user }) {
     const [personalFolders, setPersonalFolders] = useState([]);
@@ -96,12 +98,15 @@ function MyPersonalFiles({ user }) {
     };
 
     const handleFolderCreated = (newFolder) => {
+        console.log('New folder created:', newFolder);
         setPersonalFolders([...personalFolders, newFolder]);
     };
 
     const renderFolders = () => {
         return personalFolders.map(folder => (
             <div key={folder.id} className="folder" onClick={() => setSelectedFolder(folder)}>
+                <img className="folder-editpencil" src={editPencil} alt="editPencil" srcSet="" />
+                <img className="folder-deleteicon" src={deleteIcon} alt="deleteIcon" srcSet="" />
                 <img src={folderIcon} alt="folder" className="folder-icon" />
                 <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
             </div>

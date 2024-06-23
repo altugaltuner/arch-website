@@ -7,14 +7,19 @@ function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
     const [folderName, setFolderName] = useState('');
 
     const handleSubmit = async () => {
+        console.log('Starting folder creation process...');
+        console.log('Folder Name:', folderName);
+        console.log('User ID:', userId);
+
         try {
             const response = await axios.post('http://localhost:1337/api/personal-folders', {
                 data: {
                     folderName,
-                    user: userId
+                    users_permissions_user: userId // Ensure the user association
                 }
             });
-            onFolderCreated(response.data.data); // Adjusted to access the actual data
+            console.log('Folder creation response:', response.data);
+            onFolderCreated(response.data.data);
             onClose();
         } catch (error) {
             console.error('Error creating folder:', error);
