@@ -143,7 +143,7 @@ function MyPersonalFiles({ user }) {
 
     const renderFolders = () => {
         return personalFolders.map(folder => (
-            <div key={folder.id} className="folder">
+            <div key={folder.id} className="folder" onClick={() => setSelectedFolder(folder)}>
                 <img
                     className="folder-editpencil"
                     src={editPencil}
@@ -162,7 +162,7 @@ function MyPersonalFiles({ user }) {
                         setShowDeleteFolderModal(true);
                     }}
                 />
-                <img src={folderIcon} alt="folder" className="folder-icon" onClick={() => setSelectedFolder(folder)} />
+                <img src={folderIcon} alt="folder" className="folder-icon" />
                 <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
             </div>
         ));

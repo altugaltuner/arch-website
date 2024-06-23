@@ -26,6 +26,10 @@
         padding: 10px 20px;
         border-radius: 5px;
         transition: all 0.3s;
+
+        &:hover {
+            background-color: darken($yellow, 10%);
+        }
     }
 
     .folders {
