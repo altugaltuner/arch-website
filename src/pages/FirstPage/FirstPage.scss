@@ -120,3 +120,70 @@
 
     }
 }
+
+@media screen and (max-width: 768px) {
+    .firstpage-main {
+        .firstpage-div {
+            width: 80%;
+            margin-top: 200px;
+
+            .firstpage-logo {
+                width: 220px;
+                height: 220px;
+            }
+
+            .firstpage-header {
+                font-size: 50px;
+            }
+
+            .firstpage-title {
+                font-size: 22px;
+            }
+
+            .firstpage-buttons-div {
+                flex-direction: column;
+                gap: 20px;
+
+                .employee-create-btn {
+                    width: 100%;
+                }
+
+                .employee-login-btn {
+                    width: 100%;
+                }
+
+                .owner-create-btn {
+                    width: 100%;
+                }
+            }
+        }
+
+        .firstpage-social-media {
+            padding: 20px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+
+            .firstpage-social-media-header {
+                font-size: 20px;
+            }
+
+            .social-media-logo-div {
+                width: 90%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                .social-media-a {
+                    width: 100px;
+                    height: 30px;
+
+                    .social-media-logo {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

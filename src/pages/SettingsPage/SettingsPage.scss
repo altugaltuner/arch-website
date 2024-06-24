@@ -11,3 +11,12 @@
         transform: translate(110px, 0px);
     }
 }
+
+@media screen and (max-width: 950px) {
+    .settings-page {
+        .settings-page-row {
+            width: calc(100% - 60px);
+            transform: translate(60px, 0px);
+        }
+    }
+}
