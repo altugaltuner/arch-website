@@ -74,13 +74,28 @@
 @media screen and (max-width: 950px) {
 
     .navigation-main {
+        width: 70px;
+
         .nav-ul {
+            .flow-logo {
+                width: 60px;
+            }
 
             .nav-li {
                 font-size: 20px;
+                height: 145px;
 
                 .nav-button {
                     width: 90%;
+
+                    .nav-p {
+                        font-size: 15px;
+                    }
+
+                    .nav-logo {
+                        width: 30px;
+                        height: 30px;
+                    }
                 }
             }
         }

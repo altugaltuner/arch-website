@@ -43,7 +43,7 @@ function Navigation() {
                     <li key={item.id} className="nav-li" id={item.id} onClick={() => handleNavClick(item.id)}>
                         <Link to={item.to} className={`nav-button ${activeNavId === item.id ? 'active' : ''}`}>
                             <img src={item.logo} alt="" className="nav-logo" />
-                            <p src="li-name">{item.name}</p>
+                            <p className="nav-p" src="li-name">{item.name}</p>
                         </Link>
                     </li>
                 ))}

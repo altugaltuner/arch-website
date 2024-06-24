@@ -14,3 +14,11 @@
     width: calc(100% - 110px);
   }
 }
+
+@media screen and (max-width: 950px) {
+  .homepage-main {
+    .homepage-column {
+      transform: translate(60px, 0px);
+    }
+  }
+}
