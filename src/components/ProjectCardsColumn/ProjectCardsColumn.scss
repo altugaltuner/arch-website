@@ -134,3 +134,74 @@
         }
     }
 }
+
+@media screen and (max-width: 950px) {
+    .project-cards-column {
+        width: calc(100% - 60px);
+        transform: translate(70px, 0px);
+
+        .projects-cards-main-row {
+            margin: 10px;
+            padding: 10px;
+            gap: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+
+    .project-cards-column {
+
+        .project-cards-header-and-searchbar {
+
+            flex-direction: column;
+
+            .title-for-projects {
+                margin: 10px;
+                font-size: 30px;
+            }
+
+            .search-bar-of-projects {
+                margin-right: 0px;
+                width: 70%;
+            }
+        }
+
+        .projects-cards-main-row {
+            .add-project-btn {
+                margin-top: 0px;
+                padding: 10px;
+                gap: 10px;
+                height: auto;
+            }
+
+            .project-cards {
+                height: 240px;
+
+                .project-card-delete-btn {
+                    width: 16px;
+                }
+
+                .project-card-edit-btn {
+                    width: 18px;
+                    right: 40px;
+                }
+
+                .project-card {
+                    margin-top: 0px;
+                    padding: 10px;
+                    gap: 10px;
+                    height: auto;
+
+                    .project-card-name {
+                        font-size: 16px;
+                    }
+
+                    .project-navbar-photos {
+                        width: 150px;
+                    }
+                }
+            }
+        }
+    }
+}
