@@ -253,9 +253,19 @@
     }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 950px) {
     .profile {
+        width: 100%;
+
+        .profile-info {
+            width: 100%;
+            flex-direction: row;
+            gap: 10px;
+        }
+
         .profile-image {
+            margin: 0px;
+
             .profile-pic {
                 width: 120px;
                 height: 120px;

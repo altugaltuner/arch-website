@@ -127,3 +127,58 @@
         }
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .project-teams-container {
+        width: 90%;
+    }
+
+    .teams-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
+    }
+
+    .employees-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .project-teams-container {
+        width: 100%;
+
+        .teams-grid {
+            grid-template-columns: repeat(auto-fill, minmax(100px, 2fr));
+        }
+
+        .employees-grid {
+            grid-template-columns: repeat(auto-fill, minmax(100px, 2fr));
+
+            .employee-card {
+                padding: 10px;
+
+                .profile-pic {
+                    margin: 0px;
+                    width: auto;
+                    height: auto;
+
+                    .profile-pic-inner {
+                        width: 70px;
+                        height: 70px;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
+@media screen and (max-width: 650px) {
+
+    .project-teams-container {
+        .employees-grid {
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        }
+    }
+
+}

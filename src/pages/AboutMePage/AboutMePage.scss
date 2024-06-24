@@ -43,11 +43,18 @@
     }
 }
 
-@media screen and (max-width: 655px) {
+@media screen and (max-width: 950px) {
     .aboutme-page-main {
+        width: calc(100% - 60px);
+
         .aboutme-page-row {
             flex-direction: column;
+            transform: translate(60px, 0px);
+            width: auto;
+
+            .aboutme-page-column {
+                width: 100%;
+            }
         }
     }
-
 }

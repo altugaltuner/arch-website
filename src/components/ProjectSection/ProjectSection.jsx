@@ -41,29 +41,27 @@ function ProjectSection({ clickedProject }) {
     const [currentFolder, setCurrentFolder] = useState(null);
     const [parentFolder, setParentFolder] = useState(null);
 
-    async function getRoles() {
-        try {
-            const response = await axios.get('http://localhost:1337/api/accesses');
-            setRoles(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     useEffect(() => {
+        async function getRoles() {
+            try {
+                const response = await axios.get('http://localhost:1337/api/accesses');
+                setRoles(response.data.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
         getRoles();
     }, []);
 
-    const fetchProjectFolders = async () => {
-        try {
-            const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
-            setProjectFolders(response.data.data);
-        } catch (error) {
-            console.error('Error fetching the data', error);
-        }
-    };
-
     useEffect(() => {
+        const fetchProjectFolders = async () => {
+            try {
+                const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
+                setProjectFolders(response.data.data);
+            } catch (error) {
+                console.error('Error fetching the data', error);
+            }
+        };
         fetchProjectFolders();
     }, []);
 
@@ -146,7 +144,6 @@ function ProjectSection({ clickedProject }) {
     };
 
     function openInsideFolder(folder) {
-        console.log("Opening folder:", folder);
         setParentFolder(currentFolder);
         setCurrentFolder(folder);
     }
@@ -157,14 +154,9 @@ function ProjectSection({ clickedProject }) {
     }
 
     const addFileToFolder = async () => {
-        console.log("Attempting to add file to folder...");
         if (!selectedFile || !currentFolder) {
-            console.log("No file selected or no current folder.");
             return;
         }
-
-        console.log("Current folder ID:", currentFolder.id);
-        console.log("Selected file:", selectedFile.name);
 
         const formData = new FormData();
         formData.append('files', selectedFile);
@@ -178,7 +170,6 @@ function ProjectSection({ clickedProject }) {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log('File uploaded successfully:', response.data);
             await fetchProjectFolders();
             setSelectedFile(null);
             setFilePreview(null);
@@ -191,7 +182,6 @@ function ProjectSection({ clickedProject }) {
         const file = e.target.files[0];
         setSelectedFile(file);
         if (file) {
-            console.log("File selected:", file.name);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setFilePreview(reader.result);
@@ -208,7 +198,7 @@ function ProjectSection({ clickedProject }) {
                     <button className="file-preview-upload" onClick={addFileToFolder}>Dosya Yükle</button>
                 </div>
             );
-        };
+        }
 
         const openFileModal = (file) => {
             setCurrentFile(file);
@@ -260,30 +250,30 @@ function ProjectSection({ clickedProject }) {
                             <img src={goBackButton} alt="" className="go-back-btn-img" />
                         </button>
                         <h2 className="current-folder-header">{currentFolder.attributes.projectFolderName}</h2>
-
                     </div>
-
                     {renderFoldersAndFiles(currentFolder.attributes)}
                 </div>
             ) : (
                 filteredFolders && filteredFolders.length > 0 ? (
-                    filteredFolders.map((folder) => (
-                        <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
-                            <img
-                                className="file-card-delete-btn"
-                                src={deleteIcon}
-                                alt="delete-icon"
-                                onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}
-                            />
-                            <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
-                            <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
-                            <img
-                                className="project-folder-image"
-                                src={folderIcon}
-                                alt="folder-icon"
-                            />
-                        </div>
-                    ))
+                    <div className="project-folders-container">
+                        {filteredFolders.map((folder) => (
+                            <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
+                                <img
+                                    className="file-card-delete-btn"
+                                    src={deleteIcon}
+                                    alt="delete-icon"
+                                    onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}
+                                />
+                                <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
+                                <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
+                                <img
+                                    className="project-folder-image"
+                                    src={folderIcon}
+                                    alt="folder-icon"
+                                />
+                            </div>
+                        ))}
+                    </div>
                 ) : (
                     <p>Bu projede henüz dosya yok.</p>
                 )

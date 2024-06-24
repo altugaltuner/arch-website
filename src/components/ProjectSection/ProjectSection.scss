@@ -12,6 +12,7 @@
     border-radius: 15px;
     margin-top: 20px;
     color: $font-color;
+    height: fit-content;
 
     .current-folders-div {
         display: flex;
@@ -165,6 +166,7 @@
         }
     }
 
+
     .project-folder-button {
         border: 1px solid $border-color;
         color: $font-color;
@@ -178,207 +180,231 @@
         }
     }
 
-    .project-folder {
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-        margin: 10px;
-        height: 170px;
-        width: 200px;
-        border-radius: 10px;
-        border: 1px solid $border-color;
-        cursor: pointer;
-
-        &:hover {
-            background-color: darken($background-color, 10%);
-        }
-
-        .file-card-delete-btn {
-            display: none;
-        }
-
-        .file-card-edit-btn {
-            display: none;
-        }
-
-        .project-folder-name {
-            font-size: 18px;
-            font-weight: 500;
-            margin: 10px 0;
-            color: $font-color;
-        }
-
-        .project-folder-image {
-            width: 120px;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-    }
-
-    :hover {
-        .file-card-delete-btn {
-            display: block;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 20px;
-            cursor: pointer;
-            width: 20px;
-            margin: 5px;
-            opacity: 0.6;
-
-            &:hover {
-                opacity: 1;
-            }
-        }
-
-        .file-card-edit-btn {
-            display: block;
-            position: absolute;
-            top: 10px;
-            right: 0px;
-            font-size: 20px;
-            cursor: pointer;
-            width: 20px;
-            margin: 5px;
-            opacity: 0.6;
-
-            &:hover {
-                opacity: 1;
-            }
-        }
-    }
-
-    .modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
+    .project-folders-container {
         width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
+        display: flex;
+        flex-direction: row;
 
-        .modal-content {
-            background-color: $background-color;
-            padding: 30px;
-            border-radius: 15px;
+        .project-folder {
+            display: flex;
             position: relative;
-            text-align: center;
+            flex-direction: column;
             align-items: center;
+            padding: 10px;
+            margin: 10px;
+            height: auto;
+            width: 200px;
+            border-radius: 10px;
+            border: 1px solid $border-color;
+            cursor: pointer;
 
-            .file-icon-modal {
-                width: 200px;
-
+            &:hover {
+                background-color: darken($background-color, 10%);
             }
 
-            .close-modal {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 20px;
-                cursor: pointer;
+            .file-card-delete-btn {
+                display: none;
             }
 
-            .modal-header {
-                font-size: 28px;
+            .file-card-edit-btn {
+                display: none;
+            }
+
+            .project-folder-name {
+                font-size: 18px;
                 font-weight: 400;
+                margin: 10px 0;
+                color: $font-color;
             }
 
-            .input-field {
-                border-radius: 15px;
-                border: 1px solid $border-color;
+            .project-folder-image {
+                width: 120px;
+                object-fit: cover;
+                margin-bottom: 10px;
             }
+        }
 
-            .buttons-for-modal {
-                display: flex;
-                justify-content: space-evenly;
-                width: 100%;
-                align-items: center;
-                text-align: center;
-
-                .submit-button {
-                    display: flex;
-                    align-items: center;
-                    border-radius: 5px;
-                    border: 1px solid $border-color;
-                    transition: all 0.3s;
-
-                    &:hover {
-                        background-color: darken($yellow, 10%);
-                    }
-                }
-
-                .cancel-button {
-                    display: flex;
-                    align-items: center;
-                    border-radius: 5px;
-                    border: 1px solid $border-color;
-                    transition: all 0.3s;
-
-                    &:hover {
-                        background-color: darken($yellow, 10%);
-                    }
-                }
-
-                .download-button {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 5px;
-                    border: 1px solid $border-color;
-                    width: 70px;
-                    height: 35px;
-                    transition: all 0.3s;
-
-                    &:hover {
-                        background-color: darken($yellow, 10%);
-                    }
-                }
-
-                .delete-button {
-                    display: flex;
-                    align-items: center;
-                    border-radius: 5px;
-                    width: 70px;
-                    height: 35px;
-                    border: 1px solid $border-color;
-                    transition: all 0.3s;
-
-                    &:hover {
-                        background-color: darken($yellow, 10%);
-                    }
-                }
-            }
-
-            .close {
+        :hover {
+            .file-card-delete-btn {
+                display: block;
                 position: absolute;
                 top: 10px;
-                right: 10px;
+                right: 20px;
                 font-size: 20px;
                 cursor: pointer;
-            }
-
-            input {
-                margin: 10px 0;
-                padding: 10px;
-                width: 100%;
-            }
-
-            button {
-                padding: 10px 20px;
-                margin: 10px 5px;
-                border: none;
-                border-radius: 5px;
+                width: 20px;
+                margin: 5px;
+                opacity: 0.6;
 
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    opacity: 1;
+                }
+            }
+
+            .file-card-edit-btn {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 0px;
+                font-size: 20px;
+                cursor: pointer;
+                width: 20px;
+                margin: 5px;
+                opacity: 0.6;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+
+            .modal-content {
+                background-color: $background-color;
+                padding: 30px;
+                border-radius: 15px;
+                position: relative;
+                text-align: center;
+                align-items: center;
+
+                .file-icon-modal {
+                    width: 200px;
+
                 }
 
+                .close-modal {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+                .modal-header {
+                    font-size: 28px;
+                    font-weight: 400;
+                }
+
+                .input-field {
+                    border-radius: 15px;
+                    border: 1px solid $border-color;
+                }
+
+                .buttons-for-modal {
+                    display: flex;
+                    justify-content: space-evenly;
+                    width: 100%;
+                    align-items: center;
+                    text-align: center;
+
+                    .submit-button {
+                        display: flex;
+                        align-items: center;
+                        border-radius: 5px;
+                        border: 1px solid $border-color;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            background-color: darken($yellow, 10%);
+                        }
+                    }
+
+                    .cancel-button {
+                        display: flex;
+                        align-items: center;
+                        border-radius: 5px;
+                        border: 1px solid $border-color;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            background-color: darken($yellow, 10%);
+                        }
+                    }
+
+                    .download-button {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 5px;
+                        border: 1px solid $border-color;
+                        width: 70px;
+                        height: 35px;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            background-color: darken($yellow, 10%);
+                        }
+                    }
+
+                    .delete-button {
+                        display: flex;
+                        align-items: center;
+                        border-radius: 5px;
+                        width: 70px;
+                        height: 35px;
+                        border: 1px solid $border-color;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            background-color: darken($yellow, 10%);
+                        }
+                    }
+                }
+
+                .close {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+                input {
+                    margin: 10px 0;
+                    padding: 10px;
+                    width: 100%;
+                }
+
+                button {
+                    padding: 10px 20px;
+                    margin: 10px 5px;
+                    border: none;
+                    border-radius: 5px;
+
+                    &:hover {
+                        background-color: darken($yellow, 10%);
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .project-folders {
+        justify-content: center;
+
+        .project-folders-container {
+            flex-direction: column;
+            width: auto;
+
+            .project-folder {
+                .project-folder-image {
+
+                    width: 90px;
+                }
             }
         }
     }
