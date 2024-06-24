@@ -91,6 +91,7 @@
         align-items: center;
         padding: 10px;
         background-color: white;
+        flex-wrap: wrap;
 
         input {
             flex-grow: 1;
@@ -122,11 +123,22 @@
     .message-panel-main {
         display: flex;
         flex-direction: column;
-        width: 155%;
-        height: 60%;
-        padding: 20px;
+        width: 90%;
+        padding: 10px;
         transform: translate(0px, 0px);
-        margin: 20px;
+        margin: 10px;
+
+        .message-panel-message-area {
+
+            input {
+                width: 50px;
+            }
+
+            .others-message-in-panel,
+            .my-message-in-panel {
+                font-size: 14px;
+            }
+        }
 
     }
 }

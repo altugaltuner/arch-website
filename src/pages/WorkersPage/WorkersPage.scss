@@ -118,32 +118,84 @@
             }
         }
     }
-
-
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 1250px) {
     .workers-page-main {
-        .company-grid {
-            flex-direction: column;
-            width: 100%;
 
-            .sidebar {
-                width: 100%;
+        .workers-column {
+            .workers-row {
+                flex-direction: column;
+                gap: 10px;
+
+                .workers-page-header {
+                    margin: 5px;
+                }
+
+                .search-bar-of-projects {
+                    margin: 0px;
+                }
             }
 
-            .employee-grid {
-                width: 100%;
+            .company-grid {
+                display: flex;
+                flex-direction: column;
 
-                .employee-card {
-                    background-color: $background-color;
-                    padding: 20px;
-                    max-height: 240px;
-                    text-align: center;
-                    border-radius: 10px;
-                    cursor: pointer;
+                .company-grid-sidebar {
+                    width: 96%;
+                }
+
+                .employee-private-chat {
+                    width: 98%;
+                    margin: 10px;
                 }
             }
         }
+
+
     }
+
+}
+
+@media screen and (max-width: 950px) {
+    .workers-page-main {
+
+        .workers-column {
+            width: calc(100% - 70px);
+            transform: translate(70px, 0px);
+
+            .workers-row {
+                flex-direction: column;
+                gap: 10px;
+
+                .workers-page-header {
+                    margin: 5px;
+                }
+
+                .search-bar-of-projects {
+                    margin: 0px;
+                }
+            }
+
+            .company-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 0px;
+
+                .company-grid-sidebar {
+                    width: 96%;
+                    margin: 10px;
+                    padding: 10px;
+                }
+
+                .employee-private-chat {
+                    width: 98%;
+                    margin: 10px;
+                }
+            }
+        }
+
+
+    }
+
 }

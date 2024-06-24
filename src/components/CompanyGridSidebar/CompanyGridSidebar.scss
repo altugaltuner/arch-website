@@ -39,3 +39,22 @@
         }
     }
 }
+
+@media screen and (max-width: 1250px) {
+    .company-grid-sidebar {
+        width: 100%;
+
+        ul {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+
+            .job-titles-for-workersPage {
+                margin: 0px;
+                padding: 5px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+            }
+        }
+    }
+}
