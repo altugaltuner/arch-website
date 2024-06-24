@@ -35,6 +35,15 @@
             flex-direction: column;
             width: 90%;
             transform: translate(60px, 0px);
+
+            .inner-project-column {
+
+
+                .inner-project-row {
+
+                    flex-direction: column;
+                }
+            }
         }
     }
 }
