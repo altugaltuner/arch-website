@@ -16,3 +16,15 @@
         margin-bottom: 20px;
     }
 }
+
+@media screen and (max-width: 750px) {
+    .sub-setting-panel-page {
+        width: 100%;
+        padding: 10px;
+
+        .personal-info-subsetting-column {
+
+            align-items: flex-start;
+        }
+    }
+}

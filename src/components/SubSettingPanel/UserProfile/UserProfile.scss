@@ -43,3 +43,12 @@
         }
     }
 }
+
+@media screen and (max-width: 750px) {
+    .personal-info-subsetting-column {
+        width: 100%;
+        gap: 10px;
+        padding: 10px;
+        align-items: center;
+    }
+}

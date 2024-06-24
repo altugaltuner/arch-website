@@ -37,7 +37,7 @@ function SubNavigationSettings({ getRelevantSettings }) {
                         <div key={index} className="sub-nav-section">
                             <h2 onClick={getRelevantSettings} className="sub-nav-subheader">{section.header}</h2>
                             {section.items.map((item, idx) => (
-                                <p key={idx}>{item}</p>
+                                <p className="sub-nav-p" key={idx}>{item}</p>
                             ))}
                         </div>
                     ))}

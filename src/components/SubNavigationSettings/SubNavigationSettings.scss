@@ -39,7 +39,7 @@
                     margin-bottom: 10px;
                 }
 
-                p {
+                .sub-nav-p {
                     padding: 5px;
                     cursor: pointer;
                     font-size: 18px;
@@ -49,42 +49,34 @@
     }
 }
 
+@media screen and (max-width: 950px) {
+    .sub-navi-settings-page {
+        width: 100%;
+        padding: 20px;
 
+        .sub-nav-header {
+            font-size: 28px;
+            margin: 0px 10px;
+            padding: 5px;
+        }
 
+        .sub-nav-container {
+            .sub-nav-content {
+                padding: 5px;
 
+                .sub-nav-section {
+                    .sub-nav-subheader {
+                        font-size: 18px;
+                        word-break: break-word;
+                    }
 
-.sub-nav-menu {
-    width: 20%;
-    border-right: 1px solid #ddd;
-    padding-right: 20px;
-    background-color: #f6f6f6;
-    position: fixed;
-    height: 100%;
-    overflow-y: auto;
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-
-        li {
-            padding: 10px 20px;
-            cursor: pointer;
-            border-bottom: 1px solid #ddd;
-            color: #333;
-
-            &:hover {
-                background-color: #e9e9e9;
-                color: #007bff;
+                    .sub-nav-p {
+                        font-size: 16px;
+                        padding: 2px;
+                        word-break: break-word;
+                    }
+                }
             }
         }
     }
-}
-
-
-
-.sub-nav-p {
-    font-size: 1em;
-    margin: 5px 0;
-    color: #666;
 }

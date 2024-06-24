@@ -14,7 +14,9 @@
 
 @media screen and (max-width: 950px) {
     .settings-page {
+
         .settings-page-row {
+            flex-direction: column;
             width: calc(100% - 60px);
             transform: translate(60px, 0px);
         }

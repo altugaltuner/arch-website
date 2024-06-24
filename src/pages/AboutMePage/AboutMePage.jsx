@@ -40,13 +40,16 @@ function AboutMePage() {
     return (
         <div className="aboutme-page-main">
             <Navigation />
-            <div className="aboutme-page-row">
-                <MyProfile user={user} />
-                <div className="aboutme-page-column">
-                    <MyLastAct user={user} />
-                    <MyActiveProjects user={user} />
+            <div className="aboutme-page-column">
+                <h1 className="aboutme-page-title">Profilim</h1>
+                <div className="aboutme-page-row">
+                    <MyProfile user={user} />
+                    <div className="aboutme-page-column">
+                        <MyLastAct user={user} />
+                        <MyActiveProjects user={user} />
+                    </div>
+                    <MyPersonalFiles user={user} />
                 </div>
-                <MyPersonalFiles user={user} />
             </div>
         </div>
     );
