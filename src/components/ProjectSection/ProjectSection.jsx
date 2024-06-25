@@ -194,6 +194,11 @@ function ProjectSection({ clickedProject }) {
         }
     };
 
+    const openFileModal = (file) => {
+        setCurrentFile(file);
+        setFileModal(true);
+    };
+
     const renderFoldersAndFiles = (folder) => {
         if (!folder || !folder.folderContent || !folder.folderContent.data) {
             return (
