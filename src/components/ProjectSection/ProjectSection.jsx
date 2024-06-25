@@ -9,9 +9,12 @@ import pdfIcon from "../../assets/icons/pdf-logo.png";
 import jpgIcon from "../../assets/icons/jpg-icon.png";
 import pngIcon from "../../assets/icons/png-logo.png";
 import dwgIcon from "../../assets/icons/dwg-icon.png";
-import fileIcon from "../../assets/icons/file-icon.png";
 import goBackButton from "../../assets/icons/back-button.png";
 import DeleteFolderModal from "../GroupModals/DeleteFolderModal";
+import EditProjectFolderModal from "../EditProjectFolderModal/EditProjectFolderModal";
+import NewFolderModal from "../NewFolderModal/NewFolderModal";
+import FileModal from "../FileModal/FileModal";
+import FolderContent from "../FolderContent/FolderContent";
 
 function ProjectSection({ clickedProject }) {
     const [projectFolders, setProjectFolders] = useState([]);
@@ -53,15 +56,16 @@ function ProjectSection({ clickedProject }) {
         getRoles();
     }, []);
 
+    const fetchProjectFolders = async () => {
+        try {
+            const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
+            setProjectFolders(response.data.data);
+        } catch (error) {
+            console.error('Error fetching the data', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchProjectFolders = async () => {
-            try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
-                setProjectFolders(response.data.data);
-            } catch (error) {
-                console.error('Error fetching the data', error);
-            }
-        };
         fetchProjectFolders();
     }, []);
 
@@ -199,37 +203,15 @@ function ProjectSection({ clickedProject }) {
                 </div>
             );
         }
-
-        const openFileModal = (file) => {
-            setCurrentFile(file);
-            setFileModal(true);
-        };
-
         return (
-            <div className="folder-content">
-                <div className="file-input-wrapper">
-                    <label htmlFor="file-upload" className="custom-file-upload">
-                        Dosya Yükle
-                    </label>
-                    <input
-                        id="file-upload"
-                        type="file"
-                        onChange={handleFileChange}
-                    />
-                    {filePreview && (
-                        <div className="file-preview">
-                            <img src={filePreview} alt="Preview" className="preview-image" />
-                            <button className="file-preview-upload" onClick={addFileToFolder}>Dosya Yükle</button>
-                        </div>
-                    )}
-                </div>
-                {folder.folderContent.data.map(file => (
-                    <div key={file.id} className="file" onClick={() => openFileModal(file)}>
-                        <img className="file-icon-img" src={fileIcons[file.attributes.ext.slice(1)] || fileIcon} alt="file-icon" />
-                        <span className="file-name">{file.attributes.name}</span>
-                    </div>
-                ))}
-            </div>
+            <FolderContent
+                folder={folder}
+                filePreview={filePreview}
+                handleFileChange={handleFileChange}
+                addFileToFolder={addFileToFolder}
+                fileIcons={fileIcons}
+                openFileModal={openFileModal}
+            />
         );
     };
 
@@ -280,58 +262,23 @@ function ProjectSection({ clickedProject }) {
             )}
 
             {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close-modal" onClick={() => setShowModal(false)}>X</span>
-                        <h2 className="modal-header">Yeni Proje Klasörü Oluştur</h2>
-                        <input
-                            className="input-field"
-                            type="text"
-                            name="projectFolderName"
-                            placeholder="Klasör Adı"
-                            value={newFolder.projectFolderName}
-                            onChange={handleInputChange}
-                        />
-                        <div className="buttons-for-modal">
-                            <button className="submit-button" onClick={handleSubmit}>Oluştur</button>
-                            <button className="cancel-button" onClick={() => setShowModal(false)}>İptal</button>
-                        </div>
-                    </div>
-                </div>
+                <NewFolderModal
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    newFolder={newFolder}
+                    handleInputChange={handleInputChange}
+                    handleSubmit={handleSubmit}
+                />
             )}
 
             {fileModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close-modal" onClick={() => setFileModal(false)}>X</span>
-                        <h2 className="modal-header">{currentFile.attributes.name}</h2>
-                        <img src={fileIcons[currentFile.attributes.ext.slice(1)] || fileIcon} alt="file-icon" className="file-icon-modal" />
-                        <div className="buttons-for-modal">
-                            <a href={`http://localhost:1337${currentFile.attributes.url}`} download className="download-button">İndir</a>
-                            <button className="delete-button" onClick={() => handleDeleteFile(currentFile.id)}>Sil</button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {editModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close-modal" onClick={() => setEditModal(false)}>X</span>
-                        <h2 className="modal-header">Klasörü Düzenle</h2>
-                        <input
-                            className="input-field"
-                            type="text"
-                            placeholder="Klasör Adı"
-                            value={newFolderName}
-                            onChange={(e) => setNewFolderName(e.target.value)}
-                        />
-                        <div className="buttons-for-modal">
-                            <button className="submit-button" onClick={handleEditSubmit}>Kaydet</button>
-                            <button className="cancel-button" onClick={() => setEditModal(false)}>İptal</button>
-                        </div>
-                    </div>
-                </div>
+                <FileModal
+                    fileModal={fileModal}
+                    setFileModal={setFileModal}
+                    currentFile={currentFile}
+                    fileIcons={fileIcons}
+                    handleDeleteFile={handleDeleteFile}
+                />
             )}
 
             {showDeleteModal && (
@@ -339,6 +286,17 @@ function ProjectSection({ clickedProject }) {
                     showDeleteModal={showDeleteModal}
                     setShowDeleteModal={setShowDeleteModal}
                     handleDeleteFolder={handleDeleteFolder}
+                />
+            )}
+
+            {editModal && (
+                <EditProjectFolderModal
+                    showEditModal={editModal}
+                    setEditModal={setEditModal}
+                    folderToEdit={folderToEdit}
+                    newFolderName={newFolderName}
+                    setNewFolderName={setNewFolderName}
+                    handleEditSubmit={handleEditSubmit}
                 />
             )}
         </div>
