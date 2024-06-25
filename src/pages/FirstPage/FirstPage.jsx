@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./FirstPage.scss";
 import flowLogo from "../../assets/icons/flow-logo.png";
 import { Link } from 'react-router-dom';
@@ -9,6 +8,28 @@ import emailLogo from "../../assets/icons/email-logo.png";
 import youtubeLogo from "../../assets/icons/youtube-logo.png";
 
 function FirstPage() {
+    const socialMediaAccounts = [
+        {
+            name: "flow",
+            url: "https://www.linkedin.com/flowcompany/",
+            logo: linkedinLogo
+        },
+        {
+            name: "flow",
+            url: "https://www.instagram.com/flowcompany/",
+            logo: instaLogo
+        },
+        {
+            name: "flow",
+            url: "https://www.youtube.com/flowcompany/",
+            logo: youtubeLogo
+        },
+        {
+            name: "flow",
+            url: "https://www.email.com/flowcompany/",
+            logo: emailLogo
+        }
+    ];
 
     return (
         <main className="firstpage-main">
@@ -17,7 +38,7 @@ function FirstPage() {
                 <h1 className="firstpage-header">Flow</h1>
                 <h2 className="firstpage-title">Flow, işinizi organize etmenize ve ekibinizle işbirliği yapmanıza yardımcı olan bir proje yönetim aracıdır. Kullanabilmek için lütfen iş sahibi veya çalışan olarak kaydolun.</h2>
                 <div className="firstpage-buttons-div">
-                    <Link to="/signup" className="employee-create-btn" >Çalışan Hesabı Aç</Link>
+                    <Link to="/signup" className="employee-create-btn">Çalışan Hesabı Aç</Link>
                     <Link to="/login" className="employee-login-btn">Hesabınız mı var? Giriş Yapın</Link>
                     <Link to="/company-create" className="owner-create-btn">Şirket Hesabı Aç</Link>
                 </div>
@@ -25,22 +46,12 @@ function FirstPage() {
             <div className="firstpage-social-media">
                 <h2 className="firstpage-social-media-header">Bizi Takip Edin</h2>
                 <div className="social-media-logo-div">
-                    <a className="social-media-a" href="https://www.linkedin.com/sdfssg/" target="_blank" rel="noreferrer">
-                        <img className="social-media-logo" src={linkedinLogo} alt="" srcSet="" />
-                        <p className="social-media-title">flow</p>
-                    </a>
-                    <a className="social-media-a" href="https://www.instagram.com/sdfssg/" target="_blank" rel="noreferrer">
-                        <img className="social-media-logo" src={instaLogo} alt="" srcSet="" />
-                        <p className="social-media-title">flow</p>
-                    </a>
-                    <a className="social-media-a" href="https://www.youtube.com/sdfssg/" target="_blank" rel="noreferrer">
-                        <img className="social-media-logo" src={youtubeLogo} alt="" srcSet="" />
-                        <p className="social-media-title">flow</p>
-                    </a>
-                    <a className="social-media-a" href="https://www.email.com/sdfssg/" target="_blank" rel="noreferrer">
-                        <img className="social-media-logo" src={emailLogo} alt="" srcSet="" />
-                        <p className="social-media-title">flow</p>
-                    </a>
+                    {socialMediaAccounts.map((account, index) => (
+                        <a key={index} className="social-media-a" href={account.url} target="_blank" rel="noreferrer">
+                            <img className="social-media-logo" src={account.logo} alt={account.name} />
+                            <p className="social-media-title">{account.name}</p>
+                        </a>
+                    ))}
                 </div>
             </div>
         </main>
