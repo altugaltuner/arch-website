@@ -38,7 +38,9 @@ function Navigation() {
     return (
         <nav className="navigation-main">
             <ul className="nav-ul">
-                <img src={flowLogo} className="flow-logo" alt="flow-logo" />
+                <Link to="/flow" className="nav-button" >
+                    <img src={flowLogo} className="flow-logo" alt="flow-logo" />
+                </Link>
                 {navItems.map(item => (
                     <li key={item.id} className="nav-li" id={item.id} onClick={() => handleNavClick(item.id)}>
                         <Link to={item.to} className={`nav-button ${activeNavId === item.id ? 'active' : ''}`}>

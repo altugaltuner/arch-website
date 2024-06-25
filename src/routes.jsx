@@ -1,4 +1,3 @@
-// import App from "./App.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import SignupPage from "./pages/SignupPage/SignupPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
@@ -11,13 +10,19 @@ import ProjectsMainPage from "./pages/ProjectsMainPage/ProjectsMainPage.jsx";
 import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
 import CompanyCreatePage from "./pages/CompanyCreatePage/CompanyCreatePage.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage.jsx";
-import AllCompanies from "./pages/AllCompanies/AllCompanies.jsx";
+import FlowPage from "./pages/FlowPage/FlowPage.jsx";
 
 const routes = [
   {
     path: "/",
     element: (
       <FirstPage />
+    ),
+  },
+  {
+    path: "/flow",
+    element: (
+      <FlowPage />
     ),
   },
   {
@@ -98,12 +103,6 @@ const routes = [
       </ProtectedRoute>
     ),
   },
-  {
-    path: "/company-hub",
-    element: (
-      <AllCompanies />
-    ),
-  }
 ];
 
 export default routes;

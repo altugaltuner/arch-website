@@ -1,0 +1,171 @@
+@use "../../styles/abstracts/variables" as *;
+
+.flow-page-main {
+    display: flex;
+    flex-direction: column;
+    font-family: $primary-font;
+    color: $font-color;
+
+    .flow-page-main-row {
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+        transform: translate(110px, 0px);
+        width: calc(100% - 110px);
+        gap: 15px;
+        justify-content: center;
+
+        .all-companies-column {
+            display: flex;
+            flex-direction: column;
+            width: 77%;
+            gap: 20px;
+
+            .social-media-and-connections {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+                padding: 20px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+                max-height: 1000px;
+                overflow: auto;
+
+                .firstpage-social-media-header {
+                    font-weight: 400;
+                    font-size: 28px;
+                }
+
+                .social-media-logo-div {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    justify-content: space-evenly;
+
+                    .social-media-a {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 33%;
+                        gap: 10px;
+                        height: 900px;
+                        border: 1px solid $border-color;
+                        border-radius: 5px;
+                        padding: 10px;
+
+                        .social-img-p {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 10px;
+                            text-align: center;
+                            width: 100%;
+                            align-items: center;
+                            border-bottom: 1px solid $border-color;
+
+                            .social-media-logo {
+                                width: 60px;
+                                height: 60px;
+                            }
+
+                            .social-media-title {
+                                font-size: 20px;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .all-companies-page-title {
+                font-size: 32px;
+                font-weight: 400;
+                padding: 10px;
+            }
+
+            .flow-page-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 20px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+
+                .all-companies-page-company-card {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+                    padding: 20px;
+                    border-radius: 5px;
+                    border: 1px solid $border-color;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: darken($background-color, 10%);
+                    }
+
+                    .company-hub-header {
+                        font-size: 20px;
+                        font-weight: 500;
+                    }
+
+                    .company-hub-one-logo {
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 5%;
+                    }
+                }
+            }
+        }
+
+        .flow-page-main-column {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+
+            .flow-page-title {
+                font-size: 40px;
+                font-weight: 400;
+                margin: 20px;
+                text-align: left;
+                width: fit-content;
+            }
+
+            .flow-descriptions {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                font-size: 18px;
+                border-radius: 5px;
+                border: 1px solid $border-color;
+                padding: 20px;
+
+                .flow-desc-subheader {
+                    font-size: 20px;
+                    font-weight: 500;
+                    padding: 5px;
+                }
+
+                .flow-desc-paragraph {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+                    font-size: 18px;
+                    font-weight: 400;
+                    gap: 10px;
+                    border-radius: 5px;
+                    border: 1px solid $border-color;
+
+                    .flow-desc-p-bold {
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+    }
+}
