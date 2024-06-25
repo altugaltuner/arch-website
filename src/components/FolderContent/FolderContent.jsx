@@ -21,7 +21,7 @@ function FolderContent({ folder, filePreview, handleFileChange, addFileToFolder,
             </div>
             {folder.folderContent.data.map(file => (
                 <div key={file.id} className="file" onClick={() => openFileModal(file)}>
-                    <img className="file-icon-img" src={fileIcons[file.attributes.ext.slice(1)] || fileIcon} alt="file-icon" />
+                    <img className="file-icon-img" src={fileIcons[file.attributes.ext.slice(1)] || fileIcons} alt="file-icon" />
                     <span className="file-name">{file.attributes.name}</span>
                 </div>
             ))}

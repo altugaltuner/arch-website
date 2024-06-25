@@ -169,7 +169,7 @@ function ProjectSection({ clickedProject }) {
         formData.append('field', 'folderContent');
 
         try {
-            const response = await axios.post('http://localhost:1337/api/upload', formData, {
+            await axios.post('http://localhost:1337/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -181,6 +181,7 @@ function ProjectSection({ clickedProject }) {
             console.error('Error uploading the file:', error.response ? error.response.data : error.message);
         }
     };
+
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];

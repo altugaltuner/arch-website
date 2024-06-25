@@ -1,15 +1,16 @@
-// src/components/AddFolderModal/AddFolderModal.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AddFolderModal.scss';
 
 function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
     const [folderName, setFolderName] = useState('');
+    const [error, setError] = useState('');
 
     const handleSubmit = async () => {
-        console.log('Starting folder creation process...');
-        console.log('Folder Name:', folderName);
-        console.log('User ID:', userId);
+        if (folderName.trim() === '') {
+            setError('Klasör ismi boş olamaz.');
+            return;
+        }
 
         try {
             const response = await axios.post('http://localhost:1337/api/personal-folders', {
@@ -18,7 +19,6 @@ function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
                     users_permissions_user: userId // Ensure the user association
                 }
             });
-            console.log('Folder creation response:', response.data);
             onFolderCreated(response.data.data);
             onClose();
         } catch (error) {
@@ -40,8 +40,12 @@ function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
                     type="text"
                     placeholder="Klasör Adı"
                     value={folderName}
-                    onChange={(e) => setFolderName(e.target.value)}
+                    onChange={(e) => {
+                        setFolderName(e.target.value);
+                        setError('');
+                    }}
                 />
+                {error && <p className="error-message">{error}</p>}
                 <div className="addfolder-modal-buttons">
                     <button className='addfolder-modal-button-create' onClick={handleSubmit}>Oluştur</button>
                     <button className='addfolder-modal-button-cancel' onClick={onClose}>İptal</button>

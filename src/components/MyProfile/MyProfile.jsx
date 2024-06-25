@@ -27,6 +27,9 @@ function MyProfile({ user }) {
     }, [user]);
 
     const handleLogout = () => {
+        // Add your logout logic here
+        // For example, you can clear user data from local storage and redirect to the login page
+        localStorage.removeItem("user");
         window.location.href = "/login";
     };
 
@@ -45,24 +48,24 @@ function MyProfile({ user }) {
                     />
                 </div>
                 <div className="profile-field">
-                    <label className="profile-field-labels">İsim Soyisim:</label>
-                    <p className="profile-field-paragraph">{formData.name}</p>
+                    <label className="profile-field-labels" htmlFor="name">İsim Soyisim:</label>
+                    <p className="profile-field-paragraph" id="name">{formData.name}</p>
                 </div>
                 <div className="profile-field">
-                    <label className="profile-field-labels">E-posta:</label>
-                    <p className="profile-field-paragraph">{formData.email}</p>
+                    <label className="profile-field-labels" htmlFor="email">E-posta:</label>
+                    <p className="profile-field-paragraph" id="email">{formData.email}</p>
                 </div>
                 <div className="profile-field">
-                    <label className="profile-field-labels">Telefon:</label>
-                    <p className="profile-field-paragraph">{formData.mobilePhone}</p>
+                    <label className="profile-field-labels" htmlFor="mobilePhone">Telefon:</label>
+                    <p className="profile-field-paragraph" id="mobilePhone">{formData.mobilePhone}</p>
                 </div>
                 <div className="profile-field">
-                    <label className="profile-field-labels">Konum:</label>
-                    <p className="profile-field-paragraph">{formData.location}</p>
+                    <label className="profile-field-labels" htmlFor="location">Konum:</label>
+                    <p className="profile-field-paragraph" id="location">{formData.location}</p>
                 </div>
                 <div className="profile-field-social">
-                    <label className="profile-field-labels">Sosyal Medya:</label>
-                    <p className="profile-field-paragraph">{formData.social1}</p>
+                    <label className="profile-field-labels" htmlFor="socialMedia">Sosyal Medya:</label>
+                    <p className="profile-field-paragraph" id="socialMedia">{formData.social1}</p>
                 </div>
                 <div className="buttons-for-profile-section">
                     <button className="my-profile-logout" type="button" onClick={handleLogout}>
