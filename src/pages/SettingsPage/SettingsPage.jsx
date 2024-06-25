@@ -7,8 +7,8 @@ import "./SettingsPage.scss";
 function SettingsPage() {
     const [selectedSetting, setSelectedSetting] = useState("Kullanıcı Bilgileri ve Profili");
 
-    const getRelevantSettings = (e) => {
-        setSelectedSetting(e.target.textContent);
+    const getRelevantSettings = (setting) => {
+        setSelectedSetting(setting);
     };
 
     return (

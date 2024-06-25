@@ -1,4 +1,3 @@
-// SubSettingPanel.js
 import React from 'react';
 import "./SubSettingPanel.scss";
 

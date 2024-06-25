@@ -34,8 +34,8 @@ function SubNavigationSettings({ getRelevantSettings }) {
             <div className="sub-nav-container">
                 <div className="sub-nav-content">
                     {sections.map((section, index) => (
-                        <div key={index} className="sub-nav-section">
-                            <h2 onClick={getRelevantSettings} className="sub-nav-subheader">{section.header}</h2>
+                        <div key={index} className="sub-nav-section" onClick={() => getRelevantSettings(section.header)}>
+                            <h2 className="sub-nav-subheader">{section.header}</h2>
                             {section.items.map((item, idx) => (
                                 <p className="sub-nav-p" key={idx}>{item}</p>
                             ))}
