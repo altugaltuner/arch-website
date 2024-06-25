@@ -70,14 +70,6 @@
             border-radius: 10px;
             cursor: pointer;
 
-            &:hover {
-                background-color: darken($background-color, 10%);
-            }
-
-            &:active {
-                background-color: darken($background-color, 20%);
-            }
-
             .project-card-delete-btn {
                 display: flex;
                 position: absolute;
@@ -118,6 +110,10 @@
                 border-top: 1px solid $border-color;
                 text-align: center;
                 cursor: pointer;
+
+                &:hover {
+                    background-color: darken($background-color, 10%);
+                }
 
                 .project-navbar-photos {
                     width: 200px;

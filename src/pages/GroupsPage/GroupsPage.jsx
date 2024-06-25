@@ -19,9 +19,11 @@ function GroupsPage() {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [groups, setGroups] = useState([]);
+    const [filteredGroups, setFilteredGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const [newGroup, setNewGroup] = useState({ groupName: "" });
     const [changedGroup, setChangedGroup] = useState({ groupName: "" });
+    const [searchTerm, setSearchTerm] = useState("");
 
     const handleDeleteGroup = () => {
         try {
@@ -66,6 +68,14 @@ function GroupsPage() {
         fetchProjectGroups();
     }, []);
 
+    useEffect(() => {
+        setFilteredGroups(
+            groups.filter((group) =>
+                group.attributes.groupName.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        );
+    }, [searchTerm, groups]);
+
     async function getRoles() {
         try {
             const response = await axios.get('http://localhost:1337/api/accesses');
@@ -82,6 +92,10 @@ function GroupsPage() {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewGroup({ ...newGroup, [name]: value });
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
     };
 
     const handleSubmit = async () => {
@@ -104,7 +118,17 @@ function GroupsPage() {
         <div className="groups-main">
             <Navigation />
             <div className="groups-main-column">
-                <h1 className="groups-main-header">Proje Grupları</h1>
+                <div className="groups-main-header-and-input">
+                    <h1 className="groups-main-header">Proje Grupları</h1>
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Grup Ara"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
+                </div>
+
                 <div className="group-div-row">
                     <div className="project-groups">
                         {roles.map(role => role.attributes.role === "Admin" && (
@@ -117,7 +141,7 @@ function GroupsPage() {
                             </button>
                         ))}
 
-                        {groups.map((group) => (
+                        {filteredGroups.map((group) => (
                             <div key={group.id} className="project-group">
                                 {group.attributes.groupChatPic?.data ? (
                                     <img
