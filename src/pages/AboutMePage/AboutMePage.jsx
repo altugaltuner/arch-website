@@ -42,7 +42,7 @@ function AboutMePage() {
                 <h1 className="aboutme-page-title">Profilim</h1>
                 <div className="aboutme-page-row">
                     <MyProfile user={user} />
-                    <div className="aboutme-page-column">
+                    <div className="aboutme-page-column-2">
                         <MyLastAct user={user} />
                         <MyActiveProjects user={user} />
                     </div>
