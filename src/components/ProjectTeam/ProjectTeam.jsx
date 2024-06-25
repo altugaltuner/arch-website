@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './ProjectTeam.scss';
 import axios from 'axios';
 import AddUserModal from '../../components/AddUserModal/AddUserModal';
-import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal'; // Yeni eklenen modal bileşeni
+import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal';
 
 const ProjectTeam = ({ clickedProject }) => {
     const [employees, setEmployees] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
-    const [showRemoveModal, setShowRemoveModal] = useState(false); // Yeni modal durumu
+    const [showRemoveModal, setShowRemoveModal] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
     const [availableUsers, setAvailableUsers] = useState([]);
 
@@ -40,7 +40,6 @@ const ProjectTeam = ({ clickedProject }) => {
     }, []);
 
     useEffect(() => {
-
         if (clickedProject?.attributes?.users?.data) {
             const projectUserIds = clickedProject.attributes.users.data.map(user => user.id);
             const available = allUsers.filter(user => !projectUserIds.includes(user.id));
@@ -57,8 +56,18 @@ const ProjectTeam = ({ clickedProject }) => {
                     users: [...clickedProject.attributes.users.data.map(user => user.id), ...userIds]
                 }
             });
-            const newUsers = userIds.map(id => allUsers.find(user => user.id === id));
-            setEmployees(prev => [...prev, ...newUsers]);
+
+            const updatedEmployees = [
+                ...employees,
+                ...userIds.map(id => allUsers.find(user => user.id === id))
+            ];
+
+            setEmployees(updatedEmployees);
+
+            // Update available users after adding new users
+            const updatedAvailableUsers = availableUsers.filter(user => !userIds.includes(user.id));
+            setAvailableUsers(updatedAvailableUsers);
+
             setShowAddModal(false);
         } catch (error) {
             console.error('Error adding users to project team', error);
@@ -81,6 +90,12 @@ const ProjectTeam = ({ clickedProject }) => {
     const filteredEmployees = employees.filter(employee =>
         employee.projects && employee.projects.some(project => project.id === clickedProject.id)
     );
+
+    useEffect(() => {
+        // Debugging logs to check the state updates
+        console.log('Employees:', employees);
+        console.log('Available Users:', availableUsers);
+    }, [employees, availableUsers]);
 
     return (
         <div className="project-teams-container">
