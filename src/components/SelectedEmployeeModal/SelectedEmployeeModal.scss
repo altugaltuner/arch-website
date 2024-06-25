@@ -28,12 +28,39 @@
         gap: 20px;
         border-radius: 20px;
 
-        .selected-employee-buttons {
+        .employee-card-modal-profile-pic {
+            width: 150px;
+            height: 150px;
+
+            .employee-card-modal-profile-pic-inner {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+
+        .employee-card-modal-username {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .employee-card-modal-email {
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .employee-card-modal-professionname {
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .employee-card-selected-employee-buttons {
             display: flex;
             gap: 10px;
 
-            .send-email-btn,
-            .send-private-message {
+            .employee-card-send-email-btn,
+            .employee-card-send-private-message {
                 border: 1px solid $border-color;
                 color: $font-color;
                 padding: 10px;
@@ -46,19 +73,7 @@
             }
         }
 
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-
-            .profile-pic-inner {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-        }
-
-        .modal-close-btn {
+        .employee-card-modal-close-btn {
             position: absolute;
             top: 10px;
             right: 10px;

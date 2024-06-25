@@ -1,6 +1,6 @@
 @use "../../styles/abstracts/variables" as *;
 
-.modal {
+.addfolder-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +14,7 @@
     font-family: $primary-font;
     color: $font-color;
 
-    .modal-content {
+    .addfolder-modal-content {
 
         background-color: $background-color;
         padding: 20px;
@@ -25,7 +25,7 @@
         position: relative;
         text-align: center;
 
-        .close-modal {
+        .addfolder-close-modal {
 
             position: absolute;
             top: 10px;
@@ -36,26 +36,26 @@
             cursor: pointer;
         }
 
-        .modal-header {
+        .addfolder-modal-header {
             margin-bottom: 20px;
             font-size: 24px;
             font-weight: 400;
         }
 
-        .input-field {
+        .addfolder-modal-input {
             border: 1px solid $border-color;
             padding: 5px;
             border-radius: 5px;
         }
 
-        .modal-buttons {
+        .addfolder-modal-buttons {
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
             gap: 20px;
 
-            .modal-button-create,
-            .modal-button-cancel {
+            .addfolder-modal-button-create,
+            .addfolder-modal-button-cancel {
                 padding: 10px 20px;
                 border: 1px solid $border-color;
                 border-radius: 5px;

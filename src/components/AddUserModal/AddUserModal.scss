@@ -1,6 +1,6 @@
 @use "../../styles/abstracts/variables" as *;
 
-.modal {
+.adduser-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +14,7 @@
     font-family: $primary-font;
     color: $font-color;
 
-    .modal-content {
+    .adduser-modal-content {
         background-color: $background-color;
         padding: 20px;
         border-radius: 8px;
@@ -24,13 +24,13 @@
         position: relative;
         text-align: center;
 
-        .modal-content-header {
+        .adduser-modal-content-header {
             margin-bottom: 20px;
             font-size: 24px;
             font-weight: 500;
         }
 
-        .modal-close {
+        .adduser-modal-close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -40,14 +40,14 @@
             cursor: pointer;
         }
 
-        .btn-div-for-modal {
+        .adduser-btn-div-for-modal {
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
             gap: 20px;
 
-            .btn-div-for-modal-submit,
-            .btn-div-for-modal-cancel {
+            .adduser-btn-div-for-modal-submit,
+            .adduser-btn-div-for-modal-cancel {
                 padding: 10px 20px;
                 border: 1px solid $border-color;
                 border-radius: 5px;

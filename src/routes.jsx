@@ -11,6 +11,7 @@ import ProjectsMainPage from "./pages/ProjectsMainPage/ProjectsMainPage.jsx";
 import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
 import CompanyCreatePage from "./pages/CompanyCreatePage/CompanyCreatePage.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage.jsx";
+import AllCompanies from "./pages/AllCompanies/AllCompanies.jsx";
 
 const routes = [
   {
@@ -95,6 +96,12 @@ const routes = [
       <ProtectedRoute>
         <HomePage />
       </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/company-hub",
+    element: (
+      <AllCompanies />
     ),
   }
 ];

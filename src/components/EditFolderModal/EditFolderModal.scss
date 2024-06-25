@@ -1,0 +1,26 @@
+@use "../../styles/abstracts/variables" as *;
+
+.edit-folder-modal {
+
+    .edit-folder-modal-content {
+
+        .edit-folder-close-modal {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 1rem;
+            cursor: pointer;
+        }
+
+        .edit-folder-header {}
+
+        .edit-folder-input {}
+
+        .edit-folder-modal-buttons {
+
+            .edit-folder-save-button {}
+
+            .edit-folder-cancel-button {}
+        }
+    }
+}

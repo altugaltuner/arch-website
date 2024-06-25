@@ -16,7 +16,6 @@ function HomePage() {
         <CompanyName />
         <Activities />
       </div>
-
     </main>
   );
 }

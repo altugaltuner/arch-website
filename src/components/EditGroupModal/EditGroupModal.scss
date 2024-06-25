@@ -26,7 +26,7 @@
         width: 400px;
         height: 240px;
 
-        .close-edit-modal {
+        .group-edit-modal {
             position: absolute;
             top: 0;
             right: 0;
@@ -64,8 +64,8 @@
             margin-top: 20px;
             gap: 20px;
 
-            .modal-button-cancel,
-            .modal-button-confirm {
+            .group-edit-modal-button-cancel,
+            .group-edit-modal-button-confirm {
                 border: 1px solid $border-color;
                 color: $font-color;
                 padding: 10px 20px;

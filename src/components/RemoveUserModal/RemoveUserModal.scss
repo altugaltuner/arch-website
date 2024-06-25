@@ -1,6 +1,6 @@
 @use "../../styles/abstracts/variables" as *;
 
-.modal-backdrop {
+.remove-user-modal {
     position: fixed;
     font-family: $primary-font;
     color: $font-color;
@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
 
-    .modal-content {
+    .remove-user-modal-content {
         background-color: white;
         padding: 20px;
         border-radius: 5px;
@@ -25,27 +25,33 @@
         align-items: center;
         gap: 20px;
 
-        .modal-header {
+        .remove-user-modal-header {
             font-size: 28px;
             font-weight: 400;
         }
 
-        .modal-ul {
+        .remove-user-modal-ul {
             list-style-type: none;
             padding: 0;
 
-            .modal-li {
+            .remove-user-modal-li {
                 margin-bottom: 10px;
+
+                .remove-user-modal-label {
+
+                    .remove-user-modal-input {}
+                }
             }
         }
 
-        .modal-backdrop-btn {
+        .remove-user-modal-backdrop-btn {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
 
-            button {
+            .remove-user-submit-button,
+            .remove-user-cancel-button {
                 border: 1px solid $border-color;
                 color: $font-color;
                 padding: 10px 20px;
@@ -57,7 +63,5 @@
                 }
             }
         }
-
-
     }
 }

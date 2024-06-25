@@ -1,4 +1,3 @@
-// src/components/EditFolderModal/EditFolderModal.jsx
 import React, { useState } from 'react';
 import './EditFolderModal.scss';
 
@@ -15,19 +14,20 @@ function EditFolderModal({ isOpen, onClose, onEdit, initialName }) {
     }
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <span className="close-modal" onClick={onClose}>X</span>
-                <h2>Klasörü Düzenle</h2>
+        <div className="edit-folder-modal">
+            <div className="edit-folder-modal-content">
+                <span className="edit-folder-close-modal" onClick={onClose}>X</span>
+                <h2 className='edit-folder-header'>Klasörü Düzenle</h2>
                 <input
+                    className='edit-folder-input'
                     type="text"
                     placeholder="Klasör Adı"
                     value={folderName}
                     onChange={(e) => setFolderName(e.target.value)}
                 />
-                <div className="modal-buttons">
-                    <button onClick={handleEdit}>Kaydet</button>
-                    <button onClick={onClose}>İptal</button>
+                <div className="edit-folder-modal-buttons">
+                    <button className='edit-folder-save-button' onClick={handleEdit}>Kaydet</button>
+                    <button className='edit-folder-cancel-button' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>
