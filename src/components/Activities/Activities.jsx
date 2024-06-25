@@ -17,6 +17,13 @@ const Activities = () => {
         fetchData();
     }, []);
 
+    const reviseStateMap = {
+        1: "yapılacak",
+        2: "yapılıyor",
+        3: "yapıldı",
+        4: "iptal edildi"
+    };
+
     return (
         <div className="activities-container">
             <div className="activities-container-half">
@@ -25,6 +32,7 @@ const Activities = () => {
                     <thead className="table-main-head">
                         <tr className="table-header-row">
                             <th className="table-header">Proje Adı</th>
+                            <th className="table-header">Revize Durumu</th>
                             <th className="table-header">Revize Sahibi</th>
                             <th className="table-header">Grup</th>
                             <th className="table-header">Tarih</th>
@@ -42,6 +50,11 @@ const Activities = () => {
                                             activity.attributes.comment[0]?.children?.length > 0 &&
                                             activity.attributes.comment[0].children[0].text
                                         }
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className="revise-owner">
+                                        {reviseStateMap[activity.attributes.reviseState] || 'Durum bilgisi yok'}
                                     </div>
                                 </td>
                                 <td className="table-data">

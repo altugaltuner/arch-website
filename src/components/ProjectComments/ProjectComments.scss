@@ -23,39 +23,45 @@
         font-weight: 300;
     }
 
-    .project-comments-ul {
-        list-style-type: none;
-        padding: 0;
-        width: 100%;
-        margin-top: 10px;
+    .project-comments-table {
+        display: flex;
+        flex-direction: row;
 
-        .project-comments-li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            font-weight: 300;
-            font-size: 18px;
-            border-bottom: 1px solid $border-color;
+        .project-comments-ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            margin-top: 10px;
 
-            .project-comments-li-user {
+            .project-comments-li {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
+                padding: 10px;
+                font-weight: 300;
+                font-size: 18px;
+                border-bottom: 1px solid $border-color;
 
-                .project-comments-li-user-name {
-                    font-weight: bold;
+                .project-comments-li-user {
+                    display: flex;
+                    align-items: center;
+
+                    .project-comments-li-user-name {
+                        font-weight: bold;
+                    }
                 }
-            }
 
-            .project-comments-li-date {
-                font-size: 0.8rem;
-            }
+                .project-comments-li-date {
+                    font-size: 0.8rem;
+                }
 
-            .project-comments-li-comment {
-                margin-top: 10px;
+                .project-comments-li-comment {
+                    margin-top: 10px;
+                }
             }
         }
     }
+
 }
 
 @media screen and (max-width: 950px) {

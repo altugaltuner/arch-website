@@ -31,7 +31,7 @@ const UserProfile = () => {
             </div>
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">Telefon</h3>
-                <p className="subsetting-paragraph">{user?.phone || 'Telefon bilgisi yok'}</p>
+                <p className="subsetting-paragraph">{user?.MobilePhone || 'Telefon bilgisi yok'}</p>
                 <img className="edit-pencil-subsetting" src={editPencil} alt="edit" />
             </div>
         </div>
