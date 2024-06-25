@@ -20,15 +20,15 @@ const RemoveUserModal = ({ show, onClose, employees, handleRemoveUsers }) => {
     if (!show) return null;
 
     return (
-        <div className="modal-backdrop">
-            <div className="modal-content">
-                <h2 className='modal-header'>Çalışanları Çıkar</h2>
-                <ul className='modal-ul'>
+        <div className="remove-user-modal">
+            <div className="remove-user-modal-content">
+                <h2 className='remove-user-modal-header'>Çalışanları Çıkar</h2>
+                <ul className='remove-user-modal-ul'>
                     {employees.map((employee) => (
-                        <li className='modal-li' key={employee.id}>
-                            <label className='modal-label'>
+                        <li className='remove-user-modal-li' key={employee.id}>
+                            <label className='remove-user-modal-label'>
                                 <input
-                                    className='modal-input'
+                                    className='remove-user-modal-input'
                                     type="checkbox"
                                     checked={selectedUsers.includes(employee.id)}
                                     onChange={() => handleCheckboxChange(employee.id)}
@@ -38,9 +38,9 @@ const RemoveUserModal = ({ show, onClose, employees, handleRemoveUsers }) => {
                         </li>
                     ))}
                 </ul>
-                <div className='modal-backdrop-btn'>
-                    <button onClick={handleConfirm}>Onayla</button>
-                    <button onClick={onClose}>İptal</button>
+                <div className='remove-user-modal-backdrop-btn'>
+                    <button className='remove-user-submit-button' onClick={handleConfirm}>Onayla</button>
+                    <button className='remove-user-cancel-button' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>

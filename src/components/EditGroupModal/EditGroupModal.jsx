@@ -19,7 +19,7 @@ function EditGroupModal({ showEditModal, setShowEditModal, handleEditGroup }) {
     return (
         <div className="group-edit-modal">
             <div className="group-edit-modal-content">
-                <span className="close-edit-modal" onClick={() => setShowEditModal(false)}>X</span>
+                <span className="group-edit-modal" onClick={() => setShowEditModal(false)}>X</span>
                 <h2 className='group-edit-modal-header'>Grubu Düzenle</h2>
                 <div className="group-edit-modal-inputs">
                     <label className='group-edit-label' htmlFor="group-name">Grup Adı</label>
@@ -34,8 +34,8 @@ function EditGroupModal({ showEditModal, setShowEditModal, handleEditGroup }) {
                     />
                 </div>
                 <div className="group-edit-modal-buttons">
-                    <button className='modal-button-confirm' onClick={handleConfirm}>Onayla</button>
-                    <button className='modal-button-cancel' onClick={() => setShowEditModal(false)}>İptal Et</button>
+                    <button className='group-edit-modal-button-confirm' onClick={handleConfirm}>Onayla</button>
+                    <button className='group-edit-modal-button-cancel' onClick={() => setShowEditModal(false)}>İptal Et</button>
                 </div>
             </div>
         </div>

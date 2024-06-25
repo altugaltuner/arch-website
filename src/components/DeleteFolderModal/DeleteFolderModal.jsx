@@ -1,4 +1,3 @@
-// src/components/DeleteFolderModal/DeleteFolderModal.jsx
 import React from 'react';
 import './DeleteFolderModal.scss';
 

@@ -31,20 +31,20 @@ function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
     }
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <span className="close-modal" onClick={onClose}>X</span>
-                <h2 className='modal-header'>Yeni Klasör Oluştur</h2>
+        <div className="addfolder-modal">
+            <div className="addfolder-modal-content">
+                <span className="addfolder-close-modal" onClick={onClose}>X</span>
+                <h2 className='addfolder-modal-header'>Yeni Klasör Oluştur</h2>
                 <input
-                    className='modal-input'
+                    className='addfolder-modal-input'
                     type="text"
                     placeholder="Klasör Adı"
                     value={folderName}
                     onChange={(e) => setFolderName(e.target.value)}
                 />
-                <div className="modal-buttons">
-                    <button className='modal-button-create' onClick={handleSubmit}>Oluştur</button>
-                    <button className='modal-button-cancel' onClick={onClose}>İptal</button>
+                <div className="addfolder-modal-buttons">
+                    <button className='addfolder-modal-button-create' onClick={handleSubmit}>Oluştur</button>
+                    <button className='addfolder-modal-button-cancel' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>

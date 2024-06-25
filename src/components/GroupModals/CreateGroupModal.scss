@@ -1,6 +1,6 @@
 @use "../../styles/abstracts/variables" as *;
 
-.modal {
+.create-group-modal {
     display: flex;
     position: fixed;
     top: 0;
@@ -15,7 +15,7 @@
     font-family: $primary-font;
     color: $font-color;
 
-    .modal-content {
+    .create-group-modal-content {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -23,27 +23,35 @@
         gap: 20px;
         border-radius: 20px;
 
-        .modal-group-header {
+        .create-group-close-group-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-weight: 900;
+        }
+
+        .create-group-modal-header {
             font-size: 24px;
             font-weight: 400;
             text-align: center;
         }
 
-        .modal-group-name-input {
+        .create-group-modal-name-input {
             padding: 10px;
             border: 1px solid $border-color;
             border-radius: 5px;
             font-size: 16px;
         }
 
-        .button-div-group {
+        .create-group-button-div-group {
             display: flex;
             flex-direction: row;
             justify-content: center;
             gap: 20px;
 
-            .modal-div-create-btn,
-            .modal-div-cancel-btn {
+            .create-group-modal-div-create-btn,
+            .create-group-modal-div-cancel-btn {
                 border: 1px solid $border-color;
                 color: $font-color;
                 padding: 10px 20px;
@@ -55,14 +63,6 @@
                 }
             }
 
-        }
-
-        .close-group-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-weight: 900;
         }
     }
 }

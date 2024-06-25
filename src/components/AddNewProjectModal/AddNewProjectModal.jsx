@@ -10,14 +10,14 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
         <div className="add-new-project-modal">
             <div className="add-new-project-modal-content">
                 <span
-                    className="new-project-modal-close"
+                    className="add-new-project-modal-close"
                     onClick={onClose}
                 >
                     X
                 </span>
-                <h2 className="new-project-adding-header">Yeni Proje Ekle</h2>
+                <h2 className="add-new-project-adding-header">Yeni Proje Ekle</h2>
                 <input
-                    className="project-name-input"
+                    className="add-new-project-name-input"
                     type="text"
                     name="projectName"
                     placeholder="Proje Adı"
@@ -25,20 +25,20 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
                     onChange={handleInputChange}
                 />
                 <input
-                    className="project-cover-photo-input"
+                    className="add-new-project-cover-photo-input"
                     type="file"
                     name="projectCoverPhoto"
                     onChange={handleFileChange}
                 />
-                <div className="adding-modal-buttons-row">
+                <div className="add-new-project-adding-modal-buttons-row">
                     <button
-                        className="adding-modal-button-create"
+                        className="add-new-project-modal-button-create"
                         onClick={handleSubmit}
                     >
                         Oluştur
                     </button>
                     <button
-                        className="adding-modal-button-abort"
+                        className="add-new-project-adding-modal-button-abort"
                         onClick={onClose}
                     >
                         İptal

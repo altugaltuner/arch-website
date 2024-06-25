@@ -23,7 +23,7 @@
         gap: 20px;
         border-radius: 20px;
 
-        .new-project-modal-close {
+        .add-new-project-modal-close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -31,13 +31,13 @@
             font-weight: 900;
         }
 
-        .new-project-adding-header {
+        .add-new-project-adding-header {
             font-size: 30px;
             font-weight: 400;
             color: $font-color;
         }
 
-        .project-name-input {
+        .add-new-project-name-input {
             width: 300px;
             height: 40px;
             padding: 10px;
@@ -46,13 +46,7 @@
             color: $font-color;
         }
 
-        .add-new-project-modal-title {
-            font-size: 20px;
-            font-weight: 400;
-            color: $font-color;
-        }
-
-        .add-new-project-modal-input {
+        .add-new-project-cover-photo-input {
             width: 300px;
             height: 40px;
             padding: 10px;
@@ -60,13 +54,13 @@
             border: 1px solid $font-color;
         }
 
-        .adding-modal-buttons-row {
+        .add-new-project-adding-modal-buttons-row {
             display: flex;
             flex-direction: row;
             justify-content: center;
             gap: 20px;
 
-            .adding-modal-button-create {
+            .add-new-project-modal-button-create {
                 border: 1px solid $border-color;
                 color: $font-color;
                 padding: 10px 20px;
@@ -78,7 +72,7 @@
                 }
             }
 
-            .adding-modal-button-abort {
+            .add-new-project-adding-modal-button-abort {
                 border: 1px solid $border-color;
                 color: $font-color;
                 padding: 10px 20px;
