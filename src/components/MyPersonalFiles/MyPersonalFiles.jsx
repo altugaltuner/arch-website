@@ -141,9 +141,18 @@ function MyPersonalFiles({ user }) {
         }
     };
 
+    const handleFolderClick = (event, folder) => {
+        // Eğer tıklama kalem veya çöp kutusu ikonlarına değilse klasörü aç
+        if (event.target.classList.contains('folder-editpencil') || event.target.classList.contains('folder-deleteicon')) {
+            event.stopPropagation(); // İkonlara tıklamayı durdur
+        } else {
+            setSelectedFolder(folder);
+        }
+    };
+
     const renderFolders = () => {
         return personalFolders.map(folder => (
-            <div key={folder.id} className="folder" onClick={() => setSelectedFolder(folder)}>
+            <div key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
                 <img
                     className="folder-editpencil"
                     src={editPencil}
