@@ -38,9 +38,7 @@ function AuthProvider({ children }) {
         password: password,
       });
 
-      console.log(response);
       if (response.data.jwt) {
-
         localStorage.setItem('token', response.data.jwt);
         setUser(response.data.user);
       }
@@ -55,10 +53,50 @@ function AuthProvider({ children }) {
     setUser(null);
   };
 
+  const updateUser = async (userData) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!user || !user.id) {
+        throw new Error("User ID is missing");
+      }
+      const { password, ...updateData } = userData; // şifreyi ayrı tut
+      const response = await api.put(`http://localhost:1337/api/users/${user.id}`, updateData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setUser(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Kullanıcı bilgisi güncellenemedi", error);
+      throw error;
+    }
+  };
+
+  const updatePassword = async (password) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!user || !user.id) {
+        throw new Error("User ID is missing");
+      }
+      const response = await api.put(`http://localhost:1337/api/users/${user.id}`, { password }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Şifre güncellenemedi", error);
+      throw error;
+    }
+  };
+
   const userValues = {
     user,
     login,
     logout,
+    updateUser,
+    updatePassword
   };
 
   return (

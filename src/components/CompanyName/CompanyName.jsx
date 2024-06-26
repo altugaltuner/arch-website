@@ -8,8 +8,10 @@ function CompanyName() {
     const [companyName, setCompanyName] = useState("ArchiNova Mimarlık ve İnşaat");
 
     useEffect(() => {
-        setCompanyName(user.company.companyName);
-    }, []);
+        if (user && user.company && user.company.companyName) {
+            setCompanyName(user.company.companyName);
+        }
+    }, [user]);
 
     return (
         <div className="company-name-main">
