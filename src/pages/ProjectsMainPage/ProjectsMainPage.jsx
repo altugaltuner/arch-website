@@ -38,7 +38,6 @@ function ProjectsMainPage() {
       }
 
       const response = await axios.get("http://localhost:1337/api/accesses");
-      console.log("Roles response:", response.data);
       setRoles(response.data.data);
     } catch (error) {
       console.error("Error fetching roles:", error);
@@ -63,7 +62,6 @@ function ProjectsMainPage() {
         const response = await axios.get(
           "http://localhost:1337/api/projects?populate=projectCoverPhoto"
         );
-        console.log("Projects response:", response.data);
         setCompanyProjects(response.data.data);
       } catch (error) {
         console.error("Error fetching the data:", error);
@@ -179,7 +177,7 @@ function ProjectsMainPage() {
     axios
       .delete(`http://localhost:1337/api/projects/${projectToDelete}`)
       .then((response) => {
-        console.log(response);
+
         console.log("Project deleted successfully");
         setCompanyProjects(
           companyProjects.filter((project) => project.id !== projectToDelete)

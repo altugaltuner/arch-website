@@ -9,7 +9,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         if (!employeeCodeGenerated) {
             const employeeCode = Math.random().toString(36).substring(2, 8).toUpperCase();
             document.getElementById("employeeCode").value = employeeCode;
-            console.log(employeeCode);
+
             setEmployeeCodeGenerated(true);
         }
     };

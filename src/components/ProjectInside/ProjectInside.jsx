@@ -10,7 +10,7 @@ function ProjectInside({ onProjectClick }) {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto');
-                console.log(response.data);
+
                 setProjects(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);

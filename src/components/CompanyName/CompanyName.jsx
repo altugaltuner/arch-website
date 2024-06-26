@@ -5,7 +5,6 @@ import { useAuth } from "../AuthProvider";
 function CompanyName() {
     const { user } = useAuth();
 
-    console.log(user, "user ama companyName verisi gelmiyor.");
     const [companyName, setCompanyName] = useState("ArchiNova Mimarlık ve İnşaat");
 
     useEffect(() => {

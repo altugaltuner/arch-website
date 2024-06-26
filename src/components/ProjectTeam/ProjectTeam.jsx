@@ -92,9 +92,6 @@ const ProjectTeam = ({ clickedProject }) => {
     );
 
     useEffect(() => {
-        // Debugging logs to check the state updates
-        console.log('Employees:', employees);
-        console.log('Available Users:', availableUsers);
     }, [employees, availableUsers]);
 
     return (

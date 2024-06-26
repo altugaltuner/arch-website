@@ -34,8 +34,6 @@ function ProjectsPage() {
         getRoles();
     }, []);
 
-    //console.log(roles);
-
     async function getProjectDetails() {
         const endpoint = `http://localhost:1337/api/projects/${idToFetch}?populate=*`;
         try {
