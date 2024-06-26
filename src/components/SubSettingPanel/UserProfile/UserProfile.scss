@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 300px;
+    width: 100%;
     padding: 30px;
 
     .subsetting-header {
@@ -20,7 +20,7 @@
 
     .personal-info-subsetting-oneline {
         position: relative;
-        width: 220px;
+        width: 100%;
 
         .edit-pencil-subsetting {
             position: absolute;

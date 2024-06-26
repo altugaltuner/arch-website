@@ -11,16 +11,16 @@ function SubNavigationSettings({ getRelevantSettings }) {
             items: ["E-posta bildirimleri açma/kapatma", "Uygulama içi bildirimler", "SMS bildirimleri"]
         },
         {
-            header: "Gizlilik ve Güvenlik",
-            items: ["Hesap güvenliği ayarları (2FA gibi)", "Hesap dondurma veya silme seçenekleri"]
-        },
-        {
             header: "Uygulama Ayarları",
             items: ["Tema seçimi (açık/koyu mod)", "Uygulama güncellemeleri"]
         },
         {
             header: "Veri ve Depolama",
             items: ["Veri yedekleme ve geri yükleme seçenekleri", "Depolama kullanımı ve yönetimi", "Arşivleme seçenekleri"]
+        },
+        {
+            header: "Gizlilik ve Güvenlik",
+            items: ["Hesap güvenliği ayarları (2FA gibi)", "Hesap dondurma veya silme seçenekleri"]
         },
         {
             header: "Hakkımızda",
