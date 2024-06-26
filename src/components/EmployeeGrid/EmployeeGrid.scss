@@ -5,11 +5,13 @@
     overflow-y: auto;
     font-family: $primary-font;
     color: $font-color;
+    width: 28%;
 
     .employee-grid {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(175px, 0fr));
+        display: flex;
+        flex-wrap: wrap;
+
         gap: 20px;
         padding: 20px;
         color: $font-color;

@@ -44,7 +44,10 @@
             flex-direction: row;
             width: 100%;
 
-            .employee-private-chat {
+            .user-permission-settings {
+                display: flex;
+                border-radius: 15px;
+                border: 1px solid $border-color;
                 width: 60%;
             }
         }
@@ -145,7 +148,7 @@
                     width: 96%;
                 }
 
-                .employee-private-chat {
+                .user-permission-settings {
                     width: 98%;
                     margin: 10px;
                 }
@@ -188,7 +191,7 @@
                     padding: 10px;
                 }
 
-                .employee-private-chat {
+                .user-permission-settings {
                     width: 98%;
                     margin: 10px;
                 }

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./WorkersPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import axios from 'axios';
-import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
-import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
+import UserPermissionSettings from "../../components/UserPermissionSettings/UserPermissionSettings";
+// import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import EmployeeGrid from "../../components/EmployeeGrid/EmployeeGrid";
 import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridSidebar";
 
@@ -27,7 +27,7 @@ function WorkersPage() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
-
+                console.log(response.data); // Check data structure
                 setEmployees(response.data);
                 setFilteredSearchEmployees(response.data);
                 const titles = response.data.map(employee => employee.profession.professionName);
@@ -53,6 +53,7 @@ function WorkersPage() {
     };
 
     const openEmployeeCardModal = (employee) => {
+        console.log("Employee selected:", employee); // Debug selected employee
         setSelectedEmployee(employee);
     };
 
@@ -84,17 +85,16 @@ function WorkersPage() {
                         selectedJobTitle={selectedJobTitle}
                         handleJobTitleClick={handleJobTitleClick}
                     />
-                    <div className="employee-private-chat">
-                        <GroupMessagePanel />
+                    <div className="user-permission-settings">
+                        <UserPermissionSettings
+                            employee={selectedEmployee}
+                            onClose={closeEmployeeCardModal}
+                            sendEmail={sendEmail}
+                        />
                     </div>
                     <EmployeeGrid
                         employees={filteredEmployees}
                         openEmployeeCardModal={openEmployeeCardModal}
-                    />
-                    <SelectedEmployeeModal
-                        employee={selectedEmployee}
-                        onClose={closeEmployeeCardModal}
-                        sendEmail={sendEmail}
                     />
                 </div>
             </div>
