@@ -16,13 +16,31 @@
 
     .adduser-modal-content {
         background-color: $background-color;
-        padding: 20px;
+        padding: 30px;
         border-radius: 8px;
-        max-width: 80%;
-        max-height: 80%;
         overflow: auto;
         position: relative;
         text-align: center;
+        width: 300px;
+
+        .adduser-modal-ul {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .adduser-modal-li {
+
+                display: flex;
+
+                .adduser-modal-label {
+
+                    .adduser-modal-input {
+                        width: 35px;
+                        height: 25px;
+                    }
+                }
+            }
+        }
 
         .adduser-modal-content-header {
             margin-bottom: 20px;
@@ -32,12 +50,24 @@
 
         .adduser-modal-close {
             position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: 200;
+            font-size: 40px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid $border-color;
+            width: 40px;
+            height: 40px;
             top: 10px;
             right: 10px;
-            background: none;
-            border: none;
-            font-size: 20px;
             cursor: pointer;
+
+            &:hover {
+                background-color: $grey;
+            }
         }
 
         .adduser-btn-div-for-modal {

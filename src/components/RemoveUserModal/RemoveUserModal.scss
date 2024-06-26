@@ -31,15 +31,21 @@
         }
 
         .remove-user-modal-ul {
-            list-style-type: none;
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
 
             .remove-user-modal-li {
-                margin-bottom: 10px;
+                display: flex;
+
 
                 .remove-user-modal-label {
 
-                    .remove-user-modal-input {}
+                    .remove-user-modal-input {
+                        width: 35px;
+                        height: 25px;
+
+                    }
                 }
             }
         }

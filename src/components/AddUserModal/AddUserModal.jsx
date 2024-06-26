@@ -33,11 +33,12 @@ function AddUserModal({ show, onClose, users, handleAddUsers }) {
             <div className="adduser-modal-content">
                 <span className="adduser-modal-close" onClick={onClose}>&times;</span>
                 <h2 className='adduser-modal-content-header'>Çalışan Ekle</h2>
-                <ul>
+                <ul className='adduser-modal-ul'>
                     {users.map((user) => (
-                        <li key={user.id}>
-                            <label>
+                        <li className='adduser-modal-li' key={user.id}>
+                            <label className='adduser-modal-label'>
                                 <input
+                                    className='adduser-modal-input'
                                     type="checkbox"
                                     checked={selectedUsers.includes(user.id)}
                                     onChange={() => handleCheckboxChange(user.id)}

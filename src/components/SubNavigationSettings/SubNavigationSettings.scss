@@ -33,6 +33,10 @@
                 border-bottom: 1px solid $border-color;
                 cursor: pointer;
 
+                &:hover {
+                    background-color: $grey;
+                }
+
                 .sub-nav-subheader {
                     font-size: 22px;
                     font-weight: 500;

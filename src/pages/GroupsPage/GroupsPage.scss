@@ -107,11 +107,11 @@
                     }
 
                     &:hover {
-                        background-color: darken($background-color, 10%);
+                        background-color: $grey;
                     }
 
                     &:active {
-                        background-color: darken($background-color, 20%);
+                        background-color: darken($grey, 10%);
                     }
                 }
             }

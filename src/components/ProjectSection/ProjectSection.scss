@@ -35,7 +35,6 @@
             }
         }
 
-
         .folder-content {
             gap: 20px;
             padding: 25px;
@@ -61,111 +60,8 @@
                     background-color: darken($background-color, 10%);
                 }
             }
-
-            .file-input-wrapper {
-                display: flex;
-                align-items: center;
-                margin-bottom: 1rem;
-
-                .file-preview {
-                    .preview-image {
-                        width: 100px;
-                        max-height: 300px;
-                    }
-                }
-
-                input[type="file"] {
-                    display: none;
-                }
-
-                .custom-file-upload {
-                    display: flex;
-                    width: 150px;
-                    height: 205px;
-                    align-items: center;
-                    padding: 10px;
-                    color: $font-color;
-                    border-radius: 15px;
-                    border: 1px solid $border-color;
-                    cursor: pointer;
-                    justify-content: center;
-
-
-                    &:hover {
-                        background-color: darken($background-color, 10%);
-                    }
-                }
-
-                button {
-                    margin-left: 1rem;
-                    padding: 0.5rem 1rem;
-                    color: $font-color;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: darken($background-color, 10%);
-                    }
-
-                    &:active {
-                        background-color: darken($background-color, 20%);
-                    }
-                }
-            }
-
-            .add-file {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 160px;
-                height: 160px;
-                border: 1px solid $border-color;
-                border-radius: 10px;
-                cursor: pointer;
-                transform: translate(0px, -12px);
-            }
-
-            .add-file-to-folder {
-                padding: 10px;
-                width: 140px;
-                height: 50px;
-                margin: 10px;
-                border: 1px solid #e4e4e4;
-                border-radius: 10px;
-                cursor: pointer;
-                font-weight: 400;
-            }
-
-            .file {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                width: 160px;
-                height: 205px;
-                text-align: center;
-                align-items: center;
-                cursor: pointer;
-                padding: 10px;
-                border-radius: 10px;
-                border: 1px solid $border-color;
-
-                .file-icon-img {
-                    width: 100px;
-                    height: 120px;
-                }
-
-                .file-name {
-                    font-size: 18px;
-                    font-weight: 400;
-                    color: $font-color;
-                    word-break: break-all;
-                }
-            }
         }
     }
-
 
     .project-folder-button {
         border: 1px solid $border-color;
@@ -229,7 +125,7 @@
                 display: block;
                 position: absolute;
                 top: 10px;
-                right: 20px;
+                right: 25px;
                 font-size: 20px;
                 cursor: pointer;
                 width: 20px;
