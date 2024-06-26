@@ -28,10 +28,23 @@
 
         .group-edit-modal-span {
             position: absolute;
-            top: 0;
-            right: 0;
-            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 200;
+            font-size: 30px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid $border-color;
+            width: 40px;
+            height: 40px;
+            top: 10px;
+            right: 10px;
             cursor: pointer;
+
+            &:hover {
+                background-color: $grey;
+            }
         }
 
         .group-edit-modal-header {

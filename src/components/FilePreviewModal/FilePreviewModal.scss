@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .file-preview-modal {
     position: fixed;
     top: 0;
@@ -19,9 +21,23 @@
 
         .file-preview-modal-close-btn {
             position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 200;
+            font-size: 30px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid $border-color;
+            width: 40px;
+            height: 40px;
             top: 10px;
             right: 10px;
             cursor: pointer;
+
+            &:hover {
+                background-color: $grey;
+            }
         }
 
         .file-preview-image {
@@ -42,23 +58,22 @@
             gap: 10px;
 
             .file-preview-modal-download-btn,
-            .file-preview-modal-cancel-btn {
+            .file-preview-modal-cancel-btn,
+            .file-preview-modal-delete-btn {
                 padding: 10px 20px;
                 cursor: pointer;
-            }
-
-            .file-preview-modal-download-btn {
-                background: #4caf50;
-                color: white;
-                border: none;
+                color: $font-color;
+                border: 1px solid $border-color;
                 border-radius: 5px;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
             }
 
             .file-preview-modal-cancel-btn {
-                background: #f44336;
-                color: white;
-                border: none;
-                border-radius: 5px;
+                background-color: $dark-button;
             }
         }
     }

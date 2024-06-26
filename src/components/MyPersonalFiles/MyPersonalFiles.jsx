@@ -4,7 +4,7 @@ import "./MyPersonalFiles.scss";
 import folderIcon from "../../assets/icons/folder-icon.png";
 import FilePreviewModal from "../FilePreviewModal/FilePreviewModal";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
-import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
+import DeletePrivateFolderModal from "../DeletePrivateFolderModal/DeletePrivateFolderModal";
 import EditFolderModal from "../EditFolderModal/EditFolderModal";
 import backButton from "../../assets/icons/back-button.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
@@ -96,6 +96,34 @@ function MyPersonalFiles({ user }) {
     const downloadFile = () => {
         if (selectedFile) {
             window.open(`http://localhost:1337${selectedFile.url}`, '_blank');
+        }
+    };
+
+    const handleFileDelete = async () => {
+        if (!selectedFile) return;
+
+        try {
+            await axios.delete(`http://localhost:1337/api/upload/files/${selectedFile.id}`);
+
+            const updatedContent = selectedFolder.personalFolderContent.filter(file => file.id !== selectedFile.id);
+
+            await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
+                data: {
+                    personalFolderContent: updatedContent.map(file => file.id),
+                },
+            });
+
+            setPersonalFolders(prevFolders => prevFolders.map(folder => {
+                if (folder.id === selectedFolder.id) {
+                    return { ...folder, personalFolderContent: updatedContent };
+                }
+                return folder;
+            }));
+            setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedContent }));
+            setSelectedFile(null);
+
+        } catch (error) {
+            console.error('Error deleting the file', error);
         }
     };
 
@@ -219,14 +247,14 @@ function MyPersonalFiles({ user }) {
                 style={{ display: "none" }}
                 onChange={handleFileUpload}
             />
-            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeFilePreview} onDownload={downloadFile} />}
+            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeFilePreview} onDownload={downloadFile} onDelete={handleFileDelete} />}
             <AddFolderModal
                 isOpen={showAddFolderModal}
                 onClose={() => setShowAddFolderModal(false)}
                 onFolderCreated={handleFolderCreated}
                 userId={user.id}
             />
-            <DeleteFolderModal
+            <DeletePrivateFolderModal
                 isOpen={showDeleteFolderModal}
                 onClose={() => setShowDeleteFolderModal(false)}
                 onDelete={handleDeleteFolder}

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./FilePreviewModal.scss";
 
-function FilePreviewModal({ file, onClose, onDownload }) {
+function FilePreviewModal({ file, onClose, onDownload, onDelete }) {
     if (!file) {
         return null;
     }
@@ -14,6 +14,7 @@ function FilePreviewModal({ file, onClose, onDownload }) {
                 <p className='file-preview-file-name'>{file.name}</p>
                 <div className='file-preview-btns'>
                     <button className='file-preview-modal-download-btn' onClick={onDownload}>İndir</button>
+                    <button className="file-preview-modal-delete-btn" onClick={onDelete}>Sil</button>
                     <button className="file-preview-modal-cancel-btn" onClick={onClose}>Kapat</button>
                 </div>
             </div>

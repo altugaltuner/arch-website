@@ -18,26 +18,40 @@
         background-color: $background-color;
         padding: 40px;
         border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         max-width: 400px;
-        max-height: 80%;
+        height: 250px;
         overflow: auto;
         position: relative;
         text-align: center;
 
         .delete-confirmation-header {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             font-size: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .delete-confirmation-close {
             position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 200;
+            font-size: 30px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid $border-color;
+            width: 40px;
+            height: 40px;
             top: 10px;
             right: 10px;
-            background: none;
-            border: none;
-            font-size: 20px;
             cursor: pointer;
+
+            &:hover {
+                background-color: $grey;
+            }
         }
 
         .delete-confirmation-modal-buttons {
