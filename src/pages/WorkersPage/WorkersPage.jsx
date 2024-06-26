@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./WorkersPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import axios from 'axios';
-import UserPermissionSettings from "../../components/UserPermissionSettings/UserPermissionSettings";
+import OtherUsersInfo from "../../components/OtherUsersInfo/OtherUsersInfo";
 // import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import EmployeeGrid from "../../components/EmployeeGrid/EmployeeGrid";
 import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridSidebar";
@@ -86,7 +86,7 @@ function WorkersPage() {
                         handleJobTitleClick={handleJobTitleClick}
                     />
                     <div className="user-permission-settings">
-                        <UserPermissionSettings
+                        <OtherUsersInfo
                             employee={selectedEmployee}
                             onClose={closeEmployeeCardModal}
                             sendEmail={sendEmail}

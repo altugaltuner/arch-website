@@ -1,6 +1,6 @@
 @use "../../styles/abstracts/variables" as *;
 
-.user-permission-settings-main {
+.other-info-main {
     width: 100%;
     height: 100%;
     display: flex;
@@ -12,15 +12,15 @@
     margin: 10px;
     text-align: center;
 
-    .user-permission-settings-header {
+    .other-info-header {
         font-size: 30px;
         font-weight: 400;
     }
 
-    .user-perm-inner {
+    .other-info-inner {
         height: fit-content;
 
-        .user-permission-inner {
+        .other-info-inner-2 {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -28,7 +28,7 @@
             gap: 10px;
             margin: 10px;
 
-            .user-permission-profile-pic {
+            .other-info-profile-pic {
                 width: 150px;
                 height: 150px;
                 border-radius: 50%;
@@ -37,24 +37,24 @@
             }
 
 
-            .user-permission-settings-username {
+            .other-info-username {
                 font-size: 18px;
                 font-weight: 400;
             }
 
-            .user-permission-settings-email {
+            .other-info-email {
                 font-size: 18px;
                 font-weight: 400;
             }
 
-            .user-permission-settings-professionname {
+            .other-info-professionname {
                 font-size: 18px;
                 font-weight: 400;
             }
         }
     }
 
-    .user-perm-joined-all {
+    .other-joined-all {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -63,14 +63,13 @@
         margin: 10px;
         height: fit-content;
 
-        .user-perm-joined-projects {
+        .other-all-projects {
             font-size: 18px;
             font-weight: 400;
-        }
 
-        .user-perm-joined-groups {
-            font-size: 18px;
-            font-weight: 400;
+            .other-joined-projects {}
+
+            .other-project {}
         }
     }
 }
