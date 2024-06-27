@@ -6,6 +6,7 @@ import OtherUsersInfo from "../../components/OtherUsersInfo/OtherUsersInfo";
 // import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import EmployeeGrid from "../../components/EmployeeGrid/EmployeeGrid";
 import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridSidebar";
+import NewProfessionModal from "../../components/NewProfessionModal/NewProfessionModal";
 
 function WorkersPage() {
     const [employees, setEmployees] = useState([]);
@@ -15,12 +16,23 @@ function WorkersPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredSearchEmployees, setFilteredSearchEmployees] = useState([]);
 
+    const [newProfessionModalOpen, setNewProfessionModalOpen] = useState(false);
+
     const sendEmail = (email) => {
         window.location.href = `mailto:${email}`;
     };
 
     const handleJobTitleClick = (title) => {
         setSelectedJobTitle(title);
+    };
+
+    const openNewProfessionModal = () => {
+        setNewProfessionModalOpen(true);
+        console.log("Open new profession modal");
+    };
+
+    const closeNewProfessionModal = () => {
+        setNewProfessionModalOpen(false);
     };
 
     useEffect(() => {
@@ -84,6 +96,7 @@ function WorkersPage() {
                         jobTitles={jobTitles}
                         selectedJobTitle={selectedJobTitle}
                         handleJobTitleClick={handleJobTitleClick}
+                        openNewProfessionModal={openNewProfessionModal}
                     />
                     <div className="user-permission-settings">
                         <OtherUsersInfo
@@ -95,6 +108,10 @@ function WorkersPage() {
                     <EmployeeGrid
                         employees={filteredEmployees}
                         openEmployeeCardModal={openEmployeeCardModal}
+                    />
+                    <NewProfessionModal
+                        isOpen={newProfessionModalOpen}
+                        onClose={closeNewProfessionModal}
                     />
                 </div>
             </div>
