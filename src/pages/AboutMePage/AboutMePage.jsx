@@ -16,7 +16,7 @@ function AboutMePage() {
             try {
                 const token = localStorage.getItem('token');
                 if (token) {
-                    const response = await api.get(`http://localhost:1337/api/users/me?populate=profilePic,project_revises`, {
+                    const response = await api.get(`http://localhost:1337/api/users/me?populate=profilePic,project_revises,profession`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }

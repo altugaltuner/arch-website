@@ -5,54 +5,93 @@
     height: 100%;
     display: flex;
     padding: 20px;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
     border: 1px solid $border-color;
     border-radius: 15px;
     margin: 10px;
     text-align: center;
 
+    .revise-and-profile {
+        display: flex;
+        flex-direction: row;
+        height: fit-content;
+        max-height: 350px;
+        overflow-y: auto;
+
+        .other-all-revises-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid $border-color;
+            border-radius: 15px;
+
+            .other-revises-h2 {
+                font-size: 24px;
+                font-weight: 400;
+                padding: 10px;
+            }
+
+            .other-revise-div {
+
+                .other-revise-p {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .other-info-inner {
+            height: fit-content;
+
+
+            .other-info-inner-2 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid $border-color;
+                border-radius: 15px;
+
+                .other-info-profile-pic {
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    background-color: $background-color;
+                    margin: 20px 0px;
+                    border: 1px solid $border-color;
+                }
+
+                .other-info-username {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+
+                .other-info-email {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+
+                .other-info-professionname {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
     .other-info-header {
         font-size: 30px;
         font-weight: 400;
     }
 
-    .other-info-inner {
-        height: fit-content;
 
-        .other-info-inner-2 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 10px;
-
-            .other-info-profile-pic {
-                width: 150px;
-                height: 150px;
-                border-radius: 50%;
-                background-color: $background-color;
-                margin: 20px 0px;
-            }
-
-
-            .other-info-username {
-                font-size: 18px;
-                font-weight: 400;
-            }
-
-            .other-info-email {
-                font-size: 18px;
-                font-weight: 400;
-            }
-
-            .other-info-professionname {
-                font-size: 18px;
-                font-weight: 400;
-            }
-        }
-    }
 
     .other-joined-all {
         display: flex;
@@ -62,14 +101,77 @@
         gap: 10px;
         margin: 10px;
         height: fit-content;
+        border: 1px solid $border-color;
+        border-radius: 15px;
 
         .other-all-projects {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
             font-size: 18px;
             font-weight: 400;
 
-            .other-joined-projects {}
+            .other-joined-projects-h2 {
+                font-size: 24px;
+                font-weight: 400;
+                padding: 10px;
+            }
 
-            .other-project {}
+            .other-column {
+                gap: 5px;
+                flex-wrap: wrap;
+                display: flex;
+                flex-direction: row;
+                padding: 10px;
+
+                .other-project-div {
+                    display: flex;
+                    width: 19%;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 10px;
+                    justify-content: space-between;
+
+                    .other-project-p {
+                        font-size: 18px;
+                        font-weight: 400;
+                    }
+
+                    .other-project-photo {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 10%;
+                        background-color: $background-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .other-all-groups {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 10px;
+        padding: 10px;
+        height: fit-content;
+        border: 1px solid $border-color;
+        border-radius: 15px;
+
+        .other-groups-joined-h2 {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .other-groups {
+
+            .other-groups-name {
+                font-size: 18px;
+                font-weight: 400;
+            }
         }
     }
 }

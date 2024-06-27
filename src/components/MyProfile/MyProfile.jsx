@@ -10,6 +10,7 @@ function MyProfile({ user }) {
         mobilePhone: "",
         email: "",
         social1: "",
+        profession: { professionName: "" }
     });
 
     useEffect(() => {
@@ -20,7 +21,8 @@ function MyProfile({ user }) {
                 location: user.UserLocation || "",
                 mobilePhone: user.MobilePhone || "",
                 email: user.email || "",
-                social1: user.socialMedia || ""
+                social1: user.socialMedia || "",
+                profession: user.profession || { professionName: "" }
             };
             setFormData(initialData);
         }
@@ -50,6 +52,10 @@ function MyProfile({ user }) {
                 <div className="profile-field">
                     <label className="profile-field-labels" htmlFor="name">İsim Soyisim:</label>
                     <p className="profile-field-paragraph" id="name">{formData.name}</p>
+                </div>
+                <div className="profile-field">
+                    <label className="profile-field-labels" htmlFor="profession">Meslek:</label>
+                    <p className="profile-field-paragraph" id="profession">{formData.profession.professionName}</p>
                 </div>
                 <div className="profile-field">
                     <label className="profile-field-labels" htmlFor="email">E-posta:</label>
