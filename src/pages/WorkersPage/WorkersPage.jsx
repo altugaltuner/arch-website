@@ -26,7 +26,7 @@ function WorkersPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
+                const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,projects.projectCoverPhoto,profilePic,groups,project_revises');
                 console.log(response.data); // Check data structure
                 setEmployees(response.data);
                 setFilteredSearchEmployees(response.data);

@@ -1,144 +1,71 @@
-import React, { useState } from 'react';
-import editPencil from '../../../assets/icons/edit-pencil.png';
-import "./UserProfile.scss";
-import { useAuth } from "../../AuthProvider";
+import React from 'react';
+import './OtherUsersInfo.scss';
 
-const UserProfile = () => {
-    const { user, updateUser, updatePassword } = useAuth();
-    const [editMode, setEditMode] = useState({
-        username: false,
-        email: false,
-        password: false,
-        MobilePhone: false
-    });
-    const [userData, setUserData] = useState({
-        username: user?.username || '',
-        email: user?.email || '',
-        password: '',
-        MobilePhone: user?.MobilePhone || ''
-    });
-
-    const handleEditClick = (field) => {
-        setEditMode({ ...editMode, [field]: true });
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setUserData({ ...userData, [name]: value });
-    };
-
-    const handleCancelClick = (field) => {
-        setEditMode({ ...editMode, [field]: false });
-        setUserData({ ...userData, [field]: user[field] || '' });
-    };
-
-    const handleSaveClick = async (field) => {
-        setEditMode({ ...editMode, [field]: false });
-        try {
-            if (field === 'password') {
-                await updatePassword(userData.password);
-            } else {
-                await updateUser(userData);
-            }
-        } catch (error) {
-            console.error("Güncelleme işlemi başarısız", error);
-        }
-    };
+function OtherUsersInfo({ employee }) {
+    if (!employee) {
+        return (
+            <div className="other-info-main">
+                <h1 className='other-info-header'>Görüntülemek istediğiniz çalışanı seçin.</h1>
+            </div>
+        );
+    }
 
     return (
-        <div className="personal-info-subsetting-column">
-            <div className="personal-info-subsetting-oneline">
-                <h3 className="subsetting-header">Profil Fotoğrafı
-                    <img className="subsetting-pp" src={`http://localhost:1337${user.profilePic?.url || ""}`} alt="profile-pic" />
-                </h3>
-                <img className="edit-pencil-subsetting" src={editPencil} alt="edit" />
+        <div className="other-info-main">
+            <div className='other-info-inner'>
+                <div className='other-info-inner-2'>
+                    <img
+                        className="other-info-profile-pic"
+                        src={`http://localhost:1337${employee.profilePic?.url || ""}`}
+                        alt=""
+                    />
+                    <p className='other-info-username'>{employee.username}</p>
+                    <p className='other-info-email'>{employee.email}</p>
+                    <p className='other-info-professionname'>{employee.profession.professionName}</p>
+                </div>
             </div>
-
-            <div className="personal-info-subsetting-oneline">
-                <h3 className="subsetting-header">Kullanıcı Adı</h3>
-                {editMode.username ? (
-                    <div>
-                        <input
-                            type="text"
-                            name="username"
-                            value={userData.username}
-                            onChange={handleInputChange}
-                        />
-                        <button onClick={() => handleSaveClick('username')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('username')}>İptal</button>
-                    </div>
-                ) : (
-                    <>
-                        <p className="subsetting-paragraph">{user?.username || 'Kullanıcı Adı'}</p>
-                        <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('username')} />
-                    </>
-                )}
+            <div className='other-joined-all'>
+                <div className='other-all-projects'>
+                    <h2 className='other-joined-projects'>Dahil Olduğu Projeler : </h2>
+                    {employee.projects && employee.projects.map((project) => (
+                        <div key={project.id} className='other-project'>
+                            <p>{project.projectName}</p>
+                            {project.projectCoverPhoto && (
+                                <img
+                                    className="project-photo"
+                                    src={`http://localhost:1337${project.projectCoverPhoto.formats?.thumbnail?.url || project.projectCoverPhoto.url}`}
+                                    alt={project.projectName}
+                                />
+                            )}
+                        </div>
+                    ))}
+                </div>
+                <div className='other-all-groups'>
+                    <h2 className='other-groups-joined'>Dahil Olduğu Gruplar :</h2>
+                    {employee.groups && employee.groups.map((group) => (
+                        <div key={group.id} className='other-groups'>
+                            <p>{group.groupName}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
-
-            <div className="personal-info-subsetting-oneline">
-                <h3 className="subsetting-header">E-posta Adresi</h3>
-                {editMode.email ? (
-                    <div>
-                        <input
-                            type="email"
-                            name="email"
-                            value={userData.email}
-                            onChange={handleInputChange}
-                        />
-                        <button onClick={() => handleSaveClick('email')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('email')}>İptal</button>
-                    </div>
-                ) : (
-                    <>
-                        <p className="subsetting-paragraph">{user?.email || 'E-posta Adresi bilgisi yok'}</p>
-                        <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('email')} />
-                    </>
-                )}
+            <div className='other-revises-all'>
+                <div className='other-all-revises'>
+                    <h2 className='other-revises'>Yazdığı Revizeleri :</h2>
+                    {employee.project_revises && employee.project_revises.map((revise) => (
+                        <div key={revise.id} className='other-revise'>
+                            <p>{revise.comment[0].children[0].text}</p>
+                        </div>
+                    ))}
+                    <div className='other-revise'>Revize1</div>
+                    <div className='other-revise'>Revize2</div>
+                    <div className='other-revise'>Revize3</div>
+                </div>
             </div>
-
-            <div className="personal-info-subsetting-oneline">
-                <h3 className="subsetting-header">Şifre</h3>
-                {editMode.password ? (
-                    <div>
-                        <input
-                            type="password"
-                            name="password"
-                            value={userData.password}
-                            onChange={handleInputChange}
-                        />
-                        <button onClick={() => handleSaveClick('password')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('password')}>İptal</button>
-                    </div>
-                ) : (
-                    <>
-                        <p className="subsetting-paragraph">*********</p>
-                        <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('password')} />
-                    </>
-                )}
-            </div>
-
-            <div className="personal-info-subsetting-oneline">
-                <h3 className="subsetting-header">Telefon</h3>
-                {editMode.MobilePhone ? (
-                    <div>
-                        <input
-                            type="text"
-                            name="MobilePhone"
-                            value={userData.MobilePhone}
-                            onChange={handleInputChange}
-                        />
-                        <button onClick={() => handleSaveClick('MobilePhone')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('MobilePhone')}>İptal</button>
-                    </div>
-                ) : (
-                    <>
-                        <p className="subsetting-paragraph">{user?.MobilePhone || 'Telefon bilgisi yok'}</p>
-                        <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('MobilePhone')} />
-                    </>
-                )}
-            </div>
+            <input type="file" accept="image/*, video/*" /> {/* kare olacak,çok büyük olmayacak
+            gönder butonu da koymam lazım  ayrıca mesaj kutusu da koyucam*/}
         </div>
     );
-};
+}
 
-export default UserProfile;
+export default OtherUsersInfo;

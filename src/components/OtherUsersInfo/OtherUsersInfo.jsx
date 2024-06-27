@@ -2,13 +2,14 @@ import React from 'react';
 import './OtherUsersInfo.scss';
 
 function OtherUsersInfo({ employee }) {
+
     if (!employee) {
         return (
             <div className="other-info-main">
                 <h1 className='other-info-header'>Görüntülemek istediğiniz çalışanı seçin.</h1>
             </div>
         );
-    };
+    }
 
     return (
         <div className="other-info-main">
@@ -27,27 +28,39 @@ function OtherUsersInfo({ employee }) {
             <div className='other-joined-all'>
                 <div className='other-all-projects'>
                     <h2 className='other-joined-projects'>Dahil Olduğu Projeler : </h2>
-                    <div className='other-project'>Proje1</div>
-                    <div className='other-project'>Proje2</div>
-                    <div className='other-project'>Proje3</div>
+                    {employee.projects && employee.projects.map((project) => (
+                        <div key={project.id} className='other-project'>
+                            <p>{project.projectName}</p>
+                            {project.projectCoverPhoto && (
+                                <img
+                                    className="project-photo"
+                                    src={`http://localhost:1337${project.projectCoverPhoto.formats?.thumbnail?.url || project.projectCoverPhoto.url}`}
+                                    alt={project.projectName}
+                                />
+                            )}
+                        </div>
+                    ))}
                 </div>
                 <div className='other-all-groups'>
                     <h2 className='other-groups-joined'>Dahil Olduğu Gruplar :</h2>
-                    <div className='other-groups'>Grup1</div>
-                    <div className='other-groups'>Grup2</div>
-                    <div className='other-groups'>Grup3</div>
+                    {employee.groups && employee.groups.map((group) => (
+                        <div key={group.id} className='other-groups'>
+                            <p>{group.groupName}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className='other-revises-all'>
                 <div className='other-all-revises'>
-                    <h2 className='other-revises'>Revizeleri : </h2>
-                    <div className='other-revise'>Revize1</div>
-                    <div className='other-revise'>Revize2</div>
-                    <div className='other-revise'>Revize3</div>
+                    <h2 className='other-revises'>Yazdığı Revizeleri :</h2>
+                    {console.log("lan", employee.project_revises)}
+                    {employee.project_revises && employee.project_revises.map((revise) => (
+                        <div key={revise.id} className='other-revise'>
+                            <p>{revise.comment[0].children[0].text}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
-            <input type="file" accept="image/*, video/*" /> {/* kare olacak,çok büyük olmayacak
-            gönder butonu da koymam lazım */}
         </div>
     );
 }
