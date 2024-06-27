@@ -240,6 +240,12 @@ function MyPersonalFiles({ user }) {
             <button className="add-folder-button" onClick={handleAddFolderClick}>Yeni Klasör</button>
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
+
+                <div className="folder">
+                    <img src={folderIcon} alt="folder" className="folder-icon" />
+                    <p className="folder-p">Çöp Kutusu</p>
+                </div>
+
             </div>
             <input
                 ref={fileInputRef}
