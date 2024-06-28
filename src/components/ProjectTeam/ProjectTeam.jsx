@@ -5,7 +5,7 @@ import AddUserModal from '../../components/AddUserModal/AddUserModal';
 import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal';
 import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 
-const ProjectTeam = ({ clickedProject }) => {
+const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [employees, setEmployees] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -36,7 +36,6 @@ const ProjectTeam = ({ clickedProject }) => {
         const fetchEmployees = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
-                setEmployees(response.data);
                 setAllUsers(response.data);
             } catch (error) {
                 console.error('Error fetching employees', error);
@@ -51,8 +50,8 @@ const ProjectTeam = ({ clickedProject }) => {
             const projectUserIds = clickedProject.attributes.users.data.map(user => user.id);
             const available = allUsers.filter(user => !projectUserIds.includes(user.id));
             setAvailableUsers(available);
-        } else {
-            console.log('clickedProject.attributes.users.data is undefined');
+            const projectEmployees = allUsers.filter(user => projectUserIds.includes(user.id));
+            setEmployees(projectEmployees);
         }
     }, [allUsers, clickedProject]);
 
@@ -63,17 +62,7 @@ const ProjectTeam = ({ clickedProject }) => {
                     users: [...clickedProject.attributes.users.data.map(user => user.id), ...userIds]
                 }
             });
-
-            const updatedEmployees = [
-                ...employees,
-                ...userIds.map(id => allUsers.find(user => user.id === id))
-            ];
-
-            setEmployees(updatedEmployees);
-
-            const updatedAvailableUsers = availableUsers.filter(user => !userIds.includes(user.id));
-            setAvailableUsers(updatedAvailableUsers);
-
+            updateProject();
             setShowAddModal(false);
         } catch (error) {
             console.error('Error adding users to project team', error);
@@ -87,7 +76,7 @@ const ProjectTeam = ({ clickedProject }) => {
                     users: clickedProject.attributes.users.data.filter(user => !userIds.includes(user.id))
                 }
             });
-            setEmployees(prev => prev.filter(employee => !userIds.includes(employee.id)));
+            updateProject();
         } catch (error) {
             console.error('Error removing users from project team', error);
         }
@@ -97,14 +86,11 @@ const ProjectTeam = ({ clickedProject }) => {
         employee.projects && employee.projects.some(project => project.id === clickedProject.id)
     );
 
-    useEffect(() => {
-    }, [employees, availableUsers]);
-
     return (
         <div className="project-teams-container">
             <div className='admin-buttons'>
                 {roles.map(role => role.attributes.role === "Admin" && (
-                    <>
+                    <React.Fragment key={role.id}>
                         <button
                             className="add-team-btn"
                             onClick={() => setShowAddModal(true)}
@@ -112,7 +98,7 @@ const ProjectTeam = ({ clickedProject }) => {
                             Çalışan Ekle
                         </button>
                         <button className='delete-team-btn' onClick={() => setShowRemoveModal(true)}>Çalışan Çıkar</button>
-                    </>
+                    </React.Fragment>
                 ))}
             </div>
             <div className="employees-grid">

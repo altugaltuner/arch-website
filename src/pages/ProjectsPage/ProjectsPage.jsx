@@ -11,7 +11,6 @@ import ProjectMetrics from "../../components/ProjectMetrics/ProjectMetrics";
 
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
-
     const [currentProject, setCurrentProject] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -34,7 +33,7 @@ function ProjectsPage() {
         getRoles();
     }, []);
 
-    async function getProjectDetails() {
+    const getProjectDetails = async () => {
         const endpoint = `http://localhost:1337/api/projects/${idToFetch}?populate=*`;
         try {
             setLoading(true);
@@ -47,7 +46,6 @@ function ProjectsPage() {
             setLoading(false);
         }
     }
-
 
     useEffect(() => {
         getProjectDetails();
@@ -69,7 +67,7 @@ function ProjectsPage() {
                     {currentProject && <ProjectHeader clickedProject={currentProject.data} />}
                     <div className="inner-project-row">
                         {currentProject && <ProjectSection clickedProject={currentProject.data} />}
-                        {currentProject && <ProjectTeam clickedProject={currentProject.data} />}
+                        {currentProject && <ProjectTeam clickedProject={currentProject.data} updateProject={getProjectDetails} />}
                     </div>
                     <div className="inner-project-row">
                         {currentProject && <ProjectComments clickedProject={currentProject.data} />}
