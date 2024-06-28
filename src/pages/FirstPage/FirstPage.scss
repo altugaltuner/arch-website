@@ -47,7 +47,7 @@
                 color: $font-color;
                 padding: 10px 20px;
                 border-radius: 5px;
-                transition: all 0.3s;
+                transition: all 0.2s;
 
                 &:hover {
                     background-color: darken($yellow, 10%);
@@ -60,7 +60,7 @@
                 padding: 10px 20px;
                 border-radius: 5px;
                 border: 1px solid $border-color;
-                transition: all 0.3s;
+                transition: all 0.2s;
 
                 &:hover {
                     background-color: darken($yellow, 10%);
@@ -73,7 +73,7 @@
                 padding: 10px 20px;
                 border-radius: 5px;
                 border: 1px solid $border-color;
-                transition: all 0.3s;
+                transition: all 0.2s;
 
                 &:hover {
                     background-color: darken($yellow, 10%);

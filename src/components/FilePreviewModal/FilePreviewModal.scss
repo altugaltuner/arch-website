@@ -65,7 +65,7 @@
                 color: $font-color;
                 border: 1px solid $border-color;
                 border-radius: 5px;
-                transition: all 0.3s;
+                transition: all 0.2s;
 
                 &:hover {
                     background-color: darken($yellow, 10%);

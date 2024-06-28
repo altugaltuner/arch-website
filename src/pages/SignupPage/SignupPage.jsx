@@ -3,6 +3,9 @@ import { useState } from "react";
 import { api } from "../../api";
 import eyeShow from "../../assets/icons/EyeShowLogo.png";
 import eyeHide from "../../assets/icons/EyeHideLogo.png";
+import { useNavigate } from 'react-router-dom';
+import backButton from '../../assets/icons/back-button.png';
+
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -12,6 +15,13 @@ function SignupPage() {
     password: "",
     confirmPassword: "",
   });
+
+
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate('/login');
+  };
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -125,6 +135,7 @@ function SignupPage() {
             />
           </div>
           <input type="text" className="company-code-input" placeholder="Şirket Kodunuz" />
+          <button className="back-button-to-login" onClick={handleBackClick}>Hesabın var mı? Giriş Yap</button>
           <input className="signup-btn" type="submit" value="Sign Up" />
         </form>
       </div>

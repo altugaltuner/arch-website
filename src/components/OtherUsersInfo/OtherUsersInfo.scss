@@ -60,12 +60,12 @@
                 border-radius: 15px;
 
                 .other-info-profile-pic {
-                    width: 150px;
-                    height: 150px;
+                    width: 100%;
+                    height: 100%;
+                    padding: 10px;
                     border-radius: 50%;
                     background-color: $background-color;
-                    margin: 20px 0px;
-                    border: 1px solid $border-color;
+
                 }
 
                 .other-info-username {
@@ -88,10 +88,8 @@
 
     .other-info-header {
         font-size: 30px;
-        font-weight: 400;
+        font-weight: 300;
     }
-
-
 
     .other-joined-all {
         display: flex;

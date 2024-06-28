@@ -3,7 +3,6 @@ import "./WorkersPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import axios from 'axios';
 import OtherUsersInfo from "../../components/OtherUsersInfo/OtherUsersInfo";
-// import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import EmployeeGrid from "../../components/EmployeeGrid/EmployeeGrid";
 import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridSidebar";
 import NewProfessionModal from "../../components/NewProfessionModal/NewProfessionModal";
@@ -65,7 +64,7 @@ function WorkersPage() {
     };
 
     const openEmployeeCardModal = (employee) => {
-        console.log("Employee selected:", employee); // Debug selected employee
+        console.log("Employee selected:", employee);
         setSelectedEmployee(employee);
     };
 

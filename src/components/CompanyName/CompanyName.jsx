@@ -8,8 +8,11 @@ function CompanyName() {
     const [companyName, setCompanyName] = useState("ArchiNova Mimarlık ve İnşaat");
 
     useEffect(() => {
+
         if (user && user.company && user.company.companyName) {
             setCompanyName(user.company.companyName);
+        } else {
+            console.log("User data is not available or companyName is missing");
         }
     }, [user]);
 

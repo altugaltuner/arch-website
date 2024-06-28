@@ -19,7 +19,7 @@
         .signup-header {
             color: $font-color;
             font-size: 50px;
-            font-weight: 500;
+            font-weight: 400;
             margin-bottom: 30px;
         }
 
@@ -104,6 +104,17 @@
                 border: 1px solid $border-color;
             }
 
+            .back-button-to-login {
+                border-radius: 12px;
+                border: 1px solid $border-color;
+                cursor: pointer;
+                padding: 10px;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+            }
+
             .password-section-signup {
 
                 .signup-password-input {
@@ -127,6 +138,10 @@
                 padding: 5px;
                 border-radius: 12px;
                 background-color: $background-color;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
             }
         }
     }

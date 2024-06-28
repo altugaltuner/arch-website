@@ -102,6 +102,7 @@
                     border-radius: 5px;
                     border: 1px solid $border-color;
                     cursor: pointer;
+                    transition: all 0.2s;
 
                     &:hover {
                         background-color: darken($background-color, 10%);

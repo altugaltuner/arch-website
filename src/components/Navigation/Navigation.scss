@@ -50,19 +50,22 @@
                 font-size: 20px;
                 cursor: pointer;
                 border-bottom: 1px solid $border-color;
+                transition: all 0.2s;
 
                 .nav-logo {
                     width: 45px;
                     height: 43px;
+                    transition: all 0.2s;
+                }
+
+                .nav-p {
+                    font-size: 20px;
+                    transition: all 0.2s;
                 }
             }
 
             :hover {
                 background-color: darken($grey, 10%);
-            }
-
-            :active {
-                background-color: darken($grey, 20%);
             }
 
             .nav-button.active {

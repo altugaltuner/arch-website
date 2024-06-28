@@ -3,6 +3,7 @@ import './ProjectTeam.scss';
 import axios from 'axios';
 import AddUserModal from '../../components/AddUserModal/AddUserModal';
 import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal';
+import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 
 const ProjectTeam = ({ clickedProject }) => {
     const [employees, setEmployees] = useState([]);
@@ -11,6 +12,12 @@ const ProjectTeam = ({ clickedProject }) => {
     const [showRemoveModal, setShowRemoveModal] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
     const [availableUsers, setAvailableUsers] = useState([]);
+
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+    const openEmployeeModal = (employee) => {
+        setSelectedEmployee(employee);
+    };
 
     async function getRoles() {
         try {
@@ -64,7 +71,6 @@ const ProjectTeam = ({ clickedProject }) => {
 
             setEmployees(updatedEmployees);
 
-            // Update available users after adding new users
             const updatedAvailableUsers = availableUsers.filter(user => !userIds.includes(user.id));
             setAvailableUsers(updatedAvailableUsers);
 
@@ -111,7 +117,8 @@ const ProjectTeam = ({ clickedProject }) => {
             </div>
             <div className="employees-grid">
                 {filteredEmployees.map((employee, index) => (
-                    <div className="employee-card" key={index}>
+                    <div className="employee-card" onClick={() => openEmployeeModal(employee)}
+                        key={index}>
                         <div className="profile-pic">
                             <img
                                 className="profile-pic-inner"
@@ -139,6 +146,11 @@ const ProjectTeam = ({ clickedProject }) => {
                 onClose={() => setShowRemoveModal(false)}
                 employees={filteredEmployees}
                 handleRemoveUsers={handleRemoveUsers}
+            />
+
+            <SelectedEmployeeModal
+                employee={selectedEmployee}
+                onClose={() => setSelectedEmployee(null)}
             />
         </div>
     );

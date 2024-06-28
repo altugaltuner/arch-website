@@ -17,6 +17,7 @@ function AuthProvider({ children }) {
               Authorization: `Bearer ${token}`
             }
           });
+          console.log("API response data:", response.data); // Buraya ekleyelim
           setUser(response.data);
         } else {
           setUser(null);
