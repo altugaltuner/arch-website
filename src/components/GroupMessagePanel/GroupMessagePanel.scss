@@ -7,7 +7,7 @@
     height: 760px;
     padding: 20px;
     margin-right: 20px;
-    background-color: $grey;
+    border: 1px solid $border-color;
     border-radius: 20px;
     margin-top: 20px;
     font-family: $primary-font;
@@ -18,7 +18,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 10px;
-        background-color: white;
+        border: 1px solid $border-color;
 
         .message-panel-left-side,
         .message-panel-right-side {
@@ -57,16 +57,15 @@
         display: flex;
         flex-direction: column;
         padding: 10px;
-        background-color: #e9e9e9;
         margin-top: 10px;
         max-height: calc(100vh - 200px);
         overflow-y: auto;
         flex-grow: 1;
+        border: 1px solid $border-color;
 
         .others-message-in-panel {
             align-self: flex-start;
-            background-color: #d1e7dd;
-            color: #0f5132;
+            background-color: #e9e9e9;
             padding: 8px 12px;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -76,8 +75,7 @@
 
         .my-message-in-panel {
             align-self: flex-end;
-            background-color: #cff4fc;
-            color: #055160;
+            background-color: #b7ffcf;
             padding: 8px 12px;
             border-radius: 10px;
             margin-bottom: 10px;

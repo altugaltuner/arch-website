@@ -5,7 +5,7 @@ function GroupMessagePanel() {
     const [message, setMessage] = useState("");
 
     const handleSendMessage = () => {
-        // Mesaj gönderme işlemi burada yapılacak
+        console.log("Message sent: ", message);
         setMessage("");
     };
 
@@ -37,7 +37,8 @@ function GroupMessagePanel() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type a message"
                 />
-                <button onClick={handleSendMessage}>Send</button>
+                <button onClick={() => { console.log("Button clicked"); handleSendMessage(); }}>Send</button>
+
             </div>
         </div>
     );

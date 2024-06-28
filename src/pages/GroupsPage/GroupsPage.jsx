@@ -25,6 +25,11 @@ function GroupsPage() {
     const [changedGroup, setChangedGroup] = useState({ groupName: "" });
     const [searchTerm, setSearchTerm] = useState("");
 
+    const selectGroup = (e) => {
+        const selectedGroup = groups.find((group) => group.attributes.groupName === e.target.innerText);
+        console.log(selectedGroup);
+    };
+
     const handleDeleteGroup = () => {
         try {
             axios.delete(`http://localhost:1337/api/groups/${selectedGroupId}`).then(() => {
@@ -142,7 +147,7 @@ function GroupsPage() {
                         ))}
 
                         {filteredGroups.map((group) => (
-                            <div key={group.id} className="project-group">
+                            <div key={group.id} className="project-group" onClick={selectGroup}>
                                 {group.attributes.groupChatPic?.data ? (
                                     <img
                                         className="group-image"
