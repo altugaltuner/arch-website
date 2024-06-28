@@ -60,13 +60,10 @@
                     border: 1px solid $border-color;
                     cursor: pointer;
                     font-weight: 400;
+                    transition: all 0.2s;
 
                     &:hover {
                         background-color: darken($background-color, 10%);
-                    }
-
-                    &:active {
-                        background-color: darken($background-color, 20%);
                     }
                 }
 
@@ -82,15 +79,26 @@
                     border-radius: 10px;
                     cursor: pointer;
                     gap: 20px;
+                    transition: all 0.2s;
 
                     .file-card-delete-btn {
                         width: 20px;
                         opacity: 0.7;
+                        transition: all 0.2s;
+
+                        &:hover {
+                            opacity: 1;
+                        }
                     }
 
                     .file-card-edit-btn {
                         width: 20px;
                         opacity: 0.7;
+                        transition: all 0.2s;
+
+                        &:hover {
+                            opacity: 1;
+                        }
                     }
 
                     .group-image {
@@ -108,10 +116,6 @@
 
                     &:hover {
                         background-color: $grey;
-                    }
-
-                    &:active {
-                        background-color: darken($grey, 10%);
                     }
                 }
             }
