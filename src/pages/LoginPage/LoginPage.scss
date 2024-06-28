@@ -99,10 +99,11 @@
                 gap: 20px;
 
                 .login-submit,
-                .login-signup {
+                .login-signup,
+                .owner-create-btn {
                     background-color: $background-color;
                     color: $font-color;
-                    padding: 10px 20px;
+                    padding: 5px;
                     border-radius: 5px;
                     border: 1px solid $border-color;
                     transition: all 0.2s;

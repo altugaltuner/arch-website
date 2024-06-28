@@ -25,6 +25,7 @@ function LoginForm({ error, handleChange, handleUserLogin, showPassword, toggleP
                     <div className="submits-of-login">
                         <input className="login-submit" type="submit" value="Giriş Yap" />
                         <Link to="/signup" className="login-signup">Hesabınız yok mu? Kaydolun</Link>
+                        <Link to="/company-create" className="owner-create-btn">Şirket Hesabı Aç</Link>
                     </div>
                 </form>
             </div>
