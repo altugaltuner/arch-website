@@ -195,8 +195,68 @@
                 }
             }
         }
-
-
     }
+}
 
+@media screen and (max-width: 360px) {
+
+    .workers-page-main {
+        .workers-column {
+            .workers-row {
+
+                .workers-page-header {
+                    font-size: 30px;
+                }
+
+                .search-bar-of-projects {
+                    width: 80%;
+                }
+            }
+
+            .company-grid-sidebar {
+                padding: 5px;
+                margin: 5px;
+
+                ul {
+                    .job-titles-for-workersPage {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .company-grid {
+                .user-permission-settings {
+                    margin: 0px;
+
+                    .other-info-main {
+                        padding: 5px;
+
+                        .revise-and-profile {
+                            flex-direction: column;
+                            align-items: center;
+
+                            .other-info-inner {
+                                width: 100%;
+
+                                .other-info-inner-2 {
+                                    margin: 0px;
+                                    padding: 5px;
+                                    gap: 5px;
+
+                                    .other-info-profile-pic {
+                                        width: 50%;
+                                        padding: 0px;
+                                    }
+                                }
+                            }
+                        }
+
+                        .other-info-header {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

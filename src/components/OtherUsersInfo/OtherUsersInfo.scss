@@ -173,3 +173,67 @@
         }
     }
 }
+
+@media screen and (max-width: 360px) {
+    .other-info-main {
+        .other-all-groups {
+            .other-groups-joined-h2 {
+                font-size: 20px;
+            }
+        }
+
+        .revise-and-profile {
+            .other-all-revises-inner {
+                gap: 5px;
+
+                padding: 5px;
+                margin: 5px;
+
+                .other-revise-div {
+                    .other-revise-p {
+                        font-size: 14px;
+                    }
+                }
+
+                .other-revises-h2 {
+
+                    font-size: 22px;
+                    padding: 3px;
+                }
+            }
+        }
+
+        .other-joined-all {
+            .other-all-projects {
+                max-height: 400px;
+                overflow-y: auto;
+
+                .other-joined-projects-h2 {
+                    font-size: 20px;
+                    padding: 5px;
+                }
+
+                .other-column {
+                    gap: 10px;
+                    justify-content: center;
+
+                    .other-project-div {
+                        padding: 3px;
+                        width: 45%;
+                        border: 1px solid $border-color;
+                        border-radius: 10px;
+
+                        .other-project-p {
+                            font-size: 16px;
+                        }
+
+                        .other-project-photo {
+                            width: 75px;
+                            height: 75px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

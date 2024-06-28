@@ -11,12 +11,16 @@ import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
 import CompanyCreatePage from "./pages/CompanyCreatePage/CompanyCreatePage.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage.jsx";
 import FlowPage from "./pages/FlowPage/FlowPage.jsx";
-
+import IsCookie from "./hooks/useCookie.jsx"
 const routes = [
   {
     path: "/",
     element: (
-      <FirstPage />
+      <>
+        <FirstPage />
+        <IsCookie />
+      </>
+
     ),
   },
   {

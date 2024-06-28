@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
 import AlreadyLoggedIn from "../../components/AlreadyLoggedIn/AlreadyLoggedIn";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import Cookies from 'js-cookie';
 
 function LoginPage() {
   const [error, setError] = useState("");
@@ -33,6 +34,7 @@ function LoginPage() {
     const { email, password } = formData;
     try {
       await login(email, password);
+      Cookies.set("isLogin", "true")
       navigate("/homepage");
     } catch (error) {
       console.error(error);
