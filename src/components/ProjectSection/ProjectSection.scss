@@ -200,6 +200,25 @@
         max-height: 240px;
         flex-direction: row;
 
+        .current-folders-div {
+            .current-folders-div-2 {
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+
+                .go-back-btn {
+                    .go-back-btn-img {
+                        height: 30px;
+                        width: 30px;
+                    }
+                }
+
+                .current-folder-header {
+                    font-size: 20px;
+
+                }
+            }
+        }
 
         .project-folder-button {
             margin: 5px;

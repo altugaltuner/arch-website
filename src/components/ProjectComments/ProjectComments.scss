@@ -67,5 +67,12 @@
 @media screen and (max-width: 950px) {
     .project-comments-main {
         width: 100%;
+        margin-top: 10px;
+
+        .project-comments-h2 {
+            font-size: 22px;
+            padding: 5px;
+            margin: 5px;
+        }
     }
 }
