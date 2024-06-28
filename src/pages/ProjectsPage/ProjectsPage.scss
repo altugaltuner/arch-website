@@ -47,3 +47,19 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .projects-page {
+        .inner-project-page {
+
+
+            .inner-project-column {
+
+
+                .inner-project-row {
+                    gap: 5px;
+                }
+            }
+        }
+    }
+}

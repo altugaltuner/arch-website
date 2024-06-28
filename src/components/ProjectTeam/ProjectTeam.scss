@@ -180,6 +180,18 @@
         .employees-grid {
             grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
         }
+
+        .admin-buttons {
+            gap: 5px;
+            padding: 5px;
+
+            .delete-team-btn,
+            .add-team-btn {
+                padding: 5px;
+                font-size: 14px;
+
+            }
+        }
     }
 
 }

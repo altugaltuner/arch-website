@@ -70,3 +70,37 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .project-section-main {
+        .projects-page-content-header {
+            .active-project-tabs {
+                .active-project-btn {
+                    font-size: 15px;
+                    padding: 3px;
+                    margin: 3px
+                }
+            }
+
+            .header-with-back-button {
+                height: 36px;
+
+                .back-button {
+                    padding: 5px;
+
+                    .back-btn {
+                        width: 90%;
+                        height: 90%;
+                    }
+                }
+
+                .active-project-title {
+                    padding: 5px;
+                    margin: 0px;
+                }
+            }
+
+
+        }
+    }
+}

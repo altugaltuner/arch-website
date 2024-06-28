@@ -4,7 +4,6 @@ import Navigation from "../../components/Navigation/Navigation";
 import axios from "axios";
 import instaLogo from "../../assets/icons/instagram-logo.png";
 import linkedinLogo from "../../assets/icons/linkedin-logo.png";
-import emailLogo from "../../assets/icons/email-logo.png";
 import youtubeLogo from "../../assets/icons/youtube-logo.png";
 
 function FlowPage() {

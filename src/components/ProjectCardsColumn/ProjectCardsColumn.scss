@@ -160,26 +160,31 @@
             .search-bar-of-projects {
                 margin-right: 0px;
                 width: 70%;
+                height: 30px;
+                font-weight: 400;
             }
         }
 
         .projects-cards-main-row {
             .add-project-btn {
                 margin-top: 0px;
-                padding: 10px;
+                padding: 3px;
                 gap: 10px;
                 height: auto;
+                font-size: 18px;
+                font-weight: 300;
             }
 
             .project-cards {
-                height: 240px;
+                height: 180px;
+                width: 45%;
 
                 .project-card-delete-btn {
-                    width: 16px;
+                    width: 12px;
                 }
 
                 .project-card-edit-btn {
-                    width: 18px;
+                    width: 12px;
                     right: 40px;
                 }
 
@@ -194,7 +199,7 @@
                     }
 
                     .project-navbar-photos {
-                        width: 150px;
+                        width: 95%;
                     }
                 }
             }
