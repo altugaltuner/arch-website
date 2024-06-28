@@ -23,3 +23,21 @@
         }
     }
 }
+
+@media screen and (min-width: 768px) {
+
+    .mylast-act-main {
+        padding: 10px;
+
+        .mylast-act-header {
+            padding: 5px;
+            font-size: 24px;
+        }
+
+        .mylast-act-item {
+            .mylast-act-item-desc {
+                font-size: 16px;
+            }
+        }
+    }
+}

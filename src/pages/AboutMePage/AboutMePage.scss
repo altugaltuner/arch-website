@@ -72,7 +72,46 @@
                 transform: translate(60px, 0px);
                 width: 100%;
             }
+        }
+    }
+}
 
+@media screen and (max-width: 450px) {
+    .aboutme-page-main {
+        .aboutme-page-column {
+
+            .aboutme-page-row {
+                padding: 10px;
+                transform: translate(70px, 0px);
+
+                .aboutme-page-column-2 {
+                    gap: 5px;
+
+                    .mylast-act-main {
+                        padding: 5px;
+
+                        .mylast-act-header {
+                            font-size: 24px;
+                            padding: 5px;
+                        }
+
+                        .mylast-act-item {
+                            .mylast-act-ul {
+                                .mylast-act-item-desc {
+                                    font-size: 14px;
+                                    padding: 5px;
+                                }
+                            }
+                        }
+                    }
+
+                    .aboutme-page-title {
+                        font-size: 28px;
+                        transform: translate(140px, 0px);
+                        margin: 10px;
+                    }
+                }
+            }
         }
     }
 }

@@ -72,11 +72,40 @@
             }
         }
     }
-
 }
 
-@media screen and (max-width: 655px) {
+@media screen and (max-width: 450px) {
     .myactive-projects-main {
         width: 100%;
+        padding: 5px;
+
+        .active-projects-container {
+            .my-active-project-div {
+
+                .my-active-project-list {
+                    padding: 5px;
+                    gap: 5px;
+
+                    .my-active-project-list-element {
+                        width: 45%;
+                        height: 140px;
+
+                        .my-active-project-list-paragraph {
+                            font-size: 14px;
+                        }
+
+                        .my-active-project-list-pic {
+                            width: 80px;
+                            height: 80px;
+                        }
+                    }
+                }
+
+                .my-active-project-list-header {
+                    padding: 5px;
+                    font-size: 22px;
+                }
+            }
+        }
     }
 }

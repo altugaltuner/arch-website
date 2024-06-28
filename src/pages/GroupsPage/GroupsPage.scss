@@ -137,11 +137,11 @@
                     width: 80%;
                     margin: 0px;
                 }
-            }
 
-            .groups-main-header {
-                font-size: 30px;
-                margin: 5px 10px;
+                .groups-main-header {
+                    font-size: 35px;
+                    margin: 10px;
+                }
             }
 
             .group-div-row {
@@ -177,6 +177,56 @@
             .project-groups {
                 width: 100%;
                 justify-content: center;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .groups-main {
+        .groups-main-column {
+
+            .group-div-row {
+                .project-groups {
+                    gap: 4px;
+                    padding: 0px;
+
+                    .project-group {
+                        width: 45%;
+                        gap: 5px;
+
+                        .group-image {
+                            width: 15px;
+                            height: 15px;
+                        }
+
+                        .file-card-edit-btn,
+                        .file-card-delete-btn {
+                            width: 15px;
+                        }
+
+                        .relevant-project-header {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .project-group-add-group {
+                        padding: 10px;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .groups-main-header-and-input {
+                .groups-main-header {
+                    font-size: 28px;
+                }
+
+                .search-input {
+                    font-size: 14px;
+                    height: 30px;
+                }
             }
         }
     }

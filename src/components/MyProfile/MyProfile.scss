@@ -210,45 +210,7 @@
             .profile-field {
                 flex-direction: column;
                 gap: 10px;
-
-                .biography-area {}
-
-                .input-for-labels {}
             }
-
-            .profile-field-social {
-                .input-for-labels {}
-            }
-
-            .profile-buttons {
-                .my-profile-submit {}
-
-                .my-profile-cancel {}
-            }
-        }
-    }
-
-    .profile-info {
-        .profile-field {}
-
-        .profile-field-social {}
-
-        .buttons-for-profile-section {
-            .my-profile-edit {}
-
-            .my-profile-logout {}
-        }
-    }
-
-    .profile-info {
-        .profile-field {}
-
-        .profile-field-social {}
-
-        .buttons-for-profile-section {
-            .my-profile-edit {}
-
-            .my-profile-logout {}
         }
     }
 }
@@ -274,8 +236,47 @@
     }
 }
 
-@media screen and (max-width: 655px) {
+@media screen and (max-width: 450px) {
     .profile {
         width: 95%;
+        padding: 10px;
+
+        .profile-info {
+            gap: 5px;
+
+            .buttons-for-profile-section {
+                margin-top: 10px;
+
+                .my-profile-logout {
+                    padding: 5px 10px;
+                }
+            }
+
+            .profile-field-social {
+                .profile-field-labels {
+                    font-size: 18px;
+                    gap: 5px;
+
+
+                }
+
+                .profile-field-paragraph {
+                    font-size: 14px;
+                }
+            }
+
+            .profile-field {
+                gap: 2px;
+                margin-bottom: 8px;
+
+                .profile-field-paragraph {
+                    font-size: 14px;
+                }
+
+                .profile-field-labels {
+                    font-size: 18px;
+                }
+            }
+        }
     }
 }

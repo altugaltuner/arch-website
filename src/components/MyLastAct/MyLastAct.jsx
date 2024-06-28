@@ -16,7 +16,7 @@ function MyLastAct({ user }) {
             <h2 className="mylast-act-header">Son Revizelerim</h2>
             {myLastActivities.map((activity, index) => (
                 <div key={index} className="mylast-act-item">
-                    <ul>
+                    <ul className="mylast-act-ul">
                         <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}</li>
                     </ul>
                 </div>
