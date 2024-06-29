@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .folder-content {
     gap: 20px;
     padding: 15px;
@@ -8,6 +10,19 @@
 
     .file-input-wrapper {
         width: 150px;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $border-color;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            background-color: darken($background-color, 10%);
+        }
 
         .file-input {
             display: none;
@@ -17,12 +32,32 @@
     }
 
     .file-folder-content {
-        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        width: 150px;
+        height: 190px;
+        padding: 10px;
+        cursor: pointer;
+        border: 1px solid $border-color;
+        border-radius: 15px;
+        transition: all 0.2s;
 
-        .file-icon-img {
-            width: 100%;
+        &:hover {
+            background-color: darken($background-color, 10%);
         }
 
-        .file-name {}
+        .file-icon-img {
+            width: 100px;
+            height: auto;
+        }
+
+        .file-name {
+            font-size: 18px;
+            word-break: break-word;
+        }
     }
 }

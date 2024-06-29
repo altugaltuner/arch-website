@@ -32,6 +32,7 @@ function ProjectSection({ clickedProject }) {
 
     const fileIcons = {
         "docx": docxIcon,
+        "doc": docxIcon,
         "pdf": pdfIcon,
         "jpg": jpgIcon,
         "png": pngIcon,

@@ -12,7 +12,7 @@ function AuthProvider({ children }) {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await api.get(`http://localhost:1337/api/users/me?populate=company`, {
+          const response = await api.get(`http://localhost:1337/api/users/me?populate=company,profilePic`, {
             headers: {
               Authorization: `Bearer ${token}`
             }

@@ -1,3 +1,5 @@
+@use "../../../styles/abstracts/variables" as *;
+
 .personal-info-subsetting-column {
     display: flex;
     flex-direction: column;
@@ -15,12 +17,45 @@
 
         .subsetting-pp {
             width: 200px;
+            height: 200px;
+            border-radius: 10%;
         }
     }
 
     .personal-info-subsetting-oneline {
         position: relative;
         width: 100%;
+
+        .subsetting-div {
+            display: flex;
+            gap: 10px;
+
+            .subsetting-buttons-div {
+                display: flex;
+                gap: 10px;
+
+                .subsetting-btn,
+                .subsetting-cancel {
+                    padding: 5px;
+                    border: 1px solid $border-color;
+                    border-radius: 10px;
+                    transition: all 0.2s;
+
+                    &:hover {
+                        background-color: darken($background-color, 10%);
+                    }
+                }
+            }
+
+
+            .input-username-subsetting {
+                color: $font-color;
+                padding: 5px;
+                border-radius: 5px;
+                border: 1px solid $border-color;
+
+            }
+        }
 
         .edit-pencil-subsetting {
             position: absolute;

@@ -53,8 +53,8 @@ function FolderContent({ folder, fileIcons, openFileModal }) {
 
     return (
         <div className="folder-content">
-            <div className="file-input-wrapper">
-                <button className="custom-file-upload" onClick={uploadFile}>Dosya Yükle</button>
+            <div className="file-input-wrapper" onClick={uploadFile}>
+                <button className="custom-file-upload">Dosya Yükle</button>
                 <input
                     className='file-input'
                     ref={fileInputRef}

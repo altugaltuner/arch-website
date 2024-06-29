@@ -5,6 +5,7 @@ import { useAuth } from "../../AuthProvider";
 
 const UserProfile = () => {
     const { user, updateUser, updatePassword } = useAuth();
+    console.log(user, "sadasd");
     const [editMode, setEditMode] = useState({
         username: false,
         email: false,
@@ -57,15 +58,18 @@ const UserProfile = () => {
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">Kullanıcı Adı</h3>
                 {editMode.username ? (
-                    <div>
+                    <div className='subsetting-div'>
                         <input
+                            className='input-username-subsetting'
                             type="text"
                             name="username"
                             value={userData.username}
                             onChange={handleInputChange}
                         />
-                        <button onClick={() => handleSaveClick('username')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('username')}>İptal</button>
+                        <div className='subsetting-buttons-div'>
+                            <button className='subsetting-btn' onClick={() => handleSaveClick('username')}>Onayla</button>
+                            <button className='subsetting-cancel' onClick={() => handleCancelClick('username')}>İptal</button>
+                        </div>
                     </div>
                 ) : (
                     <>
