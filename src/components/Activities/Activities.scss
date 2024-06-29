@@ -133,9 +133,15 @@
     }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
     .activities-container {
+        padding: 5px;
+        transform: translateX(10px);
+
         .activities-container-half {
+            padding: 0px;
+            border: none;
+
             .activities-title {
                 font-size: 16px;
             }
@@ -144,7 +150,9 @@
                 .table-main-head {
                     .table-header-row {
                         .table-header {
+                            text-align: center;
                             font-size: 14px;
+                            padding: 2px;
                         }
                     }
                 }
@@ -152,16 +160,20 @@
                 .table-body {
                     .table-body-row {
                         .table-data {
-                            font-size: 14px;
-                            padding: 5px;
+                            font-size: 12px;
+                            padding: 0px;
+                            text-align: center;
 
                             .table-data-description {
-                                font-size: 13px;
+                                font-size: 12px;
+                                max-height: 100px;
+                                overflow-y: scroll;
                             }
 
                             .table-data-group,
                             .table-data-date {
                                 font-size: 12px;
+                                word-break: break-word;
                             }
                         }
                     }

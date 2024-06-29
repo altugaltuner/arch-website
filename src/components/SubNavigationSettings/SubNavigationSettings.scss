@@ -90,3 +90,23 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .sub-navi-settings-page {
+        padding: 10px;
+
+        .sub-nav-container {
+            .sub-nav-content {
+                .sub-nav-section {
+
+                    .sub-nav-subheader {
+                        margin-bottom: 5px;
+                    }
+
+                    padding: 3px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+}

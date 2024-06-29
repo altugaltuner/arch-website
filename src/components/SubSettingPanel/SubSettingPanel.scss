@@ -23,8 +23,33 @@
         padding: 10px;
 
         .personal-info-subsetting-column {
-
             align-items: flex-start;
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .sub-setting-panel-page {
+        padding: 5px;
+
+        .personal-info-subsetting-column {
+            gap: 0px;
+
+            .personal-info-subsetting-oneline {
+                .subsetting-header {
+                    margin-bottom: 5px;
+                    font-size: 18px;
+                    gap: 5px;
+                }
+            }
+        }
+
+        .sub-setting-panel-header {
+            font-size: 20px;
+            margin-bottom: 0px;
+            padding: 5px;
+            margin-left: 10px;
+            font-weight: 500;
         }
     }
 }

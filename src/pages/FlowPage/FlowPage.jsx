@@ -48,18 +48,18 @@ function FlowPage() {
 
                         <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Flow</span>İşinizi organize etmenize ve ekibinizle etkin bir şekilde işbirliği yapmanıza yardımcı olan, kullanımı kolay ve güçlü bir proje yönetim aracıdır. Flow sayesinde projelerinizi, dosyalarınızı ve ekip üyelerinizi tek bir platformda toplar, iş süreçlerinizi daha verimli hale getirir.</p>
 
-                        <h2 className="flow-desc-subheader">Ana Özellikler:</h2>
+                        <h2 className="flow-desc-subheader">Ana Özellikler</h2>
 
-                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold"> Proje ve Görev Yönetimi:</span>Projelerinizi ve görevlerinizi kolayca oluşturun, düzenleyin ve yönetin. Her görevi ayrıntılı bir şekilde tanımlayın, önceliklendirin ve zamanlayın.</p>
+                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold"> Proje ve Görev Yönetimi</span>Projelerinizi ve görevlerinizi kolayca oluşturun, düzenleyin ve yönetin. Her görevi ayrıntılı bir şekilde tanımlayın, önceliklendirin ve zamanlayın.</p>
 
-                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Ekip İşbirliği:</span>Ekip üyelerinizle anlık iletişim kurun, yorum yapın ve dosya paylaşın. Ortak çalışma alanları sayesinde herkes her zaman güncel bilgilere ulaşabilir.</p>
+                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Ekip İşbirliği</span>Ekip üyelerinizle anlık iletişim kurun, yorum yapın ve dosya paylaşın. Ortak çalışma alanları sayesinde herkes her zaman güncel bilgilere ulaşabilir.</p>
 
-                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Dosya ve Belge Yönetimi:</span> Projelerinizle ilgili tüm dosyaları ve belgeleri tek bir yerde depolayın. Kolay erişim ve düzenleme imkanları ile dosya karmaşasından kurtulun.</p>
+                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Dosya ve Belge Yönetimi</span> Projelerinizle ilgili tüm dosyaları ve belgeleri tek bir yerde depolayın. Kolay erişim ve düzenleme imkanları ile dosya karmaşasından kurtulun.</p>
 
-                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Durum Takibi:</span>
+                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Durum Takibi</span>
                             Görevlerin ve projelerin ilerleyişini anlık olarak izleyin. Görsel gösterge panelleri sayesinde ekibinizin performansını ve proje durumunu kolayca takip edin.</p>
 
-                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Esnek ve Kullanıcı Dostu:</span> Flow, kullanıcı dostu arayüzü ile herkesin kolayca adapte olabileceği bir yapıya sahiptir. Ayrıca, farklı sektörlere ve çalışma tarzlarına uyum sağlayacak şekilde özelleştirilebilir.</p>
+                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Esnek ve Kullanıcı Dostu</span> Flow, kullanıcı dostu arayüzü ile herkesin kolayca adapte olabileceği bir yapıya sahiptir. Ayrıca, farklı sektörlere ve çalışma tarzlarına uyum sağlayacak şekilde özelleştirilebilir.</p>
                     </div>
                 </div>
                 <div className="all-companies-column">

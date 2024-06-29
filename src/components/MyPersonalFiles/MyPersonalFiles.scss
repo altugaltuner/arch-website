@@ -179,6 +179,22 @@
     .my-files-panel {
 
         .folders {
+
+            .folder-content {
+
+                .upload-file-button {
+                    width: auto;
+                    padding: 5px;
+                }
+
+                .files {
+                    .file {
+                        width: 100px;
+                        padding: 5px;
+                    }
+                }
+            }
+
             .folder {
                 width: 90px;
                 padding: 20px;
