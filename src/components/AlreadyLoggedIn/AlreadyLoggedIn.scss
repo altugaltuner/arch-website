@@ -54,7 +54,26 @@
                 }
             }
         }
+    }
+}
 
+@media screen and (max-width: 520px) {
+    .already-login-main {
+        .already-login-main-div {
+            padding: 20px;
+            gap: 20px;
+            width: 80%;
 
+            .already-login-btn-div {
+                .already-login-back {
+                    padding: 10px;
+                }
+            }
+
+            .already-login-header {
+                font-size: 30px;
+                text-align: center;
+            }
+        }
     }
 }

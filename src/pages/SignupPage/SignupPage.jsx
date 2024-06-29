@@ -135,8 +135,8 @@ function SignupPage() {
             />
           </div>
           <input type="text" className="company-code-input" placeholder="Şirket Kodunuz" />
-          <button className="back-button-to-login" onClick={handleBackClick}>Hesabın var mı? Giriş Yap</button>
-          <input className="signup-btn" type="submit" value="Sign Up" />
+          <button className="back-button-to-login" onClick={handleBackClick}>Hesabın mı var? Giriş Yapın</button>
+          <button className="signup-btn" type="submit">Kaydolun</button>
         </form>
       </div>
     </main>

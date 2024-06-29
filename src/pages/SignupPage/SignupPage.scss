@@ -41,7 +41,7 @@
                     text-align: center;
                     justify-content: center;
                     align-items: center;
-                    right: -40px;
+                    right: 0px;
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
@@ -51,7 +51,7 @@
 
                     .eye-logo {
                         width: 20px;
-                        height: 20px;
+                        height: 18px;
                         cursor: pointer;
                     }
                 }
@@ -128,7 +128,11 @@
 
                 .toggle-password-visibility {
 
-                    .eye-logo {}
+                    .eye-logo {
+                        width: 20px;
+                        height: 20px;
+                        cursor: pointer;
+                    }
                 }
             }
 
@@ -142,6 +146,18 @@
                 &:hover {
                     background-color: darken($yellow, 10%);
                 }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 578px) {
+    .signup-page {
+        .signup-main-div {
+            width: 100%;
+
+            .signup-header {
+                font-size: 40px;
             }
         }
     }

@@ -116,3 +116,25 @@
         }
     }
 }
+
+@media screen and (max-width: 570px) {
+    .login-main {
+        .login-main-div {
+            width: 80%;
+
+            .login-h1 {
+                font-size: 40px;
+            }
+
+            .login-form {
+                .login-email {
+                    width: 80%;
+                }
+
+                .login-password {
+                    width: 180px;
+                }
+            }
+        }
+    }
+}
