@@ -1,5 +1,6 @@
 import React from 'react';
 import './FileModal.scss';
+import fileIcon from "../../assets/icons/untitled-icon.png";
 
 function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDeleteFile }) {
     if (!fileModal) return null;

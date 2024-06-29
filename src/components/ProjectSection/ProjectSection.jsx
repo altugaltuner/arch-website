@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./ProjectSection.scss";
 import axios from 'axios';
 import deleteIcon from "../../assets/icons/delete-icon.png";
@@ -9,6 +9,7 @@ import pdfIcon from "../../assets/icons/pdf-logo.png";
 import jpgIcon from "../../assets/icons/jpg-icon.png";
 import pngIcon from "../../assets/icons/png-logo.png";
 import dwgIcon from "../../assets/icons/dwg-icon.png";
+import jpegIcon from "../../assets/icons/jpeg-icon.webp";
 import goBackButton from "../../assets/icons/back-button.png";
 import DeleteFolderModal from "../GroupModals/DeleteFolderModal";
 import EditProjectFolderModal from "../EditProjectFolderModal/EditProjectFolderModal";
@@ -21,21 +22,21 @@ function ProjectSection({ clickedProject }) {
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [filePreview, setFilePreview] = useState(null);
     const [fileModal, setFileModal] = useState(false);
     const [currentFile, setCurrentFile] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [newFolderName, setNewFolderName] = useState("");
+    const fileInputRef = useRef(null);
 
     const fileIcons = {
         "docx": docxIcon,
         "pdf": pdfIcon,
         "jpg": jpgIcon,
         "png": pngIcon,
-        "dwg": dwgIcon
+        "dwg": dwgIcon,
+        "jpeg": jpegIcon,
     };
 
     const [newFolder, setNewFolder] = useState({
@@ -147,53 +148,60 @@ function ProjectSection({ clickedProject }) {
         }
     };
 
+    const handleFileUpload = async (event) => {
+        const file = event.target.files[0];
+        if (!file) {
+            console.error('No file selected');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('files', file);
+
+        try {
+            const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            const uploadedFile = uploadResponse.data[0];
+            const updatedContent = currentFolder.folderContent && currentFolder.folderContent.data
+                ? [...currentFolder.folderContent.data, uploadedFile]
+                : [uploadedFile];
+
+            await axios.put(`http://localhost:1337/api/project-folders/${currentFolder.id}`, {
+                data: {
+                    folderContent: updatedContent.map(file => file.id),
+                },
+            });
+
+            setProjectFolders(prevFolders => prevFolders.map(folder => {
+                if (folder.id === currentFolder.id) {
+                    return { ...folder, folderContent: { data: updatedContent } };
+                }
+                return folder;
+            }));
+            setCurrentFolder(prevFolder => ({ ...prevFolder, folderContent: { data: updatedContent } }));
+
+        } catch (error) {
+            console.error('Error uploading the file', error);
+        }
+    };
+
+    const uploadFile = () => {
+        fileInputRef.current.click();
+    };
+
     function openInsideFolder(folder) {
         setParentFolder(currentFolder);
-        setCurrentFolder(folder);
+        setCurrentFolder({ id: folder.id, ...folder.attributes });
+        console.log("Current Folder: ", { id: folder.id, ...folder.attributes }); // Debugging purpose
     }
 
     function goBack() {
         setCurrentFolder(parentFolder);
         setParentFolder(null);
     }
-
-    const addFileToFolder = async () => {
-        if (!selectedFile || !currentFolder) {
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('files', selectedFile);
-        formData.append('ref', 'project-folders');
-        formData.append('refId', currentFolder.id);
-        formData.append('field', 'folderContent');
-
-        try {
-            await axios.post('http://localhost:1337/api/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            await fetchProjectFolders();
-            setSelectedFile(null);
-            setFilePreview(null);
-        } catch (error) {
-            console.error('Error uploading the file:', error.response ? error.response.data : error.message);
-        }
-    };
-
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setSelectedFile(file);
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFilePreview(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
 
     const openFileModal = (file) => {
         setCurrentFile(file);
@@ -205,16 +213,13 @@ function ProjectSection({ clickedProject }) {
             return (
                 <div className="folder-content">
                     <p className="folder-content-nocontent-p">Henüz dosya yüklenmedi.</p>
-                    <button className="file-preview-upload" onClick={addFileToFolder}>Dosya Yükle</button>
+                    <button className="file-preview-upload" onClick={uploadFile}>Dosya Yükle</button>
                 </div>
             );
         }
         return (
             <FolderContent
-                folder={folder}
-                filePreview={filePreview}
-                handleFileChange={handleFileChange}
-                addFileToFolder={addFileToFolder}
+                folder={{ id: folder.id, ...folder }}
                 fileIcons={fileIcons}
                 openFileModal={openFileModal}
             />
@@ -237,9 +242,9 @@ function ProjectSection({ clickedProject }) {
                         <button className="go-back-btn" onClick={goBack}>
                             <img src={goBackButton} alt="" className="go-back-btn-img" />
                         </button>
-                        <h2 className="current-folder-header">{currentFolder.attributes.projectFolderName}</h2>
+                        <h2 className="current-folder-header">{currentFolder.projectFolderName}</h2>
                     </div>
-                    {renderFoldersAndFiles(currentFolder.attributes)}
+                    {renderFoldersAndFiles(currentFolder)}
                 </div>
             ) : (
                 filteredFolders && filteredFolders.length > 0 ? (
@@ -305,6 +310,13 @@ function ProjectSection({ clickedProject }) {
                     handleEditSubmit={handleEditSubmit}
                 />
             )}
+
+            <input
+                ref={fileInputRef}
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleFileUpload}
+            />
         </div>
     );
 }

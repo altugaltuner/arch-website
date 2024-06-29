@@ -1,0 +1,28 @@
+.folder-content {
+    gap: 20px;
+    padding: 15px;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+
+    .file-input-wrapper {
+        width: 150px;
+
+        .file-input {
+            display: none;
+        }
+
+        .custom-file-upload {}
+    }
+
+    .file-folder-content {
+        width: 20%;
+
+        .file-icon-img {
+            width: 100%;
+        }
+
+        .file-name {}
+    }
+}

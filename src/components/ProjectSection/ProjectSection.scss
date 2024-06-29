@@ -41,34 +41,6 @@
                 font-weight: 400;
             }
         }
-
-        .folder-content {
-            gap: 20px;
-            padding: 25px;
-            flex-wrap: wrap;
-            display: flex;
-            flex-direction: row;
-            margin-top: 50px;
-
-            .folder-content-nocontent-p {
-                font-size: 20px;
-                font-weight: 400;
-                position: absolute;
-                top: 60px;
-            }
-
-            .file-preview-upload {
-                width: 140px;
-                height: 140px;
-                border-radius: 15px;
-                border: 1px solid $border-color;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: darken($background-color, 10%);
-                }
-            }
-        }
     }
 
     .project-folder-button {
@@ -169,7 +141,7 @@
 
 @media screen and (max-width: 1200px) {
     .project-folders {
-        justify-content: center;
+
 
         .project-folders-container {
             flex-direction: column;
