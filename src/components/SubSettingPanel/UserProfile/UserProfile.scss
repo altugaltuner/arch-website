@@ -79,6 +79,13 @@
     }
 }
 
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
 @media screen and (max-width: 750px) {
     .personal-info-subsetting-column {
         width: 100%;

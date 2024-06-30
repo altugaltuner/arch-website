@@ -11,6 +11,7 @@
     border: 1px solid $border-color;
     color: $font-color;
     font-family: $primary-font;
+    height: fit-content;
 
     .profile-info {
         .profile-field {
@@ -59,8 +60,8 @@
         }
 
         .profile-pic {
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             margin-bottom: 20px;
             border: 5px solid $border-color;

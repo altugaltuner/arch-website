@@ -4,9 +4,8 @@
     width: 100%;
     font-family: $primary-font;
     background-color: $background-color;
-    margin-top: 20px;
     color: $font-color;
-    padding: 20px;
+    padding: 0px 10px 10px 10px;
     border-radius: 20px;
     border: 1px solid $border-color;
     max-height: 560px;
@@ -25,7 +24,7 @@
             width: 100%;
 
             .my-active-project-list-header {
-                padding: 10px;
+                padding: 0px 10px 10px 10px;
                 font-weight: 300;
                 border-bottom: 1px solid $border-color;
             }

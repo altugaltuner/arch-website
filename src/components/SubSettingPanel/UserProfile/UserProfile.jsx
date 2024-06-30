@@ -4,20 +4,23 @@ import "./UserProfile.scss";
 import { useAuth } from "../../AuthProvider";
 
 const UserProfile = () => {
-    const { user, updateUser, updatePassword } = useAuth();
-    console.log(user, "sadasd");
+    const { user, updateUser, updatePassword, updateProfilePhoto } = useAuth(); // updateProfilePhoto fonksiyonu ekleyin.
     const [editMode, setEditMode] = useState({
         username: false,
         email: false,
         password: false,
-        MobilePhone: false
+        MobilePhone: false,
+        profilePic: false
     });
     const [userData, setUserData] = useState({
         username: user?.username || '',
         email: user?.email || '',
         password: '',
-        MobilePhone: user?.MobilePhone || ''
+        MobilePhone: user?.MobilePhone || '',
+        profilePic: user?.profilePic || ''
     });
+    const [error, setError] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const handleEditClick = (field) => {
         setEditMode({ ...editMode, [field]: true });
@@ -26,15 +29,59 @@ const UserProfile = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserData({ ...userData, [name]: value });
+        if (name === 'MobilePhone' || name === 'username') {
+            setError('');
+        }
     };
 
-    const handleCancelClick = (field) => {
-        setEditMode({ ...editMode, [field]: false });
-        setUserData({ ...userData, [field]: user[field] || '' });
+    const validatePhoneNumber = (phone) => {
+        const phoneRegex = /^[0-9]{10,11}$/;
+        return phoneRegex.test(phone);
+    };
+
+    const validateUsername = (username) => {
+        const usernameRegex = /^[A-Za-z]+$/;
+        return usernameRegex.test(username);
+    };
+
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const handlePhotoChange = async () => {
+        if (!selectedFile) {
+            setError('Lütfen bir fotoğraf seçin.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        try {
+            const response = await updateProfilePhoto(formData);
+            setUserData({ ...userData, profilePic: response.data.profilePic });
+            setEditMode({ ...editMode, profilePic: false });
+        } catch (error) {
+            console.error("Fotoğraf güncelleme işlemi başarısız", error);
+            setError('Fotoğraf güncelleme işlemi başarısız.');
+        }
     };
 
     const handleSaveClick = async (field) => {
+        if (field === 'MobilePhone' && !validatePhoneNumber(userData.MobilePhone)) {
+            setError('Telefon numarası 10 veya 11 haneli olmalı ve yalnızca rakamlardan oluşmalıdır.');
+            setEditMode({ ...editMode, [field]: true });
+            return;
+        }
+
+        if (field === 'username' && !validateUsername(userData.username)) {
+            setError('Kullanıcı adı yalnızca harflerden oluşmalıdır.');
+            setEditMode({ ...editMode, [field]: true });
+            return;
+        }
+
         setEditMode({ ...editMode, [field]: false });
+
         try {
             if (field === 'password') {
                 await updatePassword(userData.password);
@@ -46,13 +93,31 @@ const UserProfile = () => {
         }
     };
 
+    const handleCancelClick = (field) => {
+        setEditMode({ ...editMode, [field]: false });
+        setUserData({ ...userData, [field]: user[field] || '' });
+        setError('');
+    };
+
     return (
         <div className="personal-info-subsetting-column">
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">Profil Fotoğrafı
-                    <img className="subsetting-pp" src={`http://localhost:1337${user.profilePic?.url || ""}`} alt="profile-pic" />
+                    <img className="subsetting-pp" src={`http://localhost:1337${userData.profilePic?.url || ""}`} alt="profile-pic" />
                 </h3>
-                <img className="edit-pencil-subsetting" src={editPencil} alt="edit" />
+                <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('profilePic')} />
+                {editMode.profilePic && (
+                    <div>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                        />
+                        <button onClick={handlePhotoChange}>Fotoğrafı Değiştir</button>
+                        <button onClick={() => handleCancelClick('profilePic')}>İptal</button>
+                        {error && <p className="error-message">{error}</p>}
+                    </div>
+                )}
             </div>
 
             <div className="personal-info-subsetting-oneline">
@@ -70,6 +135,7 @@ const UserProfile = () => {
                             <button className='subsetting-btn' onClick={() => handleSaveClick('username')}>Onayla</button>
                             <button className='subsetting-cancel' onClick={() => handleCancelClick('username')}>İptal</button>
                         </div>
+                        {error && <p className="error-message">{error}</p>}
                     </div>
                 ) : (
                     <>
@@ -133,6 +199,7 @@ const UserProfile = () => {
                         />
                         <button onClick={() => handleSaveClick('MobilePhone')}>Onayla</button>
                         <button onClick={() => handleCancelClick('MobilePhone')}>İptal</button>
+                        {error && <p className="error-message">{error}</p>}
                     </div>
                 ) : (
                     <>

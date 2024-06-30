@@ -7,7 +7,9 @@ function MyLastAct({ user }) {
     useEffect(() => {
         if (user) {
             const lastActivities = user.project_revises;
-            setMyLastActivities(lastActivities);
+            const lastActivitiesSorted = lastActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
+            console.log(lastActivitiesSorted);
+            setMyLastActivities(lastActivitiesSorted);
         }
     }, [user]);
 
@@ -17,6 +19,7 @@ function MyLastAct({ user }) {
             {myLastActivities.map((activity, index) => (
                 <div key={index} className="mylast-act-item">
                     <ul className="mylast-act-ul">
+                        <li className="mylast-act-item-date">{activity.date}</li>
                         <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}</li>
                     </ul>
                 </div>

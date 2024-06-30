@@ -17,7 +17,7 @@ function AuthProvider({ children }) {
               Authorization: `Bearer ${token}`
             }
           });
-          console.log("API response data:", response.data); // Buraya ekleyelim
+          console.log("API response data:", response.data);
           setUser(response.data);
         } else {
           setUser(null);
@@ -60,7 +60,7 @@ function AuthProvider({ children }) {
       if (!user || !user.id) {
         throw new Error("User ID is missing");
       }
-      const { password, ...updateData } = userData; // şifreyi ayrı tut
+      const { password, ...updateData } = userData;
       const response = await api.put(`http://localhost:1337/api/users/${user.id}`, updateData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -92,12 +92,48 @@ function AuthProvider({ children }) {
     }
   };
 
+  const updateProfilePhoto = async (formData) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!user || !user.id) {
+        throw new Error("User ID is missing");
+      }
+      const uploadResponse = await api.post(`http://localhost:1337/api/upload`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (uploadResponse.data && uploadResponse.data[0]) {
+        const profilePicId = uploadResponse.data[0].id;
+        const userResponse = await api.put(`http://localhost:1337/api/users/${user.id}`, {
+          profilePic: profilePicId
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        setUser(userResponse.data);
+        return userResponse.data;
+      } else {
+        throw new Error("Fotoğraf yükleme başarısız");
+      }
+    } catch (error) {
+      console.error('Profil fotoğrafı güncelleme hatası:', error);
+      throw error;
+    }
+  };
+
   const userValues = {
     user,
     login,
     logout,
     updateUser,
-    updatePassword
+    updatePassword,
+    updateProfilePhoto,
+    loading
   };
 
   return (
