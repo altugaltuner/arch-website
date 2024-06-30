@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HomePage.scss";
 import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";
@@ -7,17 +7,22 @@ import CompanyName from "../../components/CompanyName/CompanyName";
 
 function HomePage() {
   const { loading } = useAuth(); // loading durumunu alın
+  const [searchTerm, setSearchTerm] = useState("");
 
   if (loading) {
     return <div>Loading...</div>; // Veriler yüklenirken gösterilecek içerik
   }
 
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
     <main className="homepage-main">
       <Navigation />
       <div className="homepage-column">
-        <CompanyName />
-        <Activities />
+        <CompanyName onSearch={handleSearch} />
+        <Activities searchTerm={searchTerm} />
       </div>
     </main>
   );

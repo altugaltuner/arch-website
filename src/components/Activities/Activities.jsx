@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import "./Activities.scss";
 import axios from "axios";
 
-const Activities = () => {
+const Activities = ({ searchTerm }) => {
     const [activities, setActivities] = useState([]);
+    const [filteredActivities, setFilteredActivities] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,6 +17,16 @@ const Activities = () => {
         };
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (searchTerm) {
+            setFilteredActivities(activities.filter(activity =>
+                activity.attributes.project?.data?.attributes?.projectName.toLowerCase().includes(searchTerm.toLowerCase())
+            ));
+        } else {
+            setFilteredActivities(activities);
+        }
+    }, [searchTerm, activities]);
 
     const reviseStateMap = {
         1: "yapılacak",
@@ -39,7 +50,7 @@ const Activities = () => {
                         </tr>
                     </thead>
                     <tbody className="table-body">
-                        {activities.map(activity => (
+                        {filteredActivities.map(activity => (
                             <tr className="table-body-row" key={activity.id}>
                                 <td className="table-data">
                                     <div className="project-name">

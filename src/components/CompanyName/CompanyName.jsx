@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CompanyName.scss";
 import { useAuth } from "../AuthProvider";
 
-function CompanyName() {
+function CompanyName({ onSearch }) {
     const { user } = useAuth();
 
     const [companyName, setCompanyName] = useState(null);
@@ -15,6 +15,10 @@ function CompanyName() {
         }
     }, [user]);
 
+    const handleSearchChange = (e) => {
+        onSearch(e.target.value);
+    };
+
     if (companyName === null) {
         return null; // or you can show a loading spinner
     }
@@ -22,6 +26,12 @@ function CompanyName() {
     return (
         <div className="company-name-main">
             <h1 className="company-name">{companyName}</h1>
+            <input
+                className="company-search"
+                type="text"
+                onChange={handleSearchChange}
+                placeholder="Ara..."
+            />
         </div>
     );
 }
