@@ -237,29 +237,44 @@
     }
 }
 
+
+
 @media screen and (max-width: 450px) {
     .flow-page-main {
         .flow-page-main-row {
-            .flow-page-main-column {
-                .flow-descriptions {
+
+            .all-companies-column {
+                .flow-page-row {
+                    .all-companies-page-company-card {
+                        width: 45%;
+
+                        .company-hub-one-logo {
+                            width: 80%;
+                            height: 80%;
+
+                        }
+                    }
+                }
+            }
+
+            .flow-descriptions {
+                padding: 5px;
+                gap: 5px;
+
+                .flow-desc-subheader {
+                    font-size: 20px;
+                }
+
+                .flow-desc-paragraph {
                     padding: 5px;
                     gap: 5px;
-
-                    .flow-desc-subheader {
-                        font-size: 20px;
-                    }
-
-                    .flow-desc-paragraph {
-                        padding: 5px;
-                        gap: 5px;
-                        font-size: 12px;
-                    }
+                    font-size: 12px;
                 }
+            }
 
-                .flow-page-title {
-                    font-size: 30px;
-                    margin: 5px;
-                }
+            .flow-page-title {
+                font-size: 30px;
+                margin: 5px;
             }
         }
     }

@@ -19,6 +19,7 @@
   .homepage-main {
     .homepage-column {
       transform: translate(60px, 0px);
+      width: calc(100% - 70px);
     }
   }
 }
