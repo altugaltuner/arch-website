@@ -12,6 +12,8 @@ import CompanyCreatePage from "./pages/CompanyCreatePage/CompanyCreatePage.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage.jsx";
 import FlowPage from "./pages/FlowPage/FlowPage.jsx";
 import IsCookie from "./hooks/useCookie.jsx"
+import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
+
 const routes = [
   {
     path: "/",
@@ -74,6 +76,14 @@ const routes = [
     element: (
       <ProtectedRoute>
         <AboutMePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/adminpanel",
+    element: (
+      <ProtectedRoute>
+        <AdminPanelPage />
       </ProtectedRoute>
     ),
   },

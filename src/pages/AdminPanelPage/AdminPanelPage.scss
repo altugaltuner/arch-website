@@ -1,0 +1,14 @@
+@use "../../styles/abstracts/variables" as *;
+
+.admin-panel-main {
+    display: flex;
+    flex-direction: row;
+
+    .admin-panel-inner {
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+        transform: translate(110px, 0px);
+        width: calc(100% - 110px);
+    }
+}

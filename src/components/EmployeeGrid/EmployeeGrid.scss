@@ -48,12 +48,29 @@
                     margin: 10px 0 5px;
                     font-size: 18px;
                     font-weight: 400;
+                    word-break: break-word;
                 }
 
                 p {
                     margin: 5px 0;
                     font-size: 14px;
                     color: #666;
+                    word-break: break-word;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .employee-grid-container {
+        .employee-grid {
+            .employee-card {
+                width: 140px;
+
+                .profile-pic {
+                    width: 80px;
+                    height: 80px;
                 }
             }
         }
