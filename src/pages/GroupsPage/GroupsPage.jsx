@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./GroupsPage.scss";
+import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";
 import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePanel";
 import CreateGroupModal from "../../components/GroupModals/CreateGroupModal ";
@@ -24,6 +25,12 @@ function GroupsPage() {
     const [newGroup, setNewGroup] = useState({ groupName: "" });
     const [changedGroup, setChangedGroup] = useState({ groupName: "" });
     const [searchTerm, setSearchTerm] = useState("");
+
+    const { user } = useAuth();
+    console.log("User:", user);
+
+    const usersCompanyId = user?.company?.id;
+    console.log("Company ID:", usersCompanyId);
 
     const selectGroup = (e) => {
         const selectedGroup = groups.find((group) => group.attributes.groupName === e.target.innerText);
@@ -62,8 +69,11 @@ function GroupsPage() {
 
     const fetchProjectGroups = async () => {
         try {
-            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic');
-            setGroups(response.data.data);
+            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
+            const allGroups = response.data.data;
+            const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
+            setGroups(companyGroups);
+            setFilteredGroups(companyGroups);
         } catch (error) {
             console.error('Error fetching the data', error);
         }
@@ -71,7 +81,7 @@ function GroupsPage() {
 
     useEffect(() => {
         fetchProjectGroups();
-    }, []);
+    }, [usersCompanyId]);
 
     useEffect(() => {
         setFilteredGroups(
@@ -105,15 +115,18 @@ function GroupsPage() {
 
     const handleSubmit = async () => {
         const formData = new FormData();
-        formData.append('data', JSON.stringify({ groupName: newGroup.groupName }));
+        formData.append('data', JSON.stringify({ groupName: newGroup.groupName, company: usersCompanyId }));
 
         try {
             await axios.post('http://localhost:1337/api/groups', formData);
             setShowModal(false);
             setNewGroup({ groupName: "" });
             // Refetch groups after adding a new one
-            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic');
-            setGroups(response.data.data);
+            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
+            const allGroups = response.data.data;
+            const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
+            setGroups(companyGroups);
+            setFilteredGroups(companyGroups);
         } catch (error) {
             console.error('Error creating a new group', error);
         }
