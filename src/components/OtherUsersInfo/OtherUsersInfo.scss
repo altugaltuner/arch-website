@@ -16,8 +16,6 @@
         display: flex;
         flex-direction: row;
         height: fit-content;
-        max-height: 350px;
-        overflow-y: auto;
 
         .other-all-revises-inner {
             display: flex;
@@ -28,6 +26,8 @@
             margin: 10px;
             border: 1px solid $border-color;
             border-radius: 15px;
+            max-height: 310px;
+            overflow-y: auto;
 
             .other-revises-h2 {
                 font-size: 24px;
@@ -38,7 +38,7 @@
             .other-revise-div {
 
                 .other-revise-p {
-                    font-size: 18px;
+                    font-size: 16px;
                     font-weight: 400;
                 }
             }
@@ -116,20 +116,24 @@
             }
 
             .other-column {
-                gap: 5px;
+                gap: 20px;
                 flex-wrap: wrap;
                 display: flex;
                 flex-direction: row;
                 padding: 10px;
+                justify-content: center;
 
                 .other-project-div {
                     display: flex;
-                    width: 19%;
+                    width: 20%;
                     flex-direction: column;
                     align-items: center;
                     gap: 10px;
                     padding: 10px;
                     justify-content: space-between;
+                    border: 1px solid $border-color;
+                    border-radius: 15px;
+                    cursor: pointer;
 
                     .other-project-p {
                         font-size: 18px;

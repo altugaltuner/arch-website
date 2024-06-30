@@ -6,6 +6,7 @@ import OtherUsersInfo from "../../components/OtherUsersInfo/OtherUsersInfo";
 import EmployeeGrid from "../../components/EmployeeGrid/EmployeeGrid";
 import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridSidebar";
 import NewProfessionModal from "../../components/NewProfessionModal/NewProfessionModal";
+import { useAuth } from "../../components/AuthProvider";
 
 function WorkersPage() {
     const [employees, setEmployees] = useState([]);
@@ -34,14 +35,25 @@ function WorkersPage() {
         setNewProfessionModalOpen(false);
     };
 
+    const { user } = useAuth();
+    console.log("User:", user);
+
+    const usersCompanyId = user?.company?.id;
+    console.log("Company ID:", usersCompanyId);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,projects.projectCoverPhoto,profilePic,groups,project_revises');
-                console.log(response.data); // Check data structure
-                setEmployees(response.data);
-                setFilteredSearchEmployees(response.data);
-                const titles = response.data.map(employee => employee.profession.professionName);
+                const response = await axios.get(`http://localhost:1337/api/companies/${usersCompanyId}?populate[users][populate]=profession,projects,projects.projectCoverPhoto,profilePic,groups,project_revises`);
+                const companyUsers = response.data.data.attributes.users.data;
+                const formattedUsers = companyUsers.map(user => ({
+                    ...user.attributes,
+                    id: user.id
+                }));
+                console.log("formattedUsers", formattedUsers); // Check data structure
+                setEmployees(formattedUsers);
+                setFilteredSearchEmployees(formattedUsers);
+                const titles = formattedUsers.map(employee => employee.profession.professionName);
                 const uniqueTitles = Array.from(new Set(titles));
                 setJobTitles(uniqueTitles);
             } catch (error) {
@@ -50,7 +62,7 @@ function WorkersPage() {
         };
 
         fetchData();
-    }, []);
+    }, [usersCompanyId]);
 
     useEffect(() => {
         const results = employees.filter(employee =>
@@ -74,7 +86,7 @@ function WorkersPage() {
 
     const filteredEmployees = selectedJobTitle === 'Tümü'
         ? filteredSearchEmployees
-        : filteredSearchEmployees.filter(employee => employee.profession.professionName === selectedJobTitle);
+        : filteredSearchEmployees.filter(employee => employee.profession.data.attributes.professionName === selectedJobTitle);
 
     return (
         <div className="workers-page-main">

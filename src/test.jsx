@@ -1,250 +1,70 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import "./ProjectsMainPage.scss";
-import Navigation from "../../components/Navigation/Navigation";
-import { useAuth } from "../../components/AuthProvider";
-import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal";
-import AddNewProjectModal from "../../components/AddNewProjectModal/AddNewProjectModal";
-import ProjectCardsColumn from "../../components/ProjectCardsColumn/ProjectCardsColumn";
-import EditProjectModal from "../../components/EditProjectModal/EditProjectModal";
+import React from 'react';
+import './OtherUsersInfo.scss';
 
-function ProjectsMainPage() {
-    const { user } = useAuth();
-    console.log("User:", user);
+function OtherUsersInfo({ employee }) {
 
-    const usersCompanyId = user?.company?.id;
-    console.log("Company ID:", usersCompanyId);
-
-    const [companyProjects, setCompanyProjects] = useState([]);
-    const [roles, setRoles] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [projectToDelete, setProjectToDelete] = useState(null);
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [projectToEdit, setProjectToEdit] = useState(null);
-    const [newProject, setNewProject] = useState({
-        projectName: "",
-        projectCoverPhoto: null,
-    });
-    const [editProject, setEditProject] = useState({
-        projectName: "",
-        projectCoverPhoto: null,
-    });
-
-    async function getRoles() {
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                console.error("No token found in localStorage");
-                return;
-            }
-
-            const response = await axios.get("http://localhost:1337/api/accesses");
-            setRoles(response.data.data);
-        } catch (error) {
-            console.error("Error fetching roles:", error);
-        }
+    if (!employee) {
+        return (
+            <div className="other-info-main">
+                <h1 className='other-info-header'>Görüntülemek istediğiniz çalışanı seçin.</h1>
+            </div>
+        );
     }
 
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            getRoles();
-        }
-    }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                if (!token) {
-                    console.error("No token found in localStorage");
-                    return;
-                }
-
-                const response = await axios.get(
-                    `http://localhost:1337/api/companies/${usersCompanyId}?populate[projects][populate]=*`
-                );
-                const companyData = response.data.data;
-                const filteredProjects = companyData.attributes.projects.data.filter(
-                    (project) => project.attributes.company.data.id === usersCompanyId
-                );
-                setCompanyProjects(filteredProjects);
-                console.log("Company and all projects:", companyData);
-            } catch (error) {
-                console.error("Error fetching the data:", error);
-            }
-        };
-
-        if (localStorage.getItem("token")) {
-            fetchData();
-        }
-    }, [usersCompanyId]);
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        if (showEditModal) {
-            setEditProject({ ...editProject, [name]: value });
-        } else {
-            setNewProject({ ...newProject, [name]: value });
-        }
-    };
-
-    const handleFileChange = (e) => {
-        if (showEditModal) {
-            setEditProject({ ...editProject, projectCoverPhoto: e.target.files[0] });
-        } else {
-            setNewProject({ ...newProject, projectCoverPhoto: e.target.files[0] });
-        }
-    };
-
-    const handleSubmit = async () => {
-        const formData = new FormData();
-        formData.append("data", JSON.stringify({
-            projectName: newProject.projectName,
-            company: usersCompanyId // Şirket ID'sini ekliyoruz
-        }));
-        if (newProject.projectCoverPhoto) {
-            formData.append("files.projectCoverPhoto", newProject.projectCoverPhoto);
-        }
-
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                console.error("No token found in localStorage");
-                return;
-            }
-
-            // Proje oluşturmak için doğru endpoint'i kullanın
-            const response = await axios.post("http://localhost:1337/api/projects", formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            const createdProject = response.data.data;
-
-            // Anında render edilmesi için yeni projeyi mevcut state'e ekleyelim
-            setCompanyProjects((prevProjects) => [
-                ...prevProjects,
-                {
-                    id: createdProject.id,
-                    attributes: createdProject.attributes,
-                }
-            ]);
-
-            setShowModal(false);
-            setNewProject({ projectName: "", projectCoverPhoto: null });
-
-        } catch (error) {
-            console.error("Error creating a new project:", error);
-        }
-    };
-
-    const handleEditSubmit = async () => {
-        const formData = new FormData();
-        formData.append(
-            "data",
-            JSON.stringify({ projectName: editProject.projectName })
-        );
-        if (editProject.projectCoverPhoto) {
-            formData.append("files.projectCoverPhoto", editProject.projectCoverPhoto);
-        }
-
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                console.error("No token found in localStorage");
-                return;
-            }
-
-            await axios.put(`http://localhost:1337/api/projects/${projectToEdit.id}`, formData);
-            setShowEditModal(false);
-            setEditProject({ projectName: "", projectCoverPhoto: null });
-            // Refetch projects after editing
-            const response = await axios.get(
-                "http://localhost:1337/api/projects?populate=projectCoverPhoto"
-            );
-            const companyData = response.data.data;
-            const filteredProjects = companyData.attributes.projects.data.filter(
-                (project) => project.attributes.company.data.id === usersCompanyId
-            );
-            setCompanyProjects(filteredProjects);
-        } catch (error) {
-            console.error("Error editing the project:", error);
-        }
-    };
-
-    const deleteModalOpen = (id) => {
-        setShowDeleteModal(true);
-        setProjectToDelete(id);
-    };
-
-    const editModalOpen = (projectId) => {
-        const project = companyProjects.find(p => p.id === projectId);
-        if (!project || !project.attributes) {
-            console.error("Invalid project object:", projectId);
-            return;
-        }
-
-        setShowEditModal(true);
-        setProjectToEdit(project);
-        setEditProject({
-            projectName: project.attributes.projectName || "",
-            projectCoverPhoto: project.attributes.projectCoverPhoto || null,
-        });
-    };
-
-    const handleDeleteConfirm = () => {
-        if (!projectToDelete) return;
-
-        axios
-            .delete(`http://localhost:1337/api/projects/${projectToDelete}`)
-            .then((response) => {
-                console.log("Project deleted successfully");
-                setCompanyProjects(
-                    companyProjects.filter((project) => project.id !== projectToDelete)
-                );
-                setShowDeleteModal(false);
-                setProjectToDelete(null);
-            })
-            .catch((error) => {
-                console.error("Error deleting project:", error);
-            });
-    };
-
     return (
-        <div className="projects-main-page">
-            <Navigation />
-            <ProjectCardsColumn
-                companyProjects={companyProjects}
-                roles={roles}
-                deleteModalOpen={deleteModalOpen}
-                setShowModal={setShowModal}
-                editModalOpen={editModalOpen}
-            />
-            <AddNewProjectModal
-                show={showModal}
-                onClose={() => setShowModal(false)}
-                newProject={newProject}
-                handleInputChange={handleInputChange}
-                handleFileChange={handleFileChange}
-                handleSubmit={handleSubmit}
-            />
-            <DeleteConfirmationModal
-                showDeleteModal={showDeleteModal}
-                onClose={() => setShowDeleteModal(false)}
-                onConfirm={handleDeleteConfirm}
-            />
-            <EditProjectModal
-                showEditModal={showEditModal}
-                onClose={() => setShowEditModal(false)}
-                projectToEdit={editProject}
-                handleInputChange={handleInputChange}
-                handleFileChange={handleFileChange}
-                handleEditSubmit={handleEditSubmit}
-            />
+        <div className="other-info-main">
+            <div className='revise-and-profile'>
+                <div className='other-info-inner'>
+                    <div className='other-info-inner-2'>
+                        <img
+                            className="other-info-profile-pic"
+                            src={`http://localhost:1337${employee.profilePic?.data.attributes.url || ""}`}
+                            alt=""
+                        />
+                        <p className='other-info-username'>{employee.username}</p>
+                        <p className='other-info-email'>{employee.email}</p>
+                        <p className='other-info-professionname'>{employee.profession.data.attributes.professionName}</p>
+                    </div>
+                </div>
+                <div className='other-all-revises-inner'>
+                    <h2 className='other-revises-h2'>Revizeler</h2>
+
+                    {employee.project_revises && employee.project_revises.data.map((revise) => (
+                        <div key={revise.id} className='other-revise-div'>
+                            <p className='other-revise-p'>{revise.attributes.comment[0].children[0].text}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className='other-joined-all'>
+                <div className='other-all-projects'>
+                    <h2 className='other-joined-projects-h2'>Dahil Olduğu Projeler</h2>
+                    <div className='other-column'>
+                        {employee.projects && employee.projects.data.map((project) => (
+                            <div key={project.id} className='other-project-div'>
+                                <p className='other-project-p'>{project.attributes.projectName}</p>
+                                {project.attributes.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url && (
+                                    <img
+                                        className="other-project-photo"
+                                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url}`}
+                                        alt={project.attributes.projectName}
+                                    />
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <div className='other-all-groups'>
+                <h2 className='other-groups-joined-h2'>Dahil Olduğu Gruplar</h2>
+                {employee.groups && employee.groups.data.map((group) => (
+                    <div key={group.id} className='other-groups'>
+                        <p className='other-groups-name'>{group.attributes.groupName}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
 
-export default ProjectsMainPage;
+export default OtherUsersInfo;
