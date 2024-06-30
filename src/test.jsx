@@ -1,154 +1,250 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { api } from "../api";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import "./ProjectsMainPage.scss";
+import Navigation from "../../components/Navigation/Navigation";
+import { useAuth } from "../../components/AuthProvider";
+import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal";
+import AddNewProjectModal from "../../components/AddNewProjectModal/AddNewProjectModal";
+import ProjectCardsColumn from "../../components/ProjectCardsColumn/ProjectCardsColumn";
+import EditProjectModal from "../../components/EditProjectModal/EditProjectModal";
 
-const AuthContext = createContext(null);
+function ProjectsMainPage() {
+    const { user } = useAuth();
+    console.log("User:", user);
 
-function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const usersCompanyId = user?.company?.id;
+    console.log("Company ID:", usersCompanyId);
+
+    const [companyProjects, setCompanyProjects] = useState([]);
+    const [roles, setRoles] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [projectToDelete, setProjectToDelete] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [projectToEdit, setProjectToEdit] = useState(null);
+    const [newProject, setNewProject] = useState({
+        projectName: "",
+        projectCoverPhoto: null,
+    });
+    const [editProject, setEditProject] = useState({
+        projectName: "",
+        projectCoverPhoto: null,
+    });
+
+    async function getRoles() {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                console.error("No token found in localStorage");
+                return;
+            }
+
+            const response = await axios.get("http://localhost:1337/api/accesses");
+            setRoles(response.data.data);
+        } catch (error) {
+            console.error("Error fetching roles:", error);
+        }
+    }
 
     useEffect(() => {
-        const checkAuthStatus = async () => {
+        if (localStorage.getItem("token")) {
+            getRoles();
+        }
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
             try {
-                const token = localStorage.getItem('token');
-                if (token) {
-                    const response = await api.get(`http://localhost:1337/api/users/me?populate=company,profilePic`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
-                    console.log("API response data:", response.data);
-                    setUser(response.data);
-                } else {
-                    setUser(null);
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    console.error("No token found in localStorage");
+                    return;
                 }
+
+                const response = await axios.get(
+                    `http://localhost:1337/api/companies/${usersCompanyId}?populate[projects][populate]=*`
+                );
+                const companyData = response.data.data;
+                const filteredProjects = companyData.attributes.projects.data.filter(
+                    (project) => project.attributes.company.data.id === usersCompanyId
+                );
+                setCompanyProjects(filteredProjects);
+                console.log("Company and all projects:", companyData);
             } catch (error) {
-                setUser(null);
-            } finally {
-                setLoading(false);
+                console.error("Error fetching the data:", error);
             }
         };
 
-        checkAuthStatus();
-    }, []);
+        if (localStorage.getItem("token")) {
+            fetchData();
+        }
+    }, [usersCompanyId]);
 
-    const login = async (email, password) => {
-        try {
-            const response = await api.post(`http://localhost:1337/api/auth/local`, {
-                identifier: email,
-                password: password,
-            });
-
-            if (response.data.jwt) {
-                localStorage.setItem('token', response.data.jwt);
-                setUser(response.data.user);
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            throw error;
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (showEditModal) {
+            setEditProject({ ...editProject, [name]: value });
+        } else {
+            setNewProject({ ...newProject, [name]: value });
         }
     };
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        setUser(null);
-    };
-
-    const updateUser = async (userData) => {
-        try {
-            const token = localStorage.getItem('token');
-            if (!user || !user.id) {
-                throw new Error("User ID is missing");
-            }
-            const { password, ...updateData } = userData;
-            const response = await api.put(`http://localhost:1337/api/users/${user.id}`, updateData, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setUser(response.data);
-            return response.data;
-        } catch (error) {
-            console.error("Kullanıcı bilgisi güncellenemedi", error);
-            throw error;
+    const handleFileChange = (e) => {
+        if (showEditModal) {
+            setEditProject({ ...editProject, projectCoverPhoto: e.target.files[0] });
+        } else {
+            setNewProject({ ...newProject, projectCoverPhoto: e.target.files[0] });
         }
     };
 
-    const updatePassword = async (password) => {
-        try {
-            const token = localStorage.getItem('token');
-            if (!user || !user.id) {
-                throw new Error("User ID is missing");
-            }
-            const response = await api.put(`http://localhost:1337/api/users/${user.id}`, { password }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return response.data;
-        } catch (error) {
-            console.error("Şifre güncellenemedi", error);
-            throw error;
+    const handleSubmit = async () => {
+        const formData = new FormData();
+        formData.append("data", JSON.stringify({
+            projectName: newProject.projectName,
+            company: usersCompanyId // Şirket ID'sini ekliyoruz
+        }));
+        if (newProject.projectCoverPhoto) {
+            formData.append("files.projectCoverPhoto", newProject.projectCoverPhoto);
         }
-    };
 
-    const updateProfilePhoto = async (formData) => {
         try {
-            const token = localStorage.getItem('token');
-            if (!user || !user.id) {
-                throw new Error("User ID is missing");
+            const token = localStorage.getItem("token");
+            if (!token) {
+                console.error("No token found in localStorage");
+                return;
             }
-            const uploadResponse = await api.post(`http://localhost:1337/api/upload`, formData, {
+
+            // Proje oluşturmak için doğru endpoint'i kullanın
+            const response = await axios.post("http://localhost:1337/api/projects", formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                }
+                },
             });
 
-            if (uploadResponse.data && uploadResponse.data[0]) {
-                const profilePicId = uploadResponse.data[0].id;
-                const userResponse = await api.put(`http://localhost:1337/api/users/${user.id}`, {
-                    profilePic: profilePicId
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+            const createdProject = response.data.data;
 
-                setUser(userResponse.data);
-                return userResponse.data;
-            } else {
-                throw new Error("Fotoğraf yükleme başarısız");
-            }
+            // Anında render edilmesi için yeni projeyi mevcut state'e ekleyelim
+            setCompanyProjects((prevProjects) => [
+                ...prevProjects,
+                {
+                    id: createdProject.id,
+                    attributes: createdProject.attributes,
+                }
+            ]);
+
+            setShowModal(false);
+            setNewProject({ projectName: "", projectCoverPhoto: null });
+
         } catch (error) {
-            console.error('Profil fotoğrafı güncelleme hatası:', error);
-            throw error;
+            console.error("Error creating a new project:", error);
         }
     };
 
-    const userValues = {
-        user,
-        login,
-        logout,
-        updateUser,
-        updatePassword,
-        updateProfilePhoto,
-        loading
+    const handleEditSubmit = async () => {
+        const formData = new FormData();
+        formData.append(
+            "data",
+            JSON.stringify({ projectName: editProject.projectName })
+        );
+        if (editProject.projectCoverPhoto) {
+            formData.append("files.projectCoverPhoto", editProject.projectCoverPhoto);
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                console.error("No token found in localStorage");
+                return;
+            }
+
+            await axios.put(`http://localhost:1337/api/projects/${projectToEdit.id}`, formData);
+            setShowEditModal(false);
+            setEditProject({ projectName: "", projectCoverPhoto: null });
+            // Refetch projects after editing
+            const response = await axios.get(
+                "http://localhost:1337/api/projects?populate=projectCoverPhoto"
+            );
+            const companyData = response.data.data;
+            const filteredProjects = companyData.attributes.projects.data.filter(
+                (project) => project.attributes.company.data.id === usersCompanyId
+            );
+            setCompanyProjects(filteredProjects);
+        } catch (error) {
+            console.error("Error editing the project:", error);
+        }
+    };
+
+    const deleteModalOpen = (id) => {
+        setShowDeleteModal(true);
+        setProjectToDelete(id);
+    };
+
+    const editModalOpen = (projectId) => {
+        const project = companyProjects.find(p => p.id === projectId);
+        if (!project || !project.attributes) {
+            console.error("Invalid project object:", projectId);
+            return;
+        }
+
+        setShowEditModal(true);
+        setProjectToEdit(project);
+        setEditProject({
+            projectName: project.attributes.projectName || "",
+            projectCoverPhoto: project.attributes.projectCoverPhoto || null,
+        });
+    };
+
+    const handleDeleteConfirm = () => {
+        if (!projectToDelete) return;
+
+        axios
+            .delete(`http://localhost:1337/api/projects/${projectToDelete}`)
+            .then((response) => {
+                console.log("Project deleted successfully");
+                setCompanyProjects(
+                    companyProjects.filter((project) => project.id !== projectToDelete)
+                );
+                setShowDeleteModal(false);
+                setProjectToDelete(null);
+            })
+            .catch((error) => {
+                console.error("Error deleting project:", error);
+            });
     };
 
     return (
-        <AuthContext.Provider value={userValues}>
-            {!loading && children}
-        </AuthContext.Provider>
+        <div className="projects-main-page">
+            <Navigation />
+            <ProjectCardsColumn
+                companyProjects={companyProjects}
+                roles={roles}
+                deleteModalOpen={deleteModalOpen}
+                setShowModal={setShowModal}
+                editModalOpen={editModalOpen}
+            />
+            <AddNewProjectModal
+                show={showModal}
+                onClose={() => setShowModal(false)}
+                newProject={newProject}
+                handleInputChange={handleInputChange}
+                handleFileChange={handleFileChange}
+                handleSubmit={handleSubmit}
+            />
+            <DeleteConfirmationModal
+                showDeleteModal={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                onConfirm={handleDeleteConfirm}
+            />
+            <EditProjectModal
+                showEditModal={showEditModal}
+                onClose={() => setShowEditModal(false)}
+                projectToEdit={editProject}
+                handleInputChange={handleInputChange}
+                handleFileChange={handleFileChange}
+                handleEditSubmit={handleEditSubmit}
+            />
+        </div>
     );
 }
 
-export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (context.user === undefined) {
-        throw new Error("useAuth must be used within an AuthProvider");
-    }
-    return context;
-};
-
-export default AuthProvider;
+export default ProjectsMainPage;

@@ -10,20 +10,22 @@ import EditProjectModal from "../../components/EditProjectModal/EditProjectModal
 
 function ProjectsMainPage() {
   const { user } = useAuth();
+  console.log("User:", user);
+
+  const usersCompanyId = user?.company?.id;
+  console.log("Company ID:", usersCompanyId);
+
   const [companyProjects, setCompanyProjects] = useState([]);
   const [roles, setRoles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
-
   const [showEditModal, setShowEditModal] = useState(false);
   const [projectToEdit, setProjectToEdit] = useState(null);
-
   const [newProject, setNewProject] = useState({
     projectName: "",
     projectCoverPhoto: null,
   });
-
   const [editProject, setEditProject] = useState({
     projectName: "",
     projectCoverPhoto: null,
@@ -60,9 +62,17 @@ function ProjectsMainPage() {
         }
 
         const response = await axios.get(
-          "http://localhost:1337/api/projects?populate=projectCoverPhoto"
+          `http://localhost:1337/api/companies/${usersCompanyId}?populate[projects][populate]=*`
         );
-        setCompanyProjects(response.data.data);
+        const companyData = response.data.data;
+        console.log("Fetched Company Data:", companyData);
+
+        const filteredProjects = companyData.attributes.projects.data.filter(
+          (project) => project.attributes.company.data.id === usersCompanyId
+        );
+        console.log("Filtered Projects:", filteredProjects);
+
+        setCompanyProjects(filteredProjects);
       } catch (error) {
         console.error("Error fetching the data:", error);
       }
@@ -71,7 +81,8 @@ function ProjectsMainPage() {
     if (localStorage.getItem("token")) {
       fetchData();
     }
-  }, []);
+  }, [usersCompanyId]);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,10 +103,12 @@ function ProjectsMainPage() {
 
   const handleSubmit = async () => {
     const formData = new FormData();
-    formData.append(
-      "data",
-      JSON.stringify({ projectName: newProject.projectName })
-    );
+    formData.append("data", JSON.stringify({
+      projectName: newProject.projectName,
+      company: usersCompanyId,
+      projectCoverPhoto: newProject.projectCoverPhoto,
+      // Şirket ID'sini ekliyoruz
+    }));
     if (newProject.projectCoverPhoto) {
       formData.append("files.projectCoverPhoto", newProject.projectCoverPhoto);
     }
@@ -107,18 +120,37 @@ function ProjectsMainPage() {
         return;
       }
 
-      await axios.post("http://localhost:1337/api/projects", formData);
+      // Proje oluşturmak için doğru endpoint'i kullanın
+      const response = await axios.post("http://localhost:1337/api/projects", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const createdProject = response.data.data;
+      console.log("Created Project:", createdProject);
+
+      // Anında render edilmesi için yeni projeyi mevcut state'e ekleyelim
+      setCompanyProjects((prevProjects) => [
+        ...prevProjects,
+        {
+          id: createdProject.id,
+          attributes: {
+            ...createdProject.attributes,
+            projectCoverPhoto: createdProject.attributes.projectCoverPhoto || { data: null }, // Proje resmini ekliyoruz
+          },
+        }
+      ]);
+
       setShowModal(false);
       setNewProject({ projectName: "", projectCoverPhoto: null });
-      // Refetch projects after adding a new one
-      const response = await axios.get(
-        "http://localhost:1337/api/projects?populate=projectCoverPhoto"
-      );
-      setCompanyProjects(response.data.data);
+
     } catch (error) {
       console.error("Error creating a new project:", error);
     }
   };
+
+
 
   const handleEditSubmit = async () => {
     const formData = new FormData();
@@ -144,7 +176,11 @@ function ProjectsMainPage() {
       const response = await axios.get(
         "http://localhost:1337/api/projects?populate=projectCoverPhoto"
       );
-      setCompanyProjects(response.data.data);
+      const companyData = response.data.data;
+      const filteredProjects = companyData.attributes.projects.data.filter(
+        (project) => project.attributes.company.data.id === usersCompanyId
+      );
+      setCompanyProjects(filteredProjects);
     } catch (error) {
       console.error("Error editing the project:", error);
     }
@@ -168,7 +204,6 @@ function ProjectsMainPage() {
       projectName: project.attributes.projectName || "",
       projectCoverPhoto: project.attributes.projectCoverPhoto || null,
     });
-
   };
 
   const handleDeleteConfirm = () => {
@@ -177,7 +212,6 @@ function ProjectsMainPage() {
     axios
       .delete(`http://localhost:1337/api/projects/${projectToDelete}`)
       .then((response) => {
-
         console.log("Project deleted successfully");
         setCompanyProjects(
           companyProjects.filter((project) => project.id !== projectToDelete)
