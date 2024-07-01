@@ -13,13 +13,32 @@
         display: flex;
         flex-direction: column;
 
-        .aboutme-page-title {
-            transform: translate(110px, 0px);
-            width: fit-content;
-            font-weight: 400;
-            font-size: 40px;
-            margin: 20px 20px 20px 40px;
-            text-align: left;
+        .aboutme-row-2 {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+
+            .aboutme-page-title {
+                transform: translate(110px, 0px);
+                width: fit-content;
+                font-weight: 400;
+                font-size: 40px;
+                margin: 20px 20px 20px 40px;
+                text-align: left;
+            }
+
+            .message-inbox {
+                width: 50px;
+                height: 50px;
+                margin-right: 50px;
+                opacity: 0.7;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
         }
 
         .aboutme-page-row {

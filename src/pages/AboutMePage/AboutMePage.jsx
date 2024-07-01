@@ -7,6 +7,8 @@ import MyActiveProjects from "../../components/MyActiveProjects/MyActiveProjects
 import MyPersonalFiles from "../../components/MyPersonalFiles/MyPersonalFiles";
 import MyLastAct from "../../components/MyLastAct/MyLastAct";
 
+import inboxLogo from "../../assets/icons/inbox-logo.png";
+
 function AboutMePage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -39,7 +41,10 @@ function AboutMePage() {
         <div className="aboutme-page-main">
             <Navigation />
             <div className="aboutme-page-column">
-                <h1 className="aboutme-page-title">Profilim</h1>
+                <div className="aboutme-row-2">
+                    <h1 className="aboutme-page-title">Profilim</h1>
+                    <img src={inboxLogo} alt="message-inbox" className="message-inbox" />
+                </div>
                 <div className="aboutme-page-row">
                     <MyProfile user={user} />
                     <div className="aboutme-page-column-2">

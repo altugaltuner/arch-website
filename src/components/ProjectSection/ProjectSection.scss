@@ -23,6 +23,15 @@
             display: flex;
             flex-direction: row;
             gap: 20px;
+            justify-content: space-between;
+
+            .project-file-search {
+                width: 250px;
+                height: 40px;
+                border-radius: 15px;
+                border: 1px solid $border-color;
+                padding: 10px;
+            }
 
             .go-back-btn {
                 .go-back-btn-img {

@@ -28,6 +28,7 @@ function ProjectSection({ clickedProject }) {
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [newFolderName, setNewFolderName] = useState("");
+    const [searchTerm, setSearchTerm] = useState(""); // Arama terimi için state
     const fileInputRef = useRef(null);
 
     const fileIcons = {
@@ -218,11 +219,18 @@ function ProjectSection({ clickedProject }) {
                 </div>
             );
         }
+
+        // Filtrelenmiş dosyalar
+        const filteredFiles = folder.folderContent.data.filter((file) =>
+            file.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
         return (
             <FolderContent
                 folder={{ id: folder.id, ...folder }}
                 fileIcons={fileIcons}
                 openFileModal={openFileModal}
+                filteredFiles={filteredFiles} // Filtrelenmiş dosyaları gönderiyoruz
             />
         );
     };
@@ -244,6 +252,13 @@ function ProjectSection({ clickedProject }) {
                             <img src={goBackButton} alt="" className="go-back-btn-img" />
                         </button>
                         <h2 className="current-folder-header">{currentFolder.projectFolderName}</h2>
+                        <input
+                            type="text"
+                            className="project-file-search"
+                            placeholder="Dosya Ara"
+                            value={searchTerm} // Search term state'ini inputa bağladık
+                            onChange={(e) => setSearchTerm(e.target.value)} // Input değiştikçe state'i güncelliyoruz
+                        />
                     </div>
                     {renderFoldersAndFiles(currentFolder)}
                 </div>

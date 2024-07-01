@@ -3,7 +3,7 @@ import axios from 'axios';
 import './FolderContent.scss';
 import fileIcon from "../../assets/icons/untitled-icon.png";
 
-function FolderContent({ folder, fileIcons, openFileModal }) {
+function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const [folderState, setFolderState] = useState(folder);
     const fileInputRef = useRef(null);
 
@@ -62,7 +62,7 @@ function FolderContent({ folder, fileIcons, openFileModal }) {
                     onChange={handleFileUpload}
                 />
             </div>
-            {folderState.folderContent && folderState.folderContent.data && folderState.folderContent.data.map(file => {
+            {filteredFiles && filteredFiles.map(file => {
                 const fileAttributes = file.attributes || {};
                 const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1) : '';
                 const iconSrc = fileIcons[fileExt] || fileIcon;
