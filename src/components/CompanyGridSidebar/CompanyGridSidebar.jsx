@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import './CompanyGridSidebar.scss';
 import NewProfessionModal from '../NewProfessionModal/NewProfessionModal';
+import DeleteModal from '../DeleteProfessionModal/DeleteProfessionModal';
 import axios from 'axios';
+import deleteIcon from '../../assets/icons/delete-icon.png';
+import { useAuth } from "../../components/AuthProvider";
 
 function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [jobTitles, setJobTitles] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [jobTitleToDelete, setJobTitleToDelete] = useState(null);
+
+    const { user } = useAuth();
+    console.log(user);
+    const isAdmin = user?.isCompanyAdmin; //bu  mükemmel çalışıyor tüm admin gerektiren işlemlerde kullanılabilir
 
     const loadJobTitles = async () => {
         try {
             const response = await axios.get('http://localhost:1337/api/professions?populate=*');
-            const titles = response.data.data.map(item => item.attributes.professionName);
+            const titles = response.data.data.map(item => ({
+                id: item.id,
+                name: item.attributes.professionName
+            }));
             setJobTitles(titles);
         } catch (error) {
             console.error('Meslek türleri yüklenemedi:', error);
@@ -34,6 +46,28 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
         closeNewProfessionModal();
     };
 
+    const openDeleteModal = (title) => {
+        setJobTitleToDelete(title);
+        setIsDeleteModalOpen(true);
+    };
+
+    const closeDeleteModal = () => {
+        setJobTitleToDelete(null);
+        setIsDeleteModalOpen(false);
+    };
+
+    const handleDeleteProfession = async () => {
+        if (jobTitleToDelete) {
+            try {
+                await axios.delete(`http://localhost:1337/api/professions/${jobTitleToDelete.id}`);
+                setJobTitles(prevTitles => prevTitles.filter(title => title.id !== jobTitleToDelete.id));
+                closeDeleteModal();
+            } catch (error) {
+                console.error('Meslek türü silinemedi:', error);
+            }
+        }
+    };
+
     return (
         <div className="company-grid-sidebar">
             <ul>
@@ -46,16 +80,32 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                 </li>
                 {jobTitles.map((title, index) => (
                     <li
-                        className={`job-titles-for-workersPage ${selectedJobTitle === title ? 'active' : ''}`}
+                        className={`job-titles-for-workersPage ${selectedJobTitle === title.name ? 'active' : ''}`}
                         key={index}
-                        onClick={() => handleJobTitleClick(title)}
+                        onClick={() => handleJobTitleClick(title.name)}
                         role="button"
                     >
-                        {title}
+                        {title.name}
+                        {isAdmin && (
+                            <img
+                                src={deleteIcon}
+                                alt="Delete"
+                                className="trash-icon"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    openDeleteModal(title);
+                                }}
+                            />
+                        )}
                     </li>
                 ))}
             </ul>
             <NewProfessionModal isOpen={isModalOpen} onClose={closeNewProfessionModal} onAdd={handleAddProfession} />
+            <DeleteModal
+                isOpen={isDeleteModalOpen}
+                onClose={closeDeleteModal}
+                onDelete={handleDeleteProfession}
+            />
         </div>
     );
 }

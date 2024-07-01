@@ -18,7 +18,9 @@
 
         .job-titles-for-workersPage {
             margin: 10px 0;
+            position: relative;
             padding: 10px;
+            padding-left: 30px;
             background-color: $background-color;
             text-align: center;
             cursor: pointer;
@@ -26,9 +28,27 @@
             border-radius: 0px;
             transition: all 0.2s;
 
+            .trash-icon {
+                top: 8px;
+                left: 5px;
+                position: absolute;
+                width: 20px;
+                cursor: pointer;
+                display: none;
+                opacity: 0.5;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+
             &:hover {
                 background-color: darken($background-color, 10%);
             }
+        }
+
+        .job-titles-for-workersPage:hover .trash-icon {
+            display: block;
         }
 
         .job-titles-for-workersPage.active {
