@@ -107,14 +107,15 @@ const UserProfile = () => {
                 </h3>
                 <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('profilePic')} />
                 {editMode.profilePic && (
-                    <div>
+                    <div className='edit-photo-div'>
                         <input
+                            className='input-photo-subsetting'
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
                         />
-                        <button onClick={handlePhotoChange}>Fotoğrafı Değiştir</button>
-                        <button onClick={() => handleCancelClick('profilePic')}>İptal</button>
+                        <button className='subsetting-btn' onClick={handlePhotoChange}>Fotoğrafı Değiştir</button>
+                        <button className='subsetting-cancel' onClick={() => handleCancelClick('profilePic')}>İptal</button>
                         {error && <p className="error-message">{error}</p>}
                     </div>
                 )}
@@ -148,15 +149,16 @@ const UserProfile = () => {
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">E-posta Adresi</h3>
                 {editMode.email ? (
-                    <div>
+                    <div className='subsetting-buttons-div'>
                         <input
+                            className='input-username-subsetting'
                             type="email"
                             name="email"
                             value={userData.email}
                             onChange={handleInputChange}
                         />
-                        <button onClick={() => handleSaveClick('email')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('email')}>İptal</button>
+                        <button className='subsetting-btn' onClick={() => handleSaveClick('email')}>Onayla</button>
+                        <button className='subsetting-cancel' onClick={() => handleCancelClick('email')}>İptal</button>
                     </div>
                 ) : (
                     <>
@@ -169,15 +171,16 @@ const UserProfile = () => {
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">Şifre</h3>
                 {editMode.password ? (
-                    <div>
+                    <div className='subsetting-buttons-div'>
                         <input
+                            className='input-username-subsetting'
                             type="password"
                             name="password"
                             value={userData.password}
                             onChange={handleInputChange}
                         />
-                        <button onClick={() => handleSaveClick('password')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('password')}>İptal</button>
+                        <button className='subsetting-btn' onClick={() => handleSaveClick('password')}>Onayla</button>
+                        <button className='subsetting-cancel' onClick={() => handleCancelClick('password')}>İptal</button>
                     </div>
                 ) : (
                     <>
@@ -190,15 +193,16 @@ const UserProfile = () => {
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">Telefon</h3>
                 {editMode.MobilePhone ? (
-                    <div>
+                    <div className='subsetting-buttons-div'>
                         <input
+                            className='input-username-subsetting'
                             type="text"
                             name="MobilePhone"
                             value={userData.MobilePhone}
                             onChange={handleInputChange}
                         />
-                        <button onClick={() => handleSaveClick('MobilePhone')}>Onayla</button>
-                        <button onClick={() => handleCancelClick('MobilePhone')}>İptal</button>
+                        <button className='subsetting-btn' onClick={() => handleSaveClick('MobilePhone')}>Onayla</button>
+                        <button className='subsetting-cancel' onClick={() => handleCancelClick('MobilePhone')}>İptal</button>
                         {error && <p className="error-message">{error}</p>}
                     </div>
                 ) : (

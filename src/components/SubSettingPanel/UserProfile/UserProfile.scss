@@ -29,32 +29,6 @@
         .subsetting-div {
             display: flex;
             gap: 10px;
-
-            .subsetting-buttons-div {
-                display: flex;
-                gap: 10px;
-
-                .subsetting-btn,
-                .subsetting-cancel {
-                    padding: 5px;
-                    border: 1px solid $border-color;
-                    border-radius: 10px;
-                    transition: all 0.2s;
-
-                    &:hover {
-                        background-color: darken($background-color, 10%);
-                    }
-                }
-            }
-
-
-            .input-username-subsetting {
-                color: $font-color;
-                padding: 5px;
-                border-radius: 5px;
-                border: 1px solid $border-color;
-
-            }
         }
 
         .edit-pencil-subsetting {
@@ -64,6 +38,12 @@
             cursor: pointer;
             right: 5px;
             top: 5px;
+            opacity: 0.6;
+            transition: all 0.2s;
+
+            &:hover {
+                opacity: 1;
+            }
         }
 
         .subsetting-header {
@@ -85,6 +65,38 @@
     margin-top: 5px;
 }
 
+.subsetting-btn,
+.subsetting-cancel {
+    padding: 5px;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: darken($background-color, 10%);
+    }
+}
+
+.input-username-subsetting {
+    color: $font-color;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid $border-color;
+
+}
+
+.subsetting-buttons-div {
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+}
+
+.edit-photo-div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
 
 @media screen and (max-width: 750px) {
     .personal-info-subsetting-column {
