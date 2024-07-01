@@ -30,7 +30,7 @@ function SubNavigationSettings({ getRelevantSettings }) {
         {
             id: 6,
             header: "Hakkımızda",
-            items: ["Flow Proje Yönetim Sistemi", "Biz Kimiz ?", "Bize Ulaşın"]
+            items: ["Ofisim Proje Yönetim Sistemi", "Biz Kimiz ?", "Bize Ulaşın"]
         }
     ];
 

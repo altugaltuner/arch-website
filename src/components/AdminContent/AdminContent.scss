@@ -1,0 +1,24 @@
+.admin-sub-setting-page {
+    display: flex;
+    width: 65%;
+    flex-direction: column;
+    padding: 25px;
+    color: rgb(54, 54, 54);
+    font-family: "Barlow", sans-serif;
+
+    .admin-sub-header {
+        font-size: 28px;
+        padding: 10px;
+        font-weight: 400;
+        border-bottom: 1px solid #e4e4e4;
+        margin-bottom: 20px;
+    }
+
+    .admin-sub-panel-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        padding: 30px;
+    }
+}

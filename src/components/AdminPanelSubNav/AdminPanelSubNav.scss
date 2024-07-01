@@ -1,0 +1,61 @@
+@use "../../styles/abstracts/variables" as *;
+
+.adminpanel-settings-page {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    font-family: $primary-font;
+    color: $font-color;
+    border-right: 1px solid $border-color;
+    max-height: 900px;
+    overflow-y: auto;
+
+    .adminpanel-header {
+        font-size: 40px;
+        padding: 20px;
+        font-weight: 400;
+        margin: 0px 20px;
+        border-bottom: 1px solid $border-color;
+    }
+
+    .adminpanel-container {
+        display: flex;
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .adminpanel-content {
+        width: 100%;
+        padding: 20px;
+        height: 90vh;
+    }
+
+    .adminpanel-section {
+        &.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        margin-bottom: 10px;
+        padding: 10px;
+        border-bottom: 1px solid $border-color;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            background-color: $grey;
+        }
+
+        .adminpanel-subheader {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .adminpanel-paragraph {
+            padding: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    }
+}

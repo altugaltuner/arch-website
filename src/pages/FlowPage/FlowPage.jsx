@@ -9,18 +9,18 @@ import youtubeLogo from "../../assets/icons/youtube-logo.png";
 function FlowPage() {
     const socialMediaAccounts = [
         {
-            name: "flow",
-            url: "https://www.linkedin.com/flowcompany/",
+            name: "ofisim",
+            url: "https://www.linkedin.com/ofisimcompany/",
             logo: linkedinLogo
         },
         {
-            name: "flow",
-            url: "https://www.instagram.com/flowcompany/",
+            name: "ofisim",
+            url: "https://www.instagram.com/ofisimcompany/",
             logo: instaLogo
         },
         {
-            name: "flow",
-            url: "https://www.youtube.com/flowcompany/",
+            name: "ofisim",
+            url: "https://www.youtube.com/ofisimcompany/",
             logo: youtubeLogo
         },
     ];
@@ -46,7 +46,7 @@ function FlowPage() {
                     <h1 className="flow-page-title">Flow</h1>
                     <div className="flow-descriptions">
 
-                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Flow</span>İşinizi organize etmenize ve ekibinizle etkin bir şekilde işbirliği yapmanıza yardımcı olan, kullanımı kolay ve güçlü bir proje yönetim aracıdır. Flow sayesinde projelerinizi, dosyalarınızı ve ekip üyelerinizi tek bir platformda toplar, iş süreçlerinizi daha verimli hale getirir.</p>
+                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Ofisim</span>İşinizi organize etmenize ve ekibinizle etkin bir şekilde işbirliği yapmanıza yardımcı olan, kullanımı kolay ve güçlü bir proje yönetim aracıdır. Ofisim sayesinde projelerinizi, dosyalarınızı ve ekip üyelerinizi tek bir platformda toplar, iş süreçlerinizi daha verimli hale getirir.</p>
 
                         <h2 className="flow-desc-subheader">Ana Özellikler</h2>
 
@@ -59,7 +59,7 @@ function FlowPage() {
                         <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Durum Takibi</span>
                             Görevlerin ve projelerin ilerleyişini anlık olarak izleyin. Görsel gösterge panelleri sayesinde ekibinizin performansını ve proje durumunu kolayca takip edin.</p>
 
-                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Esnek ve Kullanıcı Dostu</span> Flow, kullanıcı dostu arayüzü ile herkesin kolayca adapte olabileceği bir yapıya sahiptir. Ayrıca, farklı sektörlere ve çalışma tarzlarına uyum sağlayacak şekilde özelleştirilebilir.</p>
+                        <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Esnek ve Kullanıcı Dostu</span> Ofisim, kullanıcı dostu arayüzü ile herkesin kolayca adapte olabileceği bir yapıya sahiptir. Ayrıca, farklı sektörlere ve çalışma tarzlarına uyum sağlayacak şekilde özelleştirilebilir.</p>
                     </div>
                 </div>
                 <div className="all-companies-column">

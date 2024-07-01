@@ -12,23 +12,23 @@ function FirstPage() {
     const isLogin = Cookies.get("isLogin")
     const socialMediaAccounts = [
         {
-            name: "flow",
-            url: "https://www.linkedin.com/flowcompany/",
+            name: "ofisim",
+            url: "https://www.linkedin.com/ofisimcompany/",
             logo: linkedinLogo
         },
         {
-            name: "flow",
-            url: "https://www.instagram.com/flowcompany/",
+            name: "ofisim",
+            url: "https://www.instagram.com/ofisimcompany/",
             logo: instaLogo
         },
         {
-            name: "flow",
-            url: "https://www.youtube.com/flowcompany/",
+            name: "ofisim",
+            url: "https://www.youtube.com/ofisimcompany/",
             logo: youtubeLogo
         },
         {
-            name: "flow",
-            url: "https://www.email.com/flowcompany/",
+            name: "ofisim",
+            url: "https://www.email.com/ofisimcompany/",
             logo: emailLogo
         }
     ];
@@ -36,9 +36,9 @@ function FirstPage() {
     return (
         <main className="firstpage-main">
             <div className="firstpage-div">
-                <img className="firstpage-logo" src={flowLogo} alt="flow-logo" />
-                <h1 className="firstpage-header">Flow</h1>
-                <h2 className="firstpage-title">Flow, işinizi organize etmenize ve ekibinizle işbirliği yapmanıza yardımcı olan bir proje yönetim aracıdır. Kullanabilmek için lütfen iş sahibi veya çalışan olarak kaydolun.</h2>
+                <img className="firstpage-logo" src={flowLogo} alt="ofisim-logo" />
+                <h1 className="firstpage-header">Ofisim</h1>
+                <h2 className="firstpage-title">Ofisim, işinizi organize etmenize ve ekibinizle işbirliği yapmanıza yardımcı olan bir proje yönetim aracıdır. Kullanabilmek için lütfen iş sahibi veya çalışan olarak kaydolun.</h2>
                 <div className="firstpage-buttons-div">
                     <Link to="/signup" className="employee-create-btn">Çalışan Hesabı Aç</Link>
                     {isLogin ? <Link to="/homepage" className="employee-login-btn">Ana Sayfaya Dön</Link> : <Link to="/login" className="employee-login-btn">Hesabınız mı var? Giriş Yapın</Link>}

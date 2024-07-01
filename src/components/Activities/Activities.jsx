@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
 import "./Activities.scss";
 import axios from "axios";
+import { useAuth } from "../../components/AuthProvider";
 
 const Activities = ({ searchTerm }) => {
     const [activities, setActivities] = useState([]);
     const [filteredActivities, setFilteredActivities] = useState([]);
 
+    const { user } = useAuth();
+    const usersCompanyId = user?.company?.id;
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:1337/api/project-revises?populate=*');
-                setActivities(response.data.data); // API'nin döndürdüğü veriyi kontrol edin ve uygun şekilde kaydedin
+                setActivities(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
@@ -19,14 +23,12 @@ const Activities = ({ searchTerm }) => {
     }, []);
 
     useEffect(() => {
-        if (searchTerm) {
-            setFilteredActivities(activities.filter(activity =>
-                activity.attributes.project?.data?.attributes?.projectName.toLowerCase().includes(searchTerm.toLowerCase())
-            ));
-        } else {
-            setFilteredActivities(activities);
-        }
-    }, [searchTerm, activities]);
+        const filterActivities = () => {
+            return activities.filter(activity => activity.attributes.company?.data?.id === usersCompanyId);
+        };
+
+        setFilteredActivities(filterActivities());
+    }, [searchTerm, activities, usersCompanyId]);
 
     const reviseStateMap = {
         1: "yapılacak",
