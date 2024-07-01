@@ -101,6 +101,11 @@
                     .files-img {
                         width: 100%;
                     }
+
+                    .file-name {
+                        font-size: 16px;
+                        margin-top: 5px;
+                    }
                 }
             }
         }
@@ -109,13 +114,14 @@
             position: relative;
             border: 1px solid $border-color;
             display: flex;
+            flex-wrap: wrap;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 30px 5px 5px 5px;
             margin: 10px;
-            width: 39%;
+            width: 135px;
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.2s;

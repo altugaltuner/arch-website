@@ -210,6 +210,9 @@ function MyPersonalFiles({ user }) {
             <div className="folder-content">
                 <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
                 <h3 className="folder-header">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</h3>
+
+                <input type="text" />{/* Arama çubuğu buraya yapılacak. */}
+
                 <div className="files">
                     {folder.personalFolderContent && folder.personalFolderContent.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
@@ -218,6 +221,7 @@ function MyPersonalFiles({ user }) {
                             ) : (
                                 <span>{file.name}</span>
                             )}
+                            <p className="file-name">{file.name}</p>
                         </div>
                     ))}
                 </div>
