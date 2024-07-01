@@ -11,11 +11,11 @@
     border-radius: 15px;
     margin-top: 20px;
     color: $font-color;
+    max-height: 400px;
+    overflow-y: scroll;
 
     .project-comments-h2 {
-        border-bottom: 1px solid $border-color;
         padding: 10px;
-        margin: 10px;
         width: 100%;
         font-size: 30px;
         color: $font-color;
@@ -25,39 +25,57 @@
 
     .project-comments-table {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        gap: 10px;
 
-        .project-comments-ul {
-            list-style-type: none;
-            padding: 0;
+        .comment-table-head {
+            display: flex;
+            flex-direction: row;
             width: 100%;
-            margin-top: 10px;
+            border: 1px solid $border-color;
+            border-radius: 5px;
 
-            .project-comments-li {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px;
-                font-weight: 300;
-                font-size: 18px;
-                border-bottom: 1px solid $border-color;
+            .comment-table-head-text {
+                width: 70%;
+                padding: 15px;
+                border-right: 1px solid $border-color;
+            }
 
-                .project-comments-li-user {
-                    display: flex;
-                    align-items: center;
+            .comment-table-head-state {
+                width: 15%;
+                padding: 15px;
+                border-right: 1px solid $border-color;
+            }
 
-                    .project-comments-li-user-name {
-                        font-weight: bold;
-                    }
-                }
+            .comment-table-head-owner {
+                width: 15%;
+                padding: 15px;
+            }
+        }
 
-                .project-comments-li-date {
-                    font-size: 0.8rem;
-                }
+        .project-comment-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            border: 1px solid $border-color;
+            border-radius: 5px;
 
-                .project-comments-li-comment {
-                    margin-top: 10px;
-                }
+            .project-comment-text {
+                width: 70%;
+                padding: 15px;
+                border-right: 1px solid $border-color;
+            }
+
+            .project-comment-state {
+                width: 15%;
+                padding: 15px;
+                border-right: 1px solid $border-color;
+            }
+
+            .project-comment-owner {
+                padding: 15px;
+                width: 15%;
             }
         }
     }
