@@ -1,0 +1,38 @@
+@use "../../styles/abstracts/variables" as *;
+
+.admin-dashboard-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    font-family: $primary-font;
+    color: $font-color;
+
+    .dashboard-current-state-all {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .dashboard-header {
+            font-weight: 500;
+        }
+
+        .dashboard-p {
+            font-weight: 400;
+        }
+    }
+
+    .dashboard-last-activities {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .dashboard-act-header {
+            font-weight: 500;
+        }
+
+        .dashboard-act-p {
+            font-size: 18px;
+        }
+    }
+}
