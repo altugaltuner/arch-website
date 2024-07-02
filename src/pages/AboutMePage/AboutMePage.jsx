@@ -6,12 +6,14 @@ import MyProfile from "../../components/MyProfile/MyProfile";
 import MyActiveProjects from "../../components/MyActiveProjects/MyActiveProjects";
 import MyPersonalFiles from "../../components/MyPersonalFiles/MyPersonalFiles";
 import MyLastAct from "../../components/MyLastAct/MyLastAct";
-
+import OpenInboxModal from "../../components/OpenInboxModal/OpenInboxModal";
 import inboxLogo from "../../assets/icons/inbox-logo.png";
 
 function AboutMePage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const [showInboxModal, setShowInboxModal] = useState(false);
 
     useEffect(() => {
         const checkCurrentPerson = async () => {
@@ -37,13 +39,18 @@ function AboutMePage() {
         checkCurrentPerson();
     }, []);
 
+    function openInboxModal() {
+        setShowInboxModal(true);
+    };
+
     return (
         <div className="aboutme-page-main">
             <Navigation />
+            <OpenInboxModal showInboxModal={showInboxModal} setShowInboxModal={setShowInboxModal} />
             <div className="aboutme-page-column">
                 <div className="aboutme-row-2">
                     <h1 className="aboutme-page-title">Profilim</h1>
-                    <img src={inboxLogo} alt="message-inbox" className="message-inbox" />
+                    <img src={inboxLogo} alt="message-inbox" className="message-inbox" onClick={() => { openInboxModal() }} />
                 </div>
                 <div className="aboutme-page-row">
                     <MyProfile user={user} />

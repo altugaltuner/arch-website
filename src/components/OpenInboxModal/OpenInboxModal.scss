@@ -1,0 +1,71 @@
+@use "../../styles/abstracts/variables" as *;
+
+.open-inbox-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    font-family: $primary-font;
+    color: $font-color;
+
+    .open-inbox-content {
+        background-color: $background-color;
+        padding: 20px;
+        border-radius: 5px;
+        position: relative;
+        text-align: center;
+
+        .open-inbox-modal-span {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 200;
+            font-size: 30px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid $border-color;
+            width: 40px;
+            height: 40px;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: $grey;
+            }
+        }
+
+        .open-inbox-modal-header {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .open-inbox-modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            .inbox-button-confirm,
+            .inbox-button-cancel {
+                border: 1px solid $border-color;
+                color: $font-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+            }
+        }
+    }
+}
