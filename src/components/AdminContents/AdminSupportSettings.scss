@@ -1,0 +1,35 @@
+@use "../../styles/abstracts/variables" as *;
+
+.admin-support-settings-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .support-div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-bottom: 1px solid $border-color;
+        padding: 10px;
+
+        .support-div-header {
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .support-div-p {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .support-div-question {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .support-div-answer {
+            font-size: 18px;
+            font-weight: 400;
+        }
+    }
+}

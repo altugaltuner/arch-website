@@ -20,7 +20,7 @@
         .dashboard-row-inner {
             display: flex;
             flex-direction: row;
-            gap: 10px;
+            gap: 20px;
             flex-wrap: wrap;
 
             .dashboard-oneline-inner {
@@ -33,6 +33,10 @@
 
                 .dashboard-p {
                     font-weight: 400;
+                }
+
+                .dashboard-p-header {
+                    font-weight: 500;
                 }
             }
         }

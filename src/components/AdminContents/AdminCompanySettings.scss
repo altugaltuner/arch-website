@@ -1,0 +1,30 @@
+@use "../../styles/abstracts/variables" as *;
+
+.admin-company-settings-main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .admin-company-inner {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+        border: 1px solid $border-color;
+        border-radius: 15px;
+
+        .admin-company-header {
+            font-size: 24px;
+            font-weight: 500;
+            padding: 10px;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 10px;
+        }
+
+        .admin-company-p {
+            font-size: 18px;
+            font-weight: 400;
+            padding: 10px;
+        }
+    }
+}

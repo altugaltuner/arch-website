@@ -17,20 +17,20 @@ function AdminDashBoard() {
                 <h2 className='dashboard-header'>Genel Durum</h2>
                 <div className='dashboard-row-inner'>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p'>Kullanıcı Sayısı</h3>
+                        <h3 className='dashboard-p-header'>Kullanıcı Sayısı</h3>
                         <p className='dashboard-p'>20</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p'>Proje Sayısı</h3>
+                        <h3 className='dashboard-p-header'>Proje Sayısı</h3>
                         <p className='dashboard-p'>25</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p'>Tüm Revizeler</h3>
+                        <h3 className='dashboard-p-header'>Tüm Revizeler</h3>
                         <p className='dashboard-p'>revize 1</p>
                         <p className='dashboard-p'>revize 2</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p'>Kullanılan Alan</h3>
+                        <h3 className='dashboard-p-header'>Kullanılan Alan</h3>
                         <p className='dashboard-p'>20GB</p>
                     </div>
                 </div>

@@ -5,14 +5,14 @@
     width: 65%;
     flex-direction: column;
     padding: 25px;
-    color: rgb(54, 54, 54);
-    font-family: "Barlow", sans-serif;
+    color: $font-color;
+    font-family: $primary-font;
 
     .admin-sub-header {
-        font-size: 28px;
+        font-size: 34px;
         padding: 10px;
         font-weight: 400;
-        border-bottom: 1px solid #e4e4e4;
+        border-bottom: 1px solid $border-color;
         margin-bottom: 20px;
     }
 

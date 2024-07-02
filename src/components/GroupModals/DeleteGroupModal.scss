@@ -76,3 +76,24 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .delete-group-modal {
+        .delete-group-modal-content {
+            padding: 20px;
+            width: 300px;
+            height: 200px;
+
+            .delete-group-close {
+                font-size: 20px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .delete-group-header {
+                font-size: 20px;
+            }
+        }
+    }
+
+}

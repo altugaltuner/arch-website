@@ -101,3 +101,32 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .add-new-project-modal {
+        .add-new-project-modal-content {
+            width: 300px;
+            padding: 10px;
+
+            .add-new-project-adding-header {
+                font-size: 20px;
+            }
+
+            .add-new-project-cover-photo-input {
+                width: 100%;
+            }
+
+            .add-new-project-name-input {
+                width: 100%;
+            }
+
+            .add-new-project-modal-close {
+                top: 5px;
+                right: 5px;
+                width: 30px;
+                height: 30px;
+                font-size: 20px;
+            }
+        }
+    }
+}

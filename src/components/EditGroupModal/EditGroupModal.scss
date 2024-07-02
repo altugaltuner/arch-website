@@ -92,3 +92,36 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .group-edit-modal {
+        .group-edit-modal-content {
+            width: 300px;
+            height: 200px;
+
+            .group-edit-modal-span {
+                width: 30px;
+                height: 30px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .group-edit-modal-inputs {
+                .group-edit-label {
+                    font-size: 16px;
+                }
+            }
+
+            .group-edit-modal-inputs {
+                .group-edit-input {
+                    width: 100%;
+                    height: 40px;
+                }
+            }
+
+            .group-edit-modal-header {
+                font-size: 20px;
+            }
+        }
+    }
+}

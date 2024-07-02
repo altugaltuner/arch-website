@@ -125,7 +125,7 @@
         .flow-page-main-column {
             display: flex;
             flex-direction: column;
-            width: 250px;
+            width: 20%;
 
             .flow-page-title {
                 font-size: 40px;
@@ -215,7 +215,6 @@
             .all-companies-column {
                 .all-companies-page-title {
                     font-size: 30px;
-
                 }
 
                 .flow-page-row {
@@ -237,8 +236,6 @@
     }
 }
 
-
-
 @media screen and (max-width: 450px) {
     .flow-page-main {
         .flow-page-main-row {
@@ -251,7 +248,6 @@
                         .company-hub-one-logo {
                             width: 80%;
                             height: 80%;
-
                         }
                     }
                 }

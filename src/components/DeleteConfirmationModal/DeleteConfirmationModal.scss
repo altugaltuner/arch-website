@@ -74,3 +74,24 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .delete-confirmation-modal {
+        .delete-confirmation-modal-content {
+            padding: 20px;
+            width: 300px;
+            height: 200px;
+
+            .delete-confirmation-header {
+                font-size: 20px;
+            }
+
+            .delete-confirmation-close {
+                width: 30px;
+                height: 30px;
+                top: 5px;
+                right: 5px;
+            }
+        }
+    }
+}
