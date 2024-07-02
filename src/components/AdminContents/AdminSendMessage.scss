@@ -1,0 +1,116 @@
+@use "../../styles/abstracts/variables" as *;
+
+.admin-send-message-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+
+    .admin-send-message-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .admin-inbox-for-messages {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            border: 1px solid $border-color;
+            padding: 20px;
+            border-radius: 15px;
+            align-items: center;
+
+            .admin-inbox-send-btn {
+                width: 200px;
+                height: 50px;
+                padding: 10px 20px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+                font-size: 20px;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+            }
+
+            .dustbin-for-admin-mails {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                border: 1px solid $border-color;
+                border-radius: 15px;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+
+                .admin-inbox-subheader {
+                    font-size: 22px;
+                    font-weight: 400;
+                }
+
+                .admin-dustbin-email {
+                    width: 38px;
+                    height: 40px;
+                }
+            }
+        }
+
+        .admin-inbox {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .admin-inbox-subheader {
+                font-size: 26px;
+                font-weight: 400;
+            }
+
+            .messages-sent-by-admin-ul {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                max-height: 500px;
+                padding: 10px;
+                overflow-y: scroll;
+
+                .messages-sent-by-admin-li {
+                    display: flex;
+                    border: 1px solid $border-color;
+                    flex-direction: column;
+                    padding: 15px;
+                    border-radius: 15px;
+
+                    .message-div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        .message-div-title {
+                            font-weight: 400;
+                            font-size: 20px;
+                        }
+
+                        .message-div-content {
+                            font-weight: 300;
+                            font-size: 18px;
+                        }
+
+                        .message-div-date {
+                            font-weight: 300;
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+}

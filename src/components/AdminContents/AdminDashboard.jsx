@@ -2,40 +2,47 @@ import React from 'react';
 import "./AdminDashboard.scss";
 
 function AdminDashBoard() {
+    const activities = [
+        { user: "Altuğ Altuner", project: "X Projesi", folder: "Y Klasörü", file: "Zemin Planları", action: "indirdi" },
+        { user: "Elif Yılmaz", project: "Finans Projesi", folder: "Raporlar Klasörü", file: "2023 Bilanço", action: "indirdi" },
+        { user: "Mehmet Arslan", project: "Pazarlama Projesi", folder: "Sunumlar Klasörü", file: "Q1 Strateji", action: "sildi" },
+        { user: "Ayşe Demir", project: "İnsan Kaynakları Projesi", folder: "Dökümanlar Klasörü", file: "Eğitim Programı", action: "yorum yazdı" },
+        { user: "Fatih Koç", project: "Satış Projesi", folder: "Teklifler Klasörü", file: "Müşteri Teklifleri", action: "indirdi" },
+        { user: "Zeynep Kaya", project: "AR-GE Projesi", folder: "Araştırmalar Klasörü", file: "Pazar Analizi", action: "sildi" }
+    ];
 
     return (
         <div className="admin-dashboard-main">
             <div className='dashboard-current-state-all'>
                 <h2 className='dashboard-header'>Genel Durum</h2>
-                <div>
-                    <h3 className='dashboard-p'>Kullanıcı Sayısı</h3>
-                    <p>20</p>
-                </div>
-                <div>
-                    <h3 className='dashboard-p'>Proje Sayısı</h3>
-                    <p>25</p> {/* This should be dynamic and projects name should include*/}
-                    <p className='dashboard-p'>Aktif Projeler</p>
-                    <p className='dashboard-p'>Tamamlanan Projeler</p>
-                </div>
-                <div>
-                    <h3 className='dashboard-p'>Tüm Revizeler</h3>
-                    <p>revize 1</p>
-                    <p>revize 2</p>
-                </div>
-                <div>
-                    <h3 className='dashboard-p'>Kullanılan Alan</h3>
-                    <p>20GB</p>
+                <div className='dashboard-row-inner'>
+                    <div className='dashboard-oneline-inner'>
+                        <h3 className='dashboard-p'>Kullanıcı Sayısı</h3>
+                        <p className='dashboard-p'>20</p>
+                    </div>
+                    <div className='dashboard-oneline-inner'>
+                        <h3 className='dashboard-p'>Proje Sayısı</h3>
+                        <p className='dashboard-p'>25</p>
+                    </div>
+                    <div className='dashboard-oneline-inner'>
+                        <h3 className='dashboard-p'>Tüm Revizeler</h3>
+                        <p className='dashboard-p'>revize 1</p>
+                        <p className='dashboard-p'>revize 2</p>
+                    </div>
+                    <div className='dashboard-oneline-inner'>
+                        <h3 className='dashboard-p'>Kullanılan Alan</h3>
+                        <p className='dashboard-p'>20GB</p>
+                    </div>
                 </div>
             </div>
 
             <div className='dashboard-last-activities'>
-                <h2 className='dashboard-act-header'>Son Aktiviteler</h2>
-                <p className='dashboard-act-p'>Altuğ Altuner - X Projesinden Y Klasöründen "Zemin Planları" dosyasını indirdi.</p>
-                <p className='dashboard-act-p'>Elif Yılmaz - Finans Projesinden Raporlar Klasöründen "2023 Bilanço" dosyasını indirdi.</p>
-                <p className='dashboard-act-p'>Mehmet Arslan - Pazarlama Projesinden Sunumlar Klasöründen "Q1 Strateji" dosyasını sildi.</p>
-                <p className='dashboard-act-p'>Ayşe Demir - İnsan Kaynakları Projesinden Dökümanlar Klasöründen "Eğitim Programı" dosyasına yorum yazdı.</p>
-                <p className='dashboard-act-p'>Fatih Koç - Satış Projesinden Teklifler Klasöründen "Müşteri Teklifleri" dosyasını indirdi.</p>
-                <p className='dashboard-act-p'>Zeynep Kaya - AR-GE Projesinden Araştırmalar Klasöründen "Pazar Analizi" dosyasını sildi.</p>
+                <h2 className='dashboard-act-header'>Tüm Aktiviteler</h2>
+                {activities.map((activity, index) => (
+                    <p key={index} className='dashboard-act-p'>
+                        {activity.user} - {activity.project}nden {activity.folder}nden "{activity.file}" dosyasını {activity.action}.
+                    </p>
+                ))}
             </div>
         </div>
     );

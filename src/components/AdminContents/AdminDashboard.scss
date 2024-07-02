@@ -14,11 +14,27 @@
         gap: 10px;
 
         .dashboard-header {
-            font-weight: 500;
+            font-weight: 400;
         }
 
-        .dashboard-p {
-            font-weight: 400;
+        .dashboard-row-inner {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            .dashboard-oneline-inner {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid $border-color;
+                border-radius: 15px;
+                padding: 10px;
+                gap: 10px;
+
+                .dashboard-p {
+                    font-weight: 400;
+                }
+            }
         }
     }
 
@@ -26,9 +42,14 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        padding: 20px;
+        border: 1px solid $border-color;
+        border-radius: 15px;
 
         .dashboard-act-header {
-            font-weight: 500;
+            font-weight: 400;
+            border-bottom: 1px solid $border-color;
+            padding-bottom: 10px;
         }
 
         .dashboard-act-p {

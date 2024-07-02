@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .admin-sub-setting-page {
     display: flex;
     width: 65%;
@@ -19,6 +21,8 @@
         flex-direction: column;
         gap: 20px;
         width: 100%;
-        padding: 15px;
+        padding: 20px;
+        border: 1px solid $border-color;
+        border-radius: 15px;
     }
 }
