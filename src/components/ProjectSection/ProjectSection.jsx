@@ -282,6 +282,14 @@ function ProjectSection({ clickedProject }) {
                                 />
                             </div>
                         ))}
+                        <div className="dustbin-project-folder">
+                            <h2 className="project-folder-name">Çöp Kutusu</h2>
+                            <img
+                                className="project-folder-image"
+                                src={folderIcon}
+                                alt="folder-icon"
+                            />
+                        </div>
                     </div>
                 ) : (
                     <p>Bu projede henüz dosya yok.</p>

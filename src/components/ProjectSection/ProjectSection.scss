@@ -70,6 +70,38 @@
         display: flex;
         flex-direction: row;
 
+        .dustbin-project-folder {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            margin: 10px;
+            height: auto;
+            width: 200px;
+            border-radius: 10px;
+            border: 1px solid $border-color;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: darken($background-color, 10%);
+            }
+
+            .project-folder-name {
+                font-size: 18px;
+                font-weight: 400;
+                margin: 10px 0;
+                color: $font-color;
+            }
+
+            .project-folder-image {
+                width: 120px;
+                object-fit: cover;
+                margin-bottom: 10px;
+            }
+        }
+
         .project-folder {
             display: flex;
             position: relative;

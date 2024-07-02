@@ -64,8 +64,10 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
             </div>
             {filteredFiles && filteredFiles.map(file => {
                 const fileAttributes = file.attributes || {};
-                const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1) : '';
-                const iconSrc = fileIcons[fileExt] || fileIcon;
+                const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1).toLowerCase() : '';
+                const isImage = ["jpg", "jpeg", "png"].includes(fileExt);
+                const iconSrc = isImage ? `http://localhost:1337${fileAttributes.url}` : (fileIcons[fileExt] || fileIcon);
+
                 return (
                     <div key={file.id} className="file-folder-content" onClick={() => openFileModal(file)}>
                         <img
