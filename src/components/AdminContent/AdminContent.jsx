@@ -1,7 +1,7 @@
 import React from 'react';
 import "./AdminContent.scss";
 
-import AdminCopanySettings from "../../components/AdminContents/AdminCompanySettings";
+import AdminCompanySettings from "../../components/AdminContents/AdminCompanySettings";
 import AdminDashboard from "../../components/AdminContents/AdminDashboard";
 import AdminUsersSettings from "../../components/AdminContents/AdminUsersSettings";
 import AdminSupportSettings from '../../components/AdminContents/AdminSupportSettings';
@@ -17,7 +17,7 @@ function AdminContent({ selectedSetting }) {
             case "Kullanıcı Ayarları":
                 return <AdminUsersSettings />;
             case "Şirket Ayarları":
-                return <AdminCopanySettings />;
+                return <AdminCompanySettings />;
             case "Destek ve Geri Bildirim":
                 return <AdminSupportSettings />;
             default:

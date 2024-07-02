@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import "./AdminCompanySettings.scss";
 
-const AdminCompanySettings = ({ searchTerm }) => {
+const AdminCompanySettings = () => {
 
     return (
         <div className="admin-company-settings-main">
-            <p>admin-company-settings</p>
+            <p>Şirket Profili</p>
+            <p>Şirket Aboneliğini Yönet</p>
         </div>
     );
 };

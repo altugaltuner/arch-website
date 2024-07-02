@@ -5,7 +5,9 @@ function AdminSupportSettings() {
 
     return (
         <div className="admin-support-settings-main">
-            <p>admin-support-settings-main</p>
+            <p>Geri Bildirim</p>
+            <p>Sıkça Sorulan Sorular</p>
+            <p>Destek Talepleri</p>
         </div>
     );
 }

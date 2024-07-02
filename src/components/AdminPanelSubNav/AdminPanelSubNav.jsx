@@ -11,7 +11,7 @@ function AdminPanelSubNav({ getRelevantSettings }) {
         {
             id: 2,
             header: "İleti Gönderme",
-            items: ["Toplu İleti", "Özel İleti"]
+            items: ["Tüm İletiler", "Gelen Kutusu", "Gönderilenler", "Toplu İleti Gönderimi", "Özel İleti Gönderimi", "Çöp Kutusu"]
         },
         {
             id: 3,
@@ -21,7 +21,7 @@ function AdminPanelSubNav({ getRelevantSettings }) {
         {
             id: 4,
             header: "Şirket Ayarları",
-            items: ["Şirket Profili", "Şirket Aboneliği", "Güvenlik Ayarları"]
+            items: ["Şirket Profili", "Şirket Aboneliği"]
         },
         {
             id: 5,

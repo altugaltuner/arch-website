@@ -5,7 +5,11 @@ function AdminUserSettings() {
 
     return (
         <div className="admin-user-settings-main">
-            <p>admin-user-settings-main</p>
+            <div className='admin-send-message-inner'>
+                <p>Kullanıcı Ekleme/Silme</p>
+                <p>Kullanıcı Rol ve İzinleri Yönetme</p>
+                <p>Şirket içi ve dışı kullanıcılar</p>
+            </div>
         </div>
     );
 }

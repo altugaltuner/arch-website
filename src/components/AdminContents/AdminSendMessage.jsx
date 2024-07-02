@@ -5,8 +5,20 @@ function AdminSendMessage() {
 
     return (
         <div className="admin-send-message-main">
-            <p>admin-send</p>
+            <div className='admin-send-message-inner'>
+                <p>Tüm İletiler</p>
+                <p>Gelen Kutusu</p>
+                <p>Gönderilenler</p>
+                <p>Toplu İleti Gönder</p>
+                <p>Özel İleti Gönder</p>
+                <p>Çöp Kutusu</p>
+            </div>
+
+            <div className='send-message'>
+
+            </div>
         </div>
+
     );
 }
 
