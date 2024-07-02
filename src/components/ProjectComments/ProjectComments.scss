@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 50%;
     padding: 10px;
     font-family: $primary-font;
     border: 1px solid $border-color;
@@ -63,17 +63,20 @@
 
             .project-comment-text {
                 width: 70%;
+                font-size: 18px;
                 padding: 15px;
                 border-right: 1px solid $border-color;
             }
 
             .project-comment-state {
                 width: 15%;
+                font-size: 18px;
                 padding: 15px;
                 border-right: 1px solid $border-color;
             }
 
             .project-comment-owner {
+                font-size: 18px;
                 padding: 15px;
                 width: 15%;
             }

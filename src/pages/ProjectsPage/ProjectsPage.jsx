@@ -7,6 +7,7 @@ import ProjectHeader from "../../components/ProjectHeader/ProjectHeader";
 import ProjectSection from "../../components/ProjectSection/ProjectSection";
 import ProjectTeam from "../../components/ProjectTeam/ProjectTeam";
 import ProjectComments from "../../components/ProjectComments/ProjectComments";
+import ProjectHistory from "../../components/ProjectHistory/ProjectHistory";
 
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
@@ -70,6 +71,7 @@ function ProjectsPage() {
                     </div>
                     <div className="inner-project-row">
                         {currentProject && <ProjectComments clickedProject={currentProject.data} />}
+                        {currentProject && <ProjectHistory clickedProject={currentProject.data} roles={roles} />}
                     </div>
                 </div>
             </div>
