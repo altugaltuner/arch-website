@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateGroupModal.scss';
 
 const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange, handleSubmit }) => {
     const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        if (showModal) {
+            setErrorMessage('');
+        }
+    }, [showModal]);
 
     if (!showModal) return null;
 
@@ -19,7 +25,7 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
     const handleFormSubmit = () => {
         if (newGroup.groupName.length > 40) {
             setErrorMessage('Grup adı en fazla 40 karakter olabilir.');
-            return null;
+            return false;
         }
         handleSubmit();
     };
