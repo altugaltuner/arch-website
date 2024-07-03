@@ -31,7 +31,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                     {messages.map(message => (
                         <div key={message.id} className="message">
                             <h3 className="message-header">{message.attributes.header}</h3>
-                            <p className="message-owner">{message.attributes.users_permissions_user.data.attributes.username}</p>
+                            <p className="message-owner">{message.attributes.users_permissions_user?.data?.attributes?.username}</p>
                             <p className="message-content">{message.attributes.content}</p>
                             {message.attributes?.contentMedia?.data?.length > 0 && (
                                 <div className="message-media-div">

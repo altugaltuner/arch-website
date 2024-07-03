@@ -20,7 +20,6 @@
         flex-direction: column;
         gap: 20px;
         padding: 20px;
-        justify-content: center;
         border-radius: 15px;
         position: relative;
         text-align: center;
@@ -104,7 +103,6 @@
             justify-content: center;
             gap: 20px;
 
-            .inbox-button-confirm,
             .inbox-button-cancel {
                 border: 1px solid $border-color;
                 color: $font-color;
