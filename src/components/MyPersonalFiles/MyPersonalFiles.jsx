@@ -21,6 +21,7 @@ function MyPersonalFiles({ user }) {
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [trashFolder, setTrashFolder] = useState(null); // Çöp kutusu klasörü için state
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -31,8 +32,11 @@ function MyPersonalFiles({ user }) {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:1337/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
-                setPersonalFolders(response.data.personal_folders);
+                const response = await axios.get(`http://localhost:1337/api/users/${user.id}?populate=personal_folders.personalFolderContent,personalDustbin.personalFolderContent`);
+                const folders = response.data.personal_folders;
+                const dustbin = response.data.personalDustbin;
+                setPersonalFolders(folders);
+                setTrashFolder(dustbin);
             } catch (error) {
                 console.error('Error fetching the data', error);
             } finally {
@@ -60,6 +64,10 @@ function MyPersonalFiles({ user }) {
                 },
             });
             const uploadedFile = uploadResponse.data[0];
+            if (!selectedFolder) {
+                console.error('No selected folder');
+                return;
+            }
             const updatedContent = [...selectedFolder.personalFolderContent, uploadedFile];
 
             await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
@@ -82,7 +90,12 @@ function MyPersonalFiles({ user }) {
     };
 
     const uploadFile = (folderId) => {
-        setSelectedFolder(personalFolders.find(folder => folder.id === folderId));
+        const folder = personalFolders.find(folder => folder.id === folderId);
+        if (!folder) {
+            console.error('Folder not found');
+            return;
+        }
+        setSelectedFolder(folder);
         fileInputRef.current.click();
     };
 
@@ -100,31 +113,72 @@ function MyPersonalFiles({ user }) {
         }
     };
 
-    const handleFileDelete = async () => {
-        if (!selectedFile) return;
+    const moveFileToTrash = async (file) => {
+        if (!trashFolder) {
+            console.error("Çöp Kutusu bulunamadı.");
+            return;
+        }
+        if (!selectedFolder) {
+            console.error("Selected folder is null.");
+            return;
+        }
+
+        const updatedFolderContent = selectedFolder.personalFolderContent.filter(f => f.id !== file.id);
+        const updatedTrashContent = [...trashFolder.personalFolderContent, file];
 
         try {
-            await axios.delete(`http://localhost:1337/api/upload/files/${selectedFile.id}`);
-
-            const updatedContent = selectedFolder.personalFolderContent.filter(file => file.id !== selectedFile.id);
-
             await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
-                data: {
-                    personalFolderContent: updatedContent.map(file => file.id),
-                },
+                data: { personalFolderContent: updatedFolderContent.map(f => f.id) }
+            });
+
+            await axios.put(`http://localhost:1337/api/personal-folders/${trashFolder.id}`, {
+                data: { personalFolderContent: updatedTrashContent.map(f => f.id) }
             });
 
             setPersonalFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === selectedFolder.id) {
-                    return { ...folder, personalFolderContent: updatedContent };
+                    return { ...folder, personalFolderContent: updatedFolderContent };
+                }
+                if (folder.id === trashFolder.id) {
+                    return { ...folder, personalFolderContent: updatedTrashContent };
                 }
                 return folder;
             }));
-            setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedContent }));
-            setSelectedFile(null);
-
+            setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedFolderContent }));
         } catch (error) {
-            console.error('Error deleting the file', error);
+            console.error('Error moving file to trash', error);
+        }
+    };
+
+    const handleFileDelete = async () => {
+        if (!selectedFile) return;
+        await moveFileToTrash(selectedFile);
+        setSelectedFile(null);
+    };
+
+    const permanentlyDeleteFile = async (fileId) => {
+        try {
+            if (!trashFolder) {
+                console.error("Çöp Kutusu bulunamadı.");
+                return;
+            }
+
+            await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
+            const updatedTrashContent = trashFolder.personalFolderContent.filter(file => file.id !== fileId);
+
+            await axios.put(`http://localhost:1337/api/personal-folders/${trashFolder.id}`, {
+                data: { personalFolderContent: updatedTrashContent.map(file => file.id) }
+            });
+
+            setPersonalFolders(prevFolders => prevFolders.map(folder => {
+                if (folder.id === trashFolder.id) {
+                    return { ...folder, personalFolderContent: updatedTrashContent };
+                }
+                return folder;
+            }));
+            setTrashFolder(prevTrash => ({ ...prevTrash, personalFolderContent: updatedTrashContent }));
+        } catch (error) {
+            console.error('Error deleting file', error);
         }
     };
 
@@ -211,6 +265,9 @@ function MyPersonalFiles({ user }) {
     };
 
     const renderFolderContent = (folder) => {
+        if (!folder || !folder.personalFolderContent) {
+            return null;
+        }
         const filteredFiles = folder.personalFolderContent.filter(file =>
             file.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -260,11 +317,12 @@ function MyPersonalFiles({ user }) {
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
 
-                <div className="folder">
-                    <img src={folderIcon} alt="folder" className="folder-icon" />
-                    <p className="folder-p">Çöp Kutusu</p>
-                </div>
-
+                {trashFolder && (
+                    <div className="folder" onClick={(event) => handleFolderClick(event, trashFolder)}>
+                        <img src={folderIcon} alt="folder" className="folder-icon" />
+                        <p className="folder-p">Çöp Kutusu</p>
+                    </div>
+                )}
             </div>
             <input
                 ref={fileInputRef}
@@ -272,7 +330,16 @@ function MyPersonalFiles({ user }) {
                 style={{ display: "none" }}
                 onChange={handleFileUpload}
             />
-            {selectedFile && <FilePreviewModal file={selectedFile} onClose={closeFilePreview} onDownload={downloadFile} onDelete={handleFileDelete} />}
+            {selectedFile && (
+                <FilePreviewModal
+                    file={selectedFile}
+                    onClose={closeFilePreview}
+                    onDownload={downloadFile}
+                    onDelete={handleFileDelete}
+                    onPermanentDelete={permanentlyDeleteFile}
+                    isTrash={selectedFolder && trashFolder && selectedFolder.id === trashFolder.id} // Çöp kutusu mu kontrolü
+                />
+            )}
             <AddFolderModal
                 isOpen={showAddFolderModal}
                 onClose={() => setShowAddFolderModal(false)}

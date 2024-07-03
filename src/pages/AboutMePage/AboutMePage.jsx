@@ -12,7 +12,7 @@ import inboxLogo from "../../assets/icons/inbox-logo.png";
 function AboutMePage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    console.log(user);
     const [showInboxModal, setShowInboxModal] = useState(false);
 
     useEffect(() => {
