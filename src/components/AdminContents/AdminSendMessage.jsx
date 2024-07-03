@@ -1,33 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import "./AdminSendMessage.scss";
-import { adminMessages } from "../AdminSentMessages/AdminSentMessages";
+import AdminSentMessages from "../AdminSentMessages/AdminSentMessages"; // Doğru import
 import dustbinLogo from "../../assets/icons/delete-icon.png";
 import SendBulkMessageModal from '../SendBulkMessageModal/SendBulkMessageModal';
 
 function AdminSendMessage() {
-    const [messages, setMessages] = useState([]);
     const [showModal, setShowModal] = useState(false);
-
-    useEffect(() => {
-        setMessages(adminMessages);
-    }, []);
 
     return (
         <div className="admin-send-message-main">
             <div className='admin-send-message-inner'>
                 <div className='admin-inbox'>
                     <h3 className='admin-inbox-subheader'>Gönderilenler</h3>
-                    <ul className='messages-sent-by-admin-ul'>
-                        {messages.map((message, index) => (
-                            <li key={index} className='messages-sent-by-admin-li'>
-                                <div className='message-div'>
-                                    <h4 className='message-div-title'>{message.title}</h4>
-                                    <p className='message-div-content'>{message.content}</p>
-                                    <span className='message-div-date'>{message.date}</span>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                    <AdminSentMessages /> {/* Burada adminMessages yerine bileşeni render ediyoruz */}
                 </div>
 
                 <div className='admin-inbox-for-messages'>

@@ -1,0 +1,39 @@
+@use "../../styles/abstracts/variables" as *;
+
+.admin-sent-messages-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 500px;
+    padding: 10px;
+    overflow-y: scroll;
+
+    .message-item {
+        display: flex;
+        border: 1px solid $border-color;
+        flex-direction: column;
+        padding: 15px;
+        border-radius: 15px;
+        gap: 10px;
+
+        .message-div-title {
+            font-weight: 500;
+            font-size: 20px;
+        }
+
+        .message-div-content {
+            font-weight: 300;
+            font-size: 18px;
+        }
+
+        .message-div-date {
+            font-weight: 300;
+            font-size: 18px;
+        }
+
+        .message-div-owner {
+            font-weight: 300;
+            font-size: 18px;
+        }
+    }
+}

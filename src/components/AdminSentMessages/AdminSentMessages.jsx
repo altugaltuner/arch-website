@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./AdminSentMessages.scss";
 
-export const adminMessages = [
-    { title: "Altın Kule Bina Statiği Güncellemesi", content: "Yapılan son statik hesaplamalar neticesinde, binanın temel yapısında bazı revizyonlar yapılması gerektiği ortaya çıkmıştır. Bu revizyonlar, binanın genel güvenliği ve dayanıklılığı açısından büyük önem arz etmektedir.", date: "05.12.2024" },
-
-    { title: "Yeşil Vadi Projesi", content: "Betonarme yapılar için kullanılan malzemelerde kalite artırımı yapılacaktır. Özellikle kolon ve kirişlerde daha yüksek dayanıklılığa sahip beton türlerine geçilecektir.", date: "05.12.2024" },
-
-    { title: "Zemin Etüdü", content: "Zemin etüdü çalışmalarında elde edilen yeni veriler ışığında, binanın oturacağı zeminde bazı iyileştirme çalışmaları yapılması planlanmıştır. Bu çalışmalar, yapının uzun vadede stabil kalmasını sağlayacaktır.", date: "05.12.2024" }
-];
-
 function AdminSentMessages() {
+    const [adminMessages, setAdminMessages] = useState([]);
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            try {
+                const response = await fetch('http://localhost:1337/api/multiple-messages/?populate=*');
+                if (!response.ok) {
+                    throw new Error('Veriler çekilirken hata oluştu');
+                }
+                const result = await response.json();
+                console.log('Sonuç:', result);
+                setAdminMessages(result.data);
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+        };
+
+        fetchMessages();
+    }, []);
+
     return (
         <div className="admin-sent-messages-main">
-
+            {adminMessages.map((message) => (
+                <div key={message.id} className="message-item">
+                    <h3 className='message-div-title'>{message.attributes.header}</h3>
+                    <p className='message-div-content'>{message.attributes.content}</p>
+                    <p className='message-div-date'>Tarih: {new Date(message.attributes.createdAt).toLocaleDateString()}</p>
+                    <p className='message-div-owner'>Gönderen: {message.attributes.users_permissions_user?.data?.attributes?.username}</p>
+                </div>
+            ))}
         </div>
     );
 }

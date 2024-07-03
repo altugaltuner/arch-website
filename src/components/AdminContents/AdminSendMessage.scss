@@ -72,46 +72,6 @@
                 font-size: 26px;
                 font-weight: 400;
             }
-
-            .messages-sent-by-admin-ul {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                max-height: 500px;
-                padding: 10px;
-                overflow-y: scroll;
-
-                .messages-sent-by-admin-li {
-                    display: flex;
-                    border: 1px solid $border-color;
-                    flex-direction: column;
-                    padding: 15px;
-                    border-radius: 15px;
-
-                    .message-div {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 10px;
-
-                        .message-div-title {
-                            font-weight: 500;
-                            font-size: 20px;
-                        }
-
-                        .message-div-content {
-                            font-weight: 300;
-                            font-size: 18px;
-                        }
-
-                        .message-div-date {
-                            font-weight: 300;
-                            font-size: 18px;
-                        }
-                    }
-                }
-            }
         }
     }
-
-
 }
