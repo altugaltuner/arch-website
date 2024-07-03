@@ -33,8 +33,16 @@ function MyPersonalFiles({ user }) {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://localhost:1337/api/users/${user.id}?populate=personal_folders.personalFolderContent,personalDustbin.personalFolderContent`);
-                const folders = response.data.personal_folders;
-                const dustbin = response.data.personalDustbin;
+                const folders = response.data.personal_folders || [];
+                const dustbin = response.data.personalDustbin ? {
+                    id: response.data.personalDustbin.id,
+                    folderName: "Çöp Kutusu",
+                    personalFolderContent: response.data.personalDustbin.personalFolderContent || []
+                } : null;
+
+                console.log('Fetched folders:', folders);
+                console.log('Fetched dustbin:', dustbin);
+
                 setPersonalFolders(folders);
                 setTrashFolder(dustbin);
             } catch (error) {
@@ -114,26 +122,36 @@ function MyPersonalFiles({ user }) {
     };
 
     const moveFileToTrash = async (file) => {
-        if (!trashFolder) {
-            console.error("Çöp Kutusu bulunamadı.");
+        console.log('Trash folder before move:', trashFolder);
+        console.log('Selected folder before move:', selectedFolder);
+
+        if (!trashFolder || !trashFolder.id) {
+            console.error("Çöp Kutusu bulunamadı veya ID'si tanımlanmadı.");
             return;
         }
-        if (!selectedFolder) {
-            console.error("Selected folder is null.");
+        if (!selectedFolder || !selectedFolder.id) {
+            console.error("Seçili klasör bulunamadı veya ID'si tanımlanmadı.");
             return;
         }
 
         const updatedFolderContent = selectedFolder.personalFolderContent.filter(f => f.id !== file.id);
         const updatedTrashContent = [...trashFolder.personalFolderContent, file];
 
+        console.log('Updated folder content:', updatedFolderContent);
+        console.log('Updated trash content:', updatedTrashContent);
+
         try {
             await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
                 data: { personalFolderContent: updatedFolderContent.map(f => f.id) }
             });
 
+            console.log(`Updated selected folder ${selectedFolder.id} with content:`, updatedFolderContent.map(f => f.id));
+
             await axios.put(`http://localhost:1337/api/personal-folders/${trashFolder.id}`, {
                 data: { personalFolderContent: updatedTrashContent.map(f => f.id) }
             });
+
+            console.log(`Updated trash folder ${trashFolder.id} with content:`, updatedTrashContent.map(f => f.id));
 
             setPersonalFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === selectedFolder.id) {
@@ -238,30 +256,32 @@ function MyPersonalFiles({ user }) {
     };
 
     const renderFolders = () => {
-        return personalFolders.map(folder => (
-            <div key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
-                <img
-                    className="folder-editpencil"
-                    src={editPencil}
-                    alt="editPencil"
-                    onClick={() => {
-                        setFolderToEdit(folder);
-                        setShowEditFolderModal(true);
-                    }}
-                />
-                <img
-                    className="folder-deleteicon"
-                    src={deleteIcon}
-                    alt="deleteIcon"
-                    onClick={() => {
-                        setFolderToDelete(folder);
-                        setShowDeleteFolderModal(true);
-                    }}
-                />
-                <img src={folderIcon} alt="folder" className="folder-icon" />
-                <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
-            </div>
-        ));
+        return personalFolders
+            .filter(folder => folder.id !== trashFolder?.id)
+            .map(folder => (
+                <div key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
+                    <img
+                        className="folder-editpencil"
+                        src={editPencil}
+                        alt="editPencil"
+                        onClick={() => {
+                            setFolderToEdit(folder);
+                            setShowEditFolderModal(true);
+                        }}
+                    />
+                    <img
+                        className="folder-deleteicon"
+                        src={deleteIcon}
+                        alt="deleteIcon"
+                        onClick={() => {
+                            setFolderToDelete(folder);
+                            setShowDeleteFolderModal(true);
+                        }}
+                    />
+                    <img src={folderIcon} alt="folder" className="folder-icon" />
+                    <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
+                </div>
+            ));
     };
 
     const renderFolderContent = (folder) => {
@@ -297,7 +317,9 @@ function MyPersonalFiles({ user }) {
                         </div>
                     ))}
                 </div>
-                <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
+                {folder.id !== trashFolder.id && (
+                    <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
+                )}
             </div>
         );
     };
@@ -317,7 +339,7 @@ function MyPersonalFiles({ user }) {
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
 
-                {trashFolder && (
+                {trashFolder && !selectedFolder && (
                     <div className="folder" onClick={(event) => handleFolderClick(event, trashFolder)}>
                         <img src={folderIcon} alt="folder" className="folder-icon" />
                         <p className="folder-p">Çöp Kutusu</p>
