@@ -327,7 +327,7 @@ function ProjectSection({ clickedProject }) {
             {editModal && (
                 <EditProjectFolderModal
                     showEditModal={editModal}
-                    setEditModal={setEditModal}
+                    setShowEditModal={setShowEditModal}
                     folderToEdit={folderToEdit}
                     newFolderName={newFolderName}
                     setNewFolderName={setNewFolderName}

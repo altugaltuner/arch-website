@@ -43,7 +43,7 @@ function FlowPage() {
             <Navigation />
             <div className="flow-page-main-row">
                 <div className="flow-page-main-column">
-                    <h1 className="flow-page-title">Flow</h1>
+                    <h1 className="flow-page-title">Ofisim</h1>
                     <div className="flow-descriptions">
 
                         <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Ofisim</span>İşinizi organize etmenize ve ekibinizle etkin bir şekilde işbirliği yapmanıza yardımcı olan, kullanımı kolay ve güçlü bir proje yönetim aracıdır. Ofisim sayesinde projelerinizi, dosyalarınızı ve ekip üyelerinizi tek bir platformda toplar, iş süreçlerinizi daha verimli hale getirir.</p>

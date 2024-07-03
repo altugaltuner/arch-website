@@ -20,6 +20,7 @@ function MyPersonalFiles({ user }) {
     const [showEditFolderModal, setShowEditFolderModal] = useState(false);
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -178,6 +179,10 @@ function MyPersonalFiles({ user }) {
         }
     };
 
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     const renderFolders = () => {
         return personalFolders.map(folder => (
             <div key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
@@ -206,15 +211,25 @@ function MyPersonalFiles({ user }) {
     };
 
     const renderFolderContent = (folder) => {
+        const filteredFiles = folder.personalFolderContent.filter(file =>
+            file.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
         return (
             <div className="folder-content">
                 <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
                 <h3 className="folder-header">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</h3>
 
-                <input type="text" />{/* Arama çubuğu buraya yapılacak. */}
+                <input
+                    className="search-input"
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    placeholder="Dosya ara..."
+                />
 
                 <div className="files">
-                    {folder.personalFolderContent && folder.personalFolderContent.map(file => (
+                    {filteredFiles.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
                             {file.formats && file.formats.thumbnail ? (
                                 <img className="files-img" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt={file.name} />

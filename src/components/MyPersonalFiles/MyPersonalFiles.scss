@@ -47,6 +47,13 @@
             justify-content: center;
             align-items: center;
 
+            .search-input {
+                width: 100%;
+                padding: 5px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+            }
+
 
             .upload-file-button {
                 border: 1px solid $border-color;

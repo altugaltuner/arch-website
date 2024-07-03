@@ -17,10 +17,10 @@
         border-radius: 10px;
         flex-direction: column;
         text-align: center;
-        gap: 50px;
+        gap: 40px;
         position: fixed;
-        width: 400px;
-        height: 220px;
+        width: 375px;
+        height: 180px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -45,6 +45,11 @@
             top: 10px;
             right: 10px;
             cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: $grey;
+            }
         }
 
         .delete-pro-div {
@@ -71,7 +76,7 @@
 
         .delete-pro-modal-p {
             font-size: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
     }
 }
