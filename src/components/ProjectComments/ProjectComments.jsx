@@ -7,7 +7,7 @@ function ProjectComments({ clickedProject }) {
 
     useEffect(() => {
         if (clickedProject) {
-            console.log("clickedProject", clickedProject);
+            //console.log("clickedProject", clickedProject);
             const projectRevises = clickedProject.attributes.project_revises.data;
             const users = clickedProject.attributes.users.data;
 

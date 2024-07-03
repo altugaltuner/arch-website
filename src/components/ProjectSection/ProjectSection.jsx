@@ -197,7 +197,7 @@ function ProjectSection({ clickedProject }) {
     function openInsideFolder(folder) {
         setParentFolder(currentFolder);
         setCurrentFolder({ id: folder.id, ...folder.attributes });
-        console.log("Current Folder: ", { id: folder.id, ...folder.attributes }); // Debugging purpose
+        // console.log("Current Folder: ", { id: folder.id, ...folder.attributes });  Debugging purpose
     }
 
     function goBack() {
