@@ -31,11 +31,12 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                     {messages.map(message => (
                         <div key={message.id} className="message">
                             <h3 className="message-header">{message.attributes.header}</h3>
+                            <p className="message-owner">{message.attributes.users_permissions_user.data.attributes.username}</p>
                             <p className="message-content">{message.attributes.content}</p>
-                            {message.attributes.contentMedia.data.length > 0 && (
+                            {message.attributes?.contentMedia?.data?.length > 0 && (
                                 <div className="message-media-div">
                                     {message.attributes.contentMedia.data.map(media => (
-                                        <img className="message-media-img" key={media.id} src={media.attributes.url} alt={media.attributes.name} />
+                                        <img className="message-media-img" key={media.id} src={`http://localhost:1337${media.attributes.url}`} alt={media.attributes.name} />
                                     ))}
                                 </div>
                             )}

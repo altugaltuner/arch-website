@@ -16,11 +16,61 @@
 
     .open-inbox-content {
         background-color: $background-color;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         padding: 20px;
-        border-radius: 5px;
+        justify-content: center;
+        border-radius: 15px;
         position: relative;
         text-align: center;
         width: 800px;
+        max-height: 600px;
+        overflow-y: auto;
+
+        .messages-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+
+            .message {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                width: 45%;
+                padding: 20px;
+                border: 1px solid $border-color;
+                border-radius: 10px;
+
+                .message-header {
+                    font-size: 26px;
+                    font-weight: 400;
+                }
+
+                .message-owner {
+                    font-size: 20px;
+                    font-weight: 400;
+                }
+
+                .message-content {
+                    font-size: 18px;
+                }
+
+                .message-media-div {
+                    display: flex;
+                    gap: 10px;
+                    border: 1px solid $border-color;
+                    padding: 10px;
+                    border-radius: 15px;
+
+                    .message-media-img {
+                        width: 100px;
+                    }
+                }
+            }
+        }
 
         .open-inbox-modal-span {
             position: absolute;
@@ -45,9 +95,8 @@
         }
 
         .open-inbox-modal-header {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 400;
-            margin-bottom: 20px;
         }
 
         .open-inbox-modal-buttons {
