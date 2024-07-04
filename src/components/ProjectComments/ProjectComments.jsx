@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import "./ProjectComments.scss";
+import NewReviseModal from "../../components/NewReviseModal/NewReviseModal"; // Yeni modal bileşenini import edin
 
 function ProjectComments({ clickedProject }) {
 
     const [commentsWithDetails, setCommentsWithDetails] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Modal durumu için state
 
     useEffect(() => {
         if (clickedProject) {
@@ -35,9 +37,18 @@ function ProjectComments({ clickedProject }) {
         }
     }, [clickedProject]);
 
+    const openNewReviseModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeNewReviseModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="project-comments-main">
             <h2 className='project-comments-h2'>Proje Revizeleri</h2>
+            <button className='new-revise-create-btn' onClick={openNewReviseModal}>Revize Yaz</button>
             <div className='project-comments-table'>
                 <div className='comment-table-head'>
                     <div className='comment-table-head-text'>Revize</div>
@@ -58,6 +69,7 @@ function ProjectComments({ clickedProject }) {
                     </div>
                 ))}
             </div>
+            <NewReviseModal isOpen={isModalOpen} onClose={closeNewReviseModal} />
         </div>
     );
 }
