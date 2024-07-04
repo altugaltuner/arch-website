@@ -55,8 +55,8 @@ function AboutMePage() {
                 <div className="aboutme-page-row">
                     <MyProfile user={user} />
                     <div className="aboutme-page-column-2">
-                        <MyLastAct user={user} />
                         <MyActiveProjects user={user} />
+                        <MyLastAct user={user} />
                     </div>
                     <MyPersonalFiles user={user} />
                 </div>

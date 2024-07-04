@@ -40,7 +40,7 @@ function AdminDashBoard({ projectCount, userCount, reviseCount }) {
                 <h2 className='dashboard-act-header'>Tüm Aktiviteler</h2>
                 {activities.map((activity, index) => (
                     <p key={index} className='dashboard-act-p'>
-                        {activity.user} - {activity.project}nden {activity.folder}nden "{activity.file}" dosyasını {activity.action}.
+                        <span className='dashboard-bold-name'>{activity.user}</span> - {activity.project}nden {activity.folder}nden "{activity.file}" dosyasını {activity.action}.
                     </p>
                 ))}
             </div>

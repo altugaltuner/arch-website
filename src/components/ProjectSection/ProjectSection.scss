@@ -244,7 +244,8 @@
             flex-wrap: wrap;
             justify-content: center;
 
-            .project-folder {
+            .project-folder,
+            .dustbin-project-folder {
                 padding: 5px;
                 margin: 5px;
                 width: 100px;

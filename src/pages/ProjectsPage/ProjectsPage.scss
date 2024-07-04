@@ -34,8 +34,8 @@
     .projects-page {
         .inner-project-page {
             flex-direction: column;
-            width: 93%;
-            transform: translate(60px, 0px);
+            width: calc(100% - 60px);
+            transform: translate(70px, 0px);
 
             .inner-project-column {
 
@@ -52,13 +52,12 @@
 @media screen and (max-width: 450px) {
     .projects-page {
         .inner-project-page {
-
-
             .inner-project-column {
-
+                padding: 5px;
 
                 .inner-project-row {
                     gap: 5px;
+                    width: 95%;
                 }
             }
         }

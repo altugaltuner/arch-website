@@ -11,3 +11,15 @@
         width: calc(100% - 110px);
     }
 }
+
+// buradan sonrasını görmüyor
+@media screen and (max-width: 950) {
+    .admin-panel-main {
+        flex-direction: column;
+
+        .admin-content {
+            transform: translate(60px, 0px);
+            width: calc(100% - 60px);
+        }
+    }
+}

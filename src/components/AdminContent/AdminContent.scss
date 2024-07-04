@@ -2,7 +2,7 @@
 
 .admin-sub-setting-page {
     display: flex;
-    width: 65%;
+    width: 70%;
     flex-direction: column;
     padding: 25px;
     color: $font-color;
@@ -21,8 +21,5 @@
         flex-direction: column;
         gap: 20px;
         width: 100%;
-        padding: 20px;
-        border: 1px solid $border-color;
-        border-radius: 15px;
     }
 }
