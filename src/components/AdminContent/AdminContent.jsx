@@ -46,7 +46,7 @@ function AdminContent({ selectedSetting }) {
     const userCount = filteredCompany[0]?.attributes.users.data.length;
     const reviseCount = filteredCompany[0]?.attributes.project_revises.data.length;
 
-
+    const users = filteredCompany[0]?.attributes.users.data;
 
 
 
@@ -57,7 +57,7 @@ function AdminContent({ selectedSetting }) {
             case "İleti Gönderme":
                 return <AdminSendMessage />;
             case "Kullanıcı Ayarları":
-                return <AdminUsersSettings />;
+                return <AdminUsersSettings users={users} />;
             case "Şirket Ayarları":
                 return <AdminCompanySettings />;
             case "Destek ve Geri Bildirim":

@@ -16,7 +16,7 @@ function AdminPanelSubNav({ getRelevantSettings }) {
         {
             id: 3,
             header: "Kullanıcı Ayarları",
-            items: ["Kullanıcı Rol ve İzinleri Yönetme", "Kullanıcı Silme", "Şirket dışı Çalışan Bilgileri"]
+            items: ["Kullanıcı Rol ve İzinleri Yönetme", "Kullanıcı Silme", "Şirket Dışı Çalışan Bilgileri"]
         },
         {
             id: 4,

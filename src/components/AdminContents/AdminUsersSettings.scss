@@ -1,0 +1,23 @@
+@use "../../styles/abstracts/variables" as *;
+
+.admin-user-settings-main {
+    display: flex;
+    flex-direction: column;
+
+    .admin-send-message-inner {
+        display: flex;
+        flex-direction: column;
+
+        .user-set-one-div {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border: 1px solid $border-color;
+
+            .set-one-header {
+                font-size: 24px;
+                font-weight: 400;
+            }
+        }
+    }
+}
