@@ -1,7 +1,7 @@
 import React from 'react';
 import "./AdminDashboard.scss";
 
-function AdminDashBoard() {
+function AdminDashBoard({ projectCount, userCount, reviseCount }) {
     const activities = [
         { user: "Altuğ Altuner", project: "X Projesi", folder: "Y Klasörü", file: "Zemin Planları", action: "indirdi" },
         { user: "Elif Yılmaz", project: "Finans Projesi", folder: "Raporlar Klasörü", file: "2023 Bilanço", action: "indirdi" },
@@ -17,17 +17,17 @@ function AdminDashBoard() {
                 <h2 className='dashboard-header'>Genel Durum</h2>
                 <div className='dashboard-row-inner'>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p-header'>Kullanıcı Sayısı</h3>
-                        <p className='dashboard-p'>20</p>
+                        <h3 className='dashboard-p-header'>Çalışan Sayısı</h3>
+                        <p className='dashboard-p'> {userCount}</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
                         <h3 className='dashboard-p-header'>Proje Sayısı</h3>
-                        <p className='dashboard-p'>25</p>
+                        <p className='dashboard-p'>{projectCount}</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p-header'>Tüm Revizeler</h3>
-                        <p className='dashboard-p'>revize 1</p>
-                        <p className='dashboard-p'>revize 2</p>
+                        <h3 className='dashboard-p-header'>Tüm Revize Adedi</h3>
+                        <p className='dashboard-p'>{reviseCount}</p>
+
                     </div>
                     <div className='dashboard-oneline-inner'>
                         <h3 className='dashboard-p-header'>Kullanılan Alan</h3>
