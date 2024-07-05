@@ -13,6 +13,7 @@ function SignupPage() {
     email: "",
     password: "",
     confirmPassword: "",
+    companyCode: "" // Added company code to formData
   });
 
   const [emailError, setEmailError] = useState("");
@@ -20,6 +21,7 @@ function SignupPage() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [nameError, setNameError] = useState("");
+  const [companyCodeError, setCompanyCodeError] = useState(""); // Added state for company code error
 
   const navigate = useNavigate();
 
@@ -36,7 +38,7 @@ function SignupPage() {
   const signupUser = async (e) => {
     e.preventDefault();
 
-    const { fullName, phoneNumber, email, password, confirmPassword } = formData;
+    const { fullName, phoneNumber, email, password, confirmPassword, companyCode } = formData;
 
     let hasError = false;
 
@@ -66,12 +68,25 @@ function SignupPage() {
     if (hasError) return;
 
     try {
+      // Check if company code matches an existing companyID
+      const companiesResponse = await api.get(`http://localhost:1337/api/companies`);
+      const companies = companiesResponse.data.data;
+
+      const matchingCompany = companies.find(company => company.attributes.companyID === companyCode);
+      if (!matchingCompany) {
+        setCompanyCodeError("Kod uyuşmazlığı");
+        return;
+      } else {
+        setCompanyCodeError("");
+      }
+
       const response = await api.post(
         `http://localhost:1337/api/auth/local/register`,
         {
           username: fullName,
           email: email,
           password: password,
+          companyID: matchingCompany.id, // Include the company ID in the registration request
         }
       );
 
@@ -108,6 +123,9 @@ function SignupPage() {
     }
     if (name === "fullName") {
       setNameError("");
+    }
+    if (name === "companyCode") {
+      setCompanyCodeError(""); // Clear company code error when user starts typing
     }
 
     // Only allow numbers in the phone number input
@@ -200,9 +218,18 @@ function SignupPage() {
             />
           </div>
           {confirmPasswordError && <p className="confirm-password-error">{confirmPasswordError}</p>}
-          <input type="text" className="company-code-input" placeholder="Şirket Kodunuz" />
-          <button className="back-button-to-login" onClick={handleBackClick}>Hesabın mı var? Giriş Yapın</button>
-          <button className="signup-btn" type="submit">Kaydolun</button>
+          <input
+            type="text"
+            className="company-code-input"
+            placeholder="Şirket Kodunuz"
+            name="companyCode" // Added name for company code input
+            onChange={handleChange}
+          />
+          {companyCodeError && <p className="company-code-error">{companyCodeError}</p>} {/* Display company code error */}
+          <div className="buttons-div-for-signup">
+            <button className="signup-btn" type="submit">Kaydol</button>
+            <button className="back-button-to-login" onClick={handleBackClick}>Hesabın var mı? Giriş Yap</button>
+          </div>
         </form>
       </div>
       <img className="back-button-company" src={backButton} alt="back-button" onClick={() => window.history.back()} />

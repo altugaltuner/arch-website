@@ -30,6 +30,9 @@
     .signup-main-div {
         width: 500px;
         height: auto;
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid $border-color;
 
         .signup-header {
             color: $font-color;
@@ -44,6 +47,25 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+
+            .buttons-div-for-signup {
+                display: flex;
+                margin-top: 20px;
+                gap: 20px;
+
+                .back-button-to-login,
+                .signup-btn {
+                    border-radius: 12px;
+                    border: 1px solid $border-color;
+                    cursor: pointer;
+                    padding: 10px;
+                    transition: all 0.2s;
+
+                    &:hover {
+                        background-color: darken($yellow, 10%);
+                    }
+                }
+            }
 
             .password-section-signup {
                 display: flex;
@@ -70,17 +92,6 @@
                         cursor: pointer;
                     }
                 }
-            }
-
-            .signup-btn {
-                display: flex;
-                height: 40px;
-                width: 90px;
-                border: none;
-                border-radius: 12px;
-                cursor: pointer;
-                color: $background-color;
-                background-color: $grey;
             }
 
             .signup-full-name-input {
@@ -117,18 +128,6 @@
                 padding-left: 10px;
                 border-radius: 12px;
                 border: 1px solid $border-color;
-            }
-
-            .back-button-to-login {
-                border-radius: 12px;
-                border: 1px solid $border-color;
-                cursor: pointer;
-                padding: 10px;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: darken($yellow, 10%);
-                }
             }
 
             .password-section-signup {

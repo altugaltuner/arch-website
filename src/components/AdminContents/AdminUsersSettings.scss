@@ -89,6 +89,8 @@
                     .to-be-label {
                         display: flex;
                         gap: 10px;
+                        cursor: pointer;
+                        text-align: center;
 
                         .to-be-deleted-user-checkbox {}
                     }
