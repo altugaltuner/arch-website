@@ -54,7 +54,7 @@ function AdminContent({ selectedSetting }) {
         };
     }) || [];
 
-    console.log("users with access roles:", users);
+    //console.log("users with access roles:", users);
 
     const renderContent = () => {
         switch (selectedSetting) {

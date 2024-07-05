@@ -21,9 +21,18 @@
         }
 
         .admin-company-p {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 400;
             padding: 10px;
+        }
+
+        .company-logo-img {
+            padding: 10px;
+            border: 1px solid $border-color;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 400;
+            width: 250px;
         }
     }
 }

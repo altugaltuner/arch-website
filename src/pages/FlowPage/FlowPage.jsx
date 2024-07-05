@@ -5,6 +5,7 @@ import axios from "axios";
 import instaLogo from "../../assets/icons/instagram-logo.png";
 import linkedinLogo from "../../assets/icons/linkedin-logo.png";
 import youtubeLogo from "../../assets/icons/youtube-logo.png";
+import defaultLogo from "../../assets/icons/groups-logo.png"; // Default logo path
 
 function FlowPage() {
     const socialMediaAccounts = [
@@ -68,7 +69,16 @@ function FlowPage() {
                         {companies.map((company) => (
                             <div key={company.id} className="all-companies-page-company-card">
                                 <h2 className="company-hub-header">{company.attributes.companyName}</h2>
-                                <img className="company-hub-one-logo" src={`http://localhost:1337${company.attributes.companyLogo.data.attributes.formats.thumbnail.url}`} alt="company-logo" srcSet="" />
+                                <img
+                                    className="company-hub-one-logo"
+                                    src={
+                                        company.attributes.companyLogo && company.attributes.companyLogo.data && company.attributes.companyLogo.data.attributes && company.attributes.companyLogo.data.attributes.formats && company.attributes.companyLogo.data.attributes.formats.thumbnail
+                                            ? `http://localhost:1337${company.attributes.companyLogo.data.attributes.formats.thumbnail.url}`
+                                            : defaultLogo
+                                    }
+                                    alt="company-logo"
+                                    srcSet=""
+                                />
                             </div>
                         ))}
                     </div>
