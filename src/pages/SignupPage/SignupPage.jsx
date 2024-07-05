@@ -15,6 +15,11 @@ function SignupPage() {
     confirmPassword: "",
   });
 
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [nameError, setNameError] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,18 +38,32 @@ function SignupPage() {
 
     const { fullName, phoneNumber, email, password, confirmPassword } = formData;
 
+    let hasError = false;
+
     if (password !== confirmPassword) {
-      alert("Şifreler eşleşmiyor. Lütfen tekrar deneyin.");
-      return;
+      setConfirmPasswordError("Şifreler eşleşmiyor. Lütfen tekrar deneyin.");
+      hasError = true;
+    } else {
+      setConfirmPasswordError("");
     }
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{6,}$/;
     if (!passwordRegex.test(password)) {
-      alert(
-        "Şifreniz en az 6 karakter uzunluğunda olmalı ve en az bir büyük harf, bir küçük harf ve bir rakam içermelidir."
-      );
-      return;
+      setPasswordError("Şifreniz en az 6 karakter uzunluğunda olmalı ve en az bir büyük harf, bir küçük harf ve bir rakam içermelidir.");
+      hasError = true;
+    } else {
+      setPasswordError("");
     }
+
+    const phoneRegex = /^[0-9]{10,11}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      setPhoneError("Telefon numarası sadece rakamlardan oluşmalı ve 10 veya 11 haneli olmalıdır.");
+      hasError = true;
+    } else {
+      setPhoneError("");
+    }
+
+    if (hasError) return;
 
     try {
       const response = await api.post(
@@ -59,18 +78,60 @@ function SignupPage() {
       if (response.data.jwt) {
         localStorage.setItem("token", response.data.jwt);
         alert("Kayıt başarılı. Giriş yapabilirsiniz.");
+        navigate('/login');
       }
     } catch (error) {
       console.error("Error during registration:", error);
-      alert("Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+      if (error.response && error.response.data.error.message === "Email or Username are already taken") {
+        setEmailError("Bu email alınmıştır.");
+      } else {
+        alert("Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+      }
     }
   };
 
   function handleChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target;
+
+    // Clear the error when the user starts typing
+    if (name === "email") {
+      setEmailError("");
+    }
+    if (name === "password") {
+      setPasswordError("");
+    }
+    if (name === "confirmPassword") {
+      setConfirmPasswordError("");
+    }
+    if (name === "phoneNumber") {
+      setPhoneError("");
+    }
+    if (name === "fullName") {
+      setNameError("");
+    }
+
+    // Only allow numbers in the phone number input
+    if (name === "phoneNumber") {
+      const cleanedValue = value.replace(/\D/g, '');
+      setFormData({
+        ...formData,
+        [name]: cleanedValue,
+      });
+    } else if (name === "fullName") {
+      const cleanedValue = value.replace(/[0-9]/g, '');
+      setFormData({
+        ...formData,
+        [name]: cleanedValue,
+      });
+      if (cleanedValue !== value) {
+        setNameError("İsim alanında rakam olamaz.");
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   }
 
   return (
@@ -86,14 +147,17 @@ function SignupPage() {
             onChange={handleChange}
             autoComplete="name"
           />
+          {nameError && <p className="name-error">{nameError}</p>}
           <input
             className="signup-tel-input"
             type="tel"
             placeholder="Telefon Numaranız"
             name="phoneNumber"
+            value={formData.phoneNumber}
             onChange={handleChange}
             autoComplete="tel"
           />
+          {phoneError && <p className="phone-error">{phoneError}</p>}
           <input
             className="signup-email-input"
             type="email"
@@ -102,6 +166,7 @@ function SignupPage() {
             onChange={handleChange}
             autoComplete="email"
           />
+          {emailError && <p className="email-error">{emailError}</p>}
           <div className="password-section-signup">
             <input
               className="signup-password-input"
@@ -123,6 +188,7 @@ function SignupPage() {
               )}
             </button>
           </div>
+          {passwordError && <p className="password-error">{passwordError}</p>}
           <div className="password-section-signup">
             <input
               className="signup-password-input"
@@ -133,6 +199,7 @@ function SignupPage() {
               autoComplete="new-password"
             />
           </div>
+          {confirmPasswordError && <p className="confirm-password-error">{confirmPasswordError}</p>}
           <input type="text" className="company-code-input" placeholder="Şirket Kodunuz" />
           <button className="back-button-to-login" onClick={handleBackClick}>Hesabın mı var? Giriş Yapın</button>
           <button className="signup-btn" type="submit">Kaydolun</button>
