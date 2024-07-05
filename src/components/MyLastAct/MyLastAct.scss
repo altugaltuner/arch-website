@@ -21,10 +21,21 @@
         .mylast-act-ul {
 
             .mylast-act-item-desc {
+                display: flex;
                 font-size: 18px;
                 font-weight: 300;
                 padding: 10px;
+                border-bottom: 1px solid $border-color;
+                align-items: center;
+
+                .mylast-act-item-date {
+                    font-size: 16px;
+                    font-weight: 300;
+                    padding: 10px;
+                }
             }
+
+
         }
 
     }

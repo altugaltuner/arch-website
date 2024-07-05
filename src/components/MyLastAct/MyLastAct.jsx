@@ -19,8 +19,9 @@ function MyLastAct({ user }) {
             {myLastActivities.map((activity, index) => (
                 <div key={index} className="mylast-act-item">
                     <ul className="mylast-act-ul">
-                        <li className="mylast-act-item-date">{activity.date}</li>
-                        <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}</li>
+                        <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}
+                            <p className="mylast-act-item-date">{activity.commentDate ? new Date(activity.commentDate).toLocaleDateString() : 'Tarih yok'}</p>
+                        </li>
                     </ul>
                 </div>
             ))}

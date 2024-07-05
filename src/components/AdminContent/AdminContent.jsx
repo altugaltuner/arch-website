@@ -1,4 +1,3 @@
-import React from 'react';
 import "./AdminContent.scss";
 import axios from "axios";
 import { useAuth } from "../../components/AuthProvider";
@@ -11,7 +10,7 @@ import AdminSendMessage from '../../components/AdminContents/AdminSendMessage';
 
 function AdminContent({ selectedSetting }) {
     const { user } = useAuth();
-
+    console.log("userss", user);
     const usersCompanyName = user?.company?.companyName;
 
     const [companies, setCompanies] = useState([]);
@@ -20,7 +19,7 @@ function AdminContent({ selectedSetting }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/companies?populate=*');
+                const response = await axios.get('http://localhost:1337/api/companies?populate=*,users.access');
                 setCompanies(response.data.data);
                 console.log("resss", response.data.data);
             } catch (error) {
@@ -31,24 +30,31 @@ function AdminContent({ selectedSetting }) {
     }, []);
 
     useEffect(() => {
-        const filterCompanyFunction = () => {
-            return companies.filter(company => company.attributes.companyName === usersCompanyName);
-        };
-
-        setFilteredCompany(filterCompanyFunction());
+        if (companies.length && usersCompanyName) {
+            const filterCompanyFunction = () => {
+                return companies.filter(company => company.attributes.companyName === usersCompanyName);
+            };
+            setFilteredCompany(filterCompanyFunction());
+        }
     }, [companies, usersCompanyName]);
 
-    console.log("filteredCompany", filteredCompany); //doğru aldım.
+    if (!filteredCompany.length) {
+        return <div>Loading...</div>;
+    }
 
-    console.log("şirketin proje sayısı", filteredCompany[0]?.attributes.projects.data.length); //doğru aldım.4
-    const projectCount = filteredCompany[0]?.attributes.projects.data.length;
+    const projectCount = filteredCompany[0]?.attributes?.projects?.data?.length || 0;
+    const userCount = filteredCompany[0]?.attributes?.users?.data?.length || 0;
+    const reviseCount = filteredCompany[0]?.attributes?.project_revises?.data?.length || 0;
 
-    const userCount = filteredCompany[0]?.attributes.users.data.length;
-    const reviseCount = filteredCompany[0]?.attributes.project_revises.data.length;
+    const users = filteredCompany[0]?.attributes?.users?.data?.map(user => {
+        const accessRole = user.attributes.access?.data?.attributes?.role || 'Spectator';
+        return {
+            ...user,
+            access: { role: accessRole }
+        };
+    }) || [];
 
-    const users = filteredCompany[0]?.attributes.users.data;
-
-
+    console.log("users with access roles:", users);
 
     const renderContent = () => {
         switch (selectedSetting) {
