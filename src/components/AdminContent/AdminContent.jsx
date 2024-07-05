@@ -19,7 +19,7 @@ function AdminContent({ selectedSetting }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/companies?populate=*,users.access');
+                const response = await axios.get('http://localhost:1337/api/companies?populate=*,users.access,projects,companyLogo,groups,project_revises');
                 setCompanies(response.data.data);
                 console.log("resss", response.data.data);
             } catch (error) {
