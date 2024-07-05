@@ -255,7 +255,7 @@ function ProjectSection({ clickedProject }) {
                         <input
                             type="text"
                             className="project-file-search"
-                            placeholder="Dosya Ara"
+                            placeholder="Dosya Ara..."
                             value={searchTerm} // Search term state'ini inputa bağladık
                             onChange={(e) => setSearchTerm(e.target.value)} // Input değiştikçe state'i güncelliyoruz
                         />

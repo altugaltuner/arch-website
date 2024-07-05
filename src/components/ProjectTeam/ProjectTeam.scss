@@ -17,8 +17,16 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 10px;
+        padding: 0px 10px 10px 10px;
         gap: 20px;
+
+        .search-employee-input {
+            width: 200px;
+            height: 40px;
+            border-radius: 15px;
+            border: 1px solid $border-color;
+            padding: 10px;
+        }
 
         .add-team-btn {
             font-weight: 400;
@@ -82,7 +90,7 @@
 
     .employees-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
         gap: 20px;
         padding: 20px;
         width: 100%;

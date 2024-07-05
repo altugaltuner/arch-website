@@ -12,6 +12,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [showRemoveModal, setShowRemoveModal] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
     const [availableUsers, setAvailableUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
@@ -84,7 +85,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
 
     const filteredEmployees = employees.filter(employee =>
         employee.projects && employee.projects.some(project => project.id === clickedProject.id)
-    );
+    ).filter(employee => employee.username.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
         <div className="project-teams-container">
@@ -100,6 +101,13 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                         <button className='delete-team-btn' onClick={() => setShowRemoveModal(true)}>Çalışan Çıkar</button>
                     </React.Fragment>
                 ))}
+                <input
+                    type="text"
+                    className='search-employee-input'
+                    placeholder="Çalışan Ara..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </div>
             <div className="employees-grid">
                 {filteredEmployees.map((employee, index) => (
