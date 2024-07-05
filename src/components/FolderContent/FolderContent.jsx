@@ -10,16 +10,16 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const fileInputRef = useRef(null);
 
     const { user } = useAuth();
-    console.log(user);
+    console.log("Authenticated User:", user);
 
     useEffect(() => {
         setCurrentUser(user);
+        console.log("Current User in useEffect:", user);
     }, [user]);
-
-    console.log("current user upload eden kişi", currentUser);
 
     useEffect(() => {
         setFolderState(folder);
+        console.log("Folder State:", folder);
     }, [folder]);
 
     const handleFileUpload = async (event) => {
@@ -34,7 +34,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
         if (currentUser) {
             formData.append('uploader', currentUser.id); // Kullanıcı bilgisi ekleniyor
         }
-        console.log("foldercontentteki current user", currentUser);
+        console.log("Current User at file upload:", currentUser);
 
         try {
             const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
@@ -42,6 +42,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+            console.log("Upload Response:", uploadResponse.data);
             const uploadedFile = uploadResponse.data[0];
             const updatedContent = folderState.folderContent && folderState.folderContent.data
                 ? [...folderState.folderContent.data, uploadedFile]
