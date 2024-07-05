@@ -8,6 +8,7 @@ import docxIcon from "../../assets/icons/docx-icon.png";
 import pdfIcon from "../../assets/icons/pdf-logo.png";
 import jpgIcon from "../../assets/icons/jpg-icon.png";
 import pngIcon from "../../assets/icons/png-logo.png";
+import txtIcon from "../../assets/icons/txt-icon.png";
 import dwgIcon from "../../assets/icons/dwg-icon.png";
 import jpegIcon from "../../assets/icons/jpeg-icon.webp";
 import goBackButton from "../../assets/icons/back-button.png";
@@ -39,6 +40,7 @@ function ProjectSection({ clickedProject }) {
         "png": pngIcon,
         "dwg": dwgIcon,
         "jpeg": jpegIcon,
+        "txt": txtIcon,
     };
 
     const [newFolder, setNewFolder] = useState({

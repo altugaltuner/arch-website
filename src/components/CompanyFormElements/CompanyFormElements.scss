@@ -30,7 +30,7 @@
             .company-create-label,
             .admin-create-label {
                 display: block;
-                margin-bottom: 5px;
+                padding: 5px;
             }
 
             .company-create-input,
@@ -43,8 +43,11 @@
             }
 
             .error-for-company-signup {
+                display: flex;
                 font-weight: 300;
                 font-size: 16px;
+                width: 380px;
+                padding: 5px;
             }
 
             .employee-code-create-btn {

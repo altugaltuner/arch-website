@@ -30,15 +30,31 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         }
     };
 
-    const createUser = async (adminName, adminSurname, adminPassword, adminEmail, companyID) => {
+
+    const createUser = async (adminName, adminSurname, adminPassword, adminEmail, company) => {
         try {
             const response = await axios.post('http://localhost:1337/api/users', {
                 username: `${adminName} ${adminSurname}`,
                 email: adminEmail,
-                password: adminPassword,
-                isCompanyAdmin: true,
-                company: companyID,
-                role: 3, // Admin rol ID'si
+                password: adminPassword, // Parola alanı
+                isCompanyAdmin: true, // Eğer Strapi'de bu şekilde tanımlandıysa
+                company: {
+                    id: company.id,
+                    companyName: company.companyName,
+                    workingArea: company.workingArea,
+                    companyID: company.companyID,
+                    createdAt: company.createdAt,
+                    updatedAt: company.updatedAt,
+                    publishedAt: company.publishedAt
+                },
+                access: { // Burada access alanını kullanarak gönderim yapıyoruz
+                    id: 2,
+                    role: "Spectator",
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                    publishedAt: new Date().toISOString()
+                },
+                role: 1 // Role ID'si
             });
             return response.data;
         } catch (error) {
@@ -90,7 +106,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                 const company = await createCompany(formElements.companyName, formElements.workingArea, formElements.companyCode);
 
                 // Kullanıcı oluştur ve şirket ile ilişkilendir
-                await createUser(formElements.adminName, formElements.adminSurname, formElements.adminPassword, formElements.adminEmail, company.data.id);
+                await createUser(formElements.adminName, formElements.adminSurname, formElements.adminPassword, formElements.adminEmail, company.data);
 
                 alert("Form başarıyla gönderildi!");
             } catch (error) {
@@ -98,6 +114,8 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             }
         }
     };
+
+
 
     return (
         <form className="company-admin-create-form" onSubmit={validateInputs}>

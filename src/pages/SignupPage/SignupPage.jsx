@@ -6,7 +6,6 @@ import eyeHide from "../../assets/icons/EyeHideLogo.png";
 import { useNavigate } from 'react-router-dom';
 import backButton from '../../assets/icons/back-button.png';
 
-
 function SignupPage() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -139,6 +138,7 @@ function SignupPage() {
           <button className="signup-btn" type="submit">Kaydolun</button>
         </form>
       </div>
+      <img className="back-button-company" src={backButton} alt="back-button" onClick={() => window.history.back()} />
     </main>
   );
 }

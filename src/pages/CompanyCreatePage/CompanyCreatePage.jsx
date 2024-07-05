@@ -1,12 +1,10 @@
 // CompanyCreatePage.jsx
 import React, { useState } from "react";
 import "./CompanyCreatePage.scss";
-import { useAuth } from "../../components/AuthProvider";
 import CompanyFormElements from "../../components/CompanyFormElements/CompanyFormElements";
 import backButton from "../../assets/icons/back-button.png";
 
 function CompanyCreatePage() {
-    const auth = useAuth();
     const [errors, setErrors] = useState({});
 
     return (

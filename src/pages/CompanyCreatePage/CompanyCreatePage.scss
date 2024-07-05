@@ -13,10 +13,15 @@
         cursor: pointer;
         position: absolute;
         width: 50px;
-        height: 50px;
-        top: 15px;
-        left: 15px;
+        top: 20px;
+        left: 20px;
         position: absolute;
+        opacity: 0.5;
+        transition: all 0.2s;
+
+        &:hover {
+            opacity: 1;
+        }
     }
 
     .company-create-page-title {

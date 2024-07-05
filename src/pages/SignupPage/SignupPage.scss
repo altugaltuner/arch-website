@@ -11,6 +11,21 @@
     background-color: $background-color;
     font-family: $primary-font;
     color: $font-color;
+    position: relative;
+
+    .back-button-company {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 50px;
+        opacity: 0.5;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
 
     .signup-main-div {
         width: 500px;
