@@ -16,15 +16,13 @@ function MyLastAct({ user }) {
     return (
         <div className="mylast-act-main">
             <h2 className="mylast-act-header">Son Revizelerim</h2>
-            {myLastActivities.map((activity, index) => (
-                <div key={index} className="mylast-act-item">
-                    <ul className="mylast-act-ul">
-                        <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}
-                            <p className="mylast-act-item-date">{activity.commentDate ? new Date(activity.commentDate).toLocaleDateString() : 'Tarih yok'}</p>
-                        </li>
-                    </ul>
-                </div>
-            ))}
+            <ul className="mylast-act-ul">
+                {myLastActivities.map((activity, index) => (
+                    <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}
+                        <p className="mylast-act-item-date">{activity.commentDate ? new Date(activity.commentDate).toLocaleDateString() : 'Tarih yok'}</p>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

@@ -37,6 +37,8 @@
                 gap: 10px;
                 flex-wrap: wrap;
                 padding: 15px;
+                max-height: 300px;
+                overflow-y: auto;
 
                 .my-active-project-list-element {
                     padding: 10px;
