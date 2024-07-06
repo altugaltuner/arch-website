@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import "./ProjectComments.scss";
-import NewReviseModal from "../../components/NewReviseModal/NewReviseModal"; // Yeni modal bileşenini import edin
+import NewReviseModal from "../../components/NewReviseModal/NewReviseModal";
+import ReviseUpdateModal from "../../components/ReviseUpdateModal/ReviseUpdateModal";
+import axios from 'axios';
+import { useAuth } from "../../components/AuthProvider";
+import editPencil from "../../assets/icons/edit-pencil.png";
 
 function ProjectComments({ clickedProject }) {
-
     const [commentsWithDetails, setCommentsWithDetails] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false); // Modal durumu için state
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const [selectedRevise, setSelectedRevise] = useState(null);
+
+    const { user } = useAuth();
+    console.log(user);
 
     useEffect(() => {
         if (clickedProject) {
-            //console.log("clickedProject", clickedProject);
-            const projectRevises = clickedProject.attributes.project_revises.data;
-            const users = clickedProject.attributes.users.data;
+            fetchComments(clickedProject);
+        }
+    }, [clickedProject]);
+
+    const fetchComments = async (project) => {
+        try {
+            const response = await axios.get(`http://localhost:1337/api/project-revises?filters[project][id][$eq]=${project.id}&populate=*`);
+            const projectRevises = response.data.data;
+
+            const users = project.attributes.users.data;
 
             const reviseStateMap = {
                 1: "yapılacak",
@@ -23,19 +38,23 @@ function ProjectComments({ clickedProject }) {
             const commentsWithDetails = projectRevises.flatMap(revise =>
                 revise.attributes.comment.flatMap(comment =>
                     comment.children.map(child => {
-                        const owner = users.find(user => user.id === revise.id);
+                        const owner = users.find(user => user.id === revise.attributes.user.data.id);
                         return {
+                            id: revise.id,
                             text: child.text,
                             reviseState: reviseStateMap[revise.attributes.reviseState] || 'Durum bilgisi yok',
-                            owner: owner ? owner.attributes.username : 'Sahip bilgisi yok'
+                            owner: owner ? owner.attributes.username : 'Sahip bilgisi yok',
+                            ownerId: owner ? owner.id : null
                         };
                     })
                 )
             );
 
             setCommentsWithDetails(commentsWithDetails);
+        } catch (error) {
+            console.error('Revizeler alınırken bir hata oluştu:', error);
         }
-    }, [clickedProject]);
+    };
 
     const openNewReviseModal = () => {
         setIsModalOpen(true);
@@ -43,6 +62,52 @@ function ProjectComments({ clickedProject }) {
 
     const closeNewReviseModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openUpdateReviseModal = (revise) => {
+        setSelectedRevise(revise);
+        setIsUpdateModalOpen(true);
+    };
+
+    const closeUpdateReviseModal = () => {
+        setIsUpdateModalOpen(false);
+    };
+
+    const handleReviseAdded = (newRevise) => {
+        const reviseAttributes = newRevise.data.attributes;
+
+        if (!reviseAttributes || !reviseAttributes.comment || !reviseAttributes.comment[0] || !reviseAttributes.comment[0].children || !reviseAttributes.comment[0].children[0]) {
+            console.error('Yeni revize verisi beklenen formatta değil:', newRevise);
+            return;
+        }
+
+        const newComment = {
+            id: newRevise.data.id,
+            text: reviseAttributes.comment[0].children[0].text,
+            reviseState: reviseAttributes.reviseState,
+            owner: user.username,
+            ownerId: user.id
+        };
+
+        setCommentsWithDetails((prevComments) => [...prevComments, newComment]);
+    };
+
+    const handleReviseUpdated = (updatedRevise) => {
+        const reviseAttributes = updatedRevise.data.attributes;
+
+        const updatedComment = {
+            id: updatedRevise.data.id,
+            text: reviseAttributes.comment[0].children[0].text,
+            reviseState: reviseAttributes.reviseState,
+            owner: user.username,
+            ownerId: user.id
+        };
+
+        setCommentsWithDetails((prevComments) =>
+            prevComments.map((comment) =>
+                comment.id === updatedComment.id ? updatedComment : comment
+            )
+        );
     };
 
     return (
@@ -57,7 +122,8 @@ function ProjectComments({ clickedProject }) {
                 </div>
                 {commentsWithDetails.map((commentWithDetail, index) => (
                     <div key={index} className='project-comment-item'>
-                        <div className='project-comment-text'>
+                        <div className='project-comment-text' onClick={() => commentWithDetail.ownerId === user.id && openUpdateReviseModal(commentWithDetail)}>
+                            {commentWithDetail.ownerId === user.id && <img className='edit-pencil-for-revise' src={editPencil} alt="edit-pencil-for-revise" />}
                             {commentWithDetail.text}
                         </div>
                         <div className='project-comment-state'>
@@ -69,7 +135,8 @@ function ProjectComments({ clickedProject }) {
                     </div>
                 ))}
             </div>
-            <NewReviseModal isOpen={isModalOpen} onClose={closeNewReviseModal} />
+            <NewReviseModal user={user} clickedProject={clickedProject} isOpen={isModalOpen} onClose={closeNewReviseModal} onReviseAdded={handleReviseAdded} />
+            {selectedRevise && <ReviseUpdateModal isOpen={isUpdateModalOpen} onClose={closeUpdateReviseModal} revise={selectedRevise} onReviseUpdated={handleReviseUpdated} />}
         </div>
     );
 }

@@ -78,6 +78,19 @@
                 font-size: 18px;
                 padding: 15px;
                 border-right: 1px solid $border-color;
+                display: flex;
+                gap: 10px;
+                cursor: pointer;
+
+                .edit-pencil-for-revise {
+                    width: 20px;
+                    height: 20px;
+                    opacity: 0.6;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
             }
 
             .project-comment-state {
