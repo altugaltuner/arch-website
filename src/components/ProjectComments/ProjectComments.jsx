@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./ProjectComments.scss";
 import NewReviseModal from "../../components/NewReviseModal/NewReviseModal";
 import ReviseUpdateModal from "../../components/ReviseUpdateModal/ReviseUpdateModal";
+import ReviseViewModal from "../../components/ReviseViewModal/ReviseViewModal";
 import axios from 'axios';
 import { useAuth } from "../../components/AuthProvider";
 import editPencil from "../../assets/icons/edit-pencil.png";
@@ -10,10 +11,12 @@ function ProjectComments({ clickedProject }) {
     const [commentsWithDetails, setCommentsWithDetails] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const [isViewModalOpen, setIsViewModalOpen] = useState(false);
     const [selectedRevise, setSelectedRevise] = useState(null);
 
     const { user } = useAuth();
     console.log(user);
+    const userId = user.id;
 
     useEffect(() => {
         if (clickedProject) {
@@ -73,6 +76,15 @@ function ProjectComments({ clickedProject }) {
         setIsUpdateModalOpen(false);
     };
 
+    const openViewReviseModal = (revise) => {
+        setSelectedRevise(revise);
+        setIsViewModalOpen(true);
+    };
+
+    const closeViewReviseModal = () => {
+        setIsViewModalOpen(false);
+    };
+
     const handleReviseAdded = (newRevise) => {
         const reviseAttributes = newRevise.data.attributes;
 
@@ -85,7 +97,7 @@ function ProjectComments({ clickedProject }) {
             id: newRevise.data.id,
             text: reviseAttributes.comment[0].children[0].text,
             reviseState: reviseAttributes.reviseState,
-            owner: user.username,
+            owner: user.username, // Bu değer uygun şekilde değiştirilmeli
             ownerId: user.id
         };
 
@@ -99,7 +111,7 @@ function ProjectComments({ clickedProject }) {
             id: updatedRevise.data.id,
             text: reviseAttributes.comment[0].children[0].text,
             reviseState: reviseAttributes.reviseState,
-            owner: user.username,
+            owner: user.username, // Bu değer uygun şekilde değiştirilmeli
             ownerId: user.id
         };
 
@@ -122,7 +134,7 @@ function ProjectComments({ clickedProject }) {
                 </div>
                 {commentsWithDetails.map((commentWithDetail, index) => (
                     <div key={index} className='project-comment-item'>
-                        <div className='project-comment-text' onClick={() => commentWithDetail.ownerId === user.id && openUpdateReviseModal(commentWithDetail)}>
+                        <div className='project-comment-text' onClick={() => commentWithDetail.ownerId === user.id ? openUpdateReviseModal(commentWithDetail) : openViewReviseModal(commentWithDetail)}>
                             {commentWithDetail.ownerId === user.id && <img className='edit-pencil-for-revise' src={editPencil} alt="edit-pencil-for-revise" />}
                             {commentWithDetail.text}
                         </div>
@@ -137,6 +149,7 @@ function ProjectComments({ clickedProject }) {
             </div>
             <NewReviseModal user={user} clickedProject={clickedProject} isOpen={isModalOpen} onClose={closeNewReviseModal} onReviseAdded={handleReviseAdded} />
             {selectedRevise && <ReviseUpdateModal isOpen={isUpdateModalOpen} onClose={closeUpdateReviseModal} revise={selectedRevise} onReviseUpdated={handleReviseUpdated} />}
+            {selectedRevise && <ReviseViewModal isOpen={isViewModalOpen} onClose={closeViewReviseModal} revise={selectedRevise} />}
         </div>
     );
 }

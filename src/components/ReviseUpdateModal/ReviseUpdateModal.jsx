@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ReviseUpdateModal.scss';
 import axios from 'axios';
 
 function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
-    const [inputValue, setInputValue] = useState(revise.text);
-    const [selectedState, setSelectedState] = useState(revise.reviseState);
+    const [inputValue, setInputValue] = useState('');
+    const [selectedState, setSelectedState] = useState('');
+
+    useEffect(() => {
+        if (isOpen && revise) {
+            setInputValue(revise.text);
+            setSelectedState(revise.reviseState);
+        }
+    }, [isOpen, revise]);
 
     if (!isOpen) return null;
 
