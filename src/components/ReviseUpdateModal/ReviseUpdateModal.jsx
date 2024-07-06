@@ -5,11 +5,13 @@ import axios from 'axios';
 function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
     const [inputValue, setInputValue] = useState('');
     const [selectedState, setSelectedState] = useState('');
+    const [commentDate, setCommentDate] = useState('');
 
     useEffect(() => {
         if (isOpen && revise) {
             setInputValue(revise.text);
             setSelectedState(revise.reviseState);
+            setCommentDate(revise.commentDate);
         }
     }, [isOpen, revise]);
 
@@ -80,6 +82,7 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
                             <label htmlFor="revise-update-radio4">İptal Edildi</label>
                         </div>
                     </div>
+                    <p><strong>Revize Tarihi:</strong> {commentDate}</p>
                     <div className='revise-update-buttons-div'>
                         <button className='revise-update-submit-btn' type="submit">Güncelle</button>
                         <button className='revise-update-submit-cancel' onClick={onClose}>Kapat</button>

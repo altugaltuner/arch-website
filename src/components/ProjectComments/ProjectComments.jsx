@@ -32,10 +32,10 @@ function ProjectComments({ clickedProject }) {
             const users = project.attributes.users.data;
 
             const reviseStateMap = {
-                1: "yapılacak",
-                2: "yapılıyor",
-                3: "yapıldı",
-                4: "iptal edildi"
+                1: "Yapılacak",
+                2: "İşleme Alındı",
+                3: "Tamamlandı",
+                4: "İptal edildi"
             };
 
             const commentsWithDetails = projectRevises.flatMap(revise =>
@@ -47,7 +47,8 @@ function ProjectComments({ clickedProject }) {
                             text: child.text,
                             reviseState: reviseStateMap[revise.attributes.reviseState] || 'Durum bilgisi yok',
                             owner: owner ? owner.attributes.username : 'Sahip bilgisi yok',
-                            ownerId: owner ? owner.id : null
+                            ownerId: owner ? owner.id : null,
+                            commentDate: revise.attributes.commentDate
                         };
                     })
                 )
@@ -58,6 +59,7 @@ function ProjectComments({ clickedProject }) {
             console.error('Revizeler alınırken bir hata oluştu:', error);
         }
     };
+
 
     const openNewReviseModal = () => {
         setIsModalOpen(true);
@@ -98,7 +100,8 @@ function ProjectComments({ clickedProject }) {
             text: reviseAttributes.comment[0].children[0].text,
             reviseState: reviseAttributes.reviseState,
             owner: user.username, // Bu değer uygun şekilde değiştirilmeli
-            ownerId: user.id
+            ownerId: user.id,
+            commentDate: new Date(reviseAttributes.commentDate).toLocaleDateString('tr-TR')
         };
 
         setCommentsWithDetails((prevComments) => [...prevComments, newComment]);
@@ -112,7 +115,8 @@ function ProjectComments({ clickedProject }) {
             text: reviseAttributes.comment[0].children[0].text,
             reviseState: reviseAttributes.reviseState,
             owner: user.username, // Bu değer uygun şekilde değiştirilmeli
-            ownerId: user.id
+            ownerId: user.id,
+            commentDate: new Date(reviseAttributes.commentDate).toLocaleDateString('tr-TR')
         };
 
         setCommentsWithDetails((prevComments) =>
@@ -131,6 +135,7 @@ function ProjectComments({ clickedProject }) {
                     <div className='comment-table-head-text'>Revize</div>
                     <div className='comment-table-head-state'>Durum</div>
                     <div className='comment-table-head-owner'>Revize Sahibi</div>
+                    <div className='comment-table-head-date'>Tarih</div>
                 </div>
                 {commentsWithDetails.map((commentWithDetail, index) => (
                     <div key={index} className='project-comment-item'>
@@ -143,6 +148,9 @@ function ProjectComments({ clickedProject }) {
                         </div>
                         <div className='project-comment-owner'>
                             {commentWithDetail.owner}
+                        </div>
+                        <div className='project-comment-date'>
+                            {commentWithDetail.commentDate}
                         </div>
                     </div>
                 ))}

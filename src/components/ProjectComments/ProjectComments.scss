@@ -48,7 +48,7 @@
             border-radius: 5px;
 
             .comment-table-head-text {
-                width: 70%;
+                width: 55%;
                 padding: 15px;
                 border-right: 1px solid $border-color;
             }
@@ -60,6 +60,12 @@
             }
 
             .comment-table-head-owner {
+                width: 15%;
+                padding: 15px;
+                border-right: 1px solid $border-color;
+            }
+
+            .comment-table-head-date {
                 width: 15%;
                 padding: 15px;
             }
@@ -74,7 +80,7 @@
             border-radius: 5px;
 
             .project-comment-text {
-                width: 70%;
+                width: 55%;
                 font-size: 18px;
                 padding: 15px;
                 border-right: 1px solid $border-color;
@@ -102,6 +108,14 @@
 
             .project-comment-owner {
                 font-size: 18px;
+                padding: 15px;
+                width: 15%;
+                border-right: 1px solid $border-color;
+            }
+
+            .project-comment-date {
+                font-size: 12px;
+                word-break: break-all;
                 padding: 15px;
                 width: 15%;
             }

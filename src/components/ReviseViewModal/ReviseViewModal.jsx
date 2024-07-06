@@ -5,12 +5,14 @@ function ReviseViewModal({ isOpen, onClose, revise }) {
     const [text, setText] = useState('');
     const [reviseState, setReviseState] = useState('');
     const [owner, setOwner] = useState('');
+    const [commentDate, setCommentDate] = useState('');
 
     useEffect(() => {
         if (isOpen && revise) {
             setText(revise.text);
             setReviseState(revise.reviseState);
             setOwner(revise.owner);
+            setCommentDate(revise.commentDate);
         }
     }, [isOpen, revise]);
 
@@ -24,6 +26,7 @@ function ReviseViewModal({ isOpen, onClose, revise }) {
                     <p><strong>Revize İçeriği:</strong> {text}</p>
                     <p><strong>Revize Durumu:</strong> {reviseState}</p>
                     <p><strong>Revize Sahibi:</strong> {owner}</p>
+                    <p><strong>Revize Tarihi:</strong> {commentDate}</p>
                 </div>
                 <button className='revise-view-close-btn' onClick={onClose}>Kapat</button>
             </div>
