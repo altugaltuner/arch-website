@@ -4,14 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
+    width: 15%;
     padding: 20px;
     background-color: $background-color;
     border-radius: 20px;
     border: 1px solid $border-color;
     color: $font-color;
     font-family: $primary-font;
-    height: fit-content;
 
     .profile-info {
         .profile-field {

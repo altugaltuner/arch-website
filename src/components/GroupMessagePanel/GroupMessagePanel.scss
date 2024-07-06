@@ -95,22 +95,22 @@
             flex-grow: 1;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 20px;
+            border-radius: 5px;
             margin-right: 10px;
             font-size: 16px;
         }
 
-        button {
+        .message-send-chat {
             padding: 10px 20px;
-            background-color: #25d366;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
+            background-color: $grey;
+            color: black;
+            border: 1px solid $border-color;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
 
             &:hover {
-                background-color: #22c35e;
+                background-color: #8af5b1;
             }
         }
     }

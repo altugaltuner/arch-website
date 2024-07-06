@@ -8,15 +8,13 @@
     gap: 20px;
     font-family: $primary-font;
     color: $font-color;
-    max-height: 820px;
-    overflow-y: auto;
+
 
     .activities-container-half {
         border: 1px solid $border-color;
         padding: 20px;
         width: 100%;
         border-radius: 15px;
-        overflow: scroll;
 
         .activities-title {
             text-align: center;
@@ -47,6 +45,9 @@
             }
 
             .table-body {
+                max-height: 820px;
+                overflow-y: auto;
+
                 .table-body-row {
 
                     .table-data {

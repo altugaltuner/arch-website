@@ -8,6 +8,7 @@ import MyPersonalFiles from "../../components/MyPersonalFiles/MyPersonalFiles";
 import MyLastAct from "../../components/MyLastAct/MyLastAct";
 import OpenInboxModal from "../../components/OpenInboxModal/OpenInboxModal";
 import inboxLogo from "../../assets/icons/inbox-logo.png";
+import MyNotebook from "../../components/MyNotebook/MyNotebook";
 
 function AboutMePage() {
     const [user, setUser] = useState(null);
@@ -56,7 +57,10 @@ function AboutMePage() {
                     <MyProfile user={user} />
                     <div className="aboutme-page-column-2">
                         <MyActiveProjects user={user} />
-                        <MyLastAct user={user} />
+                        <div className="aboutme-row-3">
+                            <MyLastAct user={user} />
+                            <MyNotebook user={user} />
+                        </div>
                     </div>
                     <MyPersonalFiles user={user} />
                 </div>

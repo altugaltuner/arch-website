@@ -6,6 +6,7 @@ function FilePreviewModal({ file, onClose, onDownload, onDelete, onPermanentDele
         return null;
     }
 
+
     return (
         <div className="file-preview-modal">
             <div className="file-preview-modal-content">

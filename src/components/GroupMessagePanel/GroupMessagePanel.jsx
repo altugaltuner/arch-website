@@ -37,7 +37,7 @@ function GroupMessagePanel() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type a message"
                 />
-                <button onClick={() => { console.log("Button clicked"); handleSendMessage(); }}>Send</button>
+                <button className="message-send-chat" onClick={() => { console.log("Button clicked"); handleSendMessage(); }}>Send</button>
 
             </div>
         </div>
