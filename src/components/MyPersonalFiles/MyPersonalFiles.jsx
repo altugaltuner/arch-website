@@ -286,7 +286,13 @@ function MyPersonalFiles({ user }) {
 
     const renderFolderContent = (folder) => {
         if (!folder || !folder.personalFolderContent) {
-            return null;
+            return (
+                <div className="folder-content">
+                    <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
+                    <h3 className="folder-header">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</h3>
+                    <p>Klasör boş.</p>
+                </div>
+            );
         }
         const filteredFiles = folder.personalFolderContent.filter(file =>
             file.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -338,7 +344,6 @@ function MyPersonalFiles({ user }) {
             <button className="add-folder-button" onClick={handleAddFolderClick}>Yeni Klasör</button>
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
-
                 {trashFolder && !selectedFolder && (
                     <div className="folder" onClick={(event) => handleFolderClick(event, trashFolder)}>
                         <img src={folderIcon} alt="folder" className="folder-icon" />
