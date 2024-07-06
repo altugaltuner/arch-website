@@ -312,6 +312,9 @@ function MyPersonalFiles({ user }) {
                 />
 
                 <div className="files">
+                    {folder.id !== trashFolder.id && (
+                        <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
+                    )}
                     {filteredFiles.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
                             {file.formats && file.formats.thumbnail ? (
@@ -323,9 +326,6 @@ function MyPersonalFiles({ user }) {
                         </div>
                     ))}
                 </div>
-                {folder.id !== trashFolder.id && (
-                    <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
-                )}
             </div>
         );
     };
