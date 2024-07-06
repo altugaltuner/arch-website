@@ -1,7 +1,8 @@
 import React from 'react';
 import './SelectedEmployeeModal.scss';
+import { Link } from 'react-router-dom';
 
-function SelectedEmployeeModal({ employee, onClose, sendEmail }) {
+function SelectedEmployeeModal({ employee, onClose }) {
     if (!employee) {
         return null;
     }
@@ -20,10 +21,7 @@ function SelectedEmployeeModal({ employee, onClose, sendEmail }) {
                 <p className='employee-card-modal-email'>{employee.email}</p>
                 <p className='employee-card-modal-professionname'>{employee.profession.professionName}</p>
                 <div className='employee-card-selected-employee-buttons'>
-                    <button className="employee-card-send-email-btn" onClick={() => sendEmail(employee.email)}>
-                        E-posta Gönder
-                    </button>
-                    <button className='employee-card-send-private-message'>İleti Gönder</button>
+                    <Link to="/workers" className="employee-card-go-to-profile">Sayfasına Git</Link>
                 </div>
 
                 <button className="employee-card-modal-close-btn" onClick={onClose}>

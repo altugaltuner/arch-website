@@ -18,10 +18,6 @@ function WorkersPage() {
 
     const [newProfessionModalOpen, setNewProfessionModalOpen] = useState(false);
 
-    const sendEmail = (email) => {
-        window.location.href = `mailto:${email}`;
-    };
-
     const handleJobTitleClick = (title) => {
         setSelectedJobTitle(title);
     };
@@ -113,7 +109,6 @@ function WorkersPage() {
                         <OtherUsersInfo
                             employee={selectedEmployee}
                             onClose={closeEmployeeCardModal}
-                            sendEmail={sendEmail}
                         />
                     </div>
                     <EmployeeGrid
