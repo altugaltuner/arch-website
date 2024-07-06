@@ -16,7 +16,7 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
         const { value } = e.target;
         if (value.length <= 40) {
             handleInputChange(e);
-            setErrorMessage(''); // Clear the error message if within limit
+            setErrorMessage('');
         } else {
             setErrorMessage('Grup adı en fazla 40 karakter olabilir.');
         }

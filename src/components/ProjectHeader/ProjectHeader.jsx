@@ -6,7 +6,7 @@ function ProjectHeader({ clickedProject }) {
     const navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate('/projects'); // Projeler sayfasına geri yönlendir
+        navigate('/projects');
     };
 
     return (

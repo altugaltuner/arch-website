@@ -10,7 +10,6 @@ import AdminSendMessage from '../../components/AdminContents/AdminSendMessage';
 
 function AdminContent({ selectedSetting }) {
     const { user } = useAuth();
-    console.log("userss", user);
     const usersCompanyName = user?.company?.companyName;
 
     const [companies, setCompanies] = useState([]);
@@ -21,7 +20,7 @@ function AdminContent({ selectedSetting }) {
             try {
                 const response = await axios.get('http://localhost:1337/api/companies?populate=*,users.access,projects,companyLogo,groups,project_revises');
                 setCompanies(response.data.data);
-                console.log("resss", response.data.data);
+
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
@@ -53,8 +52,6 @@ function AdminContent({ selectedSetting }) {
             access: { role: accessRole }
         };
     }) || [];
-
-    //console.log("users with access roles:", users);
 
     const renderContent = () => {
         switch (selectedSetting) {

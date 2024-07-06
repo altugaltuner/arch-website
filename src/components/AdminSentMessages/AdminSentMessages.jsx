@@ -12,7 +12,7 @@ function AdminSentMessages() {
                     throw new Error('Veriler çekilirken hata oluştu');
                 }
                 const result = await response.json();
-                console.log('Sonuç:', result);
+
                 setAdminMessages(result.data);
             } catch (error) {
                 console.error('Hata:', error);

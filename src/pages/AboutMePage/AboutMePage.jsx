@@ -13,7 +13,6 @@ import MyNotebook from "../../components/MyNotebook/MyNotebook";
 function AboutMePage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    console.log(user);
     const [showInboxModal, setShowInboxModal] = useState(false);
 
     useEffect(() => {

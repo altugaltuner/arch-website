@@ -4,7 +4,6 @@ import { useAuth } from "../../components/AuthProvider";
 
 const AdminCompanySettings = () => {
     const { user } = useAuth();
-    console.log("defe", user);
 
     const [companyName, setCompanyName] = useState("");
     useEffect(() => {

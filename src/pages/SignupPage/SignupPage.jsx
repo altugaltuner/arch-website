@@ -13,7 +13,7 @@ function SignupPage() {
     email: "",
     password: "",
     confirmPassword: "",
-    companyCode: "" // Added company code to formData
+    companyCode: ""
   });
 
   const [emailError, setEmailError] = useState("");
@@ -21,7 +21,7 @@ function SignupPage() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [nameError, setNameError] = useState("");
-  const [companyCodeError, setCompanyCodeError] = useState(""); // Added state for company code error
+  const [companyCodeError, setCompanyCodeError] = useState("");
 
   const navigate = useNavigate();
 
@@ -68,7 +68,6 @@ function SignupPage() {
     if (hasError) return;
 
     try {
-      // Check if company code matches an existing companyID
       const companiesResponse = await api.get(`http://localhost:1337/api/companies`);
       const companies = companiesResponse.data.data;
 
@@ -86,7 +85,7 @@ function SignupPage() {
           username: fullName,
           email: email,
           password: password,
-          companyID: matchingCompany.id, // Include the company ID in the registration request
+          companyID: matchingCompany.id,
         }
       );
 
@@ -108,7 +107,6 @@ function SignupPage() {
   function handleChange(event) {
     const { name, value } = event.target;
 
-    // Clear the error when the user starts typing
     if (name === "email") {
       setEmailError("");
     }
@@ -125,10 +123,9 @@ function SignupPage() {
       setNameError("");
     }
     if (name === "companyCode") {
-      setCompanyCodeError(""); // Clear company code error when user starts typing
+      setCompanyCodeError("");
     }
 
-    // Only allow numbers in the phone number input
     if (name === "phoneNumber") {
       const cleanedValue = value.replace(/\D/g, '');
       setFormData({
@@ -222,10 +219,10 @@ function SignupPage() {
             type="text"
             className="company-code-input"
             placeholder="Şirket Kodunuz"
-            name="companyCode" // Added name for company code input
+            name="companyCode"
             onChange={handleChange}
           />
-          {companyCodeError && <p className="company-code-error">{companyCodeError}</p>} {/* Display company code error */}
+          {companyCodeError && <p className="company-code-error">{companyCodeError}</p>}
           <div className="buttons-div-for-signup">
             <button className="signup-btn" type="submit">Kaydol</button>
             <button className="back-button-to-login" onClick={handleBackClick}>Hesabın var mı? Giriş Yap</button>

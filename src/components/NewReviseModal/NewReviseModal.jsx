@@ -6,10 +6,6 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
     const [inputValue, setInputValue] = useState('');
     const [selectedState, setSelectedState] = useState('');
 
-    console.log("dsdsdsd", user);
-    console.log('clickedProject modalin içinde', clickedProject);
-    console.log('clickedProject modalin içinde', clickedProject.id);
-
     if (!isOpen) return null;
 
     const handleSubmit = async (e) => {
@@ -37,13 +33,11 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
                     ],
                     reviseState: parseInt(selectedState, 10),
                     isActive: true,
-                    project: { id: clickedProject.id }, // Proje ID'sini uygun şekilde ayarlayın
-                    user: { id: user.id }, // Kullanıcı ID'sini uygun şekilde ayarlayın
-                    commentDate: currentDate // Yeni revizenin tarihini ekleyin
+                    project: { id: clickedProject.id },
+                    user: { id: user.id },
+                    commentDate: currentDate
                 }
             });
-
-            console.log('API yanıtı:', response.data);
             onReviseAdded(response.data);
             onClose();
         } catch (error) {

@@ -27,14 +27,10 @@ function GroupsPage() {
     const [searchTerm, setSearchTerm] = useState("");
 
     const { user } = useAuth();
-    console.log("User:", user);
-
     const usersCompanyId = user?.company?.id;
-    console.log("Company ID:", usersCompanyId);
 
     const selectGroup = (e) => {
         const selectedGroup = groups.find((group) => group.attributes.groupName === e.target.innerText);
-        console.log(selectedGroup);
     };
 
     const handleDeleteGroup = () => {

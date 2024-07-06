@@ -2,9 +2,6 @@ import "./ProjectHistory.scss";
 
 function ProjectHistory({ clickedProject, roles }) {
 
-    // console.log("projecthistory clickedproject", clickedProject);
-    // console.log("projecthistory roles", roles);
-
     return (
         <div className="project-history-main">
             <h1 className="project-history-header">Proje Tarihçesi</h1>

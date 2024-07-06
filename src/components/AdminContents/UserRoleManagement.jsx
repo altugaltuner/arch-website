@@ -17,7 +17,6 @@ function UserRoleManagement({ users }) {
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
-        console.log("Search term set to:", e.target.value);
     };
 
     const handleUserSelect = (userId) => {

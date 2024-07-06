@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function MyActiveProjects({ user }) {
     const [allUsers, setAllUsers] = useState([]);
-    const navigate = useNavigate(); // navigate fonksiyonu oluşturuldu
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,7 +46,7 @@ function MyActiveProjects({ user }) {
 
     const handleProjectClick = (projectId) => {
 
-        navigate(`/projects/${projectId}`); // Projeye yönlendirme yapıldı
+        navigate(`/projects/${projectId}`);
     };
 
     return (

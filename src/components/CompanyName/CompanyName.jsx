@@ -20,7 +20,7 @@ function CompanyName({ onSearch }) {
     };
 
     if (companyName === null) {
-        return null; // or you can show a loading spinner
+        return null;
     }
 
     return (

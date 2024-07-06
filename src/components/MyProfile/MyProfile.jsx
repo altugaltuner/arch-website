@@ -29,8 +29,6 @@ function MyProfile({ user }) {
     }, [user]);
 
     const handleLogout = () => {
-        // Add your logout logic here
-        // For example, you can clear user data from local storage and redirect to the login page
         localStorage.removeItem("user");
         window.location.href = "/login";
     };

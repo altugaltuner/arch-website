@@ -10,7 +10,7 @@ function MyNotebook() {
         const fetchNotes = async () => {
             try {
                 const token = localStorage.getItem("token");
-                console.log("Token retrieved:", token);  // Debug log
+                console.log("Token retrieved:", token);
                 if (token) {
                     const response = await fetch("http://localhost:1337/api/users/me", {
                         headers: {

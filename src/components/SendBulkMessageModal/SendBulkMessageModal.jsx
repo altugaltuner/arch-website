@@ -6,14 +6,14 @@ function SendBulkMessageModal({ setShowModal }) {
     const [message, setMessage] = useState('');
     const messageInputRef = useRef(null);
     const [messageHeader, setMessageHeader] = useState('');
-    const [messageFile, setMessageFile] = useState(null); // Dosya objesi olarak saklayacağız
+    const [messageFile, setMessageFile] = useState(null);
 
     const { user } = useAuth();
-    console.log(user);
-    const userId = user?.id; // Kullanıcı ID'sini alın
+
+    const userId = user?.id;
 
     const handleFileChange = (e) => {
-        setMessageFile(e.target.files[0]); // Dosya objesini set ediyoruz
+        setMessageFile(e.target.files[0]);
     };
 
     const handleSend = async () => {
@@ -21,11 +21,11 @@ function SendBulkMessageModal({ setShowModal }) {
         formData.append('data', JSON.stringify({
             header: messageHeader,
             content: message,
-            users_permissions_user: userId // Kullanıcı ID'sini gönderiyoruz
+            users_permissions_user: userId
         }));
 
         if (messageFile) {
-            formData.append('files.contentMedia', messageFile); // Dosyayı ekliyoruz
+            formData.append('files.contentMedia', messageFile);
         }
 
         try {
@@ -39,7 +39,6 @@ function SendBulkMessageModal({ setShowModal }) {
             }
 
             const result = await response.json();
-            console.log('Mesaj başarıyla gönderildi:', result);
             setShowModal(false);
         } catch (error) {
             console.error('Error:', error);

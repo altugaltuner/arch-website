@@ -10,10 +10,8 @@ import EditProjectModal from "../../components/EditProjectModal/EditProjectModal
 
 function ProjectsMainPage() {
   const { user } = useAuth();
-  console.log("User:", user);
 
   const usersCompanyId = user?.company?.id;
-  console.log("Company ID:", usersCompanyId);
 
   const [companyProjects, setCompanyProjects] = useState([]);
   const [roles, setRoles] = useState([]);
@@ -65,12 +63,10 @@ function ProjectsMainPage() {
           `http://localhost:1337/api/companies/${usersCompanyId}?populate[projects][populate]=*`
         );
         const companyData = response.data.data;
-        console.log("Fetched Company Data:", companyData);
 
         const filteredProjects = companyData.attributes.projects.data.filter(
           (project) => project.attributes.company.data.id === usersCompanyId
         );
-        console.log("Filtered Projects:", filteredProjects);
 
         setCompanyProjects(filteredProjects);
       } catch (error) {
@@ -119,8 +115,6 @@ function ProjectsMainPage() {
         console.error("No token found in localStorage");
         return;
       }
-
-      // Proje oluşturmak için doğru endpoint'i kullanın
       const response = await axios.post("http://localhost:1337/api/projects", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -128,16 +122,15 @@ function ProjectsMainPage() {
       });
 
       const createdProject = response.data.data;
-      console.log("Created Project:", createdProject);
 
-      // Anında render edilmesi için yeni projeyi mevcut state'e ekleyelim
+
       setCompanyProjects((prevProjects) => [
         ...prevProjects,
         {
           id: createdProject.id,
           attributes: {
             ...createdProject.attributes,
-            projectCoverPhoto: createdProject.attributes.projectCoverPhoto || { data: null }, // Proje resmini ekliyoruz
+            projectCoverPhoto: createdProject.attributes.projectCoverPhoto || { data: null },
           },
         }
       ]);
@@ -212,7 +205,6 @@ function ProjectsMainPage() {
     axios
       .delete(`http://localhost:1337/api/projects/${projectToDelete}`)
       .then((response) => {
-        console.log("Project deleted successfully");
         setCompanyProjects(
           companyProjects.filter((project) => project.id !== projectToDelete)
         );

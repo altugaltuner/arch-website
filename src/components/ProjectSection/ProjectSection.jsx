@@ -29,7 +29,7 @@ function ProjectSection({ clickedProject }) {
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [newFolderName, setNewFolderName] = useState("");
-    const [searchTerm, setSearchTerm] = useState(""); // Arama terimi için state
+    const [searchTerm, setSearchTerm] = useState("");
     const fileInputRef = useRef(null);
 
     const fileIcons = {
@@ -54,7 +54,6 @@ function ProjectSection({ clickedProject }) {
             try {
                 const response = await axios.get('http://localhost:1337/api/accesses');
                 setRoles(response.data.data);
-                console.log("Roles data:", response.data.data);
             } catch (error) {
                 console.error("Error fetching roles:", error);
             }
@@ -66,7 +65,6 @@ function ProjectSection({ clickedProject }) {
         try {
             const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
             setProjectFolders(response.data.data);
-            console.log("Project Folders:", response.data.data);
         } catch (error) {
             console.error('Error fetching the data', error);
         }
@@ -170,7 +168,6 @@ function ProjectSection({ clickedProject }) {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log("Upload Response:", uploadResponse.data);
             const uploadedFile = uploadResponse.data[0];
             const updatedContent = currentFolder.folderContent && currentFolder.folderContent.data
                 ? [...currentFolder.folderContent.data, uploadedFile]
@@ -202,7 +199,6 @@ function ProjectSection({ clickedProject }) {
     function openInsideFolder(folder) {
         setParentFolder(currentFolder);
         setCurrentFolder({ id: folder.id, ...folder.attributes });
-        console.log("Opening Folder:", { id: folder.id, ...folder.attributes });
     }
 
     function goBack() {
@@ -225,7 +221,6 @@ function ProjectSection({ clickedProject }) {
             );
         }
 
-        // Filtrelenmiş dosyalar
         const filteredFiles = folder.folderContent.data.filter((file) =>
             file.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -235,7 +230,7 @@ function ProjectSection({ clickedProject }) {
                 folder={{ id: folder.id, ...folder }}
                 fileIcons={fileIcons}
                 openFileModal={openFileModal}
-                filteredFiles={filteredFiles} // Filtrelenmiş dosyaları gönderiyoruz
+                filteredFiles={filteredFiles}
             />
         );
     };

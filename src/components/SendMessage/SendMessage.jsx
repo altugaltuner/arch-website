@@ -8,7 +8,6 @@ const SendMessage = () => {
     const [photoURL, setPhotoURL] = useState("");
     const handleSendMessage = (e) => {
         e.preventDefault();
-        console.log(value);
         if (value.trim === "") {
             alert("Enter valid message!");
             return;

@@ -15,8 +15,6 @@ function ProjectComments({ clickedProject }) {
     const [selectedRevise, setSelectedRevise] = useState(null);
 
     const { user } = useAuth();
-    console.log(user);
-    const userId = user.id;
 
     useEffect(() => {
         if (clickedProject) {
@@ -98,7 +96,7 @@ function ProjectComments({ clickedProject }) {
             id: newRevise.data.id,
             text: reviseAttributes.comment[0].children[0].text,
             reviseState: reviseAttributes.reviseState,
-            owner: user.username, // Bu değer uygun şekilde değiştirilmeli
+            owner: user.username,
             ownerId: user.id,
             commentDate: new Date(reviseAttributes.commentDate).toLocaleDateString('tr-TR')
         };
@@ -113,7 +111,7 @@ function ProjectComments({ clickedProject }) {
             id: updatedRevise.data.id,
             text: reviseAttributes.comment[0].children[0].text,
             reviseState: reviseAttributes.reviseState,
-            owner: user.username, // Bu değer uygun şekilde değiştirilmeli
+            owner: user.username,
             ownerId: user.id,
             commentDate: new Date(reviseAttributes.commentDate).toLocaleDateString('tr-TR')
         };

@@ -72,7 +72,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                             className="project-navbar-photos"
                                             src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
                                             alt="Project Cover"
-                                            onError={(e) => { console.log("Image Error:", e); }} // Error logu ekliyoruz
+                                            onError={(e) => { console.log("Image Error:", e); }}
                                         />
                                     )}
                             </Link>

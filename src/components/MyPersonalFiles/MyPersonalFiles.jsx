@@ -21,7 +21,7 @@ function MyPersonalFiles({ user }) {
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [trashFolder, setTrashFolder] = useState(null); // Çöp kutusu klasörü için state
+    const [trashFolder, setTrashFolder] = useState(null);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -39,9 +39,6 @@ function MyPersonalFiles({ user }) {
                     folderName: "Çöp Kutusu",
                     personalFolderContent: response.data.personalDustbin.personalFolderContent || []
                 } : null;
-
-                console.log('Fetched folders:', folders);
-                console.log('Fetched dustbin:', dustbin);
 
                 setPersonalFolders(folders);
                 setTrashFolder(dustbin);
@@ -364,7 +361,7 @@ function MyPersonalFiles({ user }) {
                     onDownload={downloadFile}
                     onDelete={handleFileDelete}
                     onPermanentDelete={permanentlyDeleteFile}
-                    isTrash={selectedFolder && trashFolder && selectedFolder.id === trashFolder.id} // Çöp kutusu mu kontrolü
+                    isTrash={selectedFolder && trashFolder && selectedFolder.id === trashFolder.id}
                 />
             )}
             <AddFolderModal

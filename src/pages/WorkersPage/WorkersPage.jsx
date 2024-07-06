@@ -24,7 +24,6 @@ function WorkersPage() {
 
     const openNewProfessionModal = () => {
         setNewProfessionModalOpen(true);
-        console.log("Open new profession modal");
     };
 
     const closeNewProfessionModal = () => {
@@ -32,10 +31,8 @@ function WorkersPage() {
     };
 
     const { user } = useAuth();
-    console.log("User:", user);
 
     const usersCompanyId = user?.company?.id;
-    console.log("Company ID:", usersCompanyId);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,7 +43,6 @@ function WorkersPage() {
                     ...user.attributes,
                     id: user.id
                 }));
-                console.log("formattedUsers", formattedUsers); // Check data structure
                 setEmployees(formattedUsers);
                 setFilteredSearchEmployees(formattedUsers);
                 const titles = formattedUsers.map(employee => employee.profession.professionName);
@@ -72,7 +68,6 @@ function WorkersPage() {
     };
 
     const openEmployeeCardModal = (employee) => {
-        console.log("Employee selected:", employee);
         setSelectedEmployee(employee);
     };
 

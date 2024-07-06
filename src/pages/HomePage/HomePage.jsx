@@ -6,11 +6,11 @@ import Activities from "../../components/Activities/Activities";
 import CompanyName from "../../components/CompanyName/CompanyName";
 
 function HomePage() {
-  const { loading } = useAuth(); // loading durumunu alın
+  const { loading } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
 
   if (loading) {
-    return <div>Loading...</div>; // Veriler yüklenirken gösterilecek içerik
+    return <div>Loading...</div>;
   }
 
   const handleSearch = (term) => {

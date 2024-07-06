@@ -32,7 +32,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
         const formData = new FormData();
         formData.append('files', file);
         if (currentUser) {
-            formData.append('uploader', currentUser.id); // Kullanıcı bilgisi ekleniyor
+            formData.append('uploader', currentUser.id);
         }
         console.log("Current User at file upload:", currentUser);
 

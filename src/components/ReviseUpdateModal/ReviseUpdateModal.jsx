@@ -41,8 +41,6 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
                     reviseState: parseInt(selectedState, 10),
                 }
             });
-
-            console.log('API yanıtı:', response.data);
             onReviseUpdated(response.data);
             onClose();
         } catch (error) {

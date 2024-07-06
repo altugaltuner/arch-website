@@ -36,8 +36,8 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             const response = await axios.post('http://localhost:1337/api/users', {
                 username: `${adminName} ${adminSurname}`,
                 email: adminEmail,
-                password: adminPassword, // Parola alanı
-                isCompanyAdmin: true, // Eğer Strapi'de bu şekilde tanımlandıysa
+                password: adminPassword,
+                isCompanyAdmin: true,
                 company: {
                     id: company.id,
                     companyName: company.companyName,
@@ -47,14 +47,14 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     updatedAt: company.updatedAt,
                     publishedAt: company.publishedAt
                 },
-                access: { // Burada access alanını kullanarak gönderim yapıyoruz
+                access: {
                     id: 2,
                     role: "Spectator",
                     createdAt: new Date().toISOString(),
                     updatedAt: new Date().toISOString(),
                     publishedAt: new Date().toISOString()
                 },
-                role: 1 // Role ID'si
+                role: 1
             });
             return response.data;
         } catch (error) {
@@ -102,10 +102,8 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
         if (Object.keys(errors).length === 0) {
             try {
-                // Şirket oluştur
                 const company = await createCompany(formElements.companyName, formElements.workingArea, formElements.companyCode);
 
-                // Kullanıcı oluştur ve şirket ile ilişkilendir
                 await createUser(formElements.adminName, formElements.adminSurname, formElements.adminPassword, formElements.adminEmail, company.data);
 
                 alert("Form başarıyla gönderildi!");

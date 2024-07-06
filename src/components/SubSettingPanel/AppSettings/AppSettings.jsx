@@ -1,4 +1,3 @@
-// AppSettings.js
 import React from 'react';
 
 const AppSettings = () => (

@@ -1,4 +1,3 @@
-// CompanyCreatePage.jsx
 import React, { useState } from "react";
 import "./CompanyCreatePage.scss";
 import CompanyFormElements from "../../components/CompanyFormElements/CompanyFormElements";
