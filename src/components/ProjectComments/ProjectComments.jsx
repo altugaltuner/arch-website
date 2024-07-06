@@ -48,7 +48,7 @@ function ProjectComments({ clickedProject }) {
                             reviseState: reviseStateMap[revise.attributes.reviseState] || 'Durum bilgisi yok',
                             owner: owner ? owner.attributes.username : 'Sahip bilgisi yok',
                             ownerId: owner ? owner.id : null,
-                            commentDate: revise.attributes.commentDate
+                            commentDate: new Date(revise.attributes.commentDate).toLocaleDateString('tr-TR')
                         };
                     })
                 )
@@ -59,7 +59,6 @@ function ProjectComments({ clickedProject }) {
             console.error('Revizeler alınırken bir hata oluştu:', error);
         }
     };
-
 
     const openNewReviseModal = () => {
         setIsModalOpen(true);

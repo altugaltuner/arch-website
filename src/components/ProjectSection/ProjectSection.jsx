@@ -219,8 +219,8 @@ function ProjectSection({ clickedProject }) {
         if (!folder || !folder.folderContent || !folder.folderContent.data) {
             return (
                 <div className="folder-content">
-                    <p className="folder-content-nocontent-p">Henüz dosya yüklenmedi.</p>
                     <button className="file-preview-upload" onClick={uploadFile}>Dosya Yükle</button>
+                    <p className="folder-content-nocontent-p">Henüz dosya yüklenmedi.</p>
                 </div>
             );
         }

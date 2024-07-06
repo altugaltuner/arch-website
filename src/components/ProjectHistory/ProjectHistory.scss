@@ -11,7 +11,6 @@
     border-radius: 15px;
     margin-top: 20px;
     color: $font-color;
-    gap: 10px;
 
     .project-history-header {
         border-bottom: 1px solid $border-color;
@@ -24,8 +23,16 @@
         font-weight: 300;
     }
 
-    .history-paragraph {
-        font-size: 18px;
+    .project-history-div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 400px;
+        overflow-y: auto;
+
+        .history-paragraph {
+            font-size: 18px;
+        }
     }
 }
 

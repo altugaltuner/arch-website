@@ -19,6 +19,8 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
             return;
         }
 
+        const currentDate = new Date().toLocaleString();
+
         try {
             const response = await axios.post('http://localhost:1337/api/project-revises', {
                 data: {
@@ -36,7 +38,8 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
                     reviseState: parseInt(selectedState, 10),
                     isActive: true,
                     project: { id: clickedProject.id }, // Proje ID'sini uygun şekilde ayarlayın
-                    user: { id: user.id } // Kullanıcı ID'sini uygun şekilde ayarlayın
+                    user: { id: user.id }, // Kullanıcı ID'sini uygun şekilde ayarlayın
+                    commentDate: currentDate // Yeni revizenin tarihini ekleyin
                 }
             });
 
@@ -47,7 +50,6 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
             console.error('Revize eklenirken bir hata oluştu:', error);
         }
     };
-
 
     return (
         <div className="new-revise-modal">
