@@ -1,4 +1,3 @@
-// ProjectHistory.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProjectHistory.scss';
@@ -9,8 +8,11 @@ function ProjectHistory({ clickedProject }) {
     useEffect(() => {
         async function fetchHistory() {
             try {
-                const response = await axios.get(`http://localhost:1337/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=user`);
+                console.log("clickedProject:", clickedProject);
+                const response = await axios.get(`http://localhost:1337/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=*`);
+                console.log("Fetched History Response:", response.data);  // Geçici loglama
                 setHistory(response.data.data);
+                console.log("History fetched:", response.data.data);
             } catch (error) {
                 console.error("Error fetching history:", error);
             }
@@ -27,7 +29,7 @@ function ProjectHistory({ clickedProject }) {
             <div className="project-history-div">
                 {history.map((entry, index) => (
                     <p key={index} className="history-paragraph">
-                        {entry.attributes.user.username} {entry.attributes.action} "{entry.attributes.fileOrFolder}" - {new Date(entry.attributes.timestamp).toLocaleDateString()}
+                        {entry.attributes.users_permissions_users.data[0].attributes.username} kullanıcısı {entry.attributes.folder} adlı klasörden "{entry.attributes.file}" dosyasını  {entry.attributes.action} - {new Date(entry.attributes.timestamp).toLocaleDateString()}
                     </p>
                 ))}
             </div>
