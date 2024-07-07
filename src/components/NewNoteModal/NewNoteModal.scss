@@ -1,4 +1,6 @@
-.modal {
+@use "../../styles/abstracts/variables" as *;
+
+.new-note-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,26 +10,56 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    z-index: 1000;
 
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-}
+    .new-note-modal-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 500px;
+        height: 350px;
+        text-align: center;
 
-.note-button {
-    margin-bottom: 20px;
-}
+        .new-note-modal-header {
+            font-size: 24px;
+            font-weight: 400;
+        }
 
-textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 20px;
-}
+        .note-title-input {
+            padding: 5px;
+            border: 1px solid $border-color;
+            border-radius: 5px;
+        }
 
-button {
-    margin: 5px;
+        .note-content-input {
+            padding: 5px;
+            height: 135px;
+            border: 1px solid $border-color;
+            border-radius: 5px;
+        }
+
+        .btn-div-for-new-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            .new-note-submit-btn,
+            .new-note-cancel-btn {
+                padding: 10px 20px;
+                border-radius: 5px;
+                border: 1px solid $border-color;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: darken($yellow, 10%);
+                }
+
+            }
+        }
+    }
 }
