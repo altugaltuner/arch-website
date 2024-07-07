@@ -231,7 +231,7 @@ function ProjectSection({ clickedProject }) {
     };
 
     const renderFoldersAndFiles = (folder) => {
-        if (!folder || !currentFiles.length) {
+        if (!folder || !currentFiles) {
             return (
                 <div className="folder-content">
                     <button className="file-preview-upload" onClick={uploadFile}>Dosya Yükle</button>
@@ -348,7 +348,7 @@ function ProjectSection({ clickedProject }) {
             {editModal && (
                 <EditProjectFolderModal
                     showEditModal={editModal}
-                    setShowEditModal={setShowEditModal}
+                    setEditModal={setEditModal}
                     folderToEdit={folderToEdit}
                     newFolderName={newFolderName}
                     setNewFolderName={setNewFolderName}

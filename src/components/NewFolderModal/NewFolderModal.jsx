@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NewFolderModal.scss';
 
 function NewFolderModal({ showModal, setShowModal, newFolder, handleInputChange, handleSubmit }) {
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleInputChangeWithError = (e) => {
+        handleInputChange(e);
+        if (e.target.value.trim() === '') {
+            setErrorMessage('Klasör ismi boş olamaz');
+        } else {
+            setErrorMessage('');
+        }
+    };
+
+    const handleSubmitWithError = () => {
+        if (newFolder.projectFolderName.trim() === '') {
+            setErrorMessage('Klasör ismi boş olamaz');
+        } else {
+            handleSubmit();
+            setErrorMessage('');
+        }
+    };
+
     if (!showModal) return null;
 
     return (
@@ -15,10 +35,11 @@ function NewFolderModal({ showModal, setShowModal, newFolder, handleInputChange,
                     name="projectFolderName"
                     placeholder="Klasör Adı"
                     value={newFolder.projectFolderName}
-                    onChange={handleInputChange}
+                    onChange={handleInputChangeWithError}
                 />
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <div className="new-folder-buttons-for-modal">
-                    <button className="new-folder-submit-button" onClick={handleSubmit}>Oluştur</button>
+                    <button className="new-folder-submit-button" onClick={handleSubmitWithError}>Oluştur</button>
                     <button className="new-folder-cancel-button" onClick={() => setShowModal(false)}>İptal</button>
                 </div>
             </div>
