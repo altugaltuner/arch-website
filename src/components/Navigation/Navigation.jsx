@@ -19,7 +19,7 @@ function Navigation() {
         { id: 'home-nav-id', to: '/homepage', logo: homepageLogo, name: 'Anasayfa' },
         { id: 'projects-nav-id', to: '/projects', logo: projectsLogo, name: 'Projeler' },
         { id: 'groups-nav-id', to: '/groups', logo: groupsLogo, name: 'Gruplar' },
-        { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: 'Şirket Çalışanları' },
+        { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: ' Ekip Üyeleri' },
         { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
         { id: 'admin-panel-id', to: '/adminpanel', logo: adminPanelLogo, name: 'Admin Paneli' },
         { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' }

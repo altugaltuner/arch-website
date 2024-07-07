@@ -30,6 +30,7 @@ function ProjectSection({ clickedProject }) {
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [newFolderName, setNewFolderName] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
+    const [currentFiles, setCurrentFiles] = useState([]);
     const fileInputRef = useRef(null);
 
     const fileIcons = {
@@ -117,7 +118,9 @@ function ProjectSection({ clickedProject }) {
         try {
             await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
             setFileModal(false);
-            await fetchProjectFolders();
+            setCurrentFiles(currentFiles.filter(file => file.id !== fileId));
+            console.log("File deleted:", fileId);
+            console.log("Updated current files:", currentFiles);
         } catch (error) {
             console.error('Error deleting the file', error);
         }
@@ -163,30 +166,40 @@ function ProjectSection({ clickedProject }) {
         formData.append('files', file);
 
         try {
+            console.log('Uploading file:', file);
             const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+            console.log('Upload response:', uploadResponse.data);
             const uploadedFile = uploadResponse.data[0];
             const updatedContent = currentFolder.folderContent && currentFolder.folderContent.data
                 ? [...currentFolder.folderContent.data, uploadedFile]
                 : [uploadedFile];
 
-            await axios.put(`http://localhost:1337/api/project-folders/${currentFolder.id}`, {
+            console.log('Updated content before PUT:', updatedContent);
+            const putResponse = await axios.put(`http://localhost:1337/api/project-folders/${currentFolder.id}`, {
                 data: {
                     folderContent: updatedContent.map(file => file.id),
                 },
             });
 
+            console.log('PUT response:', putResponse);
+            console.log('Updated content after PUT:', updatedContent);
+
+            // Update state
+            setCurrentFiles(updatedContent);
+            setCurrentFolder(prevFolder => ({ ...prevFolder, folderContent: { data: updatedContent } }));
             setProjectFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === currentFolder.id) {
                     return { ...folder, folderContent: { data: updatedContent } };
                 }
                 return folder;
             }));
-            setCurrentFolder(prevFolder => ({ ...prevFolder, folderContent: { data: updatedContent } }));
 
+            console.log("File uploaded successfully");
+            console.log("Updated current files:", updatedContent);
         } catch (error) {
             console.error('Error uploading the file', error);
         }
@@ -199,11 +212,17 @@ function ProjectSection({ clickedProject }) {
     function openInsideFolder(folder) {
         setParentFolder(currentFolder);
         setCurrentFolder({ id: folder.id, ...folder.attributes });
+        setCurrentFiles(folder.attributes.folderContent ? folder.attributes.folderContent.data : []);
+        console.log('Opened folder:', folder);
+        console.log('Current files:', folder.attributes.folderContent ? folder.attributes.folderContent.data : []);
     }
 
     function goBack() {
         setCurrentFolder(parentFolder);
         setParentFolder(null);
+        setCurrentFiles(parentFolder ? parentFolder.folderContent.data : []);
+        console.log('Went back to parent folder');
+        console.log('Current files:', parentFolder ? parentFolder.folderContent.data : []);
     }
 
     const openFileModal = (file) => {
@@ -212,7 +231,7 @@ function ProjectSection({ clickedProject }) {
     };
 
     const renderFoldersAndFiles = (folder) => {
-        if (!folder || !folder.folderContent || !folder.folderContent.data) {
+        if (!folder || !currentFiles.length) {
             return (
                 <div className="folder-content">
                     <button className="file-preview-upload" onClick={uploadFile}>Dosya Yükle</button>
@@ -221,9 +240,11 @@ function ProjectSection({ clickedProject }) {
             );
         }
 
-        const filteredFiles = folder.folderContent.data.filter((file) =>
-            file.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const filteredFiles = currentFiles.filter((file) =>
+            file.attributes && file.attributes.name && file.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
+
+        console.log('Rendering files:', filteredFiles);
 
         return (
             <FolderContent
@@ -256,8 +277,8 @@ function ProjectSection({ clickedProject }) {
                             type="text"
                             className="project-file-search"
                             placeholder="Dosya Ara..."
-                            value={searchTerm} // Search term state'ini inputa bağladık
-                            onChange={(e) => setSearchTerm(e.target.value)} // Input değiştikçe state'i güncelliyoruz
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
                     {renderFoldersAndFiles(currentFolder)}

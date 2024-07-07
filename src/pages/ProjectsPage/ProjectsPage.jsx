@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./ProjectsPage.scss";
@@ -72,7 +72,7 @@ function ProjectsPage() {
                     </div>
                     <div className="inner-project-row">
                         {currentProject && <ProjectComments clickedProject={currentProject.data} />}
-                        {currentProject && <ProjectHistory clickedProject={currentProject.data} roles={roles} />}
+                        {currentProject && <ProjectHistory clickedProject={currentProject.data} />}
                         {currentProject && <ProjectProcess clickedProject={currentProject.data} roles={roles} />}
                     </div>
                 </div>
