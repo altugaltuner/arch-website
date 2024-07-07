@@ -21,7 +21,7 @@
         height: 100vh;
 
         .flow-logo {
-            width: 100px;
+            width: 94px;
             border-bottom: 1px solid $border-color;
             padding: 5px;
             cursor: pointer;
@@ -43,8 +43,8 @@
                 width: 100%;
                 border: none;
                 border-radius: 0px;
-                padding: 16px 10px 16px 10px;
-                gap: 10px;
+                padding: 10px;
+                gap: 15px;
                 text-align: center;
                 color: $font-color;
                 font-size: 20px;
@@ -53,8 +53,8 @@
                 transition: all 0.2s;
 
                 .nav-logo {
-                    width: 45px;
-                    height: 43px;
+                    width: 40px;
+                    height: 37px;
                     transition: all 0.2s;
                 }
 

@@ -14,8 +14,8 @@
 
     .project-history-header {
         border-bottom: 1px solid $border-color;
-        padding: 0px 0px 10px 0px;
-        margin: 0px 0px 10px 0px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
         width: 100%;
         font-size: 30px;
         color: $font-color;
@@ -32,6 +32,9 @@
 
         .history-paragraph {
             font-size: 18px;
+            border: 1px solid $border-color;
+            padding: 10px;
+            border-radius: 15px;
         }
     }
 }

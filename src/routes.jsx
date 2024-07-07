@@ -13,6 +13,7 @@ import FirstPage from "./pages/FirstPage/FirstPage.jsx";
 import FlowPage from "./pages/FlowPage/FlowPage.jsx";
 import IsCookie from "./hooks/useCookie.jsx"
 import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
+import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx";
 
 const routes = [
   {
@@ -68,6 +69,14 @@ const routes = [
     element: (
       <ProtectedRoute>
         <WorkersPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/calendar",
+    element: (
+      <ProtectedRoute>
+        <CalendarPage />
       </ProtectedRoute>
     ),
   },

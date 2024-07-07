@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import flowLogo from "../../assets/icons/flow-logo.png";
 import employeesLogo from "../../assets/icons/employees-logo.png";
+import calendarLogo from "../../assets/icons/calendar-icon.jpg";
 import groupsLogo from "../../assets/icons/groups-logo.png";
 import projectsLogo from "../../assets/icons/projects-logo.png";
 import myLogo from "../../assets/icons/my-profile-logo.png";
@@ -20,6 +21,7 @@ function Navigation() {
         { id: 'projects-nav-id', to: '/projects', logo: projectsLogo, name: 'Projeler' },
         { id: 'groups-nav-id', to: '/groups', logo: groupsLogo, name: 'Gruplar' },
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: ' Ekip Üyeleri' },
+        { id: 'calendar-nav-id', to: '/calendar', logo: calendarLogo, name: ' Takvim' },
         { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
         { id: 'admin-panel-id', to: '/adminpanel', logo: adminPanelLogo, name: 'Admin Paneli' },
         { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' }
