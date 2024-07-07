@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
-import './NewNoteModal.scss';
+import React, { useState, useEffect } from 'react';
+import './EditNoteModal.scss';
 
-function NewNoteModal({ showModal, setShowModal, saveNote }) {
+function EditNoteModal({ showModal, setShowModal, note, updateNote }) {
     const [noteTitle, setNoteTitle] = useState('');
     const [noteContent, setNoteContent] = useState('');
 
+    useEffect(() => {
+        if (note) {
+            setNoteTitle(note.title);
+            setNoteContent(note.content);
+        }
+    }, [note]);
+
     const handleSave = () => {
-        const note = {
+        const updatedNote = {
+            ...note,
             title: noteTitle,
             content: noteContent
         };
-        saveNote(note);
+        updateNote(updatedNote);
         setShowModal(false);
     };
 
@@ -19,7 +27,7 @@ function NewNoteModal({ showModal, setShowModal, saveNote }) {
     return (
         <div className="modal">
             <div className="modal-content">
-                <h2>Yeni Not Yaz</h2>
+                <h2>Notu Düzenle</h2>
                 <input
                     type="text"
                     placeholder="Başlık"
@@ -38,4 +46,4 @@ function NewNoteModal({ showModal, setShowModal, saveNote }) {
     );
 }
 
-export default NewNoteModal;
+export default EditNoteModal;

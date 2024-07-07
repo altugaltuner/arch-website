@@ -46,6 +46,22 @@
             border: 1px solid $border-color;
             border-radius: 10px;
             padding: 10px;
+            position: relative;
+
+            .edit-icon {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 15px;
+                height: 15px;
+                opacity: 0.5;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
 
             .note-one-subheader {
                 padding: 5px;
