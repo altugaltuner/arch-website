@@ -5,12 +5,12 @@ import NewNoteModal from "../NewNoteModal/NewNoteModal";
 function MyNotebook() {
     const [notes, setNotes] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
         const fetchNotes = async () => {
             try {
                 const token = localStorage.getItem("token");
-                console.log("Token retrieved:", token);
                 if (token) {
                     const response = await fetch("http://localhost:1337/api/users/me", {
                         headers: {
@@ -18,10 +18,13 @@ function MyNotebook() {
                         },
                     });
                     if (!response.ok) {
-                        throw new Error("Failed to fetch notes");
+                        throw new Error("Failed to fetch user data");
                     }
                     const data = await response.json();
                     setNotes(data.myNotebook || []);
+                    setUserId(data.id);  // Kullanıcı ID'sini alın
+                } else {
+                    console.error("No token found");
                 }
             } catch (error) {
                 console.error("Error fetching notes:", error);
@@ -34,14 +37,14 @@ function MyNotebook() {
     const saveNote = async (noteContent) => {
         try {
             const token = localStorage.getItem("token");
-            if (!token) {
-                throw new Error("No token found");
+            if (!token || !userId) {
+                throw new Error("No token or user ID found");
             }
 
             const updatedNotes = [...notes, noteContent];
             setNotes(updatedNotes);
 
-            const response = await fetch("http://localhost:1337/api/users/me", {
+            const response = await fetch(`http://localhost:1337/api/users/${userId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
