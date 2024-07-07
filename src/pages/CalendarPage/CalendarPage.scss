@@ -64,3 +64,48 @@
         }
     }
 }
+
+
+
+
+
+
+
+.calendar-page-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+
+    button {
+        padding: 0.5rem 1rem;
+        margin: 0 1rem;
+        cursor: pointer;
+    }
+
+    span {
+        font-size: 1.25rem;
+    }
+}
+
+.calendar-area {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+
+    .calendar-day-header {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .calendar-day {
+        padding: 1rem;
+        border: 1px solid #ddd;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}
