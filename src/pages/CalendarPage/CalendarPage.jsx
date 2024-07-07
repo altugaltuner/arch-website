@@ -3,6 +3,9 @@ import "./CalendarPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import CalendarModal from "../../components/CalendarModal/CalendarModal";
 
+import backButton from "../../assets/icons/back-button.png";
+import forwardButton from "../../assets/icons/forward-button.png";
+
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
 const generateCalendar = (year, month) => {
@@ -52,17 +55,11 @@ const CalendarPage = () => {
             <div className="calendar-page-inner">
                 <div className="calendar-page-header-and-input">
                     <h1 className="calendar-page-header">Takvim</h1>
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Grup Ara"
-                        value=""
-                    />
                 </div>
                 <div className="calendar-page-controls">
-                    <button onClick={prevMonth}>Önceki Ay</button>
+                    <img className="calendar-page-button" onClick={prevMonth} src={backButton} />
                     <span>{year} - {month + 1}</span>
-                    <button onClick={nextMonth}>Sonraki Ay</button>
+                    <img className="calendar-page-button" onClick={nextMonth} src={forwardButton} />
                 </div>
                 <div className="calendar-area">
                     {daysOfWeek.map((day) => (
