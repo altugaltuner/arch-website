@@ -131,7 +131,7 @@ function ProjectComments({ clickedProject }) {
                 <div className='comment-table-head'>
                     <div className='comment-table-head-text'>Revize</div>
                     <div className='comment-table-head-state'>Durum</div>
-                    <div className='comment-table-head-owner'>Revize Sahibi</div>
+                    <div className='comment-table-head-owner'>Yazan</div>
                     <div className='comment-table-head-date'>Tarih</div>
                 </div>
                 {commentsWithDetails.map((commentWithDetail, index) => (
