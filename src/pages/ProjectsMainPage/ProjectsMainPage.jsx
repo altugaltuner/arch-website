@@ -27,6 +27,7 @@ function ProjectsMainPage() {
   const [editProject, setEditProject] = useState({
     projectName: "",
     projectCoverPhoto: null,
+    projectPassword: "",
   });
 
   async function getRoles() {
@@ -79,6 +80,23 @@ function ProjectsMainPage() {
     }
   }, [usersCompanyId]);
 
+  const handleInputPasswordChange = (e) => {
+    const { name, value } = e.target;
+    console.log("Password input changed:", name, value);
+    if (showEditModal) {
+      setEditProject((prevEditProject) => {
+        const updatedProject = { ...prevEditProject, [name]: value };
+        console.log("Updated editProject:", updatedProject);
+        return updatedProject;
+      });
+    } else {
+      setNewProject((prevNewProject) => {
+        const updatedProject = { ...prevNewProject, [name]: value };
+        console.log("Updated newProject:", updatedProject);
+        return updatedProject;
+      });
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -89,6 +107,7 @@ function ProjectsMainPage() {
     }
   };
 
+
   const handleFileChange = (e) => {
     if (showEditModal) {
       setEditProject({ ...editProject, projectCoverPhoto: e.target.files[0] });
@@ -98,12 +117,13 @@ function ProjectsMainPage() {
   };
 
   const handleSubmit = async () => {
+    console.log("Submitting new project:", newProject);
     const formData = new FormData();
     formData.append("data", JSON.stringify({
       projectName: newProject.projectName,
+      projectPassword: newProject.projectPassword,
       company: usersCompanyId,
       projectCoverPhoto: newProject.projectCoverPhoto,
-      // Şirket ID'sini ekliyoruz
     }));
     if (newProject.projectCoverPhoto) {
       formData.append("files.projectCoverPhoto", newProject.projectCoverPhoto);
@@ -123,7 +143,6 @@ function ProjectsMainPage() {
 
       const createdProject = response.data.data;
 
-
       setCompanyProjects((prevProjects) => [
         ...prevProjects,
         {
@@ -136,7 +155,7 @@ function ProjectsMainPage() {
       ]);
 
       setShowModal(false);
-      setNewProject({ projectName: "", projectCoverPhoto: null });
+      setNewProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
 
     } catch (error) {
       console.error("Error creating a new project:", error);
@@ -144,13 +163,13 @@ function ProjectsMainPage() {
   };
 
 
-
   const handleEditSubmit = async () => {
+    console.log("Submitting edited project:", editProject);
     const formData = new FormData();
-    formData.append(
-      "data",
-      JSON.stringify({ projectName: editProject.projectName })
-    );
+    formData.append("data", JSON.stringify({
+      projectName: editProject.projectName,
+      projectPassword: editProject.projectPassword,
+    }));
     if (editProject.projectCoverPhoto) {
       formData.append("files.projectCoverPhoto", editProject.projectCoverPhoto);
     }
@@ -164,7 +183,7 @@ function ProjectsMainPage() {
 
       await axios.put(`http://localhost:1337/api/projects/${projectToEdit.id}`, formData);
       setShowEditModal(false);
-      setEditProject({ projectName: "", projectCoverPhoto: null });
+      setEditProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
       // Refetch projects after editing
       const response = await axios.get(
         "http://localhost:1337/api/projects?populate=projectCoverPhoto"
@@ -231,6 +250,7 @@ function ProjectsMainPage() {
         onClose={() => setShowModal(false)}
         newProject={newProject}
         handleInputChange={handleInputChange}
+        handleInputPasswordChange={handleInputPasswordChange}
         handleFileChange={handleFileChange}
         handleSubmit={handleSubmit}
       />
