@@ -50,8 +50,8 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
             }
         } else {
             alert('Yanlış şifre');
+            setIsModalOpen(true);
         }
-        setIsModalOpen(false);
     };
 
     const handleProjectClick = (project) => {

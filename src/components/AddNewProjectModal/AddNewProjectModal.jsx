@@ -1,7 +1,7 @@
 import React from 'react';
 import "./AddNewProjectModal.scss";
 
-function AddNewProjectModal({ show, onClose, newProject, handleInputChange, handleFileChange, handleSubmit }) {
+function AddNewProjectModal({ show, onClose, newProject, handleInputChange, handleInputPasswordChange, handleFileChange, handleSubmit }) {
     if (!show) {
         return null;
     }
@@ -23,6 +23,14 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
                     placeholder="Proje Adı"
                     value={newProject.projectName}
                     onChange={handleInputChange}
+                />
+                <input
+                    className='add-new-project-password-input'
+                    type="text"
+                    name='projectPassword'
+                    placeholder='şifre üret'
+                    value={newProject.projectPassword}
+                    onChange={handleInputPasswordChange}
                 />
                 <input
                     className="add-new-project-cover-photo-input"

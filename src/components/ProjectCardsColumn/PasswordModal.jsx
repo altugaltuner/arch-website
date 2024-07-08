@@ -17,16 +17,18 @@ const PasswordModal = ({ isOpen, onClose, onConfirm, projectName }) => {
     return (
         <div className="password-modal-overlay">
             <div className="password-modal">
-                <h2>{projectName} Projesi İçin Şifre Girin</h2>
+                <span className="open-inbox-modal-span" onClick={onClose}>X</span>
+                <h2 className='password-modal-h2'>{projectName} İçin Şifre Girin</h2>
                 <input
+                    className='password-modal-input'
                     type="password"
                     value={password}
                     onChange={handlePasswordChange}
                     placeholder="Şifre"
                 />
                 <div className="modal-buttons">
-                    <button onClick={handleConfirm}>Onayla</button>
-                    <button onClick={onClose}>İptal</button>
+                    <button className='modal-one-button' onClick={handleConfirm}>Onayla</button>
+                    <button className='modal-one-button' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>
