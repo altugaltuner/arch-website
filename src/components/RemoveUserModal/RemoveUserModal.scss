@@ -18,7 +18,8 @@
         padding: 20px;
         border-radius: 5px;
         max-width: 500px;
-        width: 100%;
+        overflow-y: auto;
+        width: 350px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -40,11 +41,12 @@
 
 
                 .remove-user-modal-label {
+                    cursor: pointer;
 
                     .remove-user-modal-input {
                         width: 35px;
                         height: 25px;
-
+                        cursor: pointer;
                     }
                 }
             }

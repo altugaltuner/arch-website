@@ -71,7 +71,7 @@ function UserRoleManagement({ users }) {
                 return user;
             }));
             setSelectedUsers([]);
-            console.log("Role change process completed.");
+            console.log("Role change process completed successfully.");
         } catch (error) {
             console.error('Error changing user roles:', error);
         }
