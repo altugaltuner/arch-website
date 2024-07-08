@@ -35,7 +35,7 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
                 {history.length > 0 ? (
                     history.map((entry, index) => (
                         <p key={index} className="history-paragraph">
-                            {entry?.attributes?.users_permissions_users?.data[0]?.attributes?.username || "Bilinmeyen Kullanıcı"} kullanıcısı {entry?.attributes?.folder} adlı klasör üzerinde "{entry?.attributes?.action}" işlemi gerçekleştirdi - {new Date(entry?.attributes?.timestamp).toLocaleDateString()}
+                            {entry?.attributes?.users_permissions_users?.data[0]?.attributes?.username || "Kullanıcı"} "{entry?.attributes?.folder}" adlı klasör üzerinde "{entry?.attributes?.action}" işlemini gerçekleştirdi - {new Date(entry?.attributes?.timestamp).toLocaleDateString()}
                         </p>
                     ))
                 ) : (

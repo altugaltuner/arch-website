@@ -8,6 +8,15 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
     const fileExt = currentFile.attributes.ext.slice(1).toLowerCase();
     const isImage = ["jpg", "jpeg", "png"].includes(fileExt);
 
+    const handleDownload = () => {
+        const link = document.createElement('a');
+        link.href = `http://localhost:1337${currentFile.attributes.url}`;
+        link.setAttribute('download', currentFile.attributes.name);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+    };
+
     return (
         <div className="file-modal">
             <div className="file-modal-content">
@@ -19,7 +28,7 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
                     <img src={fileIcons[fileExt] || fileIcon} alt="file-icon" className="file-icon-modal" />
                 )}
                 <div className="file-buttons-for-modal">
-                    <a href={`http://localhost:1337${currentFile.attributes.url}`} download className="file-download-button">İndir</a>
+                    <button className="file-download-button" onClick={handleDownload}>İndir</button>
                     <button className="file-delete-button" onClick={() => handleDeleteFile(currentFile.id)}>Sil</button>
                 </div>
             </div>
