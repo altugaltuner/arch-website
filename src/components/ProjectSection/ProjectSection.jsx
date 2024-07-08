@@ -17,8 +17,12 @@ import EditProjectFolderModal from "../EditProjectFolderModal/EditProjectFolderM
 import NewFolderModal from "../NewFolderModal/NewFolderModal";
 import FileModal from "../FileModal/FileModal";
 import FolderContent from "../FolderContent/FolderContent";
+import { useAuth } from "../../components/AuthProvider";
 
-function ProjectSection({ clickedProject }) {
+function ProjectSection({ clickedProject, setNewHistoryEntry }) {
+    const { user } = useAuth();
+    console.log(user);
+
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -66,6 +70,7 @@ function ProjectSection({ clickedProject }) {
         try {
             const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
             setProjectFolders(response.data.data);
+            console.log("bunlar project folders", response.data.data);
         } catch (error) {
             console.error('Error fetching the data', error);
         }
@@ -96,6 +101,7 @@ function ProjectSection({ clickedProject }) {
             setShowModal(false);
             setNewFolder({ projectFolderName: "" });
             await fetchProjectFolders();
+            createHistoryEntry('ekledi', '', newFolder.projectFolderName);
         } catch (error) {
             console.error('Error creating a new project folder', error);
         }
@@ -108,6 +114,7 @@ function ProjectSection({ clickedProject }) {
                 setShowDeleteModal(false);
                 setFolderToDelete(null);
                 await fetchProjectFolders();
+                createHistoryEntry('sildi', '', folderToDelete);
             } catch (error) {
                 console.error('Error deleting the project folder', error);
             }
@@ -119,8 +126,7 @@ function ProjectSection({ clickedProject }) {
             await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
             setFileModal(false);
             setCurrentFiles(currentFiles.filter(file => file.id !== fileId));
-            console.log("File deleted:", fileId);
-            console.log("Updated current files:", currentFiles);
+            createHistoryEntry('sildi', fileId, 'Dosya');
         } catch (error) {
             console.error('Error deleting the file', error);
         }
@@ -149,6 +155,7 @@ function ProjectSection({ clickedProject }) {
                 setFolderToEdit(null);
                 setNewFolderName("");
                 await fetchProjectFolders();
+                createHistoryEntry('adını değiştirdi', "", newFolderName);
             } catch (error) {
                 console.error('Error editing the project folder', error);
             }
@@ -166,29 +173,22 @@ function ProjectSection({ clickedProject }) {
         formData.append('files', file);
 
         try {
-            console.log('Uploading file:', file);
             const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log('Upload response:', uploadResponse.data);
             const uploadedFile = uploadResponse.data[0];
             const updatedContent = currentFolder.folderContent && currentFolder.folderContent.data
                 ? [...currentFolder.folderContent.data, uploadedFile]
                 : [uploadedFile];
 
-            console.log('Updated content before PUT:', updatedContent);
-            const putResponse = await axios.put(`http://localhost:1337/api/project-folders/${currentFolder.id}`, {
+            await axios.put(`http://localhost:1337/api/project-folders/${currentFolder.id}`, {
                 data: {
                     folderContent: updatedContent.map(file => file.id),
                 },
             });
 
-            console.log('PUT response:', putResponse);
-            console.log('Updated content after PUT:', updatedContent);
-
-            // Update state
             setCurrentFiles(updatedContent);
             setCurrentFolder(prevFolder => ({ ...prevFolder, folderContent: { data: updatedContent } }));
             setProjectFolders(prevFolders => prevFolders.map(folder => {
@@ -198,8 +198,7 @@ function ProjectSection({ clickedProject }) {
                 return folder;
             }));
 
-            console.log("File uploaded successfully");
-            console.log("Updated current files:", updatedContent);
+            createHistoryEntry('yükledi', file.name, currentFolder);
         } catch (error) {
             console.error('Error uploading the file', error);
         }
@@ -213,16 +212,12 @@ function ProjectSection({ clickedProject }) {
         setParentFolder(currentFolder);
         setCurrentFolder({ id: folder.id, ...folder.attributes });
         setCurrentFiles(folder.attributes.folderContent ? folder.attributes.folderContent.data : []);
-        console.log('Opened folder:', folder);
-        console.log('Current files:', folder.attributes.folderContent ? folder.attributes.folderContent.data : []);
     }
 
     function goBack() {
         setCurrentFolder(parentFolder);
         setParentFolder(null);
         setCurrentFiles(parentFolder ? parentFolder.folderContent.data : []);
-        console.log('Went back to parent folder');
-        console.log('Current files:', parentFolder ? parentFolder.folderContent.data : []);
     }
 
     const openFileModal = (file) => {
@@ -244,8 +239,6 @@ function ProjectSection({ clickedProject }) {
             file.attributes && file.attributes.name && file.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
-        console.log('Rendering files:', filteredFiles);
-
         return (
             <FolderContent
                 folder={{ id: folder.id, ...folder }}
@@ -254,6 +247,27 @@ function ProjectSection({ clickedProject }) {
                 filteredFiles={filteredFiles}
             />
         );
+    };
+
+    const createHistoryEntry = async (action, file, folder) => {
+        const userId = user.id;
+        const timestamp = new Date().toISOString();
+
+        try {
+            const response = await axios.post('http://localhost:1337/api/histories', {
+                data: {
+                    action,
+                    file,
+                    folder,
+                    timestamp,
+                    users_permissions_users: userId,
+                    project: clickedProject.id,
+                }
+            });
+            setNewHistoryEntry(response.data.data);
+        } catch (error) {
+            console.error('Error creating history entry', error);
+        }
     };
 
     return (

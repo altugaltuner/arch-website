@@ -15,6 +15,7 @@ function ProjectsPage() {
     const [currentProject, setCurrentProject] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [newHistoryEntry, setNewHistoryEntry] = useState(null);
 
     const { projectId } = useParams();
     const location = useLocation();
@@ -67,12 +68,12 @@ function ProjectsPage() {
                 <div className="inner-project-column">
                     {currentProject && <ProjectHeader clickedProject={currentProject.data} />}
                     <div className="inner-project-row">
-                        {currentProject && <ProjectSection clickedProject={currentProject.data} />}
+                        {currentProject && <ProjectSection clickedProject={currentProject.data} setNewHistoryEntry={setNewHistoryEntry} />}
                         {currentProject && <ProjectTeam clickedProject={currentProject.data} updateProject={getProjectDetails} />}
                     </div>
                     <div className="inner-project-row">
                         {currentProject && <ProjectComments clickedProject={currentProject.data} />}
-                        {currentProject && <ProjectHistory clickedProject={currentProject.data} />}
+                        {currentProject && <ProjectHistory clickedProject={currentProject.data} newHistoryEntry={newHistoryEntry} />}
                         {currentProject && <ProjectProcess clickedProject={currentProject.data} roles={roles} />}
                     </div>
                 </div>
