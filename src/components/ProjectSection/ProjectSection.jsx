@@ -114,19 +114,21 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 setShowDeleteModal(false);
                 setFolderToDelete(null);
                 await fetchProjectFolders();
-                createFolderHistoryEntry('sildi', folderToDelete.toString()); // Ensure folder ID is a string
+                createFolderHistoryEntry('silme', folderToDelete.toString()); // Ensure folder ID is a string
             } catch (error) {
                 console.error('Error deleting the project folder', error);
             }
         }
     };
 
+    //console.log('Current folder:', currentFolder); bu çalışmıyor
+
     const handleDeleteFile = async (fileId) => {
         try {
             await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
             setFileModal(false);
             setCurrentFiles(currentFiles.filter(file => file.id !== fileId));
-            createHistoryEntry('sildi', fileId.toString(), currentFolder.id.toString()); // Ensure IDs are strings
+            createHistoryEntry('silme', fileId.toString(), currentFolder.id.toString()); // Ensure IDs are strings
         } catch (error) {
             console.error('Error deleting the file', error);
         }
@@ -161,6 +163,8 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             }
         }
     };
+
+
 
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
@@ -198,7 +202,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 return folder;
             }));
 
-            createHistoryEntry('yükledi', uploadedFile.id, currentFolder.id); // Ensure IDs are used correctly
+            createHistoryEntry('yükleme', uploadedFile.id, currentFolder.id); // Ensure IDs are used correctly
         } catch (error) {
             console.error('Error uploading the file', error);
         }
