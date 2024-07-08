@@ -11,8 +11,8 @@ function AdminSendMessage() {
         <div className="admin-send-message-main">
             <div className='admin-send-message-inner'>
                 <div className='admin-inbox'>
-                    <h3 className='admin-inbox-subheader'>Gönderilenler</h3>
-                    <AdminSentMessages /> {/* Burada adminMessages yerine bileşeni render ediyoruz */}
+                    <h3 className='admin-inbox-subheader'>Gelen Kutusu</h3>
+                    <AdminSentMessages />
                 </div>
 
                 <div className='admin-inbox-for-messages'>

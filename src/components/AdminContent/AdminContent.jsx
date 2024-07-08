@@ -38,7 +38,7 @@ function AdminContent({ selectedSetting }) {
     }, [companies, usersCompanyName]);
 
     if (!filteredCompany.length) {
-        return <div>Loading...</div>;
+        return <div>Yükleniyor...</div>;
     }
 
     const projectCount = filteredCompany[0]?.attributes?.projects?.data?.length || 0;
@@ -59,7 +59,7 @@ function AdminContent({ selectedSetting }) {
                 return <AdminDashboard projectCount={projectCount} userCount={userCount} reviseCount={reviseCount} />;
             case "İleti Gönderme":
                 return <AdminSendMessage />;
-            case "Kullanıcı Ayarları":
+            case "Proje ve Grup Ayarları":
                 return <AdminUsersSettings users={users} />;
             case "Şirket Ayarları":
                 return <AdminCompanySettings />;
