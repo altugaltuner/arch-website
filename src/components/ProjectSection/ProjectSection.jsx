@@ -1,3 +1,5 @@
+// ProjectSection.jsx
+
 import React, { useState, useEffect, useRef } from "react";
 import "./ProjectSection.scss";
 import axios from 'axios';
@@ -21,7 +23,6 @@ import { useAuth } from "../../components/AuthProvider";
 
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
-    console.log(user);
 
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
@@ -70,7 +71,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         try {
             const response = await axios.get('http://localhost:1337/api/projects?populate=project_folders.folderContent');
             setProjectFolders(response.data.data);
-            console.log("bunlar project folders", response.data.data);
         } catch (error) {
             console.error('Error fetching the data', error);
         }
@@ -101,7 +101,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             setShowModal(false);
             setNewFolder({ projectFolderName: "" });
             await fetchProjectFolders();
-            createHistoryEntry('ekledi', '', newFolder.projectFolderName);
+            createFolderHistoryEntry('oluşturdu', newFolder.projectFolderName);
         } catch (error) {
             console.error('Error creating a new project folder', error);
         }
@@ -114,7 +114,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 setShowDeleteModal(false);
                 setFolderToDelete(null);
                 await fetchProjectFolders();
-                createHistoryEntry('sildi', '', folderToDelete);
+                createFolderHistoryEntry('sildi', folderToDelete.toString()); // Ensure folder ID is a string
             } catch (error) {
                 console.error('Error deleting the project folder', error);
             }
@@ -126,7 +126,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
             setFileModal(false);
             setCurrentFiles(currentFiles.filter(file => file.id !== fileId));
-            createHistoryEntry('sildi', fileId, 'Dosya');
+            createHistoryEntry('sildi', fileId.toString(), currentFolder.id.toString()); // Ensure IDs are strings
         } catch (error) {
             console.error('Error deleting the file', error);
         }
@@ -155,7 +155,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 setFolderToEdit(null);
                 setNewFolderName("");
                 await fetchProjectFolders();
-                createHistoryEntry('adını değiştirdi', "", newFolderName);
+                createFolderHistoryEntry('adı değiştirdi', newFolderName);
             } catch (error) {
                 console.error('Error editing the project folder', error);
             }
@@ -198,7 +198,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 return folder;
             }));
 
-            createHistoryEntry('yükledi', file.name, currentFolder);
+            createHistoryEntry('yükledi', uploadedFile.id, currentFolder.id); // Ensure IDs are used correctly
         } catch (error) {
             console.error('Error uploading the file', error);
         }
@@ -252,13 +252,15 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const createHistoryEntry = async (action, file, folder) => {
         const userId = user.id;
         const timestamp = new Date().toISOString();
+        const fileId = file.id ? file.id : file;
+        const folderId = folder.id ? folder.id : folder;
 
         try {
             const response = await axios.post('http://localhost:1337/api/histories', {
                 data: {
                     action,
-                    file,
-                    folder,
+                    file: fileId.toString(), // Ensure file ID is a string
+                    folder: folderId.toString(), // Ensure folder ID is a string
                     timestamp,
                     users_permissions_users: userId,
                     project: clickedProject.id,
@@ -267,6 +269,26 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             setNewHistoryEntry(response.data.data);
         } catch (error) {
             console.error('Error creating history entry', error);
+        }
+    };
+
+    const createFolderHistoryEntry = async (action, folderName) => {
+        const userId = user.id;
+        const timestamp = new Date().toISOString();
+
+        try {
+            const response = await axios.post('http://localhost:1337/api/histories', {
+                data: {
+                    action,
+                    folder: folderName,
+                    timestamp,
+                    users_permissions_users: userId,
+                    project: clickedProject.id,
+                }
+            });
+            setNewHistoryEntry(response.data.data);
+        } catch (error) {
+            console.error('Error creating folder history entry', error);
         }
     };
 

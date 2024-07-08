@@ -10,16 +10,13 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const fileInputRef = useRef(null);
 
     const { user } = useAuth();
-    console.log("Authenticated User:", user);
 
     useEffect(() => {
         setCurrentUser(user);
-        console.log("Current User in useEffect:", user);
     }, [user]);
 
     useEffect(() => {
         setFolderState(folder);
-        console.log("Folder State:", folder);
     }, [folder]);
 
     const handleFileUpload = async (event) => {
