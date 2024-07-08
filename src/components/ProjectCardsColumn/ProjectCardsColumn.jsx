@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
+import PasswordModal from "./PasswordModal";
 import "./ProjectCardsColumn.scss";
+import { useAuth } from "../../components/AuthProvider";
+import axios from 'axios';
 
 function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowModal, editModalOpen }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProjects, setFilteredProjects] = useState(companyProjects);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const { user } = useAuth();
+    const [userInvolvedProjects, setUserInvolvedProjects] = useState([]);
+
+    useEffect(() => {
+        setUserInvolvedProjects(user.projects);
+        console.log("userInvolvedProjects:", userInvolvedProjects);
+    }, [user.projects]);
 
     useEffect(() => {
         const results = companyProjects.filter(project =>
@@ -17,6 +28,40 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
 
     const searchProjects = (event) => {
         setSearchTerm(event.target.value);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        setSelectedProject(null);
+    };
+
+    const handleModalConfirm = async (password) => {
+        if (selectedProject && selectedProject.attributes.projectPassword === password) {
+            try {
+                const updatedProjects = [...userInvolvedProjects, selectedProject];
+                setUserInvolvedProjects(updatedProjects);
+                // Kullanıcının projelerini güncelle
+                await axios.put(`http://localhost:1337/api/users/${user.id}`, {
+                    projects: updatedProjects.map(project => project.id)
+                });
+                window.location.href = `/projects/${selectedProject.id}`;
+            } catch (error) {
+                console.error('Proje eklenirken bir hata oluştu:', error);
+            }
+        } else {
+            alert('Yanlış şifre');
+        }
+        setIsModalOpen(false);
+    };
+
+    const handleProjectClick = (project) => {
+        const userProjects = user.projects.map(p => p.projectName);
+        if (userProjects.includes(project.attributes.projectName)) {
+            window.location.href = `/projects/${project.id}`;
+        } else {
+            setSelectedProject(project);
+            setIsModalOpen(true);
+        }
     };
 
     return (
@@ -62,7 +107,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                 alt=""
                                 onClick={() => editModalOpen(project.id)}
                             />
-                            <Link className="project-card" to={`/projects/${project.id}`}>
+                            <div className="project-card" onClick={() => handleProjectClick(project)}>
                                 <p className="project-card-name">
                                     {project.attributes.projectName}
                                 </p>
@@ -75,13 +120,19 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                             onError={(e) => { console.log("Image Error:", e); }}
                                         />
                                     )}
-                            </Link>
+                            </div>
                         </div>
                     ))
                 ) : (
                     <p>No projects found</p>
                 )}
             </div>
+            <PasswordModal
+                isOpen={isModalOpen}
+                onClose={handleModalClose}
+                onConfirm={handleModalConfirm}
+                projectName={selectedProject ? selectedProject.attributes.projectName : ''}
+            />
         </div>
     );
 }
