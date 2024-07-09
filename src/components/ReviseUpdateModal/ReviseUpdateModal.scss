@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .revise-update-modal {
     position: fixed;
     top: 0;
@@ -8,40 +10,50 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .revise-modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 400px;
+        max-width: 80%;
+
+        .revise-update-modal-header {
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .revise-update-modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .revise-update-modal-input {
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .revise-update-checkbox-div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    }
 }
 
-.revise-modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 80%;
-}
 
-.revise-update-modal-header {
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 400;
-}
 
-.revise-update-modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.revise-update-modal-input {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
 
-.revise-update-checkbox-div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+
+
+
+
+
 
 .revise-update-div-one {
     display: flex;
@@ -61,24 +73,20 @@
 
 .revise-update-buttons-div {
     display: flex;
-    justify-content: space-between;
-    cursor: pointer;
+    justify-content: center;
+    gap: 20px;
 }
 
 .revise-update-submit-btn,
 .revise-update-submit-cancel {
     padding: 10px 20px;
-    border: none;
+    border: 1px solid $border-color;
     border-radius: 5px;
     cursor: pointer;
-}
+    transition: all 0.2s;
 
-.revise-update-submit-btn {
-    background-color: #28a745;
-    color: white;
-}
+    &:hover {
+        background: darken($yellow, 10%);
 
-.revise-update-submit-cancel {
-    background-color: #dc3545;
-    color: white;
+    }
 }
