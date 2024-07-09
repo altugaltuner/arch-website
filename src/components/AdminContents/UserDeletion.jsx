@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from "../../components/AuthProvider";
 
 function UserDeletion({ users }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredUsers, setFilteredUsers] = useState(users);
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const { user } = useAuth();
+    const activeUser = user.username; // burada kendimi göstermemeyi yapamadım
 
     useEffect(() => {
         setFilteredUsers(
             users.filter(user =>
-                user.attributes.username.toLowerCase().includes(searchTerm.toLowerCase())
+                user.attributes.username.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                !selectedUsers.includes(activeUser)
             )
         );
-    }, [searchTerm, users]);
+    }, [searchTerm, users, selectedUsers]);
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);

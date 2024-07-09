@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './OtherUsersInfo.scss';
+import PrivateMessageModal from "./PrivateMessageModal";
 
 function OtherUsersInfo({ employee }) {
-
-    if (!employee) {
-        return (
-            <div className="other-info-main">
-                <h1 className='other-info-header'>Görüntülemek istediğiniz çalışanı seçin.</h1>
-            </div>
-        );
-    }
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [privateMessages, setPrivateMessages] = useState([]);
-
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -27,6 +19,14 @@ function OtherUsersInfo({ employee }) {
 
         fetchMessages();
     }, []);
+
+    if (!employee) {
+        return (
+            <div className="other-info-main">
+                <h1 className='other-info-header'>Görüntülemek istediğiniz çalışanı seçin.</h1>
+            </div>
+        );
+    }
 
     return (
         <div className="other-info-main">
@@ -45,7 +45,6 @@ function OtherUsersInfo({ employee }) {
                 </div>
                 <div className='other-all-revises-inner'>
                     <h2 className='other-revises-h2'>Revizeler</h2>
-
                     {employee.project_revises && employee.project_revises.data.map((revise) => (
                         <div key={revise.id} className='other-revise-div'>
                             <p className='other-revise-p'>{revise.attributes.comment[0].children[0].text}</p>
@@ -84,9 +83,6 @@ function OtherUsersInfo({ employee }) {
                     <p>Bu çalışan hiçbir gruba dahil değil.</p>
                 )}
             </div>
-
-            {/* buradan sonrası kisisel mesajlar */}
-
             <div className="open-inbox-content-private-messages-div">
                 <h2 className='open-inbox-modal-header-private'>İletiler</h2>
                 <div className="messages-container-private">
@@ -106,7 +102,8 @@ function OtherUsersInfo({ employee }) {
                         </div>
                     ))}
                 </div>
-                <button className='write-priv-message'>İleti Gönder</button>
+                <button className='write-priv-message' onClick={() => setIsModalOpen(true)}>İleti Gönder</button>
+                <PrivateMessageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             </div>
         </div>
     );
