@@ -17,7 +17,7 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
                         <div className="employee-info">
                             <h3>{employee.username}</h3>
                             <p>{employee.email}</p>
-                            <p>{employee.profession.data.attributes.professionName}</p>
+                            <p>{employee?.profession?.data?.attributes?.professionName || "Yok"}</p>
                         </div>
                     </div>
                 ))}

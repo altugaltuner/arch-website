@@ -1,5 +1,6 @@
 import React from 'react';
 import './AlreadyLoggedIn.scss';
+import { Link } from 'react-router-dom';
 
 function AlreadyLoggedIn() {
     const handleLogout = () => {
@@ -15,9 +16,7 @@ function AlreadyLoggedIn() {
                     <button className="already-login-logout" onClick={handleLogout}>
                         Çıkış Yap
                     </button>
-                    <button className="already-login-back" onClick={() => window.history.back()}>
-                        Geri Dön
-                    </button>
+                    <Link to="/homepage" className="already-login-back">Anasayfaya Dön</Link>
                 </div>
             </div>
         </main>
