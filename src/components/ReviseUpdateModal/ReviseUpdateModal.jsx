@@ -80,7 +80,7 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
                             <label htmlFor="revise-update-radio4">İptal Edildi</label>
                         </div>
                     </div>
-                    <p><strong>Revize Tarihi:</strong> {commentDate}</p>
+                    <p>Revize Tarihi : {commentDate}</p>
                     <div className='revise-update-buttons-div'>
                         <button className='revise-update-submit-btn' type="submit">Güncelle</button>
                         <button className='revise-update-submit-cancel' onClick={onClose}>Kapat</button>

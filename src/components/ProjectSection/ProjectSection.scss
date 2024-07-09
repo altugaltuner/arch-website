@@ -79,7 +79,7 @@
         padding: 10px 20px;
         border-radius: 5px;
         transition: all 0.2s;
-        margin: 20px;
+        margin: 10px;
 
         &:hover {
             background-color: darken($yellow, 10%);
@@ -89,6 +89,7 @@
     .project-folders-container {
         width: 100%;
         display: flex;
+        gap: 10px;
         flex-direction: row;
         flex-wrap: wrap;
         max-height: 410px;
@@ -100,7 +101,6 @@
             flex-direction: column;
             align-items: center;
             padding: 10px;
-            margin: 10px;
             height: auto;
             width: 200px;
             border-radius: 10px;
@@ -129,10 +129,11 @@
         .project-folder {
             display: flex;
             position: relative;
+            justify-content: center;
             flex-direction: column;
+            text-align: center;
             align-items: center;
-            padding: 10px;
-            margin: 10px;
+            padding: 15px;
             height: auto;
             width: 200px;
             border-radius: 10px;
@@ -170,7 +171,7 @@
             .file-card-delete-btn {
                 display: block;
                 position: absolute;
-                top: 10px;
+                top: 0px;
                 right: 25px;
                 font-size: 20px;
                 cursor: pointer;
@@ -187,7 +188,7 @@
             .file-card-edit-btn {
                 display: block;
                 position: absolute;
-                top: 10px;
+                top: 3px;
                 right: 0px;
                 font-size: 20px;
                 cursor: pointer;

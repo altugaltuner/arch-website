@@ -21,11 +21,13 @@
 .revise-update-modal-header {
     margin-bottom: 20px;
     text-align: center;
+    font-weight: 400;
 }
 
 .revise-update-modal-form {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .revise-update-modal-input {
@@ -38,22 +40,29 @@
 .revise-update-checkbox-div {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    gap: 10px;
 }
 
 .revise-update-div-one {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    width: fit-content;
+    cursor: pointer;
+
+    label {
+        cursor: pointer;
+    }
 }
 
 .revise-update-div-one input {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .revise-update-buttons-div {
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .revise-update-submit-btn,

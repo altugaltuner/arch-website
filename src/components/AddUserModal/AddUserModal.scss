@@ -29,14 +29,15 @@
             gap: 20px;
 
             .adduser-modal-li {
-
                 display: flex;
 
                 .adduser-modal-label {
+                    cursor: pointer;
 
                     .adduser-modal-input {
                         width: 35px;
                         height: 25px;
+                        cursor: pointer;
                     }
                 }
             }
@@ -45,7 +46,7 @@
         .adduser-modal-content-header {
             margin-bottom: 20px;
             font-size: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .adduser-modal-close {
