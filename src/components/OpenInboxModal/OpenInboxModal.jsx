@@ -3,15 +3,6 @@ import "./OpenInboxModal.scss";
 
 function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
     const [messages, setMessages] = useState([]);
-    const [privateMessages, setPrivateMessages] = useState(false);
-
-
-
-
-
-
-
-
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -37,7 +28,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                 <div className="inbox-model-row">
                     <div className="open-inbox-content-massmessage-div">
                         <span className="open-inbox-modal-span" onClick={() => setShowInboxModal(false)}>X</span>
-                        <h2 className='open-inbox-modal-header'>Gelen Kutusu</h2>
+                        <h2 className='open-inbox-modal-header'>Bildirimler</h2>
                         <div className="messages-container">
                             {messages.map(message => (
                                 <div key={message.id} className="message">
@@ -48,26 +39,6 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                                         <div className="message-media-div">
                                             {message.attributes.contentMedia.data.map(media => (
                                                 <img className="message-media-img" key={media.id} src={`http://localhost:1337${media.attributes.url}`} alt={media.attributes.name} />
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="open-inbox-content-private-messages-div">
-                        <span className="open-inbox-modal-span-private" onClick={() => setShowInboxModal(false)}>X</span>
-                        <h2 className='open-inbox-modal-header-private'>Gelen Kutusu</h2>
-                        <div className="messages-container-private">
-                            {messages.map(message => (
-                                <div key={message.id} className="message-private">
-                                    <h3 className="message-header-private">{message.attributes.header}</h3>
-                                    <p className="message-owner-private">{message.attributes.users_permissions_user?.data?.attributes?.username}</p>
-                                    <p className="message-content-private">{message.attributes.content}</p>
-                                    {message.attributes?.contentMedia?.data?.length > 0 && (
-                                        <div className="message-media-div-private">
-                                            {message.attributes.contentMedia.data.map(media => (
-                                                <img className="message-media-img-private" key={media.id} src={`http://localhost:1337${media.attributes.url}`} alt={media.attributes.name} />
                                             ))}
                                         </div>
                                     )}

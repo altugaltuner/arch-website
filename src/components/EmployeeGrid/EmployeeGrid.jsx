@@ -1,11 +1,17 @@
 import React from 'react';
 import './EmployeeGrid.scss';
+import { useAuth } from "../../components/AuthProvider";
 
 function EmployeeGrid({ employees, openEmployeeCardModal }) {
+
+    const { user } = useAuth();
+    const filteredEmployees = employees.filter(employee => employee.username !== user.username);
+
+
     return (
         <div className="employee-grid-container">
             <div className="employee-grid">
-                {employees.map((employee, index) => (
+                {filteredEmployees.map((employee, index) => (
                     <div className="employee-card" key={index} onClick={() => openEmployeeCardModal(employee)}>
                         <div className="profile-pic">
                             <img

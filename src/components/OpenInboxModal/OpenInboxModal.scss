@@ -18,7 +18,7 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        width: 80%;
+        width: 60%;
         max-width: 1200px;
         background-color: white;
         padding: 20px;
@@ -86,7 +86,7 @@
                             border: 1px solid $border-color;
                             padding: 10px;
                             border-radius: 15px;
-                            max-width: 395px;
+                            max-width: 640px;
                             overflow-x: auto;
 
                             .message-media-img {
@@ -123,103 +123,7 @@
                     font-weight: 400;
                 }
             }
-
-            .open-inbox-content-private-messages-div {
-                background-color: white;
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                padding: 20px;
-                border: 1px solid $border-color;
-                border-radius: 15px;
-                position: relative;
-                text-align: center;
-                width: 100%;
-                max-height: 600px;
-                overflow-y: auto;
-
-                .open-inbox-modal-span-private {
-                    position: absolute;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-weight: 200;
-                    font-size: 30px;
-                    border-radius: 50%;
-                    background-color: white;
-                    border: 1px solid $border-color;
-                    width: 40px;
-                    height: 40px;
-                    top: 10px;
-                    right: 10px;
-                    cursor: pointer;
-                    transition: all 0.2s;
-
-                    &:hover {
-                        background-color: $grey;
-                    }
-                }
-
-                .messages-container-private {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    gap: 20px;
-                    justify-content: center;
-
-                    .message-private {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 15px;
-                        width: 90%;
-                        padding: 20px;
-                        border: 1px solid $border-color;
-                        border-radius: 10px;
-
-                        .message-header-private {
-                            font-size: 26px;
-                            font-weight: 400;
-                            word-wrap: break-word;
-                            padding-bottom: 15px;
-                            border-bottom: 1px solid $border-color;
-                        }
-
-                        .message-owner-private {
-                            font-size: 20px;
-                            font-weight: 400;
-                            word-wrap: break-word;
-                        }
-
-                        .message-content-private {
-                            font-size: 18px;
-                            word-wrap: break-word;
-                        }
-
-                        .message-media-div-private {
-                            display: flex;
-                            gap: 10px;
-                            border: 1px solid $border-color;
-                            padding: 10px;
-                            border-radius: 15px;
-                            max-width: 395px;
-                            overflow-x: auto;
-
-                            .message-media-img-private {
-                                width: 100px;
-                            }
-                        }
-                    }
-                }
-
-                .open-inbox-modal-header-private {
-                    font-size: 32px;
-                    font-weight: 400;
-
-                }
-            }
         }
-
-
 
         .open-inbox-modal-buttons {
             display: flex;
@@ -239,6 +143,4 @@
             }
         }
     }
-
-
 }
