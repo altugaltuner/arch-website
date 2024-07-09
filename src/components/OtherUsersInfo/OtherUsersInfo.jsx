@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './OtherUsersInfo.scss';
 import PrivateMessageModal from "./PrivateMessageModal";
+import { useAuth } from "../AuthProvider";
 
 function OtherUsersInfo({ employee }) {
+
+    console.log("Employee:", employee);
+    const { user } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [privateMessages, setPrivateMessages] = useState([]);
+    const [filteredMessages, setFilteredMessages] = useState([]);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -19,6 +24,29 @@ function OtherUsersInfo({ employee }) {
 
         fetchMessages();
     }, []);
+
+    useEffect(() => {
+        const filterMessages = () => {
+            const filtered = privateMessages.filter(message => {
+                const senderId = message.attributes.users_permissions_user?.data?.id;
+                const recipientId = message.attributes.recipientID;
+                console.log(`Sender ID: ${senderId}, Recipient ID: ${recipientId}`);
+                console.log(`Employee ID: ${employee?.id}, User ID: ${user?.id}`);
+                return (
+                    (senderId === user.id && recipientId === employee.id)
+                    ||
+                    (senderId === employee.id && recipientId === user.id)
+                );
+            });
+            setFilteredMessages(filtered);
+        };
+
+        filterMessages();
+    }, [employee]);
+
+    const handleMessageSent = (newMessage) => {
+        setPrivateMessages(prevMessages => [newMessage, ...prevMessages]);
+    };
 
     if (!employee) {
         return (
@@ -84,12 +112,12 @@ function OtherUsersInfo({ employee }) {
                 )}
             </div>
             <div className="open-inbox-content-private-messages-div">
-                <h2 className='open-inbox-modal-header-private'>İletiler</h2>
+                <h2 className='open-inbox-modal-header-private'>Mesajlaşma Geçmişiniz</h2>
                 <div className="messages-container-private">
-                    {privateMessages.map(message => (
+                    {filteredMessages.map(message => (
                         <div key={message.id} className="message-private">
                             <h3 className="message-header-private">{message.attributes.messageTitle}</h3>
-                            <p className="message-owner-private">{message.attributes.users_permissions_user?.data?.attributes?.username}</p>
+                            <p className="message-owner-private">{message.attributes.users_permissions_user?.data?.attributes?.username} :</p>
                             <p className="message-content-private">{message.attributes.messageContent}</p>
                             {message.attributes?.messageMedia?.data?.length > 0 && (
                                 <div className="message-media-div-private">
@@ -103,7 +131,7 @@ function OtherUsersInfo({ employee }) {
                     ))}
                 </div>
                 <button className='write-priv-message' onClick={() => setIsModalOpen(true)}>İleti Gönder</button>
-                <PrivateMessageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+                <PrivateMessageModal user={user} employee={employee} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onMessageSent={handleMessageSent} />
             </div>
         </div>
     );

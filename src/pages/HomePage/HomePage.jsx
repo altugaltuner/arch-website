@@ -10,7 +10,7 @@ function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Yükleniyor...</div>;
   }
 
   const handleSearch = (term) => {

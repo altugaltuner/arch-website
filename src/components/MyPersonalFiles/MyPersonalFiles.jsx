@@ -328,7 +328,7 @@ function MyPersonalFiles({ user }) {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>Yükleniyor...</div>;
     }
 
     if (!user || !user.id) {

@@ -34,7 +34,7 @@ function MyProfile({ user }) {
     };
 
     if (!user) {
-        return <div>Loading...</div>;
+        return <div>Yükleniyor...</div>;
     }
 
     return (

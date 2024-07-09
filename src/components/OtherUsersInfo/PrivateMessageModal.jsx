@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PrivateMessageModal.scss';
 
-const PrivateMessageModal = ({ isOpen, onClose }) => {
+const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent }) => {
     const [messageHeader, setMessageHeader] = useState('');
     const [messageContent, setMessageContent] = useState('');
     const [messageMedia, setMessageMedia] = useState(null);
@@ -10,10 +10,31 @@ const PrivateMessageModal = ({ isOpen, onClose }) => {
         setMessageMedia(e.target.files[0]);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Mesaj gönderme işlemi burada gerçekleştirilecek
-        console.log({ messageHeader, messageContent, messageMedia });
+
+        const formData = new FormData();
+        formData.append('data', JSON.stringify({
+            messageTitle: messageHeader,
+            messageContent: messageContent,
+            recipientID: employee.id,
+            users_permissions_user: user.id
+        }));
+        if (messageMedia) {
+            formData.append('files.messageMedia', messageMedia);
+        }
+
+        try {
+            const response = await fetch('http://localhost:1337/api/private-messages', {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            onMessageSent(result.data); // Yeni mesajı gönder ve üst bileşende listeyi güncelle
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
+
         onClose(); // Modal kapatma
     };
 
