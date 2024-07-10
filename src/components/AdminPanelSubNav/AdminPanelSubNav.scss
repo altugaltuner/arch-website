@@ -63,3 +63,99 @@
         }
     }
 }
+
+@media screen and (max-width: 650px) {
+    .admin-panel-main {
+        flex-direction: column;
+
+        .admin-content {
+            flex-direction: column;
+
+            .adminpanel-settings-page {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid $border-color;
+                max-height: 100%;
+
+                .adminpanel-content {
+                    height: auto;
+                }
+
+                .admin-sub-setting-page {
+                    width: 100%;
+                    padding: 10px;
+                }
+
+                .adminpanel-section {
+                    padding: 5px;
+                    margin: 0px;
+
+                    .adminpanel-subheader {
+                        margin-bottom: 5px;
+                        font-size: 18px;
+                        font-weight: 400;
+                    }
+
+                    .adminpanel-paragraph {
+                        font-size: 14px;
+                        padding: 3px;
+                    }
+                }
+
+                .adminpanel-content {
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .admin-sub-setting-page {
+        width: 100%;
+
+        .admin-sub-header {
+            margin-bottom: 5px;
+            font-size: 26px;
+            padding: 5px;
+        }
+
+        .admin-sub-panel-content {
+            .admin-dashboard-main {
+                gap: 5px;
+
+                .dashboard-current-state-all {
+                    .dashboard-header {
+                        font-size: 20px;
+                    }
+
+                    .dashboard-row-inner {
+                        gap: 5px;
+
+                        .dashboard-oneline-inner {
+                            gap: 5px;
+                            padding: 5px;
+                            border-radius: 5px;
+
+                            .dashboard-p-header {
+                                font-size: 16px;
+                            }
+
+                            .dashboard-p {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .adminpanel-settings-page {
+        .adminpanel-header {
+            font-size: 28px;
+            padding: 10px;
+            margin: 0px 10px;
+        }
+    }
+}

@@ -310,9 +310,27 @@
     }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 450px) {
     .other-info-main {
+
+        .open-inbox-content-private-messages-div {
+            .write-priv-message {
+                padding: 5px;
+                width: 150px;
+            }
+
+            .open-inbox-modal-header-private {
+                font-size: 20px;
+            }
+        }
+
         .other-all-groups {
+            .other-groups {
+                .other-groups-name {
+                    font-size: 16px;
+                }
+            }
+
             .other-groups-joined-h2 {
                 font-size: 20px;
             }
@@ -355,17 +373,17 @@
 
                     .other-project-div {
                         padding: 3px;
-                        width: 45%;
+                        width: 30%;
                         border: 1px solid $border-color;
                         border-radius: 10px;
 
                         .other-project-p {
-                            font-size: 16px;
+                            font-size: 14px;
                         }
 
                         .other-project-photo {
-                            width: 75px;
-                            height: 75px;
+                            width: 45px;
+                            height: 45px;
                         }
                     }
                 }

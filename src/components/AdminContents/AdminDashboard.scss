@@ -68,3 +68,24 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .admin-dashboard-main {
+        .dashboard-last-activities {
+            gap: 3px;
+            padding: 5px;
+            border-radius: 5px;
+
+            .dashboard-act-header {
+                font-size: 18px;
+                margin: 0px;
+                padding-bottom: 5px;
+            }
+
+            .dashboard-act-p {
+                font-size: 14px;
+                padding: 2px;
+            }
+        }
+    }
+}

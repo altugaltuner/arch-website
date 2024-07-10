@@ -186,19 +186,20 @@
 
     .groups-main {
         .groups-main-column {
+            gap: 10px;
 
             .group-div-row {
                 .project-groups {
                     gap: 4px;
                     padding: 0px;
+                    justify-content: flex-start;
 
                     .project-group {
                         width: 45%;
                         gap: 5px;
 
                         .group-image {
-                            width: 15px;
-                            height: 15px;
+                            display: none;
                         }
 
                         .file-card-edit-btn,
@@ -212,8 +213,8 @@
                     }
 
                     .project-group-add-group {
-                        padding: 10px;
-                        font-size: 16px;
+                        padding: 5px;
+                        font-size: 14px;
                     }
                 }
             }

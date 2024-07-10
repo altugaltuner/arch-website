@@ -7,30 +7,9 @@
     width: 100%;
     padding: 30px;
 
-    .subsetting-header {
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-        font-size: 20px;
-        font-weight: 500;
-        margin-bottom: 10px;
-
-        .subsetting-pp {
-            object-fit: cover;
-            width: 200px;
-            height: 200px;
-            border-radius: 10%;
-        }
-    }
-
     .personal-info-subsetting-oneline {
         position: relative;
         width: 100%;
-
-        .subsetting-div {
-            display: flex;
-            gap: 10px;
-        }
 
         .edit-pencil-subsetting {
             position: absolute;
@@ -53,9 +32,52 @@
             margin-bottom: 10px;
         }
 
-        .subsetting-paragraph {
-            font-size: 18px;
+        .subsetting-div {
+            display: flex;
+            gap: 10px;
+        }
+
+        .subsetting-div-other {
+            .subsetting-paragraph {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .edit-pencil-subsetting {
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                cursor: pointer;
+                right: 5px;
+                top: 5px;
+                opacity: 0.6;
+                transition: all 0.2s;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+
+            .subsetting-paragraph {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .subsetting-header {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            font-size: 20px;
+            font-weight: 500;
             margin-bottom: 10px;
+
+            .subsetting-pp {
+                object-fit: cover;
+                width: 150px;
+                height: 150px;
+                border-radius: 10%;
+            }
         }
     }
 }
@@ -105,5 +127,21 @@
         gap: 10px;
         padding: 10px;
         align-items: center;
+
+        .personal-info-subsetting-oneline {
+            .subsetting-header {
+                font-weight: 400;
+            }
+        }
     }
+
+    .subsetting-div {
+        flex-direction: column;
+    }
+
+    .subsetting-buttons-div {
+        flex-direction: column;
+    }
+
+
 }

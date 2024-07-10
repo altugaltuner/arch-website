@@ -139,10 +139,10 @@ const UserProfile = () => {
                         {error && <p className="error-message">{error}</p>}
                     </div>
                 ) : (
-                    <>
+                    <div className='subsetting-div-other'>
                         <p className="subsetting-paragraph">{user?.username || 'Kullanıcı Adı'}</p>
                         <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('username')} />
-                    </>
+                    </div>
                 )}
             </div>
 
@@ -161,10 +161,10 @@ const UserProfile = () => {
                         <button className='subsetting-cancel' onClick={() => handleCancelClick('email')}>İptal</button>
                     </div>
                 ) : (
-                    <>
+                    <div className='subsetting-div-other'>
                         <p className="subsetting-paragraph">{user?.email || 'E-posta Adresi bilgisi yok'}</p>
                         <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('email')} />
-                    </>
+                    </div>
                 )}
             </div>
 
@@ -183,10 +183,10 @@ const UserProfile = () => {
                         <button className='subsetting-cancel' onClick={() => handleCancelClick('password')}>İptal</button>
                     </div>
                 ) : (
-                    <>
+                    <div className='subsetting-div-other'>
                         <p className="subsetting-paragraph">*********</p>
                         <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('password')} />
-                    </>
+                    </div>
                 )}
             </div>
 
@@ -206,10 +206,10 @@ const UserProfile = () => {
                         {error && <p className="error-message">{error}</p>}
                     </div>
                 ) : (
-                    <>
+                    <div className='subsetting-div-other'>
                         <p className="subsetting-paragraph">{user?.MobilePhone || 'Telefon bilgisi yok'}</p>
                         <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('MobilePhone')} />
-                    </>
+                    </div>
                 )}
             </div>
         </div>
