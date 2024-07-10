@@ -195,6 +195,7 @@
 
 @media screen and (max-width: 450px) {
     .my-files-panel {
+        height: auto;
 
         .folders {
 
@@ -216,12 +217,16 @@
 
             .folder {
                 width: 90px;
-                padding: 20px;
+                padding: 10px;
                 margin: 0px;
 
                 .folder-deleteicon,
                 .folder-editpencil {
-                    width: 15px;
+                    width: 10px;
+                }
+
+                .folder-editpencil {
+                    right: 20px;
                 }
 
                 .folder-p {
@@ -243,7 +248,7 @@
 
         .add-folder-button {
             padding: 5px;
-            font-size: 18px;
+            font-size: 14px;
         }
     }
 }

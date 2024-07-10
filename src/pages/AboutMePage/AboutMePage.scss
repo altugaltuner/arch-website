@@ -105,35 +105,60 @@
     .aboutme-page-main {
         .aboutme-page-column {
 
+            .aboutme-row-2 {
+                width: calc(100% + 60px);
+
+                .message-inbox {
+                    margin-right: 20px;
+                }
+
+                .aboutme-page-title {
+                    font-size: 24px;
+                    margin: 10px;
+                    transform: translate(140px, 0px);
+                }
+
+                .message-inbox {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+
             .aboutme-page-row {
-                padding: 10px;
-                transform: translate(70px, 0px);
+                padding: 5px;
+                transform: translate(60px, 0px);
 
                 .aboutme-page-column-2 {
                     gap: 5px;
+                    width: 100%;
+
+                    .aboutme-row-3 {
+                        gap: 5px;
+                        width: 99%;
+                    }
 
                     .mylast-act-main {
                         padding: 5px;
 
-                        .mylast-act-header {
-                            font-size: 24px;
-                            padding: 5px;
-                        }
+                        .mylast-act-ul {
+                            .mylast-act-item-desc {
+                                flex-direction: column;
+                                font-size: 12px;
+                                padding: 4px;
 
-                        .mylast-act-item {
-                            .mylast-act-ul {
-                                .mylast-act-item-desc {
-                                    font-size: 14px;
-                                    padding: 5px;
+                                .mylast-act-item-date {
+                                    font-size: 10px;
+                                    padding: 2px;
                                 }
                             }
                         }
-                    }
 
-                    .aboutme-page-title {
-                        font-size: 28px;
-                        transform: translate(140px, 0px);
-                        margin: 10px;
+                        .mylast-act-header {
+                            font-size: 18px;
+                            padding: 5px;
+                        }
+
+                        .mylast-act-item {}
                     }
                 }
             }

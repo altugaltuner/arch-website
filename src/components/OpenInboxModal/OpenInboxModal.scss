@@ -144,3 +144,63 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .open-inbox-modal {
+        .open-column {
+            width: 85%;
+            padding: 10px;
+            gap: 10px;
+
+            .open-inbox-modal-buttons {
+                .inbox-button-cancel {
+                    padding: 5px 10px;
+                    font-size: 14px;
+                }
+            }
+
+            .inbox-model-row {
+                .open-inbox-content-massmessage-div {
+                    gap: 5px;
+                    padding: 5px;
+
+                    .open-inbox-modal-header {
+                        font-size: 24px;
+                    }
+
+                    .messages-container {
+                        gap: 10px;
+
+                        .message {
+                            gap: 5px;
+                            padding: 5px;
+
+                            .message-header {
+                                font-size: 20px;
+                                padding-bottom: 8px;
+                            }
+
+                            .message-owner {
+                                font-size: 16px;
+                            }
+
+                            .message-content {
+                                font-size: 14px;
+                            }
+
+                            .message-media-div {
+                                gap: 5px;
+                                padding: 5px;
+
+                                .message-media-img {
+                                    width: 50px;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
