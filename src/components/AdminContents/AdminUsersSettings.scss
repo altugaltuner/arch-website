@@ -15,6 +15,15 @@
             flex-direction: row;
             gap: 20px;
             flex-wrap: wrap;
+            padding: 20px;
+            border: 1px solid $border-color;
+            border-radius: 15px;
+
+            .projects-codes-h2 {
+                font-size: 24px;
+                width: 100%;
+                font-weight: 400;
+            }
 
             .projects-list-one-div {
                 display: flex;
@@ -127,7 +136,9 @@
                         cursor: pointer;
                         text-align: center;
 
-                        .to-be-deleted-user-checkbox {}
+                        .to-be-deleted-user-checkbox {
+                            cursor: pointer;
+                        }
                     }
                 }
             }

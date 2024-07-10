@@ -43,6 +43,7 @@ function AdminUserSettings({ users }) {
                 <UserRoleManagement users={users} />
                 <UserDeletion users={users} />
                 <div className="projects-list">
+                    <h2 className='projects-codes-h2'>Proje Klasör Kodları</h2>
                     {projects ? projects.map((project) => (
                         <div className='projects-list-one-div' key={project.id}>
                             <p className='project-list-projectname'>{project.attributes.projectName}</p>
