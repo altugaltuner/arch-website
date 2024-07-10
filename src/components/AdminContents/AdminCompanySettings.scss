@@ -26,13 +26,58 @@
             padding: 10px;
         }
 
-        .company-logo-img {
-            padding: 10px;
-            border: 1px solid $border-color;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: 400;
-            width: 250px;
+        .company-logo-div {
+            display: flex;
+            position: relative;
+            width: fit-content;
+
+            .edit-pencil-company-logo-edit {
+                width: 35px;
+                position: absolute;
+                padding: 5px;
+                background-color: #f0f0f0;
+                border: 1px solid $border-color;
+                border-radius: 50%;
+                top: 15px;
+                right: 15px;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: #d4d4d4;
+                }
+            }
+
+            .company-logo-img {
+                padding: 10px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+                font-size: 18px;
+                font-weight: 400;
+                width: 250px;
+                object-fit: cover;
+            }
+
+            .company-logo-placeholder {
+                width: 250px;
+                height: 250px;
+                background-color: #f0f0f0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
     }
+}
+
+.custom-file-upload {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#file-upload {
+    display: none;
 }
