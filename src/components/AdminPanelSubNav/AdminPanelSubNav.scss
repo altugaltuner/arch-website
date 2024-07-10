@@ -7,8 +7,6 @@
     font-family: $primary-font;
     color: $font-color;
     border-right: 1px solid $border-color;
-    max-height: 920px;
-    overflow-y: auto;
 
     .adminpanel-header {
         font-size: 40px;
@@ -21,14 +19,16 @@
     .adminpanel-container {
         display: flex;
         width: 100%;
-        max-width: 900px;
+
+        .adminpanel-content {
+            width: 100%;
+            padding: 20px;
+            max-height: 1000px;
+            overflow: auto;
+        }
     }
 
-    .adminpanel-content {
-        width: 100%;
-        padding: 20px;
-        height: 90vh;
-    }
+
 
     .adminpanel-section {
         &.disabled {

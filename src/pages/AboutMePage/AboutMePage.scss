@@ -92,10 +92,22 @@
         .aboutme-page-column {
             width: 100%;
 
+            .aboutme-row-2 {
+                width: calc(100% + 60px);
+
+                .message-inbox {
+                    margin-right: 20px;
+                }
+            }
+
             .aboutme-page-row {
                 flex-direction: column;
                 transform: translate(60px, 0px);
                 width: 100%;
+
+                .aboutme-page-column-2 {
+                    width: 100%;
+                }
             }
         }
     }

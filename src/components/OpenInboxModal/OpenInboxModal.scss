@@ -35,10 +35,7 @@
                 background-color: $background-color;
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
-                padding: 20px;
-                border-radius: 15px;
-                border: 1px solid $border-color;
+                gap: 10px;
                 position: relative;
                 text-align: center;
                 width: 100%;
@@ -108,7 +105,7 @@
                     border: 1px solid $border-color;
                     width: 40px;
                     height: 40px;
-                    top: 10px;
+                    top: 0px;
                     right: 10px;
                     cursor: pointer;
                     transition: all 0.2s;
@@ -141,6 +138,14 @@
                     background-color: darken($yellow, 10%);
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .open-inbox-modal {
+        .open-column {
+            width: 80%;
         }
     }
 }
