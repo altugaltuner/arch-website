@@ -130,7 +130,7 @@ const CalendarPage = () => {
                                     </div>
                                 ))
                             ) : (
-                                <p>Bu gün için planlanan etkinlik yok.</p>
+                                <p className="no-event-p">Bu gün için planlanan etkinlik yok.</p>
                             )}
                         </div>
                     </div>
