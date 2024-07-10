@@ -59,7 +59,7 @@ function AdminContent({ selectedSetting }) {
                 return <AdminDashboard projectCount={projectCount} userCount={userCount} reviseCount={reviseCount} />;
             case "İleti Gönderme":
                 return <AdminSendMessage />;
-            case "Proje ve Grup Ayarları":
+            case "Proje, Grup ve Kullanıcı Ayarları":
                 return <AdminUsersSettings users={users} />;
             case "Şirket Ayarları":
                 return <AdminCompanySettings />;

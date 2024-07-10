@@ -15,8 +15,8 @@ function AdminPanelSubNav({ getRelevantSettings }) {
         },
         {
             id: 3,
-            header: "Proje ve Grup Ayarları",
-            items: ["Proje Ayarları", "Grup Ayarları", "Kullanıcı Rol ve İzinleri Yönetme", "Kullanıcı Silme"]
+            header: "Proje, Grup ve Kullanıcı Ayarları",
+            items: ["Proje Ayarları", "Grup Ayarları", "Kullanıcı Ayarları"]
         },
         {
             id: 4,

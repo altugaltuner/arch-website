@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import UserRoleManagement from './UserRoleManagement';
 import UserDeletion from './UserDeletion';
+import UserProfessionEdit from "./UserProfessionEdit";
+import AdminGroupSettings from './AdminGroupSettings.';
+import AdminProjectSettings from "./AdminProjectSettings";
 import './AdminUsersSettings.scss';
 import axios from 'axios';
 
@@ -27,8 +30,6 @@ function AdminUserSettings({ users }) {
         getProjectDetails();
     }, []); // Boş array bağımlılığı, sadece ilk render'da çalışır.
 
-    console.log("Projects:", projects);
-
     if (loading) {
         return <div>Yükleniyor...</div>;
     }
@@ -40,8 +41,8 @@ function AdminUserSettings({ users }) {
     return (
         <div className="admin-user-settings-main">
             <div className='admin-send-message-inner'>
-                <UserRoleManagement users={users} />
-                <UserDeletion users={users} />
+                <AdminProjectSettings />
+                <AdminGroupSettings />
                 <div className="projects-list">
                     <h2 className='projects-codes-h2'>Proje Klasör Kodları</h2>
                     {projects ? projects.map((project) => (
@@ -52,6 +53,9 @@ function AdminUserSettings({ users }) {
                         </div>
                     )) : "Proje bulunamadı."}
                 </div>
+                <UserRoleManagement users={users} />
+                <UserProfessionEdit users={users} />
+                <UserDeletion users={users} />
             </div>
         </div>
     );
