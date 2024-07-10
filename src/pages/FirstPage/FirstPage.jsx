@@ -1,5 +1,5 @@
 import "./FirstPage.scss";
-import flowLogo from "../../assets/icons/flow-logo.png";
+import ofisimLogo from "../../assets/icons/ofisim-logo.png";
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import instaLogo from "../../assets/icons/instagram-logo.png";
@@ -36,7 +36,7 @@ function FirstPage() {
     return (
         <main className="firstpage-main">
             <div className="firstpage-div">
-                <img className="firstpage-logo" src={flowLogo} alt="ofisim-logo" />
+                <img className="firstpage-logo" src={ofisimLogo} alt="ofisim-logo" />
                 <h1 className="firstpage-header">Ofisim</h1>
                 <h2 className="firstpage-title">Ofisim, işinizi organize etmenize ve ekibinizle işbirliği yapmanıza yardımcı olan bir proje yönetim aracıdır. Kullanabilmek için lütfen iş sahibi veya çalışan olarak kaydolun.</h2>
                 <div className="firstpage-buttons-div">
