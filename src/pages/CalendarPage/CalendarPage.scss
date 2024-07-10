@@ -252,6 +252,7 @@
         }
 
         .calendar-page-events-div {
+            height: auto;
             transform: translate(40px, 0px);
             width: calc(100% - 90px);
 
@@ -263,12 +264,26 @@
                 .calendar-page-subheader {}
 
                 .selected-day-event-inner {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+
                     .calendar-one-event {
-                        .one-event-subheader {}
+                        gap: 10px;
+                        padding: 10px;
+                        width: 90%;
+
+                        .one-event-subheader {
+                            font-size: 22px;
+                        }
 
                         .events-header-date {}
 
-                        .events-paragraph {}
+                        .events-paragraph {
+                            max-height: 400px;
+                            overflow-y: auto;
+                        }
                     }
                 }
             }
@@ -296,7 +311,7 @@
 
             .calendar-page-header-and-input {
                 .calendar-page-header {
-                    font-size: 30px;
+                    font-size: 28px;
                     margin: 5px;
                 }
             }

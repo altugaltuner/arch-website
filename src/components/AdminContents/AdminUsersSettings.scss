@@ -144,3 +144,14 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .admin-user-settings-main {
+        .admin-send-message-inner {
+            .projects-list {
+                gap: 10px;
+                padding: 10px;
+            }
+        }
+    }
+}
