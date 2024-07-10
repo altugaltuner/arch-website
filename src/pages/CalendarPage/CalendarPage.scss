@@ -55,7 +55,7 @@
             }
 
             .calendar-day {
-                padding: 1rem;
+                padding: 28px;
                 border: 1px solid #ddd;
                 text-align: center;
                 cursor: pointer;
@@ -114,6 +114,7 @@
         border: 1px solid $border-color;
         border-radius: 15px;
         margin-top: 20px;
+        height: 880px;
 
         .calendar-page-events-inner-div {
             display: flex;
@@ -142,32 +143,43 @@
             .calendar-page-subheader {
                 font-size: 30px;
                 font-weight: 400;
-                padding: 15px;
+                padding: 7px;
             }
 
-            .calendar-one-event {
+            .selected-day-event-inner {
                 display: flex;
                 flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-                border: 1px solid $border-color;
-                border-radius: 15px;
+                gap: 10px;
+                max-height: 730px;
+                overflow-y: auto;
 
-                .one-event-subheader {
-                    font-size: 26px;
-                    font-weight: 400;
-                }
+                .calendar-one-event {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    padding: 15px;
+                    border: 1px solid $border-color;
+                    border-radius: 15px;
+                    width: 100%;
 
-                .events-header-date {
-                    font-size: 20px;
-                    font-weight: 300;
-                }
+                    .one-event-subheader {
+                        font-size: 26px;
+                        font-weight: 400;
+                    }
 
-                .events-paragraph {
-                    font-size: 18px;
-                    font-weight: 300;
+                    .events-header-date {
+                        font-size: 20px;
+                        font-weight: 300;
+                    }
+
+                    .events-paragraph {
+                        font-size: 18px;
+                        font-weight: 300;
+                    }
                 }
             }
+
+
         }
     }
 }

@@ -119,18 +119,20 @@ const CalendarPage = () => {
                         <h2 className="calendar-page-subheader">
                             {selectedDate.toLocaleString("tr-TR", { weekday: 'long' })} - {selectedDate.toLocaleDateString("tr-TR")}
                         </h2>
-                        <button className="create-event-calendar" onClick={openModal}>Seçilen Tarihe Etkinlik Oluştur</button>
-                        {selectedDayEvents.length > 0 ? (
-                            selectedDayEvents.map(event => (
-                                <div className="calendar-one-event" key={event.id}>
-                                    <h3 className="one-event-subheader">{event.attributes.title}</h3>
-                                    <p className="events-header-date">{new Date(event.attributes.date).toLocaleString("tr-TR")}</p>
-                                    <p className="events-paragraph">{event.attributes.description}</p>
-                                </div>
-                            ))
-                        ) : (
-                            <p>Bu gün için planlanan etkinlik yok.</p>
-                        )}
+                        <button className="create-event-calendar" onClick={openModal}>Etkinlik Oluştur</button>
+                        <div className="selected-day-event-inner">
+                            {selectedDayEvents.length > 0 ? (
+                                selectedDayEvents.map(event => (
+                                    <div className="calendar-one-event" key={event.id}>
+                                        <h3 className="one-event-subheader">{event.attributes.title}</h3>
+                                        <p className="events-header-date">{new Date(event.attributes.date).toLocaleString("tr-TR")}</p>
+                                        <p className="events-paragraph">{event.attributes.description}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>Bu gün için planlanan etkinlik yok.</p>
+                            )}
+                        </div>
                     </div>
                 ) : (
                     <div className="calendar-page-events-inner-div">
