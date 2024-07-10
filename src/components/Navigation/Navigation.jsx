@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import flowLogo from "../../assets/icons/flow-logo.png";
 import employeesLogo from "../../assets/icons/employees-logo.png";
-import calendarLogo from "../../assets/icons/calendar-icon.jpg";
+import calendarLogo from "../../assets/icons/calendar-icon.png";
 import groupsLogo from "../../assets/icons/groups-logo.png";
 import projectsLogo from "../../assets/icons/projects-logo.png";
 import myLogo from "../../assets/icons/my-profile-logo.png";

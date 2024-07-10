@@ -46,6 +46,10 @@
             background-color: $grey;
         }
 
+        &.selected {
+            background-color: #f4f4f4;
+        }
+
         .adminpanel-subheader {
             font-size: 22px;
             font-weight: 500;

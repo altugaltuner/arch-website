@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AdminPanelSubNav.scss';
 
 function AdminPanelSubNav({ getRelevantSettings }) {
+    const [selectedSection, setSelectedSection] = useState(1);
+
     const adminSections = [
         {
             id: 1,
@@ -30,6 +32,13 @@ function AdminPanelSubNav({ getRelevantSettings }) {
         },
     ];
 
+    const handleSectionClick = (section) => {
+        setSelectedSection(section.id);
+        if (section.id !== 7) {
+            getRelevantSettings(section.header);
+        }
+    };
+
     return (
         <div className="adminpanel-settings-page">
             <h1 className="adminpanel-header">Ayarlar</h1>
@@ -38,8 +47,8 @@ function AdminPanelSubNav({ getRelevantSettings }) {
                     {adminSections.map((section, index) => (
                         <div
                             key={index}
-                            className={`adminpanel-section ${(section.id === 7) ? 'disabled' : ''}`}
-                            onClick={() => (section.id !== 7) && getRelevantSettings(section.header)}
+                            className={`adminpanel-section ${section.id === selectedSection ? 'selected' : ''} ${section.id === 7 ? 'disabled' : ''}`}
+                            onClick={() => handleSectionClick(section)}
                         >
                             <h2 className="adminpanel-subheader">{section.header}</h2>
                             {section.items.map((item, idx) => (

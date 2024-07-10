@@ -65,11 +65,11 @@
             }
 
             :hover {
-                background-color: darken($grey, 10%);
+                background-color: darken($grey, 5%);
             }
 
             .nav-button.active {
-                background-color: darken($grey, 10%);
+                background-color: darken($grey, 5%);
             }
         }
     }
