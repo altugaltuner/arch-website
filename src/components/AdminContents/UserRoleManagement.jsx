@@ -22,10 +22,8 @@ function UserRoleManagement({ users }) {
     const handleUserSelect = (userId) => {
         setSelectedUsers((prevSelected) => {
             if (prevSelected.includes(userId)) {
-                console.log(`User ${userId} deselected`);
                 return prevSelected.filter(id => id !== userId);
             } else {
-                console.log(`User ${userId} selected`);
                 return [...prevSelected, userId];
             }
         });
@@ -33,32 +31,22 @@ function UserRoleManagement({ users }) {
 
     const handleRoleChange = (e) => {
         setSelectedRole(e.target.value);
-        console.log("Role selected:", e.target.value);
     };
 
     const handleChangeRole = async () => {
-        console.log("Selected users for role change:", selectedUsers);
-        console.log("Role to be set:", selectedRole);
         try {
             for (const userId of selectedUsers) {
                 const user = users.find(user => user.id === userId);
-                if (!user) {
-                    console.log(`User with ID ${userId} not found`);
-                    continue;
-                }
+                if (!user) continue;
+
                 const currentRole = user.access ? user.access.role : 'undefined';
-                console.log(`Current role of user ${user.attributes.username}:`, currentRole);
                 if (selectedRole && currentRole !== selectedRole) {
-                    console.log(`Changing role of user ${user.attributes.username} to ${selectedRole}`);
                     const response = await axios.put(`http://localhost:1337/api/users/${userId}`, {
                         access: {
                             role: selectedRole
                         }
                     });
-                    console.log(`Response from Strapi for user ${user.attributes.username}:`, response.data);
-                    console.log(`Role of user ${user.attributes.username} changed to ${selectedRole}`);
-                } else {
-                    console.log(`No role change needed for user ${user.attributes.username}`);
+                    console.log(`Response for user ${user.attributes.username}:`, response.data);
                 }
             }
             setFilteredUsers(filteredUsers.map(user => {

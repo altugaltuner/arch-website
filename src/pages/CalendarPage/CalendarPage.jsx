@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./CalendarPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
-import CalendarModal from "../../components/CalendarModal/CalendarModal";
+import CreateEventModal from "./CreateEventModal";
 
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
@@ -22,17 +23,45 @@ const CalendarPage = () => {
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth());
     const [selectedDate, setSelectedDate] = useState(null);
+    const [events, setEvents] = useState([]);
+    const [selectedDayEvents, setSelectedDayEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const calendarDates = generateCalendar(year, month);
 
-    const openModal = (date) => {
+    useEffect(() => {
+        // Takvim yüklendiğinde tüm etkinlikleri getir
+        axios.get('http://localhost:1337/api/calendar-events/?populate=*')
+            .then(response => {
+                setEvents(response.data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching events:', error);
+            });
+    }, []);
+
+    const handleDateClick = (date) => {
         setSelectedDate(date);
+        // Seçilen tarihteki etkinlikleri filtrele
+        const dayEvents = events.filter(event => {
+            const eventDate = new Date(event.attributes.date);
+            return eventDate.toDateString() === date.toDateString();
+        });
+        setSelectedDayEvents(dayEvents);
+    };
+
+    const openModal = () => {
         setModalOpen(true);
     };
 
     const closeModal = () => {
-        setSelectedDate(null);
         setModalOpen(false);
+    };
+
+    const addEvent = (newEvent) => {
+        setEvents([...events, newEvent]);
+        if (new Date(newEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
+            setSelectedDayEvents([...selectedDayEvents, newEvent]);
+        }
     };
 
     const nextMonth = () => {
@@ -57,22 +86,65 @@ const CalendarPage = () => {
                     <h1 className="calendar-page-header">Takvim</h1>
                 </div>
                 <div className="calendar-page-controls">
-                    <img className="calendar-page-button" onClick={prevMonth} src={backButton} />
+                    <img className="calendar-page-button" onClick={prevMonth} src={backButton} alt="Geri" />
                     <span>{year} - {month + 1}</span>
-                    <img className="calendar-page-button" onClick={nextMonth} src={forwardButton} />
+                    <img className="calendar-page-button" onClick={nextMonth} src={forwardButton} alt="İleri" />
                 </div>
                 <div className="calendar-area">
                     {daysOfWeek.map((day) => (
                         <div key={day} className="calendar-day-header">{day}</div>
                     ))}
-                    {calendarDates.map((date) => (
-                        <div key={date.toDateString()} className="calendar-day" onClick={() => openModal(date)}>
-                            {date.getDate()}
-                        </div>
-                    ))}
+                    {calendarDates.map((date) => {
+                        const eventDateString = date.toDateString();
+                        const hasEvent = events.some(event => {
+                            const eventDate = new Date(event.attributes.date);
+                            return eventDate.toDateString() === eventDateString;
+                        });
+
+                        return (
+                            <div
+                                key={date.toDateString()}
+                                className={`calendar-day ${selectedDate && selectedDate.toDateString() === date.toDateString() ? 'selected' : ''} ${hasEvent ? 'event-day' : ''}`}
+                                onClick={() => handleDateClick(date)}
+                            >
+                                {date.getDate()}
+                            </div>
+                        );
+                    })}
                 </div>
-                {modalOpen && <CalendarModal date={selectedDate} onClose={closeModal} />}
             </div>
+            <div className="calendar-page-events-div">
+                {selectedDate ? (
+                    <div className="calendar-page-events-inner-div">
+                        <h2 className="calendar-page-subheader">
+                            {selectedDate.toLocaleString("tr-TR", { weekday: 'long' })} - {selectedDate.toLocaleDateString("tr-TR")}
+                        </h2>
+                        <button className="create-event-calendar" onClick={openModal}>Seçilen Tarihe Etkinlik Oluştur</button>
+                        {selectedDayEvents.length > 0 ? (
+                            selectedDayEvents.map(event => (
+                                <div className="calendar-one-event" key={event.id}>
+                                    <h3 className="one-event-subheader">{event.attributes.title}</h3>
+                                    <p className="events-header-date">{new Date(event.attributes.date).toLocaleString("tr-TR")}</p>
+                                    <p className="events-paragraph">{event.attributes.description}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p>Bu gün için planlanan etkinlik yok.</p>
+                        )}
+                    </div>
+                ) : (
+                    <div className="calendar-page-events-inner-div">
+                        <p className="calendar-page-subheader">Takvim üzerinden gün seçiniz.</p>
+                    </div>
+                )}
+            </div>
+            {modalOpen && (
+                <CreateEventModal
+                    selectedDate={selectedDate}
+                    onClose={closeModal}
+                    addEvent={addEvent}
+                />
+            )}
         </main>
     );
 };
