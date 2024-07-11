@@ -85,7 +85,7 @@ function SignupPage() {
           username: fullName,
           email: email,
           password: password,
-          companyID: matchingCompany.id,
+          company: matchingCompany.id, // companyID yerine company olarak gönderiliyor
         }
       );
 
