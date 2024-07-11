@@ -3,9 +3,11 @@ import axios from "axios";
 import "./CalendarPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import CreateEventModal from "./CreateEventModal";
+import EditEventModal from "./EditEventModal";
 
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
+import editIcon from "../../assets/icons/edit-pencil.png"; // Kalem ikonunu ekle
 
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
@@ -26,10 +28,11 @@ const CalendarPage = () => {
     const [events, setEvents] = useState([]);
     const [selectedDayEvents, setSelectedDayEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [eventToEdit, setEventToEdit] = useState(null);
     const calendarDates = generateCalendar(year, month);
 
     useEffect(() => {
-        // Takvim yüklendiğinde tüm etkinlikleri getir
         axios.get('http://localhost:1337/api/calendar-events/?populate=*')
             .then(response => {
                 setEvents(response.data.data);
@@ -41,7 +44,6 @@ const CalendarPage = () => {
 
     const handleDateClick = (date) => {
         setSelectedDate(date);
-        // Seçilen tarihteki etkinlikleri filtrele
         const dayEvents = events.filter(event => {
             const eventDate = new Date(event.attributes.date);
             return eventDate.toDateString() === date.toDateString();
@@ -57,10 +59,26 @@ const CalendarPage = () => {
         setModalOpen(false);
     };
 
+    const openEditModal = (event) => {
+        setEventToEdit(event);
+        setEditModalOpen(true);
+    };
+
+    const closeEditModal = () => {
+        setEditModalOpen(false);
+    };
+
     const addEvent = (newEvent) => {
         setEvents([...events, newEvent]);
         if (new Date(newEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
             setSelectedDayEvents([...selectedDayEvents, newEvent]);
+        }
+    };
+
+    const updateEvent = (updatedEvent) => {
+        setEvents(events.map(event => event.id === updatedEvent.id ? updatedEvent : event));
+        if (new Date(updatedEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
+            setSelectedDayEvents(selectedDayEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
         }
     };
 
@@ -125,7 +143,15 @@ const CalendarPage = () => {
                                 selectedDayEvents.map(event => (
                                     <div className="calendar-one-event" key={event.id}>
                                         <h3 className="one-event-subheader">{event.attributes.title}</h3>
-                                        <p className="events-header-date">{new Date(event.attributes.date).toLocaleString("tr-TR")}</p>
+                                        <p className="events-header-date">
+                                            {new Date(event.attributes.date).toLocaleString("tr-TR")}
+                                            <img
+                                                src={editIcon}
+                                                alt="edit"
+                                                className="edit-event-icon"
+                                                onClick={() => openEditModal(event)}
+                                            />
+                                        </p>
                                         <p className="events-paragraph">{event.attributes.description}</p>
                                     </div>
                                 ))
@@ -145,6 +171,13 @@ const CalendarPage = () => {
                     selectedDate={selectedDate}
                     onClose={closeModal}
                     addEvent={addEvent}
+                />
+            )}
+            {editModalOpen && eventToEdit && (
+                <EditEventModal
+                    event={eventToEdit}
+                    onClose={closeEditModal}
+                    updateEvent={updateEvent}
                 />
             )}
         </main>
