@@ -7,7 +7,6 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
     const { user } = useAuth();
     const filteredEmployees = employees.filter(employee => employee.username !== user.username);
 
-
     return (
         <div className="employee-grid-container">
             <div className="employee-grid">
@@ -16,14 +15,14 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
                         <div className="profile-pic">
                             <img
                                 className="profile-pic-inner"
-                                src={employee.profilePic ? `http://localhost:1337${employee.profilePic.data.attributes.url}` : ""}
+                                src={employee?.profilePic ? `http://localhost:1337${employee?.profilePic?.data?.attributes?.url}` : ""}
                                 alt=""
                             />
                         </div>
                         <div className="employee-info">
                             <h3>{employee.username}</h3>
                             <p>{employee.email}</p>
-                            <p>{employee?.profession?.data?.attributes?.professionName || "Yok"}</p>
+                            <p>{employee?.profession?.data?.attributes?.professionName || "Henüz Belirtilmedi"}</p>
                         </div>
                     </div>
                 ))}

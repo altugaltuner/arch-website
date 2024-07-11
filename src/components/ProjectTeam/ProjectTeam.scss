@@ -23,7 +23,7 @@
         .search-employee-input {
             width: 200px;
             height: 40px;
-            border-radius: 15px;
+            border-radius: 5px;
             border: 1px solid $border-color;
             padding: 10px;
         }
@@ -145,7 +145,7 @@
 
         .employees-grid {
             grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
-            max-height: 300px;
+            max-height: 450px;
         }
 
         .teams-grid {
@@ -189,8 +189,6 @@
 @media screen and (max-width: 650px) {
 
     .project-teams-container {
-
-
         .employees-grid {
             grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
         }
@@ -207,5 +205,23 @@
             }
         }
     }
+}
 
+@media screen and (max-width: 450px) {
+
+    .project-teams-container {
+        .employees-grid {}
+
+        .admin-buttons {
+            display: flex;
+            flex-direction: column;
+
+            .search-employee-input {
+                width: 70%;
+            }
+
+            .delete-team-btn,
+            .add-team-btn {}
+        }
+    }
 }

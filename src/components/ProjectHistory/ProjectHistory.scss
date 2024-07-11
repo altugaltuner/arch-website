@@ -45,3 +45,25 @@
         width: 100%;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .project-history-main {
+        padding: 10px;
+        margin: 0px;
+
+        .project-history-header {
+            font-size: 24px;
+        }
+
+        .project-history-div {
+            gap: 5px;
+
+            .history-paragraph {
+                font-size: 16px;
+                border: 1px solid $border-color;
+                padding: 8px;
+                border-radius: 10px;
+            }
+        }
+    }
+}

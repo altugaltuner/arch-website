@@ -77,7 +77,7 @@ function WorkersPage() {
 
     const filteredEmployees = selectedJobTitle === 'Tümü'
         ? filteredSearchEmployees
-        : filteredSearchEmployees.filter(employee => employee.profession.data.attributes.professionName === selectedJobTitle);
+        : filteredSearchEmployees.filter(employee => employee?.profession?.data?.attributes?.professionName === selectedJobTitle);
 
     return (
         <div className="workers-page-main">

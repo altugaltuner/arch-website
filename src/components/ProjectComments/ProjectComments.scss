@@ -114,6 +114,7 @@
                 font-size: 18px;
                 padding: 15px;
                 border-right: 1px solid $border-color;
+                word-wrap: break-word;
             }
 
             .project-comment-owner {
@@ -121,6 +122,7 @@
                 padding: 15px;
                 width: 15%;
                 border-right: 1px solid $border-color;
+                word-wrap: break-word;
             }
 
             .project-comment-date {
@@ -128,6 +130,7 @@
                 word-break: break-all;
                 padding: 15px;
                 width: 15%;
+                word-wrap: break-word;
             }
         }
     }
@@ -143,6 +146,83 @@
             font-size: 22px;
             padding: 5px;
             margin: 5px;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .project-comments-main {
+        .project-comments-table {
+            .project-comment-item {
+                .project-comment-text {
+                    font-size: 16px;
+                    padding: 5px;
+                }
+
+                .project-comment-state {
+                    font-size: 16px;
+                    padding: 5px;
+                }
+
+                .project-comment-owner {
+                    font-size: 16px;
+                    padding: 5px;
+                }
+
+                .project-comment-date {
+                    font-size: 14px;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .project-comments-main {
+        .project-comments-table {
+            max-height: 500px;
+
+            .comment-table-head {
+
+                .comment-table-head-date,
+                .comment-table-head-owner,
+                .comment-table-head-state,
+                .comment-table-head-text {
+                    padding: 5px;
+                    font-size: 14px;
+                }
+
+                .comment-table-head-text {
+                    width: 45%;
+
+                }
+            }
+
+            .project-comment-item {
+                .project-comment-text {
+                    font-size: 14px;
+                    padding: 5px;
+                    gap: 5px;
+                    width: 35%;
+                    flex-direction: column;
+                }
+
+                .project-comment-state {
+                    font-size: 14px;
+                    padding: 5px;
+                }
+
+                .project-comment-owner {
+                    font-size: 14px;
+                    padding: 5px;
+                }
+
+                .project-comment-date {
+                    font-size: 12px;
+                    padding: 5px;
+                }
+            }
         }
     }
 }
