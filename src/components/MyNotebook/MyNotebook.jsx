@@ -37,7 +37,7 @@ function MyNotebook() {
                     }
                     console.log("Parsed notebook data:", notebook);
                     setNotes(Array.isArray(notebook) ? notebook : []);
-                    setUserId(data.id);  // Kullanıcı ID'sini alın
+                    setUserId(data.id);
                 } else {
                     console.error("No token found");
                 }
@@ -67,7 +67,7 @@ function MyNotebook() {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ myNotebook: JSON.stringify(updatedNotes) }),  // Notları string olarak gönderin
+                body: JSON.stringify({ myNotebook: JSON.stringify(updatedNotes) }),
             });
 
             if (!response.ok) {
@@ -101,7 +101,39 @@ function MyNotebook() {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ myNotebook: JSON.stringify(updatedNotes) }),  // Notları string olarak gönderin
+                body: JSON.stringify({ myNotebook: JSON.stringify(updatedNotes) }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Notebook update failed");
+            }
+
+            const data = await response.json();
+            console.log("Notebook updated successfully", data);
+        } catch (error) {
+            console.error("Error updating notebook:", error);
+        }
+    };
+
+    const deleteNote = async (noteId) => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token || !userId) {
+                throw new Error("No token or user ID found");
+            }
+
+            const updatedNotes = notes.filter(note => note.id !== noteId);
+            setNotes(updatedNotes);
+
+            console.log("Updated notes before saving:", updatedNotes);
+
+            const response = await fetch(`http://localhost:1337/api/users/${userId}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ myNotebook: JSON.stringify(updatedNotes) }),
             });
 
             if (!response.ok) {
@@ -146,6 +178,7 @@ function MyNotebook() {
                 setShowModal={setShowEditModal}
                 note={selectedNote}
                 updateNote={updateNote}
+                deleteNote={deleteNote}
             />
         </div>
     );
