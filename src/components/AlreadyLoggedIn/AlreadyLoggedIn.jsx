@@ -1,11 +1,13 @@
 import React from 'react';
 import './AlreadyLoggedIn.scss';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function AlreadyLoggedIn() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         window.location.reload();
+        Cookies.set("isLogin", "false")
     };
 
     return (

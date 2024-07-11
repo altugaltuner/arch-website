@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './OtherUsersInfo.scss';
 import PrivateMessageModal from "./PrivateMessageModal";
 import { useAuth } from "../AuthProvider";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
 function OtherUsersInfo({ employee }) {
-
-    console.log("Employee:", employee);
     const { user } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [privateMessages, setPrivateMessages] = useState([]);
     const [filteredMessages, setFilteredMessages] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [newProfessionName, setNewProfessionName] = useState('');
+
+    useEffect(() => {
+        if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
+            setNewProfessionName(employee.profession.data.attributes.professionName);
+        }
+    }, [employee]);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -31,25 +37,63 @@ function OtherUsersInfo({ employee }) {
             const filtered = privateMessages.filter(message => {
                 const senderId = message.attributes.users_permissions_user?.data?.id;
                 const recipientId = message.attributes.recipientID;
-                console.log(`Sender ID: ${senderId}, Recipient ID: ${recipientId}`);
-                console.log(`Employee ID: ${employee?.id}, User ID: ${user?.id}`);
                 return (
-                    (senderId === user.id && recipientId === employee.id)
+                    (senderId === user.id && recipientId === employee?.id)
                     ||
-                    (senderId === employee.id && recipientId === user.id)
+                    (senderId === employee?.id && recipientId === user.id)
                 );
             });
             setFilteredMessages(filtered);
         };
 
         filterMessages();
-    }, [employee]);
+    }, [employee, privateMessages, user.id]);
 
     const handleMessageSent = (newMessage) => {
         setPrivateMessages(prevMessages => [newMessage, ...prevMessages]);
     };
 
-    if (!employee) {
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleCancelClick = () => {
+        setIsEditing(false);
+        if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
+            setNewProfessionName(employee.profession.data.attributes.professionName);
+        }
+    };
+
+    const handleSaveClick = async () => {
+        try {
+            const response = await fetch(`http://localhost:1337/api/users/${employee?.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.jwt}`
+                },
+                body: JSON.stringify({
+                    profession: {
+                        professionName: newProfessionName,
+                    },
+                }),
+            });
+
+            if (response.ok) {
+                const updatedEmployee = await response.json();
+                setIsEditing(false);
+                if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
+                    employee.profession.data.attributes.professionName = updatedEmployee.profession.professionName;
+                }
+            } else {
+                console.error("Güncelleme hatası:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Güncelleme hatası:", error);
+        }
+    };
+
+    if (!employee || !employee.profession || !employee.profession.data || !employee.profession.data.attributes) {
         return (
             <div className="other-info-main">
                 <h1 className='other-info-header'>Görüntülemek istediğiniz çalışanı seçin.</h1>
@@ -64,14 +108,28 @@ function OtherUsersInfo({ employee }) {
                     <div className='other-info-inner-2'>
                         <img
                             className="other-info-profile-pic"
-                            src={`http://localhost:1337${employee.profilePic?.data.attributes.url || ""}`}
+                            src={`http://localhost:1337${employee.profilePic?.data?.attributes?.url || ""}`}
                             alt=""
                         />
                         <p className='other-info-username'>{employee.username}</p>
                         <p className='other-info-email'>{employee.email}</p>
                         <div className='profession-editing-div'>
-                            <p className='other-info-professionname'>{employee.profession.data.attributes.professionName}</p>
-                            <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" />
+                            {isEditing ? (
+                                <div>
+                                    <input
+                                        type="text"
+                                        value={newProfessionName}
+                                        onChange={(e) => setNewProfessionName(e.target.value)}
+                                    />
+                                    <button onClick={handleSaveClick}>Onayla</button>
+                                    <button onClick={handleCancelClick}>İptal</button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className='other-info-professionname'>{employee.profession.data.attributes.professionName}</p>
+                                    <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" onClick={handleEditClick} />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -79,7 +137,7 @@ function OtherUsersInfo({ employee }) {
                     <h2 className='other-revises-h2'>Revizeler</h2>
                     {employee.project_revises && employee.project_revises.data.map((revise) => (
                         <div key={revise.id} className='other-revise-div'>
-                            <p className='other-revise-p'>{revise.attributes.comment[0].children[0].text}</p>
+                            <p className='other-revise-p'>{revise.attributes.comment[0]?.children[0]?.text}</p>
                         </div>
                     ))}
                 </div>
