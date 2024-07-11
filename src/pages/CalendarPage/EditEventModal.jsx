@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './EditEventModal.scss';
 
-const EditEventModal = ({ event, onClose, updateEvent }) => {
+const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [time, setTime] = useState('');
@@ -50,6 +50,16 @@ const EditEventModal = ({ event, onClose, updateEvent }) => {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:1337/api/calendar-events/${event.id}`);
+            deleteEvent(event.id);
+            onClose();
+        } catch (error) {
+            console.error('Error deleting event:', error);
+        }
+    };
+
     return (
         <div className="edit-event-modal">
             <div className="edit-event-modal-content">
@@ -85,6 +95,7 @@ const EditEventModal = ({ event, onClose, updateEvent }) => {
                     </label>
                     <footer className="edit-event-modal-footer">
                         <button type="button" onClick={onClose}>İptal</button>
+                        <button type="button" className="delete-button" onClick={handleDelete}>Sil</button>
                         <button type="submit">Güncelle</button>
                     </footer>
                 </form>

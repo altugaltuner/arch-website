@@ -86,5 +86,14 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
     }
 }

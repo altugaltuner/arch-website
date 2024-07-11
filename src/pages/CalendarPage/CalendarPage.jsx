@@ -82,6 +82,11 @@ const CalendarPage = () => {
         }
     };
 
+    const deleteEvent = (eventId) => {
+        setEvents(events.filter(event => event.id !== eventId));
+        setSelectedDayEvents(selectedDayEvents.filter(event => event.id !== eventId));
+    };
+
     const nextMonth = () => {
         setMonth((prev) => (prev + 1) % 12);
         if (month === 11) {
@@ -178,6 +183,7 @@ const CalendarPage = () => {
                     event={eventToEdit}
                     onClose={closeEditModal}
                     updateEvent={updateEvent}
+                    deleteEvent={deleteEvent}
                 />
             )}
         </main>
