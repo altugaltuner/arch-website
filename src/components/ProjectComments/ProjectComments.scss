@@ -86,6 +86,8 @@
             border-radius: 5px;
 
             .project-comment-text {
+                display: flex;
+                flex-direction: row;
                 width: 55%;
                 font-size: 18px;
                 padding: 15px;
@@ -93,6 +95,8 @@
                 display: flex;
                 gap: 10px;
                 cursor: pointer;
+                word-break: break-word; // Uzun kelimelerin satır sonuna gelince kırılmasını sağlar
+                white-space: pre-wrap; // Uzun metinlerin taşmasını ve satırların doğru şekilde kırılmasını sağlar
 
                 .edit-pencil-for-revise {
                     width: 20px;

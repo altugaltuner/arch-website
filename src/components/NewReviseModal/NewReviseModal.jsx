@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }) {
     const [inputValue, setInputValue] = useState('');
-    const [selectedState, setSelectedState] = useState('');
+    const [selectedState, setSelectedState] = useState(0);
 
     if (!isOpen) return null;
 
@@ -15,7 +15,8 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
             return;
         }
 
-        const currentDate = new Date().toLocaleString();
+        const currentDate = new Date().toISOString();
+
 
         try {
             const response = await axios.post('http://localhost:1337/api/project-revises', {

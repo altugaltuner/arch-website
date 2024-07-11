@@ -6,6 +6,7 @@ import Activities from "../../components/Activities/Activities";
 import CompanyName from "../../components/CompanyName/CompanyName";
 
 function HomePage() {
+  const [isLoading, setIsLoading] = useState(false);
   const { loading } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -18,10 +19,11 @@ function HomePage() {
   };
 
   return (
+    (isLoading && <div>Yükleniyor...</div>) ||
     <main className="homepage-main">
       <Navigation />
       <div className="homepage-column">
-        <CompanyName onSearch={handleSearch} />
+        <CompanyName setIsLoading={setIsLoading} onSearch={handleSearch} />
         <Activities searchTerm={searchTerm} />
       </div>
     </main>

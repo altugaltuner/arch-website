@@ -123,6 +123,12 @@ function ProjectComments({ clickedProject }) {
         );
     };
 
+    const handleReviseDeleted = (reviseId) => {
+        setCommentsWithDetails((prevComments) =>
+            prevComments.filter((comment) => comment.id !== reviseId)
+        );
+    };
+
     return (
         <div className="project-comments-main">
             <h2 className='project-comments-h2'>Proje Revizeleri</h2>
@@ -153,7 +159,7 @@ function ProjectComments({ clickedProject }) {
                 ))}
             </div>
             <NewReviseModal user={user} clickedProject={clickedProject} isOpen={isModalOpen} onClose={closeNewReviseModal} onReviseAdded={handleReviseAdded} />
-            {selectedRevise && <ReviseUpdateModal isOpen={isUpdateModalOpen} onClose={closeUpdateReviseModal} revise={selectedRevise} onReviseUpdated={handleReviseUpdated} />}
+            {selectedRevise && <ReviseUpdateModal isOpen={isUpdateModalOpen} onClose={closeUpdateReviseModal} revise={selectedRevise} onReviseUpdated={handleReviseUpdated} onReviseDeleted={handleReviseDeleted} />}
             {selectedRevise && <ReviseViewModal isOpen={isViewModalOpen} onClose={closeViewReviseModal} revise={selectedRevise} />}
         </div>
     );

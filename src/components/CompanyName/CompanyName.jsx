@@ -1,19 +1,34 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import "./CompanyName.scss";
 import { useAuth } from "../AuthProvider";
 
-function CompanyName({ onSearch }) {
-    const { user } = useAuth();
-
+const CompanyName = ({ onSearch, setIsLoading }) => {
+    let userData = null;
+    console.log("test");
     const [companyName, setCompanyName] = useState(null);
 
-    useEffect(() => {
-        if (user && user.company && user.company.companyName) {
-            setCompanyName(user.company.companyName);
-        } else {
-            console.log("User data is not available or companyName is missing");
+    try {
+        const { user } = useAuth();
+        if (user) {
+            console.log("user:", user.company.companyName);
+            userData = user;
+            setIsLoading(false);
         }
-    }, [user]);
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+
+
+    useEffect(() => {
+        if (userData && userData.company && userData.company.companyName) {
+            setCompanyName(userData.company.companyName);
+        } else {
+            console.log("userData data is not available or companyName is missing");
+        }
+    }, []);
 
     const handleSearchChange = (e) => {
         onSearch(e.target.value);

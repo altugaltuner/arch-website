@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './ReviseUpdateModal.scss';
 import axios from 'axios';
 
-function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
+function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseDeleted }) {
     const [inputValue, setInputValue] = useState('');
-    const [selectedState, setSelectedState] = useState('');
+    const [selectedState, setSelectedState] = useState(null);
     const [commentDate, setCommentDate] = useState('');
 
     useEffect(() => {
@@ -48,12 +48,22 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:1337/api/project-revises/${revise.id}`);
+            onReviseDeleted(revise.id);
+            onClose();
+        } catch (error) {
+            console.error('Revize silinirken bir hata oluştu:', error);
+        }
+    };
+
     return (
         <div className="revise-update-modal">
             <div className="revise-modal-content">
                 <h2 className='revise-update-modal-header'>Revizeyi Güncelle</h2>
                 <form className='revise-update-modal-form' onSubmit={handleSubmit}>
-                    <input
+                    <textarea
                         className='revise-update-modal-input'
                         type="text"
                         value={inputValue}
@@ -83,7 +93,8 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated }) {
                     <p>Revize Tarihi : {commentDate}</p>
                     <div className='revise-update-buttons-div'>
                         <button className='revise-update-submit-btn' type="submit">Güncelle</button>
-                        <button className='revise-update-submit-cancel' onClick={onClose}>Kapat</button>
+                        <button className='revise-update-delete-btn' type="button" onClick={handleDelete}>Sil</button>
+                        <button className='revise-update-submit-cancel' type="button" onClick={onClose}>Kapat</button>
                     </div>
                 </form>
             </div>
