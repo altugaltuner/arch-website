@@ -41,19 +41,17 @@ function Navigation() {
 
     return (
         <nav className="navigation-main">
-            <ul className="nav-ul">
+            <div className="nav-ul">
                 <Link to="/flow" className="nav-button" >
                     <img src={ofisimLogo} className="flow-logo" alt="flow-logo" />
                 </Link>
                 {navItems.map(item => (
-                    <li key={item.id} className="nav-li" id={item.id} onClick={() => handleNavClick(item.id)}>
-                        <Link to={item.to} className={`nav-button ${activeNavId === item.id ? 'active' : ''}`}>
-                            <img src={item.logo} alt="" className="nav-logo" />
-                            <p className="nav-p" src="li-name">{item.name}</p>
-                        </Link>
-                    </li>
+                    <Link to={item.to} key={item.id} className={`nav-button ${activeNavId === item.id ? 'active' : ''}`} id={item.id} onClick={() => handleNavClick(item.id)}>
+                        <img src={item.logo} alt="" className="nav-logo" />
+                        <p className="nav-p" src="li-name">{item.name}</p>
+                    </Link>
                 ))}
-            </ul>
+            </div>
         </nav>
     );
 }

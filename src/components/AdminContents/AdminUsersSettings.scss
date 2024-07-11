@@ -11,6 +11,46 @@
         max-height: 800px;
         overflow-y: auto;
 
+        .user-storage-gb-div {
+            padding: 20px;
+            border: 1px solid $border-color;
+            border-radius: 15px;
+
+            .user-storage-gb-h2 {
+                font-size: 24px;
+                font-weight: 400;
+            }
+
+            .user-storage-gb-inner {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                align-items: center;
+                padding: 15px;
+                flex-wrap: wrap;
+
+                .user-storage-gb-one-div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    padding: 5px;
+                    border-right: 1px solid $border-color;
+                    text-align: center;
+
+                    .user-storage-username {
+                        font-size: 18px;
+                        font-weight: 400;
+                    }
+
+                    .user-storage-userstorage {
+                        font-size: 14px;
+                        font-weight: 300;
+                    }
+                }
+
+            }
+        }
+
         .projects-list {
             display: flex;
             flex-direction: row;
@@ -148,6 +188,8 @@
 @media screen and (max-width: 450px) {
     .admin-user-settings-main {
         .admin-send-message-inner {
+            gap: 5px;
+
             .projects-list {
                 gap: 10px;
                 padding: 10px;

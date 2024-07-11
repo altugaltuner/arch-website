@@ -332,7 +332,7 @@ function MyPersonalFiles({ user }) {
     }
 
     if (!user || !user.id) {
-        return <div>No user data available.</div>;
+        return <div>Kullanıcı Bilgisi Bulunamadı.</div>;
     }
 
     return (
@@ -341,12 +341,7 @@ function MyPersonalFiles({ user }) {
             <button className="add-folder-button" onClick={handleAddFolderClick}>Yeni Klasör</button>
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
-                {trashFolder && !selectedFolder && (
-                    <div className="folder" onClick={(event) => handleFolderClick(event, trashFolder)}>
-                        <img src={folderIcon} alt="folder" className="folder-icon" />
-                        <p className="folder-p">Çöp Kutusu</p>
-                    </div>
-                )}
+
             </div>
             <input
                 ref={fileInputRef}

@@ -81,10 +81,34 @@
                     font-weight: 300;
                 }
 
-                .other-info-professionname {
-                    font-size: 18px;
-                    font-weight: 300;
+                .profession-editing-div {
+                    display: flex;
+                    position: relative;
+                    width: 100%;
+                    justify-content: center;
+
+                    .other-info-professionname {
+                        font-size: 18px;
+                        font-weight: 300;
+                    }
+
+                    .pencil-profession-edit {
+                        width: 15px;
+                        height: 15px;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                        opacity: 0.6;
+                        position: absolute;
+                        right: 0;
+                        top: 4px;
+
+                        &:hover {
+                            opacity: 1;
+                        }
+                    }
                 }
+
+
             }
         }
     }

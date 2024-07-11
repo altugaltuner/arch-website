@@ -11,3 +11,15 @@
         font-weight: 400;
     }
 }
+
+@media screen and (min-width: 768px) {}
+
+.admin-sub-setting-page {
+    .admin-project-settings {
+        padding: 5px;
+    }
+
+    .admin-group-settings {
+        padding: 5px;
+    }
+}

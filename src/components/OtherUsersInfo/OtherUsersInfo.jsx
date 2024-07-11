@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './OtherUsersInfo.scss';
 import PrivateMessageModal from "./PrivateMessageModal";
 import { useAuth } from "../AuthProvider";
+import editPencil from "../../assets/icons/edit-pencil.png";
 
 function OtherUsersInfo({ employee }) {
 
@@ -68,7 +69,10 @@ function OtherUsersInfo({ employee }) {
                         />
                         <p className='other-info-username'>{employee.username}</p>
                         <p className='other-info-email'>{employee.email}</p>
-                        <p className='other-info-professionname'>{employee.profession.data.attributes.professionName}</p>
+                        <div className='profession-editing-div'>
+                            <p className='other-info-professionname'>{employee.profession.data.attributes.professionName}</p>
+                            <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" />
+                        </div>
                     </div>
                 </div>
                 <div className='other-all-revises-inner'>
