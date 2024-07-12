@@ -138,6 +138,7 @@
 
             .aboutme-page-row {
                 padding: 5px;
+                gap: 5px;
                 transform: translate(60px, 0px);
 
                 .aboutme-page-column-2 {
@@ -146,7 +147,8 @@
 
                     .aboutme-row-3 {
                         gap: 5px;
-                        width: 99%;
+                        width: 95%;
+                        margin-left: 11px;
                     }
 
                     .mylast-act-main {

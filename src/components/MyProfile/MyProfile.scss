@@ -241,6 +241,7 @@
     .profile {
         width: 95%;
         padding: 10px;
+        margin-left: 12px;
 
         .profile-info {
             gap: 5px;
@@ -254,6 +255,8 @@
             }
 
             .profile-field-social {
+                gap: 4px;
+
                 .profile-field-labels {
                     font-size: 18px;
                     gap: 5px;
@@ -268,7 +271,7 @@
 
             .profile-field {
                 gap: 2px;
-                margin-bottom: 8px;
+                margin-bottom: 4px;
 
                 .profile-field-paragraph {
                     font-size: 14px;

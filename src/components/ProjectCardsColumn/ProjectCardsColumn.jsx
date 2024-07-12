@@ -64,6 +64,8 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
         }
     };
 
+    console.log("filteredProjects:", filteredProjects);
+
     return (
         <div className="project-cards-column">
             <div className="project-cards-header-and-searchbar">
@@ -115,7 +117,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                     project.attributes.projectCoverPhoto.data && (
                                         <img
                                             className="project-navbar-photos"
-                                            src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`}
+                                            src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url}`}
                                             alt="Project Cover"
                                             onError={(e) => { console.log("Image Error:", e); }}
                                         />

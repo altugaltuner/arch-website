@@ -166,8 +166,11 @@
                     .table-body-row {
                         .table-data {
                             font-size: 12px;
-                            padding: 0px;
+                            padding: 5px;
                             text-align: center;
+                            height: 150px;
+                            max-height: 450px;
+                            overflow-y: auto;
 
                             .table-data-description {
                                 font-size: 12px;
