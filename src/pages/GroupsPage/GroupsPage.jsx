@@ -251,11 +251,9 @@ function GroupsPage() {
                                         alt=""
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            if (isUserInGroup) {
-                                                setSelectedGroupId(group.id);
-                                                setChangedGroup({ groupName: group.attributes.groupName });
-                                                setShowEditModal(true);
-                                            }
+                                            setSelectedGroupId(group.id);
+                                            setChangedGroup({ groupName: group.attributes.groupName });
+                                            setShowEditModal(true);
                                         }}
                                     />
                                     <img
@@ -264,10 +262,8 @@ function GroupsPage() {
                                         alt=""
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            if (isUserInGroup) {
-                                                setSelectedGroupId(group.id);
-                                                setShowDeleteModal(true);
-                                            }
+                                            setSelectedGroupId(group.id);
+                                            setShowDeleteModal(true);
                                         }}
                                     />
                                 </div>
