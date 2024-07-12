@@ -25,7 +25,7 @@ function MyActiveProjects({ user }) {
     }, [allUsers]);
 
     if (!user || !user.username) {
-        return <div>No user data available.</div>;
+        return <div>Kullanıcı Bilgisi Yükleniyor.</div>;
     }
 
     const filteredUser = allUsers.filter(u => u.username === user.username);

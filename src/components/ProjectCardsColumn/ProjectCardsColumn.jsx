@@ -92,7 +92,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                             )
                     )
                 ) : (
-                    <p>No roles found</p>
+                    <p>Yükleniyor...</p>
                 )}
                 {filteredProjects.length > 0 ? (
                     filteredProjects.map((project) => (
@@ -126,7 +126,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                         </div>
                     ))
                 ) : (
-                    <p>No projects found</p>
+                    <p></p>
                 )}
             </div>
             <PasswordModal

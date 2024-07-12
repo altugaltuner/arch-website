@@ -42,7 +42,7 @@ function Navigation() {
         <nav className="navigation-main">
             <div className="nav-ul">
                 <Link to="/flow" className="nav-button" >
-                    <img src={ofisimLogo} className="flow-logo" alt="flow-logo" />
+                    <img src={ofisimLogo} className="flow-logo" alt="ofisim" />
                 </Link>
                 {navItems.map(item => (
                     <Link to={item.to} key={item.id} className={`nav-button ${activeNavId === item.id ? 'active' : ''}`} id={item.id} onClick={() => handleNavClick(item.id)}>
