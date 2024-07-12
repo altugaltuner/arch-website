@@ -24,11 +24,12 @@ function GroupsPage() {
     const [groups, setGroups] = useState([]);
     const [filteredGroups, setFilteredGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
-    const [newGroup, setNewGroup] = useState({ groupName: "" });
+    const [newGroup, setNewGroup] = useState({ groupName: "", groupPassword: "" }); // Add groupPassword
     const [changedGroup, setChangedGroup] = useState({ groupName: "" });
     const [searchTerm, setSearchTerm] = useState("");
     const [password, setPassword] = useState(""); // yeni state
     const [errorMessage, setErrorMessage] = useState(''); // yeni state
+    const [verifiedGroups, setVerifiedGroups] = useState([]); // yeni state
 
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
@@ -64,10 +65,12 @@ function GroupsPage() {
     };
 
     const fetchProjectGroups = async () => {
+        console.log('Fetching project groups...');
         try {
-            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
+            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword'); // groupPassword eklendi
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
+            console.log('Fetched groups:', companyGroups);
             setGroups(companyGroups);
             setFilteredGroups(companyGroups);
         } catch (error) {
@@ -88,8 +91,10 @@ function GroupsPage() {
     }, [searchTerm, groups]);
 
     async function getRoles() {
+        console.log('Fetching roles...');
         try {
             const response = await axios.get('http://localhost:1337/api/accesses');
+            console.log('Fetched roles:', response.data.data);
             setRoles(response.data.data);
         } catch (error) {
             console.error(error);
@@ -103,21 +108,29 @@ function GroupsPage() {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewGroup({ ...newGroup, [name]: value });
+        console.log('Input changed:', name, value); // Debug için log ekledik
     };
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
+        console.log('Search term changed:', e.target.value);
     };
 
-    const handleSubmit = async (groupCode) => {
+    const handleSubmit = async (group) => {
         const formData = new FormData();
-        formData.append('data', JSON.stringify({ groupName: newGroup.groupName, company: usersCompanyId, groupCode }));
+        formData.append('data', JSON.stringify({
+            groupName: group.groupName,
+            company: usersCompanyId,
+            groupPassword: group.groupPassword // Add groupPassword
+        }));
+        console.log('Submitting new group:', group);
 
         try {
             await axios.post('http://localhost:1337/api/groups', formData);
             setShowModal(false);
-            setNewGroup({ groupName: "" });
+            setNewGroup({ groupName: "", groupPassword: "" });
             // Refetch groups after adding a new one
+            console.log('Group created successfully, refetching groups...');
             const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
@@ -129,12 +142,14 @@ function GroupsPage() {
     };
 
     const handleGroupClick = (groupId) => {
-        // Kullanıcı daha önce gruba dahil olmuş mu kontrol et
+        console.log('Group clicked:', groupId);
         const group = groups.find(g => g.id === groupId);
         const isUserInGroup = group.attributes.users_permissions_users.data.some(u => u.id === user.id);
 
-        if (isUserInGroup) {
+        if (isUserInGroup || verifiedGroups.includes(groupId)) {
+            // Kullanıcı gruba kayıtlı ya da şifreyi doğrulamış
             setSelectedGroupId(groupId);
+            setShowPasswordModal(false);
         } else {
             setSelectedGroupId(groupId);
             setShowPasswordModal(true);  // modalı aç
@@ -142,23 +157,35 @@ function GroupsPage() {
     };
 
     const handlePasswordSubmit = async () => {
+        console.log('Submitting password:', password);
         const group = groups.find(g => g.id === selectedGroupId);
 
-        if (group.attributes.groupCode === password) {
-            setShowPasswordModal(false);
-            // Kullanıcıyı gruba dahil et
-            try {
-                await axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, {
-                    data: {
-                        users_permissions_users: [...group.attributes.users_permissions_users.data.map(u => u.id), user.id]
-                    }
-                });
-                setSelectedGroupId(selectedGroupId);
-            } catch (error) {
-                console.error('Error joining the group', error);
+        if (group) {
+            console.log('Found group:', group);
+            if (group.attributes.groupPassword === password) { // Compare with groupPassword
+                console.log('Password correct, adding user to group...');
+                // Kullanıcıyı gruba dahil et
+                try {
+                    await axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, {
+                        data: {
+                            users_permissions_users: [...group.attributes.users_permissions_users.data.map(u => u.id), user.id]
+                        }
+                    });
+                    setSelectedGroupId(selectedGroupId);
+                    setVerifiedGroups([...verifiedGroups, selectedGroupId]); // Grubu doğrulanmış gruplar arasına ekle
+                    setShowPasswordModal(false); // Doğru şifre girildiğinde modalı kapat
+                    return { success: true };
+                } catch (error) {
+                    console.error('Error joining the group', error);
+                    return { success: false, message: 'Gruba katılırken bir hata oluştu.' };
+                }
+            } else {
+                console.log('Incorrect password.');
+                return { success: false, message: 'Yanlış şifre.' };
             }
         } else {
-            setErrorMessage('Yanlış şifre');
+            console.log('Group not found.');
+            return { success: false, message: 'Grup bulunamadı.' };
         }
     };
 
@@ -189,47 +216,63 @@ function GroupsPage() {
                             </button>
                         ))}
 
-                        {filteredGroups.map((group) => (
-                            <div
-                                key={group.id}
-
-                                className="project-group"
-                                onClick={() => handleGroupClick(group.id)} // güncelledik
-                            >
-                                {group.attributes.groupChatPic?.data ? (
-                                    <img
-                                        className="group-image"
-                                        src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
-                                        alt={group.attributes.groupChatPic.data.attributes.name}
-                                    />
-                                ) : (
-                                    <img
-                                        className="group-image"
-                                        src={groupLogo}
-                                        alt="group-chat-pic"
-                                    />
-                                )}
-                                <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
-                                <img className="file-card-edit-btn"
-                                    src={editIcon}
-                                    alt=""
+                        {filteredGroups.map((group) => {
+                            const isUserInGroup = group.attributes.users_permissions_users.data.some(u => u.id === user.id);
+                            return (
+                                <div
+                                    key={group.id}
+                                    className="project-group"
                                     onClick={() => {
-                                        setSelectedGroupId(group.id);
-                                        setChangedGroup({ groupName: group.attributes.groupName });
-                                        setShowEditModal(true);
+                                        if (isUserInGroup || verifiedGroups.includes(group.id)) {
+                                            setSelectedGroupId(group.id);
+                                            setShowPasswordModal(false);
+                                        } else {
+                                            setSelectedGroupId(group.id);
+                                            setShowPasswordModal(true);
+                                        }
                                     }}
-                                />
-                                <img
-                                    className="file-card-delete-btn"
-                                    src={deleteIcon}
-                                    alt=""
-                                    onClick={() => {
-                                        setSelectedGroupId(group.id);
-                                        setShowDeleteModal(true);
-                                    }}
-                                />
-                            </div>
-                        ))}
+                                >
+                                    {group.attributes.groupChatPic?.data ? (
+                                        <img
+                                            className="group-image"
+                                            src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
+                                            alt={group.attributes.groupChatPic.data.attributes.name}
+                                        />
+                                    ) : (
+                                        <img
+                                            className="group-image"
+                                            src={groupLogo}
+                                            alt="group-chat-pic"
+                                        />
+                                    )}
+                                    <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
+                                    <img className="file-card-edit-btn"
+                                        src={editIcon}
+                                        alt=""
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (isUserInGroup) {
+                                                setSelectedGroupId(group.id);
+                                                setChangedGroup({ groupName: group.attributes.groupName });
+                                                setShowEditModal(true);
+                                            }
+                                        }}
+                                    />
+                                    <img
+                                        className="file-card-delete-btn"
+                                        src={deleteIcon}
+                                        alt=""
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (isUserInGroup) {
+                                                setSelectedGroupId(group.id);
+                                                setShowDeleteModal(true);
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            );
+                        })}
                     </div>
                     <GroupMessagePanel selectedGroupId={selectedGroupId} />
                 </div>

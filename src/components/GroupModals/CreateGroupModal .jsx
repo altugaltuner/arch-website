@@ -3,12 +3,12 @@ import './CreateGroupModal.scss';
 
 const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange, handleSubmit }) => {
     const [errorMessage, setErrorMessage] = useState('');
-    const [groupCode, setGroupCode] = useState('');
+    const [groupPassword, setGroupPassword] = useState('');
 
     useEffect(() => {
         if (showModal) {
             setErrorMessage('');
-            setGroupCode('');
+            setGroupPassword('');
         }
     }, [showModal]);
 
@@ -24,8 +24,8 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
         }
     };
 
-    const handleGroupCodeChange = (e) => {
-        setGroupCode(e.target.value);
+    const handleGroupPasswordChange = (e) => {
+        handleInputChange({ target: { name: 'groupPassword', value: e.target.value } });
         setErrorMessage('');
     };
 
@@ -34,11 +34,11 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
             setErrorMessage('Grup adı en fazla 40 karakter olabilir.');
             return false;
         }
-        if (!groupCode) {
+        if (!newGroup.groupPassword) {
             setErrorMessage('Grup şifresi giriniz.');
             return false;
         }
-        handleSubmit(groupCode);
+        handleSubmit(newGroup);
     };
 
     return (
@@ -55,12 +55,12 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
                     onChange={handleGroupNameChange}
                 />
                 <input
-                    type="text"
+                    type="password"
                     className='create-group-code-input'
-                    name='group-code'
-                    value={groupCode}
-                    placeholder='Grup şifresi oluştur'
-                    onChange={handleGroupCodeChange}
+                    name='groupPassword'
+                    value={newGroup.groupPassword}
+                    placeholder='Grup Şifresi'
+                    onChange={handleGroupPasswordChange}
                 />
                 {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 <div className='create-group-button-div-group'>

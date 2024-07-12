@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import './PasswordModal.scss';
 
-const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setPassword, handlePasswordSubmit }) => {
-    const [errorMessage, setErrorMessage] = useState('');
+const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setPassword, handlePasswordSubmit, errorMessage }) => {
+    const [localErrorMessage, setLocalErrorMessage] = useState('');
 
     const handleChange = (e) => {
         setPassword(e.target.value);
-        setErrorMessage('');
+        setLocalErrorMessage('');
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!password) {
-            setErrorMessage('Şifre giriniz.');
+            setLocalErrorMessage('Şifre giriniz.');
         } else {
-            handlePasswordSubmit();
+            const result = await handlePasswordSubmit();
+            if (!result.success) {
+                setLocalErrorMessage(result.message || 'Yanlış şifre.');
+            }
         }
     };
 
@@ -30,7 +33,7 @@ const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setP
                     onChange={handleChange}
                     placeholder="Şifre giriniz"
                 />
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                {(localErrorMessage || errorMessage) && <p className="error-message">{localErrorMessage || errorMessage}</p>}
                 <div className="password-modal-buttons">
                     <button onClick={handleSubmit}>Giriş Yap</button>
                     <button onClick={() => setShowPasswordModal(false)}>İptal</button>
