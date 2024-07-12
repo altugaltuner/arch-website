@@ -9,6 +9,7 @@ import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePa
 import CreateGroupModal from "../../components/GroupModals/CreateGroupModal ";
 import DeleteGroupModal from "../../components/GroupModals/DeleteGroupModal ";
 import EditGroupModal from "../../components/EditGroupModal/EditGroupModal";
+import PasswordModal from "../../components/GroupModals/PasswordModal";  // yeni modal eklendi
 
 import editIcon from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
@@ -19,19 +20,18 @@ function GroupsPage() {
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showPasswordModal, setShowPasswordModal] = useState(false); // yeni modal state
     const [groups, setGroups] = useState([]);
     const [filteredGroups, setFilteredGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const [newGroup, setNewGroup] = useState({ groupName: "" });
     const [changedGroup, setChangedGroup] = useState({ groupName: "" });
     const [searchTerm, setSearchTerm] = useState("");
+    const [password, setPassword] = useState(""); // yeni state
+    const [errorMessage, setErrorMessage] = useState(''); // yeni state
 
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
-
-    const selectGroup = (e) => {
-        const selectedGroup = groups.find((group) => group.attributes.groupName === e.target.innerText);
-    };
 
     const handleDeleteGroup = () => {
         try {
@@ -109,9 +109,9 @@ function GroupsPage() {
         setSearchTerm(e.target.value);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (groupCode) => {
         const formData = new FormData();
-        formData.append('data', JSON.stringify({ groupName: newGroup.groupName, company: usersCompanyId }));
+        formData.append('data', JSON.stringify({ groupName: newGroup.groupName, company: usersCompanyId, groupCode }));
 
         try {
             await axios.post('http://localhost:1337/api/groups', formData);
@@ -125,6 +125,40 @@ function GroupsPage() {
             setFilteredGroups(companyGroups);
         } catch (error) {
             console.error('Error creating a new group', error);
+        }
+    };
+
+    const handleGroupClick = (groupId) => {
+        // Kullanıcı daha önce gruba dahil olmuş mu kontrol et
+        const group = groups.find(g => g.id === groupId);
+        const isUserInGroup = group.attributes.users_permissions_users.data.some(u => u.id === user.id);
+
+        if (isUserInGroup) {
+            setSelectedGroupId(groupId);
+        } else {
+            setSelectedGroupId(groupId);
+            setShowPasswordModal(true);  // modalı aç
+        }
+    };
+
+    const handlePasswordSubmit = async () => {
+        const group = groups.find(g => g.id === selectedGroupId);
+
+        if (group.attributes.groupCode === password) {
+            setShowPasswordModal(false);
+            // Kullanıcıyı gruba dahil et
+            try {
+                await axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, {
+                    data: {
+                        users_permissions_users: [...group.attributes.users_permissions_users.data.map(u => u.id), user.id]
+                    }
+                });
+                setSelectedGroupId(selectedGroupId);
+            } catch (error) {
+                console.error('Error joining the group', error);
+            }
+        } else {
+            setErrorMessage('Yanlış şifre');
         }
     };
 
@@ -142,11 +176,11 @@ function GroupsPage() {
                         onChange={handleSearchChange}
                     />
                 </div>
-
-                <div className="group-div-row">
+                <div className="groups-x-all">
                     <div className="project-groups">
                         {roles.map(role => role.attributes.role === "Admin" && (
                             <button
+                                key={role.id}
                                 className="project-group-add-group"
                                 onClick={() => setShowModal(true)}
                                 role="button"
@@ -156,7 +190,12 @@ function GroupsPage() {
                         ))}
 
                         {filteredGroups.map((group) => (
-                            <div key={group.id} className="project-group" onClick={selectGroup}>
+                            <div
+                                key={group.id}
+
+                                className="project-group"
+                                onClick={() => handleGroupClick(group.id)} // güncelledik
+                            >
                                 {group.attributes.groupChatPic?.data ? (
                                     <img
                                         className="group-image"
@@ -192,9 +231,10 @@ function GroupsPage() {
                             </div>
                         ))}
                     </div>
-                    <GroupMessagePanel />
+                    <GroupMessagePanel selectedGroupId={selectedGroupId} />
                 </div>
             </div>
+
             <CreateGroupModal
                 showModal={showModal}
                 setShowModal={setShowModal}
@@ -212,6 +252,14 @@ function GroupsPage() {
                 showEditModal={showEditModal}
                 setShowEditModal={setShowEditModal}
                 handleEditGroup={handleEditGroup}
+            />
+            <PasswordModal
+                showPasswordModal={showPasswordModal}
+                setShowPasswordModal={setShowPasswordModal}
+                password={password}
+                setPassword={setPassword}
+                handlePasswordSubmit={handlePasswordSubmit}
+                errorMessage={errorMessage}
             />
         </div>
     );

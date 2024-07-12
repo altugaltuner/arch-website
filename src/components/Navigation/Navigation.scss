@@ -76,21 +76,21 @@
                 width: 60px;
             }
 
-            .nav-li {
-                font-size: 20px;
-                height: 145px;
+            font-size: 20px;
+            height: 145px;
 
-                .nav-button {
-                    width: 90%;
+            .nav-button {
+                width: 100%;
+                padding: 29px 0px 29px 0px;
+                gap: 22px;
 
-                    .nav-p {
-                        font-size: 15px;
-                    }
+                .nav-p {
+                    font-size: 15px;
+                }
 
-                    .nav-logo {
-                        width: 30px;
-                        height: 30px;
-                    }
+                .nav-logo {
+                    width: 30px;
+                    height: 30px;
                 }
             }
         }

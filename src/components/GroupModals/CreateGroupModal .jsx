@@ -3,10 +3,12 @@ import './CreateGroupModal.scss';
 
 const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange, handleSubmit }) => {
     const [errorMessage, setErrorMessage] = useState('');
+    const [groupCode, setGroupCode] = useState('');
 
     useEffect(() => {
         if (showModal) {
             setErrorMessage('');
+            setGroupCode('');
         }
     }, [showModal]);
 
@@ -22,12 +24,21 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
         }
     };
 
+    const handleGroupCodeChange = (e) => {
+        setGroupCode(e.target.value);
+        setErrorMessage('');
+    };
+
     const handleFormSubmit = () => {
         if (newGroup.groupName.length > 40) {
             setErrorMessage('Grup adı en fazla 40 karakter olabilir.');
             return false;
         }
-        handleSubmit();
+        if (!groupCode) {
+            setErrorMessage('Grup şifresi giriniz.');
+            return false;
+        }
+        handleSubmit(groupCode);
     };
 
     return (
@@ -42,6 +53,14 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
                     placeholder="Grup Adı"
                     value={newGroup.groupName}
                     onChange={handleGroupNameChange}
+                />
+                <input
+                    type="text"
+                    className='create-group-code-input'
+                    name='group-code'
+                    value={groupCode}
+                    placeholder='Grup şifresi oluştur'
+                    onChange={handleGroupCodeChange}
                 />
                 {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 <div className='create-group-button-div-group'>

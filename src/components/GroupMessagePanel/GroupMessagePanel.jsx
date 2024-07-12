@@ -1,12 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./GroupMessagePanel.scss";
+import { useAuth } from "../AuthProvider";
 
-function GroupMessagePanel() {
+function GroupMessagePanel({ selectedGroupId }) {
+    const [groupName, setGroupName] = useState("");
+    const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
+    const { user } = useAuth();
 
-    const handleSendMessage = () => {
-        console.log("Message sent: ", message);
-        setMessage("");
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
+
+    useEffect(() => {
+        const fetchGroupDetails = async () => {
+            if (selectedGroupId) {
+                try {
+                    const response = await axios.get(`http://localhost:1337/api/groups/${selectedGroupId}?populate=*`);
+                    const groupDetails = response.data.data;
+                    setGroupName(groupDetails.attributes.groupName);
+                    setMessages(groupDetails.attributes.chatMessages || []);
+                } catch (error) {
+                    console.error("Error fetching group details:", error);
+                }
+            }
+        };
+
+        fetchGroupDetails();
+    }, [selectedGroupId]);
+
+    const handleSendMessage = async () => {
+        if (message.trim()) {
+            const newMessage = {
+                user: user.id, // Replace with actual user data
+                content: message,
+                createdAt: new Date().toISOString(),
+            };
+
+            try {
+                const response = await axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, {
+                    data: {
+                        chatMessages: [...messages, newMessage],
+                    },
+                });
+
+                setMessages(response.data.data.attributes.chatMessages);
+                setMessage("");
+            } catch (error) {
+                console.error("Error sending message:", error);
+            }
+        }
     };
 
     return (
@@ -14,21 +58,26 @@ function GroupMessagePanel() {
             <div className="message-panel-head">
                 <div className="message-panel-left-side">
                     <img className="message-panel-group-img" src="" alt="group-pic" />
-                    <h2 className="message-panel-group-name">Group Name</h2>
+                    <h2 className="message-panel-group-name">{groupName}</h2>
                 </div>
                 <div className="message-panel-right-side">
-                    <img className="message-panel-search-logo" src="" alt="search-logo" />
-                    <img src="" alt="media-logo" />
+                    <p>Grup Üyeleri</p>
                 </div>
             </div>
             <div className="message-panel-message-area">
-                <p className="others-message-in-panel">Lorem ipsum</p>
-                <p className="others-message-in-panel">dolor sit amet</p>
-                <p className="others-message-in-panel">consectetur adipisicing</p>
-                <p className="others-message-in-panel">Adipisci nihil itaque</p>
-                <p className="my-message-in-panel">laboriosam, dolor</p>
-                <p className="others-message-in-panel">eligendi unde eaque vel</p>
-                <p className="my-message-in-panel">necessitatibus quo optio</p>
+                {messages.map((msg, index) => (
+                    <p
+                        key={index}
+                        className={
+                            msg.user === user.id // Replace with actual user data
+                                ? "my-message-in-panel"
+                                : "others-message-in-panel"
+                        }
+                    >
+                        {msg.user === user.id ? "" : "Other: "}
+                        {msg.content}
+                    </p>
+                ))}
             </div>
             <div className="message-input-area">
                 <input
@@ -37,11 +86,12 @@ function GroupMessagePanel() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type a message"
                 />
-                <button className="message-send-chat" onClick={() => { console.log("Button clicked"); handleSendMessage(); }}>Send</button>
-
+                <button className="message-send-chat" onClick={handleSendMessage}>
+                    Send
+                </button>
             </div>
         </div>
     );
-};
+}
 
 export default GroupMessagePanel;
