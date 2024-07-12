@@ -99,11 +99,13 @@ const UserProfile = () => {
         setError('');
     };
 
+    console.log("aaa", userData);
+
     return (
         <div className="personal-info-subsetting-column">
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">Profil Fotoğrafı
-                    <img className="subsetting-pp" src={`http://localhost:1337${userData.profilePic?.url || ""}`} alt="profile-pic" />
+                    <img className="subsetting-pp" src={`http://localhost:1337${userData.profilePic ? userData.profilePic.formats?.thumbnail?.url || userData.profilePic.url : ''}`} alt="profile-pic" />
                 </h3>
                 <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('profilePic')} />
                 {editMode.profilePic && (

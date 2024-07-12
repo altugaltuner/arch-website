@@ -295,6 +295,8 @@ function MyPersonalFiles({ user }) {
             file.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
+        console.log('Filtered files:', filteredFiles);
+
         return (
             <div className="folder-content">
                 <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
@@ -315,7 +317,7 @@ function MyPersonalFiles({ user }) {
                     {filteredFiles.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
                             {file.formats && file.formats.thumbnail ? (
-                                <img className="files-img" src={`http://localhost:1337${file.formats.thumbnail.url}`} alt={file.name} />
+                                <img className="files-img" src={`http://localhost:1337${file.formats.thumbnail.url || file.url}`} alt={file.name} />
                             ) : (
                                 <span>{file.name}</span>
                             )}

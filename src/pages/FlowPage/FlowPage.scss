@@ -240,8 +240,31 @@
 @media screen and (max-width: 450px) {
     .flow-page-main {
         .flow-page-main-row {
+            .flow-page-main-column {
+                .flow-page-title {
+                    font-size: 32px;
+                    margin: 10px;
+                }
+            }
 
             .all-companies-column {
+
+                .social-media-and-connections {
+                    .social-media-logo-div {
+                        .social-media-a {
+                            max-height: 300px;
+                            overflow-y: auto;
+
+                            .social-img-p {
+                                .social-media-logo {
+                                    width: 40px;
+                                    height: 40px;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 .flow-page-row {
                     .all-companies-page-company-card {
                         width: 45%;
@@ -269,10 +292,7 @@
                 }
             }
 
-            .flow-page-title {
-                font-size: 30px;
-                margin: 5px;
-            }
+
         }
     }
 }

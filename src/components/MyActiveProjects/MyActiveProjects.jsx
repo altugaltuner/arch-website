@@ -36,7 +36,7 @@ function MyActiveProjects({ user }) {
             <div className="my-active-project-list">
                 {u.projects.map(p => (
                     <div className="my-active-project-list-element" key={p.id} onClick={() => handleProjectClick(p.id)}>
-                        <img className="my-active-project-list-pic" src={`http://localhost:1337${p.projectCoverPhoto.formats.thumbnail.url}`} alt="" />
+                        <img className="my-active-project-list-pic" src={`http://localhost:1337${p.projectCoverPhoto.formats.thumbnail.url || p.projectCoverPhoto.url}`} alt="" />
                         <p className="my-active-project-list-paragraph" key={p.id}>{p.projectName}</p>
                     </div>
                 ))}

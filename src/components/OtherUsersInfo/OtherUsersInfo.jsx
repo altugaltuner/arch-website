@@ -108,7 +108,7 @@ function OtherUsersInfo({ employee }) {
                     <div className='other-info-inner-2'>
                         <img
                             className="other-info-profile-pic"
-                            src={`http://localhost:1337${employee.profilePic?.data?.attributes?.url || ""}`}
+                            src={`http://localhost:1337${employee.profilePic?.data?.attributes?.url || employee.profilePic?.data?.attributes?.formats?.thumbnail?.url || ""}`}
                             alt=""
                         />
                         <p className='other-info-username'>{employee.username}</p>
@@ -152,7 +152,7 @@ function OtherUsersInfo({ employee }) {
                                 {project.attributes.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url && (
                                     <img
                                         className="other-project-photo"
-                                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url}`}
+                                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url || project.attributes.projectCoverPhoto.data.attributes.url || ''}`}
                                         alt={project.attributes.projectName}
                                     />
                                 )}

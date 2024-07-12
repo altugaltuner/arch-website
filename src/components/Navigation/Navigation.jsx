@@ -27,7 +27,6 @@ function Navigation() {
         { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' }
     ];
 
-    // Konum değiştiğinde aktif sınıfı güncelle
     useEffect(() => {
         const activeItem = navItems.find(item => item.to === location.pathname);
         if (activeItem) {
