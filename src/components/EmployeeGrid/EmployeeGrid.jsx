@@ -7,6 +7,8 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
     const { user } = useAuth();
     const filteredEmployees = employees.filter(employee => employee.username !== user.username);
 
+    console.log("filteredEmployees:", filteredEmployees);
+
     return (
         <div className="employee-grid-container">
             <div className="employee-grid">

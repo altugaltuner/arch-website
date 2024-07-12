@@ -136,3 +136,20 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .folder-content {
+
+
+        .file-folder-content,
+        .file-input-wrapper {
+
+
+            .file-icon-img {
+                width: 60px;
+            }
+
+            .file-name {}
+        }
+    }
+}

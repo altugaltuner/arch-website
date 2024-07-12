@@ -87,6 +87,8 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
         employee.projects && employee.projects.some(project => project.id === clickedProject.id)
     ).filter(employee => employee.username.toLowerCase().includes(searchTerm.toLowerCase()));
 
+    console.log("filteredEmployees:", filteredEmployees);
+
     return (
         <div className="project-teams-container">
             <div className='admin-buttons'>
@@ -116,7 +118,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                         <div className="profile-pic">
                             <img
                                 className="profile-pic-inner"
-                                src={employee.profilePic?.url ? `http://localhost:1337${employee.profilePic.url}` : ""}
+                                src={employee?.profilePic?.formats?.thumbnail?.url ? `http://localhost:1337${employee?.profilePic?.formats?.thumbnail?.url}` : `http://localhost:1337${employee?.profilePic?.url}`}
                                 alt=""
                             />
                         </div>

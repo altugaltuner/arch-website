@@ -64,6 +64,8 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
         fileInputRef.current.click();
     };
 
+    console.log("filteredFiles", filteredFiles);
+
     return (
         <div className="folder-content">
             <div className="file-input-wrapper" onClick={uploadFile}>
@@ -79,7 +81,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 const fileAttributes = file.attributes || {};
                 const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1).toLowerCase() : '';
                 const isImage = ["jpg", "jpeg", "png"].includes(fileExt);
-                const iconSrc = isImage ? `http://localhost:1337${fileAttributes.url}` : (fileIcons[fileExt] || fileIcon);
+                const iconSrc = isImage ? `http://localhost:1337${fileAttributes.formats.thumbnail.url || fileAttributes.url}` : (fileIcons[fileExt] || fileIcon);
 
                 return (
                     <div key={file.id} className="file-folder-content" onClick={() => openFileModal(file)}>

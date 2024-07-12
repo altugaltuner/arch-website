@@ -7,13 +7,14 @@ function SelectedEmployeeModal({ employee, onClose }) {
         return null;
     }
 
+    console.log(employee);
     return (
         <div className="employee-card-modal">
             <div className="employee-card-modal-inner">
                 <div className="employee-card-modal-profile-pic">
                     <img
                         className="employee-card-modal-profile-pic-inner"
-                        src={`http://localhost:1337${employee.profilePic?.url || ""}`}
+                        src={`http://localhost:1337${employee.profilePic?.formats?.thumbnail?.url || employee?.profilePic?.url}`}
                         alt=""
                     />
                 </div>
