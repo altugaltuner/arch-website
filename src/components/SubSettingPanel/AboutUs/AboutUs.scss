@@ -1,0 +1,21 @@
+.personal-info-subsetting-column-aboutus {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .personal-info-subsetting-oneline {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+
+        .subsetting-header {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .subsetting-paragraph {
+            font-size: 18px;
+            font-weight: 400;
+        }
+    }
+}
