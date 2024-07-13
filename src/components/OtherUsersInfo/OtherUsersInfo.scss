@@ -187,21 +187,23 @@
         border: 1px solid $border-color;
         border-radius: 15px;
 
-        .other-groups-joined-h2 {
-            font-size: 24px;
-            font-weight: 400;
-        }
-
-        .other-groups {
+        .all-groups-row-div {
             display: flex;
             flex-direction: row;
-            gap: 20px;
-            width: 100%;
+            gap: 10px;
+            align-items: center;
+
+            .other-groups-joined-h2 {
+                font-size: 24px;
+                font-weight: 400;
+            }
 
             .other-groups-name {
-                font-size: 18px;
-                width: 30%;
+                width: 100%;
+                padding-right: 5px;
                 font-weight: 400;
+                font-size: 18px;
+                border-right: 1px solid $border-color;
             }
         }
     }

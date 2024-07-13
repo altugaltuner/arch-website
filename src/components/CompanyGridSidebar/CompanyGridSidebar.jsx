@@ -85,7 +85,6 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                         onClick={() => handleJobTitleClick(title.name)}
                         role="button"
                     >
-                        {title.name}
                         {isAdmin && (
                             <img
                                 src={deleteIcon}
@@ -97,6 +96,8 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                                 }}
                             />
                         )}
+                        <p className='job-titles-for-title-name'>{title.name}</p>
+
                     </li>
                 ))}
             </ul>

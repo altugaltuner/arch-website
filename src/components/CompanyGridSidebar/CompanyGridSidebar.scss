@@ -17,8 +17,10 @@
         padding: 0;
 
         .job-titles-for-workersPage {
+            display: flex;
+            flex-direction: row;
             margin: 10px 0;
-            position: relative;
+            gap: 10px;
             padding: 10px;
             padding-left: 30px;
             background-color: $background-color;
@@ -28,10 +30,14 @@
             border-radius: 0px;
             transition: all 0.2s;
 
+            .job-titles-for-title-name {
+                font-size: 18px;
+                font-weight: 400;
+            }
+
             .trash-icon {
                 top: 8px;
                 left: 5px;
-                position: absolute;
                 width: 20px;
                 cursor: pointer;
                 display: none;

@@ -163,15 +163,15 @@ function OtherUsersInfo({ employee }) {
             </div>
             <div className='other-all-groups'>
                 <h2 className='other-groups-joined-h2'>Dahil Olduğu Gruplar</h2>
-                {employee.groups && employee.groups.data.length > 0 ? (
-                    employee.groups.data.map((group) => (
-                        <div key={group.id} className='other-groups'>
+                <div className='all-groups-row-div'>
+                    {employee.groups && employee.groups.data.length > 0 ? (
+                        employee.groups.data.map((group) => (
                             <p className='other-groups-name'>{group.attributes.groupName}</p>
-                        </div>
-                    ))
-                ) : (
-                    <p>Bu çalışan hiçbir gruba dahil değil.</p>
-                )}
+                        ))
+                    ) : (
+                        <p>Bu çalışan hiçbir gruba dahil değil.</p>
+                    )}
+                </div>
             </div>
             <div className="open-inbox-content-private-messages-div">
                 <h2 className='open-inbox-modal-header-private'>Mesajlaşma Geçmişiniz</h2>
