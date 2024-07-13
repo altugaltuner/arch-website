@@ -78,3 +78,13 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .new-profession-modal-overlay {
+        .new-profession-modal-main {
+            width: 90%;
+            padding: 20px;
+        }
+    }
+
+}

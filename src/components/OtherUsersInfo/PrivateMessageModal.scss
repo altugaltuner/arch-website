@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .priv-modal-overlay {
     position: fixed;
     top: 0;
@@ -9,55 +11,66 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
 
-.priv-modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    width: 400px;
-    max-width: 100%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+    .priv-modal-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 400px;
+        width: 90%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-.priv-form-group {
-    margin-bottom: 15px;
-}
+        .priv-header {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
 
-.priv-label {
-    display: block;
-    margin-bottom: 5px;
-}
 
-.priv-input-header,
-.priv-input-content,
-.priv-input-media {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
+        .priv-form {
+            .form-button-div {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
 
-.priv-input-content {
-    resize: vertical;
-    height: 180px;
-}
+                button {
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    border: 1px solid $border-color;
+                    transition: all 0.2s;
 
-.priv-submit-button,
-.priv-close-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-right: 10px;
-}
+                    cursor: pointer;
 
-.priv-submit-button {
-    background: #4caf50;
-    color: #fff;
-}
+                    &:hover {
+                        background: $yellow;
+                    }
+                }
+            }
 
-.priv-close-button {
-    background: #f44336;
-    color: #fff;
+
+            .priv-form-group {
+                margin-bottom: 15px;
+
+                .priv-input-header,
+                .priv-input-content,
+                .priv-input-media {
+                    width: 100%;
+                    padding: 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 3px;
+                }
+
+                .priv-input-content {
+                    resize: vertical;
+                    height: 180px;
+                }
+
+
+            }
+
+
+
+        }
+    }
 }

@@ -3,7 +3,6 @@ import UserRoleManagement from './UserRoleManagement';
 import UserDeletion from './UserDeletion';
 import UserProfessionEdit from "./UserProfessionEdit";
 import AdminGroupSettings from './AdminGroupSettings.';
-import AdminProjectSettings from "./AdminProjectSettings";
 import './AdminUsersSettings.scss';
 import axios from 'axios';
 
@@ -41,7 +40,6 @@ function AdminUserSettings({ users }) {
     return (
         <div className="admin-user-settings-main">
             <div className='admin-send-message-inner'>
-                <AdminProjectSettings />
                 <AdminGroupSettings />
                 <div className="projects-list">
                     <h2 className='projects-codes-h2'>Proje Klasör Kodları</h2>

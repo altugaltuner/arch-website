@@ -169,7 +169,7 @@ function OtherUsersInfo({ employee }) {
                             <p className='other-groups-name'>{group.attributes.groupName}</p>
                         ))
                     ) : (
-                        <p>Bu çalışan hiçbir gruba dahil değil.</p>
+                        <p className='no-group-p'>Bu çalışan hiçbir gruba dahil değil.</p>
                     )}
                 </div>
             </div>

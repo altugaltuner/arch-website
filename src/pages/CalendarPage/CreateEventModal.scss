@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .create-event-modal {
     position: fixed;
     top: 0;
@@ -64,10 +66,18 @@
                 }
 
                 &:last-of-type {
-                    background: #007bff;
+                    background: $blue;
                     color: white;
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .create-event-modal {
+        .create-event-modal-content {
+            width: 80%;
         }
     }
 }

@@ -44,7 +44,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
         <div className="priv-modal-overlay">
             <div className="priv-modal-content">
                 <h2 className='priv-header'>Yeni Mesaj</h2>
-                <form onSubmit={handleSubmit}>
+                <form className='priv-form' onSubmit={handleSubmit}>
                     <div className="priv-form-group">
                         <label htmlFor="header">Başlık:</label>
                         <input
@@ -73,8 +73,10 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
                             className="priv-input-media"
                         />
                     </div>
-                    <button type="submit" className="priv-submit-button">Gönder</button>
-                    <button type="button" onClick={onClose} className="priv-close-button">Kapat</button>
+                    <div className='form-button-div'>
+                        <button type="submit" className="priv-submit-button">Gönder</button>
+                        <button type="button" onClick={onClose} className="priv-close-button">Kapat</button>
+                    </div>
                 </form>
             </div>
         </div>

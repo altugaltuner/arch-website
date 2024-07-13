@@ -58,8 +58,16 @@
                 &:hover {
                     background-color: darken($yellow, 10%);
                 }
-
             }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .new-note-modal {
+        .new-note-modal-content {
+            width: 90%;
+
         }
     }
 }

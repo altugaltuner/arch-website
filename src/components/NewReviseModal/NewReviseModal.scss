@@ -85,3 +85,28 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    .new-revise-modal {
+        .revise-modal-content {
+            width: 90%;
+
+            .new-revise-modal-header {
+                font-size: 28px;
+            }
+
+            .new-revise-modal-form {
+                .new-revise-modal-input {
+                    height: 100px;
+                }
+
+                .new-revise-checkbox-div {
+                    flex-direction: column;
+                    gap: 10px;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+
+}

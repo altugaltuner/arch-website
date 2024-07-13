@@ -80,3 +80,29 @@
         }
     }
 }
+
+@media screen and (max-width: 400px) {
+    .delete-pro-modal-main {
+        .delete-pro-modal {
+            width: 90%;
+            height: 130px;
+            padding: 10px;
+            gap: 20px;
+
+            .delete-pro-modal-close {
+                width: 30px;
+                height: 30px;
+                top: 5px;
+                right: 5px;
+            }
+
+            .delete-pro-div {
+                gap: 20px;
+            }
+
+            .delete-pro-modal-p {
+                font-size: 20px;
+            }
+        }
+    }
+}

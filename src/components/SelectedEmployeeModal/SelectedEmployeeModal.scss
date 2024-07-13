@@ -95,3 +95,13 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    .employee-card-modal {
+        .employee-card-modal-inner {
+            width: 85%;
+
+        }
+    }
+
+}

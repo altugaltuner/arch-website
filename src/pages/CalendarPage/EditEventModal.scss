@@ -1,3 +1,5 @@
+@use "../../styles/abstracts/variables" as *;
+
 .edit-event-modal {
     position: fixed;
     top: 0;
@@ -45,7 +47,7 @@
 
             textarea {
                 resize: vertical;
-                height: 80px;
+                height: 150px;
             }
         }
 
@@ -96,4 +98,15 @@
             background-color: #c82333;
         }
     }
+}
+
+@media screen and (max-width: 500px) {
+    .edit-event-modal {
+        .edit-event-modal-content {
+            width: 90%;
+            border-radius: 0;
+        }
+    }
+
+
 }

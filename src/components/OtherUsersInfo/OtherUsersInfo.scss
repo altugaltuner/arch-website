@@ -187,14 +187,19 @@
         border: 1px solid $border-color;
         border-radius: 15px;
 
+        .other-groups-joined-h2 {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
         .all-groups-row-div {
             display: flex;
             flex-direction: row;
             gap: 10px;
             align-items: center;
 
-            .other-groups-joined-h2 {
-                font-size: 24px;
+            .no-group-p {
+                font-size: 18px;
                 font-weight: 400;
             }
 
