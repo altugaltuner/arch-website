@@ -135,7 +135,11 @@
             width: calc(100% - 80px);
 
             .groups-x-all {
+                display: flex;
+                flex-direction: column;
+
                 .project-groups {
+                    width: 100%;
 
                     .project-group {
                         width: 100%;
@@ -152,6 +156,10 @@
                             height: 30px;
                         }
                     }
+                }
+
+                .message-panel-main {
+                    width: 100%;
                 }
             }
 
