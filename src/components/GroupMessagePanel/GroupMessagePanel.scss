@@ -49,6 +49,17 @@
                 height: 20px;
                 margin-left: 10px;
             }
+
+            .group-members-show {
+                border: 1px solid $border-color;
+                padding: 10px;
+                border-radius: 5px;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: $yellow;
+                }
+            }
         }
     }
 

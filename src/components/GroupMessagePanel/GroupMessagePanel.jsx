@@ -61,7 +61,7 @@ function GroupMessagePanel({ selectedGroupId }) {
                     <h2 className="message-panel-group-name">{groupName}</h2>
                 </div>
                 <div className="message-panel-right-side">
-                    <p>Grup Üyeleri</p>
+                    <button className="group-members-show">Grup Üyeleri</button>
                 </div>
             </div>
             <div className="message-panel-message-area">
@@ -69,7 +69,7 @@ function GroupMessagePanel({ selectedGroupId }) {
                     <p
                         key={index}
                         className={
-                            msg.user === user.id // Replace with actual user data
+                            msg.user === user.id
                                 ? "my-message-in-panel"
                                 : "others-message-in-panel"
                         }

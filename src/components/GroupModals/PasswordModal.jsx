@@ -26,7 +26,7 @@ const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setP
         <div className="password-modal">
             <div className="password-modal-content">
                 <span className="password-modal-close" onClick={() => setShowPasswordModal(false)}>X</span>
-                <h2>Grup Şifresi</h2>
+                <h2 className='password-modal-header'>Grup Şifresi</h2>
                 <input
                     type="password"
                     value={password}
@@ -35,8 +35,8 @@ const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setP
                 />
                 {(localErrorMessage || errorMessage) && <p className="error-message">{localErrorMessage || errorMessage}</p>}
                 <div className="password-modal-buttons">
-                    <button onClick={handleSubmit}>Giriş Yap</button>
-                    <button onClick={() => setShowPasswordModal(false)}>İptal</button>
+                    <button className='password-modal-one-btn' onClick={handleSubmit}>Giriş Yap</button>
+                    <button className='password-modal-one-btn' onClick={() => setShowPasswordModal(false)}>İptal</button>
                 </div>
             </div>
         </div>
