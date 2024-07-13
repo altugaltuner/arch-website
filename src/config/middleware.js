@@ -6,7 +6,7 @@ module.exports = [
             contentSecurityPolicy: {
                 useDefaults: true,
                 directives: {
-                    'connect-src': ["'self'", 'http:', 'https:', 'http://192.168.1.108:*'],
+                    'connect-src': ["'self'", 'http:', 'https:', 'http://localhost:1337'], // Server URL'nizi burada belirtin
                 },
             },
         },
@@ -15,7 +15,7 @@ module.exports = [
         name: 'strapi::cors',
         config: {
             enabled: true,
-            origin: ['*'], // Buraya telefonunuzun IP adresini de ekleyebilirsiniz.
+            origin: ['*'],
             headers: '*',
         },
     },
@@ -30,7 +30,6 @@ module.exports = [
         name: 'socket',
         config: {
             enabled: true,
-            // additional settings if needed
-        }
-    }
+        },
+    },
 ];

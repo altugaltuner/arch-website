@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PasswordModal.scss';
 
 const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setPassword, handlePasswordSubmit, errorMessage }) => {
     const [localErrorMessage, setLocalErrorMessage] = useState('');
+
+    useEffect(() => {
+        if (showPasswordModal) {
+            setPassword(''); // Şifreyi sıfırla
+            setLocalErrorMessage(''); // Hata mesajını sıfırla
+        }
+    }, [showPasswordModal]);
 
     const handleChange = (e) => {
         setPassword(e.target.value);
@@ -32,6 +39,7 @@ const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setP
                     value={password}
                     onChange={handleChange}
                     placeholder="Şifre giriniz"
+                    autoComplete="off" // Otomatik doldurma devre dışı bırakıldı
                 />
                 {(localErrorMessage || errorMessage) && <p className="error-message">{localErrorMessage || errorMessage}</p>}
                 <div className="password-modal-buttons">

@@ -82,12 +82,17 @@ function GroupMessagePanel({ selectedGroupId }) {
         <div className="message-panel-main">
             <div className="message-panel-head">
                 <div className="message-panel-left-side">
-                    <img className="message-panel-group-img" src="" alt="group-pic" />
                     <h2 className="message-panel-group-name">{groupName}</h2>
                 </div>
                 <div className="message-panel-right-side">
-                    <button className="group-members-show" onClick={() => setShowMembersModal(true)}>Grup Üyeleri</button> {/* Modal açma butonu */}
+                    <button className="group-members-show" onClick={() => setShowMembersModal(true)}>Grup Üyeleri</button>
+                    <GroupMembersModal
+                        show={showMembersModal}
+                        onClose={() => setShowMembersModal(false)}
+                        groupId={selectedGroupId}
+                    />
                 </div>
+
             </div>
             {isUserInGroup && (
                 <>
@@ -119,11 +124,6 @@ function GroupMessagePanel({ selectedGroupId }) {
                     </div>
                 </>
             )}
-            <GroupMembersModal
-                show={showMembersModal}
-                onClose={() => setShowMembersModal(false)}
-                groupId={selectedGroupId}
-            /> {/* Modal bileşeni */}
         </div>
     );
 }

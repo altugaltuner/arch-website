@@ -9,7 +9,7 @@ import GroupMessagePanel from "../../components/GroupMessagePanel/GroupMessagePa
 import CreateGroupModal from "../../components/GroupModals/CreateGroupModal ";
 import DeleteGroupModal from "../../components/GroupModals/DeleteGroupModal ";
 import EditGroupModal from "../../components/EditGroupModal/EditGroupModal";
-import PasswordModal from "../../components/GroupModals/PasswordModal";  // yeni modal eklendi
+import PasswordModal from "../../components/GroupModals/PasswordModal";
 
 import editIcon from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
@@ -20,16 +20,16 @@ function GroupsPage() {
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
-    const [showPasswordModal, setShowPasswordModal] = useState(false); // yeni modal state
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
     const [groups, setGroups] = useState([]);
     const [filteredGroups, setFilteredGroups] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState(1);
-    const [newGroup, setNewGroup] = useState({ groupName: "", groupPassword: "" }); // Add groupPassword
+    const [newGroup, setNewGroup] = useState({ groupName: "", groupPassword: "" });
     const [changedGroup, setChangedGroup] = useState({ groupName: "" });
     const [searchTerm, setSearchTerm] = useState("");
-    const [password, setPassword] = useState(""); // yeni state
-    const [errorMessage, setErrorMessage] = useState(''); // yeni state
-    const [verifiedGroups, setVerifiedGroups] = useState([]); // yeni state
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
+    const [verifiedGroups, setVerifiedGroups] = useState([]);
 
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
@@ -67,7 +67,7 @@ function GroupsPage() {
     const fetchProjectGroups = async () => {
         console.log('Fetching project groups...');
         try {
-            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword'); // groupPassword eklendi
+            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
             console.log('Fetched groups:', companyGroups);
@@ -108,7 +108,7 @@ function GroupsPage() {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewGroup({ ...newGroup, [name]: value });
-        console.log('Input changed:', name, value); // Debug için log ekledik
+        console.log('Input changed:', name, value);
     };
 
     const handleSearchChange = (e) => {
@@ -121,7 +121,7 @@ function GroupsPage() {
         formData.append('data', JSON.stringify({
             groupName: group.groupName,
             company: usersCompanyId,
-            groupPassword: group.groupPassword // Add groupPassword
+            groupPassword: group.groupPassword
         }));
         console.log('Submitting new group:', group);
 
@@ -129,7 +129,6 @@ function GroupsPage() {
             await axios.post('http://localhost:1337/api/groups', formData);
             setShowModal(false);
             setNewGroup({ groupName: "", groupPassword: "" });
-            // Refetch groups after adding a new one
             console.log('Group created successfully, refetching groups...');
             const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
             const allGroups = response.data.data;
@@ -147,12 +146,13 @@ function GroupsPage() {
         const isUserInGroup = group.attributes.users_permissions_users.data.some(u => u.id === user.id);
 
         if (isUserInGroup || verifiedGroups.includes(groupId)) {
-            // Kullanıcı gruba kayıtlı ya da şifreyi doğrulamış
             setSelectedGroupId(groupId);
             setShowPasswordModal(false);
         } else {
             setSelectedGroupId(groupId);
-            setShowPasswordModal(true);  // modalı aç
+            setPassword(""); // Şifre alanını boşalt
+            setErrorMessage(""); // Hata mesajını temizle
+            setShowPasswordModal(true);
         }
     };
 
@@ -162,9 +162,8 @@ function GroupsPage() {
 
         if (group) {
             console.log('Found group:', group);
-            if (group.attributes.groupPassword === password) { // Compare with groupPassword
+            if (group.attributes.groupPassword === password) {
                 console.log('Password correct, adding user to group...');
-                // Kullanıcıyı gruba dahil et
                 try {
                     await axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, {
                         data: {
@@ -172,8 +171,8 @@ function GroupsPage() {
                         }
                     });
                     setSelectedGroupId(selectedGroupId);
-                    setVerifiedGroups([...verifiedGroups, selectedGroupId]); // Grubu doğrulanmış gruplar arasına ekle
-                    setShowPasswordModal(false); // Doğru şifre girildiğinde modalı kapat
+                    setVerifiedGroups([...verifiedGroups, selectedGroupId]);
+                    setShowPasswordModal(false);
                     return { success: true };
                 } catch (error) {
                     console.error('Error joining the group', error);
@@ -181,6 +180,7 @@ function GroupsPage() {
                 }
             } else {
                 console.log('Incorrect password.');
+                setErrorMessage("Yanlış şifre.");
                 return { success: false, message: 'Yanlış şifre.' };
             }
         } else {
@@ -201,6 +201,7 @@ function GroupsPage() {
                         placeholder="Grup Ara"
                         value={searchTerm}
                         onChange={handleSearchChange}
+                        autoComplete="off" // Otomatik doldurma devre dışı bırakıldı
                     />
                 </div>
                 <div className="groups-x-all">
@@ -228,6 +229,8 @@ function GroupsPage() {
                                             setShowPasswordModal(false);
                                         } else {
                                             setSelectedGroupId(group.id);
+                                            setPassword(""); // Şifre alanını boşalt
+                                            setErrorMessage(""); // Hata mesajını temizle
                                             setShowPasswordModal(true);
                                         }
                                     }}

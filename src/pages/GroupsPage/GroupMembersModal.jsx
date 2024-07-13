@@ -24,14 +24,13 @@ const GroupMembersModal = ({ show, onClose, groupId }) => {
 
     return (
         <div className="group-members-modal">
-            <div className="modal-content">
-                <button className="close-button" onClick={onClose}>Kapat</button>
-                <h2>Grup Üyeleri</h2>
-                <ul>
+            <div className="group-members-modal-content">
+                <button className="group-members-close-button" onClick={onClose}>X</button>
+                <h2 className="group-members-header">Grup Üyeleri</h2>
+                <ul className="members-ul">
                     {members.map(member => (
-                        <li key={member.id}>
-                            {console.log(member)}
-                            {member.attributes.username} - {member.attributes.access.data.attributes.role}
+                        <li className="members-li" key={member.id}>
+                            <p className="members-li-p">{member.attributes.username} - {member.attributes.access.data.attributes.role}</p>
                         </li>
                     ))}
                 </ul>
