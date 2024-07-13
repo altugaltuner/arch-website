@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./GroupMessagePanel.scss";
 import { useAuth } from "../AuthProvider";
+import GroupMembersModal from "../../pages/GroupsPage/GroupMembersModal"; // Yeni modalı import ettik
 
 function GroupMessagePanel({ selectedGroupId }) {
     const [groupName, setGroupName] = useState("");
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
     const { user } = useAuth();
+    const [showMembersModal, setShowMembersModal] = useState(false); // Modal state
 
     useEffect(() => {
         console.log(user);
@@ -33,7 +35,7 @@ function GroupMessagePanel({ selectedGroupId }) {
     const handleSendMessage = async () => {
         if (message.trim()) {
             const newMessage = {
-                user: user.id, // Replace with actual user data
+                user: user.id,
                 content: message,
                 createdAt: new Date().toISOString(),
             };
@@ -61,7 +63,7 @@ function GroupMessagePanel({ selectedGroupId }) {
                     <h2 className="message-panel-group-name">{groupName}</h2>
                 </div>
                 <div className="message-panel-right-side">
-                    <button className="group-members-show">Grup Üyeleri</button>
+                    <button className="group-members-show" onClick={() => setShowMembersModal(true)}>Grup Üyeleri</button> {/* Modal açma butonu */}
                 </div>
             </div>
             <div className="message-panel-message-area">
@@ -90,6 +92,11 @@ function GroupMessagePanel({ selectedGroupId }) {
                     Send
                 </button>
             </div>
+            <GroupMembersModal
+                show={showMembersModal}
+                onClose={() => setShowMembersModal(false)}
+                groupId={selectedGroupId}
+            /> {/* Modal bileşeni */}
         </div>
     );
 }

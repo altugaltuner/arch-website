@@ -23,7 +23,7 @@ function GroupsPage() {
     const [showPasswordModal, setShowPasswordModal] = useState(false); // yeni modal state
     const [groups, setGroups] = useState([]);
     const [filteredGroups, setFilteredGroups] = useState([]);
-    const [selectedGroupId, setSelectedGroupId] = useState(null);
+    const [selectedGroupId, setSelectedGroupId] = useState(1);
     const [newGroup, setNewGroup] = useState({ groupName: "", groupPassword: "" }); // Add groupPassword
     const [changedGroup, setChangedGroup] = useState({ groupName: "" });
     const [searchTerm, setSearchTerm] = useState("");
