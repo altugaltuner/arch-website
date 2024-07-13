@@ -26,4 +26,11 @@ module.exports = [
     'strapi::session',
     'strapi::favicon',
     'strapi::public',
+    {
+        name: 'socket',
+        config: {
+            enabled: true,
+            // additional settings if needed
+        }
+    }
 ];
