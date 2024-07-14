@@ -5,6 +5,8 @@
     flex-direction: column;
     align-items: center;
     width: 15%;
+    max-height: 800px;
+    overflow-y: auto;
     padding: 20px;
     background-color: $background-color;
     border-radius: 20px;

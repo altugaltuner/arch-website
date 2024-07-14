@@ -3,9 +3,7 @@ import axios from "axios";
 import io from 'socket.io-client';
 import "./GroupMessagePanel.scss";
 import { useAuth } from "../AuthProvider";
-import GroupMembersModal from "../../pages/GroupsPage/GroupMembersModal"; // Yeni modalı import ettik
-
-const socket = io('http://localhost:1337'); // Strapi server'ınızın URL'sini kullanın
+import GroupMembersModal from "../../pages/GroupsPage/GroupMembersModal";
 
 function GroupMessagePanel({ selectedGroupId }) {
     const [groupName, setGroupName] = useState("");
@@ -13,7 +11,9 @@ function GroupMessagePanel({ selectedGroupId }) {
     const [message, setMessage] = useState("");
     const [isUserInGroup, setIsUserInGroup] = useState(false);
     const { user } = useAuth();
-    const [showMembersModal, setShowMembersModal] = useState(false); // Modal state
+    const [showMembersModal, setShowMembersModal] = useState(false);
+
+    const socket = io('http://localhost:1337'); // Strapi sunucusunun URL'sini kullanın
 
     useEffect(() => {
         console.log(user);
@@ -25,12 +25,15 @@ function GroupMessagePanel({ selectedGroupId }) {
                 try {
                     const response = await axios.get(`http://localhost:1337/api/groups/${selectedGroupId}?populate=users_permissions_users.role`);
                     const groupDetails = response.data.data;
+                    if (!groupDetails) {
+                        throw new Error("Group details not found");
+                    }
                     setGroupName(groupDetails.attributes.groupName);
                     setMessages(groupDetails.attributes.chatMessages || []);
                     const isUserInGroup = groupDetails.attributes.users_permissions_users.data.some(u => u.id === user.id);
                     setIsUserInGroup(isUserInGroup);
                 } catch (error) {
-                    console.error("Error fetching group details:", error);
+                    console.error("Error fetching group details:", error.response ? error.response.data : error.message);
                 }
             }
         };
@@ -73,7 +76,7 @@ function GroupMessagePanel({ selectedGroupId }) {
                 setMessages(response.data.data.attributes.chatMessages);
                 setMessage("");
             } catch (error) {
-                console.error("Error sending message:", error);
+                console.error("Error sending message:", error.response ? error.response.data : error.message);
             }
         }
     };

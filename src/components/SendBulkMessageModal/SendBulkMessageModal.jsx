@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import "./SendBulkMessageModal.scss";
 import { useAuth } from "../../components/AuthProvider";
 
-function SendBulkMessageModal({ setShowModal }) {
+function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
     const [message, setMessage] = useState('');
     const messageInputRef = useRef(null);
     const [messageHeader, setMessageHeader] = useState('');
@@ -39,6 +39,7 @@ function SendBulkMessageModal({ setShowModal }) {
             }
 
             const result = await response.json();
+            setUpdatedAdminMessages((prevMessages) => [result.data, ...prevMessages]);
             setShowModal(false);
         } catch (error) {
             console.error('Error:', error);

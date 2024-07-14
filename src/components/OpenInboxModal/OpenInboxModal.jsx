@@ -32,6 +32,8 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                         <div className="messages-container">
                             {messages.map(message => (
                                 <div key={message.id} className="message">
+
+                                    <p className="message-created-date">{new Date(message.attributes.createdAt).toLocaleString()}</p>
                                     <h3 className="message-header">{message.attributes.header}</h3>
                                     <p className="message-owner">{message.attributes.users_permissions_user?.data?.attributes?.username}</p>
                                     <p className="message-content">{message.attributes.content}</p>

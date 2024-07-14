@@ -1,36 +1,83 @@
-module.exports = [
-    'strapi::errors',
-    {
-        name: 'strapi::security',
-        config: {
-            contentSecurityPolicy: {
-                useDefaults: true,
-                directives: {
-                    'connect-src': ["'self'", 'http:', 'https:', 'http://192.168.1.108:*'],
-                },
-            },
-        },
-    },
-    {
-        name: 'strapi::cors',
-        config: {
-            enabled: true,
-            origin: ['*'], // Buraya telefonunuzun IP adresini de ekleyebilirsiniz.
-            headers: '*',
-        },
-    },
-    'strapi::poweredBy',
-    'strapi::logger',
-    'strapi::query',
-    'strapi::body',
-    'strapi::session',
-    'strapi::favicon',
-    'strapi::public',
-    {
-        name: 'socket',
-        config: {
-            enabled: true,
-            // additional settings if needed
+import React, { useState, useRef } from 'react';
+import "./SendBulkMessageModal.scss";
+import { useAuth } from "../../components/AuthProvider";
+
+function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
+    const [message, setMessage] = useState('');
+    const messageInputRef = useRef(null);
+    const [messageHeader, setMessageHeader] = useState('');
+    const [messageFile, setMessageFile] = useState(null);
+
+    const { user } = useAuth();
+
+    const userId = user?.id;
+
+    const handleFileChange = (e) => {
+        setMessageFile(e.target.files[0]);
+    };
+
+    const handleSend = async () => {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify({
+            header: messageHeader,
+            content: message,
+            users_permissions_user: userId
+        }));
+
+        if (messageFile) {
+            formData.append('files.contentMedia', messageFile);
         }
-    }
-];
+
+        try {
+            const response = await fetch('http://localhost:1337/api/multiple-messages', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Mesaj gönderilirken hata oluştu');
+            }
+
+            const result = await response.json();
+            setUpdatedAdminMessages((prevMessages) => [...prevMessages], result.data); // Yeni mesajı en üste ekle
+            setShowModal(false);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    return (
+        <div className="send-bulk-message-modal">
+            <div className="bulk-message-content">
+                <span className="bulk-message-close" onClick={() => setShowModal(false)}>X</span>
+                <h2 className='bulk-message-header'>Toplu Mesaj Gönder</h2>
+                <input
+                    type="text"
+                    className='bulk-message-input-header'
+                    placeholder="Mesaj Başlığı"
+                    value={messageHeader}
+                    onChange={(e) => setMessageHeader(e.target.value)}
+                />
+                <input
+                    ref={messageInputRef}
+                    className="bulk-message-input"
+                    type="text"
+                    placeholder="Mesajınızı buraya yazın"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                />
+                <input
+                    type="file"
+                    className='bulk-message-file-input'
+                    onChange={handleFileChange}
+                />
+                <div className="bulk-message-buttons">
+                    <button className='bulk-message-cancel' onClick={() => setShowModal(false)}>İptal</button>
+                    <button className='bulk-message-send' onClick={handleSend}>Gönder</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default SendBulkMessageModal;
