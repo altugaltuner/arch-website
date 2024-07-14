@@ -9,7 +9,7 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
     const { user } = useAuth();
     const fileExt = currentFile.attributes.ext.slice(1).toLowerCase();
     const isImage = ["jpg", "jpeg", "png"].includes(fileExt);
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     const handleDownload = () => {
         const link = document.createElement('a');

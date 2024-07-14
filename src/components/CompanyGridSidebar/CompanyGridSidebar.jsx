@@ -13,7 +13,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [jobTitleToDelete, setJobTitleToDelete] = useState(null);
 
     const { user } = useAuth();
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
     //bu  mükemmel çalışıyor tüm admin gerektiren işlemlerde kullanılabilir
 
     const loadJobTitles = async () => {

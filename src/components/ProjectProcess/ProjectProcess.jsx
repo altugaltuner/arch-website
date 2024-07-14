@@ -6,7 +6,7 @@ function ProjectProcess({ clickedProject }) {
     const [projectProcess, setProjectProcess] = useState(0);
     const [inputValue, setInputValue] = useState(0);
     const { user } = useAuth();
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     useEffect(() => {
         const projectPercentage = clickedProject?.attributes?.projectProcess;

@@ -16,7 +16,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const { user } = useAuth();
     const [selectedEmployee, setSelectedEmployee] = useState(null);
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     const openEmployeeModal = (employee) => {
         setSelectedEmployee(employee);

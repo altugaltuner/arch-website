@@ -15,7 +15,7 @@ function ProjectComments({ clickedProject }) {
     const [selectedRevise, setSelectedRevise] = useState(null);
 
     const { user } = useAuth();
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     useEffect(() => {
         if (clickedProject) {

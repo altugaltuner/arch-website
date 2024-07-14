@@ -6,7 +6,7 @@ import editPencil from "../../assets/icons/edit-pencil.png";
 
 function OtherUsersInfo({ employee }) {
     const { user } = useAuth();
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [privateMessages, setPrivateMessages] = useState([]);
     const [filteredMessages, setFilteredMessages] = useState([]);

@@ -10,7 +10,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const fileInputRef = useRef(null);
 
     const { user } = useAuth();
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     useEffect(() => {
         setCurrentUser(user);

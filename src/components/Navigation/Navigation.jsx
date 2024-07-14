@@ -13,11 +13,10 @@ import adminPanelLogo from "../../assets/icons/admin-panel.png";
 import { useAuth } from "../../components/AuthProvider"; // useAuth hook'unu içe aktar
 
 function Navigation() {
-
     const [activeNavId, setActiveNavId] = useState(null);
     const location = useLocation();  // Mevcut konumu almak için 
     const { user } = useAuth(); // user bilgisini alın
-    const userRole = user.access.role; // userRole değişkenini oluşturun
+    const userRole = user && user.access ? user.access.role : null; // userRole değişkenini oluşturun
 
     const navItems = [
         { id: 'home-nav-id', to: '/homepage', logo: homepageLogo, name: 'Anasayfa' },
@@ -61,4 +60,5 @@ function Navigation() {
         </nav>
     );
 }
+
 export default Navigation;

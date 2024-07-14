@@ -23,7 +23,7 @@ import { useAuth } from "../../components/AuthProvider";
 
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -298,7 +298,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
 
     return (
         <div className="project-folders">
-            {!currentFolder && userRole === "Admin" && (
+            {!currentFolder && userRole === "Admin" || !currentFolder && userRole === "Contributor" && (
 
                 <button
                     className="project-folder-button"
@@ -330,7 +330,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                         {filteredFolders.map((folder) => (
                             <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
 
-                                {userRole === "Admin" && (
+                                {userRole === "Admin" || userRole === "Contributor" && (
                                     <>
                                         <img
                                             className="file-card-delete-btn"

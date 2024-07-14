@@ -22,7 +22,6 @@ const generateCalendar = (year, month) => {
 };
 
 const CalendarPage = () => {
-
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth());
     const [selectedDate, setSelectedDate] = useState(null);
@@ -33,7 +32,7 @@ const CalendarPage = () => {
     const [eventToEdit, setEventToEdit] = useState(null);
     const calendarDates = generateCalendar(year, month);
     const { user } = useAuth();
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     useEffect(() => {
         axios.get('http://localhost:1337/api/calendar-events/?populate=*')

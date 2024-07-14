@@ -14,7 +14,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
     const { user } = useAuth();
     const [userInvolvedProjects, setUserInvolvedProjects] = useState([]);
 
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     useEffect(() => {
         setUserInvolvedProjects(user.projects);

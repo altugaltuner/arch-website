@@ -33,7 +33,7 @@ function GroupsPage() {
 
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
-    const userRole = user.access.role;
+    const userRole = user && user.access ? user.access.role : null;
 
     const handleDeleteGroup = () => {
         try {
