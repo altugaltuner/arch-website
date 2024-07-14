@@ -69,7 +69,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
 
     return (
         <div className="folder-content">
-            {userRole === "Admin" && (
+            {userRole === "Admin" || userRole === "Contributor" && (
                 <div className="file-input-wrapper" onClick={uploadFile}>
                     <button className="custom-file-upload">Dosya Yükle</button>
                     <input

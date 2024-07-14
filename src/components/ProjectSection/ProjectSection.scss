@@ -116,14 +116,14 @@
             .project-folder-name {
                 font-size: 18px;
                 font-weight: 400;
-                margin: 10px 0;
+                margin-bottom: 10px;
                 color: $font-color;
             }
 
             .project-folder-image {
-                width: 120px;
+                width: 95px;
                 object-fit: cover;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
             }
         }
 
@@ -134,9 +134,9 @@
             flex-direction: column;
             text-align: center;
             align-items: center;
-            padding: 15px;
+            padding: 10px;
             height: auto;
-            width: 200px;
+            width: 160px;
             border-radius: 10px;
             border: 1px solid $border-color;
             cursor: pointer;
@@ -157,14 +157,14 @@
             .project-folder-name {
                 font-size: 18px;
                 font-weight: 400;
-                margin: 10px 0;
+                margin-bottom: 10px;
                 color: $font-color;
             }
 
             .project-folder-image {
-                width: 120px;
+                width: 95px;
                 object-fit: cover;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
             }
         }
 

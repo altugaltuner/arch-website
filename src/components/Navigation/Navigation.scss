@@ -22,10 +22,8 @@
 
         .flow-logo {
             width: 94px;
-            border-bottom: 1px solid $border-color;
             padding: 5px;
             cursor: pointer;
-            border-radius: 50%;
         }
 
         .nav-button {
@@ -36,7 +34,7 @@
             border: none;
             border-radius: 0px;
             padding: 11px;
-            gap: 10px;
+            gap: 12px;
             text-align: center;
             color: $font-color;
             font-size: 20px;
