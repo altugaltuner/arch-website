@@ -6,7 +6,7 @@ function ProjectProcess({ clickedProject }) {
     const [projectProcess, setProjectProcess] = useState(0);
     const [inputValue, setInputValue] = useState(0);
     const { user } = useAuth();
-    const isAdmin = user?.isCompanyAdmin;
+    const userRole = user.access.role;
 
     useEffect(() => {
         const projectPercentage = clickedProject?.attributes?.projectProcess;
@@ -57,7 +57,7 @@ function ProjectProcess({ clickedProject }) {
                     {projectProcess}%
                 </div>
             </div>
-            {isAdmin && (
+            {userRole === "Admin" || userRole === "Contributor" && (
                 <div className="project-process-input">
                     <p className="project-process-p">Projenin Durumunu Güncelleyin</p>
                     <input

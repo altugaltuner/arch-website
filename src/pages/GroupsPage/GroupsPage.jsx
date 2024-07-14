@@ -33,6 +33,7 @@ function GroupsPage() {
 
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
+    const userRole = user.access.role;
 
     const handleDeleteGroup = () => {
         try {
@@ -206,17 +207,15 @@ function GroupsPage() {
                 </div>
                 <div className="groups-x-all">
                     <div className="project-groups">
-                        {roles.map(role => role.attributes.role === "Admin" && (
+                        {userRole === "Admin" && (
                             <button
-                                key={role.id}
                                 className="project-group-add-group"
                                 onClick={() => setShowModal(true)}
-                                role="button"
-                            >
+                                role="button">
+
                                 Grup Oluştur
                             </button>
-                        ))}
-
+                        )}
                         {filteredGroups.map((group) => {
                             const isUserInGroup = group.attributes.users_permissions_users.data.some(u => u.id === user.id);
                             return (

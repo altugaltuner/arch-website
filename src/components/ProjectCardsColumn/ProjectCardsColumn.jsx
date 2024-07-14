@@ -14,9 +14,10 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
     const { user } = useAuth();
     const [userInvolvedProjects, setUserInvolvedProjects] = useState([]);
 
+    const userRole = user.access.role;
+
     useEffect(() => {
         setUserInvolvedProjects(user.projects);
-        console.log("userInvolvedProjects:", userInvolvedProjects);
     }, [user.projects]);
 
     useEffect(() => {
@@ -40,7 +41,6 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
             try {
                 const updatedProjects = [...userInvolvedProjects, selectedProject];
                 setUserInvolvedProjects(updatedProjects);
-                // Kullanıcının projelerini güncelle
                 await axios.put(`http://localhost:1337/api/users/${user.id}`, {
                     projects: updatedProjects.map(project => project.id)
                 });
@@ -64,8 +64,6 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
         }
     };
 
-    console.log("filteredProjects:", filteredProjects);
-
     return (
         <div className="project-cards-column">
             <div className="project-cards-header-and-searchbar">
@@ -79,36 +77,34 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                 />
             </div>
             <div className="projects-cards-main-row">
-                {roles.length > 0 ? (
-                    roles.map(
-                        (role) =>
-                            role.attributes.role === "Admin" && (
-                                <button
-                                    className="add-project-btn"
-                                    onClick={() => setShowModal(true)}
-                                >
-                                    Proje Ekle
-                                </button>
-                            )
-                    )
-                ) : (
-                    <p>Yükleniyor...</p>
+                {userRole === "Admin" && (
+                    <button
+                        className="add-project-btn"
+                        onClick={() => setShowModal(true)}
+                    >
+                        Proje Ekle
+                    </button>
+
                 )}
                 {filteredProjects.length > 0 ? (
                     filteredProjects.map((project) => (
                         <div className="project-cards" key={project.id}>
-                            <img
-                                className="project-card-delete-btn"
-                                src={deleteIcon}
-                                alt=""
-                                onClick={() => deleteModalOpen(project.id)}
-                            />
-                            <img
-                                className="project-card-edit-btn"
-                                src={editPencil}
-                                alt=""
-                                onClick={() => editModalOpen(project.id)}
-                            />
+                            {userRole === "Admin" && (
+                                <>
+                                    <img
+                                        className="project-card-delete-btn"
+                                        src={deleteIcon}
+                                        alt=""
+                                        onClick={() => deleteModalOpen(project.id)}
+                                    />
+                                    <img
+                                        className="project-card-edit-btn"
+                                        src={editPencil}
+                                        alt=""
+                                        onClick={() => editModalOpen(project.id)}
+                                    />
+                                </>
+                            )}
                             <div className="project-card" onClick={() => handleProjectClick(project)}>
                                 <p className="project-card-name">
                                     {project.attributes.projectName}

@@ -23,7 +23,7 @@ import { useAuth } from "../../components/AuthProvider";
 
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
-
+    const userRole = user.access.role;
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -298,14 +298,15 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
 
     return (
         <div className="project-folders">
-            {!currentFolder && roles.map(role => role.attributes.role === "Admin" && (
+            {!currentFolder && userRole === "Admin" && (
+
                 <button
                     className="project-folder-button"
                     onClick={() => setShowModal(true)}
                 >
                     Klasör Oluştur
                 </button>
-            ))}
+            )}
             {currentFolder ? (
                 <div className="current-folders-div">
                     <div className="current-folders-div-2">

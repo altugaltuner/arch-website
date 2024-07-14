@@ -15,6 +15,7 @@ function ProjectComments({ clickedProject }) {
     const [selectedRevise, setSelectedRevise] = useState(null);
 
     const { user } = useAuth();
+    const userRole = user.access.role;
 
     useEffect(() => {
         if (clickedProject) {
@@ -132,7 +133,9 @@ function ProjectComments({ clickedProject }) {
     return (
         <div className="project-comments-main">
             <h2 className='project-comments-h2'>Proje Revizeleri</h2>
-            <button className='new-revise-create-btn' onClick={openNewReviseModal}>Revize Yaz</button>
+            {userRole === "Admin" || userRole === "Contributor" && (
+                <button className='new-revise-create-btn' onClick={openNewReviseModal}>Revize Yaz</button>
+            )}
             <div className='project-comments-table'>
                 <div className='comment-table-head'>
                     <div className='comment-table-head-text'>Revize</div>
