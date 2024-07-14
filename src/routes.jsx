@@ -23,7 +23,6 @@ const routes = [
         <FirstPage />
         <IsCookie />
       </>
-
     ),
   },
   {
@@ -91,7 +90,7 @@ const routes = [
   {
     path: "/adminpanel",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute adminOnly={true}>
         <AdminPanelPage />
       </ProtectedRoute>
     ),

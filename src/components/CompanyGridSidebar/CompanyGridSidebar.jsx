@@ -13,8 +13,8 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [jobTitleToDelete, setJobTitleToDelete] = useState(null);
 
     const { user } = useAuth();
-    console.log(user);
-    const isAdmin = user?.isCompanyAdmin; //bu  mükemmel çalışıyor tüm admin gerektiren işlemlerde kullanılabilir
+    const userRole = user.access.role;
+    //bu  mükemmel çalışıyor tüm admin gerektiren işlemlerde kullanılabilir
 
     const loadJobTitles = async () => {
         try {
@@ -71,7 +71,10 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     return (
         <div className="company-grid-sidebar">
             <ul>
-                <li className='job-titles-for-workersPage' onClick={openNewProfessionModal}>Meslek Türü Ekle</li>
+                {userRole === "Admin" && (
+
+                    <li className='job-titles-for-workersPage' onClick={openNewProfessionModal}>Meslek Türü Ekle</li>
+                )}
                 <li
                     className={`job-titles-for-workersPage ${selectedJobTitle === "Tümü" ? 'active' : ''}`}
                     onClick={() => handleJobTitleClick('Tümü')}
@@ -85,7 +88,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                         onClick={() => handleJobTitleClick(title.name)}
                         role="button"
                     >
-                        {isAdmin && (
+                        {userRole === "Admin" && (
                             <img
                                 src={deleteIcon}
                                 alt="Delete"

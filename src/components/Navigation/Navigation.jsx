@@ -10,11 +10,14 @@ import myLogo from "../../assets/icons/my-profile-logo.png";
 import homepageLogo from "../../assets/icons/homepage-logo.png";
 import settingsLogo from "../../assets/icons/settings-icon.png";
 import adminPanelLogo from "../../assets/icons/admin-panel.png";
+import { useAuth } from "../../components/AuthProvider"; // useAuth hook'unu içe aktar
 
 function Navigation() {
 
     const [activeNavId, setActiveNavId] = useState(null);
     const location = useLocation();  // Mevcut konumu almak için 
+    const { user } = useAuth(); // user bilgisini alın
+    const userRole = user.access.role; // userRole değişkenini oluşturun
 
     const navItems = [
         { id: 'home-nav-id', to: '/homepage', logo: homepageLogo, name: 'Anasayfa' },
@@ -23,9 +26,13 @@ function Navigation() {
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: ' Ekip Üyeleri' },
         { id: 'calendar-nav-id', to: '/calendar', logo: calendarLogo, name: ' Takvim' },
         { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
-        { id: 'admin-panel-id', to: '/adminpanel', logo: adminPanelLogo, name: 'Admin Paneli' },
         { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' }
     ];
+
+    // Admin rolü varsa admin panelini navItems'a ekle
+    if (userRole === "Admin") {
+        navItems.push({ id: 'admin-panel-id', to: '/adminpanel', logo: adminPanelLogo, name: 'Admin Paneli' });
+    }
 
     useEffect(() => {
         const activeItem = navItems.find(item => item.to === location.pathname);

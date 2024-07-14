@@ -6,6 +6,7 @@ import editPencil from "../../assets/icons/edit-pencil.png";
 
 function OtherUsersInfo({ employee }) {
     const { user } = useAuth();
+    const userRole = user.access.role;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [privateMessages, setPrivateMessages] = useState([]);
     const [filteredMessages, setFilteredMessages] = useState([]);
@@ -127,7 +128,11 @@ function OtherUsersInfo({ employee }) {
                             ) : (
                                 <div>
                                     <p className='other-info-professionname'>{employee.profession.data.attributes.professionName}</p>
-                                    <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" onClick={handleEditClick} />
+
+                                    {userRole === "Admin" && (
+
+                                        <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" onClick={handleEditClick} />
+                                    )}
                                 </div>
                             )}
                         </div>

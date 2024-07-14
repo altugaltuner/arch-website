@@ -10,6 +10,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const fileInputRef = useRef(null);
 
     const { user } = useAuth();
+    const userRole = user.access.role;
 
     useEffect(() => {
         setCurrentUser(user);
@@ -68,15 +69,17 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
 
     return (
         <div className="folder-content">
-            <div className="file-input-wrapper" onClick={uploadFile}>
-                <button className="custom-file-upload">Dosya Yükle</button>
-                <input
-                    className='file-input'
-                    ref={fileInputRef}
-                    type="file"
-                    onChange={handleFileUpload}
-                />
-            </div>
+            {userRole === "Admin" && (
+                <div className="file-input-wrapper" onClick={uploadFile}>
+                    <button className="custom-file-upload">Dosya Yükle</button>
+                    <input
+                        className='file-input'
+                        ref={fileInputRef}
+                        type="file"
+                        onChange={handleFileUpload}
+                    />
+                </div>
+            )}
             {filteredFiles && filteredFiles.map(file => {
                 const fileAttributes = file.attributes || {};
                 const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1).toLowerCase() : '';

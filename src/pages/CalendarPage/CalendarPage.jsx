@@ -4,7 +4,7 @@ import "./CalendarPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import CreateEventModal from "./CreateEventModal";
 import EditEventModal from "./EditEventModal";
-
+import { useAuth } from "../../components/AuthProvider";
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
 import editIcon from "../../assets/icons/edit-pencil.png"; // Kalem ikonunu ekle
@@ -22,6 +22,7 @@ const generateCalendar = (year, month) => {
 };
 
 const CalendarPage = () => {
+
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth());
     const [selectedDate, setSelectedDate] = useState(null);
@@ -31,6 +32,9 @@ const CalendarPage = () => {
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [eventToEdit, setEventToEdit] = useState(null);
     const calendarDates = generateCalendar(year, month);
+    const { user } = useAuth();
+    const userRole = user.access.role;
+
 
     useEffect(() => {
         axios.get('http://localhost:1337/api/calendar-events/?populate=*')
@@ -142,7 +146,9 @@ const CalendarPage = () => {
                         <h2 className="calendar-page-subheader">
                             {selectedDate.toLocaleString("tr-TR", { weekday: 'long' })} - {selectedDate.toLocaleDateString("tr-TR")}
                         </h2>
-                        <button className="create-event-calendar" onClick={openModal}>Etkinlik Oluştur</button>
+                        {userRole === "Admin" && (
+                            <button className="create-event-calendar" onClick={openModal}>Etkinlik Oluştur</button>
+                        )}
                         <div className="selected-day-event-inner">
                             {selectedDayEvents.length > 0 ? (
                                 selectedDayEvents.map(event => (
