@@ -35,7 +35,6 @@ const CalendarPage = () => {
     const { user } = useAuth();
     const userRole = user.access.role;
 
-
     useEffect(() => {
         axios.get('http://localhost:1337/api/calendar-events/?populate=*')
             .then(response => {
@@ -156,12 +155,14 @@ const CalendarPage = () => {
                                         <h3 className="one-event-subheader">{event.attributes.title}</h3>
                                         <p className="events-header-date">
                                             {new Date(event.attributes.date).toLocaleString("tr-TR")}
-                                            <img
-                                                src={editIcon}
-                                                alt="edit"
-                                                className="edit-event-icon"
-                                                onClick={() => openEditModal(event)}
-                                            />
+                                            {event.attributes.createdBy === user.id && ( // Etkinlik sahibini kontrol et
+                                                <img
+                                                    src={editIcon}
+                                                    alt="edit"
+                                                    className="edit-event-icon"
+                                                    onClick={() => openEditModal(event)}
+                                                />
+                                            )}
                                         </p>
                                         <p className="events-paragraph">{event.attributes.description}</p>
                                     </div>
