@@ -4,6 +4,7 @@ import axios from 'axios';
 import AddUserModal from '../../components/AddUserModal/AddUserModal';
 import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal';
 import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
+import { useAuth } from "../../components/AuthProvider";
 
 const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [employees, setEmployees] = useState([]);
@@ -13,8 +14,9 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [allUsers, setAllUsers] = useState([]);
     const [availableUsers, setAvailableUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-
+    const { user } = useAuth();
     const [selectedEmployee, setSelectedEmployee] = useState(null);
+    const userRole = user.access.role;
 
     const openEmployeeModal = (employee) => {
         setSelectedEmployee(employee);
@@ -92,8 +94,8 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
     return (
         <div className="project-teams-container">
             <div className='admin-buttons'>
-                {roles.map(role => role.attributes.role === "Admin" && (
-                    <React.Fragment key={role.id}>
+                {userRole === "Admin" && (
+                    <>
                         <button
                             className="add-team-btn"
                             onClick={() => setShowAddModal(true)}
@@ -101,8 +103,8 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                             Çalışan Ekle
                         </button>
                         <button className='delete-team-btn' onClick={() => setShowRemoveModal(true)}>Çalışan Çıkar</button>
-                    </React.Fragment>
-                ))}
+                    </>
+                )}
                 <input
                     type="text"
                     className='search-employee-input'

@@ -329,13 +329,18 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                     <div className="project-folders-container">
                         {filteredFolders.map((folder) => (
                             <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
-                                <img
-                                    className="file-card-delete-btn"
-                                    src={deleteIcon}
-                                    alt="delete-icon"
-                                    onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}
-                                />
-                                <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
+
+                                {userRole === "Admin" && (
+                                    <>
+                                        <img
+                                            className="file-card-delete-btn"
+                                            src={deleteIcon}
+                                            alt="delete-icon"
+                                            onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}
+                                        />
+                                        <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
+                                    </>
+                                )}
                                 <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
                                 <img
                                     className="project-folder-image"
