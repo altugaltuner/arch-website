@@ -28,7 +28,7 @@ function AdminGroupSettings() {
 
     return (
         <div className="admin-group-settings">
-            <h1 className="admin-group-header">Grup Ayarları</h1>
+            <h1 className="admin-group-header">Grup Kodları</h1>
             <div className="admin-group-codes-div">
                 {groups.map((group) => (
                     <div key={group.id} className="admin-group-code">

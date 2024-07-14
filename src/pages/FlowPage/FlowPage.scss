@@ -9,7 +9,7 @@
     .flow-page-main-row {
         display: flex;
         flex-direction: row;
-        padding: 20px;
+        padding: 15px;
         transform: translate(110px, 0px);
         width: calc(100% - 110px);
         gap: 15px;
@@ -51,7 +51,7 @@
                         align-items: center;
                         width: 33%;
                         gap: 10px;
-                        height: 900px;
+                        height: 180px;
                         border: 1px solid $border-color;
                         border-radius: 5px;
                         padding: 10px;
@@ -144,6 +144,8 @@
                 border-radius: 5px;
                 border: 1px solid $border-color;
                 padding: 10px;
+                max-height: 800px;
+                overflow-y: auto;
 
                 .flow-desc-subheader {
                     font-size: 24px;

@@ -1,21 +1,49 @@
+@use "../../../styles/abstracts/variables" as *;
+
 .personal-info-subsetting-column-aboutus {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 790px;
+    overflow-y: auto;
 
     .personal-info-subsetting-oneline {
         display: flex;
         gap: 20px;
         flex-direction: column;
 
-        .subsetting-header {
-            font-size: 24px;
+        .subsetting-paragraph {
+            font-size: 16px;
             font-weight: 400;
         }
 
-        .subsetting-paragraph {
+        .subsetting-paragraph-special {
             font-size: 18px;
             font-weight: 400;
         }
+
+        .subsetting-header {
+            font-size: 24px;
+            font-weight: 400;
+            padding-bottom: 5px;
+            border-bottom: 1px solid $border-color;
+        }
+
+        .one-question-div {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+
+            .subsetting-paragraph {
+                font-size: 16px;
+                font-weight: 400;
+            }
+
+            .subsetting-paragraph-big {
+                font-size: 20px;
+                font-weight: 400;
+            }
+        }
+
     }
 }
