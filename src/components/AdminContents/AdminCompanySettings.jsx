@@ -21,6 +21,26 @@ const AdminCompanySettings = () => {
         setCompanySubscription(user.company.companySubscription);
     }, [user]);
 
+    const [companyWorkingArea, setCompanyWorkingArea] = useState("");
+    useEffect(() => {
+        setCompanyWorkingArea(user.company.workingArea);
+    }, [user]);
+
+    const [companyDesc, setCompanyDesc] = useState("");
+    useEffect(() => {
+        setCompanyDesc(user.company.companyDesc);
+    }, [user]);
+
+    const [companyEmail, setCompanyEmail] = useState("");
+    useEffect(() => {
+        setCompanyEmail(user.company.companyEmail);
+    }, [user]);
+
+    const [companyPhone, setCompanyPhone] = useState("");
+    useEffect(() => {
+        setCompanyPhone(user.company.companyPhone);
+    }, [user]);
+
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
         const formData = new FormData();
@@ -59,7 +79,13 @@ const AdminCompanySettings = () => {
         <div className="admin-company-settings-main">
             <div className="admin-company-inner">
                 <h2 className="admin-company-header">Şirket Profili</h2>
-                <p className="admin-company-p">{companyName}</p>
+                <p className="admin-company-p"><span>Şirket Adı : </span>{companyName || "none"}</p>
+                <p className="admin-company-p"><span>Şirket Çalışma Alanı : </span>{companyWorkingArea || "none"}</p>
+                <p className="admin-company-p"><span>Şirket Açıklaması : </span>{companyDesc || "none"}</p>
+                <p className="admin-company-p"><span>Şirket Emaili : </span>{companyEmail || "none"}</p>
+                <p className="admin-company-p"><span>Şirket Telefonu : </span>{companyPhone || "none"}</p>
+                <button className="admin-company-edit-button">Düzenle</button>
+
                 <div className="company-logo-div">
                     <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} />
                     <label htmlFor="file-upload" className="custom-file-upload">
@@ -72,11 +98,12 @@ const AdminCompanySettings = () => {
                     )}
                 </div>
             </div>
-
+            <div className="admin-company-inner">{ }</div>
             <div className="admin-company-inner">
                 <h2 className="admin-company-header">Şirket Aboneliğini Yönet</h2>
-                <p className="admin-company-p">Aktif Abonelik : {companySubscription} GB </p>
+                <p className="admin-company-p">Aktif Abonelik : {companySubscription || "none"} GB </p>
             </div>
+
         </div>
     );
 };
