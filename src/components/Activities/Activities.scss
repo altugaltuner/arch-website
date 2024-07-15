@@ -24,7 +24,7 @@
             border-top-right-radius: 10px;
             padding: 10px;
             color: $font-color;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .activities-table {
@@ -175,7 +175,7 @@
                             .table-data-description {
                                 font-size: 12px;
                                 max-height: 100px;
-                                overflow-y: scroll;
+                                overflow-y: auto;
                             }
 
                             .table-data-group,

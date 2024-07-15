@@ -44,10 +44,9 @@ const Activities = ({ searchTerm }) => {
                 <table className="activities-table">
                     <thead className="table-main-head">
                         <tr className="table-header-row">
-                            <th className="table-header">Proje Adı</th>
+                            <th className="table-header">Proje Adı / Revizesi</th>
                             <th className="table-header">Revize Durumu</th>
                             <th className="table-header">Revize Sahibi</th>
-                            <th className="table-header">Grup</th>
                             <th className="table-header">Tarih</th>
                         </tr>
                     </thead>
@@ -73,11 +72,6 @@ const Activities = ({ searchTerm }) => {
                                 <td className="table-data">
                                     <div className="revise-owner">
                                         {activity.attributes.user?.data?.attributes?.username || 'Kullanıcı adı yok'}
-                                    </div>
-                                </td>
-                                <td className="table-data">
-                                    <div className="revise-owner">
-                                        {activity.attributes.group?.data?.attributes?.groupName || 'Grup yok'}
                                     </div>
                                 </td>
                                 <td className="table-data table-data-fordate">

@@ -9,7 +9,7 @@ function AdminDashBoard({ projectCount, userCount, reviseCount }) {
                 <h2 className='dashboard-header'>Genel Durum</h2>
                 <div className='dashboard-row-inner'>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p-header'>Çalışan Sayısı</h3>
+                        <h3 className='dashboard-p-header'>Sisteme Kayıtlı Çalışan Sayısı</h3>
                         <p className='dashboard-p'> {userCount}</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
@@ -17,7 +17,7 @@ function AdminDashBoard({ projectCount, userCount, reviseCount }) {
                         <p className='dashboard-p'>{projectCount}</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
-                        <h3 className='dashboard-p-header'>Tüm Revize Adedi</h3>
+                        <h3 className='dashboard-p-header'>Tüm Revize Miktarı</h3>
                         <p className='dashboard-p'>{reviseCount}</p>
 
                     </div>
