@@ -12,10 +12,27 @@ function OtherUsersInfo({ employee }) {
     const [filteredMessages, setFilteredMessages] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [newProfessionName, setNewProfessionName] = useState('');
+    const [professions, setProfessions] = useState([]);
+
+    useEffect(() => {
+        const fetchProfessions = async () => {
+            try {
+                const response = await fetch('http://localhost:1337/api/professions?populate=*');
+                const result = await response.json();
+                setProfessions(result.data);
+            } catch (error) {
+                console.error("Meslekleri çekerken hata oluştu:", error);
+            }
+        };
+
+        fetchProfessions();
+    }, []);
 
     useEffect(() => {
         if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
             setNewProfessionName(employee.profession.data.attributes.professionName);
+        } else {
+            setNewProfessionName('Henüz Belirtilmedi');
         }
     }, [employee]);
 
@@ -26,7 +43,7 @@ function OtherUsersInfo({ employee }) {
                 const result = await response.json();
                 setPrivateMessages(result.data);
             } catch (error) {
-                console.error("Error fetching messages:", error);
+                console.error("Mesajları çekerken hata oluştu:", error);
             }
         };
 
@@ -71,7 +88,7 @@ function OtherUsersInfo({ employee }) {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user.jwt}`
+                    'Authorization': `Bearer ${user?.jwt}`
                 },
                 body: JSON.stringify({
                     profession: {
@@ -117,20 +134,23 @@ function OtherUsersInfo({ employee }) {
                         <div className='profession-editing-div'>
                             {isEditing ? (
                                 <div>
-                                    <input
-                                        type="text"
+                                    <select
                                         value={newProfessionName}
                                         onChange={(e) => setNewProfessionName(e.target.value)}
-                                    />
+                                    >
+                                        {professions.map((profession) => (
+                                            <option key={profession.id} value={profession.attributes.professionName}>
+                                                {profession.attributes.professionName}
+                                            </option>
+                                        ))}
+                                    </select>
                                     <button onClick={handleSaveClick}>Onayla</button>
                                     <button onClick={handleCancelClick}>İptal</button>
                                 </div>
                             ) : (
                                 <div>
-                                    <p className='other-info-professionname'>{employee.profession.data.attributes.professionName}</p>
-
+                                    <p className='other-info-professionname'>{employee.profession.data.attributes.professionName || "Henüz Belirtilmedi"}</p>
                                     {userRole === "Admin" && (
-
                                         <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" onClick={handleEditClick} />
                                     )}
                                 </div>

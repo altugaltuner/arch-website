@@ -1,5 +1,3 @@
-// ProjectSection.jsx
-
 import React, { useState, useEffect, useRef } from "react";
 import "./ProjectSection.scss";
 import axios from 'axios';
@@ -23,7 +21,9 @@ import { useAuth } from "../../components/AuthProvider";
 
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
-    const userRole = user && user.access ? user.access.role : null;
+
+    const userRole = user && user.access ? user.access.role : "null";
+    console.log('User role:', userRole);
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -295,10 +295,10 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             console.error('Error creating folder history entry', error);
         }
     };
-
+    console.log('userrole:', userRole);
     return (
         <div className="project-folders">
-            {!currentFolder && userRole === "Admin" || !currentFolder && userRole === "Contributor" && (
+            {userRole === "Admin" || userRole === "Contributor" ? (
 
                 <button
                     className="project-folder-button"
@@ -306,7 +306,8 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 >
                     Klasör Oluştur
                 </button>
-            )}
+            )
+                : null}
             {currentFolder ? (
                 <div className="current-folders-div">
                     <div className="current-folders-div-2">
@@ -330,7 +331,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                         {filteredFolders.map((folder) => (
                             <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
 
-                                {userRole === "Admin" || userRole === "Contributor" && (
+                                {userRole === "Admin" || userRole === "Contributor" ? (
                                     <>
                                         <img
                                             className="file-card-delete-btn"
@@ -340,7 +341,11 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                                         />
                                         <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
                                     </>
-                                )}
+                                )
+                                    :
+                                    null
+                                }
+
                                 <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
                                 <img
                                     className="project-folder-image"

@@ -7,15 +7,15 @@ function AdminGroupSettings() {
     const [groups, setGroups] = useState([]);
     const { user } = useAuth();
 
-    const currentUserCompanyId = user?.company?.id; // Kullanıcının şirket ID'sini buraya ekleyin
+    const currentUserCompanyId = user?.company?.id;
 
     useEffect(() => {
-        // Strapi API'sine istek atarak grupları çek
+
         axios
             .get("http://localhost:1337/api/groups/?populate=company")
             .then((response) => {
                 const allGroups = response.data.data;
-                // Kullanıcının şirketine ait olmayan grupları filtrele
+
                 const userGroups = allGroups.filter(group =>
                     group.attributes.company.data && group.attributes.company.data.id === currentUserCompanyId
                 );

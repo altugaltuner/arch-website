@@ -69,7 +69,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
 
     return (
         <div className="folder-content">
-            {userRole === "Admin" || userRole === "Contributor" && (
+            {userRole === "Admin" || userRole === "Contributor" ? (
                 <div className="file-input-wrapper" onClick={uploadFile}>
                     <button className="custom-file-upload">Dosya Yükle</button>
                     <input
@@ -79,7 +79,8 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                         onChange={handleFileUpload}
                     />
                 </div>
-            )}
+            ) :
+                null}
             {filteredFiles && filteredFiles.map(file => {
                 const fileAttributes = file.attributes || {};
                 const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1).toLowerCase() : '';

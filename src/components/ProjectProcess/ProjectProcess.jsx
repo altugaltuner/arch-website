@@ -57,7 +57,7 @@ function ProjectProcess({ clickedProject }) {
                     {projectProcess}%
                 </div>
             </div>
-            {userRole === "Admin" || userRole === "Contributor" && (
+            {userRole === "Admin" || userRole === "Contributor" ? (
                 <div className="project-process-input">
                     <p className="project-process-p">Projenin Durumunu Güncelleyin</p>
                     <input
@@ -71,7 +71,9 @@ function ProjectProcess({ clickedProject }) {
                     />
                     <button className="project-process-submit-button" onClick={handleSubmit}>Onayla</button>
                 </div>
-            )}
+            ) :
+                null
+            }
         </div>
     );
 }
