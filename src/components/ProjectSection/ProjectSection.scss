@@ -21,8 +21,6 @@
 
         .folder-content {
 
-            .folder-content-nocontent-p {}
-
             .file-preview-upload {
                 width: 150px;
                 height: 180px;
@@ -46,6 +44,7 @@
             flex-direction: row;
             gap: 20px;
             justify-content: space-between;
+            align-items: center;
 
             .project-file-search {
                 width: 250px;
@@ -70,6 +69,7 @@
 
             .current-folder-header {
                 font-weight: 300;
+                font-size: 24px;
             }
         }
     }
@@ -118,6 +118,7 @@
                 font-weight: 400;
                 margin-bottom: 10px;
                 color: $font-color;
+                height: 50px;
             }
 
             .project-folder-image {
@@ -130,7 +131,7 @@
         .project-folder {
             display: flex;
             position: relative;
-            justify-content: center;
+            justify-content: space-evenly;
             flex-direction: column;
             text-align: center;
             align-items: center;
@@ -157,6 +158,8 @@
             .project-folder-name {
                 font-size: 18px;
                 font-weight: 400;
+                max-height: 70px;
+                overflow-y: auto;
                 margin-bottom: 10px;
                 color: $font-color;
             }

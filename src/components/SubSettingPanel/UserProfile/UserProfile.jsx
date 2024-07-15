@@ -4,7 +4,7 @@ import "./UserProfile.scss";
 import { useAuth } from "../../AuthProvider";
 
 const UserProfile = () => {
-    const { user, updateUser, updatePassword, updateProfilePhoto } = useAuth(); // updateProfilePhoto fonksiyonu ekleyin.
+    const { user, updateProfilePhoto } = useAuth();
     const [editMode, setEditMode] = useState({
         username: false,
         email: false,
@@ -34,16 +34,6 @@ const UserProfile = () => {
         }
     };
 
-    const validatePhoneNumber = (phone) => {
-        const phoneRegex = /^[0-9]{10,11}$/;
-        return phoneRegex.test(phone);
-    };
-
-    const validateUsername = (username) => {
-        const usernameRegex = /^[A-Za-z]+$/;
-        return usernameRegex.test(username);
-    };
-
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
     };
@@ -55,11 +45,14 @@ const UserProfile = () => {
         }
 
         const formData = new FormData();
-        formData.append('file', selectedFile);
+        formData.append('files', selectedFile);
+        formData.append('ref', 'user'); // referans model
+        formData.append('refId', user.id); // kullanıcının ID'si
+        formData.append('field', 'profilePic'); // güncellenecek alan
 
         try {
             const response = await updateProfilePhoto(formData);
-            setUserData({ ...userData, profilePic: response.data.profilePic });
+            setUserData({ ...userData, profilePic: response.profilePic });
             setEditMode({ ...editMode, profilePic: false });
         } catch (error) {
             console.error("Fotoğraf güncelleme işlemi başarısız", error);
@@ -98,8 +91,6 @@ const UserProfile = () => {
         setUserData({ ...userData, [field]: user[field] || '' });
         setError('');
     };
-
-    console.log("aaa", userData);
 
     return (
         <div className="personal-info-subsetting-column">

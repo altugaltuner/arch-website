@@ -234,7 +234,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             return (
                 <div className="folder-content">
                     <button className="file-preview-upload" onClick={uploadFile}>Dosya Yükle</button>
-                    <p className="folder-content-nocontent-p">Henüz dosya yüklenmedi.</p>
                 </div>
             );
         }
