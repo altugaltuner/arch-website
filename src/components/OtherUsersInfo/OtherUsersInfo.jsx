@@ -14,6 +14,8 @@ function OtherUsersInfo({ employee }) {
     const [newProfessionName, setNewProfessionName] = useState('');
     const [professions, setProfessions] = useState([]);
 
+    console.log("employee1111:", employee);
+
     useEffect(() => {
         const fetchProfessions = async () => {
             try {
@@ -88,11 +90,12 @@ function OtherUsersInfo({ employee }) {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user?.jwt}`
                 },
                 body: JSON.stringify({
-                    profession: {
-                        professionName: newProfessionName,
+                    data: {
+                        profession: {
+                            professionName: newProfessionName,
+                        },
                     },
                 }),
             });
@@ -111,7 +114,8 @@ function OtherUsersInfo({ employee }) {
         }
     };
 
-    if (!employee || !employee.profession || !employee.profession.data || !employee.profession.data.attributes) {
+
+    if (!employee) {
         return (
             <div className="other-info-main">
                 <h1 className='other-info-header'>Görüntülemek istediğiniz çalışanı seçin.</h1>
@@ -149,7 +153,7 @@ function OtherUsersInfo({ employee }) {
                                 </div>
                             ) : (
                                 <div>
-                                    <p className='other-info-professionname'>{employee.profession.data.attributes.professionName || "Henüz Belirtilmedi"}</p>
+                                    <p className='other-info-professionname'>{employee?.profession?.data?.attributes?.professionName ?? "Henüz Belirtilmedi"}</p>
                                     {userRole === "Admin" && (
                                         <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" onClick={handleEditClick} />
                                     )}
