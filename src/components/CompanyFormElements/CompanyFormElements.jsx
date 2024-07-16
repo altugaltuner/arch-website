@@ -33,7 +33,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
     const createUser = async (adminName, adminSurname, adminPassword, adminEmail, company) => {
         try {
-            const response = await axios.post('http://localhost:1337/api/users', {
+            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/auth/local/register', {
                 username: `${adminName} ${adminSurname}`,
                 email: adminEmail,
                 password: adminPassword,
