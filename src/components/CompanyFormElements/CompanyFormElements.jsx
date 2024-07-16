@@ -30,7 +30,6 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         }
     };
 
-
     const createUser = async (adminName, adminSurname, adminPassword, adminEmail, company) => {
         try {
             const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/auth/local/register', {
@@ -55,6 +54,10 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     publishedAt: new Date().toISOString()
                 },
                 role: 1
+            }, {
+                headers: {
+                    Authorization: `Bearer <your-authentication-token>` // Eğer authentication gerekiyorsa
+                }
             });
             return response.data;
         } catch (error) {
@@ -62,6 +65,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             throw error;
         }
     };
+
 
     const validateInputs = async (e) => {
         e.preventDefault();
