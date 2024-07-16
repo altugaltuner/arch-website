@@ -4,7 +4,6 @@ import "./MyPersonalFiles.scss";
 import folderIcon from "../../assets/icons/folder-icon.png";
 import FilePreviewModal from "../FilePreviewModal/FilePreviewModal";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
-import DeletePrivateFolderModal from "../DeletePrivateFolderModal/DeletePrivateFolderModal";
 import EditFolderModal from "../EditFolderModal/EditFolderModal";
 import backButton from "../../assets/icons/back-button.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
@@ -16,12 +15,10 @@ function MyPersonalFiles({ user }) {
     const [selectedFolder, setSelectedFolder] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [showAddFolderModal, setShowAddFolderModal] = useState(false);
-    const [showDeleteFolderModal, setShowDeleteFolderModal] = useState(false);
     const [showEditFolderModal, setShowEditFolderModal] = useState(false);
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [trashFolder, setTrashFolder] = useState(null);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -32,16 +29,9 @@ function MyPersonalFiles({ user }) {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:1337/api/users/${user.id}?populate=personal_folders.personalFolderContent,personalDustbin.personalFolderContent`);
+                const response = await axios.get(`http://localhost:1337/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
                 const folders = response.data.personal_folders || [];
-                const dustbin = response.data.personalDustbin ? {
-                    id: response.data.personalDustbin.id,
-                    folderName: "Çöp Kutusu",
-                    personalFolderContent: response.data.personalDustbin.personalFolderContent || []
-                } : null;
-
                 setPersonalFolders(folders);
-                setTrashFolder(dustbin);
             } catch (error) {
                 console.error('Error fetching the data', error);
             } finally {
@@ -118,71 +108,23 @@ function MyPersonalFiles({ user }) {
         }
     };
 
-    const moveFileToTrash = async (file) => {
-
-        if (!trashFolder || !trashFolder.id) {
-            console.error("Çöp Kutusu bulunamadı veya ID'si tanımlanmadı.");
-            return;
-        }
-        if (!selectedFolder || !selectedFolder.id) {
-            console.error("Seçili klasör bulunamadı veya ID'si tanımlanmadı.");
-            return;
-        }
-
-        const updatedFolderContent = selectedFolder.personalFolderContent.filter(f => f.id !== file.id);
-        const updatedTrashContent = [...trashFolder.personalFolderContent, file];
-
+    const handleFileDelete = async (fileId) => {
         try {
-            await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
-                data: { personalFolderContent: updatedFolderContent.map(f => f.id) }
-            });
+            await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
+            const updatedFolderContent = selectedFolder.personalFolderContent.filter(file => file.id !== fileId);
 
-            await axios.put(`http://localhost:1337/api/personal-folders/${trashFolder.id}`, {
-                data: { personalFolderContent: updatedTrashContent.map(f => f.id) }
+            await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
+                data: { personalFolderContent: updatedFolderContent.map(file => file.id) }
             });
 
             setPersonalFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === selectedFolder.id) {
                     return { ...folder, personalFolderContent: updatedFolderContent };
                 }
-                if (folder.id === trashFolder.id) {
-                    return { ...folder, personalFolderContent: updatedTrashContent };
-                }
                 return folder;
             }));
             setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedFolderContent }));
-        } catch (error) {
-            console.error('Error moving file to trash', error);
-        }
-    };
-
-    const handleFileDelete = async () => {
-        if (!selectedFile) return;
-        await moveFileToTrash(selectedFile);
-        setSelectedFile(null);
-    };
-
-    const permanentlyDeleteFile = async (fileId) => {
-        try {
-            if (!trashFolder) {
-                console.error("Çöp Kutusu bulunamadı.");
-                return;
-            }
-
-            await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
-            const updatedTrashContent = trashFolder.personalFolderContent.filter(file => file.id !== fileId);
-
-            await axios.put(`http://localhost:1337/api/personal-folders/${trashFolder.id}`, {
-                data: { personalFolderContent: updatedTrashContent.map(file => file.id) }
-            });
-
-            setPersonalFolders(prevFolders => prevFolders.map(folder => {
-                if (folder.id === trashFolder.id) {
-                    return { ...folder, personalFolderContent: updatedTrashContent };
-                }
-                return folder;
-            }));
-            setTrashFolder(prevTrash => ({ ...prevTrash, personalFolderContent: updatedTrashContent }));
+            setSelectedFile(null);
         } catch (error) {
             console.error('Error deleting file', error);
         }
@@ -203,7 +145,6 @@ function MyPersonalFiles({ user }) {
             await axios.delete(`http://localhost:1337/api/personal-folders/${folderToDelete.id}`);
             setPersonalFolders(personalFolders.filter(folder => folder.id !== folderToDelete.id));
             setFolderToDelete(null);
-            setShowDeleteFolderModal(false);
         } catch (error) {
             console.error('Error deleting the folder:', error);
         }
@@ -243,32 +184,29 @@ function MyPersonalFiles({ user }) {
     };
 
     const renderFolders = () => {
-        return personalFolders
-            .filter(folder => folder.id !== trashFolder?.id)
-            .map(folder => (
-                <div key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
-                    <img
-                        className="folder-editpencil"
-                        src={editPencil}
-                        alt="editPencil"
-                        onClick={() => {
-                            setFolderToEdit(folder);
-                            setShowEditFolderModal(true);
-                        }}
-                    />
-                    <img
-                        className="folder-deleteicon"
-                        src={deleteIcon}
-                        alt="deleteIcon"
-                        onClick={() => {
-                            setFolderToDelete(folder);
-                            setShowDeleteFolderModal(true);
-                        }}
-                    />
-                    <img src={folderIcon} alt="folder" className="folder-icon" />
-                    <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
-                </div>
-            ));
+        return personalFolders.map(folder => (
+            <div key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
+                <img
+                    className="folder-editpencil"
+                    src={editPencil}
+                    alt="editPencil"
+                    onClick={() => {
+                        setFolderToEdit(folder);
+                        setShowEditFolderModal(true);
+                    }}
+                />
+                <img
+                    className="folder-deleteicon"
+                    src={deleteIcon}
+                    alt="deleteIcon"
+                    onClick={() => {
+                        setFolderToDelete(folder);
+                    }}
+                />
+                <img src={folderIcon} alt="folder" className="folder-icon" />
+                <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
+            </div>
+        ));
     };
 
     const renderFolderContent = (folder) => {
@@ -278,6 +216,14 @@ function MyPersonalFiles({ user }) {
                     <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
                     <h3 className="folder-header">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</h3>
                     <p>Klasör boş.</p>
+                    <input
+                        className="search-input"
+                        type="text"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                        placeholder="Dosya ara..."
+                    />
+                    <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
                 </div>
             );
         }
@@ -299,9 +245,7 @@ function MyPersonalFiles({ user }) {
                 />
 
                 <div className="files">
-                    {folder.id !== trashFolder.id && (
-                        <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
-                    )}
+                    <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
                     {filteredFiles.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
                             {file.formats && file.formats.thumbnail ? (
@@ -331,7 +275,6 @@ function MyPersonalFiles({ user }) {
             <button className="add-folder-button" onClick={handleAddFolderClick}>Yeni Klasör</button>
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
-
             </div>
             <input
                 ref={fileInputRef}
@@ -345,8 +288,6 @@ function MyPersonalFiles({ user }) {
                     onClose={closeFilePreview}
                     onDownload={downloadFile}
                     onDelete={handleFileDelete}
-                    onPermanentDelete={permanentlyDeleteFile}
-                    isTrash={selectedFolder && trashFolder && selectedFolder.id === trashFolder.id}
                 />
             )}
             <AddFolderModal
@@ -354,11 +295,6 @@ function MyPersonalFiles({ user }) {
                 onClose={() => setShowAddFolderModal(false)}
                 onFolderCreated={handleFolderCreated}
                 userId={user.id}
-            />
-            <DeletePrivateFolderModal
-                isOpen={showDeleteFolderModal}
-                onClose={() => setShowDeleteFolderModal(false)}
-                onDelete={handleDeleteFolder}
             />
             <EditFolderModal
                 isOpen={showEditFolderModal}

@@ -27,16 +27,19 @@
             font-weight: 200;
             font-size: 30px;
             border-radius: 50%;
-            background-color: white;
+            background-color: $grey;
+            color: black;
             border: 1px solid $border-color;
             width: 40px;
             height: 40px;
             top: 10px;
             right: 10px;
+            transition: all 0.2s;
             cursor: pointer;
 
             &:hover {
-                background-color: $grey;
+                background-color: $close;
+                color: white;
             }
         }
 

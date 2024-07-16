@@ -7,7 +7,7 @@ import EditEventModal from "./EditEventModal";
 import { useAuth } from "../../components/AuthProvider";
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
-import editIcon from "../../assets/icons/edit-pencil.png"; // Kalem ikonunu ekle
+import editIcon from "../../assets/icons/edit-pencil.png";
 
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
@@ -103,6 +103,8 @@ const CalendarPage = () => {
         }
     };
 
+    const today = new Date();
+
     return (
         <main className="calendar-page-main">
             <Navigation />
@@ -126,10 +128,12 @@ const CalendarPage = () => {
                             return eventDate.toDateString() === eventDateString;
                         });
 
+                        const isToday = date.toDateString() === today.toDateString();
+
                         return (
                             <div
                                 key={date.toDateString()}
-                                className={`calendar-day ${selectedDate && selectedDate.toDateString() === date.toDateString() ? 'selected' : ''} ${hasEvent ? 'event-day' : ''}`}
+                                className={`calendar-day ${selectedDate && selectedDate.toDateString() === date.toDateString() ? 'selected' : ''} ${hasEvent ? 'event-day' : ''} ${isToday ? 'today' : ''}`}
                                 onClick={() => handleDateClick(date)}
                             >
                                 {date.getDate()}
@@ -154,7 +158,7 @@ const CalendarPage = () => {
                                         <h3 className="one-event-subheader">{event.attributes.title}</h3>
                                         <p className="events-header-date">
                                             {new Date(event.attributes.date).toLocaleString("tr-TR")}
-                                            {event.attributes.createdBy === user.id && ( // Etkinlik sahibini kontrol et
+                                            {event.attributes.createdBy === user.id && (
                                                 <img
                                                     src={editIcon}
                                                     alt="edit"

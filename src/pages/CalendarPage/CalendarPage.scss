@@ -67,6 +67,7 @@
 
                 &.selected {
                     background-color: #f0f0f0;
+                    color: black;
                 }
 
                 &.event-day {
@@ -374,5 +375,29 @@
                 }
             }
         }
+    }
+}
+
+.calendar-day {
+
+    /* Mevcut stiller */
+
+    &.selected {
+        background-color: #2196f3;
+        /* Seçili gün rengi */
+        color: #fff;
+        /* Seçili gün yazı rengi */
+    }
+
+    &.event-day {
+        border: 2px solid #f44336;
+        /* Etkinliği olan günler için kenarlık */
+    }
+
+    &.today {
+        background-color: #ffeb3b !important;
+        /* Bugünün gününü vurgulamak için sarı renk */
+        color: #000 !important;
+        /* Yazı rengini belirle */
     }
 }
