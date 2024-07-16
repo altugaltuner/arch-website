@@ -7,6 +7,21 @@
     height: 100vh;
     font-family: $primary-font;
     color: $font-color;
+    position: relative;
+
+    .back-button-already {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 50px;
+        opacity: 0.5;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
 
     .already-login-main-div {
         display: flex;

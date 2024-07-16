@@ -2,6 +2,7 @@ import React from 'react';
 import './AlreadyLoggedIn.scss';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import backButton from '../../assets/icons/back-button.png';
 
 function AlreadyLoggedIn() {
     const handleLogout = () => {
@@ -21,6 +22,7 @@ function AlreadyLoggedIn() {
                     <Link to="/homepage" className="already-login-back">Anasayfaya Dön</Link>
                 </div>
             </div>
+            <img className="back-button-already" src={backButton} alt="back-button" onClick={() => window.history.back()} />
         </main>
     );
 }

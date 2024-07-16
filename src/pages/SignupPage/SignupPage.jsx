@@ -73,7 +73,7 @@ function SignupPage() {
 
       const matchingCompany = companies.find(company => company.attributes.companyID === companyCode);
       if (!matchingCompany) {
-        setCompanyCodeError("Kod uyuşmazlığı");
+        setCompanyCodeError("Bu şirket kodu ile eşleşen bir şirket bulunamadı.");
         return;
       } else {
         setCompanyCodeError("");
@@ -85,7 +85,7 @@ function SignupPage() {
           username: fullName,
           email: email,
           password: password,
-          company: matchingCompany.id, // companyID yerine company olarak gönderiliyor
+          company: matchingCompany.id,
         }
       );
 
