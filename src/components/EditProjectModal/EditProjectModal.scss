@@ -59,12 +59,18 @@
             font-weight: 500;
         }
 
+        .project-p-modall {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
         .edit-project-name-input,
-        .edit-project-cover-photo-input {
+        .edit-project-cover-photo-input,
+        .edit-project-password-input {
             display: block;
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;

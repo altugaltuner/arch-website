@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./AddNewProjectModal.scss";
 
 function AddNewProjectModal({ show, onClose, newProject, handleInputChange, handleInputPasswordChange, handleFileChange, handleSubmit }) {
+    const [error, setError] = useState("");
+
     if (!show) {
         return null;
+    }
+
+    const handleFormSubmit = () => {
+        if (!newProject.projectName || !newProject.projectPassword || !newProject.projectCoverPhoto) {
+            setError("Lütfen tüm alanları doldurun.");
+            return;
+        }
+        setError("");
+        handleSubmit();
     }
 
     return (
@@ -16,6 +27,7 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
                     X
                 </span>
                 <h2 className="add-new-project-adding-header">Yeni Proje Ekle</h2>
+                {error && <p className="error-message">{error}</p>}
                 <input
                     className="add-new-project-name-input"
                     type="text"
@@ -41,7 +53,7 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
                 <div className="add-new-project-adding-modal-buttons-row">
                     <button
                         className="add-new-project-modal-button-create"
-                        onClick={handleSubmit}
+                        onClick={handleFormSubmit}
                     >
                         Oluştur
                     </button>

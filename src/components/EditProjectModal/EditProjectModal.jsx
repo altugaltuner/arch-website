@@ -1,9 +1,7 @@
 import React from 'react';
 import "./EditProjectModal.scss";
 
-
-function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputChange, handleFileChange, handleEditSubmit }) {
-
+function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputChange, handleInputPasswordChange, handleFileChange, handleEditSubmit }) {
     if (!showEditModal || !projectToEdit) {
         return null;
     }
@@ -18,6 +16,8 @@ function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputCh
                     X
                 </span>
                 <h2 className="edit-project-adding-header">Projeyi Düzenle</h2>
+
+                <p className='project-p-modall'>Proje Adı</p>
                 <input
                     className="edit-project-name-input"
                     type="text"
@@ -26,6 +26,16 @@ function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputCh
                     value={projectToEdit.projectName}
                     onChange={handleInputChange}
                 />
+                <p className='project-p-modall'>Proje Adı</p>
+                <input
+                    className='edit-project-password-input'
+                    type="text"
+                    name='projectPassword'
+                    placeholder='Yeni Şifre'
+                    value={projectToEdit.projectPassword}
+                    onChange={handleInputPasswordChange}
+                />
+                <p className='project-p-modall'>Proje Adı</p>
                 <input
                     className="edit-project-cover-photo-input"
                     type="file"

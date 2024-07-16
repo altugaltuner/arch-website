@@ -10,7 +10,6 @@ import EditProjectModal from "../../components/EditProjectModal/EditProjectModal
 
 function ProjectsMainPage() {
   const { user } = useAuth();
-
   const usersCompanyId = user?.company?.id;
 
   const [companyProjects, setCompanyProjects] = useState([]);
@@ -23,6 +22,7 @@ function ProjectsMainPage() {
   const [newProject, setNewProject] = useState({
     projectName: "",
     projectCoverPhoto: null,
+    projectPassword: "",
   });
   const [editProject, setEditProject] = useState({
     projectName: "",
@@ -104,7 +104,6 @@ function ProjectsMainPage() {
     }
   };
 
-
   const handleFileChange = (e) => {
     if (showEditModal) {
       setEditProject({ ...editProject, projectCoverPhoto: e.target.files[0] });
@@ -158,7 +157,6 @@ function ProjectsMainPage() {
     }
   };
 
-
   const handleEditSubmit = async () => {
     const formData = new FormData();
     formData.append("data", JSON.stringify({
@@ -209,6 +207,7 @@ function ProjectsMainPage() {
     setEditProject({
       projectName: project.attributes.projectName || "",
       projectCoverPhoto: project.attributes.projectCoverPhoto || null,
+      projectPassword: project.attributes.projectPassword || "",
     });
   };
 
@@ -258,6 +257,7 @@ function ProjectsMainPage() {
         onClose={() => setShowEditModal(false)}
         projectToEdit={editProject}
         handleInputChange={handleInputChange}
+        handleInputPasswordChange={handleInputPasswordChange}
         handleFileChange={handleFileChange}
         handleEditSubmit={handleEditSubmit}
       />
