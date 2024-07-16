@@ -16,7 +16,7 @@
         background: white;
         padding: 30px;
         border-radius: 8px;
-        width: 50%;
+        width: 40%;
         max-width: 90%;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         position: relative;
@@ -24,15 +24,26 @@
 
         .close-button {
             position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 200;
+            font-size: 30px;
+            border-radius: 50%;
+            background-color: $grey;
+            color: black;
+            border: 1px solid $border-color;
+            width: 40px;
+            height: 40px;
             top: 10px;
             right: 10px;
-            background: none;
-            border: 1px solid $border-color;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 20px;
+            transition: all 0.2s;
             cursor: pointer;
+
+            &:hover {
+                background-color: $close;
+                color: white;
+            }
         }
 
         .company-modal-logo {
