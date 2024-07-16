@@ -16,8 +16,9 @@ function Navigation() {
     const [activeNavId, setActiveNavId] = useState(null);
     const location = useLocation();  // Mevcut konumu almak için 
     const { user } = useAuth(); // user bilgisini alın
-    const userRole = user && user.access ? user.access.role : null; // userRole değişkenini oluşturun
-
+    console.log(user);
+    const userRole = user?.access?.role ?? null; // userRole değişkenini oluşturun
+    console.log(userRole);
     const navItems = [
         { id: 'home-nav-id', to: '/homepage', logo: homepageLogo, name: 'Anasayfa' },
         { id: 'projects-nav-id', to: '/projects', logo: projectsLogo, name: 'Projeler' },

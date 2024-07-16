@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import UserRoleManagement from './UserRoleManagement';
 import UserDeletion from './UserDeletion';
-import UserProfessionEdit from "./UserProfessionEdit";
 import AdminGroupSettings from './AdminGroupSettings.';
 import './AdminUsersSettings.scss';
 import axios from 'axios';
@@ -63,7 +62,6 @@ function AdminUserSettings({ users }) {
                         ))}
                     </div>
                 </div>
-                <UserProfessionEdit users={users} />
                 <UserDeletion users={users} />
             </div>
         </div>
