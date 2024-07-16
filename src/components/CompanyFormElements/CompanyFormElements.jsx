@@ -117,13 +117,15 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         }
     };
 
-
-
     return (
         <form className="company-admin-create-form" onSubmit={validateInputs}>
             <div className="company-admin-row-for-btn">
                 <div className="company-create-div">
                     <h3 className="company-create-subheader">Şirket Bilgileri</h3>
+                    <label className="company-create-label" htmlFor="companyPermissionCode">Şirket Oluşturma İzin Kodu</label>
+                    <input className="company-create-input" type="text" id="companyPermissionCode" />
+                    {errors.companyCode && <span className="error-for-company-signup">{errors.companyCode}</span>}
+
                     <label className="company-create-label" htmlFor="companyName">Şirket İsmi</label>
                     <input className="company-create-input" type="text" id="companyName" />
                     {errors.companyName && <span className="error-for-company-signup">{errors.companyName}</span>}
@@ -133,7 +135,9 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     {errors.workingArea && <span className="error-for-company-signup">{errors.workingArea}</span>}
 
                     <label className="company-create-label" htmlFor="employeeCode">Şirket Çalışan Kodu</label>
+                    <span className="company-code-info">Şirket çalışanlarının bu kodu kullanarak şirkete katılmasını sağlayabilirsiniz.</span>
                     <input className="company-create-input" placeholder="Kodunuzu Kopyalayın" type="text" id="employeeCode" readOnly />
+
                     <button type="button" className="employee-code-create-btn" onClick={employeeCodeCreator} disabled={employeeCodeGenerated}>Kod Oluştur</button>
                 </div>
 
