@@ -43,7 +43,7 @@ function GroupMessagePanel({ selectedGroupId }) {
 
     useEffect(() => {
         socket.on('message', (msg) => {
-            console.log('Message received from server:', msg);
+
             if (msg.groupId === selectedGroupId) {
                 setMessages((prevMessages) => [...prevMessages, msg]);
             }
@@ -62,8 +62,6 @@ function GroupMessagePanel({ selectedGroupId }) {
                 createdAt: new Date().toISOString(),
                 groupId: selectedGroupId
             };
-
-            console.log('Sending message:', newMessage);
             socket.emit('message', newMessage);
 
             try {

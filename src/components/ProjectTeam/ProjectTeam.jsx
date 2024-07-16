@@ -89,8 +89,6 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
         employee.projects && employee.projects.some(project => project.id === clickedProject.id)
     ).filter(employee => employee.username.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    console.log("filteredEmployees:", filteredEmployees);
-
     return (
         <div className="project-teams-container">
             <div className='admin-buttons'>

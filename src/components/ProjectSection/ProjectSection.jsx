@@ -23,7 +23,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
 
     const userRole = user && user.access ? user.access.role : "null";
-    console.log('User role:', userRole);
+
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -120,8 +120,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             }
         }
     };
-
-    //console.log('Current folder:', currentFolder); bu çalışmıyor
 
     const handleDeleteFile = async (fileId) => {
         try {
@@ -294,7 +292,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             console.error('Error creating folder history entry', error);
         }
     };
-    console.log('userrole:', userRole);
+
     return (
         <div className="project-folders">
             {userRole === "Admin" || userRole === "Contributor" ? (

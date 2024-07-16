@@ -46,7 +46,6 @@ function UserRoleManagement({ users }) {
                             role: selectedRole
                         }
                     });
-                    console.log(`Response for user ${user.attributes.username}:`, response.data);
                 }
             }
             setFilteredUsers(filteredUsers.map(user => {

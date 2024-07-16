@@ -25,7 +25,6 @@ function MyNotebook() {
                         throw new Error("Failed to fetch user data");
                     }
                     const data = await response.json();
-                    console.log("Fetched data:", data);
 
                     let notebook = [];
                     if (data.myNotebook) {
@@ -35,7 +34,6 @@ function MyNotebook() {
                             console.error("Error parsing myNotebook JSON:", e);
                         }
                     }
-                    console.log("Parsed notebook data:", notebook);
                     setNotes(Array.isArray(notebook) ? notebook : []);
                     setUserId(data.id);
                 } else {
@@ -59,8 +57,6 @@ function MyNotebook() {
             const updatedNotes = [...notes, note];
             setNotes(updatedNotes);
 
-            console.log("Updated notes before saving:", updatedNotes);
-
             const response = await fetch(`http://localhost:1337/api/users/${userId}`, {
                 method: "PUT",
                 headers: {
@@ -75,7 +71,6 @@ function MyNotebook() {
             }
 
             const data = await response.json();
-            console.log("Notebook updated successfully", data);
         } catch (error) {
             console.error("Error updating notebook:", error);
         }
@@ -93,8 +88,6 @@ function MyNotebook() {
             );
             setNotes(updatedNotes);
 
-            console.log("Updated notes before saving:", updatedNotes);
-
             const response = await fetch(`http://localhost:1337/api/users/${userId}`, {
                 method: "PUT",
                 headers: {
@@ -109,7 +102,6 @@ function MyNotebook() {
             }
 
             const data = await response.json();
-            console.log("Notebook updated successfully", data);
         } catch (error) {
             console.error("Error updating notebook:", error);
         }
@@ -125,8 +117,6 @@ function MyNotebook() {
             const updatedNotes = notes.filter(note => note.id !== noteId);
             setNotes(updatedNotes);
 
-            console.log("Updated notes before saving:", updatedNotes);
-
             const response = await fetch(`http://localhost:1337/api/users/${userId}`, {
                 method: "PUT",
                 headers: {
@@ -141,7 +131,6 @@ function MyNotebook() {
             }
 
             const data = await response.json();
-            console.log("Notebook updated successfully", data);
         } catch (error) {
             console.error("Error updating notebook:", error);
         }

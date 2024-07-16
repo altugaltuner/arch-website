@@ -8,7 +8,6 @@ function MyLastAct({ user }) {
         if (user) {
             const lastActivities = user.project_revises;
             const lastActivitiesSorted = lastActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
-            console.log(lastActivitiesSorted);
             setMyLastActivities(lastActivitiesSorted);
         }
     }, [user]);

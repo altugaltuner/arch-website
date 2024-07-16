@@ -66,12 +66,10 @@ function GroupsPage() {
     };
 
     const fetchProjectGroups = async () => {
-        console.log('Fetching project groups...');
         try {
             const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
-            console.log('Fetched groups:', companyGroups);
             setGroups(companyGroups);
             setFilteredGroups(companyGroups);
         } catch (error) {
@@ -92,10 +90,8 @@ function GroupsPage() {
     }, [searchTerm, groups]);
 
     async function getRoles() {
-        console.log('Fetching roles...');
         try {
             const response = await axios.get('http://localhost:1337/api/accesses');
-            console.log('Fetched roles:', response.data.data);
             setRoles(response.data.data);
         } catch (error) {
             console.error(error);
@@ -109,12 +105,10 @@ function GroupsPage() {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewGroup({ ...newGroup, [name]: value });
-        console.log('Input changed:', name, value);
     };
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
-        console.log('Search term changed:', e.target.value);
     };
 
     const handleSubmit = async (group) => {
@@ -124,13 +118,11 @@ function GroupsPage() {
             company: usersCompanyId,
             groupPassword: group.groupPassword
         }));
-        console.log('Submitting new group:', group);
 
         try {
             await axios.post('http://localhost:1337/api/groups', formData);
             setShowModal(false);
             setNewGroup({ groupName: "", groupPassword: "" });
-            console.log('Group created successfully, refetching groups...');
             const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
@@ -141,30 +133,11 @@ function GroupsPage() {
         }
     };
 
-    const handleGroupClick = (groupId) => {
-        console.log('Group clicked:', groupId);
-        const group = groups.find(g => g.id === groupId);
-        const isUserInGroup = group.attributes.users_permissions_users.data.some(u => u.id === user.id);
-
-        if (isUserInGroup || verifiedGroups.includes(groupId)) {
-            setSelectedGroupId(groupId);
-            setShowPasswordModal(false);
-        } else {
-            setSelectedGroupId(groupId);
-            setPassword(""); // Şifre alanını boşalt
-            setErrorMessage(""); // Hata mesajını temizle
-            setShowPasswordModal(true);
-        }
-    };
-
     const handlePasswordSubmit = async () => {
-        console.log('Submitting password:', password);
         const group = groups.find(g => g.id === selectedGroupId);
 
         if (group) {
-            console.log('Found group:', group);
             if (group.attributes.groupPassword === password) {
-                console.log('Password correct, adding user to group...');
                 try {
                     await axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, {
                         data: {
@@ -176,16 +149,13 @@ function GroupsPage() {
                     setShowPasswordModal(false);
                     return { success: true };
                 } catch (error) {
-                    console.error('Error joining the group', error);
                     return { success: false, message: 'Gruba katılırken bir hata oluştu.' };
                 }
             } else {
-                console.log('Incorrect password.');
                 setErrorMessage("Yanlış şifre.");
                 return { success: false, message: 'Yanlış şifre.' };
             }
         } else {
-            console.log('Group not found.');
             return { success: false, message: 'Grup bulunamadı.' };
         }
     };

@@ -5,13 +5,11 @@ import { useAuth } from "../AuthProvider";
 
 const CompanyName = ({ onSearch, setIsLoading }) => {
     let userData = null;
-    console.log("test");
     const [companyName, setCompanyName] = useState(null);
 
     try {
         const { user } = useAuth();
         if (user) {
-            console.log("user:", user.company.companyName);
             userData = user;
             setIsLoading(false);
         }
@@ -19,8 +17,6 @@ const CompanyName = ({ onSearch, setIsLoading }) => {
     catch (e) {
         console.log(e);
     }
-
-
 
     useEffect(() => {
         if (userData && userData.company && userData.company.companyName) {

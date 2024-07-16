@@ -7,7 +7,6 @@ function SelectedEmployeeModal({ employee, onClose }) {
         return null;
     }
 
-    console.log(employee);
     return (
         <div className="employee-card-modal">
             <div className="employee-card-modal-inner">

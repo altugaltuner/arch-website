@@ -14,8 +14,6 @@ function OtherUsersInfo({ employee }) {
     const [newProfessionName, setNewProfessionName] = useState('');
     const [professions, setProfessions] = useState([]);
 
-    console.log("employee1111:", employee);
-
     useEffect(() => {
         const fetchProfessions = async () => {
             try {

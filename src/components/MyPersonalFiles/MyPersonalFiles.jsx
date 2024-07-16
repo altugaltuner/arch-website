@@ -119,8 +119,6 @@ function MyPersonalFiles({ user }) {
     };
 
     const moveFileToTrash = async (file) => {
-        console.log('Trash folder before move:', trashFolder);
-        console.log('Selected folder before move:', selectedFolder);
 
         if (!trashFolder || !trashFolder.id) {
             console.error("Çöp Kutusu bulunamadı veya ID'si tanımlanmadı.");
@@ -134,21 +132,14 @@ function MyPersonalFiles({ user }) {
         const updatedFolderContent = selectedFolder.personalFolderContent.filter(f => f.id !== file.id);
         const updatedTrashContent = [...trashFolder.personalFolderContent, file];
 
-        console.log('Updated folder content:', updatedFolderContent);
-        console.log('Updated trash content:', updatedTrashContent);
-
         try {
             await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
                 data: { personalFolderContent: updatedFolderContent.map(f => f.id) }
             });
 
-            console.log(`Updated selected folder ${selectedFolder.id} with content:`, updatedFolderContent.map(f => f.id));
-
             await axios.put(`http://localhost:1337/api/personal-folders/${trashFolder.id}`, {
                 data: { personalFolderContent: updatedTrashContent.map(f => f.id) }
             });
-
-            console.log(`Updated trash folder ${trashFolder.id} with content:`, updatedTrashContent.map(f => f.id));
 
             setPersonalFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === selectedFolder.id) {
@@ -202,7 +193,6 @@ function MyPersonalFiles({ user }) {
     };
 
     const handleFolderCreated = (newFolder) => {
-        console.log('New folder created:', newFolder);
         setPersonalFolders([...personalFolders, newFolder]);
     };
 
@@ -294,8 +284,6 @@ function MyPersonalFiles({ user }) {
         const filteredFiles = folder.personalFolderContent.filter(file =>
             file.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
-
-        console.log('Filtered files:', filteredFiles);
 
         return (
             <div className="folder-content">

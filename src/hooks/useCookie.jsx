@@ -10,7 +10,7 @@ const IsCookie = () => {
 
     if (isLogin) {
         const isRouter = (location.pathname && "/login");
-        console.log(isRouter)
+
         if (isRouter) {
             navigate("/homepage");
         }

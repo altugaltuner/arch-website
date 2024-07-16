@@ -32,7 +32,6 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
         if (currentUser) {
             formData.append('uploader', currentUser.id);
         }
-        console.log("Current User at file upload:", currentUser);
 
         try {
             const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
@@ -40,7 +39,6 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log("Upload Response:", uploadResponse.data);
             const uploadedFile = uploadResponse.data[0];
             const updatedContent = folderState.folderContent && folderState.folderContent.data
                 ? [...folderState.folderContent.data, uploadedFile]
@@ -64,8 +62,6 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const uploadFile = () => {
         fileInputRef.current.click();
     };
-
-    console.log("filteredFiles", filteredFiles);
 
     return (
         <div className="folder-content">

@@ -10,15 +10,14 @@ import myLogo from "../../assets/icons/my-profile-logo.png";
 import homepageLogo from "../../assets/icons/homepage-logo.png";
 import settingsLogo from "../../assets/icons/settings-icon.png";
 import adminPanelLogo from "../../assets/icons/admin-panel.png";
-import { useAuth } from "../../components/AuthProvider"; // useAuth hook'unu içe aktar
+import { useAuth } from "../../components/AuthProvider";
 
 function Navigation() {
     const [activeNavId, setActiveNavId] = useState(null);
     const location = useLocation();  // Mevcut konumu almak için 
-    const { user } = useAuth(); // user bilgisini alın
-    console.log(user);
-    const userRole = user?.access?.role ?? null; // userRole değişkenini oluşturun
-    console.log(userRole);
+    const { user } = useAuth();
+    const userRole = user?.access?.role ?? null;
+
     const navItems = [
         { id: 'home-nav-id', to: '/homepage', logo: homepageLogo, name: 'Anasayfa' },
         { id: 'projects-nav-id', to: '/projects', logo: projectsLogo, name: 'Projeler' },
@@ -29,7 +28,6 @@ function Navigation() {
         { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' }
     ];
 
-    // Admin rolü varsa admin panelini navItems'a ekle
     if (userRole === "Admin") {
         navItems.push({ id: 'admin-panel-id', to: '/adminpanel', logo: adminPanelLogo, name: 'Admin Paneli' });
     }

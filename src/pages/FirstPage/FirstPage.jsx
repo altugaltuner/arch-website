@@ -40,10 +40,6 @@ function FirstPage() {
         }
     ];
 
-
-    console.log("FirstPage -> isLogin", isLogin)
-
-
     return (
         <main className="firstpage-main">
             <div className="firstpage-div">

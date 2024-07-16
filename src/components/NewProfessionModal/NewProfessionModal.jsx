@@ -12,7 +12,6 @@ function NewProfessionModal({ isOpen, onClose, onAdd }) {
                     professionName,
                 },
             });
-            console.log('Yeni meslek türü eklendi:', response.data);
             onAdd();
         } catch (error) {
             console.error('Meslek türü eklenemedi:', error);

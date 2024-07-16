@@ -26,8 +26,6 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
         }
     }, [newHistoryEntry]);
 
-    console.log(history);
-
     return (
         <div className="project-history-main">
             <h1 className="project-history-header">Proje Tarihçesi</h1>

@@ -82,17 +82,14 @@ function ProjectsMainPage() {
 
   const handleInputPasswordChange = (e) => {
     const { name, value } = e.target;
-    console.log("Password input changed:", name, value);
     if (showEditModal) {
       setEditProject((prevEditProject) => {
         const updatedProject = { ...prevEditProject, [name]: value };
-        console.log("Updated editProject:", updatedProject);
         return updatedProject;
       });
     } else {
       setNewProject((prevNewProject) => {
         const updatedProject = { ...prevNewProject, [name]: value };
-        console.log("Updated newProject:", updatedProject);
         return updatedProject;
       });
     }
@@ -117,7 +114,6 @@ function ProjectsMainPage() {
   };
 
   const handleSubmit = async () => {
-    console.log("Submitting new project:", newProject);
     const formData = new FormData();
     formData.append("data", JSON.stringify({
       projectName: newProject.projectName,
@@ -164,7 +160,6 @@ function ProjectsMainPage() {
 
 
   const handleEditSubmit = async () => {
-    console.log("Submitting edited project:", editProject);
     const formData = new FormData();
     formData.append("data", JSON.stringify({
       projectName: editProject.projectName,
@@ -184,7 +179,6 @@ function ProjectsMainPage() {
       await axios.put(`http://localhost:1337/api/projects/${projectToEdit.id}`, formData);
       setShowEditModal(false);
       setEditProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
-      // Refetch projects after editing
       const response = await axios.get(
         "http://localhost:1337/api/projects?populate=projectCoverPhoto"
       );

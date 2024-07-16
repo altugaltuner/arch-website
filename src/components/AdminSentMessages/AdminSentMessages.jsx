@@ -14,7 +14,6 @@ function AdminSentMessages({ adminMessages }) {
 
                 return (
                     <div key={message.id} className="message-item">
-                        {console.log(message)}
                         <h3 className='message-div-title'>{message?.attributes?.header}</h3>
                         <p className='message-div-content'>{message?.attributes?.content}</p>
                         {mediaUrl && <img src={`http://localhost:1337${mediaUrl}`} className='message-div-media' alt='message-media'></img>}
