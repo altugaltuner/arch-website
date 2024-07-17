@@ -4,6 +4,12 @@ import "./UserProfile.scss";
 import { useAuth } from "../../AuthProvider";
 
 const UserProfile = () => {
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        window.location.href = "/login";
+    };
+
     const { user, updateProfilePhoto } = useAuth();
     const [editMode, setEditMode] = useState({
         username: false,
@@ -205,6 +211,9 @@ const UserProfile = () => {
                     </div>
                 )}
             </div>
+            <button className="my-profile-logout" type="button" onClick={handleLogout}>
+                Çıkış Yap
+            </button>
         </div>
     );
 };

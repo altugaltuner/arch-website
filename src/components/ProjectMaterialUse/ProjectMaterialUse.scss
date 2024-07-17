@@ -1,0 +1,66 @@
+@use "../../styles/abstracts/variables" as *;
+
+.project-material-use {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid $border-color;
+    border-radius: 15px;
+    margin-top: 20px;
+
+    .material-use-header {
+        border-bottom: 1px solid #e4e4e4;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+        font-size: 30px;
+        color: rgb(54, 54, 54);
+        text-align: center;
+        font-weight: 300;
+    }
+
+    .material-use-p {
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 10px;
+    }
+
+    .material-use-calendar {
+        margin-bottom: 20px;
+
+        .calendar {
+            display: flex;
+            flex-wrap: wrap;
+
+            .calendar-day {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #ccc;
+                cursor: pointer;
+
+                &.selected {
+                    background-color: #FFD700;
+                }
+            }
+        }
+    }
+
+    .material-use-list {
+        .material-use-list-subheader {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+
+            li {
+                margin-bottom: 5px;
+            }
+        }
+    }
+}

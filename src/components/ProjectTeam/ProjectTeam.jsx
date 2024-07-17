@@ -123,8 +123,8 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                             />
                         </div>
                         <div className="employee-info">
-                            <h3 className='employee-info-username'>{employee.username}</h3>
-                            <p className='employee-info-professionName'>{employee.profession.professionName}</p>
+                            <h3 className='employee-info-username'>{employee?.username}</h3>
+                            <p className='employee-info-professionName'>{employee?.profession?.professionName}</p>
                         </div>
                     </div>
                 ))}

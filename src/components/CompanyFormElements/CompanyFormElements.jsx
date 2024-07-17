@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import "./CompanyFormElements.scss";
 
 const CompanyFormElements = ({ errors, setErrors }) => {
     const [employeeCodeGenerated, setEmployeeCodeGenerated] = useState(false);
+    const [companyPermissionCodes, setCompanyPermissionCodes] = useState([]);
 
     const employeeCodeCreator = () => {
         if (!employeeCodeGenerated) {
@@ -13,6 +14,22 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             setEmployeeCodeGenerated(true);
         }
     };
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:1337/api/company-perm-codes?populate=*');
+            const data = response.data.data.map(item => item.attributes.code);
+            setCompanyPermissionCodes(data);
+            console.log(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const createCompany = async (companyName, workingArea, companyCode) => {
         try {
@@ -32,7 +49,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
     const createUser = async (adminName, adminSurname, adminPassword, adminEmail, company) => {
         try {
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/users', {
+            const response = await axios.post('http://localhost:1337/api/users', {
                 username: `${adminName} ${adminSurname}`,
                 email: adminEmail,
                 password: adminPassword,
@@ -54,11 +71,8 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     publishedAt: new Date().toISOString()
                 },
                 role: 1
-            }, {
-                headers: {
-                    Authorization: `Bearer <your-authentication-token>` // Eğer authentication gerekiyorsa
-                }
-            });
+            }
+            );
             return response.data;
         } catch (error) {
             console.error("Error creating user:", error);
@@ -66,11 +80,11 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         }
     };
 
-
     const validateInputs = async (e) => {
         e.preventDefault();
 
         const formElements = {
+            companyPermissionCode: document.getElementById("companyPermissionCode").value,
             companyName: document.getElementById("companyName").value,
             workingArea: document.getElementById("workingArea").value,
             companyCode: document.getElementById("employeeCode").value,
@@ -82,6 +96,10 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         };
 
         let errors = {};
+
+        if (!companyPermissionCodes.includes(formElements.companyPermissionCode)) {
+            errors.companyPermissionCode = "Geçersiz şirket oluşturma izin kodu.";
+        }
 
         if (formElements.companyName.length > 50 || formElements.companyName.length < 2) {
             errors.companyName = "Şirket ismi 50 karakterden fazla ve 2 karakterden az olamaz.";
@@ -124,7 +142,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     <h3 className="company-create-subheader">Şirket Bilgileri</h3>
                     <label className="company-create-label" htmlFor="companyPermissionCode">Şirket Oluşturma İzin Kodu</label>
                     <input className="company-create-input" type="text" id="companyPermissionCode" />
-                    {errors.companyCode && <span className="error-for-company-signup">{errors.companyCode}</span>}
+                    {errors.companyPermissionCode && <span className="error-for-company-signup">{errors.companyPermissionCode}</span>}
 
                     <label className="company-create-label" htmlFor="companyName">Şirket İsmi</label>
                     <input className="company-create-input" type="text" id="companyName" />
