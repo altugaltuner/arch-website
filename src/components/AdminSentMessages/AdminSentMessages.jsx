@@ -16,7 +16,7 @@ function AdminSentMessages({ adminMessages }) {
                     <div key={message.id} className="message-item">
                         <h3 className='message-div-title'>{message?.attributes?.header}</h3>
                         <p className='message-div-content'>{message?.attributes?.content}</p>
-                        {mediaUrl && <img src={`http://localhost:1337${mediaUrl}`} className='message-div-media' alt='message-media'></img>}
+                        {mediaUrl && <img src={`https://bold-animal-facf707bd9.strapiapp.com${mediaUrl}`} className='message-div-media' alt='message-media'></img>}
                         <p className='message-div-date'>Tarih: {new Date(message.attributes.createdAt).toLocaleString()}</p>
                         <p className='message-div-owner'>Gönderen: {message.attributes.users_permissions_user?.data?.attributes?.username}</p>
                     </div>

@@ -29,7 +29,7 @@ function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
         }
 
         try {
-            const response = await fetch('http://localhost:1337/api/multiple-messages', {
+            const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/multiple-messages', {
                 method: 'POST',
                 body: formData
             });

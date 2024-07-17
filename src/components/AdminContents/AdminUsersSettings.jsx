@@ -11,7 +11,7 @@ function AdminUserSettings({ users }) {
     const [projects, setProjects] = useState(null);
 
     const getProjectDetails = async () => {
-        const endpoint = `http://localhost:1337/api/projects?populate=*`;
+        const endpoint = `https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=*`;
         try {
             setLoading(true);
             const { data } = await axios.get(endpoint);

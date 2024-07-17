@@ -25,7 +25,7 @@ function ProjectsPage() {
 
     async function getRoles() {
         try {
-            const response = await axios.get('http://localhost:1337/api/accesses');
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
             setRoles(response.data.data);
         } catch (error) {
             console.error(error);
@@ -37,7 +37,7 @@ function ProjectsPage() {
     }, []);
 
     const getProjectDetails = async () => {
-        const endpoint = `http://localhost:1337/api/projects/${idToFetch}?populate=*`;
+        const endpoint = `https://bold-animal-facf707bd9.strapiapp.com/api/projects/${idToFetch}?populate=*`;
         try {
             setLoading(true);
             const { data } = await axios.get(endpoint);

@@ -38,7 +38,7 @@ function ProjectsMainPage() {
         return;
       }
 
-      const response = await axios.get("http://localhost:1337/api/accesses");
+      const response = await axios.get("https://bold-animal-facf707bd9.strapiapp.com/api/accesses");
       setRoles(response.data.data);
     } catch (error) {
       console.error("Error fetching roles:", error);
@@ -61,7 +61,7 @@ function ProjectsMainPage() {
         }
 
         const response = await axios.get(
-          `http://localhost:1337/api/companies/${usersCompanyId}?populate[projects][populate]=*`
+          `https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}?populate[projects][populate]=*`
         );
         const companyData = response.data.data;
 
@@ -130,7 +130,7 @@ function ProjectsMainPage() {
         console.error("No token found in localStorage");
         return;
       }
-      const response = await axios.post("http://localhost:1337/api/projects", formData, {
+      const response = await axios.post("https://bold-animal-facf707bd9.strapiapp.com/api/projects", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -174,11 +174,11 @@ function ProjectsMainPage() {
         return;
       }
 
-      await axios.put(`http://localhost:1337/api/projects/${projectToEdit.id}`, formData);
+      await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToEdit.id}`, formData);
       setShowEditModal(false);
       setEditProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
       const response = await axios.get(
-        "http://localhost:1337/api/projects?populate=projectCoverPhoto"
+        "https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=projectCoverPhoto"
       );
       const companyData = response.data.data;
       const filteredProjects = companyData.attributes.projects.data.filter(
@@ -215,7 +215,7 @@ function ProjectsMainPage() {
     if (!projectToDelete) return;
 
     axios
-      .delete(`http://localhost:1337/api/projects/${projectToDelete}`)
+      .delete(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToDelete}`)
       .then((response) => {
         setCompanyProjects(
           companyProjects.filter((project) => project.id !== projectToDelete)

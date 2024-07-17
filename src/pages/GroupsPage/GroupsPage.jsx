@@ -37,7 +37,7 @@ function GroupsPage() {
 
     const handleDeleteGroup = () => {
         try {
-            axios.delete(`http://localhost:1337/api/groups/${selectedGroupId}`).then(() => {
+            axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}`).then(() => {
                 setGroups((prevGroups) => prevGroups.filter((group) => group.id !== selectedGroupId));
                 setShowDeleteModal(false);
                 setSelectedGroupId(null);
@@ -55,7 +55,7 @@ function GroupsPage() {
         };
 
         try {
-            axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, payload).then(() => {
+            axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}`, payload).then(() => {
                 setShowEditModal(false);
                 setSelectedGroupId(null);
                 fetchProjectGroups();
@@ -67,7 +67,7 @@ function GroupsPage() {
 
     const fetchProjectGroups = async () => {
         try {
-            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword');
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
             setGroups(companyGroups);
@@ -91,7 +91,7 @@ function GroupsPage() {
 
     async function getRoles() {
         try {
-            const response = await axios.get('http://localhost:1337/api/accesses');
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
             setRoles(response.data.data);
         } catch (error) {
             console.error(error);
@@ -120,10 +120,10 @@ function GroupsPage() {
         }));
 
         try {
-            await axios.post('http://localhost:1337/api/groups', formData);
+            await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/groups', formData);
             setShowModal(false);
             setNewGroup({ groupName: "", groupPassword: "" });
-            const response = await axios.get('http://localhost:1337/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
             setGroups(companyGroups);
@@ -139,7 +139,7 @@ function GroupsPage() {
         if (group) {
             if (group.attributes.groupPassword === password) {
                 try {
-                    await axios.put(`http://localhost:1337/api/groups/${selectedGroupId}`, {
+                    await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}`, {
                         data: {
                             users_permissions_users: [...group.attributes.users_permissions_users.data.map(u => u.id), user.id]
                         }
@@ -172,7 +172,7 @@ function GroupsPage() {
                         placeholder="Grup Ara"
                         value={searchTerm}
                         onChange={handleSearchChange}
-                        autoComplete="off" // Otomatik doldurma devre dışı bırakıldı
+                        autoComplete="off"
                     />
                 </div>
                 <div className="groups-x-all">
@@ -198,8 +198,8 @@ function GroupsPage() {
                                             setShowPasswordModal(false);
                                         } else {
                                             setSelectedGroupId(group.id);
-                                            setPassword(""); // Şifre alanını boşalt
-                                            setErrorMessage(""); // Hata mesajını temizle
+                                            setPassword("");
+                                            setErrorMessage("");
                                             setShowPasswordModal(true);
                                         }
                                     }}
@@ -207,7 +207,7 @@ function GroupsPage() {
                                     {group.attributes.groupChatPic?.data ? (
                                         <img
                                             className="group-image"
-                                            src={`http://localhost:1337${group.attributes.groupChatPic.data.attributes.url}`}
+                                            src={`https://bold-animal-facf707bd9.strapiapp.com${group.attributes.groupChatPic.data.attributes.url}`}
                                             alt={group.attributes.groupChatPic.data.attributes.name}
                                         />
                                     ) : (

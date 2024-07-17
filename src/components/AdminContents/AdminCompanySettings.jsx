@@ -32,7 +32,7 @@ const AdminCompanySettings = () => {
         formData.append('files', file);
 
         try {
-            const uploadResponse = await fetch('http://localhost:1337/api/upload', {
+            const uploadResponse = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/upload', {
                 method: 'POST',
                 body: formData,
             });
@@ -40,7 +40,7 @@ const AdminCompanySettings = () => {
             const uploadResult = await uploadResponse.json();
             const newLogoId = uploadResult[0].id;
 
-            await fetch(`http://localhost:1337/api/companies/${user.company.id}`, {
+            await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${user.company.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const AdminCompanySettings = () => {
         if (!validateInputs()) return;
 
         try {
-            await fetch(`http://localhost:1337/api/companies/${user.company.id}`, {
+            await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${user.company.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const AdminCompanySettings = () => {
                         <img className="edit-pencil-company-logo-edit" src={editPencil} alt="edit-pencil" />
                     </label>
                     {companyLogo ? (
-                        <img className="company-logo-img" src={`http://localhost:1337${companyLogo}`} alt="company-logo" />
+                        <img className="company-logo-img" src={`https://bold-animal-facf707bd9.strapiapp.com${companyLogo}`} alt="company-logo" />
                     ) : (
                         <div className="company-logo-placeholder">Şirket logosu yükleyin</div>
                     )}

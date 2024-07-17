@@ -7,7 +7,7 @@ function NewProfessionModal({ isOpen, onClose, onAdd }) {
 
     const handleAddProfession = async () => {
         try {
-            const response = await axios.post('http://localhost:1337/api/professions', {
+            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/professions', {
                 data: {
                     professionName,
                 },

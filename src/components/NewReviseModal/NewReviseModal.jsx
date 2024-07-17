@@ -19,7 +19,7 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
 
 
         try {
-            const response = await axios.post('http://localhost:1337/api/project-revises', {
+            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/project-revises', {
                 data: {
                     comment: [
                         {

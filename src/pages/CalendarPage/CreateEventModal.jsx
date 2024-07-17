@@ -27,7 +27,7 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
         eventDate.setMinutes(minutes);
 
         try {
-            const response = await axios.post('http://localhost:1337/api/calendar-events', {
+            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events', {
                 data: {
                     title,
                     description,

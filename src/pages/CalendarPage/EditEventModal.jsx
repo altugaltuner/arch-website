@@ -36,7 +36,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
         eventDate.setMinutes(minutes);
 
         try {
-            const response = await axios.put(`http://localhost:1337/api/calendar-events/${event.id}`, {
+            const response = await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/${event.id}`, {
                 data: {
                     title,
                     description,
@@ -52,7 +52,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:1337/api/calendar-events/${event.id}`);
+            await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/${event.id}`);
             deleteEvent(event.id);
             onClose();
         } catch (error) {

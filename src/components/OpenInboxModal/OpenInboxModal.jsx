@@ -7,7 +7,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await fetch('http://localhost:1337/api/multiple-messages/?populate=*');
+                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/multiple-messages/?populate=*');
                 const result = await response.json();
                 setMessages(result.data);
             } catch (error) {
@@ -40,7 +40,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                                     {message.attributes?.contentMedia?.data?.length > 0 && (
                                         <div className="message-media-div">
                                             {message.attributes.contentMedia.data.map(media => (
-                                                <img className="message-media-img" key={media.id} src={`http://localhost:1337${media.attributes.url}`} alt={media.attributes.name} />
+                                                <img className="message-media-img" key={media.id} src={`https://bold-animal-facf707bd9.strapiapp.com${media.attributes.url}`} alt={media.attributes.name} />
                                             ))}
                                         </div>
                                     )}

@@ -29,7 +29,7 @@ function MyPersonalFiles({ user }) {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:1337/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
+                const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
                 const folders = response.data.personal_folders || [];
                 setPersonalFolders(folders);
             } catch (error) {
@@ -53,7 +53,7 @@ function MyPersonalFiles({ user }) {
         formData.append('files', file);
 
         try {
-            const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
+            const uploadResponse = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -65,7 +65,7 @@ function MyPersonalFiles({ user }) {
             }
             const updatedContent = [...selectedFolder.personalFolderContent, uploadedFile];
 
-            await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
+            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${selectedFolder.id}`, {
                 data: {
                     personalFolderContent: updatedContent.map(file => file.id),
                 },
@@ -104,16 +104,16 @@ function MyPersonalFiles({ user }) {
 
     const downloadFile = () => {
         if (selectedFile) {
-            window.open(`http://localhost:1337${selectedFile.url}`, '_blank');
+            window.open(`https://bold-animal-facf707bd9.strapiapp.com${selectedFile.url}`, '_blank');
         }
     };
 
     const handleFileDelete = async (fileId) => {
         try {
-            await axios.delete(`http://localhost:1337/api/upload/files/${fileId}`);
+            await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/upload/files/${fileId}`);
             const updatedFolderContent = selectedFolder.personalFolderContent.filter(file => file.id !== fileId);
 
-            await axios.put(`http://localhost:1337/api/personal-folders/${selectedFolder.id}`, {
+            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${selectedFolder.id}`, {
                 data: { personalFolderContent: updatedFolderContent.map(file => file.id) }
             });
 
@@ -142,7 +142,7 @@ function MyPersonalFiles({ user }) {
         if (!folderToDelete) return;
 
         try {
-            await axios.delete(`http://localhost:1337/api/personal-folders/${folderToDelete.id}`);
+            await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${folderToDelete.id}`);
             setPersonalFolders(personalFolders.filter(folder => folder.id !== folderToDelete.id));
             setFolderToDelete(null);
         } catch (error) {
@@ -154,7 +154,7 @@ function MyPersonalFiles({ user }) {
         if (!folderToEdit) return;
 
         try {
-            await axios.put(`http://localhost:1337/api/personal-folders/${folderToEdit.id}`, {
+            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${folderToEdit.id}`, {
                 data: { folderName: newName }
             });
             setPersonalFolders(personalFolders.map(folder => {
@@ -249,7 +249,7 @@ function MyPersonalFiles({ user }) {
                     {filteredFiles.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
                             {file.formats && file.formats.thumbnail ? (
-                                <img className="files-img" src={`http://localhost:1337${file.formats.thumbnail.url || file.url}`} alt={file.name} />
+                                <img className="files-img" src={`https://bold-animal-facf707bd9.strapiapp.com${file.formats.thumbnail.url || file.url}`} alt={file.name} />
                             ) : (
                                 <span>{file.name}</span>
                             )}

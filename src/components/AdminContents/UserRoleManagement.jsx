@@ -41,7 +41,7 @@ function UserRoleManagement({ users }) {
 
                 const currentRole = user.access ? user.access.role : 'undefined';
                 if (selectedRole && currentRole !== selectedRole) {
-                    const response = await axios.put(`http://localhost:1337/api/users/${userId}`, {
+                    const response = await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${userId}`, {
                         access: {
                             role: selectedRole
                         }

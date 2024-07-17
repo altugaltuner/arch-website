@@ -9,7 +9,7 @@ function ProjectInside({ onProjectClick }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate=projectCoverPhoto');
+                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=projectCoverPhoto');
 
                 setProjects(response.data.data);
             } catch (error) {
@@ -27,7 +27,7 @@ function ProjectInside({ onProjectClick }) {
                 <ul className="projects-list">
                     {projects.length > 0 ? projects.map(project => (
                         <li key={project.id} className="project-item" onClick={() => onProjectClick(project)}>
-                            <img className="project-navbar-photos" src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.url}`} alt="project-photo" />
+                            <img className="project-navbar-photos" src={`https://bold-animal-facf707bd9.strapiapp.com${project.attributes.projectCoverPhoto.data.attributes.url}`} alt="project-photo" />
                             {project.attributes.projectName}
                         </li>
                     )) : <li>Yükleniyor</li>}

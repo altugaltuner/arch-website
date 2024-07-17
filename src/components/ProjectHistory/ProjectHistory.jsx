@@ -9,7 +9,7 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
         async function fetchHistory() {
             try {
                 if (clickedProject?.id) {
-                    const response = await axios.get(`http://localhost:1337/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=*`);
+                    const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=*`);
                     setHistory(response.data.data || []);
                 }
             } catch (error) {

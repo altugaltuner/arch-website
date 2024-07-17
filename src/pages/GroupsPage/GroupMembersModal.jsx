@@ -9,7 +9,7 @@ const GroupMembersModal = ({ show, onClose, groupId }) => {
         if (show && groupId) {
             const fetchMembers = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:1337/api/groups/${groupId}?populate[users_permissions_users][populate]=access`);
+                    const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${groupId}?populate[users_permissions_users][populate]=access`);
                     setMembers(response.data.data.attributes.users_permissions_users.data);
                 } catch (error) {
                     console.error("Error fetching group members:", error);

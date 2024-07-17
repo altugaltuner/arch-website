@@ -34,7 +34,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
         }
 
         try {
-            const uploadResponse = await axios.post('http://localhost:1337/api/upload', formData, {
+            const uploadResponse = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -44,7 +44,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 ? [...folderState.folderContent.data, uploadedFile]
                 : [uploadedFile];
 
-            await axios.put(`http://localhost:1337/api/project-folders/${folderState.id}`, {
+            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/project-folders/${folderState.id}`, {
                 data: {
                     folderContent: updatedContent.map(file => file.id),
                 },
@@ -81,7 +81,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 const fileAttributes = file.attributes || {};
                 const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1).toLowerCase() : '';
                 const isImage = ["jpg", "jpeg", "png"].includes(fileExt);
-                const iconSrc = isImage ? `http://localhost:1337${fileAttributes.formats.thumbnail.url || fileAttributes.url}` : (fileIcons[fileExt] || fileIcon);
+                const iconSrc = isImage ? `https://bold-animal-facf707bd9.strapiapp.com${fileAttributes.formats.thumbnail.url || fileAttributes.url}` : (fileIcons[fileExt] || fileIcon);
 
                 return (
                     <div key={file.id} className="file-folder-content" onClick={() => openFileModal(file)}>
@@ -93,7 +93,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                         <span className="file-name">{fileAttributes.name || 'Unknown'}</span>
                         {currentUser && currentUser.profilePic && (
                             <div className="uploader-profile-pic-small">
-                                <img src={`http://localhost:1337${currentUser.profilePic.url}`} alt="profilepic" className="uploader-profile-pic" />
+                                <img src={`https://bold-animal-facf707bd9.strapiapp.com${currentUser.profilePic.url}`} alt="profilepic" className="uploader-profile-pic" />
                                 <span className="uploader-name-tooltip">{currentUser.username}</span>
                             </div>
                         )}

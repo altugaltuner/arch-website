@@ -6,7 +6,7 @@ module.exports = [
             contentSecurityPolicy: {
                 useDefaults: true,
                 directives: {
-                    'connect-src': ["'self'", 'http:', 'https:', 'http://localhost:1337'], // Server URL'nizi burada belirtin
+                    'connect-src': ["'self'", 'http:', 'https:', 'https://bold-animal-facf707bd9.strapiapp.com'], // Server URL'nizi burada belirtin
                 },
             },
         },

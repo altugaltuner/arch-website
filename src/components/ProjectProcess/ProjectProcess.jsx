@@ -26,7 +26,7 @@ function ProjectProcess({ clickedProject }) {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch(`http://localhost:1337/api/projects/${clickedProject.id}`, {
+            const response = await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${clickedProject.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

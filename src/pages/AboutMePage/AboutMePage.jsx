@@ -20,7 +20,7 @@ function AboutMePage() {
             try {
                 const token = localStorage.getItem('token');
                 if (token) {
-                    const response = await api.get(`http://localhost:1337/api/users/me?populate=profilePic,project_revises,profession`, {
+                    const response = await api.get(`https://bold-animal-facf707bd9.strapiapp.com/api/users/me?populate=profilePic,project_revises,profession`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }

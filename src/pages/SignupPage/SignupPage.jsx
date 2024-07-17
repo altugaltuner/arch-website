@@ -68,7 +68,7 @@ function SignupPage() {
     if (hasError) return;
 
     try {
-      const companiesResponse = await api.get(`http://localhost:1337/api/companies`);
+      const companiesResponse = await api.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies`);
       const companies = companiesResponse.data.data;
 
       const matchingCompany = companies.find(company => company.attributes.companyID === companyCode);
@@ -80,7 +80,7 @@ function SignupPage() {
       }
 
       const response = await api.post(
-        `http://localhost:1337/api/auth/local/register`,
+        `https://bold-animal-facf707bd9.strapiapp.com/api/auth/local/register`,
         {
           username: fullName,
           email: email,

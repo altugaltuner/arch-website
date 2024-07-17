@@ -35,7 +35,7 @@ const CalendarPage = () => {
     const userRole = user && user.access ? user.access.role : null;
 
     useEffect(() => {
-        axios.get('http://localhost:1337/api/calendar-events/?populate=*')
+        axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=*')
             .then(response => {
                 setEvents(response.data.data);
             })

@@ -13,7 +13,7 @@ function SelectedEmployeeModal({ employee, onClose }) {
                 <div className="employee-card-modal-profile-pic">
                     <img
                         className="employee-card-modal-profile-pic-inner"
-                        src={`http://localhost:1337${employee.profilePic?.formats?.thumbnail?.url || employee?.profilePic?.url}`}
+                        src={`https://bold-animal-facf707bd9.strapiapp.com${employee.profilePic?.formats?.thumbnail?.url || employee?.profilePic?.url}`}
                         alt=""
                     />
                 </div>

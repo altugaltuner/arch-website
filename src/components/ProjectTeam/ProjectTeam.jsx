@@ -24,7 +24,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
 
     async function getRoles() {
         try {
-            const response = await axios.get('http://localhost:1337/api/accesses');
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
             setRoles(response.data.data);
         } catch (error) {
             console.error(error);
@@ -38,7 +38,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/users?populate=profession,projects,profilePic');
+                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users?populate=profession,projects,profilePic');
                 setAllUsers(response.data);
             } catch (error) {
                 console.error('Error fetching employees', error);
@@ -60,7 +60,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
 
     const handleAddUsers = async (userIds) => {
         try {
-            await axios.put(`http://localhost:1337/api/projects/${clickedProject.id}?populate=*`, {
+            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${clickedProject.id}?populate=*`, {
                 data: {
                     users: [...clickedProject.attributes.users.data.map(user => user.id), ...userIds]
                 }
@@ -74,7 +74,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
 
     const handleRemoveUsers = async (userIds) => {
         try {
-            await axios.put(`http://localhost:1337/api/projects/${clickedProject.id}?populate=*`, {
+            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${clickedProject.id}?populate=*`, {
                 data: {
                     users: clickedProject.attributes.users.data.filter(user => !userIds.includes(user.id))
                 }
@@ -118,7 +118,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                         <div className="profile-pic">
                             <img
                                 className="profile-pic-inner"
-                                src={employee?.profilePic?.formats?.thumbnail?.url ? `http://localhost:1337${employee?.profilePic?.formats?.thumbnail?.url}` : `http://localhost:1337${employee?.profilePic?.url}`}
+                                src={employee?.profilePic?.formats?.thumbnail?.url ? `https://bold-animal-facf707bd9.strapiapp.com${employee?.profilePic?.formats?.thumbnail?.url}` : `https://bold-animal-facf707bd9.strapiapp.com${employee?.profilePic?.url}`}
                                 alt=""
                             />
                         </div>

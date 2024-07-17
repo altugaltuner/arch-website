@@ -10,7 +10,7 @@ function SelectedItemSection({ activeProjectTitle }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/file-extension-logos?populate=*');
+                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/file-extension-logos?populate=*');
                 setFileExtensions(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
@@ -22,7 +22,7 @@ function SelectedItemSection({ activeProjectTitle }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/projects?populate[users][projectAllFiles][populate]=*');
+                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate[users][projectAllFiles][populate]=*');
                 setProjectFiles(response.data.data);
             } catch (error) {
                 console.error('Error fetching the data', error);
@@ -34,7 +34,7 @@ function SelectedItemSection({ activeProjectTitle }) {
 
     const getLogoUrl = (ext) => {
         const extension = fileExtensions.find(item => item.attributes.extensionName === ext);
-        return extension ? `http://localhost:1337${extension.attributes.extensionLogo.data.attributes.url}` : '';
+        return extension ? `https://bold-animal-facf707bd9.strapiapp.com${extension.attributes.extensionLogo.data.attributes.url}` : '';
     };
 
     const renderFile = (file) => {
@@ -44,7 +44,7 @@ function SelectedItemSection({ activeProjectTitle }) {
             <div key={file.id} className="project-file">
                 <p className="file-name">{name}</p>
                 <img className="file-logo-image" src={logoUrl} alt={`${ext} logo`} />
-                <a href={`http://localhost:1337${url}`} download className="file-download-link">Download</a>
+                <a href={`https://bold-animal-facf707bd9.strapiapp.com${url}`} download className="file-download-link">Download</a>
             </div>
         );
     };

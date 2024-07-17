@@ -41,7 +41,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
             try {
                 const updatedProjects = [...userInvolvedProjects, selectedProject];
                 setUserInvolvedProjects(updatedProjects);
-                await axios.put(`http://localhost:1337/api/users/${user.id}`, {
+                await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}`, {
                     projects: updatedProjects.map(project => project.id)
                 });
                 window.location.href = `/projects/${selectedProject.id}`;
@@ -113,7 +113,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                     project.attributes.projectCoverPhoto.data && (
                                         <img
                                             className="project-navbar-photos"
-                                            src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url}`}
+                                            src={`https://bold-animal-facf707bd9.strapiapp.com${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url}`}
                                             alt="Project Cover"
                                             onError={(e) => { console.log("Image Error:", e); }}
                                         />

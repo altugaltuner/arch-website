@@ -12,7 +12,7 @@ const CompanyModal = ({ isOpen, onClose, company }) => {
                     className="company-modal-logo"
                     src={
                         company.companyLogo && company.companyLogo.data && company.companyLogo.data.attributes && company.companyLogo.data.attributes.formats && company.companyLogo.data.attributes.formats.thumbnail
-                            ? `http://localhost:1337${company.companyLogo.data.attributes.formats.thumbnail.url}`
+                            ? `https://bold-animal-facf707bd9.strapiapp.com${company.companyLogo.data.attributes.formats.thumbnail.url}`
                             : defaultLogo
                     }
                     alt="company-logo"

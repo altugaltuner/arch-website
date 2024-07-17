@@ -17,7 +17,7 @@ function OtherUsersInfo({ employee }) {
     useEffect(() => {
         const fetchProfessions = async () => {
             try {
-                const response = await fetch('http://localhost:1337/api/professions?populate=*');
+                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/professions?populate=*');
                 const result = await response.json();
                 setProfessions(result.data);
             } catch (error) {
@@ -39,7 +39,7 @@ function OtherUsersInfo({ employee }) {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await fetch('http://localhost:1337/api/private-messages/?populate=*');
+                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/private-messages/?populate=*');
                 const result = await response.json();
                 setPrivateMessages(result.data);
             } catch (error) {
@@ -84,7 +84,7 @@ function OtherUsersInfo({ employee }) {
 
     const handleSaveClick = async () => {
         try {
-            const response = await fetch(`http://localhost:1337/api/users/${employee?.id}`, {
+            const response = await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${employee?.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ function OtherUsersInfo({ employee }) {
                     <div className='other-info-inner-2'>
                         <img
                             className="other-info-profile-pic"
-                            src={`http://localhost:1337${employee.profilePic?.data?.attributes?.url || employee.profilePic?.data?.attributes?.formats?.thumbnail?.url || ""}`}
+                            src={`https://bold-animal-facf707bd9.strapiapp.com${employee.profilePic?.data?.attributes?.url || employee.profilePic?.data?.attributes?.formats?.thumbnail?.url || ""}`}
                             alt=""
                         />
                         <p className='other-info-username'>{employee.username}</p>
@@ -183,7 +183,7 @@ function OtherUsersInfo({ employee }) {
                                 {project.attributes.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url && (
                                     <img
                                         className="other-project-photo"
-                                        src={`http://localhost:1337${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url || project.attributes.projectCoverPhoto.data.attributes.url || ''}`}
+                                        src={`https://bold-animal-facf707bd9.strapiapp.com${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url || project.attributes.projectCoverPhoto.data.attributes.url || ''}`}
                                         alt={project.attributes.projectName}
                                     />
                                 )}
@@ -215,7 +215,7 @@ function OtherUsersInfo({ employee }) {
                             {message.attributes?.messageMedia?.data?.length > 0 && (
                                 <div className="message-media-div-private">
                                     {message.attributes.messageMedia.data.map(media => (
-                                        <img className="message-media-img-private" key={media.id} src={`http://localhost:1337${media.attributes.url}`} alt={media.attributes.name} />
+                                        <img className="message-media-img-private" key={media.id} src={`https://bold-animal-facf707bd9.strapiapp.com${media.attributes.url}`} alt={media.attributes.name} />
                                     ))}
                                 </div>
                             )}

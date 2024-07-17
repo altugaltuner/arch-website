@@ -10,7 +10,7 @@ function AdminSendMessage() {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await fetch('http://localhost:1337/api/multiple-messages/?populate=*');
+                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/multiple-messages/?populate=*');
                 if (!response.ok) {
                     throw new Error('Veriler çekilirken hata oluştu');
                 }
