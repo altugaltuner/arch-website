@@ -78,8 +78,8 @@
 
         .uploader-profile-pic-small {
             position: absolute;
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             top: 0;
             right: 0;
             border-radius: 50%;
@@ -139,17 +139,21 @@
 
 @media screen and (max-width: 450px) {
     .folder-content {
-
+        max-height: 250px;
 
         .file-folder-content,
         .file-input-wrapper {
+            gap: 2px;
+            width: 75px;
+            height: 100px;
 
-
-            .file-icon-img {
-                width: 60px;
+            .file-name {
+                font-size: 12px;
             }
 
-            .file-name {}
+            .file-icon-img {
+                width: 50px;
+            }
         }
     }
 }

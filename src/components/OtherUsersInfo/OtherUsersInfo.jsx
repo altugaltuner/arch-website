@@ -162,11 +162,15 @@ function OtherUsersInfo({ employee }) {
                 </div>
                 <div className='other-all-revises-inner'>
                     <h2 className='other-revises-h2'>Revizeler</h2>
-                    {employee.project_revises && employee.project_revises.data.map((revise) => (
-                        <div key={revise.id} className='other-revise-div'>
-                            <p className='other-revise-p'>{revise.attributes.comment[0]?.children[0]?.text}</p>
-                        </div>
-                    ))}
+                    {employee.project_revises && employee.project_revises.data.length > 0 ? (
+                        employee.project_revises.data.map((revise) => (
+                            <div key={revise.id} className='other-revise-div'>
+                                <p className='other-revise-p'>{revise.attributes.comment[0]?.children[0]?.text}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p className='other-revise-p'>Revize Yok</p>
+                    )}
                 </div>
             </div>
             <div className='other-joined-all'>

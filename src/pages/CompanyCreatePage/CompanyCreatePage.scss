@@ -12,12 +12,14 @@
     .back-button-company {
         cursor: pointer;
         position: absolute;
-        width: 50px;
-        top: 20px;
-        left: 20px;
+        width: 35px;
+        top: 10px;
+        left: 10px;
         position: absolute;
         opacity: 0.5;
         transition: all 0.2s;
+        width: 35px;
+        height: 35px;
 
         &:hover {
             opacity: 1;
@@ -27,16 +29,7 @@
     .company-create-page-title {
         font-weight: 400;
         margin-bottom: 20px;
-    }
-
-    .company-and-admin-create-div {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        flex-direction: column;
-        gap: 5px;
-        padding: 25px;
-        border-radius: 15px;
-        border: 1px solid $border-color;
+        margin-top: 25px;
+        color: $header-grey;
     }
 }

@@ -81,9 +81,14 @@
 
 @media screen and (max-width: 450px) {
     .my-notebook-main {
+        max-height: 250px;
+        overflow: hidden;
+        padding: 5px;
+        gap: 3px;
+
         .my-notebook-note-header {
             padding: 3px;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .note-button {

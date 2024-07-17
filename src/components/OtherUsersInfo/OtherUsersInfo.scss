@@ -50,6 +50,9 @@
         .other-info-inner {
             height: fit-content;
 
+            .other-revise-p {
+                font-size: 16px;
+            }
 
             .other-info-inner-2 {
                 display: flex;
@@ -199,7 +202,7 @@
             align-items: center;
 
             .no-group-p {
-                font-size: 18px;
+                font-size: 14px;
                 font-weight: 400;
             }
 
@@ -343,6 +346,9 @@
 
 @media screen and (max-width: 450px) {
     .other-info-main {
+        margin: 0px 10px 10px 10px;
+        gap: 5px;
+        max-height: 300px;
 
         .open-inbox-content-private-messages-div {
             .write-priv-message {
@@ -368,11 +374,26 @@
         }
 
         .revise-and-profile {
+            gap: 5px;
+
+            .other-info-inner {
+                .other-info-inner-2 {
+                    .profession-editing-div {
+                        .other-info-professionname {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .other-info-email {
+                        font-size: 16px;
+                    }
+                }
+            }
+
             .other-all-revises-inner {
                 gap: 5px;
-
                 padding: 5px;
-                margin: 5px;
+                margin: 0px;
 
                 .other-revise-div {
                     .other-revise-p {

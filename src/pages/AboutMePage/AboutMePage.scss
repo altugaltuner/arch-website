@@ -153,8 +153,13 @@
 
                     .mylast-act-main {
                         padding: 5px;
+                        max-height: 250px;
+                        overflow: hidden;
 
                         .mylast-act-ul {
+                            overflow-y: auto;
+
+
                             .mylast-act-item-desc {
                                 flex-direction: column;
                                 font-size: 12px;
@@ -168,11 +173,9 @@
                         }
 
                         .mylast-act-header {
-                            font-size: 18px;
-                            padding: 5px;
+                            font-size: 16px;
+                            padding: 3px;
                         }
-
-                        .mylast-act-item {}
                     }
                 }
             }

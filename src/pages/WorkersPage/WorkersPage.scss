@@ -47,6 +47,7 @@
             .user-permission-settings {
                 display: flex;
                 width: 60%;
+                max-height: 820px;
             }
         }
 
@@ -189,6 +190,12 @@
                 flex-direction: column;
                 gap: 0px;
 
+                .employee-grid-container {
+                    .employee-grid {
+                        max-height: 65vh;
+                    }
+                }
+
                 .company-grid-sidebar {
                     width: 96%;
                     margin: 10px;
@@ -208,6 +215,21 @@
 
     .workers-page-main {
         .workers-column {
+            .company-grid {
+                .company-grid-sidebar {
+                    padding: 5px;
+                    margin: 0px 10px 5px 10px;
+                    max-height: 110px;
+                    overflow: auto;
+
+                    ul {
+                        .job-titles-for-workersPage {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+
             .workers-row {
 
                 .workers-page-header {
@@ -219,16 +241,7 @@
                 }
             }
 
-            .company-grid-sidebar {
-                padding: 5px;
-                margin: 5px;
 
-                ul {
-                    .job-titles-for-workersPage {
-                        font-size: 14px;
-                    }
-                }
-            }
 
             .company-grid {
                 .user-permission-settings {

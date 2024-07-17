@@ -140,12 +140,14 @@
 
 @media screen and (max-width: 450px) {
     .activities-container {
-        padding: 5px;
+        padding: 10px;
         transform: translateX(10px);
 
         .activities-container-half {
             padding: 0px;
             border: none;
+            max-height: 675px;
+            overflow-y: auto;
 
             .activities-title {
                 font-size: 16px;

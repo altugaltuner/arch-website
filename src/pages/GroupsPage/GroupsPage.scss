@@ -202,11 +202,30 @@
     }
 }
 
+
+
 @media screen and (max-width: 450px) {
 
     .groups-main {
         .groups-main-column {
-            gap: 10px;
+            gap: 0px;
+
+            .groups-x-all {
+                .project-groups {
+                    max-height: 200px;
+                    padding: 5px;
+
+                    .project-group {
+                        .relevant-project-header {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .project-group-add-group {
+                        padding: 5px;
+                    }
+                }
+            }
 
             .group-div-row {
                 .project-groups {

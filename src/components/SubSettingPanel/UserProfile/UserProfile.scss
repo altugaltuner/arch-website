@@ -125,12 +125,40 @@
     .personal-info-subsetting-column {
         width: 100%;
         gap: 10px;
-        padding: 10px;
+        padding: 10px 10px 10px 15px;
         align-items: center;
 
         .personal-info-subsetting-oneline {
+            .edit-pencil-subsetting {
+                width: 10px;
+                height: 10px;
+                right: 2px;
+                top: 2px;
+            }
+
+            .subsetting-div-other {
+                .edit-pencil-subsetting {
+                    width: 10px;
+                    height: 10px;
+                    right: 2px;
+                    top: 2px;
+                }
+
+                .subsetting-paragraph {
+                    font-size: 12px;
+                    font-weight: 300;
+                    margin-bottom: 5px;
+                }
+            }
+
             .subsetting-header {
                 font-weight: 400;
+
+                .subsetting-pp {
+                    width: 100px;
+                    height: 100px;
+
+                }
             }
         }
     }
@@ -142,6 +170,4 @@
     .subsetting-buttons-div {
         flex-direction: column;
     }
-
-
 }

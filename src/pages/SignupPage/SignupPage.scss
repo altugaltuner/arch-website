@@ -15,9 +15,9 @@
 
     .back-button-company {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 50px;
+        top: 10px;
+        left: 10px;
+        width: 35px;
         opacity: 0.5;
         cursor: pointer;
         transition: all 0.2s;
@@ -35,10 +35,10 @@
         border: 1px solid $border-color;
 
         .signup-header {
-            color: $font-color;
             font-size: 50px;
             font-weight: 400;
             margin-bottom: 30px;
+            color: $header-grey;
         }
 
         .login-form {
@@ -46,20 +46,22 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
 
             .buttons-div-for-signup {
                 display: flex;
                 margin-top: 20px;
-                gap: 20px;
+                gap: 15px;
 
                 .back-button-to-login,
                 .signup-btn {
                     border-radius: 12px;
                     border: 1px solid $border-color;
                     cursor: pointer;
-                    padding: 10px;
+                    padding: 8px;
                     transition: all 0.2s;
+                    height: 50px;
+                    font-size: 18px;
 
                     &:hover {
                         background-color: darken($yellow, 10%);
@@ -170,7 +172,7 @@
 @media screen and (max-width: 578px) {
     .signup-page {
         .signup-main-div {
-            width: 100%;
+            width: 95%;
 
             .signup-header {
                 font-size: 40px;

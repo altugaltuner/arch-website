@@ -214,22 +214,14 @@
 
             .calendar-area {}
 
-            .calendar-page-header-and-input {
-
-
-                .calendar-page-header {}
-
-                .search-input {}
-            }
+            .calendar-page-header-and-input {}
         }
 
         .calendar-page-events-div {
             transform: translate(50px, 0px);
             width: calc(100% - 110px);
 
-            .calendar-page-events-inner-div {
-                .create-event-calendar {}
-            }
+            .calendar-page-events-inner-div {}
         }
     }
 }
@@ -243,28 +235,13 @@
             .calendar-page-controls {
                 padding: 10px;
                 margin: 0px;
-
-                .calendar-page-button {}
-
-                span {}
             }
 
             .calendar-area {
 
-
-                .calendar-day-header {}
-
                 .calendar-day {
                     padding: 10px;
                 }
-            }
-
-            .calendar-page-header-and-input {
-
-
-                .calendar-page-header {}
-
-                .search-input {}
             }
         }
 
@@ -274,11 +251,6 @@
             width: calc(100% - 90px);
 
             .calendar-page-events-inner-div {
-                .create-event-calendar {}
-
-                .events-header-date {}
-
-                .calendar-page-subheader {}
 
                 .selected-day-event-inner {
                     display: flex;
@@ -352,6 +324,7 @@
         .calendar-page-events-div {
             padding: 5px;
             margin-top: 5px;
+            height: 400px;
 
             .calendar-page-events-inner-div {
                 gap: 5px;
@@ -364,11 +337,26 @@
                 .calendar-page-subheader {
                     font-size: 20px;
                     padding: 5px;
-
-
                 }
 
                 .selected-day-event-inner {
+                    max-height: 310px;
+                    overflow-y: auto;
+
+                    .calendar-one-event {
+                        .one-event-subheader {
+                            font-size: 18px;
+                        }
+
+                        .events-header-date {
+                            font-size: 14px;
+                        }
+
+                        .events-paragraph {
+                            font-size: 12px;
+                        }
+                    }
+
                     .no-event-p {
                         font-size: 16px;
                     }
@@ -379,8 +367,6 @@
 }
 
 .calendar-day {
-
-    /* Mevcut stiller */
 
     &.selected {
         background-color: #2196f3;

@@ -82,5 +82,40 @@
 @media screen and (max-width: 950px) {
     .project-process-main {
         width: 100%;
+        padding: 10px;
+        margin: 0px;
+        gap: 0px;
+
+        .project-percentage {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar-container {
+            margin-bottom: 5px;
+        }
+
+        .project-process-header {
+            font-size: 20px;
+            margin: 0px;
+        }
+
+        .project-process-input {
+            gap: 5px;
+
+            .project-process-input-box {
+                padding: 5px;
+            }
+
+            .project-process-submit-button {
+                padding: 5px 10px;
+                font-size: 16px;
+            }
+
+            .project-process-p {
+                font-size: 16px;
+                margin: 0px;
+            }
+        }
     }
 }

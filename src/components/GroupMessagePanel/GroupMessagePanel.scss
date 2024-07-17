@@ -128,9 +128,33 @@
         width: 90%;
         padding: 10px;
         transform: translate(0px, 0px);
-        margin: 10px;
+        margin: 3px;
+        height: 60vh;
+
+        .message-input-area {
+            gap: 5px;
+        }
+
+        .message-panel-head {
+            .message-panel-left-side {
+                .message-panel-group-name {
+                    font-size: 16px;
+                }
+            }
+
+            .message-panel-right-side {
+                .group-members-show {
+                    padding: 5px;
+                    font-size: 12px;
+                }
+
+
+            }
+        }
 
         .message-panel-message-area {
+            max-height: 250px;
+            overflow-y: auto;
 
             input {
                 width: 50px;

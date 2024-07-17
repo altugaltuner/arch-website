@@ -234,6 +234,7 @@
             .profile-pic {
                 width: 120px;
                 height: 120px;
+                margin: 0px;
             }
         }
     }
@@ -242,17 +243,18 @@
 @media screen and (max-width: 450px) {
     .profile {
         width: 95%;
-        padding: 10px;
+        padding: 5px;
         margin-left: 12px;
 
         .profile-info {
             gap: 5px;
 
             .buttons-for-profile-section {
-                margin-top: 10px;
+                margin-top: 5px;
 
                 .my-profile-logout {
                     padding: 5px 10px;
+                    font-size: 16px;
                 }
             }
 

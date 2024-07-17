@@ -51,7 +51,7 @@
                         align-items: center;
                         width: 33%;
                         gap: 10px;
-                        height: 180px;
+                        height: auto;
                         border: 1px solid $border-color;
                         border-radius: 5px;
                         padding: 10px;
@@ -96,6 +96,7 @@
                 .all-companies-page-company-card {
                     display: flex;
                     flex-direction: column;
+                    text-align: center;
                     align-items: center;
                     gap: 12px;
                     padding: 12px;
@@ -242,7 +243,28 @@
 @media screen and (max-width: 450px) {
     .flow-page-main {
         .flow-page-main-row {
+            gap: 5px;
+
             .flow-page-main-column {
+                .flow-descriptions {
+                    padding: 5px;
+                    gap: 5px;
+
+                    .flow-desc-subheader {
+                        font-size: 20px;
+                    }
+
+                    .flow-desc-paragraph {
+                        padding: 5px;
+                        gap: 5px;
+                        font-size: 12px;
+
+                        .flow-desc-p-bold {
+                            font-size: 16px;
+                        }
+                    }
+                }
+
                 .flow-page-title {
                     font-size: 32px;
                     margin: 10px;
@@ -250,6 +272,16 @@
             }
 
             .all-companies-column {
+                gap: 5px;
+
+                .social-media-and-connections {
+                    gap: 5px;
+                }
+
+                .all-companies-page-title {
+                    font-size: 24px;
+                    padding: 5px;
+                }
 
                 .social-media-and-connections {
                     .social-media-logo-div {
@@ -278,23 +310,6 @@
                     }
                 }
             }
-
-            .flow-descriptions {
-                padding: 5px;
-                gap: 5px;
-
-                .flow-desc-subheader {
-                    font-size: 20px;
-                }
-
-                .flow-desc-paragraph {
-                    padding: 5px;
-                    gap: 5px;
-                    font-size: 12px;
-                }
-            }
-
-
         }
     }
 }

@@ -11,9 +11,9 @@
 
     .back-button-already {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 50px;
+        top: 10px;
+        left: 10px;
+        width: 35px;
         opacity: 0.5;
         cursor: pointer;
         transition: all 0.2s;
@@ -78,15 +78,19 @@
             padding: 20px;
             gap: 20px;
             width: 80%;
+            height: 80vh;
+
 
             .already-login-btn-div {
+                flex-direction: column;
+
                 .already-login-back {
                     padding: 10px;
                 }
             }
 
             .already-login-header {
-                font-size: 30px;
+                font-size: 28px;
                 text-align: center;
             }
         }

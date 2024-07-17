@@ -37,7 +37,7 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
                         </p>
                     ))
                 ) : (
-                    <p>Tarihçe kaydı bulunmamaktadır.</p>
+                    <p className='no-history-p'>Tarihçe kaydı bulunmamaktadır.</p>
                 )}
             </div>
         </div>

@@ -198,29 +198,59 @@
     .my-files-panel {
         height: auto;
         width: 95%;
+        gap: 5px;
         margin-left: 11px;
 
         .folders {
 
 
             .folder-content {
+                padding: 0px;
+                max-height: 250px;
+                margin: 0px;
+
+                .search-input {
+                    padding: 5px;
+                    width: 75%;
+                }
+
+                .folder-header {
+                    margin: 0px;
+                    font-size: 18px;
+                }
+
+                gap: 5px;
 
                 .upload-file-button {
-                    width: auto;
+                    width: 70px;
                     padding: 5px;
+                    font-size: 16px;
                 }
 
                 .files {
+                    gap: 5px;
+
                     .file {
-                        width: 100px;
+                        width: 70px;
                         padding: 5px;
+                        border-radius: 5px;
+
+                        .files-img {
+                            width: 80%;
+                            border-radius: 5px;
+                        }
+
+                        .file-name {
+                            font-size: 12px;
+                            margin: 0px;
+                        }
                     }
                 }
             }
 
             .folder {
-                width: 90px;
-                padding: 10px;
+                width: 75px;
+                padding: 5px;
                 margin: 0px;
 
                 .folder-deleteicon,
@@ -246,7 +276,8 @@
 
 
         .my-files-panel-header {
-            font-size: 22px;
+            font-size: 18px;
+            padding-bottom: 5px;
         }
 
         .add-folder-button {

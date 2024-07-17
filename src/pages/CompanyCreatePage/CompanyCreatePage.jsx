@@ -10,9 +10,7 @@ function CompanyCreatePage() {
         <main className="company-create-page-main">
             <img className="back-button-company" src={backButton} alt="back-button" onClick={() => window.history.back()} />
             <h1 className="company-create-page-title">Şirket Hesabı Açın</h1>
-            <div className="company-and-admin-create-div">
-                <CompanyFormElements errors={errors} setErrors={setErrors} />
-            </div>
+            <CompanyFormElements errors={errors} setErrors={setErrors} />
         </main>
     );
 };
