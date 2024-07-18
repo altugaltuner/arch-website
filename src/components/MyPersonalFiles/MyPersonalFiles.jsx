@@ -31,7 +31,11 @@ function MyPersonalFiles({ user }) {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
                 const folders = response.data.personal_folders || [];
-                setPersonalFolders(folders);
+                const formattedFolders = folders.map(folder => ({
+                    ...folder,
+                    personalFolderContent: folder.personalFolderContent || []
+                }));
+                setPersonalFolders(formattedFolders);
             } catch (error) {
                 console.error('Error fetching the data', error);
             } finally {
@@ -41,6 +45,7 @@ function MyPersonalFiles({ user }) {
 
         fetchData();
     }, [user]);
+
 
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
@@ -63,7 +68,7 @@ function MyPersonalFiles({ user }) {
                 console.error('No selected folder');
                 return;
             }
-            const updatedContent = [...selectedFolder.personalFolderContent, uploadedFile];
+            const updatedContent = [...(selectedFolder.personalFolderContent || []), uploadedFile];
 
             await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${selectedFolder.id}`, {
                 data: {
@@ -83,6 +88,7 @@ function MyPersonalFiles({ user }) {
             console.error('Error uploading the file', error);
         }
     };
+
 
     const uploadFile = (folderId) => {
         const folder = personalFolders.find(folder => folder.id === folderId);

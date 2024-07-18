@@ -81,7 +81,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 const fileAttributes = file.attributes || {};
                 const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1).toLowerCase() : '';
                 const isImage = ["jpg", "jpeg", "png"].includes(fileExt);
-                const iconSrc = isImage ? `https://bold-animal-facf707bd9.strapiapp.com${fileAttributes.formats.thumbnail.url || fileAttributes.url}` : (fileIcons[fileExt] || fileIcon);
+                const iconSrc = isImage ? fileAttributes.formats.thumbnail.url || fileAttributes.url : (fileIcons[fileExt] || fileIcon);
 
                 return (
                     <div key={file.id} className="file-folder-content" onClick={() => openFileModal(file)}>
@@ -91,7 +91,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                             alt="file-icon"
                         />
                         <span className="file-name">{fileAttributes.name || 'Unknown'}</span>
-                        {currentUser && currentUser.profilePic && (
+                        {currentUser?.profilePic && (
                             <div className="uploader-profile-pic-small">
                                 <img src={currentUser.profilePic.url} alt="profilepic" className="uploader-profile-pic" />
                                 <span className="uploader-name-tooltip">{currentUser.username}</span>
