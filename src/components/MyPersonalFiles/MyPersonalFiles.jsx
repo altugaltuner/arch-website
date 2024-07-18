@@ -249,7 +249,7 @@ function MyPersonalFiles({ user }) {
                     {filteredFiles.map(file => (
                         <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
                             {file.formats && file.formats.thumbnail ? (
-                                <img className="files-img" src={`https://bold-animal-facf707bd9.strapiapp.com${file.formats.thumbnail.url || file.url}`} alt={file.name} />
+                                <img className="files-img" src={file.formats.thumbnail.url || file.url} alt={file.name} />
                             ) : (
                                 <span>{file.name}</span>
                             )}

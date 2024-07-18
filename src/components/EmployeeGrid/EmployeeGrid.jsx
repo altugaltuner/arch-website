@@ -18,7 +18,7 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
                             <div className="profile-pic">
                                 <img
                                     className="profile-pic-inner"
-                                    src={employee?.profilePic ? `https://bold-animal-facf707bd9.strapiapp.com${employee?.profilePic?.data?.attributes?.url || employee?.profilePic?.data?.attributes?.formats?.thumbnail?.url}` : ""}
+                                    src={employee?.profilePic ? employee?.profilePic?.data?.attributes?.url || employee?.profilePic?.data?.attributes?.formats?.thumbnail?.url : ""}
                                     alt=""
                                 />
                             </div>

@@ -93,7 +93,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                         <span className="file-name">{fileAttributes.name || 'Unknown'}</span>
                         {currentUser && currentUser.profilePic && (
                             <div className="uploader-profile-pic-small">
-                                <img src={`https://bold-animal-facf707bd9.strapiapp.com${currentUser.profilePic.url}`} alt="profilepic" className="uploader-profile-pic" />
+                                <img src={currentUser.profilePic.url} alt="profilepic" className="uploader-profile-pic" />
                                 <span className="uploader-name-tooltip">{currentUser.username}</span>
                             </div>
                         )}

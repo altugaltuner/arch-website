@@ -111,7 +111,7 @@ const AdminCompanySettings = () => {
                         <img className="edit-pencil-company-logo-edit" src={editPencil} alt="edit-pencil" />
                     </label>
                     {companyLogo ? (
-                        <img className="company-logo-img" src={`https://bold-animal-facf707bd9.strapiapp.com${companyLogo}`} alt="company-logo" />
+                        <img className="company-logo-img" src={companyLogo} alt="company-logo" />
                     ) : (
                         <div className="company-logo-placeholder">Şirket logosu yükleyin</div>
                     )}

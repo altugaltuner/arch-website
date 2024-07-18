@@ -26,7 +26,7 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
                 <span className="file-close-modal" onClick={() => setFileModal(false)}>X</span>
                 <h2 className="file-modal-header">{currentFile.attributes.name}</h2>
                 {isImage ? (
-                    <img src={`https://bold-animal-facf707bd9.strapiapp.com${currentFile.attributes.url}`} alt="file" className="file-icon-modal" />
+                    <img src={currentFile.attributes.url} alt="file" className="file-icon-modal" />
                 ) : (
                     <img src={fileIcons[fileExt] || fileIcon} alt="file-icon" className="file-icon-modal" />
                 )}

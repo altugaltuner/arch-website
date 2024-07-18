@@ -36,7 +36,7 @@ function MyActiveProjects({ user }) {
             <div className="my-active-project-list">
                 {u.projects.map(p => (
                     <div className="my-active-project-list-element" key={p.id} onClick={() => handleProjectClick(p.id)}>
-                        <img className="my-active-project-list-pic" src={`https://bold-animal-facf707bd9.strapiapp.com${p.projectCoverPhoto.formats.thumbnail.url || p.projectCoverPhoto.url}`} alt="" />
+                        <img className="my-active-project-list-pic" src={p.projectCoverPhoto.formats.thumbnail.url || p.projectCoverPhoto.url} alt="" />
                         <p className="my-active-project-list-paragraph" key={p.id}>{p.projectName}</p>
                     </div>
                 ))}
