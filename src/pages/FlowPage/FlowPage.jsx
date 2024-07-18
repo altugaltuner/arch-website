@@ -90,7 +90,7 @@ function FlowPage() {
                                     className="company-hub-one-logo"
                                     src={
                                         company.attributes.companyLogo && company.attributes.companyLogo.data && company.attributes.companyLogo.data.attributes && company.attributes.companyLogo.data.attributes.formats && company.attributes.companyLogo.data.attributes.formats.thumbnail
-                                            ? `https://bold-animal-facf707bd9.strapiapp.com${company.attributes.companyLogo.data.attributes.formats.thumbnail.url}`
+                                            ? company.attributes.companyLogo.data.attributes.formats.thumbnail.url
                                             : defaultLogo
                                     }
                                     alt="company-logo"

@@ -18,7 +18,7 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
                             <div className="profile-pic">
                                 <img
                                     className="profile-pic-inner"
-                                    src={employee?.profilePic ? employee?.profilePic?.data?.attributes?.url || employee?.profilePic?.data?.attributes?.formats?.thumbnail?.url : ""}
+                                    src={employee?.profilePic?.data?.attributes?.formats?.thumbnail?.url || employee?.profilePic ? employee?.profilePic?.data?.attributes?.url : ""}
                                     alt=""
                                 />
                             </div>

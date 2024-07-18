@@ -40,7 +40,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                                     {message.attributes?.contentMedia?.data?.length > 0 && (
                                         <div className="message-media-div">
                                             {message.attributes.contentMedia.data.map(media => (
-                                                <img className="message-media-img" key={media.id} src={`https://bold-animal-facf707bd9.strapiapp.com${media.attributes.url}`} alt={media.attributes.name} />
+                                                <img className="message-media-img" key={media.id} src={media.attributes.url} alt={media.attributes.name} />
                                             ))}
                                         </div>
                                     )}

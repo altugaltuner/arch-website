@@ -43,7 +43,7 @@ function MyProfile({ user }) {
                 <div className="profile-image">
                     <img
                         className="profile-pic"
-                        src={formData.profilePic ? `https://bold-animal-facf707bd9.strapiapp.com${formData.profilePic.url}` : undefinedProfilePic}
+                        src={formData.profilePic ? formData.profilePic.url : undefinedProfilePic}
                         alt="Profile"
                     />
                 </div>

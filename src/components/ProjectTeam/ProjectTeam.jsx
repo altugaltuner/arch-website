@@ -118,7 +118,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                         <div className="profile-pic">
                             <img
                                 className="profile-pic-inner"
-                                src={employee?.profilePic?.formats?.thumbnail?.url ? `https://bold-animal-facf707bd9.strapiapp.com${employee?.profilePic?.formats?.thumbnail?.url}` : `https://bold-animal-facf707bd9.strapiapp.com${employee?.profilePic?.url}`}
+                                src={employee?.profilePic?.formats?.thumbnail?.url ? employee?.profilePic?.formats?.thumbnail?.url : employee?.profilePic?.url}
                                 alt=""
                             />
                         </div>

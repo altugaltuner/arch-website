@@ -207,8 +207,8 @@ function GroupsPage() {
                                     {group.attributes.groupChatPic?.data ? (
                                         <img
                                             className="group-image"
-                                            src={`https://bold-animal-facf707bd9.strapiapp.com${group.attributes.groupChatPic.data.attributes.url}`}
-                                            alt={group.attributes.groupChatPic.data.attributes.name}
+                                            src={group.attributes.groupChatPic.data.attributes.url}
+                                            alt="group-chat-pic"
                                         />
                                     ) : (
                                         <img

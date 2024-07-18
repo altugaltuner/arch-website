@@ -128,7 +128,7 @@ function OtherUsersInfo({ employee }) {
                     <div className='other-info-inner-2'>
                         <img
                             className="other-info-profile-pic"
-                            src={`https://bold-animal-facf707bd9.strapiapp.com${employee.profilePic?.data?.attributes?.url || employee.profilePic?.data?.attributes?.formats?.thumbnail?.url || ""}`}
+                            src={employee.profilePic?.data?.attributes?.url || employee.profilePic?.data?.attributes?.formats?.thumbnail?.url || ""}
                             alt=""
                         />
                         <p className='other-info-username'>{employee.username}</p>
@@ -183,7 +183,7 @@ function OtherUsersInfo({ employee }) {
                                 {project.attributes.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url && (
                                     <img
                                         className="other-project-photo"
-                                        src={`https://bold-animal-facf707bd9.strapiapp.com${project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url || project.attributes.projectCoverPhoto.data.attributes.url || ''}`}
+                                        src={project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url || project.attributes.projectCoverPhoto.data.attributes.url || ''}
                                         alt={project.attributes.projectName}
                                     />
                                 )}
@@ -215,7 +215,7 @@ function OtherUsersInfo({ employee }) {
                             {message.attributes?.messageMedia?.data?.length > 0 && (
                                 <div className="message-media-div-private">
                                     {message.attributes.messageMedia.data.map(media => (
-                                        <img className="message-media-img-private" key={media.id} src={`https://bold-animal-facf707bd9.strapiapp.com${media.attributes.url}`} alt={media.attributes.name} />
+                                        <img className="message-media-img-private" key={media.id} src={media.attributes.url} alt={media.attributes.name} />
                                     ))}
                                 </div>
                             )}
