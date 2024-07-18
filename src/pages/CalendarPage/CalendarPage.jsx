@@ -42,7 +42,6 @@ const CalendarPage = () => {
                 const allEvents = response.data.data;
                 setEvents(allEvents);
 
-                // Filter events by user's company
                 const companyEvents = allEvents.filter(event => event.attributes.company.data.id === userCompany);
                 setFilteredEvents(companyEvents);
             })
