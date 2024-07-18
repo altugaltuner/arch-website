@@ -13,7 +13,7 @@ function SelectedEmployeeModal({ employee, onClose }) {
                 <div className="employee-card-modal-profile-pic">
                     <img
                         className="employee-card-modal-profile-pic-inner"
-                        src={employee.profilePic?.formats?.thumbnail?.url || employee?.profilePic?.url}
+                        src={employee?.profilePic?.url || employee.profilePic?.formats?.thumbnail?.url}
                         alt=""
                     />
                 </div>

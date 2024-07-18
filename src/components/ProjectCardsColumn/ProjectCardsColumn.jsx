@@ -55,6 +55,8 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
     };
 
     const handleProjectClick = (project) => {
+        if (isModalOpen) return;  // Prevent navigation if modal is open
+
         const userProjects = user.projects.map(p => p.projectName);
         if (userProjects.includes(project.attributes.projectName)) {
             window.location.href = `/projects/${project.id}`;

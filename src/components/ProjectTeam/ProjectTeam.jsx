@@ -118,7 +118,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                         <div className="profile-pic">
                             <img
                                 className="profile-pic-inner"
-                                src={employee?.profilePic?.formats?.thumbnail?.url ? employee?.profilePic?.formats?.thumbnail?.url : employee?.profilePic?.url}
+                                src={employee?.profilePic?.formats?.thumbnail?.url || employee?.profilePic?.url}
                                 alt=""
                             />
                         </div>
