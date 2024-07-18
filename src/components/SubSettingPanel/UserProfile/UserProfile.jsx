@@ -16,14 +16,16 @@ const UserProfile = () => {
         email: false,
         password: false,
         MobilePhone: false,
-        profilePic: false
+        profilePic: false,
+        userLocation: false
     });
     const [userData, setUserData] = useState({
         username: user?.username || '',
         email: user?.email || '',
         password: '',
         MobilePhone: user?.MobilePhone || '',
-        profilePic: user?.profilePic || ''
+        profilePic: user?.profilePic || '',
+        userLocation: user?.userLocation || ''
     });
     const [error, setError] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -185,6 +187,28 @@ const UserProfile = () => {
                     <div className='subsetting-div-other'>
                         <p className="subsetting-paragraph">*********</p>
                         <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('password')} />
+                    </div>
+                )}
+            </div>
+
+            <div className="personal-info-subsetting-oneline">
+                <h3 className="subsetting-header">Konum</h3>
+                {editMode.userLocation ? (
+                    <div className='subsetting-buttons-div'>
+                        <input
+                            className='input-username-subsetting'
+                            type="text"
+                            name="userlocation"
+                            value={userData.userLocation}
+                            onChange={handleInputChange}
+                        />
+                        <button className='subsetting-btn' onClick={() => handleSaveClick('userlocation')}>Onayla</button>
+                        <button className='subsetting-cancel' onClick={() => handleCancelClick('userlocation')}>İptal</button>
+                    </div>
+                ) : (
+                    <div className='subsetting-div-other'>
+                        <p className="subsetting-paragraph">{user?.userLocation || 'konum bilgisi yok'}</p>
+                        <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('userlocation')} />
                     </div>
                 )}
             </div>

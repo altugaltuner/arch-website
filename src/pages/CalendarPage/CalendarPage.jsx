@@ -26,6 +26,7 @@ const CalendarPage = () => {
     const [month, setMonth] = useState(new Date().getMonth());
     const [selectedDate, setSelectedDate] = useState(null);
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
     const [selectedDayEvents, setSelectedDayEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
@@ -33,20 +34,26 @@ const CalendarPage = () => {
     const calendarDates = generateCalendar(year, month);
     const { user } = useAuth();
     const userRole = user && user.access ? user.access.role : null;
+    const userCompany = user ? user.company.id : null;
 
     useEffect(() => {
         axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=*')
             .then(response => {
-                setEvents(response.data.data);
+                const allEvents = response.data.data;
+                setEvents(allEvents);
+
+                // Filter events by user's company
+                const companyEvents = allEvents.filter(event => event.attributes.company.data.id === userCompany);
+                setFilteredEvents(companyEvents);
             })
             .catch(error => {
                 console.error('Error fetching events:', error);
             });
-    }, []);
+    }, [userCompany]);
 
     const handleDateClick = (date) => {
         setSelectedDate(date);
-        const dayEvents = events.filter(event => {
+        const dayEvents = filteredEvents.filter(event => {
             const eventDate = new Date(event.attributes.date);
             return eventDate.toDateString() === date.toDateString();
         });
@@ -72,13 +79,17 @@ const CalendarPage = () => {
 
     const addEvent = (newEvent) => {
         setEvents([...events, newEvent]);
-        if (new Date(newEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
-            setSelectedDayEvents([...selectedDayEvents, newEvent]);
+        if (newEvent.attributes.company.data.id === userCompany) {
+            setFilteredEvents([...filteredEvents, newEvent]);
+            if (new Date(newEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
+                setSelectedDayEvents([...selectedDayEvents, newEvent]);
+            }
         }
     };
 
     const updateEvent = (updatedEvent) => {
         setEvents(events.map(event => event.id === updatedEvent.id ? updatedEvent : event));
+        setFilteredEvents(filteredEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
         if (new Date(updatedEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
             setSelectedDayEvents(selectedDayEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
         }
@@ -86,6 +97,7 @@ const CalendarPage = () => {
 
     const deleteEvent = (eventId) => {
         setEvents(events.filter(event => event.id !== eventId));
+        setFilteredEvents(filteredEvents.filter(event => event.id !== eventId));
         setSelectedDayEvents(selectedDayEvents.filter(event => event.id !== eventId));
     };
 
@@ -123,7 +135,7 @@ const CalendarPage = () => {
                     ))}
                     {calendarDates.map((date) => {
                         const eventDateString = date.toDateString();
-                        const hasEvent = events.some(event => {
+                        const hasEvent = filteredEvents.some(event => {
                             const eventDate = new Date(event.attributes.date);
                             return eventDate.toDateString() === eventDateString;
                         });
