@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './EditEventModal.scss';
+import { useAuth } from "../../components/AuthProvider";
 
 const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [time, setTime] = useState('');
+    const [location, setLocation] = useState('');
     const [errors, setErrors] = useState({});
+
+    const { user } = useAuth();
+    const userId = user ? user.id : null;
+    const userRole = user ? user.access.role : null;
 
     useEffect(() => {
         if (event) {
             setTitle(event.attributes.title);
             setDescription(event.attributes.description);
             const eventDate = new Date(event.attributes.date);
-            setTime(eventDate.toISOString().substring(11, 16)); // HH:MM formatında
+            setTime(eventDate.toISOString().substring(11, 16)); // HH:MM format
+            setLocation(event.attributes.eventLocation || '');
         }
     }, [event]);
 
@@ -24,6 +31,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
         if (!title) validationErrors.title = "Başlık gerekli";
         if (!description) validationErrors.description = "Açıklama gerekli";
         if (!time) validationErrors.time = "Saat gerekli";
+        if (!location) validationErrors.location = "Yer gerekli";
 
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -41,6 +49,8 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
                     title,
                     description,
                     date: eventDate.toISOString(),
+                    eventLocation: location,
+                    company: event.attributes.company.data.id,
                 },
             });
             updateEvent(response.data.data);
@@ -60,6 +70,8 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
         }
     };
 
+    const isUserAuthorized = userRole === "Admin" || userId === event.attributes.users_permissions_user.data.id;
+
     return (
         <div className="edit-event-modal">
             <div className="edit-event-modal-content">
@@ -73,6 +85,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
+                            disabled={!isUserAuthorized}
                         />
                         {errors.title && <p className="error-message">{errors.title}</p>}
                     </label>
@@ -81,6 +94,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            disabled={!isUserAuthorized}
                         />
                         {errors.description && <p className="error-message">{errors.description}</p>}
                     </label>
@@ -90,13 +104,28 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
                             type="time"
                             value={time}
                             onChange={(e) => setTime(e.target.value)}
+                            disabled={!isUserAuthorized}
                         />
                         {errors.time && <p className="error-message">{errors.time}</p>}
                     </label>
+                    <label>
+                        Yer:
+                        <input
+                            type="text"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            disabled={!isUserAuthorized}
+                        />
+                        {errors.location && <p className="error-message">{errors.location}</p>}
+                    </label>
                     <footer className="edit-event-modal-footer">
                         <button type="button" onClick={onClose}>İptal</button>
-                        <button type="button" className="delete-button" onClick={handleDelete}>Sil</button>
-                        <button type="submit">Güncelle</button>
+                        {isUserAuthorized && (
+                            <>
+                                <button type="button" className="delete-button" onClick={handleDelete}>Sil</button>
+                                <button type="submit">Güncelle</button>
+                            </>
+                        )}
                     </footer>
                 </form>
             </div>

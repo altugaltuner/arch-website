@@ -91,6 +91,33 @@
                 }
             }
         }
+
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            font-size: 1.2rem;
+
+            .pagination-button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                margin: 0 10px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:disabled {
+                    background-color: #ccc;
+                    cursor: not-allowed;
+                }
+
+                &:hover:not(:disabled) {
+                    background-color: #0056b3;
+                }
+            }
+        }
     }
 }
 

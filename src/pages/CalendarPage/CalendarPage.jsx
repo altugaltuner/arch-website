@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
 import "./CalendarPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
@@ -7,7 +7,6 @@ import EditEventModal from "./EditEventModal";
 import { useAuth } from "../../components/AuthProvider";
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
-import editIcon from "../../assets/icons/edit-pencil.png";
 
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
@@ -31,33 +30,35 @@ const CalendarPage = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [eventToEdit, setEventToEdit] = useState(null);
-    const calendarDates = generateCalendar(year, month);
+    const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
     const { user } = useAuth();
     const userRole = user && user.access ? user.access.role : null;
     const userCompany = user ? user.company.id : null;
 
-    useEffect(() => {
-        axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=*')
-            .then(response => {
-                const allEvents = response.data.data;
-                setEvents(allEvents);
-
-                const companyEvents = allEvents.filter(event => event.attributes.company.data.id === userCompany);
-                setFilteredEvents(companyEvents);
-            })
-            .catch(error => {
-                console.error('Error fetching events:', error);
-            });
+    const fetchEvents = useCallback(async () => {
+        try {
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=*');
+            const allEvents = response.data.data;
+            setEvents(allEvents);
+            const companyEvents = allEvents.filter(event => event.attributes.company.data.id === userCompany);
+            setFilteredEvents(companyEvents);
+        } catch (error) {
+            console.error('Error fetching events:', error);
+        }
     }, [userCompany]);
 
-    const handleDateClick = (date) => {
+    useEffect(() => {
+        fetchEvents();
+    }, [fetchEvents]);
+
+    const handleDateClick = useCallback((date) => {
         setSelectedDate(date);
         const dayEvents = filteredEvents.filter(event => {
             const eventDate = new Date(event.attributes.date);
             return eventDate.toDateString() === date.toDateString();
         });
         setSelectedDayEvents(dayEvents);
-    };
+    }, [filteredEvents]);
 
     const openModal = () => {
         setModalOpen(true);
@@ -76,29 +77,29 @@ const CalendarPage = () => {
         setEditModalOpen(false);
     };
 
-    const addEvent = (newEvent) => {
-        setEvents([...events, newEvent]);
+    const addEvent = useCallback((newEvent) => {
+        setEvents(prevEvents => [...prevEvents, newEvent]);
         if (newEvent.attributes.company.data.id === userCompany) {
-            setFilteredEvents([...filteredEvents, newEvent]);
-            if (new Date(newEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
-                setSelectedDayEvents([...selectedDayEvents, newEvent]);
+            setFilteredEvents(prevFilteredEvents => [...prevFilteredEvents, newEvent]);
+            if (new Date(newEvent.attributes.date).toDateString() === selectedDate?.toDateString()) {
+                setSelectedDayEvents(prevSelectedDayEvents => [...prevSelectedDayEvents, newEvent]);
             }
         }
-    };
+    }, [selectedDate, userCompany]);
 
-    const updateEvent = (updatedEvent) => {
-        setEvents(events.map(event => event.id === updatedEvent.id ? updatedEvent : event));
-        setFilteredEvents(filteredEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
-        if (new Date(updatedEvent.attributes.date).toDateString() === selectedDate.toDateString()) {
-            setSelectedDayEvents(selectedDayEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
+    const updateEvent = useCallback((updatedEvent) => {
+        setEvents(prevEvents => prevEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
+        setFilteredEvents(prevFilteredEvents => prevFilteredEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
+        if (new Date(updatedEvent.attributes.date).toDateString() === selectedDate?.toDateString()) {
+            setSelectedDayEvents(prevSelectedDayEvents => prevSelectedDayEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
         }
-    };
+    }, [selectedDate]);
 
-    const deleteEvent = (eventId) => {
-        setEvents(events.filter(event => event.id !== eventId));
-        setFilteredEvents(filteredEvents.filter(event => event.id !== eventId));
-        setSelectedDayEvents(selectedDayEvents.filter(event => event.id !== eventId));
-    };
+    const deleteEvent = useCallback((eventId) => {
+        setEvents(prevEvents => prevEvents.filter(event => event.id !== eventId));
+        setFilteredEvents(prevFilteredEvents => prevFilteredEvents.filter(event => event.id !== eventId));
+        setSelectedDayEvents(prevSelectedDayEvents => prevSelectedDayEvents.filter(event => event.id !== eventId));
+    }, []);
 
     const nextMonth = () => {
         setMonth((prev) => (prev + 1) % 12);
@@ -167,18 +168,14 @@ const CalendarPage = () => {
                                 selectedDayEvents.map(event => (
                                     <div className="calendar-one-event" key={event.id}>
                                         <h3 className="one-event-subheader">{event.attributes.title}</h3>
-                                        <p className="events-header-date">
+                                        <p className="events-header-date">Tarih ve Saat:
                                             {new Date(event.attributes.date).toLocaleString("tr-TR")}
-                                            {event.attributes.createdBy === user.id && (
-                                                <img
-                                                    src={editIcon}
-                                                    alt="edit"
-                                                    className="edit-event-icon"
-                                                    onClick={() => openEditModal(event)}
-                                                />
-                                            )}
                                         </p>
+                                        <p className="events-header-date">Yer: {event.attributes.eventLocation}</p>
                                         <p className="events-paragraph">{event.attributes.description}</p>
+                                        {(userRole === "Admin" || user.id === event.attributes.users_permissions_user.data.id) && (
+                                            <button className="edit-event-calendar" onClick={() => openEditModal(event)}>Düzenle</button>
+                                        )}
                                     </div>
                                 ))
                             ) : (

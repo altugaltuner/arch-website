@@ -76,6 +76,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                     className="search-bar-of-projects"
                     type="text"
                     placeholder="Proje Ara"
+                    autoComplete="off"  // AutoComplete özelliğini kapat
                 />
             </div>
             <div className="projects-cards-main-row">

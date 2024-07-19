@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CreateEventModal.scss';
+import { useAuth } from "../../components/AuthProvider";
 
 const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [time, setTime] = useState('');
+    const [location, setLocation] = useState('');
     const [errors, setErrors] = useState({});
+
+    const { user } = useAuth();
+    const userId = user ? user.id : null;
+    const userCompany = user ? user.company.id : null;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,6 +21,7 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
         if (!title) validationErrors.title = "Başlık gerekli";
         if (!description) validationErrors.description = "Açıklama gerekli";
         if (!time) validationErrors.time = "Saat gerekli";
+        if (!location) validationErrors.location = "Yer gerekli";
 
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -32,6 +39,9 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
                     title,
                     description,
                     date: eventDate.toISOString(),
+                    eventLocation: location,
+                    company: userCompany,
+                    users_permissions_user: userId
                 },
             });
             addEvent(response.data.data);
@@ -73,6 +83,15 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
                             onChange={(e) => setTime(e.target.value)}
                         />
                         {errors.time && <p className="error-message">{errors.time}</p>}
+                    </label>
+                    <label>
+                        Yer:
+                        <input
+                            type="text"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                        />
+                        {errors.location && <p className="error-message">{errors.location}</p>}
                     </label>
                     <footer className="create-event-modal-footer">
                         <button type="button" onClick={onClose}>İptal</button>

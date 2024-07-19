@@ -1,34 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import "./Activities.scss";
 import axios from "axios";
 import { useAuth } from "../../components/AuthProvider";
+import debounce from 'lodash.debounce';
+
+const CACHE_KEY = 'activities';
+const CACHE_EXPIRY_KEY = 'activities_expiry';
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
 
 const Activities = ({ searchTerm }) => {
     const [activities, setActivities] = useState([]);
-    const [filteredActivities, setFilteredActivities] = useState([]);
-
+    const [page, setPage] = useState(1); // Current page number
+    const [totalPages, setTotalPages] = useState(1); // Total number of pages
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
 
-    useEffect(() => {
-        const fetchData = async () => {
+    const isCacheValid = () => {
+        const expiry = localStorage.getItem(CACHE_EXPIRY_KEY);
+        return expiry && new Date().getTime() < expiry;
+    };
+
+    const fetchData = async (page) => {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        if (cachedData && isCacheValid()) {
+            setActivities(JSON.parse(cachedData));
+        } else {
             try {
-                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*');
+                const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
                 setActivities(response.data.data);
+                setTotalPages(response.data.meta.pagination.pageCount); // Update total pages
+                localStorage.setItem(CACHE_KEY, JSON.stringify(response.data.data));
+                localStorage.setItem(CACHE_EXPIRY_KEY, new Date().getTime() + CACHE_DURATION);
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
-        };
-        fetchData();
-    }, []);
+        }
+    };
 
     useEffect(() => {
-        const filterActivities = () => {
-            return activities.filter(activity => activity.attributes.company?.data?.id === usersCompanyId);
-        };
+        fetchData(page);
+    }, [page]);
 
-        setFilteredActivities(filterActivities());
-    }, [searchTerm, activities, usersCompanyId]);
+    const filteredActivities = useMemo(() => {
+        return activities.filter(activity =>
+            activity.attributes.company?.data?.id === usersCompanyId &&
+            (!searchTerm || activity.attributes.project?.data?.attributes?.projectName.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+    }, [activities, usersCompanyId, searchTerm]);
+
+    const loadNextPage = () => {
+        if (page < totalPages) {
+            setPage(prevPage => prevPage + 1);
+        }
+    };
+
+    const loadPreviousPage = () => {
+        if (page > 1) {
+            setPage(prevPage => prevPage - 1);
+        }
+    };
 
     const reviseStateMap = {
         1: "yapılacak",
@@ -83,6 +113,15 @@ const Activities = ({ searchTerm }) => {
                         ))}
                     </tbody>
                 </table>
+                <div className="pagination-controls">
+                    <button onClick={loadPreviousPage} disabled={page === 1} className="pagination-button">
+                        Önceki
+                    </button>
+                    <span>Sayfa {page} / {totalPages}</span>
+                    <button onClick={loadNextPage} disabled={page === totalPages} className="pagination-button">
+                        Sonraki
+                    </button>
+                </div>
             </div>
         </div>
     );
