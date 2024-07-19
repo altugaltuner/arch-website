@@ -41,7 +41,6 @@
                 width: 20px;
                 height: 24px;
                 cursor: pointer;
-                display: none;
                 opacity: 0.5;
 
                 &:hover {
@@ -52,10 +51,6 @@
             &:hover {
                 background-color: darken($background-color, 10%);
             }
-        }
-
-        .job-titles-for-workersPage:hover .trash-icon {
-            display: block;
         }
 
         .job-titles-for-workersPage.active {
