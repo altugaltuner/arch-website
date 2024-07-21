@@ -94,7 +94,7 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
                     <div className='revise-update-buttons-div'>
                         <button className='revise-update-submit-btn' type="submit">Güncelle</button>
                         <button className='revise-update-delete-btn' type="button" onClick={handleDelete}>Sil</button>
-                        <button className='revise-update-submit-cancel' type="button" onClick={onClose}>Kapat</button>
+                        <button className='revise-update-cancel' type="button" onClick={onClose}>Kapat</button>
                     </div>
                 </form>
             </div>

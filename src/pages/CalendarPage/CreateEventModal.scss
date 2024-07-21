@@ -20,8 +20,8 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
         .create-event-modal-header {
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            margin-bottom: 25px;
         }
 
         .create-event-modal-body {
@@ -52,21 +52,27 @@
             display: flex;
             justify-content: flex-end;
             margin-top: 10px;
+            gap: 20px;
 
-            button {
-                margin-left: 10px;
-                padding: 8px 16px;
-                border: none;
-                border-radius: 4px;
+            .create-event-cancel,
+            .create-event-submit {
+                padding: 10px 20px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
                 cursor: pointer;
+                transition: all 0.2s;
+            }
 
-                &:first-of-type {
-                    background: #ccc;
+            .create-event-cancel {
+                &:hover {
+                    background: darken($close, 10%);
                     color: white;
                 }
+            }
 
-                &:last-of-type {
-                    background: $blue;
+            .create-event-submit {
+                &:hover {
+                    background: darken($blue, 10%);
                     color: white;
                 }
             }

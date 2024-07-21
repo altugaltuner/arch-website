@@ -94,8 +94,8 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
                         {errors.location && <p className="error-message">{errors.location}</p>}
                     </label>
                     <footer className="create-event-modal-footer">
-                        <button type="button" onClick={onClose}>İptal</button>
-                        <button type="submit">Oluştur</button>
+                        <button className='create-event-cancel' type="button" onClick={onClose}>İptal</button>
+                        <button className='create-event-submit' type="submit">Oluştur</button>
                     </footer>
                 </form>
             </div>

@@ -84,16 +84,31 @@
 }
 
 .revise-update-submit-btn,
-.revise-update-submit-cancel,
+.revise-update-cancel,
 .revise-update-delete-btn {
     padding: 10px 20px;
     border: 1px solid $border-color;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.2s;
+}
 
+.revise-update-submit-btn {
+    &:hover {
+        background: darken($blue, 10%);
+        color: white;
+    }
+}
+
+.revise-update-cancel {
     &:hover {
         background: darken($yellow, 10%);
+    }
+}
 
+.revise-update-delete-btn {
+    &:hover {
+        background: darken($close, 10%);
+        color: white;
     }
 }

@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 800px;
+    overflow-y: auto;
 
     .support-div {
         display: flex;

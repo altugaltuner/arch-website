@@ -45,9 +45,18 @@
                     transition: all 0.2s;
                     padding: 10px 20px;
                     border-radius: 5px;
+                }
 
+                .new-revise-submit-cancel {
                     &:hover {
                         background: darken($yellow, 10%);
+                    }
+                }
+
+                .new-revise-submit-btn {
+                    &:hover {
+                        background: darken($blue, 10%);
+                        color: white;
                     }
                 }
             }
