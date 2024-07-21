@@ -1,4 +1,5 @@
 import React from 'react';
+import './MaterialCalendar.scss';
 
 const MaterialCalendar = ({ selectedDate, setSelectedDate }) => {
     const handleDateClick = (date) => {

@@ -1,0 +1,27 @@
+.material-calendar {
+
+    .material-calendar-subheader {
+        font-weight: 400;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .calendar {
+        display: flex;
+        flex-wrap: wrap;
+
+        .calendar-day {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            cursor: pointer;
+
+            &.selected {
+                background-color: gold;
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './MaterialUseList.scss';
 
 const MaterialUseList = ({ selectedDate }) => {
     const [materialUse, setMaterialUse] = useState([]);
