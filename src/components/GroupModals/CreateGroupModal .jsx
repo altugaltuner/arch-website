@@ -53,6 +53,7 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
                     placeholder="Grup Adı"
                     value={newGroup.groupName}
                     onChange={handleGroupNameChange}
+                    autoComplete="off"
                 />
                 <input
                     type="password"

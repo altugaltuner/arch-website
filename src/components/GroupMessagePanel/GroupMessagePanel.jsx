@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import "./GroupMessagePanel.scss";
 import { useAuth } from "../AuthProvider";
 import GroupMembersModal from "../../pages/GroupsPage/GroupMembersModal";
@@ -13,7 +13,7 @@ function GroupMessagePanel({ selectedGroupId }) {
     const { user } = useAuth();
     const [showMembersModal, setShowMembersModal] = useState(false);
 
-    const socket = io('http://localhost:1337'); // Strapi sunucusunun URL'sini kullanın
+    //const socket = io('http://localhost:1337'); // Strapi sunucusunun URL'sini kullanın
 
     useEffect(() => {
         console.log(user);
@@ -41,18 +41,18 @@ function GroupMessagePanel({ selectedGroupId }) {
         fetchGroupDetails();
     }, [selectedGroupId, user.id]);
 
-    useEffect(() => {
-        socket.on('message', (msg) => {
+    // useEffect(() => {
+    //     socket.on('message', (msg) => {
 
-            if (msg.groupId === selectedGroupId) {
-                setMessages((prevMessages) => [...prevMessages, msg]);
-            }
-        });
+    //         if (msg.groupId === selectedGroupId) {
+    //             setMessages((prevMessages) => [...prevMessages, msg]);
+    //         }
+    //     });
 
-        return () => {
-            socket.off('message');
-        };
-    }, [selectedGroupId]);
+    //     return () => {
+    //         socket.off('message');
+    //     };
+    // }, [selectedGroupId]);
 
     const handleSendMessage = async () => {
         if (message.trim()) {

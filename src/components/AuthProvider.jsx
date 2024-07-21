@@ -31,6 +31,7 @@ function AuthProvider({ children }) {
     checkAuthStatus();
   }, []);
 
+
   const login = async (email, password) => {
     try {
       const response = await api.post(`https://bold-animal-facf707bd9.strapiapp.com/api/auth/local`, {

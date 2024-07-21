@@ -33,7 +33,12 @@ const CalendarPage = () => {
     const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
     const { user } = useAuth();
     const userRole = user && user.access ? user.access.role : null;
-    const userCompany = user ? user.company.id : null;
+    const userCompany = user && user.company ? user.company.id : null;
+
+    console.log("userCompany", userCompany);
+    console.log("user", user);
+    console.log("userRole", userRole);
+
 
     const fetchEvents = useCallback(async () => {
         try {
@@ -48,8 +53,13 @@ const CalendarPage = () => {
     }, [userCompany]);
 
     useEffect(() => {
-        fetchEvents();
-    }, [fetchEvents]);
+        if (userCompany) {
+            fetchEvents();
+        } else {
+            console.error("User company is not defined");
+        }
+    }, [fetchEvents, userCompany]);
+
 
     const handleDateClick = useCallback((date) => {
         setSelectedDate(date);

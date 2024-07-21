@@ -228,6 +228,7 @@ function MyPersonalFiles({ user }) {
                         value={searchTerm}
                         onChange={handleSearchChange}
                         placeholder="Dosya ara..."
+                        autoComplete="off"
                     />
                     <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
                 </div>
@@ -248,6 +249,7 @@ function MyPersonalFiles({ user }) {
                     value={searchTerm}
                     onChange={handleSearchChange}
                     placeholder="Dosya ara..."
+                    autoComplete="off"
                 />
 
                 <div className="files">

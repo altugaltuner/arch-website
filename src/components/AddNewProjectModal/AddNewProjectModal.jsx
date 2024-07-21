@@ -15,6 +15,7 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
         }
         setError("");
         handleSubmit();
+        onClose();
     }
 
     return (

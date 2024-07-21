@@ -112,10 +112,10 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                 <p className="project-card-name">
                                     {project.attributes.projectName}
                                 </p>
-                                {project.attributes.projectCoverPhoto && project.attributes.projectCoverPhoto.data && (
+                                {project?.attributes?.projectCoverPhoto && project?.attributes?.projectCoverPhoto?.data && (
                                     <img
                                         className="project-navbar-photos"
-                                        src={project.attributes.projectCoverPhoto.data.attributes.formats.thumbnail.url}
+                                        src={project?.attributes?.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url ?? project?.attributes?.projectCoverPhoto?.data?.attributes?.url}
                                         alt="Project Cover"
                                         onError={(e) => { console.log("Image Error:", e); }}
                                     />
