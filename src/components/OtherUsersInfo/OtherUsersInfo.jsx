@@ -52,13 +52,13 @@ function OtherUsersInfo({ employee }) {
 
     useEffect(() => {
         const filterMessages = () => {
-            const filtered = privateMessages.filter(message => {
+            const filtered = privateMessages?.filter(message => {
                 const senderId = message.attributes.users_permissions_user?.data?.id;
                 const recipientId = message.attributes.recipientID;
                 return (
-                    (senderId === user.id && recipientId === employee?.id)
+                    (senderId === user?.id && recipientId === employee?.id)
                     ||
-                    (senderId === employee?.id && recipientId === user.id)
+                    (senderId === employee?.id && recipientId === user?.id)
                 );
             });
             setFilteredMessages(filtered);
@@ -207,7 +207,7 @@ function OtherUsersInfo({ employee }) {
             <div className="open-inbox-content-private-messages-div">
                 <h2 className='open-inbox-modal-header-private'>Mesajlaşma Geçmişiniz</h2>
                 <div className="messages-container-private">
-                    {filteredMessages.map(message => (
+                    {filteredMessages?.map(message => (
                         <div key={message.id} className="message-private">
                             <h3 className="message-header-private">{message.attributes.messageTitle}</h3>
                             <p className="message-owner-private">{message.attributes.users_permissions_user?.data?.attributes?.username} :</p>

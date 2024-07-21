@@ -40,7 +40,7 @@ const CalendarPage = () => {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=*');
             const allEvents = response.data.data;
             setEvents(allEvents);
-            const companyEvents = allEvents.filter(event => event.attributes.company.data.id === userCompany);
+            const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);
             setFilteredEvents(companyEvents);
         } catch (error) {
             console.error('Error fetching events:', error);
@@ -53,7 +53,7 @@ const CalendarPage = () => {
 
     const handleDateClick = useCallback((date) => {
         setSelectedDate(date);
-        const dayEvents = filteredEvents.filter(event => {
+        const dayEvents = filteredEvents?.filter(event => {
             const eventDate = new Date(event.attributes.date);
             return eventDate.toDateString() === date.toDateString();
         });
