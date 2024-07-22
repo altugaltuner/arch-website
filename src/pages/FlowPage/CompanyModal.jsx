@@ -1,5 +1,6 @@
 import React from 'react';
 import './CompanyModal.scss';
+import "../../assets/icons/defaultLogo";
 
 const CompanyModal = ({ isOpen, onClose, company }) => {
     if (!isOpen) return null;
