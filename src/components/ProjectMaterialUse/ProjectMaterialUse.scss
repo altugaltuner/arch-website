@@ -6,6 +6,7 @@
     padding: 20px;
     border: 1px solid $border-color;
     border-radius: 15px;
+    width: 100%;
     margin-top: 20px;
 
     .material-use-header {
@@ -21,5 +22,12 @@
 
     .material-use-calendar {
         margin-bottom: 20px;
+    }
+
+    .material-use-list-all {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
     }
 }

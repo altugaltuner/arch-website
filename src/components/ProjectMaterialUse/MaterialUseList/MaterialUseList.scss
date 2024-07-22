@@ -1,4 +1,8 @@
+@use "../../../styles/abstracts/variables" as *;
+
 .material-use-list {
+    width: 50%;
+
     .material-use-list-subheader {
         font-weight: 400;
         font-size: 24px;

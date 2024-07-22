@@ -1,3 +1,5 @@
+@use "../../../styles/abstracts/variables" as *;
+
 .material-calendar {
 
     .material-calendar-subheader {
@@ -9,15 +11,17 @@
     .calendar {
         display: flex;
         flex-wrap: wrap;
+        gap: 5px;
 
         .calendar-day {
-            width: 40px;
-            height: 40px;
+            width: 85px;
+            height: 75px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #ccc;
+            border: 1px solid $border-color;
             cursor: pointer;
+            transition: all 0.2s;
 
             &.selected {
                 background-color: gold;

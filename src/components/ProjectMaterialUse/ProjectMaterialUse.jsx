@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProjectMaterialUse.scss";
 import MaterialCalendar from "./MaterialCalendar/MaterialCalendar";
 import MaterialUseList from "./MaterialUseList/MaterialUseList";
+import MaterialEnteringArea from "./MaterialEnteringArea/MaterialEnteringArea";
 
 function ProjectMaterialUse({ clickedProject }) {
     const [selectedDate, setSelectedDate] = useState(null);
+
+    useEffect(() => {
+        console.log(clickedProject);
+    }, [])
 
     return (
         <div className="project-material-use">
@@ -14,6 +19,7 @@ function ProjectMaterialUse({ clickedProject }) {
             </div>
             <div className="material-use-list-all">
                 <MaterialUseList selectedDate={selectedDate} />
+                <MaterialEnteringArea />
             </div>
         </div>
     );
