@@ -17,10 +17,10 @@ function ProjectMaterialUse({ clickedProject }) {
             <div className="material-use-calendar">
                 <MaterialCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
             </div>
-            <div className="material-use-list-all">
+            {/* <div className="material-use-list-all">
                 <MaterialUseList selectedDate={selectedDate} />
                 <MaterialEnteringArea />
-            </div>
+            </div> */}
         </div>
     );
 };
