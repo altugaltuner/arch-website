@@ -51,7 +51,7 @@ const MaterialCalendar = ({ selectedDate, setSelectedDate, events }) => {
                 {daysOfWeek.map((day) => (
                     <div key={day} className="calendar-day-header">{day}</div>
                 ))}
-                {calendarDates.map((date) => {
+                {/* {calendarDates.map((date) => {
                     const eventDateString = date.toDateString();
                     const hasEvent = events.some(event => {
                         const eventDate = new Date(event.attributes.date);
@@ -69,7 +69,7 @@ const MaterialCalendar = ({ selectedDate, setSelectedDate, events }) => {
                             {date.getDate()}
                         </div>
                     );
-                })}
+                })} */}
             </div>
         </div>
     );
