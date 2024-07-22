@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MaterialEnteringArea.scss";
 
-function MaterialEnteringArea({ onClose }) {
+function MaterialEnteringArea() {
 
     const [matQuantity, setMatQuantity] = useState();
     const [matName, setMatName] = useState("");
@@ -59,7 +59,7 @@ function MaterialEnteringArea({ onClose }) {
                 </div>
 
                 <button className="add-entry-material-btn" type="submit">Gir</button>
-                <button className='new-revise-submit-cancel' onClick={onClose}>Kapat</button>
+                <button className='new-revise-submit-cancel'>Kapat</button>
             </form>
         </div>
     );

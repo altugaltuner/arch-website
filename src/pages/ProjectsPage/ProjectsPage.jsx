@@ -77,9 +77,9 @@ function ProjectsPage() {
                         {currentProject && <ProjectHistory clickedProject={currentProject.data} newHistoryEntry={newHistoryEntry} />}
                         {currentProject && <ProjectProcess clickedProject={currentProject.data} roles={roles} />}
                     </div>
-                    {/* <div className="inner-project-row">
+                    <div className="inner-project-row">
                         {currentProject && <ProjectMaterialUse clickedProject={currentProject.data} />}
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>

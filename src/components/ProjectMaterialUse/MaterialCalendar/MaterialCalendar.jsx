@@ -51,25 +51,7 @@ const MaterialCalendar = ({ selectedDate, setSelectedDate, events }) => {
                 {daysOfWeek.map((day) => (
                     <div key={day} className="calendar-day-header">{day}</div>
                 ))}
-                {/* {calendarDates.map((date) => {
-                    const eventDateString = date.toDateString();
-                    const hasEvent = events.some(event => {
-                        const eventDate = new Date(event.attributes.date);
-                        return eventDate.toDateString() === eventDateString;
-                    });
 
-                    const isToday = date.toDateString() === today.toDateString();
-
-                    return (
-                        <div
-                            key={date.toDateString()}
-                            className={`calendar-day ${selectedDate && selectedDate.toDateString() === date.toDateString() ? 'selected' : ''} ${hasEvent ? 'event-day' : ''} ${isToday ? 'today' : ''}`}
-                            onClick={() => handleDateClick(date)}
-                        >
-                            {date.getDate()}
-                        </div>
-                    );
-                })} */}
             </div>
         </div>
     );
