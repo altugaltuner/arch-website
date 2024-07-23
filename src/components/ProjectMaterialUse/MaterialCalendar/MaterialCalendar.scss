@@ -1,31 +1,60 @@
 @use "../../../styles/abstracts/variables" as *;
 
 .material-calendar {
+    width: 100%;
+    margin: 0 auto;
+    font-family: $primary-font;
 
     .material-calendar-subheader {
-        font-weight: 400;
-        font-size: 24px;
+        text-align: center;
         margin-bottom: 10px;
     }
 
-    .calendar {
+    .calendar-controls {
         display: flex;
-        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 0px 20px 0px 20px;
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid $border-color;
+    }
+
+    .calendar {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
         gap: 5px;
+    }
 
-        .calendar-day {
-            width: 85px;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid $border-color;
-            cursor: pointer;
-            transition: all 0.2s;
+    .calendar-day {
+        padding: 28px;
+        border: 1px solid #ddd;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s;
+    }
 
-            &.selected {
-                background-color: gold;
-            }
-        }
+    .calendar-day-header {
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .calendar-day.valid {
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+    .calendar-day.invalid {
+        background-color: #f5f5f5;
+    }
+
+    .calendar-day.today {
+        background-color: yellow;
+    }
+
+    .calendar-day:hover {
+        background-color: #e0e0e0;
     }
 }

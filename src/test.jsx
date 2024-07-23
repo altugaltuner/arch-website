@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import './MaterialCalendar.scss';
 
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
@@ -6,14 +6,22 @@ const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "C
 const generateCalendar = (year, month) => {
     const date = new Date(year, month, 1);
     const dates = [];
+    // Prepend days of the previous month
+    for (let i = 0; i < date.getDay(); i++) {
+        dates.push(null);
+    }
     while (date.getMonth() === month) {
         dates.push(new Date(date));
         date.setDate(date.getDate() + 1);
     }
+    // Append days of the next month
+    while (dates.length % 7 !== 0) {
+        dates.push(null);
+    }
     return dates;
 };
 
-const MaterialCalendar = ({ selectedDate, setSelectedDate, events }) => {
+const MaterialCalendar = ({ selectedDate, setSelectedDate }) => {
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth());
     const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
@@ -40,6 +48,7 @@ const MaterialCalendar = ({ selectedDate, setSelectedDate, events }) => {
 
     return (
         <div className="material-calendar">
+            <h3 className="material-calendar-subheader">Gün Seçin</h3>
             <div className="calendar-controls">
                 <button onClick={prevMonth}>Önceki</button>
                 <span>{year} - {month + 1}</span>
@@ -49,25 +58,15 @@ const MaterialCalendar = ({ selectedDate, setSelectedDate, events }) => {
                 {daysOfWeek.map((day) => (
                     <div key={day} className="calendar-day-header">{day}</div>
                 ))}
-                {calendarDates.map((date) => {
-                    const eventDateString = date.toDateString();
-                    const hasEvent = events.some(event => {
-                        const eventDate = new Date(event.attributes.date);
-                        return eventDate.toDateString() === eventDateString;
-                    });
-
-                    const isToday = date.toDateString() === today.toDateString();
-
-                    return (
-                        <div
-                            key={date.toDateString()}
-                            className={`calendar-day ${selectedDate && selectedDate.toDateString() === date.toDateString() ? 'selected' : ''} ${hasEvent ? 'event-day' : ''} ${isToday ? 'today' : ''}`}
-                            onClick={() => handleDateClick(date)}
-                        >
-                            {date.getDate()}
-                        </div>
-                    );
-                })}
+                {calendarDates.map((date, index) => (
+                    <div
+                        key={index}
+                        className={`calendar-day ${date ? 'valid' : 'invalid'} ${date && date.toDateString() === today.toDateString() ? 'today' : ''}`}
+                        onClick={() => date && handleDateClick(date)}
+                    >
+                        {date ? date.getDate() : ''}
+                    </div>
+                ))}
             </div>
         </div>
     );

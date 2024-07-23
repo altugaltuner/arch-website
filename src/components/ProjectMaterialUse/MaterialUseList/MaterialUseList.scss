@@ -2,6 +2,9 @@
 
 .material-use-list {
     width: 50%;
+    padding: 20px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
 
     .material-use-list-subheader {
         font-weight: 400;
@@ -9,12 +12,17 @@
         margin-bottom: 10px;
     }
 
-    ul {
+    .material-list-ul {
         list-style-type: none;
         padding: 0;
 
-        li {
+        .material-list-li {
             margin-bottom: 5px;
+            font-weight: 300;
         }
+    }
+
+    .material-list-no-p {
+        font-weight: 300;
     }
 }

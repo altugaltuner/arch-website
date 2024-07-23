@@ -31,13 +31,13 @@ const MaterialUseList = ({ selectedDate }) => {
         <div className="material-use-list">
             <h3 className="material-use-list-subheader">Malzeme Kullanımı</h3>
             {materialUse.length > 0 ? (
-                <ul>
+                <ul className='material-list-ul'>
                     {materialUse.map((item, index) => (
-                        <li key={index}>{item.material}: {item.amount}</li>
+                        <li className='material-list-li' key={index}>{item.material}: {item.amount}</li>
                     ))}
                 </ul>
             ) : (
-                <p>Bu gün için malzeme kullanımı bulunmamaktadır.</p>
+                <p className='material-list-no-p'>Bu gün için malzeme kullanımı bulunmamaktadır.</p>
             )}
         </div>
     );

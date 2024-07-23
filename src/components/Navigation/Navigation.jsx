@@ -11,6 +11,7 @@ import homepageLogo from "../../assets/icons/homepage-logo.png";
 import settingsLogo from "../../assets/icons/settings-icon.png";
 import adminPanelLogo from "../../assets/icons/admin-panel.png";
 import { useAuth } from "../../components/AuthProvider";
+import materialsLogo from "../../assets/icons/materials-logo.jpg";
 
 function Navigation() {
     const [activeNavId, setActiveNavId] = useState(null);
@@ -24,6 +25,7 @@ function Navigation() {
         { id: 'groups-nav-id', to: '/groups', logo: groupsLogo, name: 'Gruplar' },
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: ' Ekip Üyeleri' },
         { id: 'calendar-nav-id', to: '/calendar', logo: calendarLogo, name: ' Takvim' },
+        { id: 'materials-nav-id', to: '/materials', logo: materialsLogo, name: ' Metraj' },
         { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
         { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' }
     ];

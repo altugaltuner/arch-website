@@ -35,14 +35,14 @@ function MaterialEnteringArea() {
         <div className="material-entering-area">
             <form className="entering-area-form" onSubmit={handleSubmitMaterial}>
                 <div className="one-material-div">
-                    <label htmlFor="material-name">Malzeme Adı</label>
-                    <input type="text" id="material-name" value={matName} onChange={(e) => setMatName(e.target.value)} placeholder="malzeme adı" />
+                    <label className="material-label" htmlFor="material-name">Malzeme Adı</label>
+                    <input className="material-input" type="text" id="material-name" value={matName} onChange={(e) => setMatName(e.target.value)} placeholder="malzeme adı" />
                 </div>
                 <div className="one-material-div">
-                    <label htmlFor="material-quantity">Malzeme Miktarı</label>
-                    <input type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={(e) => setMatQuantity(e.target.value)} />
+                    <label className="material-label" htmlFor="material-quantity">Malzeme Miktarı</label>
+                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={(e) => setMatQuantity(e.target.value)} />
 
-                    <label htmlFor="unit">Ölçü birimi</label>
+                    <label className="material-label" htmlFor="unit">Ölçü birimi</label>
                     <select
                         name="unit"
                         id="unit"
@@ -57,9 +57,10 @@ function MaterialEnteringArea() {
                         <option value="dakika">dakika</option>
                     </select>
                 </div>
-
-                <button className="add-entry-material-btn" type="submit">Gir</button>
-                <button className='new-revise-submit-cancel'>Kapat</button>
+                <div className="one-material-div">
+                    <button className="add-entry-material-btn" type="submit">Gir</button>
+                    <button className='new-revise-submit-cancel'>Kapat</button>
+                </div>
             </form>
         </div>
     );

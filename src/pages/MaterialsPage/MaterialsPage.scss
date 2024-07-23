@@ -1,0 +1,29 @@
+@use "../../styles/abstracts/variables" as *;
+
+.project-material-use {
+    font-family: $primary-font;
+
+    .materials-inner-div {
+        transform: translate(110px, 0px);
+        width: calc(100% - 110px);
+
+        .material-use-header {
+            font-size: 40px;
+            font-weight: 400;
+            margin: 20px 20px 20px 40px;
+            text-align: left;
+            width: fit-content;
+        }
+
+        .material-use-calendar {
+            padding: 20px;
+        }
+
+        .material-use-list-all {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+    }
+
+}
