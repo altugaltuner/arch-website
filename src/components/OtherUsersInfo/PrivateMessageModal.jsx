@@ -35,7 +35,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
             console.error("Error sending message:", error);
         }
 
-        onClose(); // Modal kapatma
+        onClose();
     };
 
     if (!isOpen) return null;

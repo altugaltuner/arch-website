@@ -37,9 +37,9 @@
                 border: 1px solid $border-color;
                 border-radius: 5px;
                 height: 120px;
-                resize: none; // Kullanıcı tarafından yeniden boyutlandırılmasını engellemek için
-                overflow: auto; // İçeriğin taşması durumunda kaydırma çubuğu eklemek için
-                white-space: pre-wrap; // Uzun metinlerin taşmasını ve satırların doğru şekilde kırılmasını sağlamak için
+                resize: none;
+                overflow: auto;
+                white-space: pre-wrap;
             }
 
             .revise-update-checkbox-div {

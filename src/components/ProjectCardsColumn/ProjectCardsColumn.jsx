@@ -55,7 +55,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
     };
 
     const handleProjectClick = (project) => {
-        if (isModalOpen) return;  // Prevent navigation if modal is open
+        if (isModalOpen) return;
 
         const userProjects = user.projects.map(p => p.projectName);
         if (userProjects.includes(project.attributes.projectName)) {
@@ -76,7 +76,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                     className="search-bar-of-projects"
                     type="text"
                     placeholder="Proje Ara"
-                    autoComplete="off"  // AutoComplete özelliğini kapat
+                    autoComplete="off"
                 />
             </div>
             <div className="projects-cards-main-row">

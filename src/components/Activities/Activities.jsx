@@ -2,16 +2,15 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import "./Activities.scss";
 import axios from "axios";
 import { useAuth } from "../../components/AuthProvider";
-import debounce from 'lodash.debounce';
 
 const CACHE_KEY = 'activities';
 const CACHE_EXPIRY_KEY = 'activities_expiry';
-const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
+const CACHE_DURATION = 60 * 60 * 1000;
 
 const Activities = ({ searchTerm }) => {
     const [activities, setActivities] = useState([]);
-    const [page, setPage] = useState(1); // Current page number
-    const [totalPages, setTotalPages] = useState(1); // Total number of pages
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
 
@@ -28,7 +27,7 @@ const Activities = ({ searchTerm }) => {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
                 setActivities(response.data.data);
-                setTotalPages(response.data.meta.pagination.pageCount); // Update total pages
+                setTotalPages(response.data.meta.pagination.pageCount);
                 localStorage.setItem(CACHE_KEY, JSON.stringify(response.data.data));
                 localStorage.setItem(CACHE_EXPIRY_KEY, new Date().getTime() + CACHE_DURATION);
             } catch (error) {

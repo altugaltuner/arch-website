@@ -54,9 +54,9 @@ const UserProfile = () => {
 
         const formData = new FormData();
         formData.append('files', selectedFile);
-        formData.append('ref', 'user'); // referans model
-        formData.append('refId', user.id); // kullanıcının ID'si
-        formData.append('field', 'profilePic'); // güncellenecek alan
+        formData.append('ref', 'user');
+        formData.append('refId', user.id);
+        formData.append('field', 'profilePic');
 
         try {
             const response = await updateProfilePhoto(formData);

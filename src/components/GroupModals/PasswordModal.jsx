@@ -6,8 +6,8 @@ const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setP
 
     useEffect(() => {
         if (showPasswordModal) {
-            setPassword(''); // Şifreyi sıfırla
-            setLocalErrorMessage(''); // Hata mesajını sıfırla
+            setPassword('');
+            setLocalErrorMessage('');
         }
     }, [showPasswordModal]);
 
@@ -39,7 +39,7 @@ const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setP
                     value={password}
                     onChange={handleChange}
                     placeholder="Şifre giriniz"
-                    autoComplete="off" // Otomatik doldurma devre dışı bırakıldı
+                    autoComplete="off"
                 />
                 {(localErrorMessage || errorMessage) && <p className="error-message">{localErrorMessage || errorMessage}</p>}
                 <div className="password-modal-buttons">

@@ -114,7 +114,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 setShowDeleteModal(false);
                 setFolderToDelete(null);
                 await fetchProjectFolders();
-                createFolderHistoryEntry('silme', folderToDelete.toString()); // Ensure folder ID is a string
+                createFolderHistoryEntry('silme', folderToDelete.toString());
             } catch (error) {
                 console.error('Error deleting the project folder', error);
             }
@@ -260,8 +260,8 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/histories', {
                 data: {
                     action,
-                    file: fileId.toString(), // Ensure file ID is a string
-                    folder: folderId.toString(), // Ensure folder ID is a string
+                    file: fileId.toString(),
+                    folder: folderId.toString(),
                     timestamp,
                     users_permissions_users: userId,
                     project: clickedProject.id,

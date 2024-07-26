@@ -37,7 +37,6 @@ function UserDeletion({ users }) {
             for (const userId of selectedUsers) {
                 await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${userId}`);
             }
-            // Silme işlemi başarılı olduktan sonra kullanıcı listesini güncelle
             setFilteredUsers(filteredUsers.filter(user => !selectedUsers.includes(user.id)));
             setSelectedUsers([]);
         } catch (error) {

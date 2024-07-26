@@ -25,7 +25,7 @@ const PasswordModal = ({ isOpen, onClose, onConfirm, projectName }) => {
                     value={password}
                     onChange={handlePasswordChange}
                     placeholder="Şifre"
-                    autoComplete="new-password"  // AutoComplete özelliğini kapat
+                    autoComplete="new-password"
                 />
                 <div className="modal-buttons">
                     <button className='modal-one-button' onClick={handleConfirm}>Onayla</button>

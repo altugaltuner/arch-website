@@ -16,7 +16,7 @@ function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
             const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders', {
                 data: {
                     folderName,
-                    users_permissions_user: userId // Ensure the user association
+                    users_permissions_user: userId
                 }
             });
             onFolderCreated(response.data.data);

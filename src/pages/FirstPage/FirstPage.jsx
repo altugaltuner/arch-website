@@ -15,8 +15,6 @@ function FirstPage() {
         isLogin = Cookies.get("isLogin")
     }, []);
 
-
-
     const socialMediaAccounts = [
         {
             name: "ofisim",

@@ -7,8 +7,6 @@ const MaterialUseList = ({ selectedDate }) => {
 
     const fetchData = async () => {
         if (selectedDate) {
-            // Veriyi fetch etmek için API çağrısı yapılabilir
-            // Örnek veri olarak aşağıdaki gibi
 
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?populate=*`);
