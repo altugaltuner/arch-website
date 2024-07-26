@@ -73,4 +73,8 @@
     .calendar-day:hover {
         background-color: #e0e0e0;
     }
+
+    .calendar-day.selected {
+        background-color: darkslateblue;
+    }
 }

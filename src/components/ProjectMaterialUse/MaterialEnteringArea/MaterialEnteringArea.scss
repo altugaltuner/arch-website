@@ -7,13 +7,25 @@
     border-radius: 5px;
 
     .entering-area-form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
 
         .one-material-div {
             display: flex;
-            gap: 20px;
+            gap: 10px;
             padding: 5px;
 
-            .material-label {}
+            .material-label {
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            .material-input-select {
+                border: 1px solid $border-color;
+                border-radius: 5px;
+                padding: 5px;
+            }
 
             .material-input {
                 border: 1px solid $border-color;

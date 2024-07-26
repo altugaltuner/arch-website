@@ -14,7 +14,25 @@ function MaterialEnteringArea() {
             return;
         }
         try {
-            console.log("tüm gönderilecek bilgiler:", matType, matQuantity, matName);
+            const data = {
+                data: {
+                    name: matName,
+                    amount: matQuantity,
+                    type: matType,
+
+                    date: new Date().toISOString().split('T')[0] // assuming you want to set the current date
+                }
+            };
+
+            const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/materials', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }, body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            console.log("result", result);
+            console.log("tüm gönderilen bilgiler:", matType, matQuantity, matName);
         }
         catch (error) {
             console.log(error, "hata kodu");
@@ -31,6 +49,20 @@ function MaterialEnteringArea() {
         setMatType(e.target.value);
     }
 
+    const filterMatQuantity = (e) => {
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            setMatQuantity(e.target.value);
+        }
+    };
+
+    const eraseAll = () => {
+        setMatName("");
+        setMatQuantity("");
+        setMatType("");
+    }
+
+
     return (
         <div className="material-entering-area">
             <form className="entering-area-form" onSubmit={handleSubmitMaterial}>
@@ -40,10 +72,11 @@ function MaterialEnteringArea() {
                 </div>
                 <div className="one-material-div">
                     <label className="material-label" htmlFor="material-quantity">Malzeme Miktarı</label>
-                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={(e) => setMatQuantity(e.target.value)} />
+                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={filterMatQuantity} />
 
                     <label className="material-label" htmlFor="unit">Ölçü birimi</label>
                     <select
+                        className="material-input-select"
                         name="unit"
                         id="unit"
                         onChange={selectTypeChange}
@@ -59,7 +92,7 @@ function MaterialEnteringArea() {
                 </div>
                 <div className="one-material-div">
                     <button className="add-entry-material-btn" type="submit">Gir</button>
-                    <button className='new-revise-submit-cancel'>Kapat</button>
+                    <button className='new-revise-submit-cancel' onClick={eraseAll} type="button">Temizle</button>
                 </div>
             </form>
         </div>

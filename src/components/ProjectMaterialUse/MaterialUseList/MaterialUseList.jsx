@@ -4,22 +4,23 @@ import axios from 'axios';
 
 const MaterialUseList = ({ selectedDate }) => {
     const [materialUse, setMaterialUse] = useState([]);
+    const [activeIndex, setActiveIndex] = useState(null);
 
     const fetchData = async () => {
         if (selectedDate) {
-
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?populate=*`);
-                setMaterialUse(response.data.data);
-                console.log(response.data.data, "response for materialUse");
+                const fetchedData = response.data.data;
+                console.log(fetchedData, "response for materialUse");
+
+                const dataForSelectedDate = fetchedData.filter(item => item.attributes.date === selectedDate);
+                console.log("selectedDate", selectedDate);
+                console.log("dataforselecteddate", dataForSelectedDate);
+
+                setMaterialUse(dataForSelectedDate);
             } catch (error) {
                 console.log("hata");
             }
-            console.log()
-            console.log("selectedDate", selectedDate);
-            const dataForSelectedDate = materialUse.filter(item => item.attributes.date === selectedDate);
-            console.log("dataforselecteddate", dataForSelectedDate)
-            setMaterialUse(dataForSelectedDate);
         }
     }
 
@@ -33,7 +34,7 @@ const MaterialUseList = ({ selectedDate }) => {
             {materialUse.length > 0 ? (
                 <ul className='material-list-ul'>
                     {materialUse.map((item, index) => (
-                        <li className='material-list-li' key={index}>{item.material}: {item.amount}</li>
+                        <li className='material-list-li' key={index}>{item.attributes.name}: {item.attributes.amount} {item.attributes.type}</li>
                     ))}
                 </ul>
             ) : (

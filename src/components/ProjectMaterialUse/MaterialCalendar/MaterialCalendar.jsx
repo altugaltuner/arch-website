@@ -23,7 +23,7 @@ const generateCalendar = (year, month) => {
     return dates;
 };
 
-const formatDate = () => {
+const formatDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
@@ -33,10 +33,12 @@ const formatDate = () => {
 const MaterialCalendar = ({ setSelectedDate }) => {
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth());
+    const [selectedDate, setSelectedDateState] = useState(null);
     const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
 
     const handleDateClick = (date) => {
         setSelectedDate(formatDate(date));
+        setSelectedDateState(date);
     };
 
     const nextMonth = () => {
@@ -70,7 +72,7 @@ const MaterialCalendar = ({ setSelectedDate }) => {
                 {calendarDates.map((date, index) => (
                     <div
                         key={index}
-                        className={`calendar-day ${date ? 'valid' : 'invalid'} ${date && date.toDateString() === today.toDateString() ? 'today' : ''}`}
+                        className={`calendar-day ${date ? 'valid' : 'invalid'} ${date && date.toDateString() === today.toDateString() ? 'today' : ''} ${date && selectedDate && date.toDateString() === selectedDate.toDateString() ? 'selected' : ''}`}
                         onClick={() => date && handleDateClick(date)}
                     >
                         {date ? date.getDate() : ''}
