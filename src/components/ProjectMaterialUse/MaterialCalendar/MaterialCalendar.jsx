@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import './MaterialCalendar.scss';
+import backButton from "../../../assets/icons/back-button.png";
+import forwardButton from "../../../assets/icons/forward-button.png";
 
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
@@ -21,13 +23,20 @@ const generateCalendar = (year, month) => {
     return dates;
 };
 
-const MaterialCalendar = ({ selectedDate, setSelectedDate }) => {
+const formatDate = () => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+const MaterialCalendar = ({ setSelectedDate }) => {
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth());
     const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
 
     const handleDateClick = (date) => {
-        setSelectedDate(date);
+        setSelectedDate(formatDate(date));
     };
 
     const nextMonth = () => {
@@ -50,9 +59,9 @@ const MaterialCalendar = ({ selectedDate, setSelectedDate }) => {
         <div className="material-calendar">
             <h3 className="material-calendar-subheader">Gün Seçin</h3>
             <div className="calendar-controls">
-                <button onClick={prevMonth}>Önceki</button>
+                <img className="material-calendar-page-button" onClick={prevMonth} src={backButton} alt="Geri" />
                 <span>{year} - {month + 1}</span>
-                <button onClick={nextMonth}>Sonraki</button>
+                <img className="material-calendar-page-button" onClick={nextMonth} src={forwardButton} alt="İleri" />
             </div>
             <div className="calendar">
                 {daysOfWeek.map((day) => (

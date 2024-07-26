@@ -13,12 +13,14 @@ const MaterialUseList = ({ selectedDate }) => {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?populate=*`);
                 setMaterialUse(response.data.data);
-                console.log(response.data.data, "alala");
+                console.log(response.data.data, "response for materialUse");
             } catch (error) {
                 console.log("hata");
             }
-            console.log("qq", selectedDate);
-            const dataForSelectedDate = materialUse.filter(item => item.date === selectedDate);
+            console.log()
+            console.log("selectedDate", selectedDate);
+            const dataForSelectedDate = materialUse.filter(item => item.attributes.date === selectedDate);
+            console.log("dataforselecteddate", dataForSelectedDate)
             setMaterialUse(dataForSelectedDate);
         }
     }

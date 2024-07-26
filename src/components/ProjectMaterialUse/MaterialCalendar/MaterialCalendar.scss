@@ -18,6 +18,22 @@
         padding: 20px;
         border-radius: 5px;
         border: 1px solid $border-color;
+
+        span {
+            margin: 0px 20px;
+        }
+
+        .material-calendar-page-button {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.2s;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 
     .calendar {

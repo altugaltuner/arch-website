@@ -9,9 +9,6 @@ function MaterialsPage() {
 
     const [selectedDate, setSelectedDate] = useState(null);
 
-
-
-
     return (
         <div className="project-material-use">
             <Navigation />
