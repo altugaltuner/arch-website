@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./MaterialEnteringArea.scss";
 
-function MaterialEnteringArea() {
+function MaterialEnteringArea({ selectedDate, selectedProject }) {
 
     const [matQuantity, setMatQuantity] = useState();
     const [matName, setMatName] = useState("");
     const [matType, setMatType] = useState("");
+
+    useEffect(() => {
+        console.log("selectedProject", selectedProject); // now you should get the full project object
+    }, [selectedProject]);
 
     const handleSubmitMaterial = async (e) => {
         e.preventDefault();
@@ -19,7 +23,12 @@ function MaterialEnteringArea() {
                     name: matName,
                     amount: matQuantity,
                     type: matType,
-
+                    project: {
+                        data: {
+                            id: selectedProject.id,
+                            attributes: selectedProject.attributes
+                        }
+                    },
                     date: new Date().toISOString().split('T')[0] // assuming you want to set the current date
                 }
             };
@@ -62,7 +71,6 @@ function MaterialEnteringArea() {
         setMatType("");
     }
 
-
     return (
         <div className="material-entering-area">
             <form className="entering-area-form" onSubmit={handleSubmitMaterial}>
@@ -97,6 +105,6 @@ function MaterialEnteringArea() {
             </form>
         </div>
     );
-};
+}
 
 export default MaterialEnteringArea;

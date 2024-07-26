@@ -19,22 +19,22 @@ function MaterialsPage() {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}/?populate=*`);
                 setCompanyProjects(response.data.data.attributes.projects.data);
-
-
             } catch (error) {
                 console.error('Error fetching the data', error);
             }
         };
         fetchData();
-    }, []);
+    }, [usersCompanyId]);
 
-    console.log(companyProjects, "companyProjects");
+    useEffect(() => {
+        console.log(selectedProject, "selectedProject after state update");
+    }, [selectedProject]);
 
     const selectProject = (e) => {
-        const projectId = e.target.value;
-        setSelectedProject(projectId);
-        console.log(selectedProject, "selectedProject");
-    }
+        const projectName = e.target.value;
+        const project = companyProjects.find(p => p.attributes.projectName === projectName);
+        setSelectedProject(project);
+    };
 
     return (
         <div className="project-material-use">
@@ -55,14 +55,14 @@ function MaterialsPage() {
                     >
                         <option className='material-project-options' value="">Proje seçin</option>
                         {companyProjects.map((project) => (
-                            <option className="material-project-options" key={project.id} value={project.id}>{project.attributes.projectName}</option>
+                            <option className="material-project-options" key={project.id} value={project.attributes.projectName}>{project.attributes.projectName}</option>
                         ))}
                     </select>
                 </div>
 
                 <div className="material-use-list-all">
                     <MaterialUseList selectedDate={selectedDate} />
-                    <MaterialEnteringArea />
+                    <MaterialEnteringArea selectedDate={selectedDate} selectedProject={selectedProject} />
                 </div>
             </div>
         </div>

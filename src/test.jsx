@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./MaterialEnteringArea.scss";
 
-function MaterialEnteringArea() {
+function MaterialEnteringArea({ selectedDate, selectedProject }) {
 
-    const [matQuantity, setMatQuantity] = useState("");
+    const [matQuantity, setMatQuantity] = useState();
     const [matName, setMatName] = useState("");
     const [matType, setMatType] = useState("");
+
+    useEffect(() => {
+        console.log("selectedProject", selectedProject); // now you should get the full project object
+    }, [selectedProject]);
 
     const handleSubmitMaterial = async (e) => {
         e.preventDefault();
@@ -19,6 +23,12 @@ function MaterialEnteringArea() {
                     name: matName,
                     amount: matQuantity,
                     type: matType,
+                    project: {
+                        data: {
+                            id: selectedProject.id,
+                            attributes: selectedProject.attributes
+                        }
+                    },
                     date: new Date().toISOString().split('T')[0] // assuming you want to set the current date
                 }
             };
@@ -27,31 +37,39 @@ function MaterialEnteringArea() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
+                }, body: JSON.stringify(data),
             });
-
             const result = await response.json();
-            if (!response.ok) {
-                throw new Error(result.error.message);
-            }
-
             console.log("result", result);
             console.log("tüm gönderilen bilgiler:", matType, matQuantity, matName);
-        } catch (error) {
+        }
+        catch (error) {
             console.log(error, "hata kodu");
         }
-    };
+    }
 
     useEffect(() => {
         console.log("matQuantity", matQuantity);
         console.log("matName", matName);
         console.log("matType", matType);
-    }, [matQuantity, matName, matType]);
+    }, [matQuantity, matName, matType])
 
     const selectTypeChange = (e) => {
         setMatType(e.target.value);
+    }
+
+    const filterMatQuantity = (e) => {
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            setMatQuantity(e.target.value);
+        }
     };
+
+    const eraseAll = () => {
+        setMatName("");
+        setMatQuantity("");
+        setMatType("");
+    }
 
     return (
         <div className="material-entering-area">
@@ -62,13 +80,13 @@ function MaterialEnteringArea() {
                 </div>
                 <div className="one-material-div">
                     <label className="material-label" htmlFor="material-quantity">Malzeme Miktarı</label>
-                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={(e) => setMatQuantity(e.target.value)} />
+                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={filterMatQuantity} />
 
                     <label className="material-label" htmlFor="unit">Ölçü birimi</label>
                     <select
+                        className="material-input-select"
                         name="unit"
                         id="unit"
-                        value={matType}
                         onChange={selectTypeChange}
                     >
                         <option value="">birim seçin</option>
@@ -82,11 +100,11 @@ function MaterialEnteringArea() {
                 </div>
                 <div className="one-material-div">
                     <button className="add-entry-material-btn" type="submit">Gir</button>
-                    <button className='new-revise-submit-cancel' type="button">Kapat</button>
+                    <button className='new-revise-submit-cancel' onClick={eraseAll} type="button">Temizle</button>
                 </div>
             </form>
         </div>
     );
-};
+}
 
 export default MaterialEnteringArea;

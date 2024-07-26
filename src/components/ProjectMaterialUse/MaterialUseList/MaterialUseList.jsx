@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './MaterialUseList.scss';
 import axios from 'axios';
 
-const MaterialUseList = ({ selectedDate }) => {
+const MaterialUseList = ({ selectedDate, selectedProject }) => {
     const [materialUse, setMaterialUse] = useState([]);
     const [activeIndex, setActiveIndex] = useState(null);
 
     const fetchData = async () => {
-        if (selectedDate) {
+        if (selectedDate && selectedProject) {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?populate=*`);
                 const fetchedData = response.data.data;
@@ -16,11 +16,17 @@ const MaterialUseList = ({ selectedDate }) => {
                 const dataForSelectedDate = fetchedData.filter(item => item.attributes.date === selectedDate);
                 console.log("selectedDate", selectedDate);
                 console.log("dataforselecteddate", dataForSelectedDate);
+                console.log("selectedProject", selectedProject);
 
-                setMaterialUse(dataForSelectedDate);
+                const ProjectAndDateCorrect = dataForSelectedDate.filter(item => item.attributes.project.data.attributes.projectName === selectedProject);
+
+                setMaterialUse(ProjectAndDateCorrect);
             } catch (error) {
                 console.log("hata");
             }
+        }
+        else {
+            setMaterialUse([]);
         }
     }
 
