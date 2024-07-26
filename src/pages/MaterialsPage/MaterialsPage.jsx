@@ -36,6 +36,21 @@ function MaterialsPage() {
         setSelectedProject(project);
     };
 
+    const formatDate = (date) => {
+        if (!date) return null;
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    };
+
+    const formattedDate = formatDate(selectedDate);
+
     return (
         <div className="project-material-use">
             <Navigation />
@@ -61,8 +76,8 @@ function MaterialsPage() {
                 </div>
 
                 <div className="material-use-list-all">
-                    <MaterialUseList selectedDate={selectedDate} />
-                    <MaterialEnteringArea selectedDate={selectedDate} selectedProject={selectedProject} />
+                    <MaterialUseList selectedDate={formattedDate} selectedProject={selectedProject} />
+                    <MaterialEnteringArea selectedDate={formattedDate} selectedProject={selectedProject} />
                 </div>
             </div>
         </div>

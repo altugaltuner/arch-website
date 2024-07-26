@@ -1,110 +1,91 @@
-import React, { useEffect, useState } from "react";
-import "./MaterialEnteringArea.scss";
+import React, { useState, useMemo, useEffect } from 'react';
+import './MaterialCalendar.scss';
+import backButton from "../../../assets/icons/back-button.png";
+import forwardButton from "../../../assets/icons/forward-button.png";
 
-function MaterialEnteringArea({ selectedDate, selectedProject }) {
+const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
-    const [matQuantity, setMatQuantity] = useState();
-    const [matName, setMatName] = useState("");
-    const [matType, setMatType] = useState("");
-
-    useEffect(() => {
-        console.log("selectedProject", selectedProject); // now you should get the full project object
-    }, [selectedProject]);
-
-    const handleSubmitMaterial = async (e) => {
-        e.preventDefault();
-        if (!matName || !matQuantity || !matType) {
-            alert("eksik yerleri doldurun.");
-            return;
-        }
-        try {
-            const data = {
-                data: {
-                    name: matName,
-                    amount: matQuantity,
-                    type: matType,
-                    project: {
-                        data: {
-                            id: selectedProject.id,
-                            attributes: selectedProject.attributes
-                        }
-                    },
-                    date: new Date().toISOString().split('T')[0] // assuming you want to set the current date
-                }
-            };
-
-            const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/materials', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }, body: JSON.stringify(data),
-            });
-            const result = await response.json();
-            console.log("result", result);
-            console.log("tüm gönderilen bilgiler:", matType, matQuantity, matName);
-        }
-        catch (error) {
-            console.log(error, "hata kodu");
-        }
+const generateCalendar = (year, month) => {
+    const date = new Date(year, month, 1);
+    const dates = [];
+    // Prepend days of the previous month
+    for (let i = 0; i < date.getDay(); i++) {
+        dates.push(null);
     }
-
-    useEffect(() => {
-        console.log("matQuantity", matQuantity);
-        console.log("matName", matName);
-        console.log("matType", matType);
-    }, [matQuantity, matName, matType])
-
-    const selectTypeChange = (e) => {
-        setMatType(e.target.value);
+    while (date.getMonth() === month) {
+        dates.push(new Date(date));
+        date.setDate(date.getDate() + 1);
     }
+    // Append days of the next month
+    while (dates.length % 7 !== 0) {
+        dates.push(null);
+    }
+    return dates;
+};
 
-    const filterMatQuantity = (e) => {
-        const re = /^[0-9\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
-            setMatQuantity(e.target.value);
+const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+const MaterialCalendar = ({ setSelectedDate }) => {
+    const [year, setYear] = useState(new Date().getFullYear());
+    const [month, setMonth] = useState(new Date().getMonth());
+    const [selectedDate, setSelectedDateState] = useState(null);
+    const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
+
+    const handleDateClick = (date) => {
+        const formattedDate = formatDate(date);
+        setSelectedDate(formattedDate);
+        setSelectedDateState(date);
+    };
+
+    const nextMonth = () => {
+        setMonth((prev) => (prev + 1) % 12);
+        if (month === 11) {
+            setYear((prev) => prev + 1);
         }
     };
 
-    const eraseAll = () => {
-        setMatName("");
-        setMatQuantity("");
-        setMatType("");
-    }
+    const prevMonth = () => {
+        setMonth((prev) => (prev === 0 ? 11 : prev - 1));
+        if (month === 0) {
+            setYear((prev) => prev - 1);
+        }
+    };
+
+    const today = new Date();
+
+    useEffect(() => {
+        console.log(selectedDate, "selectedDate");
+    }, [selectedDate]);
 
     return (
-        <div className="material-entering-area">
-            <form className="entering-area-form" onSubmit={handleSubmitMaterial}>
-                <div className="one-material-div">
-                    <label className="material-label" htmlFor="material-name">Malzeme Adı</label>
-                    <input className="material-input" type="text" id="material-name" value={matName} onChange={(e) => setMatName(e.target.value)} placeholder="malzeme adı" />
-                </div>
-                <div className="one-material-div">
-                    <label className="material-label" htmlFor="material-quantity">Malzeme Miktarı</label>
-                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={filterMatQuantity} />
-
-                    <label className="material-label" htmlFor="unit">Ölçü birimi</label>
-                    <select
-                        className="material-input-select"
-                        name="unit"
-                        id="unit"
-                        onChange={selectTypeChange}
+        <div className="material-calendar">
+            <h3 className="material-calendar-subheader">Gün Seçin</h3>
+            <div className="calendar-controls">
+                <img className="material-calendar-page-button" onClick={prevMonth} src={backButton} alt="Geri" />
+                <span>{year} - {month + 1}</span>
+                <img className="material-calendar-page-button" onClick={nextMonth} src={forwardButton} alt="İleri" />
+            </div>
+            <div className="calendar">
+                {daysOfWeek.map((day) => (
+                    <div key={day} className="calendar-day-header">{day}</div>
+                ))}
+                {calendarDates.map((date, index) => (
+                    <div
+                        key={index}
+                        className={`calendar-day ${date ? 'valid' : 'invalid'} ${date && date.toDateString() === today.toDateString() ? 'today' : ''} ${date && selectedDate && date.toDateString() === selectedDate.toDateString() ? 'selected' : ''}`}
+                        onClick={() => date && handleDateClick(date)}
                     >
-                        <option value="">birim seçin</option>
-                        <option value="kg">kg</option>
-                        <option value="metre">metre</option>
-                        <option value="m2">m2</option>
-                        <option value="m3">m3</option>
-                        <option value="adet">adet</option>
-                        <option value="dakika">dakika</option>
-                    </select>
-                </div>
-                <div className="one-material-div">
-                    <button className="add-entry-material-btn" type="submit">Gir</button>
-                    <button className='new-revise-submit-cancel' onClick={eraseAll} type="button">Temizle</button>
-                </div>
-            </form>
+                        {date ? date.getDate() : ''}
+                    </div>
+                ))}
+            </div>
         </div>
     );
-}
+};
 
-export default MaterialEnteringArea;
+export default MaterialCalendar;

@@ -4,35 +4,29 @@ import axios from 'axios';
 
 const MaterialUseList = ({ selectedDate, selectedProject }) => {
     const [materialUse, setMaterialUse] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(null);
 
     const fetchData = async () => {
         if (selectedDate && selectedProject) {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?populate=*`);
                 const fetchedData = response.data.data;
-                console.log(fetchedData, "response for materialUse");
 
                 const dataForSelectedDate = fetchedData.filter(item => item.attributes.date === selectedDate);
-                console.log("selectedDate", selectedDate);
-                console.log("dataforselecteddate", dataForSelectedDate);
-                console.log("selectedProject", selectedProject);
 
-                const ProjectAndDateCorrect = dataForSelectedDate.filter(item => item.attributes.project.data.attributes.projectName === selectedProject);
+                const ProjectAndDateCorrect = dataForSelectedDate.filter(item => item.attributes.project.data && item.attributes.project.data.id === selectedProject.id);
 
                 setMaterialUse(ProjectAndDateCorrect);
             } catch (error) {
-                console.log("hata");
+                console.log("hata", error);
             }
-        }
-        else {
+        } else {
             setMaterialUse([]);
         }
     }
 
     useEffect(() => {
-        fetchData()
-    }, [selectedDate]);
+        fetchData();
+    }, [selectedDate, selectedProject]);
 
     return (
         <div className="material-use-list">

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './MaterialCalendar.scss';
 import backButton from "../../../assets/icons/back-button.png";
 import forwardButton from "../../../assets/icons/forward-button.png";
@@ -37,7 +37,8 @@ const MaterialCalendar = ({ setSelectedDate }) => {
     const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
 
     const handleDateClick = (date) => {
-        setSelectedDate(formatDate(date));
+        const formattedDate = formatDate(date);
+        setSelectedDate(formattedDate);
         setSelectedDateState(date);
     };
 
@@ -56,6 +57,10 @@ const MaterialCalendar = ({ setSelectedDate }) => {
     };
 
     const today = new Date();
+
+    useEffect(() => {
+        console.log(selectedDate, "selectedDate");
+    }, [selectedDate]);
 
     return (
         <div className="material-calendar">

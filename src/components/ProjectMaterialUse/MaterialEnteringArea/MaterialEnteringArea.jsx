@@ -29,7 +29,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
                             attributes: selectedProject.attributes
                         }
                     },
-                    date: new Date().toISOString().split('T')[0] // assuming you want to set the current date
+                    date: selectedDate // use the formatted date here
                 }
             };
 
