@@ -16,10 +16,15 @@
 
     .delete-folder-modal-content {
         background-color: $background-color;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         padding: 20px;
         border-radius: 5px;
         position: relative;
         text-align: center;
+        width: 500px;
+        height: 200px;
 
         .delete-folder-close {
             position: absolute;
