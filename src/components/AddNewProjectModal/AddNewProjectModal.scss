@@ -84,7 +84,8 @@
                 transition: all 0.2s;
 
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: $blue;
+                    color: white;
                 }
             }
 
@@ -96,7 +97,8 @@
                 transition: all 0.2s;
 
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: $close;
+                    color: white;
                 }
             }
         }

@@ -27,7 +27,8 @@
         font-size: 18px;
 
         &:hover {
-            background-color: darken($yellow, 10%);
+            background-color: $blue;
+            color: white;
         }
     }
 

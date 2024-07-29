@@ -81,7 +81,6 @@
             justify-content: center;
             gap: 20px;
 
-            .edit-modal-button-create,
             .edit-modal-button-abort {
                 border: 1px solid $border-color;
                 color: $font-color;
@@ -90,9 +89,22 @@
                 transition: all 0.2s;
 
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: $close;
+                    color: white;
                 }
+            }
 
+            .edit-modal-button-create {
+                border: 1px solid $border-color;
+                color: $font-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: $blue;
+                    color: white;
+                }
             }
         }
     }

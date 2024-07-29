@@ -60,7 +60,6 @@
             margin-top: 20px;
             gap: 20px;
 
-            .delete-confirmation-yes,
             .delete-confirmation-no {
                 padding: 10px 20px;
                 border: 1px solid $border-color;
@@ -68,7 +67,21 @@
                 transition: all 0.2s;
 
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: $close;
+                    color: white;
+                }
+
+            }
+
+            .delete-confirmation-yes {
+                padding: 10px 20px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: $blue;
+                    color: white;
                 }
             }
         }

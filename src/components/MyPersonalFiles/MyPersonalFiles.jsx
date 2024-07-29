@@ -5,6 +5,7 @@ import folderIcon from "../../assets/icons/folder-icon.png";
 import FilePreviewModal from "../FilePreviewModal/FilePreviewModal";
 import AddFolderModal from "../AddFolderModal/AddFolderModal";
 import EditFolderModal from "../EditFolderModal/EditFolderModal";
+import DeleteFolderModal from "../DeleteFolderModal/DeleteFolderModal";
 import backButton from "../../assets/icons/back-button.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
@@ -16,6 +17,7 @@ function MyPersonalFiles({ user }) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [showAddFolderModal, setShowAddFolderModal] = useState(false);
     const [showEditFolderModal, setShowEditFolderModal] = useState(false);
+    const [showDeleteFolderModal, setShowDeleteFolderModal] = useState(false);
     const [folderToDelete, setFolderToDelete] = useState(null);
     const [folderToEdit, setFolderToEdit] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
@@ -207,6 +209,7 @@ function MyPersonalFiles({ user }) {
                     alt="deleteIcon"
                     onClick={() => {
                         setFolderToDelete(folder);
+                        setShowDeleteFolderModal(true);
                     }}
                 />
                 <img src={folderIcon} alt="folder" className="folder-icon" />
@@ -309,6 +312,11 @@ function MyPersonalFiles({ user }) {
                 onClose={() => setShowEditFolderModal(false)}
                 onEdit={handleEditFolder}
                 initialName={folderToEdit ? folderToEdit.folderName : ''}
+            />
+            <DeleteFolderModal
+                isOpen={showDeleteFolderModal}
+                onClose={() => setShowDeleteFolderModal(false)}
+                onDelete={handleDeleteFolder}
             />
         </div>
     );

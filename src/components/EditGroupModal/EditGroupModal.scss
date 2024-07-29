@@ -85,9 +85,19 @@
                 padding: 10px 20px;
                 border-radius: 5px;
                 transition: all 0.2s;
+            }
 
+            .group-edit-modal-button-confirm {
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: darken($blue, 10%);
+                    color: white;
+                }
+            }
+
+            .group-edit-modal-button-cancel {
+                &:hover {
+                    background-color: darken($close, 10%);
+                    color: white;
                 }
             }
         }

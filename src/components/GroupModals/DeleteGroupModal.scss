@@ -70,8 +70,20 @@
                 border-radius: 5px;
                 transition: all 0.2s;
 
+
+            }
+
+            .delete-group-btn-yes {
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: darken($blue, 10%);
+                    color: white;
+                }
+            }
+
+            .delete-group-btn-no {
+                &:hover {
+                    background-color: darken($close, 10%);
+                    color: white;
                 }
             }
         }

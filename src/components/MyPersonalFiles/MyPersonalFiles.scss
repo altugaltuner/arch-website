@@ -28,7 +28,8 @@
         transition: all 0.2s;
 
         &:hover {
-            background-color: darken($yellow, 10%);
+            background-color: $blue;
+            color: white;
         }
     }
 
@@ -135,6 +136,7 @@
             width: 135px;
             border-radius: 15px;
             cursor: pointer;
+            gap: 10px;
             transition: all 0.2s;
 
             &:hover {

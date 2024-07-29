@@ -28,8 +28,8 @@ const PasswordModal = ({ isOpen, onClose, onConfirm, projectName }) => {
                     autoComplete="new-password"
                 />
                 <div className="modal-buttons">
-                    <button className='modal-one-button' onClick={handleConfirm}>Onayla</button>
-                    <button className='modal-one-button' onClick={onClose}>İptal</button>
+                    <button className='modal-one-button-confirm' onClick={handleConfirm}>Giriş Yap</button>
+                    <button className='modal-one-button-cancel' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>
