@@ -5,6 +5,7 @@ import { useAuth } from "../AuthProvider";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
 function OtherUsersInfo({ employee }) {
+    console.log('employee', employee);
     const { user } = useAuth();
     const userRole = user && user.access ? user.access.role : null;
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -90,16 +91,15 @@ function OtherUsersInfo({ employee }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    data: {
-                        profession: {
-                            professionName: newProfessionName,
-                        },
+                    profession: {
+                        professionName: newProfessionName,
                     },
                 }),
             });
 
             if (response.ok) {
                 const updatedEmployee = await response.json();
+                console.log("Güncelleme başarılı:", updatedEmployee);
                 setIsEditing(false);
                 if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
                     employee.profession.data.attributes.professionName = updatedEmployee.profession.professionName;

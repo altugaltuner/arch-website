@@ -16,7 +16,28 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
         setError("");
         handleSubmit();
         onClose();
-    }
+    };
+
+    const validateFile = (file) => {
+        const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+            setError("Sadece fotoğraf yükleyin.");
+            return false;
+        }
+        if (file.size > 1024 * 1024) {
+            setError("Dosya boyutu 1MB'tan fazla olamaz.");
+            return false;
+        }
+        setError("");
+        return true;
+    };
+
+    const handleFileChangeWithValidation = (e) => {
+        const file = e.target.files[0];
+        if (file && validateFile(file)) {
+            handleFileChange(e);
+        }
+    };
 
     return (
         <div className="add-new-project-modal">
@@ -49,7 +70,7 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
                     className="add-new-project-cover-photo-input"
                     type="file"
                     name="projectCoverPhoto"
-                    onChange={handleFileChange}
+                    onChange={handleFileChangeWithValidation}
                 />
                 <div className="add-new-project-adding-modal-buttons-row">
                     <button

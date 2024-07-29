@@ -43,6 +43,7 @@ function WorkersPage() {
                     ...user.attributes,
                     id: user.id
                 }));
+                console.log('formattedUsers', formattedUsers);
                 setEmployees(formattedUsers);
                 setFilteredSearchEmployees(formattedUsers);
                 const titles = formattedUsers.map(employee => employee.profession.professionName);

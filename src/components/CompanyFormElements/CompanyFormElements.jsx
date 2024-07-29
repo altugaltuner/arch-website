@@ -5,12 +5,27 @@ import "./CompanyFormElements.scss";
 const CompanyFormElements = ({ errors, setErrors }) => {
     const [employeeCodeGenerated, setEmployeeCodeGenerated] = useState(false);
     const [companyPermissionCodes, setCompanyPermissionCodes] = useState([]);
+    const [allEmails, setAllEmails] = useState([]);
+
+    const fetchEmails = async () => {
+        try {
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users');
+            const data = response.data.map(item => item.email);
+            console.log(data, "Fetched Emails");
+            setAllEmails(data);
+        } catch (error) {
+            console.error("Error fetching emails:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchEmails();
+    }, []);
 
     const employeeCodeCreator = () => {
         if (!employeeCodeGenerated) {
             const employeeCode = Math.random().toString(36).substring(2, 8).toUpperCase();
             document.getElementById("employeeCode").value = employeeCode;
-
             setEmployeeCodeGenerated(true);
         }
     };
@@ -20,10 +35,9 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/company-perm-codes?populate=*');
             const data = response.data.data.map(item => item.attributes.code);
             setCompanyPermissionCodes(data);
-            console.log(data);
+            console.log(data, "Fetched Permission Codes");
         } catch (error) {
             console.error("Error fetching data:", error);
-            throw error;
         }
     };
 
@@ -40,6 +54,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     companyID: companyCode,
                 },
             });
+            console.log("Company created:", response.data);
             return response.data;
         } catch (error) {
             console.error("Error creating company:", error);
@@ -71,8 +86,8 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     publishedAt: new Date().toISOString()
                 },
                 role: 1
-            }
-            );
+            });
+            console.log("User created:", response.data);
             return response.data;
         } catch (error) {
             console.error("Error creating user:", error);
@@ -101,21 +116,38 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             errors.companyPermissionCode = "Geçersiz şirket oluşturma izin kodu.";
         }
 
+        if (formElements.companyName === "" || formElements.workingArea === "" || formElements.adminName === "" || formElements.adminSurname === "" || formElements.adminEmail === "" || formElements.adminPassword === "" || formElements.adminPasswordAgain === "") {
+            errors.companyName = "Lütfen tüm alanları doldurun.";
+        }
+
+        if (formElements.adminEmail !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formElements.adminEmail)) {
+            errors.adminEmail = "Geçersiz email adresi.";
+        }
+
+        if (formElements.adminEmail === allEmails.find(email => email === formElements.adminEmail)) {
+            errors.adminEmail = "Bu email adresi zaten kullanılmakta.";
+        }
+
         if (formElements.companyName.length > 50 || formElements.companyName.length < 2) {
             errors.companyName = "Şirket ismi 50 karakterden fazla ve 2 karakterden az olamaz.";
         }
+
         if (formElements.workingArea.length > 30 || formElements.workingArea.length < 2) {
             errors.workingArea = "Şirketin çalışma alanı 30 karakterden fazla ve 2 karakterden az olamaz.";
         }
+
         if (formElements.adminName.length > 15 || !/^[a-zA-Z]+$/.test(formElements.adminName)) {
             errors.adminName = "Admin ismi 15 karakterden fazla olamaz ve sadece harf içermelidir.";
         }
-        if (formElements.adminSurname.length > 20 || !/^[a-zA-Z]+$/.test(formElements.adminSurname)) {
+
+        if (formElements.adminSurname.length > 20 || !/^[a-zA-ZığüşöçİĞÜŞÖÇ]+$/.test(formElements.adminSurname)) {
             errors.adminSurname = "Admin soyismi 20 karakterden fazla olamaz ve sadece harf içermelidir.";
         }
+
         if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}/.test(formElements.adminPassword)) {
             errors.adminPassword = "Şifre en az bir büyük harf, bir küçük harf ve bir rakam içermeli ve en az 8 karakter uzunluğunda olmalıdır.";
         }
+
         if (formElements.adminPassword !== formElements.adminPasswordAgain) {
             errors.adminPasswordAgain = "Şifreler birbiriyle uyuşmuyor.";
         }
@@ -125,11 +157,13 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         if (Object.keys(errors).length === 0) {
             try {
                 const company = await createCompany(formElements.companyName, formElements.workingArea, formElements.companyCode);
+                console.log("Company data:", company.data);
 
                 await createUser(formElements.adminName, formElements.adminSurname, formElements.adminPassword, formElements.adminEmail, company.data);
 
                 alert("Form başarıyla gönderildi!");
             } catch (error) {
+                console.error("Form gönderimi sırasında bir hata oluştu:", error);
                 alert("Form gönderimi sırasında bir hata oluştu. Lütfen tekrar deneyin.");
             }
         }
@@ -141,6 +175,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                 <div className="company-create-div">
                     <h3 className="company-create-subheader">Şirket Bilgileri</h3>
                     <label className="company-create-label" htmlFor="companyPermissionCode">Şirket Oluşturma İzin Kodu</label>
+                    <p className="free-account-p">Ücretsiz Hesap için "1010" yazın.</p>
                     <input className="company-create-input" type="text" id="companyPermissionCode" />
                     {errors.companyPermissionCode && <span className="error-for-company-signup">{errors.companyPermissionCode}</span>}
 
@@ -171,6 +206,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
                     <label className="admin-create-label" htmlFor="adminEmail">Admin Email</label>
                     <input className="admin-create-input" type="email" id="adminEmail" />
+                    {errors.adminEmail && <span className="error-for-company-signup">{errors.adminEmail}</span>}
 
                     <label className="admin-create-label" htmlFor="adminPassword">Admin Şifresi</label>
                     <input className="admin-create-input" type="password" id="adminPassword" />
