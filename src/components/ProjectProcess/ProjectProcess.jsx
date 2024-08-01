@@ -57,6 +57,9 @@ function ProjectProcess({ clickedProject }) {
                     {projectProcess}%
                 </div>
             </div>
+
+            {projectProcess === 100 ? <p className="project-completed">Proje Tamamlandı</p> : null}
+
             {userRole === "Admin" || userRole === "Contributor" ? (
                 <div className="project-process-input">
                     <p className="project-process-p">Projenin Durumunu Güncelleyin</p>

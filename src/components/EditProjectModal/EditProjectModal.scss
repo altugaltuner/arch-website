@@ -20,7 +20,7 @@
         padding: 50px;
         border-radius: 10px;
         max-width: 400px;
-        text-align: center;
+        text-align: left;
 
         .edit-project-modal-close {
             position: absolute;
@@ -57,6 +57,7 @@
             font-size: 24px;
             margin-bottom: 20px;
             font-weight: 500;
+            margin-left: 75px;
         }
 
         .project-p-modall {

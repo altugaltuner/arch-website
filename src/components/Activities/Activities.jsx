@@ -60,10 +60,10 @@ const Activities = ({ searchTerm }) => {
     };
 
     const reviseStateMap = {
-        1: "yapılacak",
-        2: "yapılıyor",
-        3: "yapıldı",
-        4: "iptal edildi"
+        1: "Yapılacak",
+        2: "İşleme Alındı",
+        3: "Tamamlandı",
+        4: "İptal Edildi"
     };
 
     return (

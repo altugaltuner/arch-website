@@ -1,7 +1,7 @@
 import React from 'react';
 import "./AdminDashboard.scss";
 
-function AdminDashBoard({ projectCount, userCount, reviseCount }) {
+function AdminDashBoard({ projectCount, userCount, reviseCount, finishedProjectCount, onGoingProjectCount, onGoingReviseCount, CanceledReviseCount, finishedReviseCount }) {
 
     return (
         <div className="admin-dashboard-main">
@@ -15,10 +15,20 @@ function AdminDashBoard({ projectCount, userCount, reviseCount }) {
                     <div className='dashboard-oneline-inner'>
                         <h3 className='dashboard-p-header'>Proje Sayısı</h3>
                         <p className='dashboard-p'>{projectCount}</p>
+                        <h3 className='dashboard-p-header'>Devam Eden Projeler</h3>
+                        <p className='dashboard-p'>{onGoingProjectCount}</p>
+                        <h3 className='dashboard-p-header'>Biten Projeler</h3>
+                        <p className='dashboard-p'>{finishedProjectCount}</p>
                     </div>
                     <div className='dashboard-oneline-inner'>
                         <h3 className='dashboard-p-header'>Tüm Revize Miktarı</h3>
                         <p className='dashboard-p'>{reviseCount}</p>
+                        <h3 className='dashboard-p-header'>Tamamlanan</h3>
+                        <p className='dashboard-p'>{finishedReviseCount}</p>
+                        <h3 className='dashboard-p-header'>Devam Eden </h3>
+                        <p className='dashboard-p'>{onGoingReviseCount}</p>
+                        <h3 className='dashboard-p-header'>İptal Edilen</h3>
+                        <p className='dashboard-p'>{CanceledReviseCount}</p>
 
                     </div>
                     <div className='dashboard-oneline-inner'>

@@ -15,6 +15,11 @@
     max-height: 500px;
     overflow-y: auto;
 
+    .project-completed {
+        color: green;
+        font-weight: 500;
+    }
+
     .project-process-input {
         display: flex;
         flex-direction: column;
