@@ -1,93 +1,34 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import './MaterialCalendar.scss';
-import backButton from "../../../assets/icons/back-button.png";
-import forwardButton from "../../../assets/icons/forward-button.png";
+import React, { useEffect } from 'react';
+import HomePage from './pages/HomePage/HomePage';
+import { DarkModeProvider, useDarkMode } from './components/DarkModeContext';
+import AppSettings from './components/AppSettings/AppSettings';
+import './App.scss';
 
-const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
-
-const generateCalendar = (year, month) => {
-    const date = new Date(year, month, 1);
-    const dates = [];
-    // Prepend days of the previous month
-    for (let i = 0; i < date.getDay(); i++) {
-        dates.push(null);
-    }
-    while (date.getMonth() === month) {
-        dates.push(new Date(date));
-        date.setDate(date.getDate() + 1);
-    }
-    // Append days of the next month
-    while (dates.length % 7 !== 0) {
-        dates.push(null);
-    }
-    return dates;
-};
-
-const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-
-const MaterialCalendar = ({ setSelectedDate, materialDates }) => {
-    const [year, setYear] = useState(new Date().getFullYear());
-    const [month, setMonth] = useState(new Date().getMonth());
-    const [selectedDate, setSelectedDateState] = useState(null);
-    const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
-
-    const handleDateClick = (date) => {
-        const formattedDate = formatDate(date);
-        setSelectedDate(formattedDate);
-        setSelectedDateState(date);
-    };
-
-    const nextMonth = () => {
-        setMonth((prev) => (prev + 1) % 12);
-        if (month === 11) {
-            setYear((prev) => prev + 1);
-        }
-    };
-
-    const prevMonth = () => {
-        setMonth((prev) => (prev === 0 ? 11 : prev - 1));
-        if (month === 0) {
-            setYear((prev) => prev - 1);
-        }
-    };
-
-    const today = new Date();
+const AppContent = () => {
+    const { isDarkMode } = useDarkMode();
 
     useEffect(() => {
-        console.log(selectedDate, "selectedDate");
-    }, [selectedDate]);
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }, [isDarkMode]);
 
     return (
-        <div className="material-calendar">
-            <div className="calendar-controls">
-                <img className="material-calendar-page-button" onClick={prevMonth} src={backButton} alt="Geri" />
-                <span>{year} - {month + 1}</span>
-                <img className="material-calendar-page-button" onClick={nextMonth} src={forwardButton} alt="İleri" />
-            </div>
-            <div className="calendar">
-                {daysOfWeek.map((day) => (
-                    <div key={day} className="calendar-day-header">{day}</div>
-                ))}
-                {calendarDates.map((date, index) => {
-                    const isMaterialDate = date && materialDates.includes(formatDate(date));
-                    return (
-                        <div
-                            key={index}
-                            className={`calendar-day ${date ? 'valid' : 'invalid'} ${date && date.toDateString() === today.toDateString() ? 'today' : ''} ${date && selectedDate && date.toDateString() === selectedDate.toDateString() ? 'selected' : ''} ${isMaterialDate ? 'material-date' : ''}`}
-                            onClick={() => date && handleDateClick(date)}
-                        >
-                            {date ? date.getDate() : ''}
-                        </div>
-                    );
-                })}
-            </div>
+        <div className="App">
+            <AppSettings />
+            <HomePage />
         </div>
     );
 };
 
-export default MaterialCalendar;
+function App() {
+    return (
+        <DarkModeProvider>
+            <AppContent />
+        </DarkModeProvider>
+    );
+}
+
+export default App;

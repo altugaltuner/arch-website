@@ -1,9 +1,8 @@
 import React from 'react';
 import "./SubSettingPanel.scss";
-
-import AppSettings from './AppSettings/AppSettings';
+import AppSettings from "./AppSettings/AppSettings";
 import DataStorage from './DataStorage/DataStorage';
-import PrivacySecurity from './PrivacySecurity/PrivacySecurity';
+import PrivacySecurity from "./PrivacySecurity/PrivacySecurity";
 import NotificationSettings from './NotificationSettings/NotificationSettings';
 import UserProfile from './UserProfile/UserProfile';
 import AboutUs from './AboutUs/AboutUs';

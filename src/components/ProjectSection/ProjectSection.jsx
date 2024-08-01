@@ -339,7 +339,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                             <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
 
                                 {userRole === "Admin" || userRole === "Contributor" ? (
-                                    <>
+                                    <div className="edit-delete-button-div">
                                         <img
                                             className="file-card-delete-btn"
                                             src={deleteIcon}
@@ -347,18 +347,20 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                                             onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}
                                         />
                                         <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
-                                    </>
+                                    </div>
                                 )
                                     :
                                     null
                                 }
+                                <div className="project-card-rest-of">
+                                    <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
+                                    <img
+                                        className="project-folder-image"
+                                        src={folderIcon}
+                                        alt="folder-icon"
+                                    /></div>
 
-                                <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
-                                <img
-                                    className="project-folder-image"
-                                    src={folderIcon}
-                                    alt="folder-icon"
-                                />
+
                             </div>
                         ))}
                         <div className="dustbin-project-folder">

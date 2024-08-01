@@ -135,8 +135,8 @@
             flex-direction: column;
             text-align: center;
             align-items: center;
-            padding: 10px;
-            height: auto;
+            padding: 25px 10px 10px 10px;
+            height: 170px;
             width: 160px;
             border-radius: 10px;
             border: 1px solid $border-color;
@@ -147,64 +147,67 @@
                 background-color: darken($background-color, 10%);
             }
 
-            .file-card-delete-btn {
-                display: none;
-            }
+            .edit-delete-button-div {
+                display: flex;
 
-            .file-card-edit-btn {
-                display: none;
-            }
+                .file-card-delete-btn {
+                    display: block;
+                    position: absolute;
+                    top: 0px;
+                    right: 25px;
+                    font-size: 20px;
+                    cursor: pointer;
+                    width: 20px;
+                    margin: 5px;
+                    opacity: 0.6;
+                    transition: all 0.2s;
 
-            .project-folder-name {
-                font-size: 18px;
-                font-weight: 400;
-                max-height: 70px;
-                overflow-y: auto;
-                margin-bottom: 10px;
-                color: $font-color;
-            }
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
 
-            .project-folder-image {
-                width: 95px;
-                object-fit: cover;
-                margin-bottom: 8px;
-            }
-        }
+                .file-card-edit-btn {
+                    display: block;
+                    position: absolute;
+                    top: 3px;
+                    right: 0px;
+                    font-size: 20px;
+                    cursor: pointer;
+                    width: 20px;
+                    margin: 5px;
+                    opacity: 0.6;
+                    transition: all 0.2s;
 
-        :hover {
-            .file-card-delete-btn {
-                display: block;
-                position: absolute;
-                top: 0px;
-                right: 25px;
-                font-size: 20px;
-                cursor: pointer;
-                width: 20px;
-                margin: 5px;
-                opacity: 0.6;
-                transition: all 0.2s;
-
-                &:hover {
-                    opacity: 1;
+                    &:hover {
+                        opacity: 1;
+                    }
                 }
             }
 
-            .file-card-edit-btn {
-                display: block;
-                position: absolute;
-                top: 3px;
-                right: 0px;
-                font-size: 20px;
-                cursor: pointer;
-                width: 20px;
-                margin: 5px;
-                opacity: 0.6;
-                transition: all 0.2s;
+            .project-card-rest-of {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-top: 1px solid $border-color;
 
-                &:hover {
-                    opacity: 1;
+                .project-folder-name {
+                    font-size: 18px;
+                    font-weight: 400;
+                    max-height: 70px;
+                    overflow-y: auto;
+                    margin-bottom: 10px;
+                    color: $font-color;
+                }
+
+                .project-folder-image {
+                    width: 95px;
+                    object-fit: cover;
+                    margin-bottom: 8px;
                 }
             }
+
         }
     }
 }

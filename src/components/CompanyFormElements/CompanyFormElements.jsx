@@ -64,8 +64,11 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
     const createUser = async (adminName, adminSurname, adminPassword, adminEmail, company) => {
         try {
+            // Rastgele bir sayı ekleyerek benzersiz bir kullanıcı adı oluşturun
+            const username = `${adminName} ${adminSurname}${Math.floor(Math.random() * 10000)}`;
+
             const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/users', {
-                username: `${adminName} ${adminSurname}`,
+                username: username,
                 email: adminEmail,
                 password: adminPassword,
                 isCompanyAdmin: true,
