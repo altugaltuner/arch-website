@@ -52,6 +52,11 @@
         transition: all 0.2s;
     }
 
+    .calendar-day.material-date {
+        background-color: rgb(100, 134, 121) !important;
+        color: white !important;
+    }
+
     .calendar-day-header {
         font-weight: 400;
         text-align: center;

@@ -13,6 +13,7 @@ function MaterialsPage() {
     const [companyProjects, setCompanyProjects] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedProject, setSelectedProject] = useState(null);
+    const [materialDates, setMaterialDates] = useState([]); // Yeni state
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,8 +28,22 @@ function MaterialsPage() {
     }, [usersCompanyId]);
 
     useEffect(() => {
-        console.log(selectedProject, "selectedProject after state update");
-    }, [selectedProject]);
+        if (selectedProject) {
+            // Seçilen proje için malzeme tarihlerinin getirilmesi
+            const fetchMaterialDates = async () => {
+                try {
+                    const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?filters[project]=${selectedProject.id}`);
+                    const dates = response.data.data.map(material => material.attributes.date);
+                    setMaterialDates(dates);
+                } catch (error) {
+                    console.error('Error fetching material dates', error);
+                }
+            };
+            fetchMaterialDates();
+        } else {
+            setMaterialDates([]); // Proje seçilmezse malzeme tarihlerini sıfırla
+        }
+    }, [selectedProject]); // selectedProject bağımlılığına göre çalışır
 
     const selectProject = (e) => {
         const projectName = e.target.value;
@@ -56,12 +71,8 @@ function MaterialsPage() {
             <Navigation />
             <div className="materials-inner-div">
                 <h2 className="material-use-header">Metraj Tutanağı</h2>
-                <div className="material-use-calendar">
-                    <MaterialCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-                </div>
-
                 <div className="material-choose-project">
-                    <h2>Malzeme Harcama Listesi için Proje Seçin</h2>
+                    <h2>Harcama Listesi için Proje Seçin</h2>
                     <select
                         className='material-choose-project-select'
                         name="user-role"
@@ -74,7 +85,9 @@ function MaterialsPage() {
                         ))}
                     </select>
                 </div>
-
+                <div className="material-use-calendar">
+                    <MaterialCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} materialDates={materialDates} />
+                </div>
                 <div className="material-use-list-all">
                     <MaterialUseList selectedDate={formattedDate} selectedProject={selectedProject} />
                     <MaterialEnteringArea selectedDate={formattedDate} selectedProject={selectedProject} />

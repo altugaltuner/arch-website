@@ -30,7 +30,7 @@ const formatDate = (date) => {
     return `${year}-${month}-${day}`;
 }
 
-const MaterialCalendar = ({ setSelectedDate }) => {
+const MaterialCalendar = ({ setSelectedDate, materialDates }) => {
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth());
     const [selectedDate, setSelectedDateState] = useState(null);
@@ -64,7 +64,6 @@ const MaterialCalendar = ({ setSelectedDate }) => {
 
     return (
         <div className="material-calendar">
-            <h3 className="material-calendar-subheader">Gün Seçin</h3>
             <div className="calendar-controls">
                 <img className="material-calendar-page-button" onClick={prevMonth} src={backButton} alt="Geri" />
                 <span>{year} - {month + 1}</span>
@@ -74,15 +73,18 @@ const MaterialCalendar = ({ setSelectedDate }) => {
                 {daysOfWeek.map((day) => (
                     <div key={day} className="calendar-day-header">{day}</div>
                 ))}
-                {calendarDates.map((date, index) => (
-                    <div
-                        key={index}
-                        className={`calendar-day ${date ? 'valid' : 'invalid'} ${date && date.toDateString() === today.toDateString() ? 'today' : ''} ${date && selectedDate && date.toDateString() === selectedDate.toDateString() ? 'selected' : ''}`}
-                        onClick={() => date && handleDateClick(date)}
-                    >
-                        {date ? date.getDate() : ''}
-                    </div>
-                ))}
+                {calendarDates.map((date, index) => {
+                    const isMaterialDate = date && materialDates.includes(formatDate(date));
+                    return (
+                        <div
+                            key={index}
+                            className={`calendar-day ${date ? 'valid' : 'invalid'} ${date && date.toDateString() === today.toDateString() ? 'today' : ''} ${date && selectedDate && date.toDateString() === selectedDate.toDateString() ? 'selected' : ''} ${isMaterialDate ? 'material-date' : ''}`}
+                            onClick={() => date && handleDateClick(date)}
+                        >
+                            {date ? date.getDate() : ''}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

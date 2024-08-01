@@ -12,13 +12,30 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
     const userRole = user && user.access ? user.access.role : null;
 
     const handleDownload = () => {
-        const link = document.createElement('a');
-        link.href = `https://bold-animal-facf707bd9.strapiapp.com/${currentFile.attributes.url}`;
-        link.setAttribute('download', currentFile.attributes.name);
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
+        console.log("Download file:", currentFile.attributes.name);
+        console.log("File URL:", currentFile.attributes.url);
+        const fileUrl = `${currentFile.attributes.url}`;
+
+        // Check if the file URL is valid
+        fetch(fileUrl, { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    const link = document.createElement('a');
+                    link.href = fileUrl;
+                    link.setAttribute('download', currentFile.attributes.name);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                } else {
+                    alert("File not found. Please check the file URL.");
+                }
+            })
+            .catch(error => {
+                console.error("Error while fetching the file:", error);
+                alert("An error occurred while trying to download the file.");
+            });
     };
+
 
     return (
         <div className="file-modal">

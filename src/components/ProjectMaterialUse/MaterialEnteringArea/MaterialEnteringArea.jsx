@@ -6,6 +6,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
     const [matQuantity, setMatQuantity] = useState();
     const [matName, setMatName] = useState("");
     const [matType, setMatType] = useState("");
+    const [errorParagraph, setErrorParagraph] = useState("");
 
     useEffect(() => {
         console.log("selectedProject", selectedProject); // now you should get the full project object
@@ -14,7 +15,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
     const handleSubmitMaterial = async (e) => {
         e.preventDefault();
         if (!matName || !matQuantity || !matType) {
-            alert("eksik yerleri doldurun.");
+            setErrorParagraph("Lütfen tüm alanları doldurun.");
             return;
         }
         try {
@@ -56,19 +57,27 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
 
     const selectTypeChange = (e) => {
         setMatType(e.target.value);
+        setErrorParagraph("");
     }
 
     const filterMatQuantity = (e) => {
         const re = /^[0-9\b]+$/;
         if (e.target.value === '' || re.test(e.target.value)) {
             setMatQuantity(e.target.value);
+            setErrorParagraph("");
         }
     };
+
+    const filterMatName = (e) => {
+        setMatName(e.target.value);
+        setErrorParagraph("");
+    }
 
     const eraseAll = () => {
         setMatName("");
         setMatQuantity("");
         setMatType("");
+        setErrorParagraph("");
     }
 
     return (
@@ -76,7 +85,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
             <form className="entering-area-form" onSubmit={handleSubmitMaterial}>
                 <div className="one-material-div">
                     <label className="material-label" htmlFor="material-name">Malzeme Adı</label>
-                    <input className="material-input" type="text" id="material-name" value={matName} onChange={(e) => setMatName(e.target.value)} placeholder="malzeme adı" />
+                    <input className="material-input" type="text" id="material-name" value={matName} onChange={filterMatName} placeholder="malzeme adı" />
                 </div>
                 <div className="one-material-div">
                     <label className="material-label" htmlFor="material-quantity">Malzeme Miktarı</label>
@@ -101,6 +110,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
                 <div className="one-material-div">
                     <button className="add-entry-material-btn" type="submit">Gir</button>
                     <button className='new-revise-submit-cancel' onClick={eraseAll} type="button">Temizle</button>
+                    <p className="error-paragraph">{errorParagraph}</p>
                 </div>
             </form>
         </div>

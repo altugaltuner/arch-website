@@ -162,8 +162,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         }
     };
 
-
-
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) {
@@ -180,7 +178,9 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+
             const uploadedFile = uploadResponse.data[0];
+
             const updatedContent = currentFolder.folderContent && currentFolder.folderContent.data
                 ? [...currentFolder.folderContent.data, uploadedFile]
                 : [uploadedFile];
@@ -191,8 +191,14 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 },
             });
 
+            // Update state with new file
             setCurrentFiles(updatedContent);
-            setCurrentFolder(prevFolder => ({ ...prevFolder, folderContent: { data: updatedContent } }));
+            setCurrentFolder(prevFolder => ({
+                ...prevFolder,
+                folderContent: { data: updatedContent }
+            }));
+
+            // Update project folders with new file
             setProjectFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === currentFolder.id) {
                     return { ...folder, folderContent: { data: updatedContent } };
@@ -200,11 +206,15 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 return folder;
             }));
 
-            createHistoryEntry('yükleme', uploadedFile.id, currentFolder.id); // Ensure IDs are used correctly
+            // Create history entry
+            createHistoryEntry('upload', uploadedFile.id.toString(), currentFolder.id.toString());
+
         } catch (error) {
             console.error('Error uploading the file', error);
         }
     };
+
+
 
     const uploadFile = () => {
         fileInputRef.current.click();
