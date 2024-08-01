@@ -19,7 +19,7 @@
         align-items: center;
         background-color: #fff;
         padding: 20px;
-        border-radius: 8px;
+        border-radius: 5px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         width: 400px;
         max-width: 100%;
@@ -64,7 +64,7 @@
             .edit-note-save {
                 padding: 8px 16px;
                 border: none;
-                border-radius: 4px;
+                border-radius: 5px;
                 background-color: $blue;
                 color: #fff;
                 cursor: pointer;
@@ -78,7 +78,7 @@
             .edit-note-cancel {
                 padding: 8px 16px;
                 border: none;
-                border-radius: 4px;
+                border-radius: 5px;
                 background-color: $yellow;
                 color: #fff;
                 cursor: pointer;
@@ -92,7 +92,7 @@
             .edit-note-delete {
                 padding: 8px 16px;
                 border: none;
-                border-radius: 4px;
+                border-radius: 5px;
                 background-color: $close;
                 color: #fff;
                 cursor: pointer;

@@ -13,7 +13,7 @@
     color: $font-color;
 
     .login-main-div {
-        border-radius: 20px;
+        border-radius: 5px;
         border: 1px solid $border-color;
         width: 500px;
         height: auto;
@@ -23,7 +23,7 @@
             height: auto;
             width: auto;
             border: 1px solid $border-color;
-            border-radius: 12px;
+            border-radius: 5px;
             cursor: pointer;
             padding: 20px;
 
@@ -83,7 +83,7 @@
                 height: 40px;
                 border: none;
                 padding-left: 10px;
-                border-radius: 12px;
+                border-radius: 5px;
                 border: 1px solid $border-color;
             }
 
@@ -92,7 +92,7 @@
                 height: 40px;
                 border: 1px solid $border-color;
                 padding-left: 10px;
-                border-radius: 12px
+                border-radius: 5px
             }
 
             .submits-of-login {

@@ -4,12 +4,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 15%;
+    width: 250px;
     max-height: 800px;
     overflow-y: auto;
     padding: 20px;
     background-color: $background-color;
-    border-radius: 20px;
+    border-radius: 5px;
     border: 1px solid $border-color;
     color: $font-color;
     font-family: $primary-font;
@@ -105,7 +105,7 @@
                 height: 80px;
                 background-color: $background-color;
                 color: $font-color;
-                border-radius: 8px;
+                border-radius: 5px;
                 padding: 10px;
             }
 
@@ -113,7 +113,7 @@
                 background-color: $background-color;
                 color: $font-color;
                 padding: 10px;
-                border-radius: 8px;
+                border-radius: 5px;
                 border: 1px solid $border-color;
                 width: 70%;
             }
@@ -134,7 +134,7 @@
                 background-color: $background-color;
                 color: $font-color;
                 padding: 10px;
-                border-radius: 8px;
+                border-radius: 5px;
                 border: 1px solid $border-color;
             }
         }

@@ -17,7 +17,7 @@
             justify-content: space-around;
             border: 1px solid $border-color;
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 5px;
             align-items: center;
 
             .admin-inbox-send-btn {
@@ -42,7 +42,7 @@
                 align-items: center;
                 padding: 10px;
                 border: 1px solid $border-color;
-                border-radius: 15px;
+                border-radius: 5px;
                 cursor: pointer;
                 transition: all 0.2s;
 

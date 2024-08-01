@@ -9,7 +9,7 @@
     flex-direction: column;
     gap: 10px;
     border: 1px solid $border-color;
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
 
     .revise-and-profile {
@@ -25,7 +25,7 @@
             width: 100%;
             padding: 10px;
             border: 1px solid $border-color;
-            border-radius: 15px;
+            border-radius: 5px;
             max-height: 310px;
             overflow-y: auto;
 
@@ -62,7 +62,7 @@
                 gap: 10px;
                 padding: 10px;
                 border: 1px solid $border-color;
-                border-radius: 15px;
+                border-radius: 5px;
 
                 .other-info-profile-pic {
                     width: 180px;
@@ -129,7 +129,7 @@
         gap: 10px;
         height: fit-content;
         border: 1px solid $border-color;
-        border-radius: 15px;
+        border-radius: 5px;
 
         .other-all-projects {
             display: flex;
@@ -161,7 +161,7 @@
                     padding: 10px;
                     justify-content: space-between;
                     border: 1px solid $border-color;
-                    border-radius: 15px;
+                    border-radius: 5px;
 
                     .other-project-p {
                         font-size: 18px;
@@ -188,7 +188,7 @@
         padding: 10px;
         height: fit-content;
         border: 1px solid $border-color;
-        border-radius: 15px;
+        border-radius: 5px;
 
         .other-groups-joined-h2 {
             font-size: 24px;
@@ -225,7 +225,7 @@
         gap: 15px;
         padding: 10px;
         border: 1px solid $border-color;
-        border-radius: 15px;
+        border-radius: 5px;
         position: relative;
         text-align: center;
         width: 100%;
@@ -270,7 +270,7 @@
                 width: 100%;
                 padding: 10px;
                 border: 1px solid $border-color;
-                border-radius: 10px;
+                border-radius: 5px;
                 justify-content: center;
                 align-items: center;
 
@@ -283,7 +283,7 @@
                     width: 80%;
                     padding: 10px;
                     border: 1px solid $border-color;
-                    border-radius: 15px;
+                    border-radius: 5px;
                 }
 
                 .message-header-private {
@@ -312,7 +312,7 @@
                     gap: 10px;
                     border: 1px solid $border-color;
                     padding: 10px;
-                    border-radius: 15px;
+                    border-radius: 5px;
                     max-width: 395px;
                     overflow-x: auto;
 
@@ -427,7 +427,7 @@
                         padding: 3px;
                         width: 30%;
                         border: 1px solid $border-color;
-                        border-radius: 10px;
+                        border-radius: 5px;
 
                         .other-project-p {
                             font-size: 14px;

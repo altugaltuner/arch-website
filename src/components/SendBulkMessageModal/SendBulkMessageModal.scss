@@ -25,7 +25,7 @@
         align-items: center;
         position: relative;
         gap: 10px;
-        border-radius: 20px;
+        border-radius: 5px;
 
         .bulk-message-close {
             position: absolute;
@@ -59,10 +59,9 @@
             height: 150px;
             padding: 10px;
             border: 1px solid $border-color;
-            border-radius: 5px;
             font-size: 20px;
             resize: both;
-            border-radius: 15px;
+            border-radius: 5px;
         }
 
         .bulk-message-buttons {

@@ -11,6 +11,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
+        padding-top: 20px;
         justify-content: center;
         color: $font-color;
         border: 1px solid $border-color;
@@ -20,10 +21,9 @@
             width: 175px;
             max-height: 200px;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 5px;
             cursor: pointer;
             border: 1px solid $border-color;
-            border-radius: 20px;
             transition: all 0.2s;
 
             &:hover {

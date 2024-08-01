@@ -8,7 +8,7 @@
     padding: 20px;
     margin-right: 20px;
     border: 1px solid $border-color;
-    border-radius: 20px;
+    border-radius: 5px;
     margin-top: 20px;
     font-family: $primary-font;
     color: $font-color;
@@ -18,6 +18,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 10px;
+        border-radius: 5px;
         border: 1px solid $border-color;
 
         .message-panel-left-side,
@@ -71,7 +72,7 @@
             align-self: flex-start;
             background-color: #e9e9e9;
             padding: 8px 12px;
-            border-radius: 10px;
+            border-radius: 5px;
             margin-bottom: 10px;
             max-width: 70%;
             word-wrap: break-word;
@@ -81,7 +82,7 @@
             align-self: flex-end;
             background-color: #b7ffcf;
             padding: 8px 12px;
-            border-radius: 10px;
+            border-radius: 5px;
             margin-bottom: 10px;
             max-width: 70%;
             word-wrap: break-word;

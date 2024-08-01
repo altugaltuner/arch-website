@@ -8,7 +8,7 @@
     padding: 10px;
     font-family: $primary-font;
     border: 1px solid $border-color;
-    border-radius: 15px;
+    border-radius: 5px;
     margin-top: 20px;
     color: $font-color;
     min-height: 370px;
@@ -29,7 +29,7 @@
                 align-items: center;
                 justify-content: center;
                 border: 1px solid $border-color;
-                border-radius: 15px;
+                border-radius: 5px;
                 cursor: pointer;
                 transition: all 0.2s;
 
@@ -49,7 +49,7 @@
             .project-file-search {
                 width: 250px;
                 height: 40px;
-                border-radius: 15px;
+                border-radius: 5px;
                 border: 1px solid $border-color;
                 padding: 10px;
             }
@@ -104,7 +104,7 @@
             padding: 10px;
             height: auto;
             width: 200px;
-            border-radius: 10px;
+            border-radius: 5px;
             border: 1px solid $border-color;
             cursor: pointer;
             transition: all 0.2s;
@@ -138,7 +138,7 @@
             padding: 25px 10px 10px 10px;
             height: 170px;
             width: 160px;
-            border-radius: 10px;
+            border-radius: 5px;
             border: 1px solid $border-color;
             cursor: pointer;
             transition: all 0.2s;

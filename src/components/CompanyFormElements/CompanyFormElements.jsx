@@ -82,8 +82,8 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     publishedAt: company.publishedAt
                 },
                 access: {
-                    id: 2,
-                    role: "Spectator",
+                    id: 1,
+                    role: "Admin",
                     createdAt: new Date().toISOString(),
                     updatedAt: new Date().toISOString(),
                     publishedAt: new Date().toISOString()

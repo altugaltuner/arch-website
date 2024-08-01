@@ -11,6 +11,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [jobTitleToDelete, setJobTitleToDelete] = useState(null);
+    const [filteredJobTitles, setFilteredJobTitles] = useState([]);
 
     const { user } = useAuth();
     const userRole = user && user.access ? user.access.role : null;
@@ -24,6 +25,9 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                 name: item.attributes.professionName
             }));
             setJobTitles(titles);
+            const filteredTitles = titles.filter(title => title.attributes.company?.data?.id === user.company.id);
+            setFilteredJobTitles(filteredTitles);
+
         } catch (error) {
             console.error('Meslek türleri yüklenemedi:', error);
         }
@@ -81,7 +85,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                 >
                     Tümü
                 </li>
-                {jobTitles.map((title, index) => (
+                {filteredJobTitles.map((title, index) => (
                     <li
                         className={`job-titles-for-workersPage ${selectedJobTitle === title.name ? 'active' : ''}`}
                         key={index}

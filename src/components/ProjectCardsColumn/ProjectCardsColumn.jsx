@@ -125,7 +125,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                         </div>
                     ))
                 ) : (
-                    <p></p>
+                    <p>Henüz Proje Bulunmamaktadır.</p>
                 )}
             </div>
             <PasswordModal

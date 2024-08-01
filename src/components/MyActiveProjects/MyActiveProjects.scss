@@ -6,7 +6,7 @@
     background-color: $background-color;
     color: $font-color;
     padding: 0px 10px 10px 10px;
-    border-radius: 20px;
+    border-radius: 5px;
     border: 1px solid $border-color;
     max-height: 480px;
     overflow-y: auto;
@@ -53,7 +53,7 @@
                     gap: 10px;
                     height: 180px;
                     border: 1px solid $border-color;
-                    border-radius: 15px;
+                    border-radius: 5px;
 
                     .my-active-project-list-paragraph {
                         font-size: 18px;
@@ -63,7 +63,7 @@
                     .my-active-project-list-pic {
                         width: 100px;
                         height: 100px;
-                        border-radius: 10px;
+                        border-radius: 5px;
                     }
 
                     &:hover {
