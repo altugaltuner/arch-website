@@ -42,7 +42,7 @@ const CalendarPage = () => {
 
     const fetchEvents = useCallback(async () => {
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=*');
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=users_permissions_user');
             const allEvents = response.data.data;
             setEvents(allEvents);
             const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);
@@ -86,6 +86,8 @@ const CalendarPage = () => {
     const closeEditModal = () => {
         setEditModalOpen(false);
     };
+
+
 
     const addEvent = useCallback((newEvent) => {
         setEvents(prevEvents => [...prevEvents, newEvent]);
@@ -183,6 +185,7 @@ const CalendarPage = () => {
                                         </p>
                                         <p className="events-header-date">Yer: {event.attributes.eventLocation}</p>
                                         <p className="events-paragraph">{event.attributes.description}</p>
+                                        <p className="events-paragraph">{event.attributes.users_permissions_user.data.attributes.username}</p>
                                         {(userRole === "Admin" || user.id === event.attributes.users_permissions_user.data.id) && (
                                             <button className="edit-event-calendar" onClick={() => openEditModal(event)}>Düzenle</button>
                                         )}

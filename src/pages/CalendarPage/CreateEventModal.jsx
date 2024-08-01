@@ -12,6 +12,7 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
 
     const { user } = useAuth();
     const userId = user ? user.id : null;
+    const username = user ? user.username : null;
     const userCompany = user ? user.company.id : null;
 
     const handleSubmit = async (e) => {
@@ -41,14 +42,16 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
                     date: eventDate.toISOString(),
                     eventLocation: location,
                     company: userCompany,
-                    users_permissions_user: userId
+                    users_permissions_user: userId,
                 },
             });
+            console.log('Event created:', response.data.data);
             addEvent(response.data.data);
             onClose();
         } catch (error) {
             console.error('Error creating event:', error);
         }
+        onClose(); // daha sonra silinecek. datayı okuyamıyor hatası veriyor ama okuyor.
     };
 
     return (

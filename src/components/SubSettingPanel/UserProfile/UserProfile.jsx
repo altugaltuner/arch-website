@@ -4,12 +4,6 @@ import "./UserProfile.scss";
 import { useAuth } from "../../AuthProvider";
 
 const UserProfile = () => {
-
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        window.location.href = "/login";
-    };
-
     const { user, updateProfilePhoto } = useAuth();
     const [editMode, setEditMode] = useState({
         username: false,
@@ -27,8 +21,54 @@ const UserProfile = () => {
         profilePic: user?.profilePic || '',
         userLocation: user?.userLocation || ''
     });
+
     const [error, setError] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
+
+    const validatePhoneNumber = (phoneNumber) => {
+        const phoneNumberRegex = /^[0-9]{10,11}$/;
+        return phoneNumberRegex.test(phoneNumber);
+    };
+
+    const validateUsername = (username) => {
+        const usernameRegex = /^[a-zA-Z]+$/;
+        return usernameRegex.test(username);
+    };
+
+    const updateUser = async (userData) => {
+        try {
+            await fetch(`http://localhost:1337/users/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.jwt}`,
+                },
+                body: JSON.stringify(userData),
+            });
+        } catch (error) {
+            console.error("Kullanıcı güncelleme işlemi başarısız", error);
+        }
+    };
+
+    const updatePassword = async (password) => {
+        try {
+            await fetch(`http://localhost:1337/auth/update-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.jwt}`,
+                },
+                body: JSON.stringify({ password }),
+            });
+        } catch (error) {
+            console.error("Şifre güncelleme işlemi başarısız", error);
+        }
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        window.location.href = "/login";
+    };
 
     const handleEditClick = (field) => {
         setEditMode({ ...editMode, [field]: true });
