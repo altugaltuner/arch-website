@@ -86,6 +86,8 @@ function SignupPage() {
           email: email,
           password: password,
           company: matchingCompany.id,
+          phoneNumber: phoneNumber,
+          confirmed: true
         }
       );
 

@@ -1,0 +1,33 @@
+@use "../../styles/abstracts/variables" as *;
+
+.not-found-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    font-family: $primary-font;
+
+    .not-found-header {
+        font-size: 50px;
+        font-weight: 400;
+        margin-bottom: 30px;
+        color: gray;
+    }
+
+    .not-found-turnback-btn {
+        margin-top: 20px;
+        border-radius: 12px;
+        border: 1px solid $border-color;
+        cursor: pointer;
+        padding: 15px;
+        transition: all 0.2s;
+        height: 50px;
+        font-size: 18px;
+
+        &:hover {
+            background-color: darken($yellow, 10%);
+        }
+    }
+}

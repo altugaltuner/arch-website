@@ -101,7 +101,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             setShowModal(false);
             setNewFolder({ projectFolderName: "" });
             await fetchProjectFolders();
-            createFolderHistoryEntry('oluşturdu', newFolder.projectFolderName);
+            createFolderHistoryEntry('oluşturma', newFolder.projectFolderName);
         } catch (error) {
             console.error('Error creating a new project folder', error);
         }
@@ -155,7 +155,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 setFolderToEdit(null);
                 setNewFolderName("");
                 await fetchProjectFolders();
-                createFolderHistoryEntry('adı değiştirdi', newFolderName);
+                createFolderHistoryEntry('isim değiştirme', newFolderName);
             } catch (error) {
                 console.error('Error editing the project folder', error);
             }
@@ -207,7 +207,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             }));
 
             // Create history entry
-            createHistoryEntry('upload', uploadedFile.id.toString(), currentFolder.id.toString());
+            createHistoryEntry('yükleme', uploadedFile.id.toString(), currentFolder.id.toString());
 
         } catch (error) {
             console.error('Error uploading the file', error);

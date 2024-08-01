@@ -15,6 +15,7 @@ import IsCookie from "./hooks/useCookie.jsx"
 import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
 import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx";
 import MaterialsPage from "./pages/MaterialsPage/MaterialsPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 
 const routes = [
   {
@@ -132,6 +133,14 @@ const routes = [
       <ProtectedRoute>
         <HomePage />
       </ProtectedRoute>
+    ),
+  },
+  {
+    path: "*",
+    element: (
+      <>
+        <NotFoundPage />
+      </>
     ),
   },
 ];

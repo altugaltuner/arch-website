@@ -166,6 +166,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                 console.error("Form gönderimi sırasında bir hata oluştu:", error);
                 alert("Form gönderimi sırasında bir hata oluştu. Lütfen tekrar deneyin.");
             }
+            window.location.href = "/login";
         }
     };
 

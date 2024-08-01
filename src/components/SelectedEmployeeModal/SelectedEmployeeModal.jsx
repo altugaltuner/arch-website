@@ -17,9 +17,9 @@ function SelectedEmployeeModal({ employee, onClose }) {
                         alt=""
                     />
                 </div>
-                <p className='employee-card-modal-username'>{employee.username}</p>
-                <p className='employee-card-modal-email'>{employee.email}</p>
-                <p className='employee-card-modal-professionname'>{employee.profession.professionName}</p>
+                <p className='employee-card-modal-username'>{employee?.username}</p>
+                <p className='employee-card-modal-email'>{employee?.email}</p>
+                <p className='employee-card-modal-professionname'>{employee?.profession?.professionName}</p>
                 <div className='employee-card-selected-employee-buttons'>
                     <Link to="/workers" className="employee-card-go-to-profile">Sayfasına Git</Link>
                 </div>
