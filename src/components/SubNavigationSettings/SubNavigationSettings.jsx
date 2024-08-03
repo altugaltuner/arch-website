@@ -39,7 +39,7 @@ function SubNavigationSettings({ getRelevantSettings }) {
 
     const handleSectionClick = (section) => {
         setSelectedSection(section.id);
-        if (section.id === 1 || section.id === 6 || section.id === 3) {
+        if (section.id === 1 || section.id === 6) {
             getRelevantSettings(section.header);
         }
     };
@@ -52,7 +52,7 @@ function SubNavigationSettings({ getRelevantSettings }) {
                     {sections.map((section, index) => (
                         <div
                             key={index}
-                            className={`sub-nav-section ${section.id === selectedSection ? 'selected' : ''} ${(section.id !== 1 && section.id !== 6 && section.id !== 3) ? 'disabled' : ''}`}
+                            className={`sub-nav-section ${section.id === selectedSection ? 'selected' : ''} ${(section.id !== 1 && section.id !== 6) ? 'disabled' : ''}`}
                             onClick={() => handleSectionClick(section)}
                         >
                             <h2 className="sub-nav-subheader">{section.header}</h2>

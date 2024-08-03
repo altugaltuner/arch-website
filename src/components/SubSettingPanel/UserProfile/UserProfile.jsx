@@ -238,17 +238,17 @@ const UserProfile = () => {
                         <input
                             className='input-username-subsetting'
                             type="text"
-                            name="userlocation"
+                            name="userLocation"
                             value={userData.userLocation}
                             onChange={handleInputChange}
                         />
-                        <button className='subsetting-btn' onClick={() => handleSaveClick('userlocation')}>Onayla</button>
-                        <button className='subsetting-cancel' onClick={() => handleCancelClick('userlocation')}>İptal</button>
+                        <button className='subsetting-btn' onClick={() => handleSaveClick('userLocation')}>Onayla</button>
+                        <button className='subsetting-cancel' onClick={() => handleCancelClick('userLocation')}>İptal</button>
                     </div>
                 ) : (
                     <div className='subsetting-div-other'>
                         <p className="subsetting-paragraph">{user?.userLocation || 'konum bilgisi yok'}</p>
-                        <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('userlocation')} />
+                        <img className="edit-pencil-subsetting" src={editPencil} alt="edit" onClick={() => handleEditClick('userLocation')} />
                     </div>
                 )}
             </div>

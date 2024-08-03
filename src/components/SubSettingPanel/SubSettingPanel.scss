@@ -8,6 +8,21 @@
     color: $font-color;
     font-family: $primary-font;
 
+    .personal-info-subsetting-column {
+        .personal-info-subsetting-oneline {
+            border: 1px solid $border-color;
+            padding: 15px;
+            border-radius: 5px;
+
+            .subsetting-header {
+                margin-bottom: 5px;
+                font-size: 20px;
+                gap: 5px;
+
+            }
+        }
+    }
+
     .sub-setting-panel-header {
         font-size: 28px;
         padding: 10px;
@@ -34,14 +49,6 @@
 
         .personal-info-subsetting-column {
             gap: 0px;
-
-            .personal-info-subsetting-oneline {
-                .subsetting-header {
-                    margin-bottom: 5px;
-                    font-size: 16px;
-                    gap: 5px;
-                }
-            }
         }
 
         .sub-setting-panel-header {
