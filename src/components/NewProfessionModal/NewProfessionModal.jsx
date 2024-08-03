@@ -23,7 +23,7 @@ function NewProfessionModal({ isOpen, onClose, onAdd }) {
     return (
         <div className="new-profession-modal-overlay">
             <div className="new-profession-modal-main">
-                <button className="modal-close-button" onClick={onClose}>X</button>
+                <button className="global-close-button" onClick={onClose}>X</button>
                 <h2 className='new-pro-header'>Yeni Meslek Ekle</h2>
                 <input
                     className='new-pro-input'

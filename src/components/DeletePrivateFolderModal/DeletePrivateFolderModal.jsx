@@ -9,7 +9,7 @@ function DeletePrivateFolderModal({ isOpen, onClose, onDelete }) {
     return (
         <div className="delete-folder-modal">
             <div className="delete-folder-modal-content">
-                <span className="delete-folder-close-modal" onClick={onClose}>X</span>
+                <span className="global-close-button" onClick={onClose}>X</span>
                 <h2 className='delete-folder-header'>Klasörü Sil</h2>
                 <p className='delete-folder-p'>Bu kişisel klasörü silmek istediğinize emin misiniz?</p>
                 <div className="delete-folder-modal-buttons">

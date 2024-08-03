@@ -43,9 +43,8 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
         <div className="add-new-project-modal">
             <div className="add-new-project-modal-content">
                 <span
-                    className="add-new-project-modal-close"
-                    onClick={onClose}
-                >
+                    className="global-close-button"
+                    onClick={onClose}>
                     X
                 </span>
                 <h2 className="add-new-project-adding-header">Yeni Proje Ekle</h2>

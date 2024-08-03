@@ -7,7 +7,7 @@ function DeleteModal({ isOpen, onClose, onDelete }) {
     return (
         <div className="delete-pro-modal-main">
             <div className="delete-pro-modal">
-                <span className="delete-pro-modal-close" onClick={onClose}>&times;</span>
+                <span className="global-close-button" onClick={onClose}>X</span>
                 <h2 className='delete-pro-modal-p'>Silmek istiyor musunuz?</h2>
                 <div className='delete-pro-div'>
                     <button className='delete-pro-modal-yes' onClick={onDelete}>Evet</button>

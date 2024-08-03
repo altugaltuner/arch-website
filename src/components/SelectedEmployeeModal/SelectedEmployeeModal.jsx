@@ -24,7 +24,7 @@ function SelectedEmployeeModal({ employee, onClose }) {
                     <Link to="/workers" className="employee-card-go-to-profile">Sayfasına Git</Link>
                 </div>
 
-                <button className="employee-card-modal-close-btn" onClick={onClose}>
+                <button className="global-close-button" onClick={onClose}>
                     X
                 </button>
             </div>

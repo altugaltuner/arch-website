@@ -146,8 +146,8 @@ function OtherUsersInfo({ employee }) {
                                             </option>
                                         ))}
                                     </select>
-                                    <button onClick={handleSaveClick}>Onayla</button>
-                                    <button onClick={handleCancelClick}>İptal</button>
+                                    <button className='confirm-small' onClick={handleSaveClick}>Onayla</button>
+                                    <button className='cancel-small' onClick={handleCancelClick}>İptal</button>
                                 </div>
                             ) : (
                                 <div>

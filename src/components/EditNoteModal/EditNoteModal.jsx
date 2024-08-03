@@ -32,6 +32,7 @@ function EditNoteModal({ showModal, setShowModal, note, updateNote, deleteNote }
     return (
         <div className="edit-note-modal">
             <div className="edit-note-modal-content">
+                <span className='global-close-button' onClick={() => setShowModal(false)}>X</span>
                 <h2 className='edit-note-h2'>Notu Düzenle</h2>
                 <input
                     type="text"

@@ -10,7 +10,7 @@ function DeleteConfirmationModal({ showDeleteModal, onClose, onConfirm }) {
         <div className="delete-confirmation-modal">
             <div className="delete-confirmation-modal-content">
                 <span
-                    className="delete-confirmation-close"
+                    className="global-close-button"
                     onClick={onClose}
                 >X </span>
                 <h2 className='delete-confirmation-header'>Bu projeyi silmek istediğinize emin misiniz?</h2>

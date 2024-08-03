@@ -119,6 +119,50 @@
                 margin-bottom: 10px;
                 color: $font-color;
                 height: 50px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 200px;
+                /* İhtiyacınıza göre genişliği ayarlayın */
+                display: inline-block;
+                position: relative;
+                cursor: pointer;
+            }
+
+            .project-folder-name:hover::after {
+                content: attr(data-fulltext);
+                position: absolute;
+                white-space: normal;
+                background-color: #333;
+                color: #fff;
+                padding: 5px;
+                border-radius: 5px;
+                top: 100%;
+                left: 0;
+                z-index: 10;
+                display: block;
+                max-width: 300px;
+                visibility: visible;
+                opacity: 1;
+                transition: opacity 0.5s;
+            }
+
+            .project-folder-name::after {
+                content: attr(data-fulltext);
+                position: absolute;
+                white-space: normal;
+                background-color: #333;
+                color: #fff;
+                padding: 5px;
+                border-radius: 5px;
+                top: 100%;
+                left: 0;
+                z-index: 10;
+                display: block;
+                max-width: 300px;
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.5s;
             }
 
             .project-folder-image {

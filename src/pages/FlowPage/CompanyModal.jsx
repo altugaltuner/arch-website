@@ -8,7 +8,7 @@ const CompanyModal = ({ isOpen, onClose, company }) => {
     return (
         <div className="company-modal-overlay">
             <div className="company-modal">
-                <button className="close-button" onClick={onClose}>X</button>
+                <button className="global-close-button" onClick={onClose}>X</button>
                 <img
                     className="company-modal-logo"
                     src={

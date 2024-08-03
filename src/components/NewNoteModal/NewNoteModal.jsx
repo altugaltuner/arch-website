@@ -19,6 +19,7 @@ function NewNoteModal({ showModal, setShowModal, saveNote }) {
     return (
         <div className="new-note-modal">
             <div className="new-note-modal-content">
+                <span className='global-close-button' onClick={() => setShowModal(false)}>X</span>
                 <h2 className='new-note-modal-header'>Yeni Not Yaz</h2>
                 <input
                     className='note-title-input'

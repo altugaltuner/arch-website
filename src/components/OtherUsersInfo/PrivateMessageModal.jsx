@@ -43,6 +43,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
         <div className="priv-modal-overlay">
             <div className="priv-modal-content">
                 <h2 className='priv-header'>Yeni Mesaj</h2>
+                <span className='global-close-button' onClick={onClose}>X</span>
                 <form className='priv-form' onSubmit={handleSubmit}>
                     <div className="priv-form-group">
                         <label htmlFor="header">Başlık:</label>

@@ -6,19 +6,27 @@
     font-family: $primary-font;
     color: $font-color;
 
-    .flow-page-main-row {
+    .flow-page-main-column {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         padding: 15px;
         transform: translate(110px, 0px);
         width: calc(100% - 110px);
         gap: 15px;
         justify-content: center;
 
+        .flow-page-title {
+            font-size: 40px;
+            font-weight: 400;
+            margin: 20px;
+            text-align: left;
+            width: fit-content;
+        }
+
         .all-companies-column {
             display: flex;
             flex-direction: column;
-            width: 77%;
+            width: 100%;
             gap: 20px;
 
             .social-media-and-connections {
@@ -118,55 +126,6 @@
                         width: 110px;
 
                         border-radius: 5%;
-                    }
-                }
-            }
-        }
-
-        .flow-page-main-column {
-            display: flex;
-            flex-direction: column;
-            width: 20%;
-
-            .flow-page-title {
-                font-size: 40px;
-                font-weight: 400;
-                margin: 20px;
-                text-align: left;
-                width: fit-content;
-            }
-
-            .flow-descriptions {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                width: 100%;
-                font-size: 18px;
-                border-radius: 5px;
-                border: 1px solid $border-color;
-                padding: 10px;
-                max-height: 800px;
-                overflow-y: auto;
-
-                .flow-desc-subheader {
-                    font-size: 24px;
-                    font-weight: 400;
-                    padding: 5px;
-                }
-
-                .flow-desc-paragraph {
-                    display: flex;
-                    flex-direction: column;
-                    padding: 10px;
-                    font-size: 16px;
-                    font-weight: 300;
-                    gap: 10px;
-                    border-radius: 5px;
-                    border: 1px solid $border-color;
-
-                    .flow-desc-p-bold {
-                        font-weight: 400;
-                        font-size: 20px;
                     }
                 }
             }

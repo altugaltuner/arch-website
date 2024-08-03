@@ -34,7 +34,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
             <div className="open-column">
                 <div className="inbox-model-row">
                     <div className="open-inbox-content-massmessage-div">
-                        <span className="open-inbox-modal-span" onClick={() => setShowInboxModal(false)}>X</span>
+                        <span className="global-close-button" onClick={() => setShowInboxModal(false)}>X</span>
                         <h2 className='open-inbox-modal-header'>Bildirimler</h2>
                         <div className="messages-container">
                             {filteredMessages.map(message => (

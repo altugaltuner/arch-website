@@ -22,6 +22,7 @@ const RemoveUserModal = ({ show, onClose, employees, handleRemoveUsers }) => {
     return (
         <div className="remove-user-modal">
             <div className="remove-user-modal-content">
+                <span className='global-close-button'>X</span>
                 <h2 className='remove-user-modal-header'>Çalışanları Çıkar</h2>
                 <ul className='remove-user-modal-ul'>
                     {employees.map((employee) => (

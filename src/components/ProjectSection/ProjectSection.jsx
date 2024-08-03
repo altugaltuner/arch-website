@@ -306,15 +306,13 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     return (
         <div className="project-folders">
             {userRole === "Admin" || userRole === "Contributor" ? (
-
                 <button
                     className="project-folder-button"
                     onClick={() => setShowModal(true)}
                 >
                     Klasör Oluştur
                 </button>
-            )
-                : null}
+            ) : null}
             {currentFolder ? (
                 <div className="current-folders-div">
                     <div className="current-folders-div-2">
@@ -337,7 +335,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                     <div className="project-folders-container">
                         {filteredFolders.map((folder) => (
                             <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
-
                                 {userRole === "Admin" || userRole === "Contributor" ? (
                                     <div className="edit-delete-button-div">
                                         <img
@@ -348,19 +345,17 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                                         />
                                         <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
                                     </div>
-                                )
-                                    :
-                                    null
-                                }
+                                ) : null}
                                 <div className="project-card-rest-of">
-                                    <h2 className="project-folder-name">{folder.attributes.projectFolderName}</h2>
+                                    <h2 className="project-folder-name" data-fulltext={folder.attributes.projectFolderName}>
+                                        {folder.attributes.projectFolderName}
+                                    </h2>
                                     <img
                                         className="project-folder-image"
                                         src={folderIcon}
                                         alt="folder-icon"
-                                    /></div>
-
-
+                                    />
+                                </div>
                             </div>
                         ))}
                         <div className="dustbin-project-folder">

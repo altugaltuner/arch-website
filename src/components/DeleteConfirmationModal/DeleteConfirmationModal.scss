@@ -33,27 +33,6 @@
             font-weight: 400;
         }
 
-        .delete-confirmation-close {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 200;
-            font-size: 30px;
-            border-radius: 50%;
-            background-color: white;
-            border: 1px solid $border-color;
-            width: 40px;
-            height: 40px;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: $grey;
-            }
-        }
-
         .delete-confirmation-modal-buttons {
             display: flex;
             justify-content: space-around;
@@ -97,13 +76,6 @@
 
             .delete-confirmation-header {
                 font-size: 20px;
-            }
-
-            .delete-confirmation-close {
-                width: 30px;
-                height: 30px;
-                top: 5px;
-                right: 5px;
             }
         }
     }

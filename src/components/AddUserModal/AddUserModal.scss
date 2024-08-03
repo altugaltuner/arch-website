@@ -49,28 +49,6 @@
             font-weight: 400;
         }
 
-        .adduser-modal-close {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-weight: 200;
-            font-size: 40px;
-            border-radius: 50%;
-            background-color: white;
-            border: 1px solid $border-color;
-            width: 40px;
-            height: 40px;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: $grey;
-            }
-        }
-
         .adduser-btn-div-for-modal {
             display: flex;
             justify-content: space-around;

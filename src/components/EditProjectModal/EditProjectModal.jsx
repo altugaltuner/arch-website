@@ -10,7 +10,7 @@ function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputCh
         <div className="edit-project-modal">
             <div className='edit-project-content'>
                 <span
-                    className="edit-project-modal-close"
+                    className="global-close-button"
                     onClick={onClose}
                 >
                     X

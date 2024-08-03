@@ -31,7 +31,7 @@ function AddUserModal({ show, onClose, users, handleAddUsers }) {
     return (
         <div className="adduser-modal">
             <div className="adduser-modal-content">
-                <span className="adduser-modal-close" onClick={onClose}>&times;</span>
+                <span className="global-close-button" onClick={onClose}>&times;</span>
                 <h2 className='adduser-modal-content-header'>Çalışan Ekle</h2>
                 <ul className='adduser-modal-ul'>
                     {users.map((user) => (

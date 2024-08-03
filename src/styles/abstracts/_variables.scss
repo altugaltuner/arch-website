@@ -27,3 +27,27 @@ $dark-button: #e7e7e7;
 $blue: #007bff;
 $close: #E81123;
 $header-grey: #5e5e5e;
+
+.global-close-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 200;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: #f4f4f4;
+    color: black;
+    border: 1px solid #e4e4e4;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(255, 65, 65);
+        color: white;
+    }
+}

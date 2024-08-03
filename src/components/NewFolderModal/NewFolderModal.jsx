@@ -27,7 +27,7 @@ function NewFolderModal({ showModal, setShowModal, newFolder, handleInputChange,
     return (
         <div className="new-folder-modal">
             <div className="new-folder-modal-content">
-                <span className="new-folder-close-modal" onClick={() => setShowModal(false)}>X</span>
+                <span className="global-close-button" onClick={() => setShowModal(false)}>X</span>
                 <h2 className="new-folder-modal-header">Yeni Proje Klasörü Oluştur</h2>
                 <input
                     className="new-folder-input-field"

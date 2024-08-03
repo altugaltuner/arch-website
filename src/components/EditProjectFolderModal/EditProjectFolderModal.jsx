@@ -7,7 +7,7 @@ function EditProjectFolderModal({ showEditModal, setEditModal, folderToEdit, new
     return (
         <div className="edit-project-folder-modal">
             <div className="edit-project-folder-modal-content">
-                <span className="edit-project-folder-close-modal" onClick={() => setEditModal(false)}>X</span>
+                <span className="global-close-button" onClick={() => setEditModal(false)}>X</span>
                 <h2 className="edit-project-folder-modal-header">Klasörü Düzenle</h2>
                 <input
                     className="edit-project-folder-input-field"

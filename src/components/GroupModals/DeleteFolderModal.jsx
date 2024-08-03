@@ -6,7 +6,7 @@ function DeleteFolderModal({ showDeleteModal, setShowDeleteModal, handleDeleteFo
     return (
         <div className="delete-folder-modal">
             <div className="delete-folder-modal-content">
-                <span className="delete-folder-close" onClick={() => setShowDeleteModal(false)}>X</span>
+                <span className="global-close-button" onClick={() => setShowDeleteModal(false)}>X</span>
                 <h2 className="delete-folder-header"> Proje Klasörü Sil</h2>
                 <p className="delete-folder-p">Proje klasörünü gerçekten silmek istiyor musunuz?</p>
                 <div className='delete-folder-buttons-div'>

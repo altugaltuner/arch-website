@@ -61,6 +61,7 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
     return (
         <div className="revise-update-modal">
             <div className="revise-modal-content">
+                <span className='global-close-button' onClick={onClose}>X</span>
                 <h2 className='revise-update-modal-header'>Revizeyi Güncelle</h2>
                 <form className='revise-update-modal-form' onSubmit={handleSubmit}>
                     <textarea

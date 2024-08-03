@@ -17,7 +17,7 @@ const PasswordModal = ({ isOpen, onClose, onConfirm, projectName }) => {
     return (
         <div className="password-modal-overlay">
             <div className="password-modal">
-                <span className="open-inbox-modal-span" onClick={onClose}>X</span>
+                <span className="global-close-button" onClick={onClose}>X</span>
                 <h2 className='password-modal-h2'>{projectName} İçin Şifre Girin</h2>
                 <input
                     className='password-modal-input'
