@@ -20,7 +20,7 @@ function NewNoteModal({ showModal, setShowModal, saveNote }) {
         <div className="new-note-modal">
             <div className="new-note-modal-content">
                 <span className='global-close-button' onClick={() => setShowModal(false)}>X</span>
-                <h2 className='new-note-modal-header'>Yeni Not Yaz</h2>
+                <h2 className='modal-header'>Yeni Not Yaz</h2>
                 <input
                     className='note-title-input'
                     type="text"
@@ -35,8 +35,8 @@ function NewNoteModal({ showModal, setShowModal, saveNote }) {
                     onChange={(e) => setNoteContent(e.target.value)}
                 />
                 <div className='btn-div-for-new-note'>
-                    <button className='new-note-submit-btn' onClick={handleSave}>Kaydet</button>
-                    <button className='new-note-cancel-btn' onClick={() => setShowModal(false)}>İptal</button>
+                    <button className='confirm-button' onClick={handleSave}>Kaydet</button>
+                    <button className='cancel-button' onClick={() => setShowModal(false)}>İptal</button>
                 </div>
             </div>
         </div>

@@ -49,8 +49,8 @@ function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
     return (
         <div className="send-bulk-message-modal">
             <div className="bulk-message-content">
-                <span className="bulk-message-close" onClick={() => setShowModal(false)}>X</span>
-                <h2 className='bulk-message-header'>Toplu Mesaj Gönder</h2>
+                <span className="global-close-button" onClick={() => setShowModal(false)}>X</span>
+                <h2 className='modal-header'>Toplu Mesaj Gönder</h2>
                 <input
                     type="text"
                     className='bulk-message-input-header'

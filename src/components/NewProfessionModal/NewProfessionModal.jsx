@@ -24,7 +24,7 @@ function NewProfessionModal({ isOpen, onClose, onAdd }) {
         <div className="new-profession-modal-overlay">
             <div className="new-profession-modal-main">
                 <button className="global-close-button" onClick={onClose}>X</button>
-                <h2 className='new-pro-header'>Yeni Meslek Ekle</h2>
+                <h2 className='modal-header'>Yeni Meslek Ekle</h2>
                 <input
                     className='new-pro-input'
                     type="text"
@@ -33,8 +33,8 @@ function NewProfessionModal({ isOpen, onClose, onAdd }) {
                     onChange={(e) => setProfessionName(e.target.value)}
                 />
                 <div className='new-pro-button-div'>
-                    <button className='new-pro-button' onClick={handleAddProfession}>Ekle</button>
-                    <button className='new-pro-button' onClick={onClose}>İptal</button>
+                    <button className='confirm-button' onClick={handleAddProfession}>Ekle</button>
+                    <button className='cancel-button' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>

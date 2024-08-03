@@ -8,10 +8,10 @@ function DeleteModal({ isOpen, onClose, onDelete }) {
         <div className="delete-pro-modal-main">
             <div className="delete-pro-modal">
                 <span className="global-close-button" onClick={onClose}>X</span>
-                <h2 className='delete-pro-modal-p'>Silmek istiyor musunuz?</h2>
+                <h2 className='modal-header'>Silmek istiyor musunuz?</h2>
                 <div className='delete-pro-div'>
-                    <button className='delete-pro-modal-yes' onClick={onDelete}>Evet</button>
-                    <button className='delete-pro-modal-no' onClick={onClose}>İptal</button>
+                    <button className='confirm-button' onClick={onDelete}>Evet</button>
+                    <button className='cancel-button' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>

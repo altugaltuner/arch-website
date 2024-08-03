@@ -57,7 +57,7 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
     return (
         <div className="create-event-modal">
             <div className="create-event-modal-content">
-                <header className="create-event-modal-header">
+                <header className="modal-header">
                     Etkinlik Oluştur - {selectedDate.toLocaleDateString("tr-TR")}
                 </header>
                 <form className="create-event-modal-body" onSubmit={handleSubmit}>
@@ -97,8 +97,8 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
                         {errors.location && <p className="error-message">{errors.location}</p>}
                     </label>
                     <footer className="create-event-modal-footer">
-                        <button className='create-event-cancel' type="button" onClick={onClose}>İptal</button>
-                        <button className='create-event-submit' type="submit">Oluştur</button>
+                        <button className='cancel-button' type="button" onClick={onClose}>İptal</button>
+                        <button className='confirm-button' type="submit">Oluştur</button>
                     </footer>
                 </form>
             </div>

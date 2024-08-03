@@ -283,7 +283,7 @@ function MyPersonalFiles({ user }) {
     return (
         <div className="my-files-panel">
             <h2 className="my-files-panel-header">Dosyalarım</h2>
-            <button className="add-folder-button" onClick={handleAddFolderClick}>Yeni Klasör</button>
+            <button className="yellow-button" onClick={handleAddFolderClick}>Yeni Klasör</button>
             <div className="folders">
                 {selectedFolder ? renderFolderContent(selectedFolder) : renderFolders()}
             </div>

@@ -25,12 +25,6 @@
         gap: 20px;
         border-radius: 20px;
 
-        .add-new-project-adding-header {
-            font-size: 30px;
-            font-weight: 400;
-            color: $font-color;
-        }
-
         .add-new-project-name-input,
         .add-new-project-password-input {
             width: 300px;
@@ -54,32 +48,6 @@
             flex-direction: row;
             justify-content: center;
             gap: 20px;
-
-            .add-new-project-modal-button-create {
-                border: 1px solid $border-color;
-                color: $font-color;
-                padding: 10px 20px;
-                border-radius: 5px;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: $blue;
-                    color: white;
-                }
-            }
-
-            .add-new-project-adding-modal-button-abort {
-                border: 1px solid $border-color;
-                color: $font-color;
-                padding: 10px 20px;
-                border-radius: 5px;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: $close;
-                    color: white;
-                }
-            }
         }
     }
 }

@@ -40,7 +40,7 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
     return (
         <div className="file-modal">
             <div className="file-modal-content">
-                <span className="file-close-modal" onClick={() => setFileModal(false)}>X</span>
+                <span className="global-close-button" onClick={() => setFileModal(false)}>X</span>
                 <h2 className="file-modal-header">{currentFile.attributes.name}</h2>
                 {isImage ? (
                     <img src={currentFile.attributes.url} alt="file" className="file-icon-modal" />
@@ -48,9 +48,9 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
                     <img src={fileIcons[fileExt] || fileIcon} alt="file-icon" className="file-icon-modal" />
                 )}
                 <div className="file-buttons-for-modal">
-                    <button className="file-download-button" onClick={handleDownload}>İndir</button>
+                    <button className="confirm-button" onClick={handleDownload}>İndir</button>
                     {userRole === "Admin" && (
-                        <button className="file-delete-button" onClick={() => handleDeleteFile(currentFile.id)}>Sil</button>
+                        <button className="cancel-button" onClick={() => handleDeleteFile(currentFile.id)}>Sil</button>
                     )}
                 </div>
             </div>

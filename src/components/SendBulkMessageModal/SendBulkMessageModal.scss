@@ -27,6 +27,10 @@
         gap: 10px;
         border-radius: 5px;
 
+        .bulk-message-input-header {
+            padding: 10px;
+        }
+
         .bulk-message-close {
             position: absolute;
             display: flex;

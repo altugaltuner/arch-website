@@ -85,11 +85,11 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
             <form className="entering-area-form" onSubmit={handleSubmitMaterial}>
                 <div className="one-material-div">
                     <label className="material-label" htmlFor="material-name">Malzeme Adı</label>
-                    <input className="material-input" type="text" id="material-name" value={matName} onChange={filterMatName} placeholder="malzeme adı" />
+                    <input className="material-input" type="text" id="material-name" value={matName} onChange={filterMatName} placeholder="" />
                 </div>
                 <div className="one-material-div">
                     <label className="material-label" htmlFor="material-quantity">Malzeme Miktarı</label>
-                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="malzeme miktarı" onChange={filterMatQuantity} />
+                    <input className="material-input" type="text" id="material-quantity" value={matQuantity} placeholder="" onChange={filterMatQuantity} />
 
                     <label className="material-label" htmlFor="unit">Ölçü birimi</label>
                     <select

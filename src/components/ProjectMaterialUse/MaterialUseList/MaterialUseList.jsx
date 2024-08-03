@@ -10,6 +10,7 @@ const MaterialUseList = ({ selectedDate, selectedProject }) => {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?populate=*`);
                 const fetchedData = response.data.data;
+                console.log(fetchedData);
 
                 const dataForSelectedDate = fetchedData.filter(item => item.attributes.date === selectedDate);
 
@@ -38,7 +39,7 @@ const MaterialUseList = ({ selectedDate, selectedProject }) => {
                     ))}
                 </ul>
             ) : (
-                <p className='material-list-no-p'>Bu gün için malzeme kullanımı bulunmamaktadır.</p>
+                <p className='material-list-no-p'>Bu gün için malzeme girdisi bulunmamaktadır.</p>
             )}
         </div>
     );

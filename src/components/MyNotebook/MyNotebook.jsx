@@ -144,7 +144,7 @@ function MyNotebook() {
     return (
         <div className="my-notebook-main">
             <h2 className="my-notebook-note-header">Not Defterim</h2>
-            <button className="note-button" onClick={() => setShowModal(true)}>
+            <button className="yellow-button" onClick={() => setShowModal(true)}>
                 Yeni Not Yaz
             </button>
             <div className="notebook-notes-area">

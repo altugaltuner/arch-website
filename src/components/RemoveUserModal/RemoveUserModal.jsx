@@ -22,8 +22,8 @@ const RemoveUserModal = ({ show, onClose, employees, handleRemoveUsers }) => {
     return (
         <div className="remove-user-modal">
             <div className="remove-user-modal-content">
-                <span className='global-close-button'>X</span>
-                <h2 className='remove-user-modal-header'>Çalışanları Çıkar</h2>
+                <span className='global-close-button' onClick={onClose}>X</span>
+                <h2 className='modal-header'>Çalışanları Çıkar</h2>
                 <ul className='remove-user-modal-ul'>
                     {employees.map((employee) => (
                         <li className='remove-user-modal-li' key={employee.id}>
@@ -40,8 +40,8 @@ const RemoveUserModal = ({ show, onClose, employees, handleRemoveUsers }) => {
                     ))}
                 </ul>
                 <div className='remove-user-modal-backdrop-btn'>
-                    <button className='remove-user-submit-button' onClick={handleConfirm}>Onayla</button>
-                    <button className='remove-user-cancel-button' onClick={onClose}>İptal</button>
+                    <button className='confirm-button' onClick={handleConfirm}>Onayla</button>
+                    <button className='cancel-button' onClick={onClose}>İptal</button>
                 </div>
             </div>
         </div>

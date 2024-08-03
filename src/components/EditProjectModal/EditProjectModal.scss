@@ -32,13 +32,6 @@
             position: relative;
         }
 
-        .edit-project-adding-header {
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: 500;
-            margin-left: 75px;
-        }
-
         .project-p-modall {
             font-size: 18px;
             margin-bottom: 5px;
@@ -60,32 +53,6 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-
-            .edit-modal-button-abort {
-                border: 1px solid $border-color;
-                color: $font-color;
-                padding: 10px 20px;
-                border-radius: 5px;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: $close;
-                    color: white;
-                }
-            }
-
-            .edit-modal-button-create {
-                border: 1px solid $border-color;
-                color: $font-color;
-                padding: 10px 20px;
-                border-radius: 5px;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: $blue;
-                    color: white;
-                }
-            }
         }
     }
 }
@@ -96,10 +63,6 @@
             padding: 20px;
             width: 300px;
             height: 250px;
-
-            .edit-project-adding-header {
-                font-size: 20px;
-            }
         }
     }
 }

@@ -9,7 +9,7 @@ function FilePreviewModal({ file, onClose, onDownload, onDelete }) {
     return (
         <div className="file-preview-modal">
             <div className="file-preview-modal-content">
-                <span className="file-preview-modal-close-btn" onClick={onClose}>X</span>
+                <span className="global-close-button" onClick={onClose}>X</span>
                 <img src={file.url} alt={file.name} className="file-preview-image" />
                 <p className='file-preview-file-name'>{file.name}</p>
                 <div className='file-preview-btns'>

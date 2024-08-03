@@ -14,17 +14,13 @@
     .revise-modal-content {
         background: white;
         position: relative;
+        text-align: center;
+        align-items: center;
         padding: 20px;
         border-radius: 5px;
         width: 400px;
         max-width: 80%;
         font-family: $primary-font;
-
-        .revise-update-modal-header {
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 400;
-        }
 
         .revise-update-modal-form {
             display: flex;

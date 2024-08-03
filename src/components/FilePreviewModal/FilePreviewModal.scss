@@ -19,30 +19,6 @@
         text-align: center;
         position: relative;
 
-        .file-preview-modal-close-btn {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 200;
-            font-size: 30px;
-            border-radius: 50%;
-            background-color: $grey;
-            color: black;
-            border: 1px solid $border-color;
-            width: 40px;
-            height: 40px;
-            top: 10px;
-            right: 10px;
-            transition: all 0.2s;
-            cursor: pointer;
-
-            &:hover {
-                background-color: $close;
-                color: white;
-            }
-        }
-
         .file-preview-image {
             max-width: 100%;
             max-height: 400px;

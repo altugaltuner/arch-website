@@ -18,7 +18,7 @@ const CompanyModal = ({ isOpen, onClose, company }) => {
                     }
                     alt="company-logo"
                 />
-                <h2 className="company-modal-name">{company?.companyName}</h2>
+                <h2 className="modal-header">{company?.companyName}</h2>
                 <p className='company-working-area'><span className='company-areas-bold'>İş Alanı : </span>{company?.workingArea}</p>
                 <p className='company-desc-area'><span className='company-areas-bold'>Şirket Açıklaması : </span>{company?.companyDesc || "Yok"}</p>
                 <p className='company-desc-area'><span className='company-areas-bold'>Şirket Maili : </span>{company?.companyEmail || "Yok"}</p>

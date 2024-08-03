@@ -47,7 +47,7 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
                     onClick={onClose}>
                     X
                 </span>
-                <h2 className="add-new-project-adding-header">Yeni Proje Ekle</h2>
+                <h2 className="modal-header">Yeni Proje Ekle</h2>
                 {error && <p className="error-message">{error}</p>}
                 <input
                     className="add-new-project-name-input"
@@ -73,13 +73,13 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
                 />
                 <div className="add-new-project-adding-modal-buttons-row">
                     <button
-                        className="add-new-project-modal-button-create"
+                        className="confirm-button"
                         onClick={handleFormSubmit}
                     >
                         Oluştur
                     </button>
                     <button
-                        className="add-new-project-adding-modal-button-abort"
+                        className="cancel-button"
                         onClick={onClose}
                     >
                         İptal

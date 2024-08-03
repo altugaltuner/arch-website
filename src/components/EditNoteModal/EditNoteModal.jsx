@@ -33,7 +33,7 @@ function EditNoteModal({ showModal, setShowModal, note, updateNote, deleteNote }
         <div className="edit-note-modal">
             <div className="edit-note-modal-content">
                 <span className='global-close-button' onClick={() => setShowModal(false)}>X</span>
-                <h2 className='edit-note-h2'>Notu Düzenle</h2>
+                <h2 className='modal-header'>Notu Düzenle</h2>
                 <input
                     type="text"
                     placeholder="Başlık"
@@ -46,9 +46,9 @@ function EditNoteModal({ showModal, setShowModal, note, updateNote, deleteNote }
                     onChange={(e) => setNoteContent(e.target.value)}
                 />
                 <div className="edit-note-button-group">
-                    <button className='edit-note-save' onClick={handleSave}>Kaydet</button>
-                    <button className='edit-note-cancel' onClick={() => setShowModal(false)}>İptal</button>
-                    <button onClick={handleDelete} className="edit-note-delete">Sil</button>
+                    <button className='confirm-button' onClick={handleSave}>Kaydet</button>
+                    <button className='yellow-button' onClick={() => setShowModal(false)}>İptal</button>
+                    <button onClick={handleDelete} className="cancel-button">Sil</button>
                 </div>
             </div>
         </div>

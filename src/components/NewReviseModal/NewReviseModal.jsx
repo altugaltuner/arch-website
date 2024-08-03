@@ -50,9 +50,9 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
         <div className="new-revise-modal">
             <div className="revise-modal-content">
                 <span className='global-close-button' onClick={onClose}>X</span>
-                <h2 className='new-revise-modal-header'>Yeni Revize Ekle</h2>
+                <h2 className='modal-header'>Yeni Revize Ekle</h2>
                 <form className='new-revise-modal-form' onSubmit={handleSubmit}>
-                    <input
+                    <textarea
                         className='new-revise-modal-input'
                         type="text"
                         value={inputValue}

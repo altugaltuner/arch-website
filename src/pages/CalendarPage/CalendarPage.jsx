@@ -42,11 +42,13 @@ const CalendarPage = () => {
 
     const fetchEvents = useCallback(async () => {
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=users_permissions_user');
+            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=users_permissions_user,company');
             const allEvents = response.data.data;
+            console.log("allEvents", allEvents);
             setEvents(allEvents);
             const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);
             setFilteredEvents(companyEvents);
+            console.log("companyEvents", companyEvents);
         } catch (error) {
             console.error('Error fetching events:', error);
         }

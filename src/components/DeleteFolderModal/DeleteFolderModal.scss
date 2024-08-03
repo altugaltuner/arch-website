@@ -22,12 +22,6 @@
         height: 250px;
         text-align: center;
 
-        .delete-folder-header {
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-weight: 500;
-        }
-
         .delete-folder-modal-buttons {
             display: flex;
             justify-content: space-around;
@@ -66,10 +60,6 @@
         .edit-folder-modal-content {
             padding: 20px;
             max-width: 300px;
-
-            .edit-folder-header {
-                font-size: 20px;
-            }
 
             .edit-folder-modal-buttons {
 

@@ -61,48 +61,6 @@
             justify-content: space-evenly;
             width: 100%;
             margin-top: 10px;
-
-            .edit-note-save {
-                padding: 8px 16px;
-                border: none;
-                border-radius: 5px;
-                background-color: $blue;
-                color: #fff;
-                cursor: pointer;
-                transition: background-color 0.2s;
-
-                &:hover {
-                    background-color: #0056b3;
-                }
-            }
-
-            .edit-note-cancel {
-                padding: 8px 16px;
-                border: none;
-                border-radius: 5px;
-                background-color: $yellow;
-                color: #fff;
-                cursor: pointer;
-                transition: background-color 0.2s;
-
-                &:hover {
-                    background-color: darken($yellow, 10%);
-                }
-            }
-
-            .edit-note-delete {
-                padding: 8px 16px;
-                border: none;
-                border-radius: 5px;
-                background-color: $close;
-                color: #fff;
-                cursor: pointer;
-                transition: background-color 0.2s;
-
-                &:hover {
-                    background-color: darken($close, 10%);
-                }
-            }
         }
     }
 }

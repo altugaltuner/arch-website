@@ -42,11 +42,11 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
     return (
         <div className="priv-modal-overlay">
             <div className="priv-modal-content">
-                <h2 className='priv-header'>Yeni Mesaj</h2>
+                <h2 className='modal-header'>Yeni Mesaj</h2>
                 <span className='global-close-button' onClick={onClose}>X</span>
                 <form className='priv-form' onSubmit={handleSubmit}>
                     <div className="priv-form-group">
-                        <label htmlFor="header">Başlık:</label>
+                        <label htmlFor="header">Başlık</label>
                         <input
                             type="text"
                             id="header"
@@ -56,7 +56,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
                         />
                     </div>
                     <div className="priv-form-group">
-                        <label htmlFor="content">İçerik:</label>
+                        <label htmlFor="content">İçerik</label>
                         <textarea
                             id="content"
                             value={messageContent}
@@ -65,7 +65,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
                         ></textarea>
                     </div>
                     <div className="priv-form-group">
-                        <label htmlFor="media">Medya:</label>
+                        <label htmlFor="media">Medya</label>
                         <input
                             type="file"
                             id="media"
@@ -74,8 +74,8 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
                         />
                     </div>
                     <div className='form-button-div'>
-                        <button type="submit" className="priv-submit-button">Gönder</button>
-                        <button type="button" onClick={onClose} className="priv-close-button">Kapat</button>
+                        <button type="submit" className="confirm-button">Gönder</button>
+                        <button type="button" onClick={onClose} className="cancel-button">Kapat</button>
                     </div>
                 </form>
             </div>

@@ -15,7 +15,7 @@ function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputCh
                 >
                     X
                 </span>
-                <h2 className="edit-project-adding-header">Projeyi Düzenle</h2>
+                <h2 className="modal-header">Projeyi Düzenle</h2>
 
                 <p className='project-p-modall'>Proje Adı</p>
                 <input
@@ -44,13 +44,13 @@ function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputCh
                 />
                 <div className="edit-modal-buttons-row">
                     <button
-                        className="edit-modal-button-create"
+                        className="confirm-button"
                         onClick={handleEditSubmit}
                     >
                         Kaydet
                     </button>
                     <button
-                        className="edit-modal-button-abort"
+                        className="cancel-button"
                         onClick={onClose}
                     >
                         İptal
