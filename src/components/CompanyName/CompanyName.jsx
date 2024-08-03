@@ -4,27 +4,20 @@ import "./CompanyName.scss";
 import { useAuth } from "../AuthProvider";
 
 const CompanyName = ({ onSearch, setIsLoading }) => {
-    let userData = null;
     const [companyName, setCompanyName] = useState(null);
-
-    try {
-        const { user } = useAuth();
-        if (user) {
-            userData = user;
-            setIsLoading(false);
-        }
-    }
-    catch (e) {
-        console.log(e);
-    }
+    const { user } = useAuth();
 
     useEffect(() => {
-        if (userData && userData.company && userData.company.companyName) {
-            setCompanyName(userData.company.companyName);
-        } else {
-            console.log("userData data is not available or companyName is missing");
+        if (user) {
+            setIsLoading(false);
         }
-    }, []);
+
+        if (user && user.company && user.company.companyName) {
+            setCompanyName(user.company.companyName);
+        } else {
+            console.log("user data is not available or companyName is missing");
+        }
+    }, [user, setIsLoading]);
 
     const handleSearchChange = (e) => {
         onSearch(e.target.value);

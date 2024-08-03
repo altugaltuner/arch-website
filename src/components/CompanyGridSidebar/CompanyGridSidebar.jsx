@@ -22,16 +22,18 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/professions?populate=*');
             const titles = response.data.data.map(item => ({
                 id: item.id,
-                name: item.attributes.professionName
+                name: item.attributes.professionName,
+                companyID: item.attributes.company.data.attributes.companyID // Added this line to extract companyID
             }));
             setJobTitles(titles);
-            const filteredTitles = titles.filter(title => title.attributes.company?.data?.id === user.company.id);
+            const filteredTitles = titles.filter(title => title.companyID === user.company.companyID); // Modified this line to use companyID directly
             setFilteredJobTitles(filteredTitles);
 
         } catch (error) {
             console.error('Meslek türleri yüklenemedi:', error);
         }
     };
+
 
     useEffect(() => {
         loadJobTitles();

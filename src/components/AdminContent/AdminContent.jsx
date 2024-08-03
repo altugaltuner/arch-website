@@ -10,8 +10,7 @@ import AdminSendMessage from '../../components/AdminContents/AdminSendMessage';
 
 function AdminContent({ selectedSetting }) {
     const { user } = useAuth();
-    const usersCompanyName = user?.company?.companyName;
-
+    const usersCompanyId = user?.company.companyID;
     const [companies, setCompanies] = useState([]);
     const [filteredCompany, setFilteredCompany] = useState([]);
 
@@ -20,6 +19,7 @@ function AdminContent({ selectedSetting }) {
             try {
                 const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/companies?populate=*,users.access,projects,companyLogo,groups,project_revises');
                 setCompanies(response.data.data);
+                console.log(response.data.data, "response.data.data");
 
             } catch (error) {
                 console.error('Error fetching the data', error);
@@ -29,13 +29,13 @@ function AdminContent({ selectedSetting }) {
     }, []);
 
     useEffect(() => {
-        if (companies.length && usersCompanyName) {
+        if (companies.length && usersCompanyId) {
             const filterCompanyFunction = () => {
-                return companies.filter(company => company.attributes.companyName === usersCompanyName);
+                return companies.filter(company => company.attributes.companyID === usersCompanyId);
             };
             setFilteredCompany(filterCompanyFunction());
         }
-    }, [companies, usersCompanyName]);
+    }, [companies, usersCompanyId]);
 
     if (!filteredCompany.length) {
         return <div>Yükleniyor...</div>;

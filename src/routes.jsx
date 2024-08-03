@@ -58,14 +58,6 @@ const routes = [
     ),
   },
   {
-    path: "/groups",
-    element: (
-      <ProtectedRoute>
-        <GroupsPage />
-      </ProtectedRoute>
-    ),
-  },
-  {
     path: "/workers",
     element: (
       <ProtectedRoute>
