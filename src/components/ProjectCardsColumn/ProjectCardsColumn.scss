@@ -48,7 +48,7 @@
             transition: all 0.2s;
 
             &:hover {
-                background-color: darken($background-color, 10%);
+                box-shadow: 0px 0px 5px rgb(199, 199, 199);
             }
         }
 
@@ -60,6 +60,11 @@
             border: 1px solid $border-color;
             border-radius: 5px;
             cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                box-shadow: 0px 0px 5px rgb(199, 199, 199);
+            }
 
             .project-card-delete-btn {
                 display: flex;
@@ -104,11 +109,6 @@
                 border-top: 1px solid $border-color;
                 text-align: center;
                 cursor: pointer;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: darken($background-color, 10%);
-                }
 
                 .project-navbar-photos {
                     width: 150px;

@@ -2,17 +2,98 @@
 
 .firstpage-main {
     display: flex;
+    flex-direction: column;
     position: relative;
-    justify-content: center;
     align-items: center;
     font-family: $primary-font;
     color: $font-color;
     height: 100vh;
+    padding: 30px;
+
+    .flow-descriptions {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+
+        .flow-desc-paragraph {
+            display: flex;
+            width: 30%;
+            border: 1px solid $border-color;
+            padding: 15px;
+            justify-content: flex-start;
+            border-radius: 5px;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 300;
+
+            .flow-desc-p-bold {
+                font-weight: 400;
+                font-size: 24px;
+            }
+        }
+
+        .flow-desc-subheader {
+            font-size: 24px;
+            font-weight: 500;
+        }
+    }
+
+    .firstpage-buttons-div {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        gap: 50px;
+        align-items: center;
+        margin-top: 20px;
+
+        .employee-create-btn {
+            border: 1px solid $border-color;
+            color: $font-color;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: darken($yellow, 10%);
+            }
+        }
+
+        .employee-login-btn {
+            background-color: $grey;
+            color: $font-color;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid $border-color;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: darken($yellow, 10%);
+            }
+        }
+
+        .owner-create-btn {
+            background-color: $grey;
+            color: $font-color;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid $border-color;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: darken($yellow, 10%);
+            }
+        }
+    }
 
     .firstpage-div {
         display: flex;
         flex-direction: column;
-        width: 60%;
+        width: 100%;
         justify-content: center;
         align-items: center;
         gap: 20px;
@@ -25,60 +106,13 @@
         }
 
         .firstpage-header {
-            font-weight: 500;
+            font-weight: 400;
             font-size: 60px;
         }
 
         .firstpage-title {
             font-weight: 300;
             font-size: 26px;
-        }
-
-        .firstpage-buttons-div {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            gap: 50px;
-            align-items: center;
-            margin-top: 20px;
-
-            .employee-create-btn {
-                border: 1px solid $border-color;
-                color: $font-color;
-                padding: 10px 20px;
-                border-radius: 5px;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: darken($yellow, 10%);
-                }
-            }
-
-            .employee-login-btn {
-                background-color: $grey;
-                color: $font-color;
-                padding: 10px 20px;
-                border-radius: 5px;
-                border: 1px solid $border-color;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: darken($yellow, 10%);
-                }
-            }
-
-            .owner-create-btn {
-                background-color: $grey;
-                color: $font-color;
-                padding: 10px 20px;
-                border-radius: 5px;
-                border: 1px solid $border-color;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: darken($yellow, 10%);
-                }
-            }
         }
     }
 

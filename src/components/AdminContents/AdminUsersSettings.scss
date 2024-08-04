@@ -15,6 +15,11 @@
             padding: 20px;
             border: 1px solid $border-color;
             border-radius: 5px;
+            transition: all 0.2s;
+
+            &:hover {
+                box-shadow: 0px 0px 5px rgb(199, 199, 199);
+            }
 
             .user-storage-gb-h2 {
                 font-size: 24px;
@@ -57,6 +62,11 @@
             padding: 20px;
             border: 1px solid $border-color;
             border-radius: 5px;
+            transition: all 0.2s;
+
+            &:hover {
+                box-shadow: 0px 0px 5px rgb(199, 199, 199);
+            }
 
             .projects-codes-h2 {
                 font-size: 24px;
@@ -97,6 +107,11 @@
             border: 1px solid $border-color;
             gap: 10px;
             border-radius: 5px;
+            transition: all 0.2s;
+
+            &:hover {
+                box-shadow: 0px 0px 5px rgb(199, 199, 199);
+            }
 
             .set-one-header {
                 font-size: 24px;
