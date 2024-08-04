@@ -7,7 +7,6 @@
     align-items: center;
     font-family: $primary-font;
     color: $font-color;
-    height: 100vh;
     padding: 30px;
 
     .flow-descriptions {
@@ -16,7 +15,7 @@
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 30px;
 
         .flow-desc-paragraph {
             display: flex;
@@ -30,6 +29,11 @@
             align-items: center;
             font-size: 18px;
             font-weight: 300;
+            transition: all 0.2s;
+
+            &:hover {
+                box-shadow: 0px 0px 5px rgb(199, 199, 199);
+            }
 
             .flow-desc-p-bold {
                 font-weight: 400;
@@ -92,21 +96,21 @@
 
     .firstpage-div {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        gap: 40px;
         text-align: center;
 
         .firstpage-logo {
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
         }
 
         .firstpage-header {
-            font-weight: 400;
+            font-weight: 300;
             font-size: 60px;
         }
 
