@@ -15,12 +15,6 @@
         justify-content: space-between;
         align-items: center;
 
-        .title-for-projects {
-            font-size: 40px;
-            font-weight: 400;
-            margin: 20px 20px 20px 40px;
-        }
-
         .search-bar-of-projects {
             width: 300px;
             height: 40px;
@@ -150,13 +144,7 @@
     .project-cards-column {
 
         .project-cards-header-and-searchbar {
-
             flex-direction: column;
-
-            .title-for-projects {
-                margin: 10px;
-                font-size: 28px;
-            }
 
             .search-bar-of-projects {
                 margin-right: 0px;

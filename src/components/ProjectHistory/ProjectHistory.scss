@@ -12,17 +12,6 @@
     margin-top: 20px;
     color: $font-color;
 
-    .project-history-header {
-        border-bottom: 1px solid $border-color;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-        width: 100%;
-        font-size: 30px;
-        color: $font-color;
-        text-align: center;
-        font-weight: 300;
-    }
-
     .project-history-div {
         display: flex;
         flex-direction: column;
@@ -34,13 +23,6 @@
         .no-history-p {
             font-size: 20px;
             text-align: center;
-        }
-
-        .history-paragraph {
-            font-size: 18px;
-            border: 1px solid $border-color;
-            padding: 10px;
-            border-radius: 5px;
         }
     }
 }
@@ -56,22 +38,11 @@
         padding: 10px;
         margin: 0px;
 
-        .project-history-header {
-            font-size: 20px;
-        }
-
         .project-history-div {
             gap: 5px;
 
             .no-history-p {
                 font-size: 16px;
-            }
-
-            .history-paragraph {
-                font-size: 16px;
-                border: 1px solid $border-color;
-                padding: 8px;
-                border-radius: 5px;
             }
         }
     }

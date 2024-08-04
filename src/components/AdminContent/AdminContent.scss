@@ -8,14 +8,6 @@
     color: $font-color;
     font-family: $primary-font;
 
-    .admin-sub-header {
-        font-size: 34px;
-        padding: 10px;
-        font-weight: 400;
-        border-bottom: 1px solid $border-color;
-        margin-bottom: 20px;
-    }
-
     .admin-sub-panel-content {
         display: flex;
         flex-direction: column;
@@ -28,12 +20,5 @@
     .admin-sub-setting-page {
         width: 100%;
         padding: 10px;
-
-        .admin-sub-header {
-            font-size: 26px;
-            padding: 5px;
-            margin: 0px;
-        }
     }
-
 }

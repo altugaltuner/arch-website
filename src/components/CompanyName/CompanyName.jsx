@@ -29,7 +29,7 @@ const CompanyName = ({ onSearch, setIsLoading }) => {
 
     return (
         <div className="company-name-main">
-            <h1 className="company-name">{companyName}</h1>
+            <h1 className="div-big-header">{companyName}</h1>
             <input
                 className="company-search"
                 type="text"

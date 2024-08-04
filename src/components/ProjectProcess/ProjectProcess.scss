@@ -51,16 +51,6 @@
         }
     }
 
-    .project-process-header {
-        border-bottom: 1px solid $border-color;
-        padding: 0px 0px 10px 0px;
-        margin: 0px 0px 10px 0px;
-        width: 100%;
-        font-size: 30px;
-        text-align: center;
-        font-weight: 300;
-    }
-
     .project-percentage {
         font-size: 18px;
         margin-bottom: 20px;
@@ -99,11 +89,6 @@
 
         .progress-bar-container {
             margin-bottom: 5px;
-        }
-
-        .project-process-header {
-            font-size: 20px;
-            margin: 0px;
         }
 
         .project-process-input {

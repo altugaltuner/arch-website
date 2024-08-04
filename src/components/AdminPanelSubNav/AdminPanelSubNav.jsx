@@ -41,7 +41,7 @@ function AdminPanelSubNav({ getRelevantSettings }) {
 
     return (
         <div className="adminpanel-settings-page">
-            <h1 className="adminpanel-header">Ayarlar</h1>
+            <h1 className="div-big-header">Ayarlar</h1>
             <div className="adminpanel-container">
                 <div className="adminpanel-content">
                     {adminSections.map((section, index) => (

@@ -9,19 +9,11 @@
     .flow-page-main-column {
         display: flex;
         flex-direction: column;
-        padding: 15px;
+        padding: 0px 15px;
         transform: translate(110px, 0px);
         width: calc(100% - 110px);
         gap: 15px;
         justify-content: center;
-
-        .flow-page-title {
-            font-size: 40px;
-            font-weight: 400;
-            margin: 20px;
-            text-align: left;
-            width: fit-content;
-        }
 
         .all-companies-column {
             display: flex;
@@ -222,11 +214,6 @@
                             font-size: 16px;
                         }
                     }
-                }
-
-                .flow-page-title {
-                    font-size: 32px;
-                    margin: 10px;
                 }
             }
 

@@ -10,14 +10,6 @@
     gap: 10px;
     height: 480px;
 
-    .my-notebook-note-header {
-        padding: 10px;
-        font-weight: 300;
-        border-bottom: 1px solid $border-color;
-        font-size: 24px;
-        text-align: center;
-    }
-
     .notebook-notes-area {
 
         display: flex;
@@ -72,11 +64,6 @@
         overflow: hidden;
         padding: 5px;
         gap: 3px;
-
-        .my-notebook-note-header {
-            padding: 3px;
-            font-size: 16px;
-        }
 
         .notebook-notes-area {
             .note-div {

@@ -5,18 +5,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0px 0px 0px;
     background-color: $background-color;
     font-family: $primary-font;
     color: $font-color;
-
-    .company-name {
-        font-size: 40px;
-        font-weight: 400;
-        padding: 12px 30px;
-        border: none;
-        border-radius: 5px;
-    }
 
     .company-search {
         width: 300px;
@@ -31,11 +22,6 @@
 @media screen and (max-width: 450px) {
     .company-name-main {
         padding: 5px;
-
-        .company-name {
-            font-size: 24px;
-            padding: 5px 5px 5px 10px;
-        }
 
         .company-search {
             width: 100px;

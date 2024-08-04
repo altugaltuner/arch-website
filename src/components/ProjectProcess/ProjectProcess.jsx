@@ -50,7 +50,7 @@ function ProjectProcess({ clickedProject }) {
 
     return (
         <div className="project-process-main">
-            <h1 className="project-process-header">Proje Durumu</h1>
+            <h1 className="div-header">Proje Durumu</h1>
             <p className="project-percentage">{projectProcess} % 100</p>
             <div className="progress-bar-container">
                 <div className="progress-bar" style={{ width: `${projectProcess}%` }}>

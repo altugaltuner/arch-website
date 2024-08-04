@@ -87,14 +87,6 @@
             justify-content: space-between;
             align-items: center;
 
-            .calendar-page-header {
-                font-size: 40px;
-                font-weight: 400;
-                margin: 20px 20px 20px 40px;
-                text-align: left;
-                width: fit-content;
-            }
-
             .search-input {
                 width: 300px;
                 height: 40px;
@@ -138,8 +130,6 @@
             }
 
             .events-header-date {
-                font-size: 30px;
-                font-weight: 400;
 
                 .edit-event-icon {
                     width: 20px;
@@ -187,8 +177,8 @@
                     }
 
                     .events-header-date {
-                        font-size: 20px;
-                        font-weight: 300;
+                        font-size: 18px;
+                        font-weight: 400;
                     }
 
                     .events-paragraph {
@@ -221,20 +211,11 @@
         .calendar-page-inner {
             transform: translate(50px, 0px);
             width: calc(100% - 110px);
-
-
-            .calendar-page-controls {}
-
-            .calendar-area {}
-
-            .calendar-page-header-and-input {}
         }
 
         .calendar-page-events-div {
             transform: translate(50px, 0px);
             width: calc(100% - 110px);
-
-            .calendar-page-events-inner-div {}
         }
     }
 }
@@ -280,8 +261,6 @@
                             font-size: 22px;
                         }
 
-                        .events-header-date {}
-
                         .events-paragraph {
                             max-height: 400px;
                             overflow-y: auto;
@@ -308,13 +287,6 @@
                 .calendar-page-button {
                     width: 20px;
                     height: 20px;
-                }
-            }
-
-            .calendar-page-header-and-input {
-                .calendar-page-header {
-                    font-size: 28px;
-                    margin: 5px;
                 }
             }
 

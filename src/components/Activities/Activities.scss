@@ -16,17 +16,6 @@
         width: 100%;
         border-radius: 15px;
 
-        .activities-title {
-            text-align: center;
-            font-weight: 400;
-            border: 1px solid $border-color;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            padding: 10px;
-            color: $font-color;
-            margin-bottom: 10px;
-        }
-
         .activities-table {
             width: 100%;
             color: $font-color;
@@ -130,10 +119,6 @@
             padding: 10px;
             font-size: 15px;
 
-            .activities-title {
-                font-size: 18px;
-            }
-
             .activities-table {
                 .table-main-head {
                     .table-header-row {
@@ -175,10 +160,6 @@
             border: none;
             max-height: 675px;
             overflow-y: auto;
-
-            .activities-title {
-                font-size: 16px;
-            }
 
             .activities-table {
                 .table-main-head {

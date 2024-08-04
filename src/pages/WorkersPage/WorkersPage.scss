@@ -19,15 +19,6 @@
             justify-content: space-between;
             align-items: center;
 
-            .workers-page-header {
-                font-size: 40px;
-                font-weight: 400;
-                margin: 20px 20px 20px 40px;
-                text-align: left;
-                width: fit-content;
-                color: $font-color;
-            }
-
             .search-bar-of-projects {
                 width: 300px;
                 height: 40px;
@@ -131,10 +122,6 @@
                 gap: 10px;
                 margin-bottom: 10px;
 
-                .workers-page-header {
-                    margin: 5px;
-                }
-
                 .search-bar-of-projects {
                     margin: 0px;
                 }
@@ -175,10 +162,6 @@
             .workers-row {
                 flex-direction: column;
                 gap: 10px;
-
-                .workers-page-header {
-                    margin: 5px;
-                }
 
                 .search-bar-of-projects {
                     margin: 0px;
@@ -232,16 +215,10 @@
 
             .workers-row {
 
-                .workers-page-header {
-                    font-size: 28px;
-                }
-
                 .search-bar-of-projects {
                     width: 80%;
                 }
             }
-
-
 
             .company-grid {
                 .user-permission-settings {

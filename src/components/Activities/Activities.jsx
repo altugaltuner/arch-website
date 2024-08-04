@@ -69,7 +69,7 @@ const Activities = ({ searchTerm }) => {
     return (
         <div className="activities-container">
             <div className="activities-container-half">
-                <h2 className="activities-title">Son Aktiviteler</h2>
+                <h2 className="div-header">Son Aktiviteler</h2>
                 <table className="activities-table">
                     <thead className="table-main-head">
                         <tr className="table-header-row">

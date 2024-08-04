@@ -32,7 +32,7 @@ function MyActiveProjects({ user }) {
 
     const userElements = filteredUser.map(u => (
         <div className="my-active-project-div" key={u.id}>
-            <h2 className="my-active-project-list-header">Dahil Olduğum Projeler</h2>
+            <h2 className="div-header">Dahil Olduğum Projeler</h2>
             <div className="my-active-project-list">
                 {u.projects.map(p => (
                     <div className="my-active-project-list-element" key={p.id} onClick={() => handleProjectClick(p.id)}>

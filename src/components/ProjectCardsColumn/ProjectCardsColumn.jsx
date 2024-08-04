@@ -69,7 +69,7 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
     return (
         <div className="project-cards-column">
             <div className="project-cards-header-and-searchbar">
-                <h1 className="title-for-projects">Projeler</h1>
+                <h1 className="div-big-header">Projeler</h1>
                 <input
                     onChange={searchProjects}
                     value={searchTerm}

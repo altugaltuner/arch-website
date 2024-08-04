@@ -6,12 +6,6 @@
     border: 1px solid $border-color;
     border-radius: 5px;
 
-    .material-use-list-subheader {
-        font-weight: 400;
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
     .material-list-ul {
         list-style-type: none;
         padding: 0;
@@ -23,6 +17,7 @@
     }
 
     .material-list-no-p {
-        font-weight: 300;
+        font-weight: 400;
+        font-size: 18px;
     }
 }

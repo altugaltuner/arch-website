@@ -29,7 +29,7 @@ function SubSettingPanel({ selectedSetting }) {
 
     return (
         <div className="sub-setting-panel-page">
-            <h2 className="sub-setting-panel-header">{selectedSetting}</h2>
+            <h2 className="div-header">{selectedSetting}</h2>
             {renderContent()}
         </div>
     );

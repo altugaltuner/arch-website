@@ -136,7 +136,7 @@ const CalendarPage = () => {
             <Navigation />
             <div className="calendar-page-inner">
                 <div className="calendar-page-header-and-input">
-                    <h1 className="calendar-page-header">Takvim</h1>
+                    <h1 className="div-big-header">Takvim</h1>
                 </div>
                 <div className="calendar-page-controls">
                     <img className="calendar-page-button" onClick={prevMonth} src={backButton} alt="Geri" />

@@ -21,7 +21,7 @@
 
                 .back-btn {
                     width: 40px;
-                    height: 45px;
+                    height: 40px;
                     opacity: 0.7;
                     transition: all 0.2s;
 
@@ -32,31 +32,11 @@
             }
         }
 
-        .active-project-title {
-            width: fit-content;
-            padding: 10px;
-            margin: 10px;
-            color: $font-color;
-            font-weight: 400;
-            border-radius: 5px;
-        }
-
         .active-project-tabs {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             background-color: $background-color;
-
-            .active-project-btn {
-                border-bottom: 1px solid $border-color;
-                padding: 10px;
-                margin: 10px;
-                width: 100%;
-                font-size: 30px;
-                color: $font-color;
-                text-align: center;
-                font-weight: 300;
-            }
         }
     }
 }

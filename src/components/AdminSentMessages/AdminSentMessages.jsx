@@ -14,7 +14,7 @@ function AdminSentMessages({ adminMessages }) {
 
                 return (
                     <div key={message.id} className="message-item">
-                        <h3 className='message-div-title'>{message?.attributes?.header}</h3>
+                        <h3 className='paragraph-header'>{message?.attributes?.header}</h3>
                         <p className='message-div-content'>{message?.attributes?.content}</p>
                         {mediaUrl && <img src={mediaUrl} className='message-div-media' alt='message-media'></img>}
                         <p className='message-div-date'>Tarih: {new Date(message.attributes.createdAt).toLocaleString()}</p>

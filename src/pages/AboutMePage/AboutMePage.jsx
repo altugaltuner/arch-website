@@ -49,7 +49,7 @@ function AboutMePage() {
             <OpenInboxModal showInboxModal={showInboxModal} setShowInboxModal={setShowInboxModal} />
             <div className="aboutme-page-column">
                 <div className="aboutme-row-2">
-                    <h1 className="aboutme-page-title">Profilim</h1>
+                    <h1 className="div-big-header">Profilim</h1>
                     <img src={inboxLogo} alt="message-inbox" className="message-inbox" onClick={() => { openInboxModal() }} />
                 </div>
                 <div className="aboutme-page-row">

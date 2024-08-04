@@ -28,11 +28,11 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
 
     return (
         <div className="project-history-main">
-            <h1 className="project-history-header">Proje Tarihçesi</h1>
+            <h1 className="div-header">Proje Tarihçesi</h1>
             <div className="project-history-div">
                 {history.length > 0 ? (
                     history.map((entry, index) => (
-                        <p key={index} className="history-paragraph">
+                        <p key={index} className="paragraph">
                             {entry?.attributes?.users_permissions_users?.data[0]?.attributes?.username || "Kullanıcı"} "{entry?.attributes?.folder}" adlı klasör üzerinde "{entry?.attributes?.action}" işlemini gerçekleştirdi - {new Date(entry?.attributes?.timestamp).toLocaleDateString()}
                         </p>
                     ))

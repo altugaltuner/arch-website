@@ -7,14 +7,6 @@
         transform: translate(110px, 0px);
         width: calc(100% - 110px);
 
-        .material-use-header {
-            font-size: 40px;
-            font-weight: 400;
-            margin: 20px 20px 20px 40px;
-            text-align: left;
-            width: fit-content;
-        }
-
         .material-use-calendar {
             padding: 20px;
         }
@@ -30,14 +22,6 @@
             gap: 20px;
             align-items: center;
 
-            h2 {
-                font-size: 30px;
-                font-weight: 400;
-                margin: 20px 20px 20px 40px;
-                text-align: left;
-                width: fit-content;
-            }
-
             .material-choose-project-select {
                 border: 1px solid $border-color;
                 border-radius: 5px;
@@ -50,5 +34,4 @@
             }
         }
     }
-
 }

@@ -10,12 +10,6 @@
     text-align: center;
     height: 480px;
 
-    .mylast-act-header {
-        padding: 10px;
-        font-weight: 300;
-        border-bottom: 1px solid $border-color;
-    }
-
     .mylast-act-ul {
         display: flex;
         flex-direction: column;
@@ -48,11 +42,6 @@
 
     .mylast-act-main {
         padding: 10px;
-
-        .mylast-act-header {
-
-            font-size: 24px;
-        }
 
         .mylast-act-item {
             .mylast-act-item-desc {

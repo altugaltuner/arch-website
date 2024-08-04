@@ -70,9 +70,9 @@ function MaterialsPage() {
         <div className="project-material-use">
             <Navigation />
             <div className="materials-inner-div">
-                <h2 className="material-use-header">Metraj Tutanağı</h2>
+                <h2 className="div-big-header">Metraj Tutanağı</h2>
                 <div className="material-choose-project">
-                    <h2>Proje Seçin</h2>
+                    <h2 className="div-header">Proje Seçin</h2>
                     <select
                         className='material-choose-project-select'
                         name="user-role"

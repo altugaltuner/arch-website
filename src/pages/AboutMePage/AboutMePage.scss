@@ -16,18 +16,10 @@
 
         .aboutme-row-2 {
             display: flex;
-            width: 100%;
             justify-content: space-between;
             align-items: center;
-
-            .aboutme-page-title {
-                transform: translate(110px, 0px);
-                width: fit-content;
-                font-weight: 400;
-                font-size: 40px;
-                margin: 20px 20px 20px 40px;
-                text-align: left;
-            }
+            width: calc(100% - 110px);
+            transform: translate(110px, 0px);
 
             .message-inbox {
                 width: 50px;
@@ -67,8 +59,6 @@
             }
         }
     }
-
-
 }
 
 @media screen and (max-width: 1250px) {
@@ -125,12 +115,6 @@
                     margin-right: 20px;
                 }
 
-                .aboutme-page-title {
-                    font-size: 28px;
-                    margin: 10px;
-                    transform: translate(140px, 0px);
-                }
-
                 .message-inbox {
                     width: 30px;
                     height: 30px;
@@ -160,7 +144,6 @@
                         .mylast-act-ul {
                             overflow-y: auto;
 
-
                             .mylast-act-item-desc {
                                 flex-direction: column;
                                 font-size: 12px;
@@ -171,11 +154,6 @@
                                     padding: 2px;
                                 }
                             }
-                        }
-
-                        .mylast-act-header {
-                            font-size: 16px;
-                            padding: 3px;
                         }
                     }
                 }

@@ -56,7 +56,7 @@ function FlowPage() {
         <div className="flow-page-main">
             <Navigation />
             <div className="flow-page-main-column">
-                <h1 className="flow-page-title">Ofisim</h1>
+                <h1 className="div-big-header">Ofisim</h1>
                 <div className="all-companies-column">
                     <h2 className="all-companies-page-title">Tüm Şirketler</h2>
                     <div className="flow-page-row">

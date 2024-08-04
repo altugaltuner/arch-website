@@ -46,7 +46,7 @@ function SubNavigationSettings({ getRelevantSettings }) {
 
     return (
         <div className="sub-navi-settings-page">
-            <h1 className="sub-nav-header">Ayarlar</h1>
+            <h1 className="div-big-header">Ayarlar</h1>
             <div className="sub-nav-container">
                 <div className="sub-nav-content">
                     {sections.map((section, index) => (

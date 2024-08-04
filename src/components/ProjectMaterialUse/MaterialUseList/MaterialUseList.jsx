@@ -31,7 +31,7 @@ const MaterialUseList = ({ selectedDate, selectedProject }) => {
 
     return (
         <div className="material-use-list">
-            <h3 className="material-use-list-subheader">Malzeme Kullanımı</h3>
+            <h3 className="div-header">Malzeme Kullanımı</h3>
             {materialUse.length > 0 ? (
                 <ul className='material-list-ul'>
                     {materialUse.map((item, index) => (

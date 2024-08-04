@@ -132,7 +132,7 @@ function ProjectComments({ clickedProject }) {
 
     return (
         <div className="project-comments-main">
-            <h2 className='project-comments-h2'>Proje Revizeleri</h2>
+            <h2 className='div-header'>Proje Revizeleri</h2>
             {userRole === "Admin" || userRole === "Contributor" ? (
                 <button className='new-revise-create-btn' onClick={openNewReviseModal}>Revize Yaz</button>
             ) :

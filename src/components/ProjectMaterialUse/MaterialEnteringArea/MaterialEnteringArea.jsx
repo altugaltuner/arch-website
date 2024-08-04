@@ -82,6 +82,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
 
     return (
         <div className="material-entering-area">
+            <h3 className="div-header">Malzeme Girişi</h3>
             <form className="entering-area-form" onSubmit={handleSubmitMaterial}>
                 <div className="one-material-div">
                     <label className="material-label" htmlFor="material-name">Malzeme Adı</label>

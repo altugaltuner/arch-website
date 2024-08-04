@@ -10,14 +10,6 @@
     max-height: 910px;
     overflow-y: auto;
 
-    .sub-nav-header {
-        font-size: 40px;
-        padding: 20px;
-        font-weight: 400;
-        margin: 0px 20px;
-        border-bottom: 1px solid $border-color;
-    }
-
     .sub-nav-container {
         display: flex;
         width: 100%;
@@ -66,12 +58,6 @@
     .sub-navi-settings-page {
         width: 100%;
         padding: 20px;
-
-        .sub-nav-header {
-            font-size: 28px;
-            margin: 0px 10px;
-            padding: 5px;
-        }
 
         .sub-nav-container {
             .sub-nav-content {

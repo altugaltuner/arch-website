@@ -85,7 +85,7 @@ function WorkersPage() {
             <Navigation />
             <div className="workers-column">
                 <div className="workers-row">
-                    <h1 className="workers-page-header">Şirket Çalışanları</h1>
+                    <h1 className="div-big-header">Şirket Çalışanları</h1>
                     <input
                         onChange={searchEmployees}
                         value={searchTerm}

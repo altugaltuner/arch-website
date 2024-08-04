@@ -8,14 +8,6 @@
     color: $font-color;
     border-right: 1px solid $border-color;
 
-    .adminpanel-header {
-        font-size: 40px;
-        padding: 20px;
-        font-weight: 400;
-        margin: 0px 20px;
-        border-bottom: 1px solid $border-color;
-    }
-
     .adminpanel-container {
         display: flex;
         width: 100%;
@@ -27,8 +19,6 @@
             overflow: auto;
         }
     }
-
-
 
     .adminpanel-section {
         &.disabled {
@@ -113,20 +103,11 @@
     .admin-sub-setting-page {
         width: 100%;
 
-        .admin-sub-header {
-            margin-bottom: 5px;
-            font-size: 26px;
-            padding: 5px;
-        }
-
         .admin-sub-panel-content {
             .admin-dashboard-main {
                 gap: 5px;
 
                 .dashboard-current-state-all {
-                    .dashboard-header {
-                        font-size: 20px;
-                    }
 
                     .dashboard-row-inner {
                         gap: 5px;
@@ -152,11 +133,5 @@
 
     .adminpanel-settings-page {
         padding: 10px;
-
-        .adminpanel-header {
-            font-size: 28px;
-            padding: 10px;
-            margin: 0px 10px;
-        }
     }
 }

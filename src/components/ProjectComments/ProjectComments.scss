@@ -13,17 +13,6 @@
     color: $font-color;
     gap: 10px;
 
-    .project-comments-h2 {
-        padding: 10px;
-        width: 100%;
-        font-size: 30px;
-        color: $font-color;
-        text-align: center;
-        font-weight: 300;
-        margin-left: 10px;
-        border-bottom: 1px solid $border-color;
-    }
-
     .new-revise-create-btn {
         border: 1px solid $border-color;
         padding: 10px;
@@ -148,12 +137,6 @@
         .new-revise-create-btn {
             padding: 5px;
             font-size: 14px;
-        }
-
-        .project-comments-h2 {
-            font-size: 22px;
-            padding: 5px;
-            margin: 0px;
         }
     }
 }

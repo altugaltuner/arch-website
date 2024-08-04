@@ -83,7 +83,7 @@ function AdminContent({ selectedSetting }) {
 
     return (
         <div className="admin-sub-setting-page">
-            <h2 className="admin-sub-header">{selectedSetting}</h2>
+            <h2 className="div-header">{selectedSetting}</h2>
             <div className='admin-sub-panel-content'>
                 {renderContent()}
             </div>

@@ -6,7 +6,7 @@ function AdminDashBoard({ projectCount, userCount, reviseCount, finishedProjectC
     return (
         <div className="admin-dashboard-main">
             <div className='dashboard-current-state-all'>
-                <h2 className='dashboard-header'>Genel Durum</h2>
+                <h2 className='paragraph-header'>Genel Durum</h2>
                 <div className='dashboard-row-inner'>
                     <div className='dashboard-oneline-inner'>
                         <h3 className='dashboard-p-header'>Sisteme Kayıtlı Çalışan Sayısı</h3>

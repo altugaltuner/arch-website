@@ -14,7 +14,7 @@ function MyLastAct({ user }) {
 
     return (
         <div className="mylast-act-main">
-            <h2 className="mylast-act-header">Son Revizelerim</h2>
+            <h2 className="div-header">Son Revizelerim</h2>
             <ul className="mylast-act-ul">
                 {myLastActivities?.map((activity, index) => (
                     <li className="mylast-act-item-desc">{activity.comment[0].children[0].text}
