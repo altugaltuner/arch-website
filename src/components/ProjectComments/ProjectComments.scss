@@ -12,6 +12,11 @@
     margin-top: 20px;
     color: $font-color;
     gap: 10px;
+    transition: all 0.2s;
+
+    &:hover {
+        box-shadow: 0px 0px 5px rgb(199, 199, 199);
+    }
 
     .new-revise-create-btn {
         border: 1px solid $border-color;
@@ -74,6 +79,10 @@
             width: 100%;
             border: 1px solid $border-color;
             border-radius: 5px;
+
+            &:hover {
+                box-shadow: 0px 0px 5px rgb(199, 199, 199);
+            }
 
             .project-comment-text {
                 display: flex;

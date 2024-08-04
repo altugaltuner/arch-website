@@ -15,6 +15,11 @@
     max-height: 500px;
     overflow-y: auto;
     text-align: center;
+    transition: all 0.2s;
+
+    &:hover {
+        box-shadow: 0px 0px 5px rgb(199, 199, 199);
+    }
 
     .project-completed {
         color: green;
