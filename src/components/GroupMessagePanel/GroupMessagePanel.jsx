@@ -5,6 +5,8 @@ import "./GroupMessagePanel.scss";
 import { useAuth } from "../AuthProvider";
 import GroupMembersModal from "../../pages/GroupsPage/GroupMembersModal";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function GroupMessagePanel({ selectedGroupId }) {
     const [groupName, setGroupName] = useState("");
     const [messages, setMessages] = useState([]);
@@ -24,6 +26,24 @@ function GroupMessagePanel({ selectedGroupId }) {
 
     useEffect(() => {
         const fetchGroupDetails = async () => {
+
+            const cachedGroup = localStorage.getItem(`group_${selectedGroupId}`);
+            const cachedTimestamp = localStorage.getItem(`group_${selectedGroupId}_timestamp`);
+
+            if (cachedGroup && cachedTimestamp) {
+                const age = Date.now() - parseInt(cachedTimestamp, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    const groupDetails = JSON.parse(cachedGroup);
+                    setGroupName(groupDetails?.attributes?.groupName);
+                    setMessages(groupDetails?.attributes?.chatMessages || []);
+                    const isUserInGroup = groupDetails?.attributes.users_permissions_users?.data.some(u => u.id === user?.id);
+                    setIsUserInGroup(isUserInGroup);
+                    return;
+                }
+            }
+
+
             if (selectedGroupId) {
                 try {
                     const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}?populate=users_permissions_users.role,company`);

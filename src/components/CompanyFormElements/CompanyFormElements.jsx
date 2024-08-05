@@ -2,17 +2,33 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import "./CompanyFormElements.scss";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 const CompanyFormElements = ({ errors, setErrors }) => {
     const [employeeCodeGenerated, setEmployeeCodeGenerated] = useState(false);
     const [companyPermissionCodes, setCompanyPermissionCodes] = useState([]);
     const [allEmails, setAllEmails] = useState([]);
 
     const fetchEmails = async () => {
+        const cachedEmails = localStorage.getItem(`emails`);
+        const cachedTimestampEmails = localStorage.getItem(`emails_timestamp`);
+
+        if (cachedEmails && cachedTimestampEmails) {
+            const age = Date.now() - parseInt(cachedTimestampEmails, 10);
+            if (age < CACHE_DURATION) {
+                console.log('Veriler localStorage\'dan yükleniyor');
+                setAllEmails(JSON.parse(cachedEmails));
+                return;
+            }
+        }
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users');
             const data = response.data.map(item => item.email);
             console.log(data, "Fetched Emails");
             setAllEmails(data);
+            localStorage.setItem(`emails`, JSON.stringify(data));
+            localStorage.setItem(`emails_timestamp`, Date.now().toString());
+
         } catch (error) {
             console.error("Error fetching emails:", error);
         }

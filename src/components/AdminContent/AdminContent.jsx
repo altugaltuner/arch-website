@@ -33,6 +33,9 @@ function AdminContent({ selectedSetting }) {
                 const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/companies?populate=*,users.access,projects,companyLogo,groups,project_revises');
                 setCompanies(response.data.data);
                 console.log(response.data.data, "response.data.data");
+                localStorage.setItem(`companies`, JSON.stringify(response.data.data));
+                localStorage.setItem(`companies_timestamp`, Date.now().toString());
+                console.log("veriler dbden çekiliyor.");
 
             } catch (error) {
                 console.error('Error fetching the data', error);
