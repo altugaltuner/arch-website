@@ -47,11 +47,24 @@ const CompanyFormElements = ({ errors, setErrors }) => {
     };
 
     const fetchData = async () => {
+        const cachedPermissionCodes = localStorage.getItem(`permission_codes`);
+        const cachedTimestampPermissionCodes = localStorage.getItem(`permission_codes_timestamp`);
+        if (cachedPermissionCodes && cachedTimestampPermissionCodes) {
+            const age = Date.now() - parseInt(cachedTimestampPermissionCodes, 10);
+            if (age < CACHE_DURATION) {
+                console.log('Veriler localStorage\'dan yükleniyor');
+                setCompanyPermissionCodes(JSON.parse(cachedPermissionCodes));
+                return;
+            }
+        }
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/company-perm-codes?populate=*');
             const data = response.data.data.map(item => item.attributes.code);
             setCompanyPermissionCodes(data);
             console.log(data, "Fetched Permission Codes");
+            localStorage.setItem(`permission_codes`, JSON.stringify(data));
+            localStorage.setItem(`permission_codes_timestamp`, Date.now().toString());
+            console.log("veriler sunucudan yükleniyor");
         } catch (error) {
             console.error("Error fetching data:", error);
         }

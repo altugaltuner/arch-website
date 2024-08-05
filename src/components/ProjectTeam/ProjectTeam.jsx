@@ -6,6 +6,8 @@ import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal';
 import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import { useAuth } from "../../components/AuthProvider";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [employees, setEmployees] = useState([]);
     const [roles, setRoles] = useState([]);
@@ -23,9 +25,21 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
     };
 
     async function getRoles() {
+        const cachedRole = localStorage.getItem(`roles`);
+        const cachedTimestampRole = localStorage.getItem(`roles_timestamp`);
+        if (cachedRole && cachedTimestampRole) {
+            const age = Date.now() - parseInt(cachedTimestampRole, 10);
+            if (age < CACHE_DURATION) {
+                console.log('Veriler localStorage\'dan yükleniyor');
+                setRoles(JSON.parse(cachedRole));
+                return;
+            }
+        }
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
             setRoles(response.data.data);
+            localStorage.setItem(`roles`, JSON.stringify(response.data.data));
+            localStorage.setItem(`roles_timestamp`, Date.now().toString());
         } catch (error) {
             console.error(error);
         }

@@ -19,6 +19,8 @@ import FileModal from "../FileModal/FileModal";
 import FolderContent from "../FolderContent/FolderContent";
 import { useAuth } from "../../components/AuthProvider";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
 
@@ -57,9 +59,22 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
 
     useEffect(() => {
         async function getRoles() {
+            const cachedRoles = localStorage.getItem(`roles`);
+            const cachedTimestampRoles = localStorage.getItem(`roles_timestamp`);
+            if (cachedRoles && cachedTimestampRoles) {
+                const age = Date.now() - parseInt(cachedTimestampRoles, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    setRoles(JSON.parse(cachedRoles));
+                    return;
+                }
+            }
             try {
                 const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
                 setRoles(response.data.data);
+                localStorage.setItem(`roles`, JSON.stringify(response.data.data));
+                localStorage.setItem(`roles_timestamp`, Date.now().toString());
+                console.log('Veriler sunucudan yükleniyor');
             } catch (error) {
                 console.error("Error fetching roles:", error);
             }
@@ -68,9 +83,22 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     }, []);
 
     const fetchProjectFolders = async () => {
+        const cachedProjectFolders = localStorage.getItem(`project_${clickedProject.id}_folders`);
+        const cachedTimestampFolders = localStorage.getItem(`project_${clickedProject.id}_folders_timestamp`);
+        if (cachedProjectFolders && cachedTimestampFolders) {
+            const age = Date.now() - parseInt(cachedTimestampFolders, 10);
+            if (age < CACHE_DURATION) {
+                console.log('Veriler localStorage\'dan yükleniyor');
+                setProjectFolders(JSON.parse(cachedProjectFolders));
+                return;
+            }
+        }
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=project_folders.folderContent');
             setProjectFolders(response.data.data);
+            localStorage.setItem(`project_${clickedProject.id}_folders`, JSON.stringify(response.data.data));
+            localStorage.setItem(`project_${clickedProject.id}_folders_timestamp`, Date.now().toString());
+            console.log('Veriler sunucudan yükleniyor');
         } catch (error) {
             console.error('Error fetching the data', error);
         }

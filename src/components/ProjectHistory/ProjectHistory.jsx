@@ -2,15 +2,30 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProjectHistory.scss';
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function ProjectHistory({ clickedProject, newHistoryEntry }) {
     const [history, setHistory] = useState([]);
 
     useEffect(() => {
         async function fetchHistory() {
+            const cachedHistory = localStorage.getItem(`project_${clickedProject.id}_history`);
+            const cachedTimestamp = localStorage.getItem(`project_${clickedProject.id}_history_timestamp`);
+
+            if (cachedHistory && cachedTimestamp) {
+                const age = Date.now() - parseInt(cachedTimestamp, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    setHistory(JSON.parse(cachedHistory));
+                    return;
+                }
+            }
             try {
                 if (clickedProject?.id) {
                     const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=*`);
                     setHistory(response.data.data || []);
+                    localStorage.setItem(`project_${clickedProject.id}_history`, JSON.stringify(response.data.data));
+                    localStorage.setItem(`project_${clickedProject.id}_history_timestamp`, Date.now().toString());
                 }
             } catch (error) {
                 console.error("Error fetching history:", error);
