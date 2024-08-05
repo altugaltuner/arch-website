@@ -1,29 +1,47 @@
 import React, { useState, useEffect } from "react";
 import "./OpenInboxModal.scss";
 import { useAuth } from "../AuthProvider";
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
 
 function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
     const [messages, setMessages] = useState([]);
     const [filteredMessages, setFilteredMessages] = useState([]);
     const { user } = useAuth();
     const userCompanyId = user?.company?.id;
+
     useEffect(() => {
         const fetchMessages = async () => {
+            const cachedMessages = localStorage.getItem(`messages`);
+            const cachedTimestamp = localStorage.getItem(`messages_timestamp`);
+
+            if (cachedMessages && cachedTimestamp) {
+                const age = Date.now() - parseInt(cachedTimestamp, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    const parsedMessages = JSON.parse(cachedMessages);
+                    setMessages(parsedMessages);
+                    const companyMessages = parsedMessages.filter(message => message.attributes.company?.data?.id === userCompanyId);
+                    setFilteredMessages(companyMessages);
+                    return;
+                }
+            }
+
             try {
                 const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/multiple-messages/?populate=*');
                 const result = await response.json();
+                console.log('Veriler sunucudan yükleniyor', result.data);
                 setMessages(result.data);
-                console.log("messages", result.data);
                 const companyMessages = result.data.filter(message => message.attributes.company?.data?.id === userCompanyId);
                 setFilteredMessages(companyMessages);
-
+                localStorage.setItem(`messages`, JSON.stringify(companyMessages));
+                localStorage.setItem(`messages_timestamp`, Date.now().toString());
             } catch (error) {
                 console.error("Error fetching messages:", error);
             }
         };
 
         fetchMessages();
-    }, []);
+    }, [userCompanyId]);
 
     if (!showInboxModal) {
         return null;

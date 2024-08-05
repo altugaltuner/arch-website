@@ -7,19 +7,38 @@ import Navigation from "../../components/Navigation/Navigation";
 import { useAuth } from "../../components/AuthProvider";
 import axios from "axios";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function MaterialsPage() {
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
     const [companyProjects, setCompanyProjects] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedProject, setSelectedProject] = useState(null);
-    const [materialDates, setMaterialDates] = useState([]); // Yeni state
+    const [materialDates, setMaterialDates] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
+
+            const cachedProjects = localStorage.getItem(`projects_${usersCompanyId}`);
+            const cachedTimestampProjects = localStorage.getItem(`projects_${usersCompanyId}_timestamp`);
+
+            if (cachedProjects && cachedTimestampProjects) {
+                const age = Date.now() - parseInt(cachedTimestampProjects, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    setCompanyProjects(JSON.parse(cachedProjects));
+                    return;
+                }
+            }
+
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}/?populate=*`);
                 setCompanyProjects(response.data.data.attributes.projects.data);
+
+                localStorage.setItem(`projects_${usersCompanyId}`, JSON.stringify(response.data.data.attributes.projects.data));
+                localStorage.setItem(`projects_${usersCompanyId}_timestamp`, Date.now().toString());
+                console.log('Veriler API\'den yükleniyor');
             } catch (error) {
                 console.error('Error fetching the data', error);
             }

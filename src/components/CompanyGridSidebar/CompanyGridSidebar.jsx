@@ -6,6 +6,8 @@ import axios from 'axios';
 import deleteIcon from '../../assets/icons/delete-icon.png';
 import { useAuth } from "../../components/AuthProvider";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [jobTitles, setJobTitles] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +20,19 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     //bu  mükemmel çalışıyor tüm admin gerektiren işlemlerde kullanılabilir
 
     const loadJobTitles = async () => {
+
+        const cachedJobTitles = localStorage.getItem(`cachedJobTitles`);
+        const cachedTimestampJobTitles = localStorage.getItem(`jobTitles_timestamp`);
+
+        if (cachedJobTitles && cachedTimestampJobTitles) {
+            const age = Date.now() - parseInt(cachedTimestampJobTitles, 10);
+            if (age < CACHE_DURATION) {
+                console.log('Veriler localStorage\'dan yükleniyor, professions-title');
+                setJobTitles(JSON.parse(cachedJobTitles));
+                return;
+            }
+        }
+
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/professions?populate=*');
             const titles = response.data.data.map(item => ({
@@ -28,6 +43,10 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
             setJobTitles(titles);
             const filteredTitles = titles.filter(title => title.companyID === user.company.companyID); // Modified this line to use companyID directly
             setFilteredJobTitles(filteredTitles);
+
+            localStorage.setItem(`cachedJobTitles`, JSON.stringify(filteredTitles));
+            localStorage.setItem(`jobTitles_timestamp`, Date.now().toString());
+            console.log('Veriler sunucudan yükleniyor(professions-title)');
 
         } catch (error) {
             console.error('Meslek türleri yüklenemedi:', error);

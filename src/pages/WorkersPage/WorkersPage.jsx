@@ -8,6 +8,8 @@ import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridS
 import NewProfessionModal from "../../components/NewProfessionModal/NewProfessionModal";
 import { useAuth } from "../../components/AuthProvider";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function WorkersPage() {
     const [employees, setEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -36,6 +38,19 @@ function WorkersPage() {
 
     useEffect(() => {
         const fetchData = async () => {
+
+            const cachedEmployees = localStorage.getItem(`cachedEmployees`);
+            const cachedTimestampEmployees = localStorage.getItem(`employees_timestamp`);
+
+            if (cachedEmployees && cachedTimestampEmployees) {
+                const age = Date.now() - parseInt(cachedTimestampEmployees, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    setEmployees(JSON.parse(cachedEmployees));
+                    return;
+                }
+            }
+
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}?populate[users][populate]=profession,projects,projects.projectCoverPhoto,profilePic,groups,project_revises,company`);
                 const companyUsers = response.data.data.attributes.users.data;
@@ -49,6 +64,9 @@ function WorkersPage() {
                 const titles = formattedUsers.map(employee => employee.profession.professionName);
                 const uniqueTitles = Array.from(new Set(titles));
                 setJobTitles(uniqueTitles);
+
+                localStorage.setItem(`cachedEmployees`, JSON.stringify(formattedUsers));
+                localStorage.setItem(`employees_timestamp`, Date.now().toString());
             } catch (error) {
                 console.error('Error fetching the data', error);
             }

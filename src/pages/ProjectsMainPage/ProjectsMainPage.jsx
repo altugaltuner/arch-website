@@ -8,6 +8,8 @@ import AddNewProjectModal from "../../components/AddNewProjectModal/AddNewProjec
 import ProjectCardsColumn from "../../components/ProjectCardsColumn/ProjectCardsColumn";
 import EditProjectModal from "../../components/EditProjectModal/EditProjectModal";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function ProjectsMainPage() {
   const { user } = useAuth();
   const usersCompanyId = user?.company?.id;
@@ -31,35 +33,48 @@ function ProjectsMainPage() {
   });
 
   async function getRoles() {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("No token found in localStorage");
+    const cachedRole = localStorage.getItem(`roles`);
+    const cachedTimestampRole = localStorage.getItem(`roles_timestamp`);
+
+    if (cachedRole && cachedTimestampRole) {
+      const age = Date.now() - parseInt(cachedTimestampRole, 10);
+      if (age < CACHE_DURATION) {
+        console.log('Veriler localStorage\'dan yükleniyor');
+        setRoles(JSON.parse(cachedRole));
         return;
       }
+    }
 
-      const response = await axios.get("https://bold-animal-facf707bd9.strapiapp.com/api/accesses");
+    try {
+      const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
       setRoles(response.data.data);
+      localStorage.setItem(`roles`, JSON.stringify(data));
+      localStorage.setItem(`roles_timestamp`, Date.now().toString());
     } catch (error) {
-      console.error("Error fetching roles:", error);
+      console.error(error);
     }
   }
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      getRoles();
-    }
+    getRoles();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          console.error("No token found in localStorage");
+      const cachedProject = localStorage.getItem(`projects_${usersCompanyId}`);
+      const cachedTimestamp = localStorage.getItem(`projects_${usersCompanyId}_timestamp`);
+
+      if (cachedProject && cachedTimestamp) {
+        const age = Date.now() - parseInt(cachedTimestamp, 10);
+        if (age < CACHE_DURATION) {
+          console.log('Veriler localStorage\'dan yükleniyor');
+          setCompanyProjects(JSON.parse(cachedProject));
           return;
         }
+      }
 
+
+      try {
         const response = await axios.get(
           `https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}?populate[projects][populate]=*`
         );
@@ -68,16 +83,14 @@ function ProjectsMainPage() {
         const filteredProjects = companyData.attributes.projects.data.filter(
           (project) => project.attributes.company.data.id === usersCompanyId
         );
-
         setCompanyProjects(filteredProjects);
+        localStorage.setItem(`projects_${usersCompanyId}`, JSON.stringify(filteredProjects));
+        localStorage.setItem(`projects_${usersCompanyId}_timestamp`, Date.now().toString());
       } catch (error) {
         console.error("Error fetching the data:", error);
       }
     };
-
-    if (localStorage.getItem("token")) {
-      fetchData();
-    }
+    fetchData();
   }, [usersCompanyId]);
 
   const handleInputPasswordChange = (e) => {
@@ -125,11 +138,6 @@ function ProjectsMainPage() {
     }
 
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("No token found in localStorage");
-        return;
-      }
       const response = await axios.post("https://bold-animal-facf707bd9.strapiapp.com/api/projects", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -168,11 +176,6 @@ function ProjectsMainPage() {
     }
 
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("No token found in localStorage");
-        return;
-      }
 
       await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToEdit.id}`, formData);
       setShowEditModal(false);

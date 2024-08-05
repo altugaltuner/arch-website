@@ -54,6 +54,10 @@
                     border: 1px solid $border-color;
                     border-radius: 5px;
 
+                    &:hover {
+                        box-shadow: 0px 0px 5px rgb(199, 199, 199);
+                    }
+
                     .my-active-project-list-paragraph {
                         font-size: 18px;
                         font-weight: 300;
@@ -63,10 +67,6 @@
                         width: 100px;
                         height: 100px;
                         border-radius: 5px;
-                    }
-
-                    &:hover {
-                        background-color: darken($background-color, 10%);
                     }
                 }
             }

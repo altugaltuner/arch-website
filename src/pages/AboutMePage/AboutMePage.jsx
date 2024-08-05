@@ -10,6 +10,8 @@ import OpenInboxModal from "../../components/OpenInboxModal/OpenInboxModal";
 import inboxLogo from "../../assets/icons/inbox-logo.png";
 import MyNotebook from "../../components/MyNotebook/MyNotebook";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function AboutMePage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -17,6 +19,18 @@ function AboutMePage() {
 
     useEffect(() => {
         const checkCurrentPerson = async () => {
+            const cachedUser = localStorage.getItem(`user-me`);
+            const cachedTimestampUser = localStorage.getItem(`user-me_timestamp`);
+
+            if (cachedUser && cachedTimestampUser) {
+                const age = Date.now() - parseInt(cachedTimestampUser, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    setUser(JSON.parse(cachedUser));
+                    return;
+                }
+            }
+
             try {
                 const token = localStorage.getItem('token');
                 if (token) {
@@ -26,6 +40,9 @@ function AboutMePage() {
                         }
                     });
                     setUser(response.data);
+                    localStorage.setItem(`user-me`, JSON.stringify(response.data));
+                    localStorage.setItem(`user-me_timestamp`, Date.now().toString());
+                    console.log('Veriler API\'den yükleniyor');
                 } else {
                     setUser(null);
                 }

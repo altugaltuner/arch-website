@@ -10,6 +10,8 @@ import backButton from "../../assets/icons/back-button.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function MyPersonalFiles({ user }) {
     const [personalFolders, setPersonalFolders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +32,19 @@ function MyPersonalFiles({ user }) {
         }
 
         const fetchData = async () => {
+            const cachedPersonalFolders = localStorage.getItem(`personal_folders_${user.id}`);
+            const cachedTimestampPersonalFolders = localStorage.getItem(`personal_folders_${user.id}_timestamp`);
+
+            if (cachedPersonalFolders && cachedTimestampPersonalFolders) {
+                const age = Date.now() - parseInt(cachedTimestampPersonalFolders, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    setPersonalFolders(JSON.parse(cachedPersonalFolders));
+                    setIsLoading(false);
+                    return;
+                }
+            }
+
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
                 const folders = response.data.personal_folders || [];
@@ -38,6 +53,8 @@ function MyPersonalFiles({ user }) {
                     personalFolderContent: folder.personalFolderContent || []
                 }));
                 setPersonalFolders(formattedFolders);
+                localStorage.setItem(`personal_folders_${user.id}`, JSON.stringify(formattedFolders));
+                localStorage.setItem(`personal_folders_${user.id}_timestamp`, Date.now().toString());
             } catch (error) {
                 console.error('Error fetching the data', error);
             } finally {

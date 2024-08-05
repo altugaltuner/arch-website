@@ -8,6 +8,8 @@ import { useAuth } from "../../components/AuthProvider";
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
 const generateCalendar = (year, month) => {
@@ -41,6 +43,21 @@ const CalendarPage = () => {
 
 
     const fetchEvents = useCallback(async () => {
+
+        const cachedEvents = localStorage.getItem(`cachedEvents`);
+        const cachedTimestampEvents = localStorage.getItem(`events_timestamp`);
+
+        if (cachedEvents && cachedTimestampEvents) {
+            const age = Date.now() - parseInt(cachedTimestampEvents, 10);
+            if (age < CACHE_DURATION) {
+                console.log('Veriler localStorage\'dan yükleniyor, events');
+                setEvents(JSON.parse(cachedEvents));
+                const companyEvents = JSON.parse(cachedEvents)?.filter(event => event.attributes.company.data.id === userCompany);
+                setFilteredEvents(companyEvents);
+
+                return;
+            }
+        }
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=users_permissions_user,company');
             const allEvents = response.data.data;
@@ -49,6 +66,10 @@ const CalendarPage = () => {
             const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);
             setFilteredEvents(companyEvents);
             console.log("companyEvents", companyEvents);
+            console.log("veriler sunucudan yükleniyor, events");
+            localStorage.setItem(`cachedEvents`, JSON.stringify(allEvents));
+            localStorage.setItem(`events_timestamp`, Date.now().toString());
+
         } catch (error) {
             console.error('Error fetching events:', error);
         }
@@ -88,8 +109,6 @@ const CalendarPage = () => {
     const closeEditModal = () => {
         setEditModalOpen(false);
     };
-
-
 
     const addEvent = useCallback((newEvent) => {
         setEvents(prevEvents => [...prevEvents, newEvent]);

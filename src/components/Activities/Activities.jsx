@@ -1,11 +1,9 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./Activities.scss";
 import axios from "axios";
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_KEY = 'activities';
-const CACHE_EXPIRY_KEY = 'activities_expiry';
-const CACHE_DURATION = 60 * 60 * 1000;
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
 
 const Activities = ({ searchTerm }) => {
     const [activities, setActivities] = useState([]);
@@ -14,25 +12,30 @@ const Activities = ({ searchTerm }) => {
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
 
-    const isCacheValid = () => {
-        const expiry = localStorage.getItem(CACHE_EXPIRY_KEY);
-        return expiry && new Date().getTime() < expiry;
-    };
-
     const fetchData = async (page) => {
-        const cachedData = localStorage.getItem(CACHE_KEY);
-        if (cachedData && isCacheValid()) {
-            setActivities(JSON.parse(cachedData));
-        } else {
-            try {
-                const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
-                setActivities(response.data.data);
-                setTotalPages(response.data.meta.pagination.pageCount);
-                localStorage.setItem(CACHE_KEY, JSON.stringify(response.data.data));
-                localStorage.setItem(CACHE_EXPIRY_KEY, new Date().getTime() + CACHE_DURATION);
-            } catch (error) {
-                console.error('Error fetching the data', error);
+
+        const cachedRevises = localStorage.getItem(`cachedRevises`);
+        const cachedTimestampRevises = localStorage.getItem(`revises_timestamp`);
+
+        if (cachedRevises && cachedTimestampRevises) {
+            const age = Date.now() - parseInt(cachedTimestampRevises, 10);
+            if (age < CACHE_DURATION) {
+                console.log('Veriler localStorage\'dan yükleniyor');
+                setActivities(JSON.parse(cachedRevises));
+                return;
             }
+        }
+
+        try {
+            const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
+            setActivities(response.data.data);
+            setTotalPages(response.data.meta.totalPages);
+            console.log('Veriler sunucudan yükleniyor');
+            localStorage.setItem(`cachedRevises`, JSON.stringify(response.data.data));
+            localStorage.setItem(`revises_timestamp`, Date.now().toString());
+
+        } catch (error) {
+            console.error('Error fetching the data', error);
         }
     };
 

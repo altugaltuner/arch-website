@@ -8,6 +8,8 @@ import youtubeLogo from "../../assets/icons/youtube-logo.png";
 import defaultLogo from "../../assets/icons/groups-logo.png";
 import CompanyModal from "./CompanyModal";
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function FlowPage() {
     const socialMediaAccounts = [
         {
@@ -32,9 +34,23 @@ function FlowPage() {
 
     useEffect(() => {
         async function getCompanies() {
+
+            const cachedCompanies = localStorage.getItem(`cachedCompanies`);
+            const cachedTimestampCompanies = localStorage.getItem(`companies_timestamp`);
+
+            if (cachedCompanies && cachedTimestampCompanies) {
+                const age = Date.now() - parseInt(cachedTimestampCompanies, 10);
+                if (age < CACHE_DURATION) {
+                    console.log('Veriler localStorage\'dan yükleniyor');
+                    setCompanies(JSON.parse(cachedCompanies));
+                    return;
+                }
+            }
             try {
                 const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/companies?populate=*');
                 setCompanies(response.data.data);
+                localStorage.setItem(`cachedCompanies`, JSON.stringify(response.data.data));
+                localStorage.setItem(`companies_timestamp`, Date.now().toString());
             } catch (error) {
                 console.error(error);
             }
