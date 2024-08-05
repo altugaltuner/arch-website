@@ -44,7 +44,7 @@ function MaterialsPage() {
             }
         };
         fetchData();
-    }, [usersCompanyId]);
+    }, [usersCompanyId, selectedDate]);
 
     useEffect(() => {
         if (selectedProject) {

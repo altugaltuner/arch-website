@@ -51,15 +51,31 @@ const MaterialUseList = ({ selectedDate, selectedProject }) => {
         <div className="material-use-list">
             <h3 className="div-header">Malzeme Kullanımı</h3>
             {materialUse.length > 0 ? (
-                <ul className='material-list-ul'>
-                    {materialUse.map((item, index) => (
-                        <li className='material-list-li' key={index}>{item.attributes.name}: {item.attributes.amount} {item.attributes.type}</li>
-                    ))}
-                </ul>
+                <table className='material-list-table'>
+                    <thead>
+                        <tr>
+                            <th>Malzeme İsmi</th>
+                            <th>Miktar</th>
+                            <th>Cins</th>
+                            <th>Eylem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {materialUse.map((item, index) => (
+                            <tr className='material-list-tr' key={index}>
+                                <td>{item.attributes.name}</td>
+                                <td>{item.attributes.amount}</td>
+                                <td>{item.attributes.type}</td>
+                                <td>{item.attributes.input === "input" ? "girdi" : "çıktı"}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             ) : (
                 <p className='material-list-no-p'>Bu gün için malzeme girdisi bulunmamaktadır.</p>
             )}
         </div>
+
     );
 };
 

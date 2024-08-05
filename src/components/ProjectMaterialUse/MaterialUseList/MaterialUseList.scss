@@ -6,9 +6,32 @@
     border: 1px solid $border-color;
     border-radius: 5px;
     transition: all 0.2s;
+    border-collapse: collapse;
+    /* Çift kenarlıkları tek bir kenarlık yapar */
 
     &:hover {
         box-shadow: 0px 0px 5px rgb(199, 199, 199);
+    }
+
+    .material-list-table th,
+    .material-list-table td {
+        border: 1px solid $border-color;
+        /* Hücrelerin etrafına siyah çerçeve ekler */
+        padding: 8px;
+        /* Hücre içi boşluk */
+        text-align: left;
+        /* Metin hizalaması */
+    }
+
+    .material-list-table th {
+        /* Başlık hücreleri için arka plan rengi */
+        font-weight: 400;
+        /* Başlık hücrelerini kalın yapar */
+    }
+
+    .material-list-tr:hover {
+        background-color: #eaeaea;
+        /* Üzerine gelindiğinde satır rengi */
     }
 
     .material-list-ul {
