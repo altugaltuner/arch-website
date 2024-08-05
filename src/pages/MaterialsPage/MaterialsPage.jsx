@@ -90,8 +90,11 @@ function MaterialsPage() {
             <Navigation />
             <div className="materials-inner-div">
                 <h2 className="div-big-header">Metraj Tutanağı</h2>
+                <div className="material-use-calendar">
+                    <MaterialCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} materialDates={materialDates} />
+                </div>
                 <div className="material-choose-project">
-                    <h2 className="div-header">Proje Seçin</h2>
+                    <h2 className="div-header-select-project">Proje Seçin</h2>
                     <select
                         className='material-choose-project-select'
                         name="user-role"
@@ -103,9 +106,6 @@ function MaterialsPage() {
                             <option className="material-project-options" key={project.id} value={project.attributes.projectName}>{project.attributes.projectName}</option>
                         ))}
                     </select>
-                </div>
-                <div className="material-use-calendar">
-                    <MaterialCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} materialDates={materialDates} />
                 </div>
                 <div className="material-use-list-all">
                     <MaterialUseList selectedDate={formattedDate} selectedProject={selectedProject} />

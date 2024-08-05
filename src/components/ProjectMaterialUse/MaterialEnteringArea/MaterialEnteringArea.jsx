@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./MaterialEnteringArea.scss";
 
 function MaterialEnteringArea({ selectedDate, selectedProject }) {
-
     const [matQuantity, setMatQuantity] = useState();
     const [matName, setMatName] = useState("");
     const [matType, setMatType] = useState("");
+    const [matInputOutput, setMatInputOutput] = useState("");
     const [errorParagraph, setErrorParagraph] = useState("");
 
     useEffect(() => {
@@ -14,7 +14,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
 
     const handleSubmitMaterial = async (e) => {
         e.preventDefault();
-        if (!matName || !matQuantity || !matType) {
+        if (!matName || !matQuantity || !matType || !matInputOutput) {
             setErrorParagraph("Lütfen tüm alanları doldurun.");
             return;
         }
@@ -24,12 +24,8 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
                     name: matName,
                     amount: matQuantity,
                     type: matType,
-                    project: {
-                        data: {
-                            id: selectedProject.id,
-                            attributes: selectedProject.attributes
-                        }
-                    },
+                    input: matInputOutput,
+                    project: selectedProject.id,
                     date: selectedDate // use the formatted date here
                 }
             };
@@ -42,7 +38,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
             });
             const result = await response.json();
             console.log("result", result);
-            console.log("tüm gönderilen bilgiler:", matType, matQuantity, matName);
+            console.log("tüm gönderilen bilgiler:", matType, matQuantity, matName, matInputOutput);
         }
         catch (error) {
             console.log(error, "hata kodu");
@@ -53,10 +49,16 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
         console.log("matQuantity", matQuantity);
         console.log("matName", matName);
         console.log("matType", matType);
+        console.log("matInputOutput", matInputOutput);
     }, [matQuantity, matName, matType])
 
     const selectTypeChange = (e) => {
         setMatType(e.target.value);
+        setErrorParagraph("");
+    }
+
+    const SelectTypeInput = (e) => {
+        setMatInputOutput(e.target.value);
         setErrorParagraph("");
     }
 
@@ -78,6 +80,7 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
         setMatQuantity("");
         setMatType("");
         setErrorParagraph("");
+        setMatInputOutput("");
     }
 
     return (
@@ -106,6 +109,12 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
                         <option value="m3">m3</option>
                         <option value="adet">adet</option>
                         <option value="dakika">dakika</option>
+                    </select>
+                    <label className="material-label-input-output" htmlFor="input-output">Eylem</label>
+                    <select className="material-input-select" name="input-output" id="input-output" onChange={SelectTypeInput}>
+                        <option value="">Eylem Seçin</option>
+                        <option value="input">Girdi</option>
+                        <option value="output">Çıktı</option>
                     </select>
                 </div>
                 <div className="one-material-div">
