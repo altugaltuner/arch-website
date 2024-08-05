@@ -15,28 +15,28 @@ function FirstPage() {
         isLogin = Cookies.get("isLogin")
     }, []);
 
-    // const socialMediaAccounts = [
-    //     {
-    //         name: "ofisim",
-    //         url: "https://www.linkedin.com/ofisimcompany/",
-    //         logo: linkedinLogo
-    //     },
-    //     {
-    //         name: "ofisim",
-    //         url: "https://www.instagram.com/ofisimcompany/",
-    //         logo: instaLogo
-    //     },
-    //     {
-    //         name: "ofisim",
-    //         url: "https://www.youtube.com/ofisimcompany/",
-    //         logo: youtubeLogo
-    //     },
-    //     {
-    //         name: "ofisim",
-    //         url: "https://www.email.com/ofisimcompany/",
-    //         logo: emailLogo
-    //     }
-    // ];
+    const socialMediaAccounts = [
+        {
+            name: "ofisim",
+            url: "https://www.linkedin.com/ofisimcompany/",
+            logo: linkedinLogo
+        },
+        {
+            name: "ofisim",
+            url: "https://www.instagram.com/ofisimcompany/",
+            logo: instaLogo
+        },
+        {
+            name: "ofisim",
+            url: "https://www.youtube.com/ofisimcompany/",
+            logo: youtubeLogo
+        },
+        {
+            name: "ofisim",
+            url: "https://www.email.com/ofisimcompany/",
+            logo: emailLogo
+        }
+    ];
 
     return (
         <main className="firstpage-main">
@@ -63,7 +63,7 @@ function FirstPage() {
                 {isLogin ? <Link to="/homepage" className="employee-login-btn">Ana Sayfaya Dön</Link> : <Link to="/login" className="employee-login-btn">Hesabınız mı var? Giriş Yapın</Link>}
                 <Link to="/company-create" className="owner-create-btn">Şirket Hesabı Aç</Link>
             </div>
-            {/* <div className="firstpage-social-media">
+            <div className="firstpage-social-media">
                 <h2 className="firstpage-social-media-header">Bizi Takip Edin</h2>
                 <div className="social-media-logo-div">
                     {socialMediaAccounts.map((account, index) => (
@@ -73,7 +73,7 @@ function FirstPage() {
                         </a>
                     ))}
                 </div>
-            </div> */}
+            </div>
         </main>
     );
 }

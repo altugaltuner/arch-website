@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect } from 'react';
 import HomePage from './pages/HomePage/HomePage';
 import { DarkModeProvider, useDarkMode } from './components/DarkModeContext';

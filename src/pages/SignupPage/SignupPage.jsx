@@ -6,6 +6,8 @@ import eyeHide from "../../assets/icons/EyeHideLogo.png";
 import { useNavigate } from 'react-router-dom';
 import backButton from '../../assets/icons/back-button.png';
 
+const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+
 function SignupPage() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -68,8 +70,25 @@ function SignupPage() {
     if (hasError) return;
 
     try {
+      const cachedCompanies = localStorage.getItem(`companies`);
+      const cachedTimestampCompanies = localStorage.getItem(`companies_timestamp`);
+
+      if (cachedCompanies && cachedTimestampCompanies) {
+        const age = Date.now() - parseInt(cachedTimestampCompanies, 10);
+        if (age < CACHE_DURATION) {
+          const companies = JSON.parse(cachedCompanies);
+          const matchingCompany = companies.find(company => company.attributes.companyID === companyCode);
+          if (!matchingCompany) {
+            setCompanyCodeError("Bu şirket kodu ile eşleşen bir şirket bulunamadı.");
+            return;
+          }
+        }
+      }
+
       const companiesResponse = await api.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies`);
       const companies = companiesResponse.data.data;
+      localStorage.setItem(`companies`, JSON.stringify(companies));
+      localStorage.setItem(`companies_timestamp`, Date.now().toString());
 
       const matchingCompany = companies.find(company => company.attributes.companyID === companyCode);
       if (!matchingCompany) {

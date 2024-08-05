@@ -51,9 +51,20 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
 
     useEffect(() => {
         const fetchEmployees = async () => {
+            const cachedEmployees = localStorage.getItem(`employees`);
+            const cachedTimestampEmployees = localStorage.getItem(`employees_timestamp`);
+            if (cachedEmployees && cachedTimestampEmployees) {
+                const age = Date.now() - parseInt(cachedTimestampEmployees, 10);
+                if (age < CACHE_DURATION) {
+                    setAllUsers(JSON.parse(cachedEmployees));
+                    return;
+                }
+            }
             try {
                 const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users?populate=profession,projects,profilePic');
                 setAllUsers(response.data);
+                localStorage.setItem(`employees`, JSON.stringify(response.data));
+                localStorage.setItem(`employees_timestamp`, Date.now().toString());
             } catch (error) {
                 console.error('Error fetching employees', error);
             }

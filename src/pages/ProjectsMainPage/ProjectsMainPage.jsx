@@ -180,6 +180,7 @@ function ProjectsMainPage() {
       await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToEdit.id}`, formData);
       setShowEditModal(false);
       setEditProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
+
       const response = await axios.get(
         "https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=projectCoverPhoto"
       );

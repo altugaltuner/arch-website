@@ -12,7 +12,6 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
 
     const { user } = useAuth();
     const userId = user ? user.id : null;
-    const username = user ? user.username : null;
     const userCompany = user ? user.company.id : null;
 
     const handleSubmit = async (e) => {

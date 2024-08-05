@@ -54,7 +54,6 @@ const CalendarPage = () => {
                 setEvents(JSON.parse(cachedEvents));
                 const companyEvents = JSON.parse(cachedEvents)?.filter(event => event.attributes.company.data.id === userCompany);
                 setFilteredEvents(companyEvents);
-
                 return;
             }
         }
