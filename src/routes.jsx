@@ -5,7 +5,6 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import ProjectsPage from "./pages/ProjectsPage/ProjectsPage.jsx";
 import WorkersPage from "./pages/WorkersPage/WorkersPage.jsx";
 import AboutMePage from "./pages/AboutMePage/AboutMePage.jsx";
-import GroupsPage from "./pages/GroupsPage/GroupsPage.jsx";
 import ProjectsMainPage from "./pages/ProjectsMainPage/ProjectsMainPage.jsx";
 import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
 import CompanyCreatePage from "./pages/CompanyCreatePage/CompanyCreatePage.jsx";
@@ -16,6 +15,7 @@ import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
 import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx";
 import MaterialsPage from "./pages/MaterialsPage/MaterialsPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
+import SurveysPage from "./pages/SurveysPage/SurveysPage.jsx";
 
 const routes = [
   {
@@ -54,6 +54,14 @@ const routes = [
     element: (
       <ProtectedRoute>
         <ProjectsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/surveys",
+    element: (
+      <ProtectedRoute>
+        <SurveysPage />
       </ProtectedRoute>
     ),
   },

@@ -108,17 +108,6 @@ function MyPersonalFiles({ user }) {
         }
     };
 
-
-    const uploadFile = (folderId) => {
-        const folder = personalFolders.find(folder => folder.id === folderId);
-        if (!folder) {
-            console.error('Folder not found');
-            return;
-        }
-        setSelectedFolder(folder);
-        fileInputRef.current.click();
-    };
-
     const showFilePreview = (file) => {
         setSelectedFile(file);
     };
@@ -257,6 +246,16 @@ function MyPersonalFiles({ user }) {
         const filteredFiles = folder.personalFolderContent.filter(file =>
             file.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
+
+        const uploadFile = (folderId) => {
+            const folder = personalFolders.find(folder => folder.id === folderId);
+            if (!folder) {
+                console.error('Folder not found');
+                return;
+            }
+            setSelectedFolder(folder);
+            fileInputRef.current.click();
+        };
 
         return (
             <div className="folder-content">

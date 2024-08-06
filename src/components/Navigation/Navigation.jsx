@@ -5,6 +5,7 @@ import ofisimLogo from "../../assets/icons/ofisim-logo.png";
 import employeesLogo from "../../assets/icons/employees-logo.png";
 import calendarLogo from "../../assets/icons/calendar-icon.png";
 import projectsLogo from "../../assets/icons/projects-logo.png";
+import SurveysLogo from "../../assets/icons/survey-icon.png";
 import myLogo from "../../assets/icons/my-profile-logo.png";
 import homepageLogo from "../../assets/icons/homepage-logo.png";
 import settingsLogo from "../../assets/icons/settings-icon.png";
@@ -21,6 +22,7 @@ function Navigation() {
     const navItems = [
         { id: 'home-nav-id', to: '/homepage', logo: homepageLogo, name: 'Anasayfa' },
         { id: 'projects-nav-id', to: '/projects', logo: projectsLogo, name: 'Projeler' },
+        { id: 'surveys-nav-id', to: '/surveys', logo: SurveysLogo, name: 'Anketler' },
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: ' Ekip Üyeleri' },
         { id: 'calendar-nav-id', to: '/calendar', logo: calendarLogo, name: ' Takvim' },
         { id: 'materials-nav-id', to: '/materials', logo: materialsLogo, name: ' Metraj' },
