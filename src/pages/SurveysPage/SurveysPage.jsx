@@ -35,6 +35,7 @@ function SurveysPage() {
                                 <div className="survey-header-div">
                                     <p className="survey-creator-title">{survey.attributes.users_permissions_user.data.attributes.username}</p>
                                     <div className="survey-right-header">
+                                        <p className="survey-point">{survey.attributes.surveyPoint}</p>
                                         <p className="survey-category">{survey.attributes.category}</p>
                                         <p className="survey-date">{survey.attributes.createdDate}</p>
                                     </div>
@@ -49,7 +50,7 @@ function SurveysPage() {
                                 )}
                             </div>
                             <div className="survey-graph">
-                                <h1>Yorumlar</h1>
+                                <h1 className="div-header">Yorumlar</h1>
                                 {survey.attributes.comment && survey.attributes.comment.comments &&
                                     survey.attributes.comment.comments.map((comment, index) => (
                                         <div className="survey-comment" key={index}>

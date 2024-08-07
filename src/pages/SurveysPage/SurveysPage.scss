@@ -24,8 +24,11 @@
 
             .survey-one-div {
                 display: flex;
+                padding: 30px;
+                border: 1px solid $border-color;
                 flex-direction: row;
                 gap: 20px;
+                border-radius: 5px;
 
                 .survey-part {
                     display: flex;
@@ -33,7 +36,7 @@
                     padding: 10px;
                     flex-direction: column;
                     gap: 10px;
-                    width: 400px;
+                    width: 500px;
                     border-radius: 5px;
 
                     .survey-header-div {
@@ -60,14 +63,22 @@
                                 padding: 5px;
                                 border: 1px solid $border-color;
                                 border-radius: 5px;
+                                font-size: 16px;
                                 cursor: pointer;
+                            }
+
+                            .survey-point {
+                                padding: 5px;
+                                border: 1px solid $border-color;
+                                border-radius: 5px;
+                                font-size: 16px;
                             }
 
                             .survey-date {
                                 padding: 5px;
                                 border: 1px solid $border-color;
                                 border-radius: 5px;
-                                cursor: pointer;
+                                font-size: 14px;
                             }
                         }
                     }
@@ -123,6 +134,19 @@
                     gap: 10px;
                     width: 400px;
                     border-radius: 5px;
+
+                    .survey-comment {
+                        padding: 5px;
+                        border: 1px solid $border-color;
+
+                        .survey-comment-username {
+                            font-weight: 400;
+                        }
+
+                        .survey-comment-text {
+                            font-weight: 300;
+                        }
+                    }
                 }
             }
         }
