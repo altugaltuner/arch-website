@@ -20,10 +20,7 @@ const routes = [
   {
     path: "/",
     element: (
-      <>
-        <FirstPage />
-        <IsCookie />
-      </>
+      <FirstPage />
     ),
   },
   {

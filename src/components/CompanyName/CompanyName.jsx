@@ -1,30 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./CompanyName.scss";
-import { useAuth } from "../AuthProvider";
 
-const CompanyName = ({ onSearch, setIsLoading }) => {
-    const [companyName, setCompanyName] = useState(null);
-    const { user } = useAuth();
-
-    useEffect(() => {
-        if (user) {
-            setIsLoading(false);
-        }
-
-        if (user && user.company && user.company.companyName) {
-            setCompanyName(user.company.companyName);
-        } else {
-        }
-    }, [user, setIsLoading]);
+const CompanyName = ({ onSearch }) => {
+    const companyName = "Altınkaya İnşaat";
 
     const handleSearchChange = (e) => {
         onSearch(e.target.value);
     };
-
-    if (companyName === null) {
-        return "Altın Mimarlık";
-    }
 
     return (
         <div className="company-name-main">
