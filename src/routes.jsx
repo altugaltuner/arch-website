@@ -10,7 +10,6 @@ import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
 import CompanyCreatePage from "./pages/CompanyCreatePage/CompanyCreatePage.jsx";
 import FirstPage from "./pages/FirstPage/FirstPage.jsx";
 import FlowPage from "./pages/FlowPage/FlowPage.jsx";
-import IsCookie from "./hooks/useCookie.jsx"
 import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
 import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx";
 import MaterialsPage from "./pages/MaterialsPage/MaterialsPage.jsx";
