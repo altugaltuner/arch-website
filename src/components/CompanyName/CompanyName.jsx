@@ -23,7 +23,7 @@ const CompanyName = ({ onSearch, setIsLoading }) => {
     };
 
     if (companyName === null) {
-        return null;
+        return "Altın Mimarlık";
     }
 
     return (
