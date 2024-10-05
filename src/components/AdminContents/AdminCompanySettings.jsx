@@ -54,7 +54,6 @@ const AdminCompanySettings = () => {
 
             setCompanyLogo(uploadResult[0].url);
         } catch (error) {
-            console.error("Dosya yükleme hatası:", error);
         }
     };
 
@@ -97,7 +96,6 @@ const AdminCompanySettings = () => {
             });
             setIsEditing(false);
         } catch (error) {
-            console.error("Şirket bilgileri güncelleme hatası:", error);
         }
     };
 

@@ -3,7 +3,7 @@ import "./AdminSendMessage.scss";
 import AdminSentMessages from "../AdminSentMessages/AdminSentMessages";
 import SendBulkMessageModal from '../SendBulkMessageModal/SendBulkMessageModal';
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function AdminSendMessage() {
     const [showModal, setShowModal] = useState(false);
@@ -31,7 +31,6 @@ function AdminSendMessage() {
                 localStorage.setItem('admin_messages', JSON.stringify(result.data));
                 localStorage.setItem('admin_messages_timestamp', Date.now().toString());
             } catch (error) {
-                console.error('Hata:', error);
             }
         };
 

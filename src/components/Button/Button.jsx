@@ -26,7 +26,3 @@ const Button = ({
 };
 
 export default Button;
-
-// Usage
-// <Button width="200px" height="50px">Accept</Button>
-// <Button width="200px" variant="secondary">Cancel</Button>

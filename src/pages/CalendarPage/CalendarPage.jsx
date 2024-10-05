@@ -8,7 +8,7 @@ import { useAuth } from "../../components/AuthProvider";
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
@@ -37,10 +37,6 @@ const CalendarPage = () => {
     const userRole = user && user.access ? user.access.role : null;
     const userCompany = user && user.company ? user.company.id : null;
 
-    console.log("userCompany", userCompany);
-    console.log("user", user);
-    console.log("userRole", userRole);
-
 
     const fetchEvents = useCallback(async () => {
 
@@ -50,7 +46,6 @@ const CalendarPage = () => {
         if (cachedEvents && cachedTimestampEvents) {
             const age = Date.now() - parseInt(cachedTimestampEvents, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor, events');
                 setEvents(JSON.parse(cachedEvents));
                 const companyEvents = JSON.parse(cachedEvents)?.filter(event => event.attributes.company.data.id === userCompany);
                 setFilteredEvents(companyEvents);
@@ -60,12 +55,9 @@ const CalendarPage = () => {
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=users_permissions_user,company');
             const allEvents = response.data.data;
-            console.log("allEvents", allEvents);
             setEvents(allEvents);
             const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);
             setFilteredEvents(companyEvents);
-            console.log("companyEvents", companyEvents);
-            console.log("veriler sunucudan yükleniyor, events");
             localStorage.setItem(`cachedEvents`, JSON.stringify(allEvents));
             localStorage.setItem(`events_timestamp`, Date.now().toString());
 
@@ -77,8 +69,6 @@ const CalendarPage = () => {
     useEffect(() => {
         if (userCompany) {
             fetchEvents();
-        } else {
-            console.error("User company is not defined");
         }
     }, [fetchEvents, userCompany]);
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import "./CompanyFormElements.scss";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 const CompanyFormElements = ({ errors, setErrors }) => {
     const [employeeCodeGenerated, setEmployeeCodeGenerated] = useState(false);
@@ -24,13 +24,11 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         try {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users');
             const data = response.data.map(item => item.email);
-            console.log(data, "Fetched Emails");
             setAllEmails(data);
             localStorage.setItem(`emails`, JSON.stringify(data));
             localStorage.setItem(`emails_timestamp`, Date.now().toString());
 
         } catch (error) {
-            console.error("Error fetching emails:", error);
         }
     };
 
@@ -52,7 +50,6 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         if (cachedPermissionCodes && cachedTimestampPermissionCodes) {
             const age = Date.now() - parseInt(cachedTimestampPermissionCodes, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setCompanyPermissionCodes(JSON.parse(cachedPermissionCodes));
                 return;
             }
@@ -61,12 +58,9 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/company-perm-codes?populate=*');
             const data = response.data.data.map(item => item.attributes.code);
             setCompanyPermissionCodes(data);
-            console.log(data, "Fetched Permission Codes");
             localStorage.setItem(`permission_codes`, JSON.stringify(data));
             localStorage.setItem(`permission_codes_timestamp`, Date.now().toString());
-            console.log("veriler sunucudan yükleniyor");
         } catch (error) {
-            console.error("Error fetching data:", error);
         }
     };
 
@@ -83,17 +77,14 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                     companyID: companyCode,
                 },
             });
-            console.log("Company created:", response.data);
             return response.data;
         } catch (error) {
-            console.error("Error creating company:", error);
             throw error;
         }
     };
 
     const createUser = async (adminName, adminSurname, adminPassword, adminEmail, company) => {
         try {
-            // Rastgele bir sayı ekleyerek benzersiz bir kullanıcı adı oluşturun
             const username = `${adminName} ${adminSurname}${Math.floor(Math.random() * 10000)}`;
 
             const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/users', {
@@ -119,10 +110,8 @@ const CompanyFormElements = ({ errors, setErrors }) => {
                 },
                 role: 1
             });
-            console.log("User created:", response.data);
             return response.data;
         } catch (error) {
-            console.error("Error creating user:", error);
             throw error;
         }
     };
@@ -189,13 +178,11 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         if (Object.keys(errors).length === 0) {
             try {
                 const company = await createCompany(formElements.companyName, formElements.workingArea, formElements.companyCode);
-                console.log("Company data:", company.data);
 
                 await createUser(formElements.adminName, formElements.adminSurname, formElements.adminPassword, formElements.adminEmail, company.data);
 
                 alert("Form başarıyla gönderildi!");
             } catch (error) {
-                console.error("Form gönderimi sırasında bir hata oluştu:", error);
                 alert("Form gönderimi sırasında bir hata oluştu. Lütfen tekrar deneyin.");
             }
             window.location.href = "/login";

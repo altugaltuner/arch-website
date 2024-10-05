@@ -5,7 +5,7 @@ import AdminGroupSettings from './AdminGroupSettings.';
 import './AdminUsersSettings.scss';
 import axios from 'axios';
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function AdminUserSettings({ users }) {
     const [error, setError] = useState(null);
@@ -18,7 +18,6 @@ function AdminUserSettings({ users }) {
         if (cachedProjects && cachedTimestamp) {
             const age = Date.now() - parseInt(cachedTimestamp, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setProjects(JSON.parse(cachedProjects));
                 return;
             }
@@ -31,7 +30,6 @@ function AdminUserSettings({ users }) {
             localStorage.setItem(`projects`, JSON.stringify(data.data));
             localStorage.setItem(`projects_timestamp`, Date.now().toString());
         } catch (error) {
-            console.error(error);
             setError(error);
         } finally {
             setLoading(false);
@@ -40,7 +38,7 @@ function AdminUserSettings({ users }) {
 
     useEffect(() => {
         getProjectDetails();
-    }, []); // Boş array bağımlılığı, sadece ilk render'da çalışır.
+    }, []);
 
     if (loading) {
         return <div>Yükleniyor...</div>;

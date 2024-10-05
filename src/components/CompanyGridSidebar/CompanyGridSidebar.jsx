@@ -6,7 +6,7 @@ import axios from 'axios';
 import deleteIcon from '../../assets/icons/delete-icon.png';
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [jobTitles, setJobTitles] = useState([]);
@@ -17,7 +17,6 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
 
     const { user } = useAuth();
     const userRole = user && user.access ? user.access.role : null;
-    //bu  mükemmel çalışıyor tüm admin gerektiren işlemlerde kullanılabilir
 
     const loadJobTitles = async () => {
 
@@ -27,7 +26,6 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
         if (cachedJobTitles && cachedTimestampJobTitles) {
             const age = Date.now() - parseInt(cachedTimestampJobTitles, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor, professions-title');
                 setJobTitles(JSON.parse(cachedJobTitles));
                 return;
             }
@@ -38,18 +36,16 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
             const titles = response.data.data.map(item => ({
                 id: item.id,
                 name: item.attributes.professionName,
-                companyID: item.attributes.company.data.attributes.companyID // Added this line to extract companyID
+                companyID: item.attributes.company.data.attributes.companyID
             }));
             setJobTitles(titles);
-            const filteredTitles = titles.filter(title => title.companyID === user.company.companyID); // Modified this line to use companyID directly
+            const filteredTitles = titles.filter(title => title.companyID === user.company.companyID);
             setFilteredJobTitles(filteredTitles);
 
             localStorage.setItem(`cachedJobTitles`, JSON.stringify(filteredTitles));
             localStorage.setItem(`jobTitles_timestamp`, Date.now().toString());
-            console.log('Veriler sunucudan yükleniyor(professions-title)');
 
         } catch (error) {
-            console.error('Meslek türleri yüklenemedi:', error);
         }
     };
 
@@ -88,7 +84,6 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                 setJobTitles(prevTitles => prevTitles.filter(title => title.id !== jobTitleToDelete.id));
                 closeDeleteModal();
             } catch (error) {
-                console.error('Meslek türü silinemedi:', error);
             }
         }
     };

@@ -7,7 +7,7 @@ function UserDeletion({ users }) {
     const [filteredUsers, setFilteredUsers] = useState(users);
     const [selectedUsers, setSelectedUsers] = useState([]);
     const { user } = useAuth();
-    const activeUser = user.username; // burada kendimi göstermemeyi yapamadım
+    const activeUser = user.username;
 
     useEffect(() => {
         setFilteredUsers(
@@ -40,14 +40,13 @@ function UserDeletion({ users }) {
             setFilteredUsers(filteredUsers.filter(user => !selectedUsers.includes(user.id)));
             setSelectedUsers([]);
         } catch (error) {
-            console.error('Error deleting users:', error);
         }
     };
 
     return (
         <div className='user-set-one-div'>
             <h2 className='set-one-header'>Kullanıcı Sil</h2>
-            <label htmlFor="delete-user" className='delete-user-label'>
+            <label htmlFor="delete-user" className='delete-user-label'>Search User
                 <input
                     className='delete-user-input'
                     type="text"

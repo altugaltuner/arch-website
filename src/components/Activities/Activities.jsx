@@ -3,7 +3,7 @@ import "./Activities.scss";
 import axios from "axios";
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 const Activities = ({ searchTerm }) => {
     const [activities, setActivities] = useState([]);
@@ -20,7 +20,6 @@ const Activities = ({ searchTerm }) => {
         if (cachedRevises && cachedTimestampRevises) {
             const age = Date.now() - parseInt(cachedTimestampRevises, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setActivities(JSON.parse(cachedRevises));
                 return;
             }
@@ -30,7 +29,6 @@ const Activities = ({ searchTerm }) => {
             const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
             setActivities(response.data.data);
             setTotalPages(response.data.meta.totalPages);
-            console.log('Veriler sunucudan yükleniyor');
             localStorage.setItem(`cachedRevises`, JSON.stringify(response.data.data));
             localStorage.setItem(`revises_timestamp`, Date.now().toString());
 
