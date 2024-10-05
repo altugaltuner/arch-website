@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import "./NewProfessionModal.scss";
 
 function NewProfessionModal({ isOpen, onClose, onAdd }) {
@@ -7,14 +6,8 @@ function NewProfessionModal({ isOpen, onClose, onAdd }) {
 
     const handleAddProfession = async () => {
         try {
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/professions', {
-                data: {
-                    professionName,
-                },
-            });
             onAdd();
         } catch (error) {
-            console.error('Meslek türü eklenemedi:', error);
         }
     };
 

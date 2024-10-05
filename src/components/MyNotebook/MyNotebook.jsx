@@ -4,7 +4,7 @@ import NewNoteModal from "../NewNoteModal/NewNoteModal";
 import EditNoteModal from "../EditNoteModal/EditNoteModal";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function MyNotebook() {
     const [notes, setNotes] = useState([]);
@@ -21,7 +21,6 @@ function MyNotebook() {
             if (cachedNotes && cachedTimestampNotes) {
                 const age = Date.now() - parseInt(cachedTimestampNotes, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setNotes(JSON.parse(cachedNotes));
                     return;
                 }
@@ -45,17 +44,14 @@ function MyNotebook() {
                         try {
                             notebook = JSON.parse(data.myNotebook);
                         } catch (e) {
-                            console.error("Error parsing myNotebook JSON:", e);
                         }
                     }
                     setNotes(Array.isArray(notebook) ? notebook : []);
                     setUserId(data.id);
                     localStorage.setItem(`notes`, JSON.stringify(notebook));
                 } else {
-                    console.error("No token found");
                 }
             } catch (error) {
-                console.error("Error fetching notes:", error);
             }
         };
 
@@ -85,7 +81,6 @@ function MyNotebook() {
                 throw new Error("Notebook update failed");
             }
 
-            const data = await response.json();
         } catch (error) {
             console.error("Error updating notebook:", error);
         }
@@ -115,10 +110,7 @@ function MyNotebook() {
             if (!response.ok) {
                 throw new Error("Notebook update failed");
             }
-
-            const data = await response.json();
         } catch (error) {
-            console.error("Error updating notebook:", error);
         }
     };
 
@@ -145,9 +137,7 @@ function MyNotebook() {
                 throw new Error("Notebook update failed");
             }
 
-            const data = await response.json();
         } catch (error) {
-            console.error("Error updating notebook:", error);
         }
     };
 

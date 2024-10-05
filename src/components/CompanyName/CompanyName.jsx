@@ -15,7 +15,6 @@ const CompanyName = ({ onSearch, setIsLoading }) => {
         if (user && user.company && user.company.companyName) {
             setCompanyName(user.company.companyName);
         } else {
-            console.log("user data is not available or companyName is missing");
         }
     }, [user, setIsLoading]);
 

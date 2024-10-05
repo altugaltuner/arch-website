@@ -1,4 +1,3 @@
-// src/components/AppSettings/AppSettings.jsx
 import React from 'react';
 import Switch from 'react-switch';
 import { useDarkMode } from "../../DarkModeContext/DarkModeContext ";

@@ -13,7 +13,7 @@ function ProtectedRoute({ children, adminOnly }) {
     }
 
     if (adminOnly && user.access.role !== "Admin") {
-      navigate("/not-authorized", { replace: true }); // Yetkisiz kullanıcılar için yönlendirme
+      navigate("/not-authorized", { replace: true });
       return;
     }
   }, [user, navigate, adminOnly]);

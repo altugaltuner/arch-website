@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useAuth } from "../../components/AuthProvider";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function ProjectComments({ clickedProject }) {
     const [commentsWithDetails, setCommentsWithDetails] = useState([]);
@@ -32,7 +32,6 @@ function ProjectComments({ clickedProject }) {
         if (cachedComments && cachedTimestamp) {
             const age = Date.now() - parseInt(cachedTimestamp, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setCommentsWithDetails(JSON.parse(cachedComments));
                 return;
             }
@@ -70,7 +69,6 @@ function ProjectComments({ clickedProject }) {
             localStorage.setItem(`project_${project.id}_comments`, JSON.stringify(commentsWithDetails));
             localStorage.setItem(`project_${project.id}_comments_timestamp`, Date.now().toString());
         } catch (error) {
-            console.error('Revizeler alınırken bir hata oluştu:', error);
         }
     };
 
@@ -104,7 +102,6 @@ function ProjectComments({ clickedProject }) {
         const reviseAttributes = newRevise.data.attributes;
 
         if (!reviseAttributes || !reviseAttributes.comment || !reviseAttributes.comment[0] || !reviseAttributes.comment[0].children || !reviseAttributes.comment[0].children[0]) {
-            console.error('Yeni revize verisi beklenen formatta değil:', newRevise);
             return;
         }
 

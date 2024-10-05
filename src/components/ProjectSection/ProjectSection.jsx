@@ -19,7 +19,7 @@ import FileModal from "../FileModal/FileModal";
 import FolderContent from "../FolderContent/FolderContent";
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
@@ -64,7 +64,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             if (cachedRoles && cachedTimestampRoles) {
                 const age = Date.now() - parseInt(cachedTimestampRoles, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setRoles(JSON.parse(cachedRoles));
                     return;
                 }
@@ -74,9 +73,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 setRoles(response.data.data);
                 localStorage.setItem(`roles`, JSON.stringify(response.data.data));
                 localStorage.setItem(`roles_timestamp`, Date.now().toString());
-                console.log('Veriler sunucudan yükleniyor');
             } catch (error) {
-                console.error("Error fetching roles:", error);
             }
         }
         getRoles();
@@ -88,7 +85,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         if (cachedProjectFolders && cachedTimestampFolders) {
             const age = Date.now() - parseInt(cachedTimestampFolders, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setProjectFolders(JSON.parse(cachedProjectFolders));
                 return;
             }
@@ -98,9 +94,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             setProjectFolders(response.data.data);
             localStorage.setItem(`project_${clickedProject.id}_folders`, JSON.stringify(response.data.data));
             localStorage.setItem(`project_${clickedProject.id}_folders_timestamp`, Date.now().toString());
-            console.log('Veriler sunucudan yükleniyor');
         } catch (error) {
-            console.error('Error fetching the data', error);
         }
     };
 
@@ -131,7 +125,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             await fetchProjectFolders();
             createFolderHistoryEntry('oluşturma', newFolder.projectFolderName);
         } catch (error) {
-            console.error('Error creating a new project folder', error);
         }
     };
 
@@ -144,7 +137,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 await fetchProjectFolders();
                 createFolderHistoryEntry('silme', folderToDelete.toString());
             } catch (error) {
-                console.error('Error deleting the project folder', error);
             }
         }
     };
@@ -154,9 +146,8 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/upload/files/${fileId}`);
             setFileModal(false);
             setCurrentFiles(currentFiles.filter(file => file.id !== fileId));
-            createHistoryEntry('silme', fileId.toString(), currentFolder.id.toString()); // Ensure IDs are strings
+            createHistoryEntry('silme', fileId.toString(), currentFolder.id.toString());
         } catch (error) {
-            console.error('Error deleting the file', error);
         }
     };
 
@@ -185,7 +176,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 await fetchProjectFolders();
                 createFolderHistoryEntry('isim değiştirme', newFolderName);
             } catch (error) {
-                console.error('Error editing the project folder', error);
             }
         }
     };
@@ -193,7 +183,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) {
-            console.error('No file selected');
             return;
         }
 
@@ -219,14 +208,12 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 },
             });
 
-            // Update state with new file
             setCurrentFiles(updatedContent);
             setCurrentFolder(prevFolder => ({
                 ...prevFolder,
                 folderContent: { data: updatedContent }
             }));
 
-            // Update project folders with new file
             setProjectFolders(prevFolders => prevFolders.map(folder => {
                 if (folder.id === currentFolder.id) {
                     return { ...folder, folderContent: { data: updatedContent } };
@@ -234,11 +221,9 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 return folder;
             }));
 
-            // Create history entry
             createHistoryEntry('yükleme', uploadedFile.id.toString(), currentFolder.id.toString());
 
         } catch (error) {
-            console.error('Error uploading the file', error);
         }
     };
 
@@ -307,7 +292,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             });
             setNewHistoryEntry(response.data.data);
         } catch (error) {
-            console.error('Error creating history entry', error);
         }
     };
 
@@ -327,7 +311,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             });
             setNewHistoryEntry(response.data.data);
         } catch (error) {
-            console.error('Error creating folder history entry', error);
         }
     };
 

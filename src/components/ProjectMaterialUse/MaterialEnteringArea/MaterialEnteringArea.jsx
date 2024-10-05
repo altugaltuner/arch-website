@@ -8,10 +8,6 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
     const [matInputOutput, setMatInputOutput] = useState("");
     const [errorParagraph, setErrorParagraph] = useState("");
 
-    useEffect(() => {
-        console.log("selectedProject", selectedProject); // now you should get the full project object
-    }, [selectedProject]);
-
     const handleSubmitMaterial = async (e) => {
         e.preventDefault();
         if (!matName || !matQuantity || !matType || !matInputOutput) {
@@ -26,31 +22,13 @@ function MaterialEnteringArea({ selectedDate, selectedProject }) {
                     type: matType,
                     input: matInputOutput,
                     project: selectedProject.id,
-                    date: selectedDate // use the formatted date here
+                    date: selectedDate
                 }
             };
-
-            const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/materials', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }, body: JSON.stringify(data),
-            });
-            const result = await response.json();
-            console.log("result", result);
-            console.log("tüm gönderilen bilgiler:", matType, matQuantity, matName, matInputOutput);
         }
         catch (error) {
-            console.log(error, "hata kodu");
         }
     }
-
-    useEffect(() => {
-        console.log("matQuantity", matQuantity);
-        console.log("matName", matName);
-        console.log("matType", matType);
-        console.log("matInputOutput", matInputOutput);
-    }, [matQuantity, matName, matType])
 
     const selectTypeChange = (e) => {
         setMatType(e.target.value);

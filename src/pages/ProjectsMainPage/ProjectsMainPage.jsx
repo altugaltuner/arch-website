@@ -8,7 +8,7 @@ import AddNewProjectModal from "../../components/AddNewProjectModal/AddNewProjec
 import ProjectCardsColumn from "../../components/ProjectCardsColumn/ProjectCardsColumn";
 import EditProjectModal from "../../components/EditProjectModal/EditProjectModal";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function ProjectsMainPage() {
   const { user } = useAuth();
@@ -39,7 +39,6 @@ function ProjectsMainPage() {
     if (cachedRole && cachedTimestampRole) {
       const age = Date.now() - parseInt(cachedTimestampRole, 10);
       if (age < CACHE_DURATION) {
-        console.log('Veriler localStorage\'dan yükleniyor');
         setRoles(JSON.parse(cachedRole));
         return;
       }
@@ -50,9 +49,7 @@ function ProjectsMainPage() {
       setRoles(response.data.data);
       localStorage.setItem(`roles`, JSON.stringify(data));
       localStorage.setItem(`roles_timestamp`, Date.now().toString());
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) { }
   }
 
   useEffect(() => {
@@ -67,12 +64,10 @@ function ProjectsMainPage() {
       if (cachedProject && cachedTimestamp) {
         const age = Date.now() - parseInt(cachedTimestamp, 10);
         if (age < CACHE_DURATION) {
-          console.log('Veriler localStorage\'dan yükleniyor');
           setCompanyProjects(JSON.parse(cachedProject));
           return;
         }
       }
-
 
       try {
         const response = await axios.get(
@@ -87,7 +82,6 @@ function ProjectsMainPage() {
         localStorage.setItem(`projects_${usersCompanyId}`, JSON.stringify(filteredProjects));
         localStorage.setItem(`projects_${usersCompanyId}_timestamp`, Date.now().toString());
       } catch (error) {
-        console.error("Error fetching the data:", error);
       }
     };
     fetchData();
@@ -143,9 +137,7 @@ function ProjectsMainPage() {
           Authorization: `Bearer ${token}`,
         },
       });
-
       const createdProject = response.data.data;
-
       setCompanyProjects((prevProjects) => [
         ...prevProjects,
         {
@@ -160,9 +152,7 @@ function ProjectsMainPage() {
       setShowModal(false);
       setNewProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
 
-    } catch (error) {
-      console.error("Error creating a new project:", error);
-    }
+    } catch (error) { }
   };
 
   const handleEditSubmit = async () => {
@@ -176,7 +166,6 @@ function ProjectsMainPage() {
     }
 
     try {
-
       await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToEdit.id}`, formData);
       setShowEditModal(false);
       setEditProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
@@ -189,9 +178,7 @@ function ProjectsMainPage() {
         (project) => project.attributes.company.data.id === usersCompanyId
       );
       setCompanyProjects(filteredProjects);
-    } catch (error) {
-      console.error("Error editing the project:", error);
-    }
+    } catch (error) { }
   };
 
   const deleteModalOpen = (id) => {
@@ -202,7 +189,6 @@ function ProjectsMainPage() {
   const editModalOpen = (projectId) => {
     const project = companyProjects.find(p => p.id === projectId);
     if (!project || !project.attributes) {
-      console.error("Invalid project object:", projectId);
       return;
     }
 
@@ -220,16 +206,14 @@ function ProjectsMainPage() {
 
     axios
       .delete(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToDelete}`)
-      .then((response) => {
+      .then(() => {
         setCompanyProjects(
           companyProjects.filter((project) => project.id !== projectToDelete)
         );
         setShowDeleteModal(false);
         setProjectToDelete(null);
       })
-      .catch((error) => {
-        console.error("Error deleting project:", error);
-      });
+      .catch(() => { });
   };
 
   return (

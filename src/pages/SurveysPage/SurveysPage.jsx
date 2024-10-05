@@ -5,17 +5,15 @@ import Navigation from "../../components/Navigation/Navigation";
 import axios from "axios";
 
 function SurveysPage() {
-    const { user } = useAuth();
+    useAuth();
     const [surveys, setSurveys] = useState([]);
 
     const getSurveys = async () => {
         try {
             const response = await axios.get("https://bold-animal-facf707bd9.strapiapp.com/api/surveys?populate=*");
             setSurveys(response.data.data);
-            console.log("response.data.data", response.data.data);
         }
         catch (error) {
-            console.error("Error fetching surveys:", error);
         }
     }
 

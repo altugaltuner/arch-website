@@ -8,7 +8,7 @@ import CompanyGridSidebar from "../../components/CompanyGridSidebar/CompanyGridS
 import NewProfessionModal from "../../components/NewProfessionModal/NewProfessionModal";
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function WorkersPage() {
     const [employees, setEmployees] = useState([]);
@@ -17,7 +17,6 @@ function WorkersPage() {
     const [jobTitles, setJobTitles] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredSearchEmployees, setFilteredSearchEmployees] = useState([]);
-
     const [newProfessionModalOpen, setNewProfessionModalOpen] = useState(false);
 
     const handleJobTitleClick = (title) => {
@@ -33,7 +32,6 @@ function WorkersPage() {
     };
 
     const { user } = useAuth();
-
     const usersCompanyId = user?.company?.id;
 
     useEffect(() => {
@@ -45,7 +43,6 @@ function WorkersPage() {
             if (cachedEmployees && cachedTimestampEmployees) {
                 const age = Date.now() - parseInt(cachedTimestampEmployees, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setEmployees(JSON.parse(cachedEmployees));
                     return;
                 }
@@ -58,7 +55,6 @@ function WorkersPage() {
                     ...user.attributes,
                     id: user.id
                 }));
-                console.log('formattedUsers', formattedUsers);
                 setEmployees(formattedUsers);
                 setFilteredSearchEmployees(formattedUsers);
                 const titles = formattedUsers.map(employee => employee.profession.professionName);
@@ -68,7 +64,6 @@ function WorkersPage() {
                 localStorage.setItem(`cachedEmployees`, JSON.stringify(formattedUsers));
                 localStorage.setItem(`employees_timestamp`, Date.now().toString());
             } catch (error) {
-                console.error('Error fetching the data', error);
             }
         };
 

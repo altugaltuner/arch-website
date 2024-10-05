@@ -43,7 +43,6 @@ function GroupsPage() {
                 setSelectedGroupId(null);
             });
         } catch (error) {
-            console.error('Error deleting the group', error);
         }
     };
 
@@ -61,7 +60,6 @@ function GroupsPage() {
                 fetchProjectGroups();
             });
         } catch (error) {
-            console.error('Error editing the group', error);
         }
     };
 
@@ -73,7 +71,6 @@ function GroupsPage() {
             setGroups(companyGroups);
             setFilteredGroups(companyGroups);
         } catch (error) {
-            console.error('Error fetching the data', error);
         }
     };
 
@@ -94,7 +91,6 @@ function GroupsPage() {
             const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
             setRoles(response.data.data);
         } catch (error) {
-            console.error(error);
         }
     }
 
@@ -129,7 +125,6 @@ function GroupsPage() {
             setGroups(companyGroups);
             setFilteredGroups(companyGroups);
         } catch (error) {
-            console.error('Error creating a new group', error);
         }
     };
 

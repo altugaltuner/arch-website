@@ -10,7 +10,7 @@ import backButton from "../../assets/icons/back-button.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function MyPersonalFiles({ user }) {
     const [personalFolders, setPersonalFolders] = useState([]);
@@ -38,7 +38,6 @@ function MyPersonalFiles({ user }) {
             if (cachedPersonalFolders && cachedTimestampPersonalFolders) {
                 const age = Date.now() - parseInt(cachedTimestampPersonalFolders, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setPersonalFolders(JSON.parse(cachedPersonalFolders));
                     setIsLoading(false);
                     return;
@@ -56,7 +55,6 @@ function MyPersonalFiles({ user }) {
                 localStorage.setItem(`personal_folders_${user.id}`, JSON.stringify(formattedFolders));
                 localStorage.setItem(`personal_folders_${user.id}_timestamp`, Date.now().toString());
             } catch (error) {
-                console.error('Error fetching the data', error);
             } finally {
                 setIsLoading(false);
             }
@@ -69,7 +67,6 @@ function MyPersonalFiles({ user }) {
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) {
-            console.error('No file selected');
             return;
         }
 
@@ -84,7 +81,6 @@ function MyPersonalFiles({ user }) {
             });
             const uploadedFile = uploadResponse.data[0];
             if (!selectedFolder) {
-                console.error('No selected folder');
                 return;
             }
             const updatedContent = [...(selectedFolder.personalFolderContent || []), uploadedFile];
@@ -104,7 +100,6 @@ function MyPersonalFiles({ user }) {
             setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedContent }));
 
         } catch (error) {
-            console.error('Error uploading the file', error);
         }
     };
 
@@ -140,7 +135,6 @@ function MyPersonalFiles({ user }) {
             setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedFolderContent }));
             setSelectedFile(null);
         } catch (error) {
-            console.error('Error deleting file', error);
         }
     };
 
@@ -160,7 +154,6 @@ function MyPersonalFiles({ user }) {
             setPersonalFolders(personalFolders.filter(folder => folder.id !== folderToDelete.id));
             setFolderToDelete(null);
         } catch (error) {
-            console.error('Error deleting the folder:', error);
         }
     };
 
@@ -180,14 +173,12 @@ function MyPersonalFiles({ user }) {
             setFolderToEdit(null);
             setShowEditFolderModal(false);
         } catch (error) {
-            console.error('Error editing the folder:', error);
         }
     };
 
     const handleFolderClick = (event, folder) => {
-        // Eğer tıklama kalem veya çöp kutusu ikonlarına değilse klasörü aç
         if (event.target.classList.contains('folder-editpencil') || event.target.classList.contains('folder-deleteicon')) {
-            event.stopPropagation(); // İkonlara tıklamayı durdur
+            event.stopPropagation();
         } else {
             setSelectedFolder(folder);
         }
@@ -250,7 +241,6 @@ function MyPersonalFiles({ user }) {
         const uploadFile = (folderId) => {
             const folder = personalFolders.find(folder => folder.id === folderId);
             if (!folder) {
-                console.error('Folder not found');
                 return;
             }
             setSelectedFolder(folder);

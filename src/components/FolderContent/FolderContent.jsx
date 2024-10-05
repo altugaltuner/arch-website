@@ -23,7 +23,6 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) {
-            console.error('No file selected');
             return;
         }
 
@@ -55,7 +54,6 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 folderContent: { data: updatedContent }
             }));
         } catch (error) {
-            console.error('Error uploading the file', error);
         }
     };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProjectHistory.scss';
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function ProjectHistory({ clickedProject, newHistoryEntry }) {
     const [history, setHistory] = useState([]);
@@ -15,7 +15,6 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
             if (cachedHistory && cachedTimestamp) {
                 const age = Date.now() - parseInt(cachedTimestamp, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setHistory(JSON.parse(cachedHistory));
                     return;
                 }
@@ -28,7 +27,7 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
                     localStorage.setItem(`project_${clickedProject.id}_history_timestamp`, Date.now().toString());
                 }
             } catch (error) {
-                console.error("Error fetching history:", error);
+
             }
         }
 

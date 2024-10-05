@@ -44,7 +44,6 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
             onReviseUpdated(response.data);
             onClose();
         } catch (error) {
-            console.error('Revize güncellenirken bir hata oluştu:', error);
         }
     };
 
@@ -54,7 +53,6 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
             onReviseDeleted(revise.id);
             onClose();
         } catch (error) {
-            console.error('Revize silinirken bir hata oluştu:', error);
         }
     };
 

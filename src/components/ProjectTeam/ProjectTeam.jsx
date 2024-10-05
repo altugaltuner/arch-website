@@ -6,7 +6,7 @@ import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal';
 import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [employees, setEmployees] = useState([]);
@@ -30,7 +30,6 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
         if (cachedRole && cachedTimestampRole) {
             const age = Date.now() - parseInt(cachedTimestampRole, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setRoles(JSON.parse(cachedRole));
                 return;
             }
@@ -41,13 +40,8 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
             localStorage.setItem(`roles`, JSON.stringify(response.data.data));
             localStorage.setItem(`roles_timestamp`, Date.now().toString());
         } catch (error) {
-            console.error(error);
         }
     }
-
-    useEffect(() => {
-        getRoles();
-    }, []);
 
     useEffect(() => {
         const fetchEmployees = async () => {
@@ -66,7 +60,6 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                 localStorage.setItem(`employees`, JSON.stringify(response.data));
                 localStorage.setItem(`employees_timestamp`, Date.now().toString());
             } catch (error) {
-                console.error('Error fetching employees', error);
             }
         };
 
@@ -93,7 +86,6 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
             updateProject();
             setShowAddModal(false);
         } catch (error) {
-            console.error('Error adding users to project team', error);
         }
     };
 
@@ -106,7 +98,6 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
             });
             updateProject();
         } catch (error) {
-            console.error('Error removing users from project team', error);
         }
     };
 

@@ -32,7 +32,6 @@ const SendMessage = () => {
                     .then((data) => console.log(data));
             }
         } catch (error) {
-            console.log(error);
         }
         setValue("");
         setDisplayName(displayName);

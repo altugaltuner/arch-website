@@ -15,7 +15,7 @@ import materialsLogo from "../../assets/icons/materials-logo.jpg";
 
 function Navigation() {
     const [activeNavId, setActiveNavId] = useState(null);
-    const location = useLocation();  // Mevcut konumu almak için 
+    const location = useLocation();
     const { user } = useAuth();
     const userRole = user?.access?.role ?? null;
 

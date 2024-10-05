@@ -19,7 +19,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
             setTitle(event.attributes.title);
             setDescription(event.attributes.description);
             const eventDate = new Date(event.attributes.date);
-            setTime(eventDate.toISOString().substring(11, 16)); // HH:MM format
+            setTime(eventDate.toISOString().substring(11, 16));
             setLocation(event.attributes.eventLocation || '');
         }
     }, [event]);
@@ -56,7 +56,6 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
             updateEvent(response.data.data);
             onClose();
         } catch (error) {
-            console.error('Error updating event:', error);
         }
     };
 
@@ -66,7 +65,6 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
             deleteEvent(event.id);
             onClose();
         } catch (error) {
-            console.error('Error deleting event:', error);
         }
     };
 

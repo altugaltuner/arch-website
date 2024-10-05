@@ -30,9 +30,8 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
                 body: formData,
             });
             const result = await response.json();
-            onMessageSent(result.data); // Yeni mesajı gönder ve üst bileşende listeyi güncelle
+            onMessageSent(result.data);
         } catch (error) {
-            console.error("Error sending message:", error);
         }
         onClose();
     };

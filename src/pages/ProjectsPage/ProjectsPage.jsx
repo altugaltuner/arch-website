@@ -10,7 +10,7 @@ import ProjectComments from "../../components/ProjectComments/ProjectComments";
 import ProjectHistory from "../../components/ProjectHistory/ProjectHistory";
 import ProjectProcess from "../../components/ProjectProcess/ProjectProcess";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
@@ -31,7 +31,6 @@ function ProjectsPage() {
         if (cachedRole && cachedTimestampRole) {
             const age = Date.now() - parseInt(cachedTimestampRole, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setRoles(JSON.parse(cachedRole));
                 return;
             }
@@ -43,7 +42,6 @@ function ProjectsPage() {
             localStorage.setItem(`roles`, JSON.stringify(data));
             localStorage.setItem(`roles_timestamp`, Date.now().toString());
         } catch (error) {
-            console.error(error);
         }
     }
 
@@ -58,7 +56,6 @@ function ProjectsPage() {
         if (cachedProject && cachedTimestamp) {
             const age = Date.now() - parseInt(cachedTimestamp, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setCurrentProject(JSON.parse(cachedProject));
                 return;
             }
@@ -66,14 +63,12 @@ function ProjectsPage() {
 
         const endpoint = `https://bold-animal-facf707bd9.strapiapp.com/api/projects/${idToFetch}?populate=*`;
         try {
-            console.log('Veriler sunucudan yükleniyor');
             setLoading(true);
             const { data } = await axios.get(endpoint);
             setCurrentProject(data);
             localStorage.setItem(`project_${idToFetch}`, JSON.stringify(data));
             localStorage.setItem(`project_${idToFetch}_timestamp`, Date.now().toString());
         } catch (error) {
-            console.error(error);
             setError(error);
         } finally {
             setLoading(false);

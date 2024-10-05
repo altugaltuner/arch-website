@@ -6,7 +6,7 @@ import eyeHide from "../../assets/icons/EyeHideLogo.png";
 import { useNavigate } from 'react-router-dom';
 import backButton from '../../assets/icons/back-button.png';
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -116,7 +116,6 @@ function SignupPage() {
         navigate('/login');
       }
     } catch (error) {
-      console.error("Error during registration:", error);
       if (error.response && error.response.data.error.message === "Email or Username are already taken") {
         setEmailError("Bu email alınmıştır.");
       } else {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../ProjectBasedRevisions/ProjectBasedRevisions.scss";
 import axios from 'axios';
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function ProjectBasedRevisions({ clickedProject }) {
     const [projectBasedRevisions, setProjectBasedRevisions] = useState([]);
@@ -12,10 +12,8 @@ function ProjectBasedRevisions({ clickedProject }) {
         if (clickedProject) {
             setActiveProjectTitle(clickedProject.attributes.projectName);
         } else {
-            console.log("No Project Selected");
         }
     }, [clickedProject]);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,7 +23,6 @@ function ProjectBasedRevisions({ clickedProject }) {
             if (cachedProjectBasedRevisions && cachedTimestampProjectBasedRevisions) {
                 const age = Date.now() - parseInt(cachedTimestampProjectBasedRevisions, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setProjectBasedRevisions(JSON.parse(cachedProjectBasedRevisions));
                     return;
                 }
@@ -36,7 +33,6 @@ function ProjectBasedRevisions({ clickedProject }) {
                 localStorage.setItem(`projectBasedRevisions`, JSON.stringify(response.data.data));
                 localStorage.setItem(`projectBasedRevisions_timestamp`, Date.now().toString());
             } catch (error) {
-                console.error('Error fetching the data', error);
             }
         };
 

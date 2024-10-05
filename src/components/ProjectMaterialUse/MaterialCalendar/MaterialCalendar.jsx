@@ -8,7 +8,6 @@ const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "C
 const generateCalendar = (year, month) => {
     const date = new Date(year, month, 1);
     const dates = [];
-    // Prepend days of the previous month
     for (let i = 0; i < date.getDay(); i++) {
         dates.push(null);
     }
@@ -16,7 +15,6 @@ const generateCalendar = (year, month) => {
         dates.push(new Date(date));
         date.setDate(date.getDate() + 1);
     }
-    // Append days of the next month
     while (dates.length % 7 !== 0) {
         dates.push(null);
     }
@@ -55,12 +53,7 @@ const MaterialCalendar = ({ setSelectedDate, materialDates }) => {
             setYear((prev) => prev - 1);
         }
     };
-
     const today = new Date();
-
-    useEffect(() => {
-        console.log(selectedDate, "selectedDate");
-    }, [selectedDate]);
 
     return (
         <div className="material-calendar">

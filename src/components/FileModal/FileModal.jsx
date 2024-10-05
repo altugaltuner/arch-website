@@ -12,11 +12,8 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
     const userRole = user && user.access ? user.access.role : null;
 
     const handleDownload = () => {
-        console.log("Download file:", currentFile.attributes.name);
-        console.log("File URL:", currentFile.attributes.url);
         const fileUrl = `${currentFile.attributes.url}`;
 
-        // Check if the file URL is valid
         fetch(fileUrl, { method: 'HEAD' })
             .then(response => {
                 if (response.ok) {
@@ -30,8 +27,7 @@ function FileModal({ fileModal, setFileModal, currentFile, fileIcons, handleDele
                     alert("File not found. Please check the file URL.");
                 }
             })
-            .catch(error => {
-                console.error("Error while fetching the file:", error);
+            .catch(() => {
                 alert("An error occurred while trying to download the file.");
             });
     };

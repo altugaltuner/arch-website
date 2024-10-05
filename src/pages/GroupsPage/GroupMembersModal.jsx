@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./GroupMembersModal.scss";
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 const GroupMembersModal = ({ show, onClose, groupId }) => {
     const [members, setMembers] = useState([]);
@@ -24,7 +24,6 @@ const GroupMembersModal = ({ show, onClose, groupId }) => {
                     localStorage.setItem(`group_${groupId}_members`, JSON.stringify(response.data.data.attributes.users_permissions_users.data));
                     localStorage.setItem(`group_${groupId}_members_timestamp`, Date.now().toString());
                 } catch (error) {
-                    console.error("Error fetching group members:", error);
                 }
             };
 

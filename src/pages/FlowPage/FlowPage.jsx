@@ -8,7 +8,7 @@ import youtubeLogo from "../../assets/icons/youtube-logo.png";
 import defaultLogo from "../../assets/icons/groups-logo.png";
 import CompanyModal from "./CompanyModal";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function FlowPage() {
     const socialMediaAccounts = [
@@ -41,7 +41,6 @@ function FlowPage() {
             if (cachedCompanies && cachedTimestampCompanies) {
                 const age = Date.now() - parseInt(cachedTimestampCompanies, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setCompanies(JSON.parse(cachedCompanies));
                     return;
                 }
@@ -52,7 +51,6 @@ function FlowPage() {
                 localStorage.setItem(`cachedCompanies`, JSON.stringify(response.data.data));
                 localStorage.setItem(`companies_timestamp`, Date.now().toString());
             } catch (error) {
-                console.error(error);
             }
         }
         getCompanies();

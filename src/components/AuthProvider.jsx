@@ -44,7 +44,6 @@ function AuthProvider({ children }) {
         setUser(response.data.user);
       }
     } catch (error) {
-      console.error('Login error:', error);
       throw error;
     }
   };
@@ -69,7 +68,6 @@ function AuthProvider({ children }) {
       setUser(response.data);
       return response.data;
     } catch (error) {
-      console.error("Kullanıcı bilgisi güncellenemedi", error);
       throw error;
     }
   };
@@ -87,7 +85,6 @@ function AuthProvider({ children }) {
       });
       return response.data;
     } catch (error) {
-      console.error("Şifre güncellenemedi", error);
       throw error;
     }
   };
@@ -121,7 +118,6 @@ function AuthProvider({ children }) {
         throw new Error("Fotoğraf yükleme başarısız");
       }
     } catch (error) {
-      console.error('Profil fotoğrafı güncelleme hatası:', error);
       throw error;
     }
   };

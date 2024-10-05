@@ -62,7 +62,6 @@ const CalendarPage = () => {
             localStorage.setItem(`events_timestamp`, Date.now().toString());
 
         } catch (error) {
-            console.error('Error fetching events:', error);
         }
     }, [userCompany]);
 

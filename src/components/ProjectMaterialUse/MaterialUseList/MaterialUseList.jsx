@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './MaterialUseList.scss';
 import axios from 'axios';
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 const MaterialUseList = ({ selectedDate, selectedProject }) => {
     const [materialUse, setMaterialUse] = useState([]);
@@ -14,7 +14,6 @@ const MaterialUseList = ({ selectedDate, selectedProject }) => {
         if (cachedMaterials && cachedTimestampMaterials) {
             const age = Date.now() - parseInt(cachedTimestampMaterials, 10);
             if (age < CACHE_DURATION) {
-                console.log('Veriler localStorage\'dan yükleniyor');
                 setMaterialUse(JSON.parse(cachedMaterials));
                 return;
             }
@@ -24,7 +23,6 @@ const MaterialUseList = ({ selectedDate, selectedProject }) => {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?populate=*`);
                 const fetchedData = response.data.data;
-                console.log(fetchedData);
 
                 const dataForSelectedDate = fetchedData.filter(item => item.attributes.date === selectedDate);
 
@@ -36,7 +34,6 @@ const MaterialUseList = ({ selectedDate, selectedProject }) => {
                     ());
 
             } catch (error) {
-                console.log("hata", error);
             }
         } else {
             setMaterialUse([]);

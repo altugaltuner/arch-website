@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import io from 'socket.io-client';
 import "./GroupMessagePanel.scss";
 import { useAuth } from "../AuthProvider";
 import GroupMembersModal from "../../pages/GroupsPage/GroupMembersModal";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function GroupMessagePanel({ selectedGroupId }) {
     const [groupName, setGroupName] = useState("");
@@ -15,14 +14,7 @@ function GroupMessagePanel({ selectedGroupId }) {
     const { user } = useAuth();
     const [showMembersModal, setShowMembersModal] = useState(false);
 
-    //const socket = io('http://localhost:1337'); // Strapi sunucusunun URL'sini kullanın
-
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
-
     const userCompanyId = user?.company?.id;
-    console.log("userCompanyId", userCompanyId);
 
     useEffect(() => {
         const fetchGroupDetails = async () => {
@@ -33,7 +25,6 @@ function GroupMessagePanel({ selectedGroupId }) {
             if (cachedGroup && cachedTimestamp) {
                 const age = Date.now() - parseInt(cachedTimestamp, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     const groupDetails = JSON.parse(cachedGroup);
                     setGroupName(groupDetails?.attributes?.groupName);
                     setMessages(groupDetails?.attributes?.chatMessages || []);
@@ -43,19 +34,15 @@ function GroupMessagePanel({ selectedGroupId }) {
                 }
             }
 
-
             if (selectedGroupId) {
                 try {
                     const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}?populate=users_permissions_users.role,company`);
                     const groupDetails = response.data.data;
-                    console.log("groupDetails", groupDetails);
                     if (!groupDetails) {
                         throw new Error("Group details not found");
                     }
-
                     const companyId = groupDetails?.attributes?.company?.data?.id;
 
-                    // Check if the companyId matches userCompanyId
                     if (companyId === userCompanyId) {
                         setGroupName(groupDetails?.attributes?.groupName);
                         setMessages(groupDetails?.attributes?.chatMessages || []);
@@ -63,27 +50,12 @@ function GroupMessagePanel({ selectedGroupId }) {
                         setIsUserInGroup(isUserInGroup);
                     }
                 } catch (error) {
-                    console.error("Error fetching group details:", error.response ? error.response.data : error.message);
                 }
             }
         };
 
         fetchGroupDetails();
     }, [selectedGroupId, user.id]);
-
-
-    // useEffect(() => {
-    //     socket.on('message', (msg) => {
-
-    //         if (msg.groupId === selectedGroupId) {
-    //             setMessages((prevMessages) => [...prevMessages, msg]);
-    //         }
-    //     });
-
-    //     return () => {
-    //         socket.off('message');
-    //     };
-    // }, [selectedGroupId]);
 
     const handleSendMessage = async () => {
         if (message.trim()) {
@@ -105,7 +77,6 @@ function GroupMessagePanel({ selectedGroupId }) {
                 setMessages(response.data.data.attributes.chatMessages);
                 setMessage("");
             } catch (error) {
-                console.error("Error sending message:", error.response ? error.response.data : error.message);
             }
         }
     };

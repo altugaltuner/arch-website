@@ -138,9 +138,7 @@ const routes = [
   {
     path: "*",
     element: (
-      <>
-        <NotFoundPage />
-      </>
+      <NotFoundPage />
     ),
   },
 ];

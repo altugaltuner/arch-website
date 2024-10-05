@@ -1,6 +1,5 @@
-import React from "react";
 import Message from "./Message";
-import { useState, useRef, useEffect } from "react";
+import { React, useState, useRef, useEffect } from "react";
 const ChatBox = () => {
     const messagesEndRef = useRef();
     const [messages, setMessages] = useState([]);
@@ -8,6 +7,7 @@ const ChatBox = () => {
         messagesEndRef.current.scrollIntoView({ behaviour: "smooth" });
     };
     useEffect(scrollToBottom, [messages]);
+
     useEffect(() => {
         const interval = setInterval(() => {
             fetch("https://bold-animal-facf707bd9.strapiapp.com/api/chat-room-messages", {

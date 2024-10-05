@@ -42,7 +42,6 @@ function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
             setUpdatedAdminMessages((prevMessages) => [result.data, ...prevMessages]);
             setShowModal(false);
         } catch (error) {
-            console.error('Error:', error);
         }
     };
 

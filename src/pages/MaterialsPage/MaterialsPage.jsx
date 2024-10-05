@@ -7,7 +7,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import { useAuth } from "../../components/AuthProvider";
 import axios from "axios";
 
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 function MaterialsPage() {
     const { user } = useAuth();
@@ -26,7 +26,6 @@ function MaterialsPage() {
             if (cachedProjects && cachedTimestampProjects) {
                 const age = Date.now() - parseInt(cachedTimestampProjects, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setCompanyProjects(JSON.parse(cachedProjects));
                     return;
                 }
@@ -35,12 +34,9 @@ function MaterialsPage() {
             try {
                 const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}/?populate=*`);
                 setCompanyProjects(response.data.data.attributes.projects.data);
-
                 localStorage.setItem(`projects_${usersCompanyId}`, JSON.stringify(response.data.data.attributes.projects.data));
                 localStorage.setItem(`projects_${usersCompanyId}_timestamp`, Date.now().toString());
-                console.log('Veriler API\'den yükleniyor');
             } catch (error) {
-                console.error('Error fetching the data', error);
             }
         };
         fetchData();
@@ -48,7 +44,6 @@ function MaterialsPage() {
 
     useEffect(() => {
         if (selectedProject) {
-            // Seçilen proje için malzeme tarihlerinin getirilmesi
             const fetchMaterialDates = async () => {
                 try {
                     const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?filters[project]=${selectedProject.id}`);
@@ -60,9 +55,9 @@ function MaterialsPage() {
             };
             fetchMaterialDates();
         } else {
-            setMaterialDates([]); // Proje seçilmezse malzeme tarihlerini sıfırla
+            setMaterialDates([]);
         }
-    }, [selectedProject]); // selectedProject bağımlılığına göre çalışır
+    }, [selectedProject]);
 
     const selectProject = (e) => {
         const projectName = e.target.value;

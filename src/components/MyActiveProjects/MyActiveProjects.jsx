@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../MyActiveProjects/MyActiveProjects.scss";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-const CACHE_DURATION = 15 * 60 * 1000; // 15 dakika
+const CACHE_DURATION = 15 * 60 * 1000;
 
 
 function MyActiveProjects({ user }) {
     const [allUsers, setAllUsers] = useState([]);
     const navigate = useNavigate();
-    //burada saçma olmuş, userın  projelerini almak için tüm userları çekmeye gerek yok. userın idsi ile projeleri çekmek daha mantıklı olurdu.
     useEffect(() => {
         const fetchData = async () => {
             const cachedUsers = localStorage.getItem(`users`);
@@ -17,7 +16,6 @@ function MyActiveProjects({ user }) {
             if (cachedUsers && cachedTimestampUsers) {
                 const age = Date.now() - parseInt(cachedTimestampUsers, 10);
                 if (age < CACHE_DURATION) {
-                    console.log('Veriler localStorage\'dan yükleniyor');
                     setAllUsers(JSON.parse(cachedUsers));
                     return;
                 }
@@ -27,9 +25,7 @@ function MyActiveProjects({ user }) {
                 setAllUsers(response.data || []);
                 localStorage.setItem(`users`, JSON.stringify(response.data));
                 localStorage.setItem(`users_timestamp`, Date.now().toString());
-                console.log('Veriler API\'den yükleniyor');
             } catch (error) {
-                console.error('Error fetching the data', error);
             }
         };
 
@@ -73,5 +69,3 @@ function MyActiveProjects({ user }) {
 };
 
 export default MyActiveProjects;
-
-

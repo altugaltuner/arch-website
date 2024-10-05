@@ -14,9 +14,7 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
             alert('Lütfen tüm alanları doldurun.');
             return;
         }
-
         const currentDate = new Date().toISOString();
-
 
         try {
             const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/project-revises', {
@@ -42,7 +40,6 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
             onReviseAdded(response.data);
             onClose();
         } catch (error) {
-            console.error('Revize eklenirken bir hata oluştu:', error);
         }
     };
 

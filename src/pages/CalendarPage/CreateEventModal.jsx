@@ -44,13 +44,11 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
                     users_permissions_user: userId,
                 },
             });
-            console.log('Event created:', response.data.data);
             addEvent(response.data.data);
             onClose();
         } catch (error) {
-            console.error('Error creating event:', error);
         }
-        onClose(); // daha sonra silinecek. datayı okuyamıyor hatası veriyor ama okuyor.
+        onClose();
     };
 
     return (

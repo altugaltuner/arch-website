@@ -5,7 +5,6 @@ import { useAuth } from "../AuthProvider";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
 function OtherUsersInfo({ employee }) {
-    console.log('employee', employee);
     const { user } = useAuth();
     const userRole = user && user.access ? user.access.role : null;
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +21,6 @@ function OtherUsersInfo({ employee }) {
                 const result = await response.json();
                 setProfessions(result.data);
             } catch (error) {
-                console.error("Meslekleri çekerken hata oluştu:", error);
             }
         };
 
@@ -44,7 +42,6 @@ function OtherUsersInfo({ employee }) {
                 const result = await response.json();
                 setPrivateMessages(result.data);
             } catch (error) {
-                console.error("Mesajları çekerken hata oluştu:", error);
             }
         };
 
@@ -99,16 +96,12 @@ function OtherUsersInfo({ employee }) {
 
             if (response.ok) {
                 const updatedEmployee = await response.json();
-                console.log("Güncelleme başarılı:", updatedEmployee);
                 setIsEditing(false);
                 if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
                     employee.profession.data.attributes.professionName = updatedEmployee.profession.professionName;
                 }
-            } else {
-                console.error("Güncelleme hatası:", response.statusText);
             }
         } catch (error) {
-            console.error("Güncelleme hatası:", error);
         }
     };
 

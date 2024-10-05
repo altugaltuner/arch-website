@@ -6,7 +6,7 @@ import "./ProjectCardsColumn.scss";
 import { useAuth } from "../../components/AuthProvider";
 import axios from 'axios';
 
-function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowModal, editModalOpen }) {
+function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, editModalOpen }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProjects, setFilteredProjects] = useState(companyProjects);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,7 +46,6 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                 });
                 window.location.href = `/projects/${selectedProject.id}`;
             } catch (error) {
-                console.error('Proje eklenirken bir hata oluştu:', error);
             }
         } else {
             alert('Yanlış şifre');
@@ -117,7 +116,6 @@ function ProjectCardsColumn({ companyProjects, roles, deleteModalOpen, setShowMo
                                         className="project-navbar-photos"
                                         src={project?.attributes?.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url ?? project?.attributes?.projectCoverPhoto?.data?.attributes?.url}
                                         alt="Project Cover"
-                                        onError={(e) => { console.log("Image Error:", e); }}
                                     />
                                 )}
 
