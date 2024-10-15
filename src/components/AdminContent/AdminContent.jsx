@@ -12,7 +12,7 @@ const CACHE_DURATION = 15 * 60 * 1000;
 
 function AdminContent({ selectedSetting }) {
     const { user } = useAuth();
-    const usersCompanyId = user?.company.companyID;
+    const usersCompanyId = user?.company?.companyID;
     const [companies, setCompanies] = useState([]);
     const [filteredCompany, setFilteredCompany] = useState([]);
 
