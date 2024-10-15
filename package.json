@@ -12,6 +12,7 @@
     "start:host": "vite --host"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.2",
     "chart.js": "^4.4.2",
     "firebase": "^10.9.0",
