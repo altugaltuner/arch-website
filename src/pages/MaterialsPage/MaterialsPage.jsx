@@ -32,7 +32,7 @@ function MaterialsPage() {
             }
 
             try {
-                const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}/?populate=*`);
+                const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies/${usersCompanyId}/?populate=*`);
                 setCompanyProjects(response.data.data.attributes.projects.data);
                 localStorage.setItem(`projects_${usersCompanyId}`, JSON.stringify(response.data.data.attributes.projects.data));
                 localStorage.setItem(`projects_${usersCompanyId}_timestamp`, Date.now().toString());
@@ -46,7 +46,7 @@ function MaterialsPage() {
         if (selectedProject) {
             const fetchMaterialDates = async () => {
                 try {
-                    const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/materials?filters[project]=${selectedProject.id}`);
+                    const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/materials?filters[project]=${selectedProject.id}`);
                     const dates = response.data.data.map(material => material.attributes.date);
                     setMaterialDates(dates);
                 } catch (error) {

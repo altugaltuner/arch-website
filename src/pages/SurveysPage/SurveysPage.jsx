@@ -10,7 +10,7 @@ function SurveysPage() {
 
     const getSurveys = async () => {
         try {
-            const response = await axios.get("https://bold-animal-facf707bd9.strapiapp.com/api/surveys?populate=*");
+            const response = await axios.get("https://wonderful-pleasure-64045d06ec.strapiapp.com/api/surveys?populate=*");
             setSurveys(response.data.data);
         }
         catch (error) {

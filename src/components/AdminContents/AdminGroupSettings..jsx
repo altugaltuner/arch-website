@@ -12,7 +12,7 @@ function AdminGroupSettings() {
     useEffect(() => {
 
         axios
-            .get("https://bold-animal-facf707bd9.strapiapp.com/api/groups/?populate=company")
+            .get("https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/?populate=company")
             .then((response) => {
                 const allGroups = response.data.data;
 

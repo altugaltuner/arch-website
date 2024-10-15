@@ -22,7 +22,7 @@ function AdminSendMessage() {
             }
 
             try {
-                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/multiple-messages/?populate=*');
+                const response = await fetch('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/multiple-messages/?populate=*');
                 if (!response.ok) {
                     throw new Error('Veriler çekilirken hata oluştu');
                 }

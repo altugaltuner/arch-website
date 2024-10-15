@@ -85,7 +85,7 @@ function SignupPage() {
         }
       }
 
-      const companiesResponse = await api.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies`);
+      const companiesResponse = await api.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies`);
       const companies = companiesResponse.data.data;
       localStorage.setItem(`companies`, JSON.stringify(companies));
       localStorage.setItem(`companies_timestamp`, Date.now().toString());
@@ -99,7 +99,7 @@ function SignupPage() {
       }
 
       const response = await api.post(
-        `https://bold-animal-facf707bd9.strapiapp.com/api/auth/local/register`,
+        `https://wonderful-pleasure-64045d06ec.strapiapp.com/api/auth/local/register`,
         {
           username: fullName,
           email: email,

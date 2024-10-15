@@ -37,7 +37,7 @@ function ProjectsPage() {
         }
 
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
             setRoles(response.data.data);
             localStorage.setItem(`roles`, JSON.stringify(data));
             localStorage.setItem(`roles_timestamp`, Date.now().toString());
@@ -61,7 +61,7 @@ function ProjectsPage() {
             }
         }
 
-        const endpoint = `https://bold-animal-facf707bd9.strapiapp.com/api/projects/${idToFetch}?populate=*`;
+        const endpoint = `https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects/${idToFetch}?populate=*`;
         try {
             setLoading(true);
             const { data } = await axios.get(endpoint);

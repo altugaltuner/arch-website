@@ -15,7 +15,7 @@ const SendMessage = () => {
         try {
             const { displayName, photoURL } = currentUser;
             if (currentUser) {
-                fetch("https://bold-animal-facf707bd9.strapiapp.com/api/chat-room-messages", {
+                fetch("https://wonderful-pleasure-64045d06ec.strapiapp.com/api/chat-room-messages", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

@@ -25,7 +25,7 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
         }
 
         try {
-            const response = await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises/${revise.id}`, {
+            const response = await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises/${revise.id}`, {
                 data: {
                     comment: [
                         {
@@ -49,7 +49,7 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises/${revise.id}`);
+            await axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises/${revise.id}`);
             onReviseDeleted(revise.id);
             onClose();
         } catch (error) {

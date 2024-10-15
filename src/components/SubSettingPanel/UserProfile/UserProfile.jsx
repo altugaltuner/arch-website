@@ -37,7 +37,7 @@ const UserProfile = () => {
 
     const updateUser = async (userData) => {
         try {
-            await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}`, {
+            await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const UserProfile = () => {
 
     const updatePassword = async (password) => {
         try {
-            await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/auth/update-password`, {
+            await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/auth/update-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

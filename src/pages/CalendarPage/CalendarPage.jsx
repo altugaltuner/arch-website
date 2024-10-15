@@ -53,7 +53,7 @@ const CalendarPage = () => {
             }
         }
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/calendar-events/?populate=users_permissions_user,company');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/calendar-events/?populate=users_permissions_user,company');
             const allEvents = response.data.data;
             setEvents(allEvents);
             const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);

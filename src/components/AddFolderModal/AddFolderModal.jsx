@@ -13,7 +13,7 @@ function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
         }
 
         try {
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders', {
+            const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/personal-folders', {
                 data: {
                     folderName,
                     users_permissions_user: userId

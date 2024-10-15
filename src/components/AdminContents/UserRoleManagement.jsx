@@ -38,15 +38,6 @@ function UserRoleManagement({ users }) {
             for (const userId of selectedUsers) {
                 const user = users.find(user => user.id === userId);
                 if (!user) continue;
-
-                const currentRole = user.access ? user.access.role : 'undefined';
-                if (selectedRole && currentRole !== selectedRole) {
-                    const response = await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${userId}`, {
-                        access: {
-                            role: selectedRole
-                        }
-                    });
-                }
             }
             setFilteredUsers(filteredUsers.map(user => {
                 if (selectedUsers.includes(user.id)) {

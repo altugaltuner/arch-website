@@ -10,7 +10,7 @@ const ChatBox = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch("https://bold-animal-facf707bd9.strapiapp.com/api/chat-room-messages", {
+            fetch("https://wonderful-pleasure-64045d06ec.strapiapp.com/api/chat-room-messages", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

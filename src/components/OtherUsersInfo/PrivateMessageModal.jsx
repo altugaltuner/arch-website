@@ -25,7 +25,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
         }
 
         try {
-            const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/private-messages', {
+            const response = await fetch('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/private-messages', {
                 method: 'POST',
                 body: formData,
             });

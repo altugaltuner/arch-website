@@ -49,7 +49,7 @@ function WorkersPage() {
             }
 
             try {
-                const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}?populate[users][populate]=profession,projects,projects.projectCoverPhoto,profilePic,groups,project_revises,company`);
+                const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies/${usersCompanyId}?populate[users][populate]=profession,projects,projects.projectCoverPhoto,profilePic,groups,project_revises,company`);
                 const companyUsers = response.data.data.attributes.users.data;
                 const formattedUsers = companyUsers.map(user => ({
                     ...user.attributes,

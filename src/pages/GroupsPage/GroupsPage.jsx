@@ -37,7 +37,7 @@ function GroupsPage() {
 
     const handleDeleteGroup = () => {
         try {
-            axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}`).then(() => {
+            axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/${selectedGroupId}`).then(() => {
                 setGroups((prevGroups) => prevGroups.filter((group) => group.id !== selectedGroupId));
                 setShowDeleteModal(false);
                 setSelectedGroupId(null);
@@ -54,7 +54,7 @@ function GroupsPage() {
         };
 
         try {
-            axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}`, payload).then(() => {
+            axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/${selectedGroupId}`, payload).then(() => {
                 setShowEditModal(false);
                 setSelectedGroupId(null);
                 fetchProjectGroups();
@@ -65,7 +65,7 @@ function GroupsPage() {
 
     const fetchProjectGroups = async () => {
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company,groupPassword');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
             setGroups(companyGroups);
@@ -88,7 +88,7 @@ function GroupsPage() {
 
     async function getRoles() {
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
             setRoles(response.data.data);
         } catch (error) {
         }
@@ -116,10 +116,10 @@ function GroupsPage() {
         }));
 
         try {
-            await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/groups', formData);
+            await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups', formData);
             setShowModal(false);
             setNewGroup({ groupName: "", groupPassword: "" });
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups?populate=projects,groupMedia,users_permissions_users,groupChatPic,company');
             const allGroups = response.data.data;
             const companyGroups = allGroups.filter(group => group.attributes.company?.data?.id === usersCompanyId);
             setGroups(companyGroups);
@@ -134,7 +134,7 @@ function GroupsPage() {
         if (group) {
             if (group.attributes.groupPassword === password) {
                 try {
-                    await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}`, {
+                    await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/${selectedGroupId}`, {
                         data: {
                             users_permissions_users: [...group.attributes.users_permissions_users.data.map(u => u.id), user.id]
                         }

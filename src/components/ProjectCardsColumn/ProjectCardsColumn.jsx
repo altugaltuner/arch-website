@@ -41,7 +41,7 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
             try {
                 const updatedProjects = [...userInvolvedProjects, selectedProject];
                 setUserInvolvedProjects(updatedProjects);
-                await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}`, {
+                await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, {
                     projects: updatedProjects.map(project => project.id)
                 });
                 window.location.href = `/projects/${selectedProject.id}`;

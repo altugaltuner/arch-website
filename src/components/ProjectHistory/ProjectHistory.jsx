@@ -21,7 +21,7 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
             }
             try {
                 if (clickedProject?.id) {
-                    const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=*`);
+                    const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=*`);
                     setHistory(response.data.data || []);
                     localStorage.setItem(`project_${clickedProject.id}_history`, JSON.stringify(response.data.data));
                     localStorage.setItem(`project_${clickedProject.id}_history_timestamp`, Date.now().toString());

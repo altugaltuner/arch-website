@@ -46,7 +46,7 @@ function FlowPage() {
                 }
             }
             try {
-                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/companies?populate=*');
+                const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies?populate=*');
                 setCompanies(response.data.data);
                 localStorage.setItem(`cachedCompanies`, JSON.stringify(response.data.data));
                 localStorage.setItem(`companies_timestamp`, Date.now().toString());

@@ -45,7 +45,7 @@ function MyPersonalFiles({ user }) {
             }
 
             try {
-                const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
+                const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
                 const folders = response.data.personal_folders || [];
                 const formattedFolders = folders.map(folder => ({
                     ...folder,
@@ -74,7 +74,7 @@ function MyPersonalFiles({ user }) {
         formData.append('files', file);
 
         try {
-            const uploadResponse = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/upload', formData, {
+            const uploadResponse = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -85,7 +85,7 @@ function MyPersonalFiles({ user }) {
             }
             const updatedContent = [...(selectedFolder.personalFolderContent || []), uploadedFile];
 
-            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${selectedFolder.id}`, {
+            await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/personal-folders/${selectedFolder.id}`, {
                 data: {
                     personalFolderContent: updatedContent.map(file => file.id),
                 },
@@ -113,16 +113,16 @@ function MyPersonalFiles({ user }) {
 
     const downloadFile = () => {
         if (selectedFile) {
-            window.open(`https://bold-animal-facf707bd9.strapiapp.com${selectedFile.url}`, '_blank');
+            window.open(`https://wonderful-pleasure-64045d06ec.strapiapp.com${selectedFile.url}`, '_blank');
         }
     };
 
     const handleFileDelete = async (fileId) => {
         try {
-            await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/upload/files/${fileId}`);
+            await axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload/files/${fileId}`);
             const updatedFolderContent = selectedFolder.personalFolderContent.filter(file => file.id !== fileId);
 
-            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${selectedFolder.id}`, {
+            await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/personal-folders/${selectedFolder.id}`, {
                 data: { personalFolderContent: updatedFolderContent.map(file => file.id) }
             });
 
@@ -150,7 +150,7 @@ function MyPersonalFiles({ user }) {
         if (!folderToDelete) return;
 
         try {
-            await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${folderToDelete.id}`);
+            await axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/personal-folders/${folderToDelete.id}`);
             setPersonalFolders(personalFolders.filter(folder => folder.id !== folderToDelete.id));
             setFolderToDelete(null);
         } catch (error) {
@@ -161,7 +161,7 @@ function MyPersonalFiles({ user }) {
         if (!folderToEdit) return;
 
         try {
-            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/personal-folders/${folderToEdit.id}`, {
+            await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/personal-folders/${folderToEdit.id}`, {
                 data: { folderName: newName }
             });
             setPersonalFolders(personalFolders.map(folder => {

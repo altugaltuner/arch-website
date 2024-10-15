@@ -69,7 +69,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 }
             }
             try {
-                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
+                const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
                 setRoles(response.data.data);
                 localStorage.setItem(`roles`, JSON.stringify(response.data.data));
                 localStorage.setItem(`roles_timestamp`, Date.now().toString());
@@ -90,7 +90,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             }
         }
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=project_folders.folderContent');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects?populate=project_folders.folderContent');
             setProjectFolders(response.data.data);
             localStorage.setItem(`project_${clickedProject.id}_folders`, JSON.stringify(response.data.data));
             localStorage.setItem(`project_${clickedProject.id}_folders_timestamp`, Date.now().toString());
@@ -119,7 +119,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         }));
 
         try {
-            await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/project-folders', formData);
+            await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-folders', formData);
             setShowModal(false);
             setNewFolder({ projectFolderName: "" });
             await fetchProjectFolders();
@@ -131,7 +131,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const handleDeleteFolder = async () => {
         if (folderToDelete) {
             try {
-                await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/project-folders/${folderToDelete}`);
+                await axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-folders/${folderToDelete}`);
                 setShowDeleteModal(false);
                 setFolderToDelete(null);
                 await fetchProjectFolders();
@@ -143,7 +143,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
 
     const handleDeleteFile = async (fileId) => {
         try {
-            await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/upload/files/${fileId}`);
+            await axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload/files/${fileId}`);
             setFileModal(false);
             setCurrentFiles(currentFiles.filter(file => file.id !== fileId));
             createHistoryEntry('silme', fileId.toString(), currentFolder.id.toString());
@@ -169,7 +169,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             }));
 
             try {
-                await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/project-folders/${folderToEdit.id}`, formData);
+                await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-folders/${folderToEdit.id}`, formData);
                 setEditModal(false);
                 setFolderToEdit(null);
                 setNewFolderName("");
@@ -190,7 +190,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         formData.append('files', file);
 
         try {
-            const uploadResponse = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/upload', formData, {
+            const uploadResponse = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -202,7 +202,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 ? [...currentFolder.folderContent.data, uploadedFile]
                 : [uploadedFile];
 
-            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/project-folders/${currentFolder.id}`, {
+            await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-folders/${currentFolder.id}`, {
                 data: {
                     folderContent: updatedContent.map(file => file.id),
                 },
@@ -280,7 +280,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         const folderId = folder.id ? folder.id : folder;
 
         try {
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/histories', {
+            const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/histories', {
                 data: {
                     action,
                     file: fileId.toString(),
@@ -300,7 +300,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         const timestamp = new Date().toISOString();
 
         try {
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/histories', {
+            const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/histories', {
                 data: {
                     action,
                     folder: folderName,

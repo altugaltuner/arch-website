@@ -32,7 +32,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
         }
 
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/professions?populate=*');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions?populate=*');
             const titles = response.data.data.map(item => ({
                 id: item.id,
                 name: item.attributes.professionName,
@@ -80,7 +80,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const handleDeleteProfession = async () => {
         if (jobTitleToDelete) {
             try {
-                await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/professions/${jobTitleToDelete.id}`);
+                await axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions/${jobTitleToDelete.id}`);
                 setJobTitles(prevTitles => prevTitles.filter(title => title.id !== jobTitleToDelete.id));
                 closeDeleteModal();
             } catch (error) {

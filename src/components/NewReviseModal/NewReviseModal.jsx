@@ -17,7 +17,7 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
         const currentDate = new Date().toISOString();
 
         try {
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/project-revises', {
+            const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises', {
                 data: {
                     comment: [
                         {

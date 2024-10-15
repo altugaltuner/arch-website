@@ -21,7 +21,7 @@ function MyActiveProjects({ user }) {
                 }
             }
             try {
-                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users?populate[profession]=*&populate[projects][populate]=projectCoverPhoto&populate=profilePic');
+                const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users?populate[profession]=*&populate[projects][populate]=projectCoverPhoto&populate=profilePic');
                 setAllUsers(response.data || []);
                 localStorage.setItem(`users`, JSON.stringify(response.data));
                 localStorage.setItem(`users_timestamp`, Date.now().toString());

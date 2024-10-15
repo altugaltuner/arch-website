@@ -26,7 +26,7 @@ const Activities = ({ searchTerm }) => {
         }
 
         try {
-            const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
+            const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
             setActivities(response.data.data);
             setTotalPages(response.data.meta.totalPages);
             localStorage.setItem(`cachedRevises`, JSON.stringify(response.data.data));

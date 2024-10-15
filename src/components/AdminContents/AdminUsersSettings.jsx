@@ -22,7 +22,7 @@ function AdminUserSettings({ users }) {
                 return;
             }
         }
-        const endpoint = `https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=*`;
+        const endpoint = `https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects?populate=*`;
         try {
             setLoading(true);
             const { data } = await axios.get(endpoint);

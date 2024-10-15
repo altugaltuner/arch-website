@@ -36,7 +36,7 @@ function GroupMessagePanel({ selectedGroupId }) {
 
             if (selectedGroupId) {
                 try {
-                    const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}?populate=users_permissions_users.role,company`);
+                    const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/${selectedGroupId}?populate=users_permissions_users.role,company`);
                     const groupDetails = response.data.data;
                     if (!groupDetails) {
                         throw new Error("Group details not found");
@@ -68,7 +68,7 @@ function GroupMessagePanel({ selectedGroupId }) {
             socket.emit('message', newMessage);
 
             try {
-                const response = await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${selectedGroupId}`, {
+                const response = await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/${selectedGroupId}`, {
                     data: {
                         chatMessages: [...messages, newMessage],
                     },

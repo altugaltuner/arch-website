@@ -26,7 +26,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
             }
 
             try {
-                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/multiple-messages/?populate=*');
+                const response = await fetch('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/multiple-messages/?populate=*');
                 const result = await response.json();
                 setMessages(result.data);
                 const companyMessages = result.data.filter(message => message.attributes.company?.data?.id === userCompanyId);

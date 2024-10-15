@@ -29,7 +29,7 @@ function AdminContent({ selectedSetting }) {
                 }
             }
             try {
-                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/companies?populate=*,users.access,projects,companyLogo,groups,project_revises');
+                const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies?populate=*,users.access,projects,companyLogo,groups,project_revises');
                 setCompanies(response.data.data);
                 localStorage.setItem(`companies`, JSON.stringify(response.data.data));
                 localStorage.setItem(`companies_timestamp`, Date.now().toString());

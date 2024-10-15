@@ -32,7 +32,7 @@ const AdminCompanySettings = () => {
         formData.append('files', file);
 
         try {
-            const uploadResponse = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/upload', {
+            const uploadResponse = await fetch('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload', {
                 method: 'POST',
                 body: formData,
             });
@@ -40,7 +40,7 @@ const AdminCompanySettings = () => {
             const uploadResult = await uploadResponse.json();
             const newLogoId = uploadResult[0].id;
 
-            await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${user.company.id}`, {
+            await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies/${user.company.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const AdminCompanySettings = () => {
         if (!validateInputs()) return;
 
         try {
-            await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/companies/${user.company.id}`, {
+            await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies/${user.company.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

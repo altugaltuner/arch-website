@@ -12,7 +12,7 @@ function AuthProvider({ children }) {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await api.get('https://bold-animal-facf707bd9.strapiapp.com/api/users/me?populate[company][populate]=companyLogo&populate=profilePic&populate[projects]=*&populate[access]=*', {
+          const response = await api.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/me?populate[company][populate]=companyLogo&populate=profilePic&populate[projects]=*&populate[access]=*', {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -34,7 +34,7 @@ function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const response = await api.post(`https://bold-animal-facf707bd9.strapiapp.com/api/auth/local`, {
+      const response = await api.post(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/auth/local`, {
         identifier: email,
         password: password,
       });
@@ -60,7 +60,7 @@ function AuthProvider({ children }) {
         throw new Error("User ID is missing");
       }
       const { password, ...updateData } = userData;
-      const response = await api.put(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}`, updateData, {
+      const response = await api.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, updateData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -78,7 +78,7 @@ function AuthProvider({ children }) {
       if (!user || !user.id) {
         throw new Error("User ID is missing");
       }
-      const response = await api.put(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}`, { password }, {
+      const response = await api.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, { password }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -95,7 +95,7 @@ function AuthProvider({ children }) {
       if (!user || !user.id) {
         throw new Error("User ID is missing");
       }
-      const uploadResponse = await api.post(`https://bold-animal-facf707bd9.strapiapp.com/api/upload`, formData, {
+      const uploadResponse = await api.post(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -104,7 +104,7 @@ function AuthProvider({ children }) {
 
       if (uploadResponse.data && uploadResponse.data[0]) {
         const profilePicId = uploadResponse.data[0].id;
-        const userResponse = await api.put(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${user.id}`, {
+        const userResponse = await api.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, {
           profilePic: profilePicId
         }, {
           headers: {

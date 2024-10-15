@@ -29,7 +29,7 @@ function MyNotebook() {
             try {
                 const token = localStorage.getItem("token");
                 if (token) {
-                    const response = await fetch("https://bold-animal-facf707bd9.strapiapp.com/api/users/me", {
+                    const response = await fetch("https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/me", {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
@@ -68,7 +68,7 @@ function MyNotebook() {
             const updatedNotes = [...notes, note];
             setNotes(updatedNotes);
 
-            const response = await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${userId}`, {
+            const response = await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${userId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ function MyNotebook() {
             );
             setNotes(updatedNotes);
 
-            const response = await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${userId}`, {
+            const response = await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${userId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ function MyNotebook() {
             const updatedNotes = notes.filter(note => note.id !== noteId);
             setNotes(updatedNotes);
 
-            const response = await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${userId}`, {
+            const response = await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${userId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

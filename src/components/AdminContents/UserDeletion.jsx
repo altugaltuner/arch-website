@@ -35,7 +35,7 @@ function UserDeletion({ users }) {
     const handleDeleteUsers = async () => {
         try {
             for (const userId of selectedUsers) {
-                await axios.delete(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${userId}`);
+                await axios.delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${userId}`);
             }
             setFilteredUsers(filteredUsers.filter(user => !selectedUsers.includes(user.id)));
             setSelectedUsers([]);

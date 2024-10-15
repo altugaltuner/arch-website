@@ -22,7 +22,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             }
         }
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users');
             const data = response.data.map(item => item.email);
             setAllEmails(data);
             localStorage.setItem(`emails`, JSON.stringify(data));
@@ -55,7 +55,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             }
         }
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/company-perm-codes?populate=*');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/company-perm-codes?populate=*');
             const data = response.data.data.map(item => item.attributes.code);
             setCompanyPermissionCodes(data);
             localStorage.setItem(`permission_codes`, JSON.stringify(data));
@@ -70,7 +70,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
     const createCompany = async (companyName, workingArea, companyCode) => {
         try {
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/companies', {
+            const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies', {
                 data: {
                     companyName: companyName,
                     workingArea: workingArea,
@@ -87,7 +87,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
         try {
             const username = `${adminName} ${adminSurname}${Math.floor(Math.random() * 10000)}`;
 
-            const response = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/users', {
+            const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users', {
                 username: username,
                 email: adminEmail,
                 password: adminPassword,

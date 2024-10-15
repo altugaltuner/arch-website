@@ -45,7 +45,7 @@ function ProjectsMainPage() {
     }
 
     try {
-      const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
+      const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
       setRoles(response.data.data);
       localStorage.setItem(`roles`, JSON.stringify(data));
       localStorage.setItem(`roles_timestamp`, Date.now().toString());
@@ -71,7 +71,7 @@ function ProjectsMainPage() {
 
       try {
         const response = await axios.get(
-          `https://bold-animal-facf707bd9.strapiapp.com/api/companies/${usersCompanyId}?populate[projects][populate]=*`
+          `https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies/${usersCompanyId}?populate[projects][populate]=*`
         );
         const companyData = response.data.data;
 
@@ -132,7 +132,7 @@ function ProjectsMainPage() {
     }
 
     try {
-      const response = await axios.post("https://bold-animal-facf707bd9.strapiapp.com/api/projects", formData, {
+      const response = await axios.post("https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -166,12 +166,12 @@ function ProjectsMainPage() {
     }
 
     try {
-      await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToEdit.id}`, formData);
+      await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects/${projectToEdit.id}`, formData);
       setShowEditModal(false);
       setEditProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
 
       const response = await axios.get(
-        "https://bold-animal-facf707bd9.strapiapp.com/api/projects?populate=projectCoverPhoto"
+        "https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects?populate=projectCoverPhoto"
       );
       const companyData = response.data.data;
       const filteredProjects = companyData.attributes.projects.data.filter(
@@ -205,7 +205,7 @@ function ProjectsMainPage() {
     if (!projectToDelete) return;
 
     axios
-      .delete(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${projectToDelete}`)
+      .delete(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects/${projectToDelete}`)
       .then(() => {
         setCompanyProjects(
           companyProjects.filter((project) => project.id !== projectToDelete)

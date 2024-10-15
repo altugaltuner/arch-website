@@ -37,7 +37,7 @@ function ProjectComments({ clickedProject }) {
             }
         }
         try {
-            const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?filters[project][id][$eq]=${project.id}&populate=*`);
+            const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises?filters[project][id][$eq]=${project.id}&populate=*`);
             const projectRevises = response.data.data;
 
             const users = project.attributes.users.data;

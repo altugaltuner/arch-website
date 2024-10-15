@@ -33,7 +33,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
         }
 
         try {
-            const uploadResponse = await axios.post('https://bold-animal-facf707bd9.strapiapp.com/api/upload', formData, {
+            const uploadResponse = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -43,7 +43,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 ? [...folderState.folderContent.data, uploadedFile]
                 : [uploadedFile];
 
-            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/project-folders/${folderState.id}`, {
+            await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-folders/${folderState.id}`, {
                 data: {
                     folderContent: updatedContent.map(file => file.id),
                 },

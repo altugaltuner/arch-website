@@ -19,7 +19,7 @@ const GroupMembersModal = ({ show, onClose, groupId }) => {
                     }
                 }
                 try {
-                    const response = await axios.get(`https://bold-animal-facf707bd9.strapiapp.com/api/groups/${groupId}?populate[users_permissions_users][populate]=access`);
+                    const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/${groupId}?populate[users_permissions_users][populate]=access`);
                     setMembers(response.data.data.attributes.users_permissions_users.data);
                     localStorage.setItem(`group_${groupId}_members`, JSON.stringify(response.data.data.attributes.users_permissions_users.data));
                     localStorage.setItem(`group_${groupId}_members_timestamp`, Date.now().toString());

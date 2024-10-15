@@ -28,7 +28,7 @@ function ProjectBasedRevisions({ clickedProject }) {
                 }
             }
             try {
-                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/project-revises?populate=*');
+                const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises?populate=*');
                 setProjectBasedRevisions(response.data.data);
                 localStorage.setItem(`projectBasedRevisions`, JSON.stringify(response.data.data));
                 localStorage.setItem(`projectBasedRevisions_timestamp`, Date.now().toString());

@@ -17,7 +17,7 @@ function OtherUsersInfo({ employee }) {
     useEffect(() => {
         const fetchProfessions = async () => {
             try {
-                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/professions?populate=*');
+                const response = await fetch('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions?populate=*');
                 const result = await response.json();
                 setProfessions(result.data);
             } catch (error) {
@@ -38,7 +38,7 @@ function OtherUsersInfo({ employee }) {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await fetch('https://bold-animal-facf707bd9.strapiapp.com/api/private-messages/?populate=*');
+                const response = await fetch('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/private-messages/?populate=*');
                 const result = await response.json();
                 setPrivateMessages(result.data);
             } catch (error) {
@@ -82,7 +82,7 @@ function OtherUsersInfo({ employee }) {
 
     const handleSaveClick = async () => {
         try {
-            const response = await fetch(`https://bold-animal-facf707bd9.strapiapp.com/api/users/${employee?.id}`, {
+            const response = await fetch(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${employee?.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

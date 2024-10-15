@@ -35,7 +35,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
             }
         }
         try {
-            const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/accesses');
+            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
             setRoles(response.data.data);
             localStorage.setItem(`roles`, JSON.stringify(response.data.data));
             localStorage.setItem(`roles_timestamp`, Date.now().toString());
@@ -55,7 +55,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
                 }
             }
             try {
-                const response = await axios.get('https://bold-animal-facf707bd9.strapiapp.com/api/users?populate=profession,projects,profilePic');
+                const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users?populate=profession,projects,profilePic');
                 setAllUsers(response.data);
                 localStorage.setItem(`employees`, JSON.stringify(response.data));
                 localStorage.setItem(`employees_timestamp`, Date.now().toString());
@@ -78,7 +78,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
 
     const handleAddUsers = async (userIds) => {
         try {
-            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${clickedProject.id}?populate=*`, {
+            await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects/${clickedProject.id}?populate=*`, {
                 data: {
                     users: [...clickedProject.attributes.users.data.map(user => user.id), ...userIds]
                 }
@@ -91,7 +91,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
 
     const handleRemoveUsers = async (userIds) => {
         try {
-            await axios.put(`https://bold-animal-facf707bd9.strapiapp.com/api/projects/${clickedProject.id}?populate=*`, {
+            await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects/${clickedProject.id}?populate=*`, {
                 data: {
                     users: clickedProject.attributes.users.data.filter(user => !userIds.includes(user.id))
                 }
