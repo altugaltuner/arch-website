@@ -2,7 +2,7 @@
 import React from "react";
 import "./CompanyName.scss";
 
-const CompanyName = ({ onSearch }) => {
+const CompanyName = () => {
     const companyName = "Altınkaya İnşaat";
 
     const handleSearchChange = (e) => {
