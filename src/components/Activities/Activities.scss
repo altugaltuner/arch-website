@@ -74,7 +74,6 @@
 
                         &.table-data-fordate {
                             width: 10%;
-                            /* Burada istediğiniz rengi belirleyin */
                         }
                     }
                 }
@@ -87,6 +86,7 @@
             align-items: center;
             margin: 20px 0;
             font-size: 1.2rem;
+            gap: 20px;
 
             .pagination-button {
                 background-color: #007bff;

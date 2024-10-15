@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import "./Activities.scss";
 import axios from "axios";
 import { useAuth } from "../../components/AuthProvider";
+import Button from '@mui/material/Button';
 
 const CACHE_DURATION = 15 * 60 * 1000;
 
@@ -114,13 +115,11 @@ const Activities = ({ searchTerm }) => {
                     </tbody>
                 </table>
                 <div className="pagination-controls">
-                    <button onClick={loadPreviousPage} disabled={page === 1} className="pagination-button">
-                        Önceki
-                    </button>
+                    <Button onClick={loadPreviousPage} disabled={page === 1} variant="contained">Önceki</Button>
                     <span>Sayfa {page} / {totalPages}</span>
-                    <button onClick={loadNextPage} disabled={page === totalPages} className="pagination-button">
+                    <Button onClick={loadNextPage} disabled={page === totalPages} variant="contained">
                         Sonraki
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
