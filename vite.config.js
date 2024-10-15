@@ -13,6 +13,7 @@ export default defineConfig({
     host: '0.0.0.0'
   },
   build: {
+    sourcemap: false,
     rollupOptions: {
       external: ['react-redux', '@reduxjs/toolkit']
     }

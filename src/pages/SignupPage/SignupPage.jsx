@@ -77,7 +77,7 @@ function SignupPage() {
         const age = Date.now() - parseInt(cachedTimestampCompanies, 10);
         if (age < CACHE_DURATION) {
           const companies = JSON.parse(cachedCompanies);
-          const matchingCompany = companies.find(company => company.attributes.companyID === companyCode);
+          const matchingCompany = companies.find(company => company?.attributes?.companyID === companyCode);
           if (!matchingCompany) {
             setCompanyCodeError("Bu şirket kodu ile eşleşen bir şirket bulunamadı.");
             return;
@@ -90,7 +90,7 @@ function SignupPage() {
       localStorage.setItem(`companies`, JSON.stringify(companies));
       localStorage.setItem(`companies_timestamp`, Date.now().toString());
 
-      const matchingCompany = companies.find(company => company.attributes.companyID === companyCode);
+      const matchingCompany = companies.find(company => company?.attributes?.companyID === companyCode);
       if (!matchingCompany) {
         setCompanyCodeError("Bu şirket kodu ile eşleşen bir şirket bulunamadı.");
         return;

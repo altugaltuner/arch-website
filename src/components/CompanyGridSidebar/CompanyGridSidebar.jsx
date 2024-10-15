@@ -36,10 +36,10 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
             const titles = response.data.data.map(item => ({
                 id: item.id,
                 name: item.attributes.professionName,
-                companyID: item.attributes.company.data.attributes.companyID
+                companyID: item?.attributes?.company.data?.attributes?.companyID
             }));
             setJobTitles(titles);
-            const filteredTitles = titles.filter(title => title.companyID === user.company.companyID);
+            const filteredTitles = titles.filter(title => title?.companyID === user?.company?.companyID);
             setFilteredJobTitles(filteredTitles);
 
             localStorage.setItem(`cachedJobTitles`, JSON.stringify(filteredTitles));

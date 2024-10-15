@@ -44,7 +44,7 @@ function AdminContent({ selectedSetting }) {
     useEffect(() => {
         if (companies.length && usersCompanyId) {
             const filterCompanyFunction = () => {
-                return companies.filter(company => company.attributes.companyID === usersCompanyId);
+                return companies.filter(company => company?.attributes?.companyID === usersCompanyId);
             };
             setFilteredCompany(filterCompanyFunction());
         }
