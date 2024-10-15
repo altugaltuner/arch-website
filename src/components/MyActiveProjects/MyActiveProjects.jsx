@@ -62,6 +62,7 @@ function MyActiveProjects({ user }) {
     return (
         <div className="myactive-projects-main">
             <div className="active-projects-container">
+                {userElements.length === 0 && <h3 className="div-header">Dahil Olduğunuz Bir Proje Bulunmamaktadır.</h3>}
                 {userElements}
             </div>
         </div>

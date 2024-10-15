@@ -51,7 +51,7 @@ function AdminContent({ selectedSetting }) {
     }, [companies, usersCompanyId]);
 
     if (!filteredCompany.length) {
-        return <div>Yükleniyor...</div>;
+        return <div className="admin-loading">Yükleniyor...</div>;
     }
     const finishedProjectCount = filteredCompany[0]?.attributes?.projects?.data?.filter(project => project.attributes.projectProcess === 100).length || 0;
 
