@@ -68,7 +68,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
         }
     };
 
-    const isUserAuthorized = userRole === "Admin" || userId === event.attributes.users_permissions_user.data.id;
+    const isUserAuthorized = userRole === "Admin" || (event?.attributes?.users_permissions_user?.data?.id && userId === event.attributes.users_permissions_user.data.id);
 
     return (
         <div className="edit-event-modal">

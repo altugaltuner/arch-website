@@ -3,13 +3,11 @@ import "./SendBulkMessageModal.scss";
 import { useAuth } from "../../components/AuthProvider";
 
 function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
+    const { user } = useAuth();
     const [message, setMessage] = useState('');
     const messageInputRef = useRef(null);
     const [messageHeader, setMessageHeader] = useState('');
     const [messageFile, setMessageFile] = useState(null);
-
-    const { user } = useAuth();
-
     const userId = user?.id;
 
     const handleFileChange = (e) => {
@@ -21,7 +19,8 @@ function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
         formData.append('data', JSON.stringify({
             header: messageHeader,
             content: message,
-            users_permissions_user: userId
+            users_permissions_user: userId,
+
         }));
 
         if (messageFile) {
@@ -42,8 +41,10 @@ function SendBulkMessageModal({ setShowModal, setUpdatedAdminMessages }) {
             setUpdatedAdminMessages((prevMessages) => [result.data, ...prevMessages]);
             setShowModal(false);
         } catch (error) {
+            console.error('Mesaj gönderme hatası:', error);
         }
     };
+
 
     return (
         <div className="send-bulk-message-modal">

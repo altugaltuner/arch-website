@@ -175,7 +175,7 @@ const CalendarPage = () => {
                                         </p>
                                         <p className="events-header-date">Yer: {event.attributes.eventLocation}</p>
                                         <p className="events-paragraph">{event.attributes.description}</p>
-                                        <p className="events-paragraph">{event.attributes.users_permissions_user.data.attributes.username}</p>
+                                        <p className="events-paragraph">{event?.attributes?.users_permissions_user?.data?.attributes?.username}</p>
                                         {(userRole === "Admin" || user.id === event.attributes.users_permissions_user.data.id) && (
                                             <button className="edit-event-calendar" onClick={() => openEditModal(event)}>Düzenle</button>
                                         )}

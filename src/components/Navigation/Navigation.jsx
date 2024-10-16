@@ -25,7 +25,6 @@ function Navigation() {
         { id: 'surveys-nav-id', to: '/surveys', logo: SurveysLogo, name: 'Anketler' },
         { id: 'employees-nav-id', to: '/workers', logo: employeesLogo, name: ' Ekip Üyeleri' },
         { id: 'calendar-nav-id', to: '/calendar', logo: calendarLogo, name: ' Takvim' },
-        { id: 'materials-nav-id', to: '/materials', logo: materialsLogo, name: ' Metraj' },
         { id: 'my-profile-nav-id', to: '/me', logo: myLogo, name: 'Profilim' },
         { id: 'settings-nav-id', to: '/settings', logo: settingsLogo, name: 'Ayarlar' }
     ];

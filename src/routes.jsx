@@ -12,7 +12,6 @@ import FirstPage from "./pages/FirstPage/FirstPage.jsx";
 import FlowPage from "./pages/FlowPage/FlowPage.jsx";
 import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
 import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx";
-import MaterialsPage from "./pages/MaterialsPage/MaterialsPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 import SurveysPage from "./pages/SurveysPage/SurveysPage.jsx";
 
@@ -74,14 +73,6 @@ const routes = [
     element: (
       <ProtectedRoute>
         <CalendarPage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/materials",
-    element: (
-      <ProtectedRoute>
-        <MaterialsPage />
       </ProtectedRoute>
     ),
   },

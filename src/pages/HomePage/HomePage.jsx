@@ -24,9 +24,6 @@ function HomePage() {
       <Navigation />
       <div className="homepage-column">
         <CompanyName setIsLoading={setIsLoading} onSearch={handleSearch} />
-        <Activities searchTerm={searchTerm} />
-        <div className="last-surveys">Son Anketler
-        </div>
       </div>
     </main>
   );

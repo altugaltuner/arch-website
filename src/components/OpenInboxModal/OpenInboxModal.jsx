@@ -16,6 +16,8 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                 setMessages(result.data);
                 const companyMessages = result.data.filter(message => message.attributes.company?.data?.id === userCompanyId);
                 setFilteredMessages(companyMessages);
+                console.log(result.data);
+                console.log(companyMessages);
             } catch (error) {
             }
         };
