@@ -5,30 +5,17 @@ import AdminGroupSettings from './AdminGroupSettings.';
 import './AdminUsersSettings.scss';
 import axios from 'axios';
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function AdminUserSettings({ users }) {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [projects, setProjects] = useState(null);
 
     const getProjectDetails = async () => {
-        const cachedProjects = localStorage.getItem(`projects`);
-        const cachedTimestamp = localStorage.getItem(`projects_timestamp`);
-        if (cachedProjects && cachedTimestamp) {
-            const age = Date.now() - parseInt(cachedTimestamp, 10);
-            if (age < CACHE_DURATION) {
-                setProjects(JSON.parse(cachedProjects));
-                return;
-            }
-        }
         const endpoint = `https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects?populate=*`;
         try {
             setLoading(true);
             const { data } = await axios.get(endpoint);
             setProjects(data.data);
-            localStorage.setItem(`projects`, JSON.stringify(data.data));
-            localStorage.setItem(`projects_timestamp`, Date.now().toString());
         } catch (error) {
             setError(error);
         } finally {

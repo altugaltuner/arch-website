@@ -6,8 +6,6 @@ import axios from 'axios';
 import deleteIcon from '../../assets/icons/delete-icon.png';
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [jobTitles, setJobTitles] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,17 +18,6 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
 
     const loadJobTitles = async () => {
 
-        const cachedJobTitles = localStorage.getItem(`cachedJobTitles`);
-        const cachedTimestampJobTitles = localStorage.getItem(`jobTitles_timestamp`);
-
-        if (cachedJobTitles && cachedTimestampJobTitles) {
-            const age = Date.now() - parseInt(cachedTimestampJobTitles, 10);
-            if (age < CACHE_DURATION) {
-                setJobTitles(JSON.parse(cachedJobTitles));
-                return;
-            }
-        }
-
         try {
             const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions?populate=*');
             const titles = response.data.data.map(item => ({
@@ -41,14 +28,9 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
             setJobTitles(titles);
             const filteredTitles = titles.filter(title => title?.companyID === user?.company?.companyID);
             setFilteredJobTitles(filteredTitles);
-
-            localStorage.setItem(`cachedJobTitles`, JSON.stringify(filteredTitles));
-            localStorage.setItem(`jobTitles_timestamp`, Date.now().toString());
-
         } catch (error) {
         }
     };
-
 
     useEffect(() => {
         loadJobTitles();

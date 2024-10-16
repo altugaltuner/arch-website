@@ -19,8 +19,6 @@ import FileModal from "../FileModal/FileModal";
 import FolderContent from "../FolderContent/FolderContent";
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
 
@@ -51,51 +49,27 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         "txt": txtIcon,
     };
 
-    const [newFolder, setNewFolder] = useState({
-        projectFolderName: ""
-    });
+    const [newFolder, setNewFolder] = useState({ projectFolderName: "" });
     const [currentFolder, setCurrentFolder] = useState(null);
     const [parentFolder, setParentFolder] = useState(null);
 
     useEffect(() => {
         async function getRoles() {
-            const cachedRoles = localStorage.getItem(`roles`);
-            const cachedTimestampRoles = localStorage.getItem(`roles_timestamp`);
-            if (cachedRoles && cachedTimestampRoles) {
-                const age = Date.now() - parseInt(cachedTimestampRoles, 10);
-                if (age < CACHE_DURATION) {
-                    setRoles(JSON.parse(cachedRoles));
-                    return;
-                }
-            }
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
                 setRoles(response.data.data);
-                localStorage.setItem(`roles`, JSON.stringify(response.data.data));
-                localStorage.setItem(`roles_timestamp`, Date.now().toString());
-            } catch (error) {
-            }
+            } catch (error) { }
         }
         getRoles();
     }, []);
 
     const fetchProjectFolders = async () => {
-        const cachedProjectFolders = localStorage.getItem(`project_${clickedProject.id}_folders`);
-        const cachedTimestampFolders = localStorage.getItem(`project_${clickedProject.id}_folders_timestamp`);
-        if (cachedProjectFolders && cachedTimestampFolders) {
-            const age = Date.now() - parseInt(cachedTimestampFolders, 10);
-            if (age < CACHE_DURATION) {
-                setProjectFolders(JSON.parse(cachedProjectFolders));
-                return;
-            }
-        }
         try {
             const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects?populate=project_folders.folderContent');
             setProjectFolders(response.data.data);
             localStorage.setItem(`project_${clickedProject.id}_folders`, JSON.stringify(response.data.data));
             localStorage.setItem(`project_${clickedProject.id}_folders_timestamp`, Date.now().toString());
-        } catch (error) {
-        }
+        } catch (error) { }
     };
 
     useEffect(() => {
@@ -155,7 +129,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         const folder = projectFolders.find((project) =>
             project.attributes.project_folders.data.some((folder) => folder.id === id)
         )?.attributes.project_folders.data.find((folder) => folder.id === id);
-
         setFolderToEdit(folder);
         setNewFolderName(folder.attributes.projectFolderName);
         setEditModal(true);
@@ -197,7 +170,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             });
 
             const uploadedFile = uploadResponse.data[0];
-
             const updatedContent = currentFolder.folderContent && currentFolder.folderContent.data
                 ? [...currentFolder.folderContent.data, uploadedFile]
                 : [uploadedFile];
@@ -220,14 +192,9 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 }
                 return folder;
             }));
-
             createHistoryEntry('yükleme', uploadedFile.id.toString(), currentFolder.id.toString());
-
-        } catch (error) {
-        }
+        } catch (error) { }
     };
-
-
 
     const uploadFile = () => {
         fileInputRef.current.click();
@@ -291,8 +258,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 }
             });
             setNewHistoryEntry(response.data.data);
-        } catch (error) {
-        }
+        } catch (error) { }
     };
 
     const createFolderHistoryEntry = async (action, folderName) => {
@@ -421,7 +387,6 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                     handleEditSubmit={handleEditSubmit}
                 />
             )}
-
             <input
                 ref={fileInputRef}
                 type="file"

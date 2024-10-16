@@ -7,8 +7,6 @@ import axios from 'axios';
 import { useAuth } from "../../components/AuthProvider";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function ProjectComments({ clickedProject }) {
     const [commentsWithDetails, setCommentsWithDetails] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,22 +24,10 @@ function ProjectComments({ clickedProject }) {
     }, [clickedProject]);
 
     const fetchComments = async (project) => {
-        const cachedComments = localStorage.getItem(`project_${project.id}_comments`);
-        const cachedTimestamp = localStorage.getItem(`project_${project.id}_comments_timestamp`);
-
-        if (cachedComments && cachedTimestamp) {
-            const age = Date.now() - parseInt(cachedTimestamp, 10);
-            if (age < CACHE_DURATION) {
-                setCommentsWithDetails(JSON.parse(cachedComments));
-                return;
-            }
-        }
         try {
             const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises?filters[project][id][$eq]=${project.id}&populate=*`);
             const projectRevises = response.data.data;
-
             const users = project.attributes.users.data;
-
             const reviseStateMap = {
                 1: "Yapılacak",
                 2: "İşleme Alındı",
@@ -64,10 +50,7 @@ function ProjectComments({ clickedProject }) {
                     })
                 )
             );
-
             setCommentsWithDetails(commentsWithDetails);
-            localStorage.setItem(`project_${project.id}_comments`, JSON.stringify(commentsWithDetails));
-            localStorage.setItem(`project_${project.id}_comments_timestamp`, Date.now().toString());
         } catch (error) {
         }
     };

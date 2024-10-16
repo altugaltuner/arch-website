@@ -8,8 +8,6 @@ import { useAuth } from "../../components/AuthProvider";
 import backButton from "../../assets/icons/back-button.png";
 import forwardButton from "../../assets/icons/forward-button.png";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 const daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
 const generateCalendar = (year, month) => {
@@ -40,29 +38,13 @@ const CalendarPage = () => {
 
     const fetchEvents = useCallback(async () => {
 
-        const cachedEvents = localStorage.getItem(`cachedEvents`);
-        const cachedTimestampEvents = localStorage.getItem(`events_timestamp`);
-
-        if (cachedEvents && cachedTimestampEvents) {
-            const age = Date.now() - parseInt(cachedTimestampEvents, 10);
-            if (age < CACHE_DURATION) {
-                setEvents(JSON.parse(cachedEvents));
-                const companyEvents = JSON.parse(cachedEvents)?.filter(event => event.attributes.company.data.id === userCompany);
-                setFilteredEvents(companyEvents);
-                return;
-            }
-        }
         try {
             const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/calendar-events/?populate=users_permissions_user,company');
             const allEvents = response.data.data;
             setEvents(allEvents);
             const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);
             setFilteredEvents(companyEvents);
-            localStorage.setItem(`cachedEvents`, JSON.stringify(allEvents));
-            localStorage.setItem(`events_timestamp`, Date.now().toString());
-
-        } catch (error) {
-        }
+        } catch (error) { }
     }, [userCompany]);
 
     useEffect(() => {
@@ -160,7 +142,6 @@ const CalendarPage = () => {
                             const eventDate = new Date(event.attributes.date);
                             return eventDate.toDateString() === eventDateString;
                         });
-
                         const isToday = date.toDateString() === today.toDateString();
 
                         return (

@@ -10,8 +10,6 @@ import backButton from "../../assets/icons/back-button.png";
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function MyPersonalFiles({ user }) {
     const [personalFolders, setPersonalFolders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -32,17 +30,6 @@ function MyPersonalFiles({ user }) {
         }
 
         const fetchData = async () => {
-            const cachedPersonalFolders = localStorage.getItem(`personal_folders_${user.id}`);
-            const cachedTimestampPersonalFolders = localStorage.getItem(`personal_folders_${user.id}_timestamp`);
-
-            if (cachedPersonalFolders && cachedTimestampPersonalFolders) {
-                const age = Date.now() - parseInt(cachedTimestampPersonalFolders, 10);
-                if (age < CACHE_DURATION) {
-                    setPersonalFolders(JSON.parse(cachedPersonalFolders));
-                    setIsLoading(false);
-                    return;
-                }
-            }
 
             try {
                 const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}?populate=personal_folders.personalFolderContent`);
@@ -52,8 +39,6 @@ function MyPersonalFiles({ user }) {
                     personalFolderContent: folder.personalFolderContent || []
                 }));
                 setPersonalFolders(formattedFolders);
-                localStorage.setItem(`personal_folders_${user.id}`, JSON.stringify(formattedFolders));
-                localStorage.setItem(`personal_folders_${user.id}_timestamp`, Date.now().toString());
             } catch (error) {
             } finally {
                 setIsLoading(false);
@@ -69,7 +54,6 @@ function MyPersonalFiles({ user }) {
         if (!file) {
             return;
         }
-
         const formData = new FormData();
         formData.append('files', file);
 

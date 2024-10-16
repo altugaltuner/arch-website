@@ -2,29 +2,15 @@ import React, { useState, useEffect } from "react";
 import "../MyActiveProjects/MyActiveProjects.scss";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-const CACHE_DURATION = 15 * 60 * 1000;
-
 
 function MyActiveProjects({ user }) {
     const [allUsers, setAllUsers] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         const fetchData = async () => {
-            const cachedUsers = localStorage.getItem(`users`);
-            const cachedTimestampUsers = localStorage.getItem(`users_timestamp`);
-
-            if (cachedUsers && cachedTimestampUsers) {
-                const age = Date.now() - parseInt(cachedTimestampUsers, 10);
-                if (age < CACHE_DURATION) {
-                    setAllUsers(JSON.parse(cachedUsers));
-                    return;
-                }
-            }
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users?populate[profession]=*&populate[projects][populate]=projectCoverPhoto&populate=profilePic');
                 setAllUsers(response.data || []);
-                localStorage.setItem(`users`, JSON.stringify(response.data));
-                localStorage.setItem(`users_timestamp`, Date.now().toString());
             } catch (error) {
             }
         };
@@ -55,7 +41,6 @@ function MyActiveProjects({ user }) {
     ));
 
     const handleProjectClick = (projectId) => {
-
         navigate(`/projects/${projectId}`);
     };
 

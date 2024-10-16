@@ -10,8 +10,6 @@ import OpenInboxModal from "../../components/OpenInboxModal/OpenInboxModal";
 import inboxLogo from "../../assets/icons/inbox-logo.png";
 import MyNotebook from "../../components/MyNotebook/MyNotebook";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function AboutMePage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -19,17 +17,6 @@ function AboutMePage() {
 
     useEffect(() => {
         const checkCurrentPerson = async () => {
-            const cachedUser = localStorage.getItem(`user-me`);
-            const cachedTimestampUser = localStorage.getItem(`user-me_timestamp`);
-
-            if (cachedUser && cachedTimestampUser) {
-                const age = Date.now() - parseInt(cachedTimestampUser, 10);
-                if (age < CACHE_DURATION) {
-                    setUser(JSON.parse(cachedUser));
-                    return;
-                }
-            }
-
             try {
                 const token = localStorage.getItem('token');
                 if (token) {
@@ -39,8 +26,6 @@ function AboutMePage() {
                         }
                     });
                     setUser(response.data);
-                    localStorage.setItem(`user-me`, JSON.stringify(response.data));
-                    localStorage.setItem(`user-me_timestamp`, Date.now().toString());
                 } else {
                     setUser(null);
                 }
@@ -50,7 +35,6 @@ function AboutMePage() {
                 setLoading(false);
             }
         };
-
         checkCurrentPerson();
     }, []);
 

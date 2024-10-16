@@ -6,8 +6,6 @@ import RemoveUserModal from '../../components/RemoveUserModal/RemoveUserModal';
 import SelectedEmployeeModal from "../../components/SelectedEmployeeModal/SelectedEmployeeModal";
 import { useAuth } from "../../components/AuthProvider";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [employees, setEmployees] = useState([]);
     const [roles, setRoles] = useState([]);
@@ -24,45 +22,13 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
         setSelectedEmployee(employee);
     };
 
-    async function getRoles() {
-        const cachedRole = localStorage.getItem(`roles`);
-        const cachedTimestampRole = localStorage.getItem(`roles_timestamp`);
-        if (cachedRole && cachedTimestampRole) {
-            const age = Date.now() - parseInt(cachedTimestampRole, 10);
-            if (age < CACHE_DURATION) {
-                setRoles(JSON.parse(cachedRole));
-                return;
-            }
-        }
-        try {
-            const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
-            setRoles(response.data.data);
-            localStorage.setItem(`roles`, JSON.stringify(response.data.data));
-            localStorage.setItem(`roles_timestamp`, Date.now().toString());
-        } catch (error) {
-        }
-    }
-
     useEffect(() => {
         const fetchEmployees = async () => {
-            const cachedEmployees = localStorage.getItem(`employees`);
-            const cachedTimestampEmployees = localStorage.getItem(`employees_timestamp`);
-            if (cachedEmployees && cachedTimestampEmployees) {
-                const age = Date.now() - parseInt(cachedTimestampEmployees, 10);
-                if (age < CACHE_DURATION) {
-                    setAllUsers(JSON.parse(cachedEmployees));
-                    return;
-                }
-            }
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users?populate=profession,projects,profilePic');
                 setAllUsers(response.data);
-                localStorage.setItem(`employees`, JSON.stringify(response.data));
-                localStorage.setItem(`employees_timestamp`, Date.now().toString());
-            } catch (error) {
-            }
+            } catch (error) { }
         };
-
         fetchEmployees();
     }, []);
 

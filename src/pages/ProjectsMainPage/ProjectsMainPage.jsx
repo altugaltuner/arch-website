@@ -8,8 +8,6 @@ import AddNewProjectModal from "../../components/AddNewProjectModal/AddNewProjec
 import ProjectCardsColumn from "../../components/ProjectCardsColumn/ProjectCardsColumn";
 import EditProjectModal from "../../components/EditProjectModal/EditProjectModal";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function ProjectsMainPage() {
   const { user } = useAuth();
   const usersCompanyId = user?.company?.id;
@@ -32,23 +30,12 @@ function ProjectsMainPage() {
   });
 
   async function getRoles() {
-    const cachedRole = localStorage.getItem(`roles`);
-    const cachedTimestampRole = localStorage.getItem(`roles_timestamp`);
-
-    if (cachedRole && cachedTimestampRole) {
-      const age = Date.now() - parseInt(cachedTimestampRole, 10);
-      if (age < CACHE_DURATION) {
-        setRoles(JSON.parse(cachedRole));
-        return;
-      }
-    }
-
     try {
       const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
       setRoles(response.data.data);
-      localStorage.setItem(`roles`, JSON.stringify(data));
-      localStorage.setItem(`roles_timestamp`, Date.now().toString());
-    } catch (error) { }
+    } catch (error) {
+      console.error("Error fetching roles:", error);
+    }
   }
 
   useEffect(() => {
@@ -57,17 +44,6 @@ function ProjectsMainPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const cachedProject = localStorage.getItem(`projects_${usersCompanyId}`);
-      const cachedTimestamp = localStorage.getItem(`projects_${usersCompanyId}_timestamp`);
-
-      if (cachedProject && cachedTimestamp) {
-        const age = Date.now() - parseInt(cachedTimestamp, 10);
-        if (age < CACHE_DURATION) {
-          setCompanyProjects(JSON.parse(cachedProject));
-          return;
-        }
-      }
-
       try {
         const response = await axios.get(
           `https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies/${usersCompanyId}?populate[projects][populate]=*`
@@ -78,9 +54,8 @@ function ProjectsMainPage() {
           (project) => project.attributes.company.data.id === usersCompanyId
         );
         setCompanyProjects(filteredProjects);
-        localStorage.setItem(`projects_${usersCompanyId}`, JSON.stringify(filteredProjects));
-        localStorage.setItem(`projects_${usersCompanyId}_timestamp`, Date.now().toString());
       } catch (error) {
+        console.error("Error fetching projects:", error);
       }
     };
     fetchData();
@@ -130,8 +105,7 @@ function ProjectsMainPage() {
       formData.append("files.projectCoverPhoto", newProject.projectCoverPhoto);
     }
 
-    // Retrieve token (from context or local storage)
-    const token = localStorage.getItem('token'); // Adjust according to your authentication setup
+    const token = localStorage.getItem('token');
 
     if (!token) {
       console.error("No token found, cannot authenticate request.");

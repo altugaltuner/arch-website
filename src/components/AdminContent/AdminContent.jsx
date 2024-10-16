@@ -8,8 +8,6 @@ import AdminUsersSettings from "../../components/AdminContents/AdminUsersSetting
 import AdminSupportSettings from '../../components/AdminContents/AdminSupportSettings';
 import AdminSendMessage from '../../components/AdminContents/AdminSendMessage';
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function AdminContent({ selectedSetting }) {
     const { user } = useAuth();
     const usersCompanyId = user?.company?.companyID;
@@ -18,21 +16,9 @@ function AdminContent({ selectedSetting }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const cachedCompanies = localStorage.getItem(`companies`);
-            const cachedTimesStampCompanies = localStorage.getItem(`companies_timestamp`);
-
-            if (cachedCompanies && cachedTimesStampCompanies) {
-                const age = Date.now() - parseInt(cachedTimesStampCompanies, 10);
-                if (age < CACHE_DURATION) {
-                    setCompanies(JSON.parse(cachedCompanies));
-                    return;
-                }
-            }
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies?populate=*,users.access,projects,companyLogo,groups,project_revises');
                 setCompanies(response.data.data);
-                localStorage.setItem(`companies`, JSON.stringify(response.data.data));
-                localStorage.setItem(`companies_timestamp`, Date.now().toString());
 
             } catch (error) {
                 console.error('Error fetching the data', error);

@@ -7,8 +7,6 @@ import Navigation from "../../components/Navigation/Navigation";
 import { useAuth } from "../../components/AuthProvider";
 import axios from "axios";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function MaterialsPage() {
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
@@ -20,24 +18,12 @@ function MaterialsPage() {
     useEffect(() => {
         const fetchData = async () => {
 
-            const cachedProjects = localStorage.getItem(`projects_${usersCompanyId}`);
-            const cachedTimestampProjects = localStorage.getItem(`projects_${usersCompanyId}_timestamp`);
-
-            if (cachedProjects && cachedTimestampProjects) {
-                const age = Date.now() - parseInt(cachedTimestampProjects, 10);
-                if (age < CACHE_DURATION) {
-                    setCompanyProjects(JSON.parse(cachedProjects));
-                    return;
-                }
-            }
-
             try {
                 const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies/${usersCompanyId}/?populate=*`);
                 setCompanyProjects(response.data.data.attributes.projects.data);
                 localStorage.setItem(`projects_${usersCompanyId}`, JSON.stringify(response.data.data.attributes.projects.data));
                 localStorage.setItem(`projects_${usersCompanyId}_timestamp`, Date.now().toString());
-            } catch (error) {
-            }
+            } catch (error) { }
         };
         fetchData();
     }, [usersCompanyId, selectedDate]);

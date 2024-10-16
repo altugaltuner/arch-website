@@ -2,9 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import "./Activities.scss";
 import axios from "axios";
 import { useAuth } from "../../components/AuthProvider";
-import Button from '@mui/material/Button';
-
-const CACHE_DURATION = 15 * 60 * 1000;
 
 const Activities = ({ searchTerm }) => {
     const [activities, setActivities] = useState([]);
@@ -15,24 +12,10 @@ const Activities = ({ searchTerm }) => {
 
     const fetchData = async (page) => {
 
-        const cachedRevises = localStorage.getItem(`cachedRevises`);
-        const cachedTimestampRevises = localStorage.getItem(`revises_timestamp`);
-
-        if (cachedRevises && cachedTimestampRevises) {
-            const age = Date.now() - parseInt(cachedTimestampRevises, 10);
-            if (age < CACHE_DURATION) {
-                setActivities(JSON.parse(cachedRevises));
-                return;
-            }
-        }
-
         try {
             const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises?populate=*&pagination[page]=${page}&pagination[pageSize]=10`);
             setActivities(response.data.data);
             setTotalPages(response.data.meta.totalPages);
-            localStorage.setItem(`cachedRevises`, JSON.stringify(response.data.data));
-            localStorage.setItem(`revises_timestamp`, Date.now().toString());
-
         } catch (error) {
             console.error('Error fetching the data', error);
         }
@@ -115,11 +98,11 @@ const Activities = ({ searchTerm }) => {
                     </tbody>
                 </table>
                 <div className="pagination-controls">
-                    <Button onClick={loadPreviousPage} disabled={page === 1} variant="contained">Önceki</Button>
+                    <button onClick={loadPreviousPage} disabled={page === 1} variant="contained">Önceki</button>
                     <span>Sayfa {page} / {totalPages}</span>
-                    <Button onClick={loadNextPage} disabled={page === totalPages} variant="contained">
+                    <button onClick={loadNextPage} disabled={page === totalPages} variant="contained">
                         Sonraki
-                    </Button>
+                    </button>
                 </div>
             </div>
         </div>

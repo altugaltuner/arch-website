@@ -4,8 +4,6 @@ import NewNoteModal from "../NewNoteModal/NewNoteModal";
 import EditNoteModal from "../EditNoteModal/EditNoteModal";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function MyNotebook() {
     const [notes, setNotes] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -15,17 +13,6 @@ function MyNotebook() {
 
     useEffect(() => {
         const fetchNotes = async () => {
-            const cachedNotes = localStorage.getItem(`notes`);
-            const cachedTimestampNotes = localStorage.getItem(`notes_timestamp`);
-
-            if (cachedNotes && cachedTimestampNotes) {
-                const age = Date.now() - parseInt(cachedTimestampNotes, 10);
-                if (age < CACHE_DURATION) {
-                    setNotes(JSON.parse(cachedNotes));
-                    return;
-                }
-            }
-
             try {
                 const token = localStorage.getItem("token");
                 if (token) {
@@ -48,13 +35,12 @@ function MyNotebook() {
                     }
                     setNotes(Array.isArray(notebook) ? notebook : []);
                     setUserId(data.id);
-                    localStorage.setItem(`notes`, JSON.stringify(notebook));
                 } else {
                 }
             } catch (error) {
+                console.error("Error fetching notes:", error);
             }
         };
-
         fetchNotes();
     }, []);
 

@@ -5,9 +5,15 @@ function NewProfessionModal({ isOpen, onClose, onAdd }) {
     const [professionName, setProfessionName] = useState('');
 
     const handleAddProfession = async () => {
+        if (professionName.trim() === "") {
+            alert("Meslek adı boş olamaz!");
+            return;
+        }
         try {
-            onAdd();
+            await onAdd(professionName); // professionName'i parametre olarak iletin
+            setProfessionName(''); // Formu temizleyin
         } catch (error) {
+            console.error("Error adding profession:", error);
         }
     };
 

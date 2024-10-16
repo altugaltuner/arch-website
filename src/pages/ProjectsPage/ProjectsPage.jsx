@@ -10,8 +10,6 @@ import ProjectComments from "../../components/ProjectComments/ProjectComments";
 import ProjectHistory from "../../components/ProjectHistory/ProjectHistory";
 import ProjectProcess from "../../components/ProjectProcess/ProjectProcess";
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function ProjectsPage() {
     const [roles, setRoles] = useState([]);
     const [currentProject, setCurrentProject] = useState(null);
@@ -25,24 +23,11 @@ function ProjectsPage() {
     const idToFetch = location.state?.projectId || projectId;
 
     async function getRoles() {
-        const cachedRole = localStorage.getItem(`roles`);
-        const cachedTimestampRole = localStorage.getItem(`roles_timestamp`);
-
-        if (cachedRole && cachedTimestampRole) {
-            const age = Date.now() - parseInt(cachedTimestampRole, 10);
-            if (age < CACHE_DURATION) {
-                setRoles(JSON.parse(cachedRole));
-                return;
-            }
-        }
 
         try {
             const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
             setRoles(response.data.data);
-            localStorage.setItem(`roles`, JSON.stringify(data));
-            localStorage.setItem(`roles_timestamp`, Date.now().toString());
-        } catch (error) {
-        }
+        } catch (error) { }
     }
 
     useEffect(() => {
@@ -50,16 +35,6 @@ function ProjectsPage() {
     }, []);
 
     const getProjectDetails = async () => {
-        const cachedProject = localStorage.getItem(`project_${idToFetch}`);
-        const cachedTimestamp = localStorage.getItem(`project_${idToFetch}_timestamp`);
-
-        if (cachedProject && cachedTimestamp) {
-            const age = Date.now() - parseInt(cachedTimestamp, 10);
-            if (age < CACHE_DURATION) {
-                setCurrentProject(JSON.parse(cachedProject));
-                return;
-            }
-        }
 
         const endpoint = `https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects/${idToFetch}?populate=*`;
         try {

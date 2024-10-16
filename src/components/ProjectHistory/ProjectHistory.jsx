@@ -2,23 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProjectHistory.scss';
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function ProjectHistory({ clickedProject, newHistoryEntry }) {
     const [history, setHistory] = useState([]);
 
     useEffect(() => {
         async function fetchHistory() {
-            const cachedHistory = localStorage.getItem(`project_${clickedProject.id}_history`);
-            const cachedTimestamp = localStorage.getItem(`project_${clickedProject.id}_history_timestamp`);
-
-            if (cachedHistory && cachedTimestamp) {
-                const age = Date.now() - parseInt(cachedTimestamp, 10);
-                if (age < CACHE_DURATION) {
-                    setHistory(JSON.parse(cachedHistory));
-                    return;
-                }
-            }
             try {
                 if (clickedProject?.id) {
                     const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/histories?filters[project][id][$eq]=${clickedProject.id}&populate=*`);
@@ -27,7 +15,6 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
                     localStorage.setItem(`project_${clickedProject.id}_history_timestamp`, Date.now().toString());
                 }
             } catch (error) {
-
             }
         }
 
@@ -57,5 +44,4 @@ function ProjectHistory({ clickedProject, newHistoryEntry }) {
         </div>
     );
 }
-
 export default ProjectHistory;

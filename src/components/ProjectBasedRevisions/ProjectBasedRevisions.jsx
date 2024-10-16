@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import "../ProjectBasedRevisions/ProjectBasedRevisions.scss";
 import axios from 'axios';
 
-const CACHE_DURATION = 15 * 60 * 1000;
-
 function ProjectBasedRevisions({ clickedProject }) {
     const [projectBasedRevisions, setProjectBasedRevisions] = useState([]);
     const [activeProjectTitle, setActiveProjectTitle] = useState(null);
@@ -17,21 +15,9 @@ function ProjectBasedRevisions({ clickedProject }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const cachedProjectBasedRevisions = localStorage.getItem(`projectBasedRevisions`);
-            const cachedTimestampProjectBasedRevisions = localStorage.getItem(`projectBasedRevisions_timestamp`);
-
-            if (cachedProjectBasedRevisions && cachedTimestampProjectBasedRevisions) {
-                const age = Date.now() - parseInt(cachedTimestampProjectBasedRevisions, 10);
-                if (age < CACHE_DURATION) {
-                    setProjectBasedRevisions(JSON.parse(cachedProjectBasedRevisions));
-                    return;
-                }
-            }
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises?populate=*');
                 setProjectBasedRevisions(response.data.data);
-                localStorage.setItem(`projectBasedRevisions`, JSON.stringify(response.data.data));
-                localStorage.setItem(`projectBasedRevisions_timestamp`, Date.now().toString());
             } catch (error) {
             }
         };

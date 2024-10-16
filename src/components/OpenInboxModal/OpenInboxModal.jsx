@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./OpenInboxModal.scss";
 import { useAuth } from "../AuthProvider";
-const CACHE_DURATION = 15 * 60 * 1000;
 
 function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
     const [messages, setMessages] = useState([]);
@@ -11,28 +10,12 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
 
     useEffect(() => {
         const fetchMessages = async () => {
-            const cachedMessages = localStorage.getItem(`messages`);
-            const cachedTimestamp = localStorage.getItem(`messages_timestamp`);
-
-            if (cachedMessages && cachedTimestamp) {
-                const age = Date.now() - parseInt(cachedTimestamp, 10);
-                if (age < CACHE_DURATION) {
-                    const parsedMessages = JSON.parse(cachedMessages);
-                    setMessages(parsedMessages);
-                    const companyMessages = parsedMessages.filter(message => message.attributes.company?.data?.id === userCompanyId);
-                    setFilteredMessages(companyMessages);
-                    return;
-                }
-            }
-
             try {
                 const response = await fetch('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/multiple-messages/?populate=*');
                 const result = await response.json();
                 setMessages(result.data);
                 const companyMessages = result.data.filter(message => message.attributes.company?.data?.id === userCompanyId);
                 setFilteredMessages(companyMessages);
-                localStorage.setItem(`messages`, JSON.stringify(companyMessages));
-                localStorage.setItem(`messages_timestamp`, Date.now().toString());
             } catch (error) {
             }
         };
