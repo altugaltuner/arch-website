@@ -3,6 +3,8 @@ import HomePage from './pages/HomePage/HomePage';
 import { DarkModeProvider, useDarkMode } from './components/DarkModeContext';
 import AppSettings from './components/AppSettings/AppSettings';
 import './App.scss';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const queryClient = new QueryClient();
 
 const AppContent = () => {
   const { isDarkMode } = useDarkMode();
@@ -16,10 +18,12 @@ const AppContent = () => {
   }, [isDarkMode]);
 
   return (
-    <div className="App">
-      <AppSettings />
-      <HomePage />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <AppSettings />
+        <HomePage />
+      </div>
+    </QueryClientProvider>
   );
 };
 

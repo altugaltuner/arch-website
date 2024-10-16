@@ -13,7 +13,6 @@ const CACHE_DURATION = 15 * 60 * 1000;
 function ProjectsMainPage() {
   const { user } = useAuth();
   const usersCompanyId = user?.company?.id;
-
   const [companyProjects, setCompanyProjects] = useState([]);
   const [roles, setRoles] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -131,6 +130,14 @@ function ProjectsMainPage() {
       formData.append("files.projectCoverPhoto", newProject.projectCoverPhoto);
     }
 
+    // Retrieve token (from context or local storage)
+    const token = localStorage.getItem('token'); // Adjust according to your authentication setup
+
+    if (!token) {
+      console.error("No token found, cannot authenticate request.");
+      return;
+    }
+
     try {
       const response = await axios.post("https://wonderful-pleasure-64045d06ec.strapiapp.com/api/projects", formData, {
         headers: {
@@ -152,8 +159,11 @@ function ProjectsMainPage() {
       setShowModal(false);
       setNewProject({ projectName: "", projectPassword: "", projectCoverPhoto: null });
 
-    } catch (error) { }
+    } catch (error) {
+      console.error("Error creating project:", error.response?.data || error.message);
+    }
   };
+
 
   const handleEditSubmit = async () => {
     const formData = new FormData();
