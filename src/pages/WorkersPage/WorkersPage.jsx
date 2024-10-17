@@ -26,8 +26,6 @@ function WorkersPage() {
 
             // Yeni bir unique professionId oluşturabilirsiniz veya manuel olarak verebilirsiniz.
             const professionId = `prof-${Date.now()}`; // Örnek olarak unique bir ID oluşturuyoruz.
-
-            console.log("Yeni meslek ekleme işlemi başlatıldı:", professionName, "ID:", professionId);
             const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions', {
                 data: {
                     professionName: professionName,
@@ -40,7 +38,6 @@ function WorkersPage() {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log("API isteği başarılı:", response.data);
             await loadJobTitles(); // Yeni meslek eklendikten sonra meslekleri yeniden yükleyin
             closeNewProfessionModal();
         } catch (error) {
@@ -52,23 +49,19 @@ function WorkersPage() {
 
     const loadJobTitles = async () => {
         if (!user) {
-            console.log("Kullanıcı bilgisi bulunamadı, meslekler yüklenemiyor.");
             return;
         }
         try {
-            console.log("Meslekler yükleniyor...");
             const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions?populate=*');
-            console.log("Meslekler API'den alındı:", response.data);
             const titles = response.data.data.map(item => ({
                 id: item.id,
-                professionId: item.attributes.professionId, // professionId'yi ekleyin
+                professionId: item.attributes.professionId,
                 name: item.attributes.professionName,
                 companyID: item?.attributes?.company.data?.attributes?.companyID
             }));
             setJobTitles(titles);
             const filteredTitles = titles.filter(title => title?.companyID === user?.company?.companyID);
             setFilteredJobTitles(filteredTitles);
-            console.log("Meslekler başarıyla yüklendi:", filteredTitles);
         } catch (error) {
             console.error("Meslekler yüklenirken hata oluştu:", error);
         }
