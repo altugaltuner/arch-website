@@ -33,8 +33,8 @@
             width: 100%;
             border: none;
             border-radius: 0px;
-            padding: 11px;
-            gap: 12px;
+            padding: 15px;
+            gap: 15px;
             text-align: center;
             color: $font-color;
             font-size: 20px;
@@ -43,7 +43,7 @@
             transition: all 0.2s;
 
             &:hover {
-                background-color: darken($grey, 5%);
+                background-color: $grey;
             }
 
             .nav-logo {
@@ -59,7 +59,7 @@
         }
 
         .nav-button.active {
-            background-color: darken($grey, 5%);
+            background-color: $grey;
         }
     }
 }

@@ -92,20 +92,20 @@
 
 .revise-update-submit-btn {
     &:hover {
-        background: darken($blue, 10%);
+        background: $dark-blue;
         color: white;
     }
 }
 
 .revise-update-cancel {
     &:hover {
-        background: darken($yellow, 10%);
+        background: $darkyellow;
     }
 }
 
 .revise-update-delete-btn {
     &:hover {
-        background: darken($close, 10%);
+        background: $close;
         color: white;
     }
 }

@@ -44,13 +44,13 @@
 
                 .new-revise-submit-cancel {
                     &:hover {
-                        background: darken($yellow, 10%);
+                        background: $darkyellow;
                     }
                 }
 
                 .new-revise-submit-btn {
                     &:hover {
-                        background: darken($blue, 10%);
+                        background: $dark-blue;
                         color: white;
                     }
                 }

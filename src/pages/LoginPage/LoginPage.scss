@@ -36,11 +36,7 @@
             padding: 20px;
 
             &:hover {
-                background-color: darken($background-color, 10%);
-            }
-
-            &:active {
-                background-color: darken($background-color, 20%);
+                background-color: $grey;
             }
         }
 
@@ -118,7 +114,7 @@
                     transition: all 0.2s;
 
                     &:hover {
-                        background-color: darken($yellow, 10%);
+                        background-color: $darkyellow;
                     }
                 }
             }

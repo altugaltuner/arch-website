@@ -52,14 +52,14 @@
 
         .add-entry-material-btn {
             &:hover {
-                background-color: darken($blue, 10%);
+                background-color: $dark-blue;
                 color: white;
             }
         }
 
         .new-revise-submit-cancel {
             &:hover {
-                background-color: darken($close, 10%);
+                background-color: $close;
                 color: white;
             }
         }

@@ -75,14 +75,14 @@
 
             .delete-group-btn-yes {
                 &:hover {
-                    background-color: darken($blue, 10%);
+                    background-color: $dark-blue;
                     color: white;
                 }
             }
 
             .delete-group-btn-no {
                 &:hover {
-                    background-color: darken($close, 10%);
+                    background-color: $close;
                     color: white;
                 }
             }

@@ -42,7 +42,6 @@ function FirstPage() {
         <main className="firstpage-main">
             <div className="firstpage-div">
                 <img className="firstpage-logo" src={ofisimLogo} alt="ofisim-logo" />
-                <h1 className="firstpage-header">Ofisim</h1>
             </div>
             <div className="flow-descriptions">
                 <p className="flow-desc-paragraph"><span className="flow-desc-p-bold">Ofisim Nedir</span>İşinizi organize etmenize ve ekibinizle etkin bir şekilde işbirliği yapmanıza yardımcı olan, kullanımı kolay ve güçlü bir proje yönetim aracıdır.</p>

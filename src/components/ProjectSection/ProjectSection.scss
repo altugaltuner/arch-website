@@ -39,7 +39,7 @@
                 transition: all 0.2s;
 
                 &:hover {
-                    background-color: darken($background-color, 10%);
+                    background-color: $grey;
                 }
             }
         }
@@ -88,7 +88,7 @@
         margin: 10px;
 
         &:hover {
-            background-color: darken($yellow, 10%);
+            background-color: $darkyellow;
         }
     }
 
@@ -116,7 +116,7 @@
             transition: all 0.2s;
 
             &:hover {
-                background-color: darken($background-color, 10%);
+                background-color: $grey;
             }
 
             .project-folder-name {

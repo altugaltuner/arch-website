@@ -25,10 +25,6 @@
   &.primary {
     background-color: $background-color;
     color: $font-color;
-
-    &:hover {
-      background-color: darken($color: $background-color, $amount: 1%);
-    }
   }
 
   &.secondary {

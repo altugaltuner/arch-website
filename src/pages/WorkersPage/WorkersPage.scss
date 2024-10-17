@@ -91,11 +91,7 @@
                         cursor: pointer;
 
                         &:hover {
-                            background-color: darken($background-color, 10%);
-                        }
-
-                        &:active {
-                            background-color: darken($background-color, 20%);
+                            background-color: $grey;
                         }
                     }
 
@@ -116,7 +112,6 @@
 
 @media screen and (max-width: 1250px) {
     .workers-page-main {
-
         .workers-column {
             .workers-row {
                 flex-direction: column;

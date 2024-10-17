@@ -65,14 +65,14 @@
 
             .create-event-cancel {
                 &:hover {
-                    background: darken($close, 10%);
+                    background: $close;
                     color: white;
                 }
             }
 
             .create-event-submit {
                 &:hover {
-                    background: darken($blue, 10%);
+                    background: $dark-blue;
                     color: white;
                 }
             }

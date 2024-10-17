@@ -150,7 +150,7 @@
                     width: 200px;
 
                     &:hover {
-                        background-color: darken($yellow, 10%);
+                        background-color: $darkyellow;
                     }
                 }
             }
@@ -173,7 +173,7 @@
                 width: 200px;
 
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: $darkyellow;
                 }
             }
 

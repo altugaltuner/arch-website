@@ -25,7 +25,7 @@
         transition: all 0.2s;
 
         &:hover {
-            background: darken($yellow, 10%);
+            background: $darkyellow;
         }
     }
 

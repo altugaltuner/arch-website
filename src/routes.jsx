@@ -13,7 +13,6 @@ import FlowPage from "./pages/FlowPage/FlowPage.jsx";
 import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
 import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
-import SurveysPage from "./pages/SurveysPage/SurveysPage.jsx";
 
 const routes = [
   {
@@ -49,14 +48,6 @@ const routes = [
     element: (
       <ProtectedRoute>
         <ProjectsPage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/surveys",
-    element: (
-      <ProtectedRoute>
-        <SurveysPage />
       </ProtectedRoute>
     ),
   },

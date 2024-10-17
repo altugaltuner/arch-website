@@ -49,12 +49,12 @@
             }
 
             &:hover {
-                background-color: darken($background-color, 10%);
+                background-color: $grey;
             }
         }
 
         .job-titles-for-workersPage.active {
-            background-color: darken($background-color, 10%);
+            background-color: $grey;
         }
     }
 }

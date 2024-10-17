@@ -71,7 +71,7 @@
                 transition: all 0.2s;
 
                 &:hover {
-                    background-color: darken($yellow, 10%);
+                    background-color: $darkyellow;
                 }
 
                 &:disabled {
@@ -91,7 +91,7 @@
         transition: all 0.2s;
 
         &:hover {
-            background-color: darken($yellow, 10%);
+            background-color: $darkyellow;
         }
     }
 }
