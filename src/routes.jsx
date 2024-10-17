@@ -1,4 +1,3 @@
-import HomePage from "./pages/HomePage/HomePage.jsx";
 import SignupPage from "./pages/SignupPage/SignupPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
@@ -105,14 +104,14 @@ const routes = [
       <CompanyCreatePage />
     ),
   },
-  {
-    path: "/homepage",
-    element: (
-      <ProtectedRoute>
-        <HomePage />
-      </ProtectedRoute>
-    ),
-  },
+  // {
+  //   path: "/homepage",
+  //   element: (
+  //     <ProtectedRoute>
+  //       <HomePage />
+  //     </ProtectedRoute>
+  //   ),
+  // },
   {
     path: "*",
     element: (

@@ -18,12 +18,12 @@ function FirstPage() {
     const socialMediaAccounts = [
         {
             name: "ofisim",
-            url: "https://www.linkedin.com/ofisimcompany/",
+            url: "https://www.linkedin.com/in/altug-altuner/",
             logo: linkedinLogo
         },
         {
             name: "ofisim",
-            url: "https://www.instagram.com/ofisimcompany/",
+            url: "https://www.instagram.com/altugaltuner/",
             logo: instaLogo
         },
         {
