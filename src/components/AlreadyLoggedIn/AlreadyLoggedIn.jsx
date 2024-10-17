@@ -19,7 +19,7 @@ function AlreadyLoggedIn() {
                     <button className="already-login-logout" onClick={handleLogout}>
                         Çıkış Yap
                     </button>
-                    <Link to="/homepage" className="already-login-back">Anasayfaya Dön</Link>
+                    <Link to="/projects" className="already-login-back">Anasayfaya Dön</Link>
                 </div>
             </div>
             <img className="back-button-already" src={backButton} alt="back-button" onClick={() => window.history.back()} />
