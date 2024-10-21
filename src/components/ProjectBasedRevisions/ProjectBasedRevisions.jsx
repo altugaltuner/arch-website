@@ -37,7 +37,7 @@ function ProjectBasedRevisions({ clickedProject }) {
 
     return (
         <div className="projects-based-revisions">
-            <h1 className="projects-revisions-header">Proje Revizeleri</h1>
+            <h1 className="projects-revisions-header">Proje Revizelerim</h1>
             <div className="project-revisions">
                 {projectBasedRevisions.filter(projectRevision => {
                     return projectRevision.attributes.project.data.attributes.projectName === "Seçili Proje Yok"
