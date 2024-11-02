@@ -137,3 +137,16 @@ $header-grey: #5e5e5e;
     padding-bottom: 5px;
     border-bottom: 1px solid $border-color;
 }
+
+@media screen and (max-width: 450px) {
+    .div-header {
+        font-size: 20px;
+        margin: 5px;
+        padding: 5px;
+    }
+
+    .div-big-header {
+        margin: 10px;
+        font-size: 28px;
+    }
+}

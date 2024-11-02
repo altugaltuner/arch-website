@@ -274,7 +274,7 @@
 
         .project-folders-container {
             flex-direction: row;
-            width: auto;
+            width: 100%;
 
             .project-folder {
                 .project-folder-image {
@@ -293,6 +293,7 @@
 
         .project-folders-container {
             justify-content: start;
+            width: 100%;
 
             .project-folder,
             .dustbin-project-folder {
@@ -308,7 +309,7 @@
         padding: 2px;
         margin-top: 5px;
         overflow-y: auto;
-        max-height: 240px;
+        height: 240px;
 
         .current-folders-div {
             .current-folders-div-2 {
@@ -344,22 +345,31 @@
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
 
             .project-folder,
             .dustbin-project-folder {
                 padding: 5px;
                 margin: 5px;
-                width: 100px;
+                width: 115px;
+                height: 140px;
+                justify-content: space-between;
 
-                .project-folder-image {
-                    width: 70px;
-                    margin-bottom: 5px;
+                .project-card-rest-of {
+                    .project-folder-image {
+                        width: 50px;
+                        margin-bottom: 5px;
+                    }
+
+                    .project-folder-name {
+                        font-size: 16px;
+                        margin: 5px 0px;
+                    }
                 }
 
-                .project-folder-name {
-                    font-size: 16px;
-                    margin: 5px 0px;
-                }
+
+
+
             }
         }
     }

@@ -73,10 +73,12 @@
             }
 
             .header-with-back-button {
-                height: 36px;
+                height: auto;
 
                 .back-button {
                     padding: 5px;
+                    width: 55px;
+                    height: 50px;
 
                     .back-btn {
                         width: 90%;

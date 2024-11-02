@@ -112,11 +112,13 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
                                     {project.attributes.projectName}
                                 </p>
                                 {project?.attributes?.projectCoverPhoto && project?.attributes?.projectCoverPhoto?.data && (
-                                    <img
-                                        className="project-navbar-photos"
-                                        src={project?.attributes?.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url ?? project?.attributes?.projectCoverPhoto?.data?.attributes?.url}
-                                        alt="Project Cover"
-                                    />
+                                    <div className='p-nav-div'>
+                                        <img
+                                            className="project-navbar-photos"
+                                            src={project?.attributes?.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url ?? project?.attributes?.projectCoverPhoto?.data?.attributes?.url}
+                                            alt="Project Cover"
+                                        /></div>
+
                                 )}
 
                             </div>

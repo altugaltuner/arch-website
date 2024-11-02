@@ -111,10 +111,17 @@
                 text-align: center;
                 cursor: pointer;
 
-                .project-navbar-photos {
-                    width: 150px;
-                    border-radius: 5px;
-                    border: 1px solid $border-color;
+                .p-nav-div {
+                    width: 100%;
+                    height: 100%;
+
+                    .project-navbar-photos {
+                        width: 100%;
+                        height: 150px;
+                        object-fit: cover;
+                        border-radius: 5px;
+                        border: 1px solid $border-color;
+                    }
                 }
 
                 .project-card-name {
@@ -169,16 +176,18 @@
             }
 
             .project-cards {
-                height: 180px;
+                height: 150px;
                 width: 45%;
 
                 .project-card-delete-btn {
                     width: 12px;
+                    top: 28px;
                 }
 
                 .project-card-edit-btn {
                     width: 12px;
                     right: 40px;
+                    top: 28px;
                 }
 
                 .project-card {
@@ -192,9 +201,19 @@
                         font-size: 14px;
                     }
 
-                    .project-navbar-photos {
-                        width: 80%;
+                    .p-nav-div {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: end;
+
+                        .project-navbar-photos {
+                            width: 80%;
+                            height: 90px;
+                        }
                     }
+
+
                 }
             }
         }

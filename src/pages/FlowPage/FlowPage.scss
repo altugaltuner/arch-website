@@ -203,10 +203,20 @@
 
 @media screen and (max-width: 450px) {
     .flow-page-main {
-        .flow-page-main-row {
-            gap: 5px;
+        .flow-page-main-column {
+            transform: translate(80px, 0px);
+            width: calc(100% - 80px);
+            padding: 0px 10px;
+            gap: 0px;
 
-            .flow-page-main-column {
+            .div-big-header {
+                margin: 5px;
+                padding: 5px;
+            }
+
+            .flow-page-main-row {
+                gap: 5px;
+
                 .flow-descriptions {
                     padding: 5px;
                     gap: 5px;
@@ -247,8 +257,8 @@
 
                             .social-img-p {
                                 .social-media-logo {
-                                    width: 40px;
-                                    height: 40px;
+                                    width: 30px;
+                                    height: 30px;
                                 }
                             }
                         }
@@ -264,6 +274,16 @@
                             height: 80%;
                         }
                     }
+                }
+            }
+        }
+
+        .navigation-main {
+            .nav-ul {
+                height: 100vh;
+
+                .nav-button {
+                    height: 14%;
                 }
             }
         }

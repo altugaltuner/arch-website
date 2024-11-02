@@ -100,8 +100,11 @@
 
     .navigation-main {
         .nav-ul {
+            height: 100vh;
+
             .nav-button {
                 width: 90%;
+                height: 14%;
                 padding: 5px;
                 gap: 4px;
                 padding-bottom: 12px;

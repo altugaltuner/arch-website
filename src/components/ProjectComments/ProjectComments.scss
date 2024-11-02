@@ -203,27 +203,32 @@
             }
 
             .project-comment-item {
+                flex-direction: column;
+
                 .project-comment-text {
                     font-size: 14px;
                     padding: 5px;
                     gap: 5px;
-                    width: 35%;
+                    width: 100%;
                     flex-direction: column;
                 }
 
                 .project-comment-state {
                     font-size: 14px;
                     padding: 5px;
+                    width: 100%;
                 }
 
                 .project-comment-owner {
                     font-size: 14px;
                     padding: 5px;
+                    width: 100%;
                 }
 
                 .project-comment-date {
                     font-size: 12px;
                     padding: 5px;
+                    width: 100%;
                 }
             }
         }
