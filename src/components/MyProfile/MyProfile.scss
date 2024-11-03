@@ -281,6 +281,8 @@
             .profile-field {
                 gap: 2px;
                 margin-bottom: 4px;
+                flex-wrap: nowrap;
+                align-items: center;
 
                 .profile-field-paragraph {
                     font-size: 14px;
@@ -288,6 +290,7 @@
 
                 .profile-field-labels {
                     font-size: 18px;
+                    width: 40%;
                 }
             }
         }

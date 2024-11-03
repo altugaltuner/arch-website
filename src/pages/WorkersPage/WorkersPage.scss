@@ -198,7 +198,7 @@
                 .company-grid-sidebar {
                     padding: 5px;
                     margin: 0px 10px 5px 10px;
-                    max-height: 110px;
+                    max-height: 150px;
                     overflow: auto;
 
                     ul {
@@ -222,6 +222,8 @@
 
                     .other-info-main {
                         padding: 5px;
+                        align-items: unset;
+                        justify-content: unset;
 
                         .revise-and-profile {
                             flex-direction: column;

@@ -140,13 +140,37 @@ $header-grey: #5e5e5e;
 
 @media screen and (max-width: 450px) {
     .div-header {
-        font-size: 20px;
-        margin: 5px;
+        font-size: 16px;
+        margin: 0px;
         padding: 5px;
     }
 
+    .yellow-button {
+        padding: 5px;
+        font-size: 16px;
+    }
+
     .div-big-header {
-        margin: 10px;
+        margin: 5px;
+        padding: 5px;
         font-size: 28px;
+    }
+
+    .paragraph {
+        font-size: 14px;
+    }
+
+    .paragraph-header {
+        font-size: 18px;
+    }
+
+    .confirm-button {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .cancel-button {
+        padding: 10px;
+        font-size: 16px;
     }
 }

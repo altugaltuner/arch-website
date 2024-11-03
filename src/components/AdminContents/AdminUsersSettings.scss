@@ -156,6 +156,8 @@
             }
 
             .delete-user-label {
+                font-size: 18px;
+
                 .delete-user-input {
                     width: 250px;
                     height: 40px;
@@ -206,10 +208,99 @@
     .admin-user-settings-main {
         .admin-send-message-inner {
             gap: 5px;
+            max-height: 400px;
+
+            .user-storage-gb-div {
+                padding: 5px;
+
+                .user-storage-gb-inner {
+                    padding: 5px;
+                    gap: 2px;
+
+                    .user-storage-gb-one-div {
+                        padding: 5px;
+
+                        .user-storage-username {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                .user-storage-gb-h2 {
+                    font-size: 18px;
+                }
+            }
+
+            .user-set-one-div {
+                padding: 5px;
+                gap: 5px;
+
+                .delete-user-button {
+                    padding: 5px;
+                    font-size: 16px;
+                }
+
+                .delete-user-label {
+                    .delete-user-input {
+                        padding: 5px;
+                    }
+                }
+
+                .searched-user-for-deletion {
+                    justify-content: unset;
+                    gap: 5px;
+
+                    .to-be-deleted-user-div {
+                        .to-be-label {
+                            gap: 5px;
+                            font-size: 16px;
+                        }
+                    }
+                }
+
+                .user-role-permission-div {
+                    gap: 5px;
+                    flex-wrap: wrap;
+
+                    .role-permission-button {
+                        padding: 5px 10px;
+                        width: 125px;
+                        font-size: 16px;
+                    }
+
+                    .search-role-select {
+                        padding: 5px;
+                    }
+
+                    .user-search-label {
+                        .user-search-for-role {
+                            padding: 5px;
+                        }
+                    }
+                }
+
+                .set-one-header {
+                    font-size: 18px;
+                }
+            }
 
             .projects-list {
-                gap: 10px;
-                padding: 10px;
+                gap: 5px;
+                padding: 5px;
+
+                .projects-list-one-div {
+                    max-width: 128px;
+                    padding: 5px;
+
+                    .project-list-projectname {
+                        font-size: 16px;
+                    }
+                }
+
+                .projects-codes-h2 {
+                    font-size: 18px;
+                    margin-bottom: 5px;
+                }
             }
         }
     }

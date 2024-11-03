@@ -57,3 +57,19 @@
     color: red;
     margin-top: 10px;
 }
+
+@media screen and (max-width: 500px) {
+    .new-folder-modal {
+        .new-folder-modal-content {
+            width: 90%;
+            padding: 10px;
+            gap: 10px;
+
+            .modal-header {
+                font-size: 22px;
+                margin: 0px;
+            }
+        }
+    }
+
+}

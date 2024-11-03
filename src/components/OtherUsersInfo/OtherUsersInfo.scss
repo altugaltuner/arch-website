@@ -360,10 +360,20 @@
         gap: 5px;
         max-height: 300px;
 
+        .other-all-groups {
+            .all-groups-row-div {
+                .other-groups-name {
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+        }
+
         .open-inbox-content-private-messages-div {
             .write-priv-message {
                 padding: 5px;
                 width: 150px;
+                font-size: 16px;
             }
 
             .open-inbox-modal-header-private {
@@ -405,14 +415,11 @@
                 padding: 5px;
                 margin: 0px;
 
-                .other-revise-div {
-                    .other-revise-p {
-                        font-size: 14px;
-                    }
+                .other-revise-p {
+                    font-size: 14px;
                 }
 
                 .other-revises-h2 {
-
                     font-size: 22px;
                     padding: 3px;
                 }

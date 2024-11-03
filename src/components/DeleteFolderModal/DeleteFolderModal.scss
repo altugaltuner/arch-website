@@ -56,10 +56,19 @@
 }
 
 @media screen and (max-width: 500px) {
+
+    .delete-folder-modal {
+        .delete-folder-modal-content {
+            padding: 10px;
+            width: 90%;
+            height: 200px;
+        }
+    }
+
     .edit-folder-modal {
         .edit-folder-modal-content {
-            padding: 20px;
-            max-width: 300px;
+            padding: 10px;
+            width: 90%;
 
             .edit-folder-modal-buttons {
 

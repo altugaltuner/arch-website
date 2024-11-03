@@ -54,3 +54,15 @@
         }
     }
 }
+
+@media screen and (min-width:450px) {
+
+    .mylast-act-main {
+        height: 250px;
+
+        .mylast-act-ul {
+            max-height: 200px;
+        }
+    }
+
+}

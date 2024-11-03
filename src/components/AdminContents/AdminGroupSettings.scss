@@ -48,6 +48,35 @@
                 font-weight: 300;
             }
         }
-
     }
+}
+
+@media screen and (max-width: 450px) {
+    .admin-group-settings {
+        padding: 5px;
+        gap: 5px;
+
+        .admin-group-header {
+            font-size: 18px;
+            margin-bottom: 0px;
+        }
+
+        .admin-group-codes-div {
+            gap: 5px;
+
+            .admin-group-code {
+                max-width: 128px;
+                padding: 5px;
+
+                .admin-group-code-name {
+                    font-size: 16px;
+                }
+
+                .admin-group-code-value {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
 }

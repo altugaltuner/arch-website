@@ -75,8 +75,6 @@
             }
         }
 
-
-
         .admin-company-header {
             font-size: 24px;
             font-weight: 400;
@@ -151,4 +149,38 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 450px) {
+    .admin-company-settings-main {
+        gap: 5px;
+
+        .admin-company-inner {
+            padding: 5px;
+            font-size: 18px;
+            gap: 3px;
+
+            .admin-company-header {
+                font-size: 20px;
+            }
+
+            .admin-company-edit-button {
+                padding: 3px;
+            }
+
+            .admin-company-p {
+                padding: 3px;
+                font-size: 16px;
+
+                span {
+                    font-size: 18px;
+                }
+            }
+
+            .admin-company-header {
+                padding: 5px;
+            }
+        }
+    }
+
 }

@@ -117,7 +117,8 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
                                             className="project-navbar-photos"
                                             src={project?.attributes?.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url ?? project?.attributes?.projectCoverPhoto?.data?.attributes?.url}
                                             alt="Project Cover"
-                                        /></div>
+                                        />
+                                    </div>
 
                                 )}
 

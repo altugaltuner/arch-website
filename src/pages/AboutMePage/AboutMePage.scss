@@ -16,7 +16,7 @@
 
         .aboutme-row-2 {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             width: calc(100% - 110px);
             transform: translate(110px, 0px);
@@ -109,7 +109,7 @@
         .aboutme-page-column {
 
             .aboutme-row-2 {
-                width: calc(100% + 60px);
+                width: calc(100% - 60px);
 
                 .message-inbox {
                     margin-right: 20px;

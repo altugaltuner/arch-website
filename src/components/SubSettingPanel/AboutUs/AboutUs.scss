@@ -39,6 +39,66 @@
                 font-weight: 400;
             }
         }
-
     }
+}
+
+@media screen and (max-width: 950px) {
+
+    .sub-setting-panel-page {
+        width: 100%;
+
+        .div-header {
+            padding-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .personal-info-subsetting-column-aboutus {
+            width: 100%;
+            gap: 10px;
+            padding: 5px 5px 5px 10px;
+
+            .personal-info-subsetting-oneline {
+                gap: 10px;
+                padding: 5px;
+
+                .one-question-div {
+                    .subsetting-paragraph-big {
+                        font-size: 18px;
+                    }
+                }
+
+                .subsetting-header {
+                    font-weight: 400;
+                    font-size: 16px;
+                }
+
+                .subsetting-pp {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                .edit-pencil-subsetting {
+                    width: 10px;
+                    height: 10px;
+                    right: 10px;
+                    top: 10px;
+                }
+
+                .subsetting-div-other {
+                    .edit-pencil-subsetting {
+                        width: 10px;
+                        height: 10px;
+                        right: 10px;
+                        top: 10px;
+                    }
+
+                    .subsetting-paragraph {
+                        font-size: 16px;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+
 }

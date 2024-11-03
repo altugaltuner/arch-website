@@ -312,6 +312,14 @@
         height: 240px;
 
         .current-folders-div {
+
+            .folder-content {
+                .file-preview-upload {
+                    width: 30%;
+                    height: 80px;
+                }
+            }
+
             .current-folders-div-2 {
                 align-items: center;
                 justify-content: center;
@@ -350,8 +358,8 @@
             .project-folder,
             .dustbin-project-folder {
                 padding: 5px;
-                margin: 5px;
-                width: 115px;
+                margin: 0px;
+                width: 100px;
                 height: 140px;
                 justify-content: space-between;
 
@@ -367,8 +375,15 @@
                     }
                 }
 
+                .edit-delete-button-div {
+                    .file-card-edit-btn {
+                        width: 15px;
+                    }
 
-
+                    .file-card-delete-btn {
+                        width: 15px;
+                    }
+                }
 
             }
         }

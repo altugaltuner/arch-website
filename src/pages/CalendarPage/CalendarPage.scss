@@ -213,6 +213,7 @@
                         border-radius: 5px;
                         transition: all 0.2s;
 
+
                         &:hover {
                             background-color: $darkyellow;
                         }
@@ -276,6 +277,12 @@
                         gap: 10px;
                         padding: 20px;
                         width: 95%;
+
+                        .edit-event-calendar {
+                            font-size: 20px;
+                            height: 28px;
+                            font-weight: 400;
+                        }
 
                         .one-event-subheader {
                             font-size: 22px;

@@ -206,7 +206,7 @@
         .flow-page-main-column {
             transform: translate(80px, 0px);
             width: calc(100% - 80px);
-            padding: 0px 10px;
+            padding: 0px 5px 0px 0px;
             gap: 0px;
 
             .div-big-header {
@@ -266,6 +266,9 @@
                 }
 
                 .flow-page-row {
+                    padding: 10px;
+                    gap: 10px;
+
                     .all-companies-page-company-card {
                         width: 45%;
 

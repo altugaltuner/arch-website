@@ -104,10 +104,13 @@
         width: 100%;
 
         .admin-sub-panel-content {
+            padding: 10px;
+
             .admin-dashboard-main {
                 gap: 5px;
 
                 .dashboard-current-state-all {
+                    padding: 0px;
 
                     .dashboard-row-inner {
                         gap: 5px;

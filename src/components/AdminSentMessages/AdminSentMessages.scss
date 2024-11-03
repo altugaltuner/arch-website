@@ -46,3 +46,21 @@
         }
     }
 }
+
+@media screen and (max-width: 450px) {
+    .admin-sent-messages-main {
+        .message-item {
+            .message-div-content {
+                font-size: 14px;
+            }
+
+            .message-div-date {
+                font-size: 14px;
+            }
+
+            .message-div-owner {
+                font-size: 14px;
+            }
+        }
+    }
+}

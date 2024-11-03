@@ -77,3 +77,31 @@
         }
     }
 }
+
+@media screen and (max-width: 950px) {
+    .admin-send-message-main {
+        .admin-send-message-inner {
+            gap: 5px;
+
+            .admin-inbox-for-messages {
+                padding: 5px;
+
+                .admin-inbox-send-btn {
+                    font-size: 18px;
+                    padding: 5px;
+                    width: 180px;
+                }
+            }
+
+            .admin-inbox {
+                gap: 0px;
+
+                .admin-inbox-subheader {
+                    font-size: 20px;
+                    padding-left: 10px;
+                    padding-top: 10px;
+                }
+            }
+        }
+    }
+}

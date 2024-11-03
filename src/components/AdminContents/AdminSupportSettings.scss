@@ -47,3 +47,38 @@
         }
     }
 }
+
+@media screen and (max-width:768px) {
+    .admin-support-settings-main {
+        gap: 10px;
+        max-height: 450px;
+
+        .support-div {
+            gap: 2px;
+            padding: 5px;
+
+            .support-div-answer {
+                padding: 5px;
+                font-size: 14px;
+            }
+
+            .support-div-question {
+                padding: 5px;
+                font-size: 18px;
+                font-weight: 400;
+            }
+
+            .support-div-p {
+                padding: 5px;
+                font-size: 14px;
+            }
+
+            .support-div-header {
+                padding: 5px;
+                font-size: 20px;
+                margin: 0px;
+                font-weight: 400;
+            }
+        }
+    }
+}
