@@ -6,9 +6,7 @@ const RemoveUserModal = ({ show, onClose, employees, handleRemoveUsers }) => {
 
     const handleCheckboxChange = (userId) => {
         setSelectedUsers((prevSelected) =>
-            prevSelected.includes(userId)
-                ? prevSelected.filter((id) => id !== userId)
-                : [...prevSelected, userId]
+            prevSelected.includes(userId) ? prevSelected.filter((id) => id !== userId) : [...prevSelected, userId]
         );
     };
 
@@ -22,7 +20,7 @@ const RemoveUserModal = ({ show, onClose, employees, handleRemoveUsers }) => {
     return (
         <div className="remove-user-modal">
             <div className="remove-user-modal-content">
-                <span className='global-close-button' onClick={onClose}>X</span>
+                <button className='global-close-button' onClick={onClose}>X</button>
                 <h2 className='modal-header'>Çalışanları Çıkar</h2>
                 <ul className='remove-user-modal-ul'>
                     {employees.map((employee) => (

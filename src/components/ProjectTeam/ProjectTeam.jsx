@@ -8,7 +8,6 @@ import { useAuth } from "../../components/AuthProvider";
 
 const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [employees, setEmployees] = useState([]);
-    const [roles, setRoles] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
@@ -16,7 +15,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const { user } = useAuth();
     const [selectedEmployee, setSelectedEmployee] = useState(null);
-    const userRole = user && user.access ? user.access.role : null;
+    const userRole = user.access ? user.access.role : null;
 
     const openEmployeeModal = (employee) => {
         setSelectedEmployee(employee);
@@ -27,7 +26,9 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users?populate=profession,projects,profilePic');
                 setAllUsers(response.data);
-            } catch (error) { }
+            } catch (error) {
+                console.error('Çalışanları getirirken hata oluştu:', error);
+            }
         };
         fetchEmployees();
     }, []);
@@ -52,6 +53,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
             updateProject();
             setShowAddModal(false);
         } catch (error) {
+            console.error('Çalışanları eklerken hata oluştu:', error);
         }
     };
 
@@ -64,6 +66,7 @@ const ProjectTeam = ({ clickedProject, updateProject }) => {
             });
             updateProject();
         } catch (error) {
+            console.error('Çalışanları çıkarırken hata oluştu:', error);
         }
     };
 

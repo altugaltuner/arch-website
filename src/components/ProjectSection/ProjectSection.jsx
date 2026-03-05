@@ -22,7 +22,7 @@ import { useAuth } from "../../components/AuthProvider";
 function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const { user } = useAuth();
 
-    const userRole = user && user.access ? user.access.role : "null";
+    const userRole = user.access ? user.access.role : "null";
 
     const [projectFolders, setProjectFolders] = useState([]);
     const [roles, setRoles] = useState([]);
@@ -52,13 +52,15 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
     const [newFolder, setNewFolder] = useState({ projectFolderName: "" });
     const [currentFolder, setCurrentFolder] = useState(null);
     const [parentFolder, setParentFolder] = useState(null);
-
+    console.log("roles", roles);
     useEffect(() => {
         async function getRoles() {
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
                 setRoles(response.data.data);
-            } catch (error) { }
+            } catch (error) {
+                console.error("Error fetching roles:", error);
+            }
         }
         getRoles();
     }, []);
@@ -69,7 +71,9 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             setProjectFolders(response.data.data);
             localStorage.setItem(`project_${clickedProject.id}_folders`, JSON.stringify(response.data.data));
             localStorage.setItem(`project_${clickedProject.id}_folders_timestamp`, Date.now().toString());
-        } catch (error) { }
+        } catch (error) {
+            console.error("Error fetching project folders:", error);
+        }
     };
 
     useEffect(() => {
@@ -99,6 +103,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             await fetchProjectFolders();
             createFolderHistoryEntry('oluşturma', newFolder.projectFolderName);
         } catch (error) {
+            console.error("Error creating folder:", error);
         }
     };
 
@@ -111,6 +116,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 await fetchProjectFolders();
                 createFolderHistoryEntry('silme', folderToDelete.toString());
             } catch (error) {
+                console.error("Error deleting folder:", error);
             }
         }
     };
@@ -122,6 +128,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             setCurrentFiles(currentFiles.filter(file => file.id !== fileId));
             createHistoryEntry('silme', fileId.toString(), currentFolder.id.toString());
         } catch (error) {
+            console.error("Error deleting file:", error);
         }
     };
 
@@ -149,6 +156,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 await fetchProjectFolders();
                 createFolderHistoryEntry('isim değiştirme', newFolderName);
             } catch (error) {
+                console.error("Error editing folder:", error);
             }
         }
     };
@@ -170,7 +178,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             });
 
             const uploadedFile = uploadResponse.data[0];
-            const updatedContent = currentFolder.folderContent && currentFolder.folderContent.data
+            const updatedContent = currentFolder.folderContent.data
                 ? [...currentFolder.folderContent.data, uploadedFile]
                 : [uploadedFile];
 
@@ -193,7 +201,9 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 return folder;
             }));
             createHistoryEntry('yükleme', uploadedFile.id.toString(), currentFolder.id.toString());
-        } catch (error) { }
+        } catch (error) {
+            console.error("Error uploading file:", error);
+        }
     };
 
     const uploadFile = () => {
@@ -227,7 +237,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
         }
 
         const filteredFiles = currentFiles.filter((file) =>
-            file.attributes && file.attributes.name && file.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
+            file.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
         return (
@@ -258,7 +268,9 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 }
             });
             setNewHistoryEntry(response.data.data);
-        } catch (error) { }
+        } catch (error) {
+            console.error("Error creating history entry:", error);
+        }
     };
 
     const createFolderHistoryEntry = async (action, folderName) => {
@@ -277,6 +289,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
             });
             setNewHistoryEntry(response.data.data);
         } catch (error) {
+            console.error("Error creating folder history entry:", error);
         }
     };
 
@@ -311,16 +324,20 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                 filteredFolders && filteredFolders.length > 0 ? (
                     <div className="project-folders-container">
                         {filteredFolders.map((folder) => (
-                            <div className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
+                            <button className="project-folder" key={folder.id} onClick={() => openInsideFolder(folder)}>
                                 {userRole === "Admin" || userRole === "Contributor" ? (
                                     <div className="edit-delete-button-div">
-                                        <img
-                                            className="file-card-delete-btn"
-                                            src={deleteIcon}
-                                            alt="delete-icon"
-                                            onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}
-                                        />
-                                        <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }} />
+                                        <button onClick={(e) => { e.stopPropagation(); setFolderToDelete(folder.id); setShowDeleteModal(true); }}>
+                                            <img
+                                                className="file-card-delete-btn"
+                                                src={deleteIcon}
+                                                alt="delete-icon"
+
+                                            />
+                                        </button>
+                                        <button onClick={(e) => { e.stopPropagation(); handleEditFolder(folder.id); }}>
+                                            <img className="file-card-edit-btn" src={editPencil} alt="edit-icon" />
+                                        </button>
                                     </div>
                                 ) : null}
                                 <div className="project-card-rest-of">
@@ -333,7 +350,7 @@ function ProjectSection({ clickedProject, setNewHistoryEntry }) {
                                         alt="folder-icon"
                                     />
                                 </div>
-                            </div>
+                            </button>
                         ))}
                         <div className="dustbin-project-folder">
                             <h2 className="project-folder-name">Çöp Kutusu</h2>

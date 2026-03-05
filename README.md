@@ -1,5 +1,7 @@
 Ofisim - İşletmeler İçin Yönetim Platformu
 
+Projenin websitesine buradan ulaşabilirsiniz : https://www.ofisim.co/
+
 Ofisim, küçük ve orta ölçekli işletmelerin günlük operasyonlarını kolaylaştırmak, zaman kazandırmak ve verimliliği artırmak için geliştirilmiş, modüler ve uyarlanabilir bir yönetim platformudur. Bu proje, iş süreçlerini daha düzenli hale getirmek, iş akışlarını optimize etmek ve ekiplerin iş birliğini artırmak amacıyla tasarlanmıştır.
 
 Özellikler
@@ -40,17 +42,3 @@ STRAPI_SECRET=your_strapi_secret
 Geliştirme sunucusunu başlatın:
 npm run dev
 Tarayıcınızda http://localhost:3000 adresine giderek projeyi görüntüleyin.
-
-Katkı Sağlama
-Bu projeye katkıda bulunmak isterseniz, aşağıdaki adımları izleyebilirsiniz:
-
-Projeyi forklayın ve kendi yerel makinenize klonlayın.
-Yeni bir özellik veya hata düzeltmesi için bir dal oluşturun: git checkout -b feature/yeni-ozellik.
-Değişikliklerinizi yapın ve commit edin: git commit -m 'Yeni özelliği ekledim'.
-Değişikliklerinizi GitHub'a gönderin: git push origin feature/yeni-ozellik.
-Bir pull request (PR) açın ve ekibin incelemesine sunun.
-İletişim
-Bu projeyle ilgili sorularınız veya geri bildirimleriniz için bana ulaşabilirsiniz:
-
-E-posta: altug.altuner@example.com
-LinkedIn: Altuğ Altuner
