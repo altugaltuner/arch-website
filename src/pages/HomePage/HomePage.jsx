@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./HomePage.scss";
 import { useAuth } from "../../components/AuthProvider";
 import Navigation from "../../components/Navigation/Navigation";
-import Activities from "../../components/Activities/Activities";
 import CompanyName from "../../components/CompanyName/CompanyName";
 
 function HomePage() {

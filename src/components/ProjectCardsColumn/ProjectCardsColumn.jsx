@@ -44,7 +44,7 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
                 await axios.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, {
                     projects: updatedProjects.map(project => project.id)
                 });
-                window.location.href = `/projects/${selectedProject.id}`;
+                globalThis.location.href = `/projects/${selectedProject.id}`;
             } catch (error) {
                 console.error('Projeye katılırken hata oluştu:', error);
             }
@@ -114,7 +114,7 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
                                 <p className="project-card-name">
                                     {project.attributes.projectName}
                                 </p>
-                                {project?.attributes?.projectCoverPhoto && project?.attributes?.projectCoverPhoto?.data && (
+                                {project?.attributes?.projectCoverPhoto?.data && (
                                     <div className='p-nav-div'>
                                         <img
                                             className="project-navbar-photos"

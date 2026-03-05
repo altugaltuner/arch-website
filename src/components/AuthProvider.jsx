@@ -22,6 +22,7 @@ function AuthProvider({ children }) {
           setUser(null);
         }
       } catch (error) {
+        console.error("Authentication check failed:", error);
         setUser(null);
       } finally {
         setLoading(false);
@@ -44,6 +45,7 @@ function AuthProvider({ children }) {
         setUser(response.data.user);
       }
     } catch (error) {
+      console.error("Login failed:", error);
       throw error;
     }
   };
@@ -56,7 +58,7 @@ function AuthProvider({ children }) {
   const updateUser = async (userData) => {
     try {
       const token = localStorage.getItem('token');
-      if (!user || !user.id) {
+      if (!user.id) {
         throw new Error("User ID is missing");
       }
       const { password, ...updateData } = userData;
@@ -68,6 +70,7 @@ function AuthProvider({ children }) {
       setUser(response.data);
       return response.data;
     } catch (error) {
+      console.error("User update failed:", error);
       throw error;
     }
   };
@@ -75,7 +78,7 @@ function AuthProvider({ children }) {
   const updatePassword = async (password) => {
     try {
       const token = localStorage.getItem('token');
-      if (!user || !user.id) {
+      if (!user.id) {
         throw new Error("User ID is missing");
       }
       const response = await api.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, { password }, {
@@ -85,6 +88,7 @@ function AuthProvider({ children }) {
       });
       return response.data;
     } catch (error) {
+      console.error("Password update failed:", error);
       throw error;
     }
   };
@@ -92,7 +96,7 @@ function AuthProvider({ children }) {
   const updateProfilePhoto = async (formData) => {
     try {
       const token = localStorage.getItem('token');
-      if (!user || !user.id) {
+      if (!user.id) {
         throw new Error("User ID is missing");
       }
       const uploadResponse = await api.post(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/upload`, formData, {
@@ -102,7 +106,7 @@ function AuthProvider({ children }) {
         }
       });
 
-      if (uploadResponse.data && uploadResponse.data[0]) {
+      if (uploadResponse.data[0]) {
         const profilePicId = uploadResponse.data[0].id;
         const userResponse = await api.put(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users/${user.id}`, {
           profilePic: profilePicId
@@ -118,6 +122,7 @@ function AuthProvider({ children }) {
         throw new Error("Fotoğraf yükleme başarısız");
       }
     } catch (error) {
+      console.error("Profile photo update failed:", error);
       throw error;
     }
   };

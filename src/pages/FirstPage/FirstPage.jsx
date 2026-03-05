@@ -66,7 +66,7 @@ function FirstPage() {
                 <h2 className="firstpage-social-media-header">Bizi Takip Edin</h2>
                 <div className="social-media-logo-div">
                     {socialMediaAccounts.map((account, index) => (
-                        <a key={index} className="social-media-a" href={account.url} target="_blank" rel="noreferrer">
+                        <a key={account.id} className="social-media-a" href={account.url} target="_blank" rel="noreferrer">
                             <img className="social-media-logo" src={account.logo} alt={account.name} />
                             <p className="social-media-title">{account.name}</p>
                         </a>

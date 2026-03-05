@@ -1,4 +1,3 @@
-import React from 'react';
 import './CompanyModal.scss';
 import defaultLogo from "../../assets/icons/groups-logo.png";
 
@@ -12,7 +11,7 @@ const CompanyModal = ({ isOpen, onClose, company }) => {
                 <img
                     className="company-modal-logo"
                     src={
-                        company.companyLogo && company.companyLogo.data && company.companyLogo.data.attributes && company.companyLogo.data.attributes.formats && company.companyLogo.data.attributes.formats.thumbnail
+                        company
                             ? company.companyLogo.data.attributes.formats.thumbnail.url
                             : defaultLogo
                     }

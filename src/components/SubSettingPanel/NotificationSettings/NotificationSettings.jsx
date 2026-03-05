@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import "./NotificationSettings";
 
 const NotificationSettings = () => {
@@ -16,11 +16,11 @@ const NotificationSettings = () => {
             </div>
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">Uygulama içi bildirimler:</h3>
-                <div className="toggle-switch" onClick={handleToggle}>
+                <button className="toggle-switch" onClick={handleToggle}>
                     <div className={`toggle-switch-inner ${isToggled ? 'on' : 'off'}`}>
                         <span>{isToggled ? 'YES' : 'NO'}</span>
                     </div>
-                </div>
+                </button>
             </div>
             <div className="personal-info-subsetting-oneline">
                 <h3 className="subsetting-header">SMS bildirimleri:</h3>

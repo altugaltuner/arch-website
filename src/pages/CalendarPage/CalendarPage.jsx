@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
 import "./CalendarPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
@@ -32,8 +32,8 @@ const CalendarPage = () => {
     const [eventToEdit, setEventToEdit] = useState(null);
     const calendarDates = useMemo(() => generateCalendar(year, month), [year, month]);
     const { user } = useAuth();
-    const userRole = user && user.access ? user.access.role : null;
-    const userCompany = user && user.company ? user.company.id : null;
+    const userRole = user.access ? user.access.role : null;
+    const userCompany = user.company ? user.company.id : null;
 
 
     const fetchEvents = useCallback(async () => {
@@ -44,7 +44,9 @@ const CalendarPage = () => {
             setEvents(allEvents);
             const companyEvents = allEvents?.filter(event => event.attributes.company.data.id === userCompany);
             setFilteredEvents(companyEvents);
-        } catch (error) { }
+        } catch (error) {
+            console.error("Failed to fetch events:", error);
+        }
     }, [userCompany]);
 
     useEffect(() => {
@@ -128,9 +130,14 @@ const CalendarPage = () => {
                     <h1 className="div-big-header">Takvim</h1>
                 </div>
                 <div className="calendar-page-controls">
-                    <img className="calendar-page-button" onClick={prevMonth} src={backButton} alt="Geri" />
+                    <button onClick={prevMonth}>
+                        <img className="calendar-page-button" src={backButton} alt="go-back" />
+                    </button>
+
                     <span>{year} - {month + 1}</span>
-                    <img className="calendar-page-button" onClick={nextMonth} src={forwardButton} alt="İleri" />
+                    <button onClick={nextMonth}>
+                        <img className="calendar-page-button" src={forwardButton} alt="go-forward" />
+                    </button>
                 </div>
                 <div className="calendar-area">
                     {daysOfWeek.map((day) => (
@@ -145,13 +152,13 @@ const CalendarPage = () => {
                         const isToday = date.toDateString() === today.toDateString();
 
                         return (
-                            <div
+                            <button
                                 key={date.toDateString()}
-                                className={`calendar-day ${selectedDate && selectedDate.toDateString() === date.toDateString() ? 'selected' : ''} ${hasEvent ? 'event-day' : ''} ${isToday ? 'today' : ''}`}
+                                className={`calendar-day ${selectedDate.toDateString() === date.toDateString() ? 'selected' : ''} ${hasEvent ? 'event-day' : ''} ${isToday ? 'today' : ''}`}
                                 onClick={() => handleDateClick(date)}
                             >
                                 {date.getDate()}
-                            </div>
+                            </button>
                         );
                     })}
                 </div>

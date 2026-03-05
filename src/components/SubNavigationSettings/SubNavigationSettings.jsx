@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './SubNavigationSettings.scss';
 
 function SubNavigationSettings({ getRelevantSettings }) {
@@ -50,7 +50,7 @@ function SubNavigationSettings({ getRelevantSettings }) {
             <div className="sub-nav-container">
                 <div className="sub-nav-content">
                     {sections.map((section, index) => (
-                        <div
+                        <button
                             key={index}
                             className={`sub-nav-section ${section.id === selectedSection ? 'selected' : ''} ${(section.id !== 1 && section.id !== 6) ? 'disabled' : ''}`}
                             onClick={() => handleSectionClick(section)}
@@ -59,7 +59,7 @@ function SubNavigationSettings({ getRelevantSettings }) {
                             {section.items.map((item, idx) => (
                                 <p className="sub-nav-p" key={idx}>{item}</p>
                             ))}
-                        </div>
+                        </button>
                     ))}
                 </div>
             </div>

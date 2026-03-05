@@ -1,5 +1,4 @@
 import editPencil from '../../../assets/icons/edit-pencil.png';
-import React from 'react';
 
 const PrivacySecurity = () => (
     <div className="personal-info-subsetting-column">

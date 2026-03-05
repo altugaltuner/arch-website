@@ -104,14 +104,6 @@ const routes = [
       <CompanyCreatePage />
     ),
   },
-  // {
-  //   path: "/homepage",
-  //   element: (
-  //     <ProtectedRoute>
-  //       <HomePage />
-  //     </ProtectedRoute>
-  //   ),
-  // },
   {
     path: "*",
     element: (

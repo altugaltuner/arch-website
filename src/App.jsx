@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import HomePage from './pages/HomePage/HomePage';
 import { DarkModeProvider, useDarkMode } from './components/DarkModeContext';
 import AppSettings from './components/AppSettings/AppSettings';

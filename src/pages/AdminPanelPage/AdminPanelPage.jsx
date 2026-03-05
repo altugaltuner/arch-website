@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./AdminPanelPage.scss";
 import AdminPanelSubNav from "../../components/AdminPanelSubNav/AdminPanelSubNav";
 import Navigation from "../../components/Navigation/Navigation";

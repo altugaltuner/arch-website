@@ -1,5 +1,4 @@
 import editPencil from '../../../assets/icons/edit-pencil.png';
-import React from 'react';
 
 const DataStorage = () => (
     <div className="personal-info-subsetting-column">

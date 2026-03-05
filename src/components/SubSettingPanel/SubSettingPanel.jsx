@@ -1,4 +1,3 @@
-import React from 'react';
 import "./SubSettingPanel.scss";
 import AppSettings from "./AppSettings/AppSettings";
 import DataStorage from './DataStorage/DataStorage';

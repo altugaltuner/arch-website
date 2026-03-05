@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./ProjectsPage.scss";
@@ -27,7 +27,9 @@ function ProjectsPage() {
         try {
             const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
             setRoles(response.data.data);
-        } catch (error) { }
+        } catch (error) {
+            console.error("Error fetching roles:", error);
+        }
     }
 
     useEffect(() => {

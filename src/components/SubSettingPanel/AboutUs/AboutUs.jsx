@@ -1,4 +1,3 @@
-import React from 'react';
 import './AboutUs.scss';
 
 const faqData = [
@@ -33,7 +32,7 @@ const AboutUs = () => (
         <div className="personal-info-subsetting-oneline">
             <h3 className="subsetting-header">Sıkça Sorulan Sorular</h3>
             {faqData.map((faq, index) => (
-                <div className='one-question-div' key={index}>
+                <div className='one-question-div' key={faq.id}>
                     <p className="subsetting-paragraph-big">{faq.question}</p>
                     <p className="paragraph">{faq.answer}</p>
                 </div>

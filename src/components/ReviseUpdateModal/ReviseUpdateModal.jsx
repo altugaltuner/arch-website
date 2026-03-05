@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './ReviseUpdateModal.scss';
 import axios from 'axios';
 
@@ -44,6 +44,7 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
             onReviseUpdated(response.data);
             onClose();
         } catch (error) {
+            console.error('Revize güncellenirken hata oluştu:', error);
         }
     };
 
@@ -53,13 +54,14 @@ function ReviseUpdateModal({ isOpen, onClose, revise, onReviseUpdated, onReviseD
             onReviseDeleted(revise.id);
             onClose();
         } catch (error) {
+            console.error('Revize silinirken hata oluştu:', error);
         }
     };
 
     return (
         <div className="revise-update-modal">
             <div className="revise-modal-content">
-                <span className='global-close-button' onClick={onClose}>X</span>
+                <button className='global-close-button' onClick={onClose}>X</button>
                 <h2 className='modal-header'>Revizeyi Güncelle</h2>
                 <form className='revise-update-modal-form' onSubmit={handleSubmit}>
                     <textarea

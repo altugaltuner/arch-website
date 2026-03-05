@@ -1,4 +1,3 @@
-import React from 'react';
 import './SelectedEmployeeModal.scss';
 import { Link } from 'react-router-dom';
 
@@ -13,8 +12,8 @@ function SelectedEmployeeModal({ employee, onClose }) {
                 <div className="employee-card-modal-profile-pic">
                     <img
                         className="employee-card-modal-profile-pic-inner"
-                        src={employee?.profilePic?.url || employee.profilePic?.formats?.thumbnail?.url}
-                        alt=""
+                        src={employee.profilePic?.formats?.thumbnail?.url}
+                        alt="employee-profile"
                     />
                 </div>
                 <p className='employee-card-modal-username'>{employee?.username}</p>

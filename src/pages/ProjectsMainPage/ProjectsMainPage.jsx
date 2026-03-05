@@ -162,7 +162,9 @@ function ProjectsMainPage() {
         (project) => project.attributes.company.data.id === usersCompanyId
       );
       setCompanyProjects(filteredProjects);
-    } catch (error) { }
+    } catch (error) {
+      console.error("Error updating project:", error.response?.data || error.message);
+    }
   };
 
   const deleteModalOpen = (id) => {
@@ -172,7 +174,7 @@ function ProjectsMainPage() {
 
   const editModalOpen = (projectId) => {
     const project = companyProjects.find(p => p.id === projectId);
-    if (!project || !project.attributes) {
+    if (!project.attributes) {
       return;
     }
 

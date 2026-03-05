@@ -42,27 +42,27 @@ function SignupPage() {
 
     let hasError = false;
 
-    if (password !== confirmPassword) {
+    if (password === confirmPassword) {
+      setConfirmPasswordError("");
+    } else {
       setConfirmPasswordError("Şifreler eşleşmiyor. Lütfen tekrar deneyin.");
       hasError = true;
-    } else {
-      setConfirmPasswordError("");
     }
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{6,}$/;
-    if (!passwordRegex.test(password)) {
+    if (passwordRegex.test(password)) {
+      setPasswordError("");
+    } else {
       setPasswordError("Şifreniz en az 6 karakter uzunluğunda olmalı ve en az bir büyük harf, bir küçük harf ve bir rakam içermelidir.");
       hasError = true;
-    } else {
-      setPasswordError("");
     }
 
     const phoneRegex = /^[0-9]{10,11}$/;
-    if (!phoneRegex.test(phoneNumber)) {
+    if (phoneRegex.test(phoneNumber)) {
+      setPhoneError("");
+    } else {
       setPhoneError("Telefon numarası sadece rakamlardan oluşmalı ve 10 veya 11 haneli olmalıdır.");
       hasError = true;
-    } else {
-      setPhoneError("");
     }
 
     if (hasError) return;
@@ -72,11 +72,11 @@ function SignupPage() {
       const companiesResponse = await api.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies`);
       const companies = companiesResponse.data.data;
       const matchingCompany = companies.find(company => company?.attributes?.companyID === companyCode);
-      if (!matchingCompany) {
+      if (matchingCompany) {
+        setCompanyCodeError("");
+      } else {
         setCompanyCodeError("Bu şirket kodu ile eşleşen bir şirket bulunamadı.");
         return;
-      } else {
-        setCompanyCodeError("");
       }
 
       const response = await api.post(
@@ -97,7 +97,7 @@ function SignupPage() {
         navigate('/login');
       }
     } catch (error) {
-      if (error.response && error.response.data.error.message === "Email or Username are already taken") {
+      if (error.response.data.error.message === "Email or Username are already taken") {
         setEmailError("Bu email alınmıştır.");
       } else {
         alert("Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.");
@@ -128,13 +128,13 @@ function SignupPage() {
     }
 
     if (name === "phoneNumber") {
-      const cleanedValue = value.replace(/\D/g, '');
+      const cleanedValue = value.replaceAll(/\D/g, '');
       setFormData({
         ...formData,
         [name]: cleanedValue,
       });
     } else if (name === "fullName") {
-      const cleanedValue = value.replace(/[0-9]/g, '');
+      const cleanedValue = value.replaceAll(/[0-9]/g, '');
       setFormData({
         ...formData,
         [name]: cleanedValue,
@@ -230,7 +230,9 @@ function SignupPage() {
           </div>
         </form>
       </div>
-      <img className="back-button-company" src={backButton} alt="back-button" onClick={() => window.history.back()} />
+      <button onClick={() => window.history.back()}>
+        <img className="back-button-company" src={backButton} alt="back-button" />
+      </button>
     </main>
   );
 }

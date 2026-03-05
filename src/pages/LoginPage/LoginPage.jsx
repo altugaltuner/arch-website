@@ -37,6 +37,7 @@ function LoginPage() {
       Cookies.set("isLogin", "true")
       navigate("/homepage");
     } catch (error) {
+      console.error("Login error:", error);
       setError("Hatalı kullanıcı adı veya şifre, lütfen tekrar deneyin!");
     }
   }

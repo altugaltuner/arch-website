@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./AboutMePage.scss";
 import { api } from "../../api";
 import Navigation from "../../components/Navigation/Navigation";
@@ -30,6 +30,7 @@ function AboutMePage() {
                     setUser(null);
                 }
             } catch (error) {
+                console.error("Failed to fetch current user:", error);
                 setUser(null);
             } finally {
                 setLoading(false);
@@ -49,7 +50,10 @@ function AboutMePage() {
             <div className="aboutme-page-column">
                 <div className="aboutme-row-2">
                     <h1 className="div-big-header">Profilim</h1>
-                    <img src={inboxLogo} alt="message-inbox" className="message-inbox" onClick={() => { openInboxModal() }} />
+                    <button onClick={() => { openInboxModal() }}>
+                        <img src={inboxLogo} alt="message-inbox" className="message-inbox" />
+                    </button>
+
                 </div>
                 <div className="aboutme-page-row">
                     <MyProfile user={user} />

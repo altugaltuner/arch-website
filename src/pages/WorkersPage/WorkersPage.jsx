@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./WorkersPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import axios from 'axios';
@@ -22,30 +22,27 @@ function WorkersPage() {
 
     const onAddProfession = async (professionName) => {
         try {
-            const token = localStorage.getItem('token'); // Eğer yetkilendirme gerekiyorsa bu şekilde alabilirsiniz
+            const token = localStorage.getItem('token');
 
-            // Yeni bir unique professionId oluşturabilirsiniz veya manuel olarak verebilirsiniz.
-            const professionId = `prof-${Date.now()}`; // Örnek olarak unique bir ID oluşturuyoruz.
-            const response = await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions', {
+            const professionId = `prof-${Date.now()}`;
+            await axios.post('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/professions', {
                 data: {
                     professionName: professionName,
                     professionId: professionId,
-                    company: usersCompanyId, // Meslek şirketle ilişkilendirilecekse bu bilgiyi de ekleyin
+                    company: usersCompanyId,
                 }
             }, {
                 headers: {
-                    Authorization: `Bearer ${token}`, // Eğer yetkilendirme gerekiyorsa bu başlığı ekleyin
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             });
-            await loadJobTitles(); // Yeni meslek eklendikten sonra meslekleri yeniden yükleyin
+            await loadJobTitles();
             closeNewProfessionModal();
         } catch (error) {
             console.error("Meslek eklenirken hata oluştu:", error.response?.data || error.message);
         }
     };
-
-
 
     const loadJobTitles = async () => {
         if (!user) {
@@ -66,7 +63,6 @@ function WorkersPage() {
             console.error("Meslekler yüklenirken hata oluştu:", error);
         }
     };
-
 
     useEffect(() => {
         loadJobTitles();
@@ -99,7 +95,9 @@ function WorkersPage() {
                 const titles = formattedUsers.map(employee => employee.profession.professionName);
                 const uniqueTitles = Array.from(new Set(titles));
                 setJobTitles(uniqueTitles);
-            } catch (error) { }
+            } catch (error) {
+                console.error("Çalışanlar yüklenirken hata oluştu:", error);
+            }
         };
 
         fetchData();

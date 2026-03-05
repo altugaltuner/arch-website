@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import "./FlowPage.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import axios from "axios";
@@ -35,7 +35,9 @@ function FlowPage() {
             try {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/companies?populate=*');
                 setCompanies(response.data.data);
-            } catch (error) { }
+            } catch (error) {
+                console.log(error);
+            }
         }
         getCompanies();
     }, []);
@@ -59,29 +61,29 @@ function FlowPage() {
                     <h2 className="all-companies-page-title">Tüm Şirketler</h2>
                     <div className="flow-page-row">
                         {companies.map((company) => (
-                            <div
+                            <button
                                 key={company.id}
                                 className="all-companies-page-company-card"
                                 onClick={() => handleCompanyClick(company)}
                             >
                                 <h2 className="company-hub-header">{company.attributes.companyName}</h2>
+
                                 <img
                                     className="company-hub-one-logo"
                                     src={
-                                        company.attributes.companyLogo && company.attributes.companyLogo.data && company.attributes.companyLogo.data.attributes && company.attributes.companyLogo.data.attributes.formats && company.attributes.companyLogo.data.attributes.formats.thumbnail
-                                            ? company.attributes.companyLogo.data.attributes.formats.thumbnail.url
+                                        company ? company.attributes.companyLogo.data.attributes.formats.thumbnail.url
                                             : defaultLogo
                                     }
                                     alt="company-logo"
                                 />
-                            </div>
+                            </button>
                         ))}
                     </div>
                     <div className="social-media-and-connections">
                         <h2 className="firstpage-social-media-header">Bizi Takip Edin</h2>
                         <div className="social-media-logo-div">
                             {socialMediaAccounts.map((account, index) => (
-                                <a key={index} className="social-media-a" href={account.url} target="_blank" rel="noreferrer">
+                                <a key={account.id} className="social-media-a" href={account.url} target="_blank" rel="noreferrer">
                                     <div className="social-img-p">
                                         <img className="social-media-logo" src={account.logo} alt={account.name} />
                                         <p className="social-media-title">{account.name}</p>

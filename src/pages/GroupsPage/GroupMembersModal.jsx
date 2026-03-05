@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./GroupMembersModal.scss";
 
@@ -11,7 +11,9 @@ const GroupMembersModal = ({ show, onClose, groupId }) => {
                 try {
                     const response = await axios.get(`https://wonderful-pleasure-64045d06ec.strapiapp.com/api/groups/${groupId}?populate[users_permissions_users][populate]=access`);
                     setMembers(response.data.data.attributes.users_permissions_users.data);
-                } catch (error) { }
+                } catch (error) {
+                    console.error("Error fetching group members:", error);
+                }
             };
             fetchMembers();
         }

@@ -8,7 +8,9 @@ function CompanyCreatePage() {
 
     return (
         <main className="company-create-page-main">
-            <img className="back-button-company" src={backButton} alt="back-button" onClick={() => window.history.back()} />
+            <button onClick={() => globalThis.history.back()}>
+                <img className="back-button-company" src={backButton} alt="back-button" />
+            </button>
             <h1 className="company-create-page-title">Şirket Hesabı Açın</h1>
             <CompanyFormElements errors={errors} setErrors={setErrors} />
         </main>

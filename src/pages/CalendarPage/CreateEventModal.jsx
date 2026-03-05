@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import './CreateEventModal.scss';
 import { useAuth } from "../../components/AuthProvider";
@@ -47,6 +47,7 @@ const CreateEventModal = ({ selectedDate, onClose, addEvent }) => {
             addEvent(response.data.data);
             onClose();
         } catch (error) {
+            console.error("Failed to create event:", error);
         }
         onClose();
     };

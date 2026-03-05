@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './EditEventModal.scss';
 import { useAuth } from "../../components/AuthProvider";
@@ -56,6 +56,7 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
             updateEvent(response.data.data);
             onClose();
         } catch (error) {
+            console.error("Failed to update event:", error);
         }
     };
 
@@ -65,10 +66,11 @@ const EditEventModal = ({ event, onClose, updateEvent, deleteEvent }) => {
             deleteEvent(event.id);
             onClose();
         } catch (error) {
+            console.error("Failed to delete event:", error);
         }
     };
 
-    const isUserAuthorized = userRole === "Admin" || (event?.attributes?.users_permissions_user?.data?.id && userId === event.attributes.users_permissions_user.data.id);
+    const isUserAuthorized = userRole === "Admin" || ( userId === event.attributes.users_permissions_user.data.id);
 
     return (
         <div className="edit-event-modal">

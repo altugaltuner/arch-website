@@ -33,7 +33,7 @@ function GroupsPage() {
 
     const { user } = useAuth();
     const usersCompanyId = user?.company?.id;
-    const userRole = user && user.access ? user.access.role : null;
+    const userRole = user.access ? user.access.role : null;
 
     const handleDeleteGroup = () => {
         try {
@@ -43,6 +43,7 @@ function GroupsPage() {
                 setSelectedGroupId(null);
             });
         } catch (error) {
+            console.error("Error deleting group:", error);
         }
     };
 
@@ -60,6 +61,7 @@ function GroupsPage() {
                 fetchProjectGroups();
             });
         } catch (error) {
+            console.error("Error editing group:", error);
         }
     };
 
@@ -71,6 +73,7 @@ function GroupsPage() {
             setGroups(companyGroups);
             setFilteredGroups(companyGroups);
         } catch (error) {
+            console.error("Error fetching groups:", error);
         }
     };
 
@@ -91,6 +94,7 @@ function GroupsPage() {
             const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/accesses');
             setRoles(response.data.data);
         } catch (error) {
+            console.error("Error fetching roles:", error);
         }
     }
 
@@ -125,6 +129,7 @@ function GroupsPage() {
             setGroups(companyGroups);
             setFilteredGroups(companyGroups);
         } catch (error) {
+            console.error("Error creating group:", error);
         }
     };
 
@@ -144,6 +149,7 @@ function GroupsPage() {
                     setShowPasswordModal(false);
                     return { success: true };
                 } catch (error) {
+                    console.error("Error joining group:", error);
                     return { success: false, message: 'Gruba katılırken bir hata oluştu.' };
                 }
             } else {
@@ -176,18 +182,16 @@ function GroupsPage() {
                             <button
                                 className="project-group-add-group"
                                 onClick={() => setShowModal(true)}
-                                role="button">
-
+                            >
                                 Grup Oluştur
                             </button>
                         )}
 
                         {filteredGroups.length > 0 ? (
-
                             filteredGroups.map((group) => {
                                 const isUserInGroup = group.attributes.users_permissions_users.data.some(u => u.id === user.id);
                                 return (
-                                    <div
+                                    <button
                                         key={group.id}
                                         className="project-group"
                                         onClick={() => {
@@ -218,30 +222,31 @@ function GroupsPage() {
                                         <h2 className="relevant-project-header">{group.attributes.groupName}</h2>
 
                                         {userRole === "Admin" && (
-                                            <>
-                                                <img className="file-card-edit-btn"
-                                                    src={editIcon}
-                                                    alt=""
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setSelectedGroupId(group.id);
-                                                        setChangedGroup({ groupName: group.attributes.groupName });
-                                                        setShowEditModal(true);
-                                                    }}
-                                                />
-                                                <img
-                                                    className="file-card-delete-btn"
-                                                    src={deleteIcon}
-                                                    alt=""
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setSelectedGroupId(group.id);
-                                                        setShowDeleteModal(true);
-                                                    }}
-                                                />
+                                            <><button onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedGroupId(group.id);
+                                                setChangedGroup({ groupName: group.attributes.groupName });
+                                                setShowEditModal(true);
+                                            }}><img className="file-card-edit-btn"
+                                                src={editIcon}
+                                                alt="edit-group"
+                                                /></button>
+                                                <button onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setSelectedGroupId(group.id);
+                                                    setShowDeleteModal(true);
+                                                }}>
+                                                    <img
+                                                        className="file-card-delete-btn"
+                                                        src={deleteIcon}
+                                                        alt="delete-group"
+
+                                                    />
+                                                </button>
+
                                             </>
                                         )}
-                                    </div>
+                                    </button>
                                 );
                             })
 

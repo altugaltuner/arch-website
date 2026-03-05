@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../AuthProvider";
 
 const SendMessage = () => {
@@ -32,6 +32,7 @@ const SendMessage = () => {
                     .then((data) => console.log(data));
             }
         } catch (error) {
+            console.error("Error sending message:", error);
         }
         setValue("");
         setDisplayName(displayName);

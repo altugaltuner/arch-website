@@ -1,4 +1,3 @@
-import React from "react";
 import { useAuth } from "../AuthProvider";
 const Message = ({ message }) => {
     const { currentUser } = useAuth();
