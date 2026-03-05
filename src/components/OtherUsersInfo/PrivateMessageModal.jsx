@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './PrivateMessageModal.scss';
 
 const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent }) => {
@@ -32,6 +32,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
             const result = await response.json();
             onMessageSent(result.data);
         } catch (error) {
+            console.error('Mesaj gönderilirken hata oluştu:', error);
         }
         onClose();
     };
@@ -42,7 +43,7 @@ const PrivateMessageModal = ({ isOpen, onClose, employee, user, onMessageSent })
         <div className="priv-modal-overlay">
             <div className="priv-modal-content">
                 <h2 className='modal-header'>Yeni Mesaj</h2>
-                <span className='global-close-button' onClick={onClose}>X</span>
+                <button className='global-close-button' onClick={onClose}>X</button>
                 <form className='priv-form' onSubmit={handleSubmit}>
                     <div className="priv-form-group">
                         <label htmlFor="header">Başlık</label>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './CreateGroupModal.scss';
 
 const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange, handleSubmit }) => {
@@ -44,7 +44,7 @@ const CreateGroupModal = ({ showModal, setShowModal, newGroup, handleInputChange
     return (
         <div className="create-group-modal">
             <div className="create-group-modal-content">
-                <span className="create-group-close-group-modal" onClick={() => setShowModal(false)}>X</span>
+                <button className="create-group-close-group-modal" onClick={() => setShowModal(false)}>X</button>
                 <h2 className='create-group-modal-header'>Yeni Grup Oluştur</h2>
                 <input
                     className='create-group-modal-name-input'

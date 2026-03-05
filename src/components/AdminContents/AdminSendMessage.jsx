@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import "./AdminSendMessage.scss";
 import AdminSentMessages from "../AdminSentMessages/AdminSentMessages";
 import SendBulkMessageModal from '../SendBulkMessageModal/SendBulkMessageModal';
@@ -17,6 +17,7 @@ function AdminSendMessage() {
                 const result = await response.json();
                 setUpdatedAdminMessages(result.data);
             } catch (error) {
+                console.error('Error fetching messages:', error);
             }
         };
 

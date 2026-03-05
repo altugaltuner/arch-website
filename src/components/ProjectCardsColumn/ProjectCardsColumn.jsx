@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import editPencil from "../../assets/icons/edit-pencil.png";
 import deleteIcon from "../../assets/icons/delete-icon.png";
 import PasswordModal from "./PasswordModal";
@@ -14,7 +14,7 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
     const { user } = useAuth();
     const [userInvolvedProjects, setUserInvolvedProjects] = useState([]);
 
-    const userRole = user && user.access ? user.access.role : null;
+    const userRole = user.access ? user.access.role : null;
 
     useEffect(() => {
         setUserInvolvedProjects(user.projects);
@@ -46,6 +46,7 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
                 });
                 window.location.href = `/projects/${selectedProject.id}`;
             } catch (error) {
+                console.error('Projeye katılırken hata oluştu:', error);
             }
         } else {
             alert('Yanlış şifre');
@@ -58,7 +59,7 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
 
         const userProjects = user.projects.map(p => p.projectName);
         if (userProjects.includes(project.attributes.projectName)) {
-            window.location.href = `/projects/${project.id}`;
+            globalThis.location.href = `/projects/${project.id}`;
         } else {
             setSelectedProject(project);
             setIsModalOpen(true);
@@ -93,21 +94,23 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
                         <div className="project-cards" key={project.id}>
                             {userRole === "Admin" && (
                                 <>
-                                    <img
+                                    <button onClick={() => deleteModalOpen(project.id)}> <img
                                         className="project-card-delete-btn"
                                         src={deleteIcon}
-                                        alt=""
-                                        onClick={() => deleteModalOpen(project.id)}
+                                        alt="delete-project"
                                     />
-                                    <img
-                                        className="project-card-edit-btn"
-                                        src={editPencil}
-                                        alt=""
-                                        onClick={() => editModalOpen(project.id)}
-                                    />
+                                    </button>
+
+                                    <button onClick={() => editModalOpen(project.id)}>
+                                        <img
+                                            className="project-card-edit-btn"
+                                            src={editPencil}
+                                            alt="edit-project"
+                                        />
+                                    </button>
                                 </>
                             )}
-                            <div className="project-card" onClick={() => handleProjectClick(project)}>
+                            <button className="project-card" onClick={() => handleProjectClick(project)}>
                                 <p className="project-card-name">
                                     {project.attributes.projectName}
                                 </p>
@@ -122,7 +125,7 @@ function ProjectCardsColumn({ companyProjects, deleteModalOpen, setShowModal, ed
 
                                 )}
 
-                            </div>
+                            </button>
                         </div>
                     ))
                 ) : (

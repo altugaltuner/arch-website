@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import './FolderContent.scss';
 import fileIcon from "../../assets/icons/untitled-icon.png";
@@ -10,7 +10,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     const fileInputRef = useRef(null);
 
     const { user } = useAuth();
-    const userRole = user && user.access ? user.access.role : null;
+    const userRole = user.access ? user.access.role : null;
 
     useEffect(() => {
         setCurrentUser(user);
@@ -39,7 +39,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 },
             });
             const uploadedFile = uploadResponse.data[0];
-            const updatedContent = folderState.folderContent && folderState.folderContent.data
+            const updatedContent = folderState.folderContent.data
                 ? [...folderState.folderContent.data, uploadedFile]
                 : [uploadedFile];
 
@@ -54,6 +54,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                 folderContent: { data: updatedContent }
             }));
         } catch (error) {
+            console.log('Dosya yükleme hatası:', error);
         }
     };
 
@@ -64,25 +65,25 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
     return (
         <div className="folder-content">
             {userRole === "Admin" || userRole === "Contributor" ? (
-                <div className="file-input-wrapper" onClick={uploadFile}>
-                    <button className="custom-file-upload">Dosya Yükle</button>
+                <button className="file-input-wrapper" onClick={uploadFile}>
+                    <span className="custom-file-upload">Dosya Yükle</span>
                     <input
                         className='file-input'
                         ref={fileInputRef}
                         type="file"
                         onChange={handleFileUpload}
                     />
-                </div>
+                </button>
             ) :
                 null}
-            {filteredFiles && filteredFiles.map(file => {
+            {filteredFiles?.map(file => {
                 const fileAttributes = file.attributes || {};
                 const fileExt = fileAttributes.ext ? fileAttributes.ext.slice(1).toLowerCase() : '';
                 const isImage = ["jpg", "jpeg", "png"].includes(fileExt);
                 const iconSrc = isImage ? fileAttributes.formats.thumbnail.url || fileAttributes.url : (fileIcons[fileExt] || fileIcon);
 
                 return (
-                    <div key={file.id} className="file-folder-content" onClick={() => openFileModal(file)}>
+                    <button key={file.id} className="file-folder-content" onClick={() => openFileModal(file)}>
                         <img
                             className="file-icon-img"
                             src={iconSrc}
@@ -95,7 +96,7 @@ function FolderContent({ folder, fileIcons, openFileModal, filteredFiles }) {
                                 <span className="uploader-name-tooltip">{currentUser.username}</span>
                             </div>
                         )}
-                    </div>
+                    </button>
                 );
             })}
         </div>

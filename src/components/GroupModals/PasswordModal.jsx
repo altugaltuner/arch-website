@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './PasswordModal.scss';
 
 const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setPassword, handlePasswordSubmit, errorMessage }) => {
@@ -32,7 +32,7 @@ const PasswordModal = ({ showPasswordModal, setShowPasswordModal, password, setP
     return (
         <div className="password-modal">
             <div className="password-modal-content">
-                <span className="password-modal-close" onClick={() => setShowPasswordModal(false)}>X</span>
+                <button className="password-modal-close" onClick={() => setShowPasswordModal(false)}>X</button>
                 <h2 className='password-modal-header'>Grup Şifresi</h2>
                 <input
                     type="password"

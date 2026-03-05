@@ -1,4 +1,3 @@
-import React from 'react';
 import "./AdminDashboard.scss";
 
 function AdminDashBoard({ projectCount, userCount, reviseCount, finishedProjectCount, onGoingProjectCount, onGoingReviseCount, CanceledReviseCount, finishedReviseCount }) {

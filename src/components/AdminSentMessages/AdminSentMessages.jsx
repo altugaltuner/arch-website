@@ -6,8 +6,8 @@ function AdminSentMessages({ adminMessages }) {
         <div className="admin-sent-messages-main">
             {adminMessages.map((message) => {
                 const contentMedia = message.attributes.contentMedia;
-                const mediaUrl = contentMedia && contentMedia.data && contentMedia.data[0]
-                    ? (contentMedia.data[0].attributes.formats && contentMedia.data[0].attributes.formats.thumbnail
+                const mediaUrl = contentMedia.data[0]
+                    ? (contentMedia.data[0].attributes.formats.thumbnail
                         ? contentMedia.data[0].attributes.formats.medium.url
                         : contentMedia.data[0].attributes.url)
                     : null;

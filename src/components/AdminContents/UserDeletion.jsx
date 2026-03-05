@@ -40,6 +40,7 @@ function UserDeletion({ users }) {
             setFilteredUsers(filteredUsers.filter(user => !selectedUsers.includes(user.id)));
             setSelectedUsers([]);
         } catch (error) {
+            console.error('Error deleting users:', error);
         }
     };
 

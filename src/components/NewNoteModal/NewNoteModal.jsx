@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './NewNoteModal.scss';
 
 function NewNoteModal({ showModal, setShowModal, saveNote }) {
@@ -19,7 +19,7 @@ function NewNoteModal({ showModal, setShowModal, saveNote }) {
     return (
         <div className="new-note-modal">
             <div className="new-note-modal-content">
-                <span className='global-close-button' onClick={() => setShowModal(false)}>X</span>
+                <button className='global-close-button' onClick={() => setShowModal(false)}>X</button>
                 <h2 className='modal-header'>Yeni Not Yaz</h2>
                 <input
                     className='note-title-input'

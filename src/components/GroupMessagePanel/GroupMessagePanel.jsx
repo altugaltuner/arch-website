@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./GroupMessagePanel.scss";
 import { useAuth } from "../AuthProvider";
@@ -33,6 +33,7 @@ function GroupMessagePanel({ selectedGroupId }) {
                         setIsUserInGroup(isUserInGroup);
                     }
                 } catch (error) {
+                    console.error("Error fetching group details:", error);
                 }
             }
         };
@@ -60,6 +61,7 @@ function GroupMessagePanel({ selectedGroupId }) {
                 setMessages(response.data.data.attributes.chatMessages);
                 setMessage("");
             } catch (error) {
+                console.error("Error sending message:", error);
             }
         }
     };
@@ -85,7 +87,7 @@ function GroupMessagePanel({ selectedGroupId }) {
                     <div className="message-panel-message-area">
                         {messages.map((msg, index) => (
                             <p
-                                key={index}
+                                key={msg.id}
                                 className={
                                     msg.user === user.id
                                         ? "my-message-in-panel"

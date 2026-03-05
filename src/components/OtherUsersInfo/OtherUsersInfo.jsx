@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './OtherUsersInfo.scss';
 import PrivateMessageModal from "./PrivateMessageModal";
 import { useAuth } from "../AuthProvider";
@@ -6,7 +6,7 @@ import editPencil from "../../assets/icons/edit-pencil.png";
 
 function OtherUsersInfo({ employee }) {
     const { user } = useAuth();
-    const userRole = user && user.access ? user.access.role : null;
+    const userRole = user.access ? user.access.role : null;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [privateMessages, setPrivateMessages] = useState([]);
     const [filteredMessages, setFilteredMessages] = useState([]);
@@ -21,6 +21,7 @@ function OtherUsersInfo({ employee }) {
                 const result = await response.json();
                 setProfessions(result.data);
             } catch (error) {
+                console.error('Meslekler alınırken hata oluştu:', error);
             }
         };
 
@@ -28,7 +29,7 @@ function OtherUsersInfo({ employee }) {
     }, []);
 
     useEffect(() => {
-        if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
+        if (employee.profession.data.attributes) {
             setNewProfessionName(employee.profession.data.attributes.professionName);
         } else {
             setNewProfessionName('Henüz Belirtilmedi');
@@ -75,7 +76,7 @@ function OtherUsersInfo({ employee }) {
 
     const handleCancelClick = () => {
         setIsEditing(false);
-        if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
+        if (employee.profession.data.attributes) {
             setNewProfessionName(employee.profession.data.attributes.professionName);
         }
     };
@@ -97,11 +98,12 @@ function OtherUsersInfo({ employee }) {
             if (response.ok) {
                 const updatedEmployee = await response.json();
                 setIsEditing(false);
-                if (employee && employee.profession && employee.profession.data && employee.profession.data.attributes) {
+                if (employee.profession.data.attributes) {
                     employee.profession.data.attributes.professionName = updatedEmployee.profession.professionName;
                 }
             }
         } catch (error) {
+            console.error('Meslek güncellenirken hata oluştu:', error);
         }
     };
 
@@ -121,7 +123,7 @@ function OtherUsersInfo({ employee }) {
                     <div className='other-info-inner-2'>
                         <img
                             className="other-info-profile-pic"
-                            src={employee.profilePic?.data?.attributes?.url || employee.profilePic?.data?.attributes?.formats?.thumbnail?.url || ""}
+                            src={employee.profilePic?.data?.attributes?.formats?.thumbnail?.url || ""}
                             alt=""
                         />
                         <p className='other-info-username'>{employee.username}</p>
@@ -146,7 +148,9 @@ function OtherUsersInfo({ employee }) {
                                 <div>
                                     <p className='other-info-professionname'>{employee?.profession?.data?.attributes?.professionName ?? "Henüz Belirtilmedi"}</p>
                                     {userRole === "Admin" && (
-                                        <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" onClick={handleEditClick} />
+                                        <button className='edit-profession-button' onClick={handleEditClick}>
+                                            <img src={editPencil} className='pencil-profession-edit' alt="edit-pencil" />
+                                        </button>
                                     )}
                                 </div>
                             )}
@@ -155,7 +159,7 @@ function OtherUsersInfo({ employee }) {
                 </div>
                 <div className='other-all-revises-inner'>
                     <h2 className='other-revises-h2'>Revizeler</h2>
-                    {employee.project_revises && employee.project_revises.data.length > 0 ? (
+                    {employee.project_revises.data.length > 0 ? (
                         employee.project_revises.data.map((revise) => (
                             <div key={revise.id} className='other-revise-div'>
                                 <p className='other-revise-p'>{revise.attributes.comment[0]?.children[0]?.text}</p>
@@ -170,7 +174,7 @@ function OtherUsersInfo({ employee }) {
                 <div className='other-all-projects'>
                     <h2 className='other-joined-projects-h2'>Dahil Olduğu Projeler</h2>
                     <div className='other-column'>
-                        {employee.projects && employee.projects.data.map((project) => (
+                        {employee.projects.data.map((project) => (
                             <div key={project.id} className='other-project-div'>
                                 <p className='other-project-p'>{project.attributes.projectName}</p>
                                 {project.attributes.projectCoverPhoto?.data?.attributes?.formats?.thumbnail?.url && (
@@ -188,7 +192,7 @@ function OtherUsersInfo({ employee }) {
             <div className='other-all-groups'>
                 <h2 className='other-groups-joined-h2'>Dahil Olduğu Gruplar</h2>
                 <div className='all-groups-row-div'>
-                    {employee.groups && employee.groups.data.length > 0 ? (
+                    {employee.groups.data.length > 0 ? (
                         employee.groups.data.map((group) => (
                             <p className='other-groups-name'>{group.attributes.groupName}</p>
                         ))

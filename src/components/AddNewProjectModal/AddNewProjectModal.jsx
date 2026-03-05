@@ -42,11 +42,11 @@ function AddNewProjectModal({ show, onClose, newProject, handleInputChange, hand
     return (
         <div className="add-new-project-modal">
             <div className="add-new-project-modal-content">
-                <span
+                <button
                     className="global-close-button"
                     onClick={onClose}>
                     X
-                </span>
+                </button>
                 <h2 className="modal-header">Yeni Proje Ekle</h2>
                 {error && <p className="error-message">{error}</p>}
                 <input

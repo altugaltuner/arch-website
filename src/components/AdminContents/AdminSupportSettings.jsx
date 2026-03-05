@@ -1,4 +1,3 @@
-import React from 'react';
 import "./AdminSupportSettings.scss";
 
 function AdminSupportSettings() {

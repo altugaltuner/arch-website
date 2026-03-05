@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./OpenInboxModal.scss";
 import { useAuth } from "../AuthProvider";
 
@@ -17,6 +17,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
                 const companyMessages = result.data.filter(message => message.attributes.company?.data?.id === userCompanyId);
                 setFilteredMessages(companyMessages);
             } catch (error) {
+                console.error('Mesajlar alınırken hata oluştu:', error);
             }
         };
 
@@ -32,7 +33,7 @@ function OpenInboxModal({ showInboxModal, setShowInboxModal }) {
             <div className="open-column">
                 <div className="inbox-model-row">
                     <div className="open-inbox-content-massmessage-div">
-                        <span className="global-close-button" onClick={() => setShowInboxModal(false)}>X</span>
+                        <button className="global-close-button" onClick={() => setShowInboxModal(false)}>X</button>
                         <h2 className='open-inbox-modal-header'>Bildirimler</h2>
                         <div className="messages-container">
                             {filteredMessages.map(message => (

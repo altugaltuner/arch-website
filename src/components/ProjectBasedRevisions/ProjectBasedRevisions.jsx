@@ -10,6 +10,7 @@ function ProjectBasedRevisions({ clickedProject }) {
         if (clickedProject) {
             setActiveProjectTitle(clickedProject.attributes.projectName);
         } else {
+            console.warn('clickedProject prop is null or undefined');
         }
     }, [clickedProject]);
 
@@ -19,6 +20,7 @@ function ProjectBasedRevisions({ clickedProject }) {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/project-revises?populate=*');
                 setProjectBasedRevisions(response.data.data);
             } catch (error) {
+                console.error('Revizeler alınırken hata oluştu:', error);
             }
         };
 
@@ -27,9 +29,9 @@ function ProjectBasedRevisions({ clickedProject }) {
 
     const getCommentText = (comment) => {
         return comment.map((paragraph, index) => (
-            <p className="revision-paragraph" key={index}>
+            <p className="revision-paragraph" key={paragraph.id}>
                 {paragraph.children.map((child, childIndex) => (
-                    <span className="revision-comment" key={childIndex}>{child.text}</span>
+                    <span className="revision-comment" key={child.id}>{child.text}</span>
                 ))}
             </p>
         ));

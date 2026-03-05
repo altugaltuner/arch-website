@@ -1,4 +1,3 @@
-import React from 'react';
 import './EditProjectFolderModal.scss';
 
 function EditProjectFolderModal({ showEditModal, setEditModal, newFolderName, setNewFolderName, handleEditSubmit }) {
@@ -7,7 +6,7 @@ function EditProjectFolderModal({ showEditModal, setEditModal, newFolderName, se
     return (
         <div className="edit-project-folder-modal">
             <div className="edit-project-folder-modal-content">
-                <span className="global-close-button" onClick={() => setEditModal(false)}>X</span>
+                <button className="global-close-button" onClick={() => setEditModal(false)}>X</button>
                 <h2 className="modal-header">Klasörü Düzenle</h2>
                 <input
                     className="edit-project-folder-input-field"

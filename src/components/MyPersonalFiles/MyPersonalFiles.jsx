@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import "./MyPersonalFiles.scss";
 import folderIcon from "../../assets/icons/folder-icon.png";
@@ -24,7 +24,7 @@ function MyPersonalFiles({ user }) {
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        if (!user || !user.id) {
+        if (!user.id) {
             setIsLoading(false);
             return;
         }
@@ -40,6 +40,7 @@ function MyPersonalFiles({ user }) {
                 }));
                 setPersonalFolders(formattedFolders);
             } catch (error) {
+                console.error("Error fetching personal folders:", error);
             } finally {
                 setIsLoading(false);
             }
@@ -84,6 +85,7 @@ function MyPersonalFiles({ user }) {
             setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedContent }));
 
         } catch (error) {
+            console.error("Error uploading file:", error);
         }
     };
 
@@ -119,6 +121,7 @@ function MyPersonalFiles({ user }) {
             setSelectedFolder(prevFolder => ({ ...prevFolder, personalFolderContent: updatedFolderContent }));
             setSelectedFile(null);
         } catch (error) {
+            console.error("Error deleting file:", error);
         }
     };
 
@@ -138,6 +141,7 @@ function MyPersonalFiles({ user }) {
             setPersonalFolders(personalFolders.filter(folder => folder.id !== folderToDelete.id));
             setFolderToDelete(null);
         } catch (error) {
+            console.error("Error deleting folder:", error);
         }
     };
 
@@ -157,6 +161,7 @@ function MyPersonalFiles({ user }) {
             setFolderToEdit(null);
             setShowEditFolderModal(false);
         } catch (error) {
+            console.error("Error editing folder:", error);
         }
     };
 
@@ -174,37 +179,41 @@ function MyPersonalFiles({ user }) {
 
     const renderFolders = () => {
         return personalFolders.map(folder => (
-            <div key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
-                <img
+            <button key={folder.id} className="folder" onClick={(event) => handleFolderClick(event, folder)}>
+                <button
                     className="folder-editpencil"
-                    src={editPencil}
-                    alt="editPencil"
                     onClick={() => {
                         setFolderToEdit(folder);
                         setShowEditFolderModal(true);
                     }}
-                />
-                <img
+                    aria-label="Edit folder"
+                >
+                    <img src={editPencil} alt="editPencil" />
+                </button>
+                <button
                     className="folder-deleteicon"
-                    src={deleteIcon}
-                    alt="deleteIcon"
                     onClick={() => {
                         setFolderToDelete(folder);
                         setShowDeleteFolderModal(true);
                     }}
-                />
+                    aria-label="Delete folder"
+                >
+                    <img src={deleteIcon} alt="deleteIcon" />
+                </button>
                 <img src={folderIcon} alt="folder" className="folder-icon" />
-                <p className="folder-p">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</p>
-            </div>
+                <p className="folder-p">{folder.folderName || (folder.attributes.folderName)}</p>
+            </button>
         ));
     };
 
     const renderFolderContent = (folder) => {
-        if (!folder || !folder.personalFolderContent) {
+        if (!folder.personalFolderContent) {
             return (
                 <div className="folder-content">
-                    <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
-                    <h3 className="folder-header">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</h3>
+                    <button onClick={() => setSelectedFolder(null)}>
+                        <img className="back-button" src={backButton} alt="back" />
+                    </button>
+                    <h3 className="folder-header">{folder.folderName || (folder.attributes.folderName)}</h3>
                     <p>Klasör boş.</p>
                     <input
                         className="search-input"
@@ -233,8 +242,10 @@ function MyPersonalFiles({ user }) {
 
         return (
             <div className="folder-content">
-                <img className="back-button" src={backButton} alt="back" onClick={() => setSelectedFolder(null)} />
-                <h3 className="folder-header">{folder.folderName || (folder.attributes && folder.attributes.folderName)}</h3>
+                <button onClick={() => setSelectedFolder(null)}>
+                    <img className="back-button" src={backButton} alt="back" />
+                </button>
+                <h3 className="folder-header">{folder.folderName || (folder.attributes.folderName)}</h3>
 
                 <input
                     className="search-input"
@@ -248,14 +259,14 @@ function MyPersonalFiles({ user }) {
                 <div className="files">
                     <button className="upload-file-button" onClick={() => uploadFile(folder.id)}>Dosya Yükle</button>
                     {filteredFiles.map(file => (
-                        <div key={file.id} className="file" onClick={() => showFilePreview(file)}>
-                            {file.formats && file.formats.thumbnail ? (
+                        <button key={file.id} className="file" onClick={() => showFilePreview(file)}>
+                            {file.formats.thumbnail ? (
                                 <img className="files-img" src={file.formats.thumbnail.url || file.url} alt={file.name} />
                             ) : (
                                 <span>{file.name}</span>
                             )}
                             <p className="file-name">{file.name}</p>
-                        </div>
+                        </button>
                     ))}
                 </div>
             </div>
@@ -266,7 +277,7 @@ function MyPersonalFiles({ user }) {
         return <div>Yükleniyor...</div>;
     }
 
-    if (!user || !user.id) {
+    if (!user.id) {
         return <div>Kullanıcı Bilgisi Bulunamadı.</div>;
     }
 

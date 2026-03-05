@@ -1,4 +1,3 @@
-import React from 'react';
 import './DeletePrivateFolderModal.scss';
 
 function DeletePrivateFolderModal({ isOpen, onClose, onDelete }) {
@@ -9,7 +8,7 @@ function DeletePrivateFolderModal({ isOpen, onClose, onDelete }) {
     return (
         <div className="delete-folder-modal">
             <div className="delete-folder-modal-content">
-                <span className="global-close-button" onClick={onClose}>X</span>
+                <button className="global-close-button" onClick={onClose}>X</button>
                 <h2 className='modal-header'>Klasörü Sil</h2>
                 <p className='delete-folder-p'>Bu kişisel klasörü silmek istediğinize emin misiniz?</p>
                 <div className="delete-folder-modal-buttons">

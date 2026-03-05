@@ -1,4 +1,3 @@
-import React from 'react';
 import eyeShow from "../../assets/icons/EyeShowLogo.png";
 import eyeHide from "../../assets/icons/EyeHideLogo.png";
 import { Link } from 'react-router-dom';

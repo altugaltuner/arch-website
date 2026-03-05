@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './DeleteFolderModal.scss';
 
 function DeleteFolderModal({ isOpen, onClose, onDelete }) {
@@ -15,7 +14,7 @@ function DeleteFolderModal({ isOpen, onClose, onDelete }) {
     return (
         <div className="delete-folder-modal">
             <div className="delete-folder-modal-content">
-                <span className="global-close-button" onClick={onClose}>X</span>
+                <button className="global-close-button" onClick={onClose}>X</button>
                 <h2 className='modal-header'>Klasörü Silmek İstediğinize Emin Misiniz ?</h2>
                 <div className="delete-folder-modal-buttons">
                     <button className='delete-folder-save-button' onClick={handleDelete}>Kaydet</button>

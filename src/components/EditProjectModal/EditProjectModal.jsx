@@ -1,4 +1,3 @@
-import React from 'react';
 import "./EditProjectModal.scss";
 
 function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputChange, handleInputPasswordChange, handleFileChange, handleEditSubmit }) {
@@ -9,12 +8,12 @@ function EditProjectModal({ showEditModal, onClose, projectToEdit, handleInputCh
     return (
         <div className="edit-project-modal">
             <div className='edit-project-content'>
-                <span
+                <button
                     className="global-close-button"
                     onClick={onClose}
                 >
                     X
-                </span>
+                </button>
                 <h2 className="modal-header">Projeyi Düzenle</h2>
 
                 <p className='project-p-modall'>Proje Adı</p>

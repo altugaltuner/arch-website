@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./MyNotebook.scss";
 import NewNoteModal from "../NewNoteModal/NewNoteModal";
 import EditNoteModal from "../EditNoteModal/EditNoteModal";
@@ -31,11 +31,13 @@ function MyNotebook() {
                         try {
                             notebook = JSON.parse(data.myNotebook);
                         } catch (e) {
+                            console.error("Error parsing notebook data:", e);
                         }
                     }
                     setNotes(Array.isArray(notebook) ? notebook : []);
                     setUserId(data.id);
                 } else {
+                    throw new Error("No token found");
                 }
             } catch (error) {
                 console.error("Error fetching notes:", error);
@@ -97,6 +99,7 @@ function MyNotebook() {
                 throw new Error("Notebook update failed");
             }
         } catch (error) {
+            console.error("Error updating notebook:", error);
         }
     };
 
@@ -124,6 +127,7 @@ function MyNotebook() {
             }
 
         } catch (error) {
+            console.error("Error updating notebook:", error);
         }
     };
 
@@ -140,15 +144,16 @@ function MyNotebook() {
             </button>
             <div className="notebook-notes-area">
                 {notes.map((note, index) => (
-                    <div className="note-div" key={index}>
+                    <div className="note-div" key={note.id}>
                         <h3 className="note-one-subheader">{note.title}</h3>
                         <p className="note-one-subnote">{note.content}</p>
-                        <img
-                            src={editPencil}
-                            alt="Edit"
-                            className="edit-icon"
-                            onClick={() => handleEditClick(note)}
-                        />
+                        <button className="edit-note-button" onClick={() => handleEditClick(note)}>
+                            <img
+                                src={editPencil}
+                                alt="Edit"
+                                className="edit-icon"
+                            />
+                        </button>
                     </div>
                 ))}
             </div>

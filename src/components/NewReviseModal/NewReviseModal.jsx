@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './NewReviseModal.scss';
 import axios from 'axios';
 
@@ -40,13 +40,14 @@ function NewReviseModal({ isOpen, onClose, onReviseAdded, clickedProject, user }
             onReviseAdded(response.data);
             onClose();
         } catch (error) {
+            console.error('Revize eklenirken hata oluştu:', error);
         }
     };
 
     return (
         <div className="new-revise-modal">
             <div className="revise-modal-content">
-                <span className='global-close-button' onClick={onClose}>X</span>
+                <button className='global-close-button' onClick={onClose}>X</button>
                 <h2 className='modal-header'>Yeni Revize Ekle</h2>
                 <form className='new-revise-modal-form' onSubmit={handleSubmit}>
                     <textarea

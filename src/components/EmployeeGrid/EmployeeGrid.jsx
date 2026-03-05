@@ -1,4 +1,3 @@
-import React from 'react';
 import './EmployeeGrid.scss';
 import { useAuth } from "../../components/AuthProvider";
 
@@ -14,7 +13,7 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
                     <p>Henüz Çalışan Yok</p>
                 ) : (
                     filteredEmployees.map((employee, index) => (
-                        <div className="employee-card" key={index} onClick={() => openEmployeeCardModal(employee)}>
+                        <button className="employee-card" key={index} onClick={() => openEmployeeCardModal(employee)}>
                             <div className="profile-pic">
                                 <img
                                     className="profile-pic-inner"
@@ -27,7 +26,7 @@ function EmployeeGrid({ employees, openEmployeeCardModal }) {
                                 <p>{employee.email}</p>
                                 <p>{employee?.profession?.data?.attributes?.professionName || "Henüz Belirtilmedi"}</p>
                             </div>
-                        </div>
+                        </button>
                     ))
                 )}
             </div>

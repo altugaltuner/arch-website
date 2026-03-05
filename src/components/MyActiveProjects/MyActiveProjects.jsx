@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../MyActiveProjects/MyActiveProjects.scss";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ function MyActiveProjects({ user }) {
                 const response = await axios.get('https://wonderful-pleasure-64045d06ec.strapiapp.com/api/users?populate[profession]=*&populate[projects][populate]=projectCoverPhoto&populate=profilePic');
                 setAllUsers(response.data || []);
             } catch (error) {
+                console.error("Error fetching users:", error);
             }
         };
 
@@ -21,7 +22,7 @@ function MyActiveProjects({ user }) {
     useEffect(() => {
     }, [allUsers]);
 
-    if (!user || !user.username) {
+    if (!user.username) {
         return <div>Kullanıcı Bilgisi Yükleniyor.</div>;
     }
     const filteredUser = allUsers.filter(u => u.username === user.username);
@@ -31,10 +32,10 @@ function MyActiveProjects({ user }) {
             <h2 className="div-header">Dahil Olduğum Projeler</h2>
             <div className="my-active-project-list">
                 {u.projects.map(p => (
-                    <div className="my-active-project-list-element" key={p.id} onClick={() => handleProjectClick(p.id)}>
+                    <button className="my-active-project-list-element" key={p.id} onClick={() => handleProjectClick(p.id)}>
                         <img className="my-active-project-list-pic" src={p.projectCoverPhoto.formats.thumbnail.url || p.projectCoverPhoto.url} alt="" />
                         <p className="my-active-project-list-paragraph" key={p.id}>{p.projectName}</p>
-                    </div>
+                    </button>
                 ))}
             </div>
         </div>

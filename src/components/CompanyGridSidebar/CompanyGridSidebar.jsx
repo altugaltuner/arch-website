@@ -13,8 +13,9 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
     const [jobTitleToDelete, setJobTitleToDelete] = useState(null);
     const [filteredJobTitles, setFilteredJobTitles] = useState([]);
 
+    console.log(jobTitles);
     const { user } = useAuth();
-    const userRole = user && user.access ? user.access.role : null;
+    const userRole = user.access ? user.access.role : null;
 
     const loadJobTitles = async () => {
 
@@ -29,6 +30,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
             const filteredTitles = titles.filter(title => title?.companyID === user?.company?.companyID);
             setFilteredJobTitles(filteredTitles);
         } catch (error) {
+            console.error('Error fetching job titles:', error);
         }
     };
 
@@ -66,6 +68,7 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
                 setJobTitles(prevTitles => prevTitles.filter(title => title.id !== jobTitleToDelete.id));
                 closeDeleteModal();
             } catch (error) {
+                console.error('Error deleting profession:', error);
             }
         }
     };
@@ -75,35 +78,40 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
             <ul>
                 {userRole === "Admin" && (
 
-                    <li className='job-titles-for-workersPage' onClick={openNewProfessionModal}>Meslek Türü Ekle</li>
+                    <button className='job-titles-for-workersPage' onClick={openNewProfessionModal}>Meslek Türü Ekle</button>
                 )}
-                <li
+                <button
                     className={`job-titles-for-workersPage ${selectedJobTitle === "Tümü" ? 'active' : ''}`}
                     onClick={() => handleJobTitleClick('Tümü')}
                 >
                     Tümü
-                </li>
+                </button>
                 {filteredJobTitles.map((title, index) => (
-                    <li
+                    <button
                         className={`job-titles-for-workersPage ${selectedJobTitle === title.name ? 'active' : ''}`}
-                        key={index}
+                        key={title.id}
                         onClick={() => handleJobTitleClick(title.name)}
-                        role="button"
+
                     >
                         {userRole === "Admin" && (
-                            <img
-                                src={deleteIcon}
-                                alt="Delete"
-                                className="trash-icon"
+                            <button
+                                className="trash-icon-button"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     openDeleteModal(title);
                                 }}
-                            />
+                                aria-label="Delete profession"
+                            >
+                                <img
+                                    src={deleteIcon}
+                                    alt="Delete"
+                                    className="trash-icon"
+                                />
+                            </button>
                         )}
                         <p className='job-titles-for-title-name'>{title.name}</p>
 
-                    </li>
+                    </button>
                 ))}
             </ul>
             <NewProfessionModal isOpen={isModalOpen} onClose={closeNewProfessionModal} onAdd={handleAddProfession} />
@@ -115,5 +123,4 @@ function CompanyGridSidebar({ selectedJobTitle, handleJobTitleClick }) {
         </div>
     );
 }
-
 export default CompanyGridSidebar;

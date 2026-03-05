@@ -1,4 +1,3 @@
-import React from "react";
 import "./DeleteMessageModal.scss";
 
 function DeleteMessageModal({ show, onClose, onDelete }) {

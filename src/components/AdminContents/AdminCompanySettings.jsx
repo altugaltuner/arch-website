@@ -4,8 +4,8 @@ import { useAuth } from "../../components/AuthProvider";
 import editPencil from "../../assets/icons/edit-pencil.png";
 
 const AdminCompanySettings = () => {
-    const { user } = useAuth();
 
+    const { user } = useAuth();
     const [companyName, setCompanyName] = useState("");
     const [companyLogo, setCompanyLogo] = useState("");
     const [companySubscription, setCompanySubscription] = useState("0GB");
@@ -54,6 +54,7 @@ const AdminCompanySettings = () => {
 
             setCompanyLogo(uploadResult[0].url);
         } catch (error) {
+            console.log("Error uploading company logo:", error);
         }
     };
 
@@ -96,6 +97,7 @@ const AdminCompanySettings = () => {
             });
             setIsEditing(false);
         } catch (error) {
+            console.log("Error updating company info:", error);
         }
     };
 

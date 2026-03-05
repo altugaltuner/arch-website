@@ -33,12 +33,12 @@ function AddFolderModal({ isOpen, onClose, onFolderCreated, userId }) {
     return (
         <div className="addfolder-modal">
             <div className="addfolder-modal-content">
-                <span className="addfolder-close-modal" onClick={onClose}>X</span>
+                <button className="addfolder-close-modal" onClick={onClose}>X</button>
                 <h2 className='addfolder-modal-header'>Yeni Klasör Oluştur</h2>
                 <input
                     className='addfolder-modal-input'
                     type="text"
-                    placeholder="Klasör Adı"
+                    placeholder="case-name"
                     value={folderName}
                     onChange={(e) => {
                         setFolderName(e.target.value);

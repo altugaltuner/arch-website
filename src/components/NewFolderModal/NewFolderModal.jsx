@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './NewFolderModal.scss';
 
 function NewFolderModal({ showModal, setShowModal, newFolder, handleInputChange, handleSubmit }) {
@@ -27,7 +27,7 @@ function NewFolderModal({ showModal, setShowModal, newFolder, handleInputChange,
     return (
         <div className="new-folder-modal">
             <div className="new-folder-modal-content">
-                <span className="global-close-button" onClick={() => setShowModal(false)}>X</span>
+                <button className="global-close-button" onClick={() => setShowModal(false)}>X</button>
                 <h2 className="modal-header">Yeni Proje Klasörü Oluştur</h2>
                 <input
                     className="new-folder-input-field"

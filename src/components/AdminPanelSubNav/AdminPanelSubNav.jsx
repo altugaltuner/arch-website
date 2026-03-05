@@ -45,7 +45,7 @@ function AdminPanelSubNav({ getRelevantSettings }) {
             <div className="adminpanel-container">
                 <div className="adminpanel-content">
                     {adminSections.map((section, index) => (
-                        <div
+                        <button
                             key={index}
                             className={`adminpanel-section ${section.id === selectedSection ? 'selected' : ''} ${section.id === 7 ? 'disabled' : ''}`}
                             onClick={() => handleSectionClick(section)}
@@ -54,7 +54,7 @@ function AdminPanelSubNav({ getRelevantSettings }) {
                             {section.items.map((item, idx) => (
                                 <p className="adminpanel-paragraph" key={idx}>{item}</p>
                             ))}
-                        </div>
+                        </button>
                     ))}
                 </div>
             </div>

@@ -7,7 +7,7 @@ import backButton from '../../assets/icons/back-button.png';
 function AlreadyLoggedIn() {
     const handleLogout = () => {
         localStorage.removeItem('token');
-        window.location.reload();
+        globalThis.location.reload();
         Cookies.set("isLogin", "false")
     };
 
@@ -22,7 +22,7 @@ function AlreadyLoggedIn() {
                     <Link to="/projects" className="already-login-back">Anasayfaya Dön</Link>
                 </div>
             </div>
-            <img className="back-button-already" src={backButton} alt="back-button" onClick={() => window.history.back()} />
+            <button className="back-button-already" src={backButton} alt="back-button" onClick={() => globalThis.history.back()} />
         </main>
     );
 }

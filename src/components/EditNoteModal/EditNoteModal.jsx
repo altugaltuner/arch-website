@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './EditNoteModal.scss';
 
 function EditNoteModal({ showModal, setShowModal, note, updateNote, deleteNote }) {
@@ -32,7 +32,7 @@ function EditNoteModal({ showModal, setShowModal, note, updateNote, deleteNote }
     return (
         <div className="edit-note-modal">
             <div className="edit-note-modal-content">
-                <span className='global-close-button' onClick={() => setShowModal(false)}>X</span>
+                <button className='global-close-button' onClick={() => setShowModal(false)}>X</button>
                 <h2 className='modal-header'>Notu Düzenle</h2>
                 <input
                     type="text"

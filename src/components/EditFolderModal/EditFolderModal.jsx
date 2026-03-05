@@ -16,7 +16,7 @@ function EditFolderModal({ isOpen, onClose, onEdit, initialName }) {
     return (
         <div className="edit-folder-modal">
             <div className="edit-folder-modal-content">
-                <span className="global-close-button" onClick={onClose}>X</span>
+                <button className="global-close-button" onClick={onClose}>X</button>
                 <h2 className='modal-header'>Klasörü Düzenle</h2>
                 <input
                     className='edit-folder-input'

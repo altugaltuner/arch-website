@@ -7,7 +7,7 @@ const DeleteGroupModal = ({ showDeleteModal, setShowDeleteModal, handleDeleteGro
     return (
         <div className="delete-group-modal">
             <div className="delete-group-modal-content">
-                <span className="delete-group-close" onClick={() => setShowDeleteModal(false)}>X</span>
+                <button className="delete-group-close" onClick={() => setShowDeleteModal(false)}>X</button>
                 <h2 className="delete-group-header">Grubu Sil</h2>
                 <p className="delete-group-p">Grubu gerçekten silmek istiyor musunuz?</p>
                 <div className='delete-group-buttons-div'>

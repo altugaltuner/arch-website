@@ -1,4 +1,3 @@
-import React from 'react';
 import "./DeleteConfirmationModal.scss";
 
 function DeleteConfirmationModal({ showDeleteModal, onClose, onConfirm }) {
@@ -9,10 +8,10 @@ function DeleteConfirmationModal({ showDeleteModal, onClose, onConfirm }) {
     return (
         <div className="delete-confirmation-modal">
             <div className="delete-confirmation-modal-content">
-                <span
+                <button
                     className="global-close-button"
                     onClick={onClose}
-                >X </span>
+                >X </button>
                 <h2 className='delete-confirmation-header'>Bu projeyi silmek istediğinize emin misiniz?</h2>
                 <div className="delete-confirmation-modal-buttons">
                     <button className='confirm-button' onClick={onConfirm}>Onayla</button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './PasswordModal.scss';
 
 const PasswordModal = ({ isOpen, onClose, onConfirm, projectName }) => {
@@ -17,7 +17,7 @@ const PasswordModal = ({ isOpen, onClose, onConfirm, projectName }) => {
     return (
         <div className="password-modal-overlay">
             <div className="password-modal">
-                <span className="global-close-button" onClick={onClose}>X</span>
+                <button className="global-close-button" onClick={onClose}>X</button>
                 <h2 className='modal-header'>{projectName} İçin Şifre Girin</h2>
                 <input
                     className='password-modal-input'

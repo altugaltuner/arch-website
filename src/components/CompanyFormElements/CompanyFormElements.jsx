@@ -13,6 +13,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             const data = response.data.map(item => item.email);
             setAllEmails(data);
         } catch (error) {
+            console.log('Error fetching emails:', error);
         }
     };
 
@@ -34,6 +35,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             const data = response.data.data.map(item => item.attributes.code);
             setCompanyPermissionCodes(data);
         } catch (error) {
+            console.log('Error fetching company permission codes:', error);
         }
     };
 
@@ -52,6 +54,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             });
             return response.data;
         } catch (error) {
+            console.log('Error creating company:', error);
             throw error;
         }
     };
@@ -85,6 +88,7 @@ const CompanyFormElements = ({ errors, setErrors }) => {
             });
             return response.data;
         } catch (error) {
+            console.log('Error creating user:', error);
             throw error;
         }
     };
@@ -156,9 +160,10 @@ const CompanyFormElements = ({ errors, setErrors }) => {
 
                 alert("Form başarıyla gönderildi!");
             } catch (error) {
+                console.log('Error during form submission:', error);
                 alert("Form gönderimi sırasında bir hata oluştu. Lütfen tekrar deneyin.");
             }
-            window.location.href = "/login";
+            globalThis.location.href = "/login";
         }
     };
 
